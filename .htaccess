@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteRule ^storage/ - [L]
+RewriteRule ^(.*)$ public/$1 [L]
