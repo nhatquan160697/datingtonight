@@ -68,7 +68,7 @@
          <ul id="flexiselDemo1">
             <li>
                <div class="blog-item">
-                  <img src="/storage/app/files/images/1.jpg" alt=" " class="img-fluid" />
+                  <img src="/templates/datingtonight/images/1.jpg" alt=" " class="img-fluid" />
                   <button type="button" class="btn btn-primary play" data-toggle="modal" data-target="#exampleModal">
                      <i class="fas fa-play"></i>
                   </button>
@@ -86,7 +86,7 @@
             </li>
             <li>
                <div class="blog-item">
-                  <img src="/storage/app/files/images/2.jpg" alt=" " class="img-fluid" />
+                  <img src="/templates/datingtonight/images/2.jpg" alt=" " class="img-fluid" />
                   <button type="button" class="btn btn-primary play" data-toggle="modal" data-target="#exampleModal">
                      <i class="fas fa-play"></i>
                   </button>
@@ -104,7 +104,7 @@
             </li>
             <li>
                <div class="blog-item">
-                  <img src="/storage/app/files/images/3.jpg" alt=" " class="img-fluid" />
+                  <img src="/templates/datingtonight/images/3.jpg" alt=" " class="img-fluid" />
                   <button type="button" class="btn btn-primary play" data-toggle="modal" data-target="#exampleModal">
                      <i class="fas fa-play"></i>
                   </button>
@@ -123,7 +123,7 @@
             </li>
             <li>
                <div class="blog-item">
-                  <img src="/storage/app/files/images/4.jpg" alt=" " class="img-fluid" />
+                  <img src="/templates/datingtonight/images/4.jpg" alt=" " class="img-fluid" />
                   <button type="button" class="btn btn-primary play" data-toggle="modal" data-target="#exampleModal">
                      <i class="fas fa-play"></i>
                   </button>
@@ -170,7 +170,7 @@
                   <div class="b-grid-top">
                      <div class="blog_info_left_grid">
                         <a href="single.html">
-                           <img src="/storage/app/files/images/b1.jpg" class="img-fluid" alt="">
+                           <img src="/templates/datingtonight/images/b1.jpg" class="img-fluid" alt="">
                         </a>
                      </div>
                      <div class="blog-info-middle">
@@ -205,7 +205,7 @@
                   <ul id="flexiselDemo2">
                      <li>
                         <div class="blog-item">
-                           <img src="/storage/app/files/images/5.jpg" alt=" " class="img-fluid" />
+                           <img src="/templates/datingtonight/images/5.jpg" alt=" " class="img-fluid" />
                            <button type="button" class="btn btn-primary play sec" data-toggle="modal" data-target="#exampleModal">
                               <i class="fas fa-play"></i>
                            </button>
@@ -216,7 +216,7 @@
                      </li>
                      <li>
                         <div class="blog-item">
-                           <img src="/storage/app/files/images/6.jpg" alt=" " class="img-fluid" />
+                           <img src="/templates/datingtonight/images/6.jpg" alt=" " class="img-fluid" />
                            <button type="button" class="btn btn-primary play sec" data-toggle="modal" data-target="#exampleModal">
                               <i class="fas fa-play"></i>
                            </button>
@@ -227,7 +227,7 @@
                      </li>
                      <li>
                         <div class="blog-item">
-                           <img src="/storage/app/files/images/7.jpg" alt=" " class="img-fluid" />
+                           <img src="/templates/datingtonight/images/7.jpg" alt=" " class="img-fluid" />
                            <button type="button" class="btn btn-primary play sec" data-toggle="modal" data-target="#exampleModal">
                               <i class="fas fa-play"></i>
                            </button>
@@ -238,7 +238,7 @@
                      </li>
                      <li>
                         <div class="blog-item">
-                           <img src="/storage/app/files/images/8.jpg" alt=" " class="img-fluid" />
+                           <img src="/templates/datingtonight/images/8.jpg" alt=" " class="img-fluid" />
                            <button type="button" class="btn btn-primary play sec" data-toggle="modal" data-target="#exampleModal">
                               <i class="fas fa-play"></i>
                            </button>
@@ -257,7 +257,7 @@
                         <div class="b-grid-top">
                            <div class="blog_info_left_grid">
                               <a href="single.html">
-                                 <img src="/storage/app/files/images/b2.jpg" class="img-fluid" alt="">
+                                 <img src="/templates/datingtonight/images/b2.jpg" class="img-fluid" alt="">
                               </a>
                            </div>
                            <h3>
@@ -285,7 +285,7 @@
                         <div class="b-grid-top">
                            <div class="blog_info_left_grid">
                               <a href="single.html">
-                                 <img src="/storage/app/files/images/b3.jpg" class="img-fluid" alt="">
+                                 <img src="/templates/datingtonight/images/b3.jpg" class="img-fluid" alt="">
                               </a>
                            </div>
                            <h3>
@@ -318,7 +318,7 @@
             <aside class="col-lg-4 agileits-w3ls-right-blog-con text-right">
                <div class="right-blog-info text-left">
                   <div class="tech-btm" style="margin-left: 60px;">
-                     <img src="/storage/app/files/logo/logo2.jpg" class="img-fluid" alt="">
+                     <img src="/templates/datingtonight/logo/logo2.jpg" class="img-fluid" alt="">
                   </div>
                   <div class="tech-btm">
                      <h4>Most Views</h4>
@@ -326,7 +326,7 @@
                      <div class="blog-grids row mb-3">
                         <div class="col-md-5 blog-grid-left">
                            <a href="single.html">
-                              <img src="/storage/app/files/images/1.jpg" class="img-fluid" alt="">
+                              <img src="/templates/datingtonight/images/1.jpg" class="img-fluid" alt="">
                            </a>
                         </div>
                         <div class="col-md-7 blog-grid-right">
@@ -344,7 +344,7 @@
                      <div class="blog-grids row mb-3">
                         <div class="col-md-5 blog-grid-left">
                            <a href="single.html">
-                              <img src="/storage/app/files/images/5.jpg" class="img-fluid" alt="">
+                              <img src="/templates/datingtonight/images/5.jpg" class="img-fluid" alt="">
                            </a>
                         </div>
                         <div class="col-md-7 blog-grid-right">
@@ -362,7 +362,7 @@
                      <div class="blog-grids row mb-3">
                         <div class="col-md-5 blog-grid-left">
                            <a href="single.html">
-                              <img src="/storage/app/files/images/3.jpg" class="img-fluid" alt="">
+                              <img src="/templates/datingtonight/images/3.jpg" class="img-fluid" alt="">
                            </a>
                         </div>
                         <div class="col-md-7 blog-grid-right">
@@ -379,7 +379,7 @@
                      <div class="blog-grids row mb-3">
                         <div class="col-md-5 blog-grid-left">
                            <a href="single.html">
-                              <img src="/storage/app/files/images/2.jpg" class="img-fluid" alt="">
+                              <img src="/templates/datingtonight/images/2.jpg" class="img-fluid" alt="">
                            </a>
                         </div>
                         <div class="col-md-7 blog-grid-right">
@@ -397,7 +397,7 @@
                      <div class="blog-grids row mb-3">
                         <div class="col-md-5 blog-grid-left">
                            <a href="single.html">
-                              <img src="/storage/app/files/images/4.jpg" class="img-fluid" alt="">
+                              <img src="/templates/datingtonight/images/4.jpg" class="img-fluid" alt="">
                            </a>
                         </div>
                         <div class="col-md-7 blog-grid-right">
@@ -415,7 +415,7 @@
                      <div class="blog-grids row mb-3">
                         <div class="col-md-5 blog-grid-left">
                            <a href="single.html">
-                              <img src="/storage/app/files/images/6.jpg" class="img-fluid" alt="">
+                              <img src="/templates/datingtonight/images/6.jpg" class="img-fluid" alt="">
                            </a>
                         </div>
                         <div class="col-md-7 blog-grid-right">
@@ -445,8 +445,8 @@
             <div class="col-md-4 news-left">
                <ul id="demo1_thumbs" class="list-inline">
                   <li>
-                     <a href="/storage/app/files/images/m1.jpg">
-                        <img src="/storage/app/files/images/m1.jpg" alt="" data-desoslide-caption="<h3>Latest Post 1</h3>">
+                     <a href="/templates/datingtonight/images/m1.jpg">
+                        <img src="/templates/datingtonight/images/m1.jpg" alt="" data-desoslide-caption="<h3>Latest Post 1</h3>">
                         <div class="mid-text-info">
                            <h4>How to tán gái 1</h4>
                            <p>Integer </p>
@@ -458,8 +458,8 @@
                      </a>
                   </li>
                   <li>
-                     <a href="/storage/app/files/images/m2.jpg">
-                        <img src="/storage/app/files/images/m2.jpg" alt="" data-desoslide-caption="<h3>Latest Post 2</h3>">
+                     <a href="/templates/datingtonight/images/m2.jpg">
+                        <img src="/templates/datingtonight/images/m2.jpg" alt="" data-desoslide-caption="<h3>Latest Post 2</h3>">
                         <div class="mid-text-info">
                            <h4>How to tán gái 2</h4>
                            <p>Integer </p>
@@ -471,8 +471,8 @@
                      </a>
                   </li>
                   <li>
-                     <a href="/storage/app/files/images/m3.jpg">
-                        <img src="/storage/app/files/images/m3.jpg" alt="" data-desoslide-caption="<h3>Latest Post 3</h3>">
+                     <a href="/templates/datingtonight/images/m3.jpg">
+                        <img src="/templates/datingtonight/images/m3.jpg" alt="" data-desoslide-caption="<h3>Latest Post 3</h3>">
                         <div class="mid-text-info">
                            <h4>How to tán gái 3</h4>
                            <p>Integer </p>
@@ -484,8 +484,8 @@
                      </a>
                   </li>
                   <li>
-                     <a href="/storage/app/files/images/m4.jpg">
-                        <img src="/storage/app/files/images/m4.jpg" alt="" data-desoslide-caption="<h3>Latest Post 4</h3>">
+                     <a href="/templates/datingtonight/images/m4.jpg">
+                        <img src="/templates/datingtonight/images/m4.jpg" alt="" data-desoslide-caption="<h3>Latest Post 4</h3>">
                         <div class="mid-text-info">
                            <h4>How to tán gái 4</h4>
                            <p>Integer </p>

@@ -359,18 +359,18 @@ form.header-search {
 /*--/slider--*/
 
 .carousel-item {
-	background: -webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/storage/app/files/images/banner1.jpg) no-repeat;
-	background: -moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/storage/app/files/images/banner1.jpg) no-repeat;
-	background: -ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/storage/app/files/images/banner1.jpg) no-repeat;
-	background: linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/storage/app/files/images/banner1.jpg) no-repeat;
+	background: -webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/templates/datingtonight/images/banner1.jpg) no-repeat;
+	background: -moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/templates/datingtonight/images/banner1.jpg) no-repeat;
+	background: -ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/templates/datingtonight/images/banner1.jpg) no-repeat;
+	background: linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/templates/datingtonight/images/banner1.jpg) no-repeat;
 	background-size: cover;
 }
 
 .carousel-item.item2 {
-	background: -webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/storage/app/files/images/banner2.jpg) no-repeat;
-	background: -moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/storage/app/files/images/banner2.jpg) no-repeat;
-	background: -ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/storage/app/files/images/banner2.jpg) no-repeat;
-	background: linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/storage/app/files/images/banner2.jpg) no-repeat;
+	background: -webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/templates/datingtonight/images/banner2.jpg) no-repeat;
+	background: -moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/templates/datingtonight/images/banner2.jpg) no-repeat;
+	background: -ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/templates/datingtonight/images/banner2.jpg) no-repeat;
+	background: linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/templates/datingtonight/images/banner2.jpg) no-repeat;
 	background-size: cover;
 }
 
@@ -587,12 +587,12 @@ section.bottom-slider {
 	.nbs-flexisel-nav-left {
 		left: 0%;
 		top: 33% !important;
-		background:#111 url(/storage/app/files/images/left.png) no-repeat -6px 16px;
+		background:#111 url(/templates/datingtonight/images/left.png) no-repeat -6px 16px;
 	}
 	.nbs-flexisel-nav-right {
 	  right: 0%;
 	  top: 33% !important;
-	  background:#111 url(/storage/app/files/images/right.png) no-repeat -3px 16px;
+	  background:#111 url(/templates/datingtonight/images/right.png) no-repeat -3px 16px;
 	}
 	/*--//flexisel--*/
 	.blog-item{
@@ -985,7 +985,7 @@ li.breadcrumb-item a {
 }
 
 .a2 {
-	background: url(/storage/app/files/images/g1.jpg) no-repeat 0px 0px;
+	background: url(/templates/datingtonight/images/g1.jpg) no-repeat 0px 0px;
 	background-size: cover;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -995,7 +995,7 @@ li.breadcrumb-item a {
 }
 
 .a3 {
-	background: url(/storage/app/files/images/g6.jpg) no-repeat 0px 0px;
+	background: url(/templates/datingtonight/images/g6.jpg) no-repeat 0px 0px;
 	background-size: cover;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -1005,7 +1005,7 @@ li.breadcrumb-item a {
 }
 
 .a5 {
-	background: url(/storage/app/files/images/g5.jpg) no-repeat 0px 0px;
+	background: url(/templates/datingtonight/images/g5.jpg) no-repeat 0px 0px;
 	background-size: cover;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -1015,7 +1015,7 @@ li.breadcrumb-item a {
 }
 
 .a6 {
-	background: url(/storage/app/files/images/g8.jpg) no-repeat 0px 0px;
+	background: url(/templates/datingtonight/images/g8.jpg) no-repeat 0px 0px;
 	background-size: cover;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -1228,7 +1228,7 @@ a.facebook:hover {
 	height: 48px;
 	border: none;
 	text-indent: 100%;
-	background: url(/storage/app/files/images/top_up.png) no-repeat 0px 0px;
+	background: url(/templates/datingtonight/images/top_up.png) no-repeat 0px 0px;
 }
 
 /*--// copyright-- */

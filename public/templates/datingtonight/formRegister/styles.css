@@ -19,7 +19,8 @@ h2 {
 
 .loginbox {
  background: #FBFCFD;
- padding: 10px; width: 490px;
+ padding: 10px;
+ width: 490px;
  margin: 4% auto 0 auto;
  position: relative;
 }
@@ -81,10 +82,13 @@ h2 {
   cursor: pointer;
 }
  
-.radius { 
-  -moz-border-radius: 5px; 
-  -webkit-border-radius: 5px; 
-  border-radius: 5px; 
+.radius {
+  -moz-border-radius: 5px;
+  /* -webkit-border-radius: 5px; */
+  border-radius: 5px;
+  float: right;
+  /* margin-right: 70px; */
+  /* margin-top: 26px; */
 }
  
 .radius1 { 
@@ -205,4 +209,41 @@ h2 {
   line-height:25px; 
   font-weight:normal; 
   color:#fff; 
+}
+/*.gender{
+    margin-top:-1px;
+    margin-bottom:2px;
+    width:34px;
+    float:left;
+    text-align:left;
+    line-height:19px;*/
+.gender{
+  
+/* margin: 10px; */
+  
+/* width: 1px; */
+  
+/* padding: 5px; */
+}
+#Male{
+  padding :1px;
+  margin: 1px;
+  width: 10px;
+}
+#Female{
+   padding :1px;
+  margin: 1px;
+  width: 10px;
+
+}
+.image{
+  float:left;
+  margin-left: 84px;
+  margin-top: 53px;
+  /* margin-bottom: 109px; */
+}
+.img{
+  width: 634px;
+  height: 537px;
+  }
 }

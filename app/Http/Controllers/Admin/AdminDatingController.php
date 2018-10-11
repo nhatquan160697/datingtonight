@@ -18,4 +18,16 @@ class AdminDatingController extends Controller
     public function postAdd(){
     	
     }
+
+    public function getEdit(){
+		return view('admin.datingplaces.edit');
+    }
+
+    public function postEdit(){
+    	
+    }
+
+    public function del(){
+    	return view('admin.datingplaces.delete');
+    }
 }

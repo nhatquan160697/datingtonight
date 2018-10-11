@@ -16,7 +16,7 @@
                   <div class="blog-grids row mb-3">
                      <div class="col-md-5 blog-grid-left">
                         <a href="single.html">
-                           <img src="/storage/app/files/images/4.jpg" class="img-fluid" alt="">
+                           <img src="/templates/datingtonight/images/4.jpg" class="img-fluid" alt="">
                         </a>
                      </div>
                      <div class="col-md-7 blog-grid-right">
@@ -34,7 +34,7 @@
                   <div class="blog-grids row mb-3">
                      <div class="col-md-5 blog-grid-left">
                         <a href="single.html">
-                           <img src="/storage/app/files/images/5.jpg" class="img-fluid" alt="">
+                           <img src="/templates/datingtonight/images/5.jpg" class="img-fluid" alt="">
                         </a>
                      </div>
                      <div class="col-md-7 blog-grid-right">
@@ -52,7 +52,7 @@
                   <div class="blog-grids row mb-3">
                      <div class="col-md-5 blog-grid-left">
                         <a href="single.html">
-                           <img src="/storage/app/files/images/6.jpg" class="img-fluid" alt="">
+                           <img src="/templates/datingtonight/images/6.jpg" class="img-fluid" alt="">
                         </a>
                      </div>
                      <div class="col-md-7 blog-grid-right">

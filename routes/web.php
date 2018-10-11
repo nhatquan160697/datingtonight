@@ -11,7 +11,7 @@
 |
 */
 
-//Route::pattern('id','[0-9]*');
+Route::pattern('id','[0-9]*');
 //Route::pattern('cid','[0-9]*');
 //Route::pattern('slug','(.*)');
 Route::namespace('DatingTonight')->group(function(){
@@ -54,7 +54,7 @@ Route::namespace('DatingTonight')->group(function(){
 });
 
 Route::namespace('Admin')->prefix('admin')->group(function(){
-	// Trang chu
+	// Home page admin
 	Route::get('/',[
 		'uses' => 'IndexController@index',
 		'as' => 'admin.index.index'
@@ -75,44 +75,44 @@ Route::namespace('Admin')->prefix('admin')->group(function(){
 		'as' => 'admin.datingplaces.add'
 		]);
 		Route::get('/edit-{id}',[
-			'uses' => 'RoomController@getEdit',
-			'as' => 'admin.room.edit'
+			'uses' => 'AdminDatingController@getEdit',
+			'as' => 'admin.datingplaces.edit'
 		]);
 		Route::post('/edit-{id}',[
-			'uses' => 'RoomController@postEdit',
-			'as' => 'admin.room.edit'
+			'uses' => 'AdminDatingController@postEdit',
+			'as' => 'admin.datingplaces.edit'
 		]);
 		Route::get('/del-{id}',[
-			'uses' => 'RoomController@del',
-			'as' => 'admin.room.del'
+			'uses' => 'AdminDatingController@del',
+			'as' => 'admin.datingplaces.delete'
 		]);
 	});
 
 	Route::prefix('flirting-methods')->group(function(){
-		// Controller roomtype
+		// Controller flirting methods
 		Route::get('/',[
-			'uses' => 'RoomtypeController@index',
-			'as' => 'admin.roomtype.cat'
+			'uses' => 'AdminFlirtingController@index',
+			'as' => 'admin.flirtingmethods.index'
 		]);
 		Route::get('/add',[
-			'uses' => 'RoomtypeController@getAdd',
-			'as' => 'admin.roomtype.add'
+			'uses' => 'AdminFlirtingController@getAdd',
+			'as' => 'admin.flirtingmethods.add'
 		]);
 		Route::post('/add',[
-		'uses' => 'RoomtypeController@postAdd',
-		'as' => 'admin.roomtype.add'
+		'uses' => 'AdminFlirtingController@postAdd',
+		'as' => 'admin.flirtingmethods.add'
 		]);
 		Route::get('/edit-{id}',[
-			'uses' => 'RoomtypeController@getEdit',
-			'as' => 'admin.roomtype.edit'
+			'uses' => 'AdminFlirtingController@getEdit',
+			'as' => 'admin.flirtingmethods.edit'
 		]);
 		Route::post('/edit-{id}',[
-			'uses' => 'RoomtypeController@postEdit',
-			'as' => 'admin.roomtype.edit'
+			'uses' => 'AdminFlirtingController@postEdit',
+			'as' => 'admin.flirtingmethods.edit'
 		]);
 		Route::get('/del-{id}',[
-			'uses' => 'RoomtypeController@del',
-			'as' => 'admin.roomtype.del'
+			'uses' => 'AdminFlirtingController@del',
+			'as' => 'admin.flirtingmethods.delete'
 		]);
 	});
 
