@@ -1,175 +1,248 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <meta charset="utf-8">
- <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Welcome to Dating Tonight</title>
-  <link href="/templates/datingtonight/formRegister/styles.css" type="text/css" rel="stylesheet" />
+	<title>Welcome to Dating Tonight </title>
+	<!-- Meta tags -->
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="Student Matriculate Form Responsive Widget, Audio and Video players, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates, Flat Web Templates, Login Sign-up Responsive Web Template, Smartphone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design"
+	/>
+	<script type="application/x-javascript">
+		addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+	</script>
+	<!-- Meta tags -->
+	<link href="/templates/datingtonight/formRegister/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+	<!-- //pop-ups-->
+	<!-- Calendar -->
+<link rel="stylesheet" href="/templates/datingtonight/formRegister/css/jquery-ui.css" />
+<!-- //Calendar -->
+
+	<!-- font-awesome icons -->
+	<link rel="stylesheet" href="/templates/datingtonight/formRegister/css/font-awesome.min.css" />
+	<!-- //font-awesome icons -->
+	<!--stylesheets-->
+	<link href="/templates/datingtonight/formRegister/css/style.css" rel='stylesheet' type='text/css' media="all">
+	<!--//style sheet end here-->
+	<link href="//fonts.googleapis.com/css?family=Cuprum:400,700" rel="stylesheet">
+	<link href="//fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 </head>
+
 <body>
-  <!-- header starts here -->
-  <div id="facebook-Bar">
-    <div id="facebook-Frame">
-      <div id="logo"> <a href="" title=""><img src="/templates/datingtonight/images/logo/logo.png" alt="Logo is here"></a> </div>
-      <div id="header-main-right">
-        <div id="header-main-right-nav">
-          <form method="post" action="" id="login_form" name="login_form">
-            <table border="0" style="border:none">
-              <tr>
-                <td ><input type="text" tabindex="1"  id="email" placeholder="Email or Phone" name="email" class="inputtext radius1" value=""></td>
-                <td ><input type="password" tabindex="2" id="pass" placeholder="Password" name="pass" class="inputtext radius1" ></td>
-                <td ><input type="submit" class="fbbutton" name="login" value="Login" /></td>
-              </tr>
-              <tr>
-                <td><label>
-                    <input id="persist_box" type="checkbox" name="persistent" value="1" checked="1"/>
-                    <span style="color:#ccc;">Keep me logged in</span></label></td>
-                <td><label><a href="" style="color:#ccc; text-decoration:none">forgot your password?</a></label></td>
-              </tr>
-            </table>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- header ends here -->
-  <div class="image">
-    <img  class ="img" src="images/background.jpg" />
-  </div>
-  <div class="loginbox radius" style="margin-right:118px" >
-    <h2 style="color:#141823; text-align:center;">Welcome to Dating Tonight</h2>
-    <div class="loginboxinner radius">
-      <div class="loginheader">
-        <h4 class="title">Connect with friends and the world around you.</h4>
-      </div>
-      <!--loginheader-->
-      <div class="loginform">
-        <form id="login" action="" method="post">
-          <p>
-            <input type="text" id="firstname" name="firstname" placeholder="First Name" value="" class="radius mini" />
-            <input type="text" id="lastname" name="lastname" placeholder="Last Name" value="" class="radius mini" />
-          </p>
-          <p>
-      <label class ="gender">Gender:</label>
-      <input type="radio" id="Male" name="gender" value="radio"/>Male 
-      <input type="radio" id="Female" name="gender" value="radio"/>Female
-           </p> 
-      <p>
-      <label>Birthdate *
-      </label>
-      <select class="date">
-        <option value="1">01
-        </option>
-        <option value="2">02
-        </option>
-        <option value="3">03
-        </option>
-        <option value="4">04
-        </option>
-        <option value="5">05
-        </option>
-        <option value="6">06
-        </option>
-        <option value="7">07
-        </option>
-        <option value="8">08
-        </option>
-        <option value="9">09
-        </option>
-        <option value="10">10
-        </option>
-        <option value="11">11
-        </option>
-        <option value="12">12
-        </option>
-        <option value="13">13
-        </option>
-        <option value="14">14
-        </option>
-        <option value="15">15
-        </option>
-        <option value="16">16
-        </option>
-        <option value="17">17
-        </option>
-        <option value="18">18
-        </option>
-        <option value="19">19
-        </option>
-        <option value="20">20
-        </option>
-        <option value="21">21
-        </option>
-        <option value="22">22
-        </option>
-        <option value="23">23
-        </option>
-        <option value="24">24
-        </option>
-        <option value="25">25
-        </option>
-        <option value="26">26
-        </option>
-        <option value="27">27
-        </option>
-        <option value="28">28
-        </option>
-        <option value="29">29
-        </option>
-        <option value="30">30
-        </option>
-        <option value="31">31
-        </option>
-      </select>
-      <select>
-        <option value="1">January
-        </option>
-        <option value="2">February
-        </option>
-        <option value="3">March
-        </option>
-        <option value="4">April
-        </option>
-        <option value="5">May
-        </option>
-        <option value="6">June
-        </option>
-        <option value="7">July
-        </option>
-        <option value="8">August
-        </option>
-        <option value="9">September
-        </option>
-        <option value="10">October
-        </option>
-        <option value="11">November
-        </option>
-        <option value="12">December
-        </option>
-      </select>
-      <input class="year" type="text" size="4" maxlength="4"/>
-    </p>
-     <p>
-            <input type="text" id="email" name="email" placeholder="Your Email" value="" class="radius" />
-          </p>
-          <p>
-            <input type="text" id="remail" name="remail" placeholder="Re-enter Email" class="radius" />
-          </p>
-          <p>
-            <input type="password" id="password" name="password" placeholder="New Password" class="radius" />
-          </p>
-      <p>
-            <input type="password" id="password" name="repassword" placeholder="Confirm Password" class="radius" />
-          </p>
-          <p>
-            <button class="radius title" name="signup">Sign Up for Dating Tonight</button>
-          </p>
-        </form>
-      </div>
-      <!--loginform-->
-    </div>
-    <!--loginboxinner-->
-  </div>
-  <!--loginbox-->
-</body>
+	<h1 class="header-w3ls">
+		Dating Tonight Form</h1>
+	<div class="icon-stu">
+
+		<h2 class="student-w3l">Login And Register Dating Tonight</h2>
+		<div class="stude-user-wls">
+			<span class="fa fa-heartbeat" aria-hidden="true"></span>
+			<div class="clear"> </div>
+		</div>
+		<div class="row-col">
+			<div class="banner-agileits-btm">
+				<div class="w3layouts_more-buttn">
+					<a href="#small-dialog1 " class="play-icon popup-with-zoom-anim">login</a>
+				</div>
+				<div id="small-dialog1" class="mfp-hide w3ls_small_dialog wthree_pop">
+					<div class="agileits_modal_body">
+
+						<!--login form-->
+						<div class="newsletter ">
+							<h2>Login Form</h2>
+
+							<div class="letter-w3ls">
+								<form action="#" method="post">
+
+									<div class="form-left-w3l">
+
+										<input type="text" class="top-up" name="name" placeholder="Name" required="">
+									</div>
+
+									<div class="form-left-w3l">
+										<input type="email" name="email" required="" placeholder="Email">
+									</div>
+									<div class="form-right-w3ls ">
+
+										<input type="password" name="password" placeholder="Password" required="">
+
+									</div>
+									<div class="btnn">
+										<button type="submit">LOGIN</button><br>
+									</div>
+								</form>
+
+
+								<div class="clear"></div>
+							</div>
+							<!--//login form-->
+
+						</div>
+					</div>
+                  </div>
+				</div>
+				<div class="banner-its-btm">
+
+					<div class="outs_more-buttn">
+						<a href="#small-dialog2 " class="play-icon popup-with-zoom-anim">Register</a>
+					</div>
+					<div id="small-dialog2" class="mfp-hide w3ls_small_dialog wthree_pop">
+						<div class="agileits_modal_body">
+
+							<!--register form-->
+							<div class="student-reg-w3 ">
+								<h3>Register Form</h3>
+								<div class="letter-w3ls">
+
+									<form action="#" method="post">
+										<div class="main">
+											<div class="form-left-to-w3l">
+
+												<input type="text" name="name" placeholder="Name" required="">
+												<div class="clear"></div>
+											</div>
+											<div class="form-right-to-w3ls">
+
+												<input type="text" name="last name" placeholder="Last Name" required="">
+												  <div class="clear"></div>
+											</div>
+
+										</div>
+
+								<div class="main">
+									<div class="form-left-to-w3l">
+
+										<input type="email" name="email" placeholder="Email" required="">
+										  <div class="clear"></div>
+									</div>
+									<div class="form-right-to-w3ls">
+
+										<input type="text" name="phone number" placeholder="Phone Number" required="">
+										  <div class="clear"></div>
+									</div>
+								</div>
+								<div class="main">
+
+	 	<div class="form-left-to-w3l">
+					<select class="form-control">
+					<option value="">Gender</option>
+						<option>Male</option>
+						<option>Female</option>
+					</select>
+			</div>
+					   <div class="form-right-to-w3ls">
+     <input  id="datepicker1" name="text" type="text" placeholder="Date of Birth" required="">
+	  <div class="clearfix"></div>
+	 </div>
+			</div>
+
+
+								<div class="form-add-to-w3ls add">
+
+									<input type="text" name="address" placeholder="Street Address" required="">
+									  <div class="clear"></div>
+								</div>
+
+
+								<div class="main">
+									<div class="form-left-to-w3l">
+
+										<input type="text" name="city" placeholder="City" required="">
+										<div class="clear"></div>
+									</div>
+									<div class="form-right-to-w3ls">
+										<input type="text" name="state" placeholder="State" required="">
+										<div class="clear"></div>
+									</div>
+
+								</div>
+								<div class="main">
+									<div class="form-left-to-w3l">
+										<input type="text" name="Pin code" placeholder="Pin code" required="">
+										<div class="clear"></div>
+									</div>
+									<div class="form-right-to-w3ls">
+										<select class="form-control buttom">
+												<option value="">
+												Select Country</option>
+													<option value="category2">Oman</option>
+													<option value="category1">Australia</option>
+													<option value="category3">America</option>
+													<option value="category3">London</option>
+													<option value="category3">Goa</option>
+													<option value="category3">Canada</option>
+													<option value="category3">Srilanka</option>
+												</select>
+
+	                                   <div class="clear"></div>
+									</div>
+
+								</div>
+								<div class="form-right-to-w3ls">
+										<select class="form-control buttom">
+												<option value="">
+												Select Course</option>
+													<option value="category2">BBA</option>
+													<option value="category1">Bsc</option>
+													<option value="category3">Bcom</option>
+
+												</select>
+
+	                                   <div class="clear"></div>
+									</div>
+								<div class="form-control-w3l">
+									<textarea name="Message" placeholder="Any Message..." required=""></textarea>
+								</div>
+								<div class="btnn">
+									<button type="submit">Submit</button><br>
+								</div>
+
+								</form>
+							</div>
+						</div>
+						<!--//register form-->
+
+					</div>
+				</div>
+				<div class="clear"> </div>
+			</div>
+			</div>
+			</div>
+			<div class="copy">
+				<p>&copy;2018 Dating Tonight Form. All Rights Reserved | Developed by The Dreamers and Design by <a href="http://www.W3Layouts.com" target="_blank">W3Layouts</a></p>
+			</div>
+
+			<script type='text/javascript' src='/templates/datingtonight/formRegister/js/jquery-2.2.3.min.js'></script>
+
+			<!--scripts-->
+
+			<!--//scripts-->
+			<script src="/templates/datingtonight/formRegister/js/jquery.magnific-popup.js" type="text/javascript"></script>
+			<script>
+				$(document).ready(function () {
+					$('.popup-with-zoom-anim').magnificPopup({
+						type: 'inline',
+						fixedContentPos: false,
+						fixedBgPos: true,
+						overflowY: 'auto',
+						closeBtnInside: true,
+						preloader: false,
+						midClick: true,
+						removalDelay: 300,
+						mainClass: 'my-mfp-zoom-in'
+					});
+
+				});
+			</script>
+			<!-- //pop-up-box video -->
+			<!-- //js -->
+			<!-- Calendar -->
+				<script src="js/jquery-ui.js"></script>
+				  <script>
+						  $(function() {
+							$( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker();
+						  });
+				  </script>
+			<!-- //Calendar -->
+
+ </body>
 </html>
