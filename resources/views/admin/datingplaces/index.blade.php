@@ -44,8 +44,8 @@
                         <td>{{ $id }}</td>
                         <td>{{ $name }}</td>
                         <td>{{ $city }}</td>
-                        <td>{{ $preview }}</td>
-                        <td>{{ $detail }}</td>
+                        <td>{!! $preview !!}</td>
+                        <td>{!! $detail !!}</td>
                         <td>
                             @if($picture != '')
                             @php
@@ -64,8 +64,8 @@
                         <td>{{ $id }}</td>
                         <td>{{ $name }}</td>
                         <td>{{ $city }}</td>
-                        <td>{{ $preview }}</td>
-                        <td>{{ $detail }}</td>
+                        <td>{!! $preview !!}</td>
+                        <td>{!! $detail !!}</td>
                         <td>
                             @if($picture != '')
                             @php
