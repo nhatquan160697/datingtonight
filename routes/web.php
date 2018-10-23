@@ -126,31 +126,32 @@ Route::namespace('Admin')->prefix('admin')->group(function(){
 
 	Route::prefix('users')->group(function(){
 		// Controller user
-		Route::get('/users',[
+		Route::get('/',[
 			'uses' => 'UserController@index',
 			'as' => 'admin.user.index'
 		]);
-		Route::get('/users/add',[
+		Route::get('/add',[
 			'uses' => 'UserController@getAdd',
 			'as' => 'admin.user.add'
 		]);
-		Route::post('/users/add',[
+		Route::post('/add',[
 			'uses' => 'UserController@postAdd',
 			'as' => 'admin.user.add'
 		]);
-		Route::get('/users/edit-{id}',[
+		Route::get('/edit-{id}',[
 			'uses' => 'UserController@getEdit',
 			'as' => 'admin.user.edit'
 		]);
-		Route::post('/users/edit-{id}',[
+		Route::post('/edit-{id}',[
 			'uses' => 'UserController@postEdit',
 			'as' => 'admin.user.edit'
 		]);
-		Route::get('/user/del-{id}',[
+		Route::get('/del-{id}',[
 			'uses' => 'UserController@del',
 			'as' => 'admin.user.del'
 		]);
 	});
+
 
 	Route::prefix('user-properties')->group(function(){
 		//controller user properties
@@ -680,6 +681,36 @@ Route::namespace('Admin')->prefix('admin')->group(function(){
 			'as' => 'admin.user-properties.constellation.delete'
 			]);
 		});
+  });
+
+	// Controller Administrator
+	Route::prefix('administrator')->group(function(){
+		// Controller user
+		Route::get('/',[
+			'uses' => 'AdminController@index',
+			'as' => 'admin.admin.index'
+		]);
+		Route::get('/add',[
+			'uses' => 'AdminController@getAdd',
+			'as' => 'admin.admin.add'
+		]);
+		Route::post('/add',[
+			'uses' => 'AdminController@postAdd',
+			'as' => 'admin.admin.add'
+		]);
+		Route::get('/edit-{id}',[
+			'uses' => 'AdminController@getEdit',
+			'as' => 'admin.admin.edit'
+		]);
+		Route::post('/edit-{id}',[
+			'uses' => 'AdminController@postEdit',
+			'as' => 'admin.admin.edit'
+		]);
+		Route::get('/del-{id}',[
+			'uses' => 'AdminController@del',
+			'as' => 'admin.admin.del'
+		]);
+
 	});
 });
 
