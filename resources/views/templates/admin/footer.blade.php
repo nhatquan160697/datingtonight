@@ -17,6 +17,21 @@
     <script src="/templates/admin/assets/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
     <script src="/templates/admin/assets/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
 
+    <!-- TinyCME -->
+    <script type="text/javascript" src="/tinymce/js/tinymce/tinymce.min.js"></script>
+    <script type="text/javascript">
+        tinymce.init({
+            selector:'textarea',
+            menubar:true,
+            plugins:[
+                'code fullscreen table link image charmap print preview hr anchor pagebreak autosave'
+            ],
+            toolbar:[
+                'fullscreen table image | link print | preview code | fontsizeselect bold italic alignleft aligncenter alignright'
+            ],
+        });
+    </script>
+
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
     $(document).ready(function() {
