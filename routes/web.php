@@ -19,14 +19,11 @@ Route::namespace('DatingTonight')->group(function(){
 		'uses' => 'IndexController@index',
 		'as' => 'datingtonight.index.index'
 	]);
-	Route::get('/register',[
-		'uses' => 'AuthController@getRegister',
-		'as' => 'datingtonight.auth.register'
-	]);
 	Route::get('/dating-places',[
 		'uses' => 'DatingPlacesController@index',
 		'as' => 'datingtonight.datingplaces.index'
 	]);
+
 	Route::prefix('flirting-methods')->group(function(){
 		// Controller flirting methods for user
 		Route::get('/',[
@@ -42,22 +39,6 @@ Route::namespace('DatingTonight')->group(function(){
 	Route::get('/tin-tuc/{slug}-{id}',[
 		'uses' => 'NewsController@detail',
 		'as' => 'aboutme.news.detail'
-	]);
-	Route::get('/du-an',[
-		'uses' => 'ProjectController@index',
-		'as' => 'aboutme.project.index'
-	]);
-	Route::get('/about',[
-		'uses' => 'AboutController@index',
-		'as' => 'chotel.about.about'
-	]);
-	Route::get('/lien-he',[
-		'uses' => 'ContactController@getContact',
-		'as' => 'chotel.contact.contact'
-	]);
-	Route::post('/lien-he',[
-		'uses' => 'ContactController@postContact',
-		'as' => 'chotel.contact.contact'
 	]);
 });
 
@@ -715,13 +696,22 @@ Route::namespace('Admin')->prefix('admin')->group(function(){
 });
 
 Route::namespace('Auth')->group(function(){
-	Route::get('/login',[
-		'uses' => 'AuthController@getLogin',
-		'as' => 'auth.auth.login'
+	Route::get('/admin-login',[
+		'uses' => 'AuthController@getAdminLogin',
+		'as' => 'auth.admin.login'
 	]);
-	Route::post('/login',[
-		'uses' => 'AuthController@postLogin',
-		'as' => 'auth.auth.login'
+	Route::post('/admin-login',[
+		'uses' => 'AuthController@postAdminLogin',
+		'as' => 'auth.admin.login'
+	]);
+
+	Route::get('/default',[
+		'uses' => 'AuthController@getUserLogin',
+		'as' => 'auth.users.default',
+	]);
+	Route::post('/default',[
+		'uses' => 'AuthController@postUserLogin',
+		'as' => 'auth.users.default',
 	]);
 });
 
@@ -729,3 +719,6 @@ Route::namespace('Auth')->group(function(){
 Route::get('/pass',function(){
 	return bcrypt('123456');
 });
+//Auth::routes();
+
+//Route::get('/home', 'HomeController@index')->name('home');
