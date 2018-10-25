@@ -4,9 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Khóa Học Lập Trình Laravel Framework 5.x Tại Khoa Phạm">
     <meta name="author" content="">
-    <title>Admin - Khoa Phạm</title>
+    <title>Admin - Dating Tonight</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/templates/admin/assets/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -25,6 +24,21 @@
 
     <!-- DataTables Responsive CSS -->
     <link href="/templates/admin/assets/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+    <!-- Tinymce -->
+    <script type="text/javascript" src="/tinymce/tinymce.min.js"></script>
+    <script type="text/javascript">
+        tinymce.init({
+            selector:'textarea',
+            menubar:true,
+            plugins:[
+                'code fullscreen table link image charmap print preview hr anchor pagebreak autosave'
+            ],
+            toolbar:[
+                'fullscreen table image | link print | preview code | fontsizeselect bold italic alignleft aligncenter alignright'
+            ],
+        });
+    </script>
 </head>
 
 <body>

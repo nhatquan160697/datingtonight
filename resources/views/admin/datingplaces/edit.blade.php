@@ -11,37 +11,34 @@
             </div>
             <!-- /.col-lg-12 -->
             <div class="col-lg-7" style="padding-bottom:120px">
-                <form action="" method="POST">
+                <form action="{{ route('admin.datingplaces.edit',$getItem->id_place) }}" method="POST" enctype="multipart/form-data">
+                    {{ csrf_field() }}
                     <div class="form-group">
                         <label>Name</label>
-                        <input class="form-control" name="txtName" placeholder="Please Enter Username" />
+                        <input class="form-control" name="txtName" value="{{ $getItem->name_place }}" />
                     </div>
                     <div class="form-group">
-                        <label>Price</label>
-                        <input class="form-control" name="txtPrice" placeholder="Please Enter Password" />
+                        <label style="display: block;">City</label>
+                        <select name="slcCity">
+                            @foreach($getCities as $city)
+                            <option value="{{ $city->city }}">{{ $city->city }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label>Intro</label>
-                        <textarea class="form-control" rows="3" name="txtIntro"></textarea>
+                        <label>Preview</label>
+                        <textarea class="form-control" rows="3" name="txtPreview">{{ $getItem->preview_text }}</textarea>
                     </div>
                     <div class="form-group">
-                        <label>Content</label>
-                        <textarea class="form-control" rows="3" name="txtContent"></textarea>
+                        <label>Detail</label>
+                        <textarea class="form-control" rows="3" name="txtDetail">{{ $getItem->detail_place }}</textarea>
                     </div>
                     <div class="form-group">
-                        <label>Images</label>
+                        <label>Picture</label>
                         <input type="file" name="fImages">
                     </div>
                     <div class="form-group">
-                        <label>Product Keywords</label>
-                        <input class="form-control" name="txtOrder" placeholder="Please Enter Category Keywords" />
-                    </div>
-                    <div class="form-group">
-                        <label>Product Description</label>
-                        <textarea class="form-control" rows="3"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Product Status</label>
+                        <label>Status</label>
                         <label class="radio-inline">
                             <input name="rdoStatus" value="1" checked="" type="radio">Visible
                         </label>

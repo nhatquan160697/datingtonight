@@ -21,11 +21,29 @@
 			<div class="row inner-sec">
 				<!--left-->
 				<div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
+					@foreach($getItems as $item)
+					@php
+                        $id = $item->id_place;
+                        $name = $item->name_place;
+                        $city = $item->city;
+                        $preview = str_limit($item->preview_text,100,'...');
+                        $detail = str_limit($item->detail_place,100,'...');
+                        $picture = $item->picture;
+                        $date_created = $item->date_created;
+                        $count = $item->count_number;
+                        $urlEdit = route('admin.datingplaces.edit',$id);
+                        $urlDelete = route('admin.datingplaces.delete',$id);
+                    @endphp
 					<article class="blog-grid-top">
 						<div class="b-grid-top">
 							<div class="blog_info_left_grid">
 								<a href="single.html">
-									<img src="images/b1.jpg" class="img-fluid" alt="">
+									@if($picture != '')
+		                            @php
+		                                $urlImg = '/storage/app/files/datingplaces/'.$picture;
+		                            @endphp
+									<img src="{{ $urlImg }}" class="img-fluid" alt="">
+									@endif
 								</a>
 							</div>
 							<div class="blog-info-middle">
@@ -36,11 +54,11 @@
 									</li>
 									<li class="mx-2">
 										<a href="#">
-											<i class="far fa-thumbs-up"></i> 201 Likes</a>
+											<i class="far fa-thumbs-up"></i> {{ $count }} Views</a>
 									</li>
 									<li>
 										<a href="#">
-											<i class="far fa-comment"></i> 15 Comments</a>
+											<i class="far fa-comment"></i> 0 Comments</a>
 									</li>
 
 								</ul>
@@ -48,81 +66,12 @@
 						</div>
 
 						<h3>
-							<a href="single.html">Amet consectetur adipisicing </a>
+							<a href="single.html">{{ $name }} </a>
 						</h3>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit sedc dnmo eiusmod tempor incididunt ut labore et dolore magna
-							aliqua uta enim ad minim ven iam quis nostrud exercitation ullamco labor nisi ut aliquip exea commodo consequat duis
-							aute irudre dolor in elit sed uta labore dolore reprehender</p>
+						<p> {!! $preview !!}</p>
 						<a href="single.html" class="btn btn-primary read-m">Read More</a>
 					</article>
-					<article class="blog-grid-top my-5">
-						<div class="b-grid-top">
-							<div class="blog_info_left_grid">
-								<a href="single.html">
-									<img src="images/b4.jpg" class="img-fluid" alt="">
-								</a>
-							</div>
-							<div class="blog-info-middle">
-								<ul>
-									<li>
-										<a href="#">
-											<i class="far fa-calendar-alt"></i> FEB 15,2018</a>
-									</li>
-									<li class="mx-2">
-										<a href="#">
-											<i class="far fa-thumbs-up"></i> 201 Likes</a>
-									</li>
-									<li>
-										<a href="#">
-											<i class="far fa-comment"></i> 15 Comments</a>
-									</li>
-
-								</ul>
-							</div>
-						</div>
-
-						<h3>
-							<a href="single.html">Amet consectetur adipisicing </a>
-						</h3>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit sedc dnmo eiusmod tempor incididunt ut labore et dolore magna
-							aliqua uta enim ad minim ven iam quis nostrud exercitation ullamco labor nisi ut aliquip exea commodo consequat duis
-							aute irudre dolor in elit sed uta labore dolore reprehender</p>
-						<a href="single.html" class="btn btn-primary read-m">Read More</a>
-					</article>
-					<article class="blog-grid-top mb-4">
-						<div class="b-grid-top">
-							<div class="blog_info_left_grid">
-								<a href="single.html">
-									<img src="images/b1.jpg" class="img-fluid" alt="">
-								</a>
-							</div>
-							<div class="blog-info-middle">
-								<ul>
-									<li>
-										<a href="#">
-											<i class="far fa-calendar-alt"></i> FEB 15,2018</a>
-									</li>
-									<li class="mx-2">
-										<a href="#">
-											<i class="far fa-thumbs-up"></i> 201 Likes</a>
-									</li>
-									<li>
-										<a href="#">
-											<i class="far fa-comment"></i> 15 Comments</a>
-									</li>
-
-								</ul>
-							</div>
-						</div>
-
-						<h3>
-							<a href="single.html">Amet consectetur adipisicing </a>
-						</h3>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit sedc dnmo eiusmod tempor incididunt ut labore et dolore magna
-							aliqua uta enim ad minim ven iam quis nostrud exercitation ullamco labor nisi ut aliquip exea commodo consequat duis
-							aute irudre dolor in elit sed uta labore dolore reprehender</p>
-						<a href="single.html" class="btn btn-primary read-m">Read More</a>
-					</article>
+					@endforeach
 					<nav aria-label="Page navigation example">
 						<ul class="pagination justify-content-left">
 							<li class="page-item disabled">
@@ -348,142 +297,6 @@
 		</div>
 	</section>
 	<!--//main-->
-
-	<!--footer-->
-	<footer>
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-4 footer-grid-agileits-w3ls text-left">
-					<h3>About US</h3>
-					<p>Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. lacinia eget consectetur sed, convallis at tellus..</p>
-					<div class="read">
-						<a href="single.html" class="btn btn-primary read-m">Read More</a>
-					</div>
-				</div>
-				<div class="col-lg-4 footer-grid-agileits-w3ls text-left">
-
-					<div class="tech-btm">
-						<h3>Latest Posts</h3>
-						<div class="blog-grids row mb-3">
-							<div class="col-md-5 blog-grid-left">
-								<a href="single.html">
-									<img src="images/4.jpg" class="img-fluid" alt="">
-								</a>
-							</div>
-							<div class="col-md-7 blog-grid-right">
-
-								<h5>
-									<a href="single.html">Pellentesque dui, non felis. Maecenas male non felis </a>
-								</h5>
-								<div class="sub-meta">
-									<span>
-										<i class="far fa-clock"></i> 20 Jan, 2018</span>
-								</div>
-							</div>
-
-						</div>
-						<div class="blog-grids row mb-3">
-							<div class="col-md-5 blog-grid-left">
-								<a href="single.html">
-									<img src="images/5.jpg" class="img-fluid" alt="">
-								</a>
-							</div>
-							<div class="col-md-7 blog-grid-right">
-
-								<h5>
-									<a href="single.html">Pellentesque dui, non felis. Maecenas male non felis </a>
-								</h5>
-								<div class="sub-meta">
-									<span>
-										<i class="far fa-clock"></i> 20 Jan, 2018</span>
-								</div>
-							</div>
-
-						</div>
-						<div class="blog-grids row mb-3">
-							<div class="col-md-5 blog-grid-left">
-								<a href="single.html">
-									<img src="images/6.jpg" class="img-fluid" alt="">
-								</a>
-							</div>
-							<div class="col-md-7 blog-grid-right">
-
-								<h5>
-									<a href="single.html">Pellentesque dui, non felis. Maecenas male non felis </a>
-								</h5>
-								<div class="sub-meta">
-									<span>
-										<i class="far fa-clock"></i> 20 Jan, 2018</span>
-								</div>
-							</div>
-
-						</div>
-					</div>
-				</div>
-				<!-- subscribe -->
-				<div class="col-lg-4 subscribe-main footer-grid-agileits-w3ls text-left">
-					<h2>Signup to our newsletter</h2>
-					<div class="subscribe-main text-left">
-						<div class="subscribe-form">
-							<form action="#" method="post" class="subscribe_form">
-								<input class="form-control" type="email" placeholder="Enter your email..." required="">
-								<button type="submit" class="btn btn-primary submit">Submit</button>
-							</form>
-							<div class="clearfix"> </div>
-						</div>
-						<p>We respect your privacy.No spam ever!</p>
-					</div>
-					<!-- //subscribe -->
-				</div>
-			</div>
-			<!-- footer -->
-			<div class="footer-cpy text-center">
-				<div class="footer-social">
-					<div class="copyrighttop">
-						<ul>
-							<li class="mx-3">
-								<a class="facebook" href="#">
-									<i class="fab fa-facebook-f"></i>
-									<span>Facebook</span>
-								</a>
-							</li>
-							<li>
-								<a class="facebook" href="#">
-									<i class="fab fa-twitter"></i>
-									<span>Twitter</span>
-								</a>
-							</li>
-							<li class="mx-3">
-								<a class="facebook" href="#">
-									<i class="fab fa-google-plus-g"></i>
-									<span>Google+</span>
-								</a>
-							</li>
-							<li>
-								<a class="facebook" href="#">
-									<i class="fab fa-pinterest-p"></i>
-									<span>Pinterest</span>
-								</a>
-							</li>
-						</ul>
-
-					</div>
-				</div>
-				<div class="w3layouts-agile-copyrightbottom">
-					<p>© 2018 Weblog. All Rights Reserved | Design by
-						<a href="http://w3layouts.com/">W3layouts</a>
-					</p>
-
-				</div>
-			</div>
-
-			<!-- //footer -->
-
-
-		</div>
-	</footer>
-	<!---->
-
 	<!-- js -->
 	<script src="js/jquery-2.2.3.min.js"></script>
 	<!-- //js -->

@@ -99,7 +99,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <a class="nav-link" href="{{ route('datingtonight.datingplaces.index') }}">Dating Places</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="{{ route('datingtonight.flirtingmethods.index') }}">Flirting Methods</a>
+                        <a class="nav-link" href="{{route('datingtonight.flirtingmethods.index')}}">Flirting Methods</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="about.html">Finding Partner</a>

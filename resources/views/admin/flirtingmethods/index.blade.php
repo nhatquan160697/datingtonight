@@ -5,42 +5,59 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Product
+                <h1 class="page-header">Flirting Methods
                     <small>List</small>
                 </h1>
             </div>
             <!-- /.col-lg-12 -->
+
+            <!-- print error message -->
+            @if(count($errors)>0)
+                <div class="alert-danger">
+                         @foreach($errors->all() as $err)
+                            {{$err}}<br>
+                        @endforeach
+                </div>
+            @endif
+
+            <!-- print success message -->
+            @if(session('success'))
+                <div class="alert-success">
+                    {{session('success')}}
+                </div>
+            @endif
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                     <tr align="center">
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Price</th>
+                        <th>Flirting Name</th>
+                        <th>Preview Text</th>
+                        <th>Detail</th>
+                        <th>Author</th>
+                        <th>Image</th>
                         <th>Date</th>
-                        <th>Status</th>
                         <th>Delete</th>
                         <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="odd gradeX" align="center">
-                        <td>1</td>
-                        <td>Áo Thun Nana</td>
-                        <td>200.000 VNĐ</td>
-                        <td>3 Minutes Age</td>
-                        <td>Hiện</td>
-                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{ route('admin.datingplaces.delete',['id'=>2]) }}">Delete</a></td>
-                        <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{ route('admin.datingplaces.edit',['id'=>2]) }}">Edit</a></td>
-                    </tr>
-                    <tr class="even gradeC" align="center">
-                        <td>2</td>
-                        <td>Áo Thun Polo</td>
-                        <td>250.000 VNĐ</td>
-                        <td>1 Hours Age</td>
-                        <td>Ẩn</td>
-                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{ route('admin.flirtingmethods.delete',['id'=>2]) }}">Delete</a></td>
-                        <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{ route('admin.flirtingmethods.edit',['id'=>2]) }}">Edit</a></td>
-                    </tr>
+                    @foreach($flirtingmethods as $fm)
+                    <?php
+                        $url='/storage/app/files/flirtingmethods/'.$fm->image;
+                        $preview_text=str_limit($fm->preview_text,50);
+                    ?>
+                        <tr class="odd gradeX" align="center">
+                            <td>{{$fm->id}}</td>
+                            <td>{{$fm->name_flirting}}</td>
+                            <td>{{$preview_text}}</td>
+                            <td>{{$fm->detail_flirting}}</td>
+                            <td>{{$fm->author}}</td>
+                            <td><img src="{{$url}}" alt="This is an image" width="100px" height="80px"></td>
+                            <td>{{$fm->date_created}}</td>
+                            <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{ route('admin.flirtingmethods.delete',$fm->id)}}">Delete</a></td>
+                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{ route('admin.flirtingmethods.edit',$fm->id)}}">Edit</a></td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

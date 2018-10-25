@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Product
+                <h1 class="page-header">Dating Places
                     <small>List</small>
                 </h1>
             </div>
@@ -15,32 +15,72 @@
                     <tr align="center">
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Price</th>
-                        <th>Date</th>
-                        <th>Status</th>
+                        <th>City</th>
+                        <th>Preview</th>
+                        <th>Detail</th>
+                        <th>Picture</th>
+                        <th>View</th>
+                        <th>Date Created</th>
                         <th>Delete</th>
                         <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($getItems as $item)
+                    @php
+                        $id = $item->id_place;
+                        $name = $item->name_place;
+                        $city = $item->city;
+                        $preview = str_limit($item->preview_text,100,'...');
+                        $detail = str_limit($item->detail_place,100,'...');
+                        $picture = $item->picture;
+                        $date_created = $item->date_created;
+                        $count = $item->count_number;
+                        $urlEdit = route('admin.datingplaces.edit',$id);
+                        $urlDelete = route('admin.datingplaces.delete',$id);
+                    @endphp
+                    @if( $id % 2 == 0 )
                     <tr class="odd gradeX" align="center">
-                        <td>1</td>
-                        <td>Áo Thun Nana</td>
-                        <td>200.000 VNĐ</td>
-                        <td>3 Minutes Age</td>
-                        <td>Hiện</td>
-                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{ route('admin.datingplaces.delete',['id'=>2]) }}">Delete</a></td>
-                        <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{ route('admin.datingplaces.edit',['id'=>2]) }}">Edit</a></td>
+                        <td>{{ $id }}</td>
+                        <td>{{ $name }}</td>
+                        <td>{{ $city }}</td>
+                        <td>{!! $preview !!}</td>
+                        <td>{!! $detail !!}</td>
+                        <td>
+                            @if($picture != '')
+                            @php
+                                $urlImg = '/storage/app/files/datingplaces/'.$picture;
+                            @endphp
+                            <img src="{{ $urlImg }}" alt="This is image" height="80px" width="100px" />
+                            @endif
+                        </td>
+                        <td>{{ $count }}</td>
+                        <td>{{ $date_created }}</td>
+                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a onclick=" return confirm('Do you want to delete ?')" href="{{ $urlDelete }}">Delete</a></td>
+                        <td class="center"><i class="fa fa-pencil fa-fw"></i><a href="{{ $urlEdit }}">Edit</a></td>
                     </tr>
+                    @else
                     <tr class="even gradeC" align="center">
-                        <td>2</td>
-                        <td>Áo Thun Polo</td>
-                        <td>250.000 VNĐ</td>
-                        <td>1 Hours Age</td>
-                        <td>Ẩn</td>
-                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{ route('admin.datingplaces.delete',['id'=>2]) }}">Delete</a></td>
-                        <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{ route('admin.datingplaces.edit',['id'=>2]) }}">Edit</a></td>
+                        <td>{{ $id }}</td>
+                        <td>{{ $name }}</td>
+                        <td>{{ $city }}</td>
+                        <td>{!! $preview !!}</td>
+                        <td>{!! $detail !!}</td>
+                        <td>
+                            @if($picture != '')
+                            @php
+                                $urlImg = '/storage/app/files/datingplaces/'.$picture;
+                            @endphp
+                            <img src="{{ $urlImg }}" alt="This is image" height="80px" width="100px" />
+                            @endif
+                        </td>
+                        <td>{{ $count }}</td>
+                        <td>{{ $date_created }}</td>
+                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a onclick="return confirm('Do you want to delete ?')" href="{{ $urlDelete }}">Delete</a></td>
+                        <td class="center"><i class="fa fa-pencil fa-fw"></i><a href="{{ $urlEdit }}">Edit</a></td>
                     </tr>
+                    @endif
+                    @endforeach
                 </tbody>
             </table>
         </div>
