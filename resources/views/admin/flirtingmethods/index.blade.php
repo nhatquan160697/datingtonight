@@ -49,8 +49,8 @@
                         <tr class="odd gradeX" align="center">
                             <td>{{$fm->id}}</td>
                             <td>{{$fm->name_flirting}}</td>
-                            <td>{{$preview_text}}</td>
-                            <td>{{$fm->detail_flirting}}</td>
+                            <td>{!!$preview_text!!}</td>
+                            <td>{!!$fm->detail_flirting!!}</td>
                             <td>{{$fm->author}}</td>
                             <td><img src="{{$url}}" alt="This is an image" width="100px" height="80px"></td>
                             <td>{{$fm->date_created}}</td>
