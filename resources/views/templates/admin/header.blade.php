@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="">
     <title>Admin - Dating Tonight</title>
+    <!-- Icon -->
+    <link rel="SHORTCUT ICON"  href="/templates/datingtonight/images/icons/icon.ico">
 
     <!-- Bootstrap Core CSS -->
     <link href="/templates/admin/assets/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
