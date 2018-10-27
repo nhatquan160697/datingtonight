@@ -24,6 +24,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
          window.scrollTo(0, 1);
       }
    </script>
+
+   <link rel="SHORTCUT ICON"  href="/templates/datingtonight/images/icons/icon.ico">
    <link href="/templates/datingtonight/css/bootstrap.css" rel='stylesheet' type='text/css' />
    <link rel="stylesheet" href="/templates/datingtonight/css/jquery.desoslide.css">
    <link href="/templates/datingtonight/css/style.css" rel='stylesheet' type='text/css' />

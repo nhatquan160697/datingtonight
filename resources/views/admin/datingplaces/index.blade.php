@@ -17,7 +17,6 @@
                         <th>Name</th>
                         <th>City</th>
                         <th>Preview</th>
-                        <th>Detail</th>
                         <th>Picture</th>
                         <th>View</th>
                         <th>Date Created</th>
@@ -44,8 +43,7 @@
                         <td>{{ $id }}</td>
                         <td>{{ $name }}</td>
                         <td>{{ $city }}</td>
-                        <td>{!! $preview !!}</td>
-                        <td>{!! $detail !!}</td>
+                        <td>{{ $preview }}</td>
                         <td>
                             @if($picture != '')
                             @php
@@ -64,8 +62,7 @@
                         <td>{{ $id }}</td>
                         <td>{{ $name }}</td>
                         <td>{{ $city }}</td>
-                        <td>{!! $preview !!}</td>
-                        <td>{!! $detail !!}</td>
+                        <td>{{ $preview }}</td>
                         <td>
                             @if($picture != '')
                             @php

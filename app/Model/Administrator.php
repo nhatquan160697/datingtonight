@@ -4,6 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Administrator extends Model
 {
@@ -18,6 +19,7 @@ class Administrator extends Model
     public function getItem($id){
     	return DB::table('administrator')->select('id_admin','username','password','fullname','name_role','administrator.id_role')->join('admin_role','administrator.id_role','=','admin_role.id_role')->where('id_admin','=',$id)->first();
     }
+
     public function getNameRoles(){
     	return DB::table('admin_role')->select('id_role','name_role')->get();
     }
