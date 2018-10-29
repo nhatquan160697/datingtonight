@@ -13,7 +13,7 @@ class DatingPlacesController extends Controller
 	}
 
   	public function index(){
-  		$getItems = $this->mDatingPlaces->getItems();
+  		$getItems = $this->mDatingPlaces->getIndex();
   		return view('datingtonight.datingplaces.index',compact('getItems'));
   	}
 

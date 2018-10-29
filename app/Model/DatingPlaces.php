@@ -15,6 +15,10 @@ class DatingPlaces extends Model
     	return $this->all();
     }
 
+    public function getIndex(){
+        return DB::table('datingplaces')->paginate(4);
+    }
+
     public function getItem($id){
     	return $this->findOrFail($id);
     }

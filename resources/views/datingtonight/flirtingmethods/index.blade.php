@@ -175,9 +175,6 @@
 								<div class="clearfix"> </div>
 							</div>
 						</div>
-				
-
-
 					<div class="tech-btm widget_social text-left">
 						<h4>Stay Connect</h4>
 						<ul>
