@@ -109,7 +109,7 @@ class AdminFlirtingController extends Controller
 
     public function getDelete($id)
     {
-    	$flirtingmethods=flirtingmethods::where('id_flirting',$id);
+    	$flirtingmethods=flirtingmethods::find($id);
         $flirtingmethods->delete();
         return redirect('admin/flirting-methods/index')->with('success','Delete successfully');
     }
