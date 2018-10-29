@@ -45,6 +45,14 @@ Route::namespace('DatingTonight')->group(function(){
 		]);
 	});
 
+	Route::prefix('finding-person')->group(function(){
+		// Controller flirting methods for user
+		Route::get('/',[
+			'uses' => 'FindingSuitablePerson@index',
+			'as' => 'datingtonight.findingperson.index'
+		]);
+	});
+
 	Route::get('/tin-tuc/{slug}-{id}',[
 		'uses' => 'NewsController@detail',
 		'as' => 'aboutme.news.detail'
@@ -721,6 +729,14 @@ Route::namespace('Auth')->group(function(){
 	Route::post('/default',[
 		'uses' => 'AuthController@postUserLogin',
 		'as' => 'auth.users.default',
+	]);
+	Route::get('/register',[
+		'uses'=>'AuthController@getRegister',
+		'as'=>'auth.users.default',
+	]);
+	Route::post('/register',[
+		'uses'=>'AuthController@postRegister',
+		'as'=>'auth.users.default',
 	]);
 });
 
