@@ -8,4 +8,8 @@ use App\Http\Controllers\Controller;
 class FindingSuitablePerson extends Controller
 {
     //
+    public function index()
+    {
+    	return view('datingtonight.findingperson.formFinding');
+    }
 }
