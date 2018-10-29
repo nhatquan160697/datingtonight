@@ -48,7 +48,12 @@
             @if (Session::has('msg'))
                 <p>{{ Session::get('msg') }}</p>
             @endif
-            <form action="{{ route('auth.admin.login') }}" method="post">
+            {{-- @php
+                if ($errors) {
+                    dd($errors->all());
+                }
+            @endphp --}}
+            <form action="{{ route('admin.post.login') }}" method="post">
                 {{ csrf_field() }}
                 <div class="field-group">
                     <span class="fa fa-user" aria-hidden="true"></span>

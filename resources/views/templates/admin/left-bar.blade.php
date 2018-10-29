@@ -35,6 +35,9 @@
                     <li>
                         <a href="{{ route('admin.datingplaces.add') }}">Add Dating Places</a>
                     </li>
+                    <li>
+                        <a href="{{ route('admin.datingplaces.picture') }}">Add Picture of Dating Places</a>
+                    </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>

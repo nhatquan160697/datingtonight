@@ -32,6 +32,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
    <link href="/templates/datingtonight/css/fontawesome-all.css" rel="stylesheet">
    <link href="//fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800"
        rel="stylesheet">
+   <link rel="stylesheet" href="/templates/datingtonight/formDatingPlaces/css/style.css">
 </head>
 
 <body>
@@ -129,8 +130,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <input class="form-control mr-sm-2" type="search" placeholder="Search here..." name="Search" required="">
                         <button class="btn btn1 my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
                      </form>
-
-
                </div>
             </nav>
 

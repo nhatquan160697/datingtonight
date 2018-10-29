@@ -92,6 +92,14 @@ Route::namespace('Admin')->prefix('admin')->group(function(){
 			'uses' => 'AdminDatingController@del',
 			'as' => 'admin.datingplaces.delete'
 		]);
+		Route::get('/picture',[
+			'uses' => 'AdminDatingController@getDatingPicture',
+			'as' => 'admin.datingplaces.picture'
+		]);
+		Route::post('/picture',[
+			'uses' => 'AdminDatingController@postDatingPicture',
+			'as' => 'admin.datingplaces.picture'
+		]);
 	});
 
 	Route::prefix('flirting-methods')->group(function(){
@@ -712,32 +720,10 @@ Route::namespace('Admin')->prefix('admin')->group(function(){
 	});
 });
 
-Route::namespace('Auth')->group(function(){
-	Route::get('/admin-login',[
-		'uses' => 'AuthController@getAdminLogin',
-		'as' => 'auth.admin.login'
-	]);
-	Route::post('/admin-login',[
-		'uses' => 'AuthController@postAdminLogin',
-		'as' => 'auth.admin.login'
-	]);
-
-	Route::get('/default',[
-		'uses' => 'AuthController@getUserLogin',
-		'as' => 'auth.users.default',
-	]);
-	Route::post('/default',[
-		'uses' => 'AuthController@postUserLogin',
-		'as' => 'auth.users.default',
-	]);
-	Route::get('/register',[
-		'uses'=>'AuthController@getRegister',
-		'as'=>'auth.users.default',
-	]);
-	Route::post('/register',[
-		'uses'=>'AuthController@postRegister',
-		'as'=>'auth.users.default',
-	]);
+// Auth cho admin
+Route::prefix('admin')->group(function() {
+    Route::get('/login', 'Admin\Auth\AdminLoginController@showLoginForm')->name('admin.login');
+    Route::post('/login', 'Admin\Auth\AdminLoginController@login')->name('admin.post.login');
 });
 
 // mã hóa lại pasword

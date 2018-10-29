@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\DatingPlaces;
 use App\Model\City;
+use App\Model\DatingPlacePicture;
 
 class AdminDatingController extends Controller
 {
-	public function __construct(DatingPlaces $mDatingPlaces, City $mCity){
+	public function __construct(DatingPlaces $mDatingPlaces, City $mCity, DatingPlacePicture $mDatingPlacePicture){
 		$this->mDatingPlaces = $mDatingPlaces;
 		$this->mCity = $mCity;
+		$this->mDatingPlacePicture = $mDatingPlacePicture;
 	}
 
 	public function index(){
@@ -96,5 +98,14 @@ class AdminDatingController extends Controller
 		} else {
 			return redirect()->route('admin.datingplaces.index')->with('msg','Delete failed');
 		}
+	}
+
+	public function getDatingPicture(){
+		$getNamePlaces = $this->mDatingPlacePicture->getNamePlaces();
+		return view('admin.datingplaces.picture',compact('getNamePlaces'));
+	}
+
+	public function postDatingPicture(){
+
 	}
 }
