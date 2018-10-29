@@ -16,4 +16,9 @@ class DatingPlacesController extends Controller
   		$getItems = $this->mDatingPlaces->getItems();
   		return view('datingtonight.datingplaces.index',compact('getItems'));
   	}
+
+  	public function detail($slug, $id){
+  		$getItem = $this->mDatingPlaces->getItem($id);
+  		return view('datingtonight.datingplaces.detail',compact('getItem'));
+  	}
 }

@@ -52,7 +52,7 @@
 								<h5 class="card-title ">
 									<a href="single.html">{{$fm->name_flirting}}</a>
 								</h5>
-								<?php 
+								<?php
 									$preview_text=str_limit($fm->preview_text,100);
 								?>
 								<p class="card-text mb-3">{{$preview_text}}</p>
@@ -271,11 +271,11 @@
 	</section>
 	<!--//main-->
 	<!-- js -->
-	<script src="js/jquery-2.2.3.min.js"></script>
+	<script src="/templates/datingtonight/js/jquery-2.2.3.min.js"></script>
 	<!-- //js -->
 	<!--/ start-smoth-scrolling -->
-	<script src="js/move-top.js"></script>
-	<script src="js/easing.js"></script>
+	<script src="/templates/datingtonight/js/move-top.js"></script>
+	<script src="/templates/datingtonight/js/easing.js"></script>
 	<script>
 		jQuery(document).ready(function ($) {
 			$(".scroll").click(function (event) {
@@ -310,7 +310,7 @@
 	</a>
 
 	<!-- //Custom-JavaScript-File-Links -->
-	<script src="js/bootstrap.js"></script>
+	<script src="/templates/datingtonight/js/bootstrap.js"></script>
 
 
 </body>

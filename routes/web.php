@@ -13,16 +13,25 @@
 
 Route::pattern('id','[0-9]*');
 //Route::pattern('cid','[0-9]*');
-//Route::pattern('slug','(.*)');
+Route::pattern('slug','(.*)');
 Route::namespace('DatingTonight')->group(function(){
 	Route::get('/',[
 		'uses' => 'IndexController@index',
 		'as' => 'datingtonight.index.index'
 	]);
-	Route::get('/dating-places',[
+
+	Route::prefix('/dating-places')->group(function(){
+		// Controller dating places for user
+		Route::get('/',[
 		'uses' => 'DatingPlacesController@index',
 		'as' => 'datingtonight.datingplaces.index'
-	]);
+		]);
+		Route::get('/detail/{slug}-{id}.html',[
+			'uses' => 'DatingPlacesController@detail',
+			'as' => 'datingtonight.datingplaces.detail'
+		]);
+	});
+
 
 	Route::prefix('flirting-methods')->group(function(){
 		// Controller flirting methods for user
@@ -30,7 +39,7 @@ Route::namespace('DatingTonight')->group(function(){
 			'uses' => 'FlirtingMethodsController@index',
 			'as' => 'datingtonight.flirtingmethods.index'
 		]);
-		Route::get('detail/{id}',[
+		Route::get('/detail/{id}',[
 			'uses' => 'FlirtingMethodsController@detail',
 			'as' => 'datingtonight.flirtingmethods.detail'
 		]);

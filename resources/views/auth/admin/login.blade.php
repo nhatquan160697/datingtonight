@@ -45,37 +45,22 @@
     <div class="content-w3ls">
         <div class="content-bottom">
 			<h2>Sign In Here</h2>
-            <form action="#" method="post">
+            @if (Session::has('msg'))
+                <p>{{ Session::get('msg') }}</p>
+            @endif
+            <form action="{{ route('auth.admin.login') }}" method="post">
+                {{ csrf_field() }}
                 <div class="field-group">
                     <span class="fa fa-user" aria-hidden="true"></span>
                     <div class="wthree-field">
-                        <input name="text1" id="text1" type="text" value="" placeholder="Username" required>
+                        <input name="username" id="username" type="text" value="" placeholder="Username" required>
                     </div>
                 </div>
                 <div class="field-group">
                     <span class="fa fa-lock" aria-hidden="true"></span>
                     <div class="wthree-field">
-                        <input name="password" id="myInput" type="Password" placeholder="Password">
+                        <input name="password" id="username" type="Password" placeholder="Password">
                     </div>
-                </div>
-                <div class="field-group">
-                    <div class="check">
-                        <label class="checkbox w3l">
-                            <input type="checkbox" onclick="myFunction()">
-                            <i> </i>show password</label>
-                    </div>
-                    <!-- script for show password -->
-                    <script>
-                        function myFunction() {
-                            var x = document.getElementById("myInput");
-                            if (x.type === "password") {
-                                x.type = "text";
-                            } else {
-                                x.type = "password";
-                            }
-                        }
-                    </script>
-                    <!-- //script for show password -->
                 </div>
                 <div class="wthree-field">
                     <input id="saveForm" name="saveForm" type="submit" value="sign in" />

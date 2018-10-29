@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\users;
+use Illuminate\Support\Facades\Auth;
+
 
 class AuthController extends Controller
 {
@@ -12,7 +13,7 @@ class AuthController extends Controller
     	return view('auth.admin.login');
     }
 
-    public function postAdminLogin(){
+    public function postAdminLogin(Request $request){
 
     }
 

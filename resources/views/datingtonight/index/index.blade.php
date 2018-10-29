@@ -318,7 +318,7 @@
             <aside class="col-lg-4 agileits-w3ls-right-blog-con text-right">
                <div class="right-blog-info text-left">
                   <div class="tech-btm" style="margin-left: 60px;">
-                     <img src="/templates/datingtonight/logo/logo2.jpg" class="img-fluid" alt="">
+                     <img src="/templates/datingtonight/images/logo/logo2.jpg" class="img-fluid" alt="">
                   </div>
                   <div class="tech-btm">
                      <h4>Most Views</h4>
