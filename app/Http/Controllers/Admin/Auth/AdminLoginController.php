@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin\Auth;
 
-use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -38,11 +37,21 @@ class AdminLoginController extends Controller
         return view('auth.admin.login');
     }
 
+    /**
+     * Get the login username to be used by the controller.
+     *
+     * @return string
+     */
     public function username()
     {
     	return 'username';
     }
 
+    /**
+     * Get the guard to be used during authentication.
+     *
+     * @return \Illuminate\Contracts\Auth\StatefulGuard
+     */
     protected function guard() {
         return Auth::guard('admin');
     }

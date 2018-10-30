@@ -48,11 +48,14 @@
             @if (Session::has('msg'))
                 <p>{{ Session::get('msg') }}</p>
             @endif
-            {{-- @php
-                if ($errors) {
-                    dd($errors->all());
-                }
-            @endphp --}}
+
+            @if ($errors->has('username') || $errors->has('password'))
+                <span class="help-block" style="color: #fff">
+                    <strong>{{ $errors->first('username') }}</strong>
+                    <strong>{{ $errors->first('password') }}</strong>
+                </span>
+            @endif
+
             <form action="{{ route('admin.post.login') }}" method="post">
                 {{ csrf_field() }}
                 <div class="field-group">
