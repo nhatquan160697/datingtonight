@@ -48,7 +48,15 @@
             @if (Session::has('msg'))
                 <p>{{ Session::get('msg') }}</p>
             @endif
-            <form action="{{ route('auth.admin.login') }}" method="post">
+
+            @if ($errors->has('username') || $errors->has('password'))
+                <span class="help-block" style="color: #fff">
+                    <strong>{{ $errors->first('username') }}</strong>
+                    <strong>{{ $errors->first('password') }}</strong>
+                </span>
+            @endif
+
+            <form action="{{ route('admin.post.login') }}" method="post">
                 {{ csrf_field() }}
                 <div class="field-group">
                     <span class="fa fa-user" aria-hidden="true"></span>
