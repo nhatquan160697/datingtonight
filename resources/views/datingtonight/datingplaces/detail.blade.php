@@ -9,7 +9,7 @@
 		<li class="breadcrumb-item">
 			<a href="index.html">Dating Place</a>
 		</li>
-		<li class="breadcrumb-item active">{{ $getItem->name_place }}</li>
+		<li class="breadcrumb-item" style="color:#910745">{{ $getItem->name_place }}</li>
 	</ol>
 
 	<!--//banner-->
@@ -52,24 +52,36 @@
 					</div>
 					<!-- Slides -->
 					<!-- Slideshow container -->
-					<div class="slideshow-container">
+					{{-- <div class="slideshow-container">
 					  <!-- Full-width images with number and caption text -->
 					  <div class="mySlides fade">
-					    <div class="numbertext">1 / 3</div>
-					    <img src="img1.jpg" style="width:100%">
-					    <div class="text">Caption Text</div>
+					    <div class="numbertext">1 / 5</div>
+					    <img src="/storage/app/files/datingplaces/dating_place_picture/{{ $getPicture->picture1}}" style="width:100%">
+					    <div class="text">{{ $getItem->name_place }}</div>
 					  </div>
 
 					  <div class="mySlides fade">
-					    <div class="numbertext">2 / 3</div>
-					    <img src="img2.jpg" style="width:100%">
-					    <div class="text">Caption Two</div>
+					    <div class="numbertext">2 / 5</div>
+					    <img src="/storage/app/files/datingplaces/dating_place_picture/{{ $getPicture->picture2}}" style="width:100%">
+					    <div class="text">{{ $getItem->name_place }}</div>
 					  </div>
 
 					  <div class="mySlides fade">
-					    <div class="numbertext">3 / 3</div>
-					    <img src="img3.jpg" style="width:100%">
-					    <div class="text">Caption Three</div>
+					    <div class="numbertext">3 / 5</div>
+					    <img src="/storage/app/files/datingplaces/dating_place_picture/{{ $getPicture->picture3}}" style="width:100%">
+					    <div class="text">{{ $getItem->name_place }}</div>
+					  </div>
+
+					  <div class="mySlides fade">
+					    <div class="numbertext">4 / 5</div>
+					    <img src="/storage/app/files/datingplaces/dating_place_picture/{{ $getPicture->picture4}}" style="width:100%">
+					    <div class="text">{{ $getItem->name_place }}</div>
+					  </div>
+
+					  <div class="mySlides fade">
+					    <div class="numbertext">5 / 5</div>
+					    <img src="/storage/app/files/datingplaces/dating_place_picture/{{ $getPicture->picture3}}" style="width:100%">
+					    <div class="text">{{ $getItem->name_place }}</div>
 					  </div>
 
 					  <!-- Next and previous buttons -->
@@ -81,7 +93,9 @@
 					  <span class="dot" onclick="currentSlide(1)"></span>
 					  <span class="dot" onclick="currentSlide(2)"></span>
 					  <span class="dot" onclick="currentSlide(3)"></span>
-					</div>
+					  <span class="dot" onclick="currentSlide(4)"></span>
+					  <span class="dot" onclick="currentSlide(5)"></span>
+					</div> --}}
 					<!--/Slides -->
 					<!-- Comment -->
 					@include('datingtonight.datingplaces.comment')
