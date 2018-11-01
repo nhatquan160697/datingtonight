@@ -39,7 +39,7 @@ Route::namespace('DatingTonight')->group(function(){
 			'uses' => 'FlirtingMethodsController@index',
 			'as' => 'datingtonight.flirtingmethods.index'
 		]);
-		Route::get('/detail/{id}',[
+		Route::get('/detail/{slug}-{id}.html',[
 			'uses' => 'FlirtingMethodsController@detail',
 			'as' => 'datingtonight.flirtingmethods.detail'
 		]);
@@ -93,12 +93,20 @@ Route::namespace('Admin')->prefix('admin')->group(function(){
 			'as' => 'admin.datingplaces.delete'
 		]);
 		Route::get('/picture',[
+			'uses' => 'AdminDatingController@listPicture',
+			'as' => 'admin.datingplaces.listpicture'
+		]);
+		Route::get('/picture/add',[
 			'uses' => 'AdminDatingController@getDatingPicture',
 			'as' => 'admin.datingplaces.picture'
 		]);
-		Route::post('/picture',[
+		Route::post('/picture/add',[
 			'uses' => 'AdminDatingController@postDatingPicture',
 			'as' => 'admin.datingplaces.picture'
+		]);
+		Route::get('/picture/del-{id}',[
+			'uses' => 'AdminDatingController@delPicture',
+			'as' => 'admin.datingplaces.delPicture'
 		]);
 	});
 

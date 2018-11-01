@@ -42,7 +42,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       <div class="top-bar_sub_w3layouts container-fluid">
          <div class="row">
             <div class="col-md-4 logo text-left">
-               <a class="navbar-brand" href="index.html">
+               <a class="navbar-brand" href="{{ route('datingtonight.index.index') }}">
                   <i class="fab fa-linode"></i> Dating Tonight </a>
             </div>
             <div class="col-md-4 top-forms text-center mt-lg-3 mt-md-1 mt-0">
@@ -89,10 +89,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                   aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                </button>
-
-
                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav mr-auto">
+                  <ul class="navbar-nav mr-auto" id="nav">
                      <li class="nav-item active">
                         <a class="nav-link" href="{{ route('datingtonight.index.index') }}">DATING TONIGHT
                            <span class="sr-only">(current)</span>

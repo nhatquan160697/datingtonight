@@ -15,9 +15,9 @@
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label style="display: block;">Dating Place Name</label>
-                        <select name="slcCity">
-                            @foreach($getNamePlaces as $name)
-                            <option value="{{ $name->id_place }}">{{ $name->name_place }}</option>
+                        <select name="slcName">
+                            @foreach($getNameDP as $nameDP)
+                            <option value="{{ $nameDP->id_place }}">{{ $nameDP->name_place }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -41,7 +41,7 @@
                         <label>Picture 5</label>
                         <input type="file" name="fImages5">
                     </div>
-                    <button type="submit" class="btn btn-default">Place Add</button>
+                    <button type="submit" class="btn btn-default">Add Picture</button>
                     <button type="reset" class="btn btn-default">Reset</button>
                 <form>
             </div>

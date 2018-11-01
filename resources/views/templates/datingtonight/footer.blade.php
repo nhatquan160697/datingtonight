@@ -129,3 +129,11 @@
          <!-- //footer -->
       </div>
    </footer>
+   <script type="text/javascript" charset="utf-8">
+      $(document).ready(function(){
+        $('.nav-item').click(function(){
+          $('.nav-item').removeClass("active");
+          $(this).addClass("active");
+      });
+      });
+   </script>

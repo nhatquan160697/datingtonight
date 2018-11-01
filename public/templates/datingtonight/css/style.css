@@ -358,38 +358,6 @@ form.header-search {
 
 /*--/slider--*/
 
-.carousel-item {
-	background: -webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/templates/datingtonight/images/banner1.jpg) no-repeat;
-	background: -moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/templates/datingtonight/images/banner1.jpg) no-repeat;
-	background: -ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/templates/datingtonight/images/banner1.jpg) no-repeat;
-	background: linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/templates/datingtonight/images/banner1.jpg) no-repeat;
-	background-size: cover;
-}
-
-.carousel-item.item2 {
-	background: -webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/templates/datingtonight/images/banner2.jpg) no-repeat;
-	background: -moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/templates/datingtonight/images/banner2.jpg) no-repeat;
-	background: -ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/templates/datingtonight/images/banner2.jpg) no-repeat;
-	background: linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/templates/datingtonight/images/banner2.jpg) no-repeat;
-	background-size: cover;
-}
-
-.carousel-item.item3 {
-	background: -webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/templates/datingtonight/images/banner3.jpg) no-repeat;
-	background: -moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/templates/datingtonight/images/banner3.jpg) no-repeat;
-	background: -ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/templates/datingtonight/images/banner3.jpg) no-repeat;
-	background: linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/templates/datingtonight/images/banner3.jpg) no-repeat;
-	background-size: cover;
-}
-
-.carousel-item.item4 {
-	background: -webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/templates/datingtonight/images/banner4.jpg) no-repeat;
-	background: -moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/templates/datingtonight/images/banner4.jpg) no-repeat;
-	background: -ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/templates/datingtonight/images/banner4.jpg) no-repeat;
-	background: linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(/templates/datingtonight/images/banner4.jpg) no-repeat;
-	background-size: cover;
-}
-
 .carousel-caption h2,
 .carousel-caption h3 {
     letter-spacing: 2px;
@@ -534,7 +502,7 @@ section.bottom-slider {
 	width: 100%;
 }
 /*--flexisel--*/
-.flex-slider{	
+.flex-slider{
 		background:#222227;
 		padding: 70px 0 165px 0;
 	}
@@ -626,7 +594,7 @@ section.bottom-slider {
 		font-style:normal;
 		color:#01cd74;
 	}
-	
+
 button.btn.btn-primary.play{
 	width:50px;
 	height:50px;
