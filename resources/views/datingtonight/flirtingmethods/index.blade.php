@@ -48,13 +48,13 @@
 
 								</ul>
 								<h5 class="card-title ">
-									<a href="single.html">{{$fm->name_flirting}}</a>
+									<a href="{{route('datingtonight.flirtingmethods.detail',['slug' => str_slug($fm->name_flirting), 'id' => $fm->id])}}">{{$fm->name_flirting}}</a>
 								</h5>
 								<?php
 									$preview_text=str_limit($fm->preview_text,100);
 								?>
 								<p class="card-text mb-3">{{$preview_text}}</p>
-								<a href="single.html" class="btn btn-primary read-m">Read More</a>
+								<a href="{{route('datingtonight.flirtingmethods.detail',['slug' => str_slug($fm->name_flirting), 'id' => $fm->id])}}" class="btn btn-primary read-m">Read More</a>
 							</div>
 						</div>
 						@endforeach
@@ -94,7 +94,7 @@
 	  			containerID: 'toTop', // fading element id
 				containerHoverID: 'toTopHover', // fading element hover id
 				scrollSpeed: 1200,
-				easingType: 'linear' 
+				easingType: 'linear'
 	 		};
 			*/
 
