@@ -23,13 +23,15 @@ class AdminDatingController extends Controller
 
 	public function getAdd(){
 		$getCities = $this->mCity->getItems();
-		return view('admin.datingplaces.add',compact('getCities'));
+		$getType = $this->mDatingPlaces->getType();
+		return view('admin.datingplaces.add',compact('getCities','getType'));
 	}
 
 	public function postAdd(Request $request){
 		date_default_timezone_set('Asia/Ho_Chi_Minh');
 		$txtName = trim($request->txtName);
 		$slcCity = $request->slcCity;
+		$slcType = $request->slcType;
 		$txtPreview = trim($request->txtPreview);
 		$txtDetail = trim($request->txtDetail);
 		$fImages = "";
@@ -41,6 +43,7 @@ class AdminDatingController extends Controller
 		$arItem = array(
 			'name_place' => $txtName,
 			'city' => $slcCity,
+			'id_type' => $slcType,
 			'preview_text' => $txtPreview,
 			'detail_place' => $txtDetail,
 			'picture' => $fImages,
@@ -65,6 +68,7 @@ class AdminDatingController extends Controller
 		$getItem = $this->mDatingPlaces->getItem($id);
 		$txtName = trim($request->txtName);
 		$slcCity = $request->slcCity;
+		$slcType = $request->slcType;
 		$txtPreview = trim($request->txtPreview);
 		$txtDetail = trim($request->txtDetail);
 		$fImages = "";
@@ -78,6 +82,7 @@ class AdminDatingController extends Controller
 		$arItem = array(
 			'name_place' => $txtName,
 			'city' => $slcCity,
+			'id_type' => $slcType,
 			'preview_text' => $txtPreview,
 			'detail_place' => $txtDetail,
 			'picture' => $fImages,

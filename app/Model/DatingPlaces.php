@@ -12,7 +12,7 @@ class DatingPlaces extends Model
     public $timestamps = false;
 
     public function getItems(){
-    	return $this->all();
+    	return DB::table('datingplaces')->join('dating_place_type','datingplaces.id_type','=','dating_place_type.id_type')->get();
     }
 
     public function getIndex(){
@@ -37,6 +37,10 @@ class DatingPlaces extends Model
 
     public function getTop23(){
         return DB::table('datingplaces')->orderby('count_number','DESC')->limit('2')->offset('1')->get();
+    }
+
+    public function getType(){
+        return DB::table('dating_place_type')->get();
     }
 
     public function getItem($id){

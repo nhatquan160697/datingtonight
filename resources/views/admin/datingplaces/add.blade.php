@@ -25,6 +25,16 @@
                             @endforeach
                         </select>
                     </div>
+
+                    <div class="form-group">
+                        <label style="display: block;">Type</label>
+                        <select name="slcType">
+                            @foreach($getType as $type)
+                            <option value="{{ $type->id_type }}">{{ $type->name_type }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label>Preview</label>
                         <textarea class="form-control" rows="3" name="txtPreview"></textarea>

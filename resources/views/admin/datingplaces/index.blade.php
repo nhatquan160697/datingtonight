@@ -16,6 +16,7 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>City</th>
+                        <th>Type</th>
                         <th>Preview</th>
                         <th>Picture</th>
                         <th>View</th>
@@ -30,6 +31,7 @@
                         $id = $item->id_place;
                         $name = $item->name_place;
                         $city = $item->city;
+                        $type = $item->name_type;
                         $preview = str_limit($item->preview_text,100,'...');
                         $detail = str_limit($item->detail_place,100,'...');
                         $picture = $item->picture;
@@ -43,6 +45,7 @@
                         <td>{{ $id }}</td>
                         <td>{{ $name }}</td>
                         <td>{{ $city }}</td>
+                        <td>{{ $type }}</td>
                         <td>{{ $preview }}</td>
                         <td>
                             @if($picture != '')
@@ -62,6 +65,7 @@
                         <td>{{ $id }}</td>
                         <td>{{ $name }}</td>
                         <td>{{ $city }}</td>
+                        <td>{{ $type }}</td>
                         <td>{{ $preview }}</td>
                         <td>
                             @if($picture != '')
