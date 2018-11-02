@@ -10,6 +10,9 @@
                 </h1>
             </div>
             <!-- /.col-lg-12 -->
+            @if (Session::has('msg'))
+                <p style="color:red; padding:10px; font-size:21px; font-weight: 700;">{{ Session::get('msg') }}</p>
+            @endif
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                     <tr align="center">

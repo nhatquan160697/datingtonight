@@ -12,7 +12,7 @@ class DatingPlaces extends Model
     public $timestamps = false;
 
     public function getItems(){
-    	return DB::table('datingplaces')->join('dating_place_type','datingplaces.id_type','=','dating_place_type.id_type')->get();
+    	return DB::table('datingplaces')->join('dating_place_type','datingplaces.id_type','=','dating_place_type.id_type')->orderby('id_place','DESC')->get();
     }
 
     public function getIndex(){

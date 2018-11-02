@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Model\DatingPlaces;
 use App\Model\City;
 use App\Model\DatingPlacePicture;
+use App\Http\Requests\DatingPlaceRequest;
 
 class AdminDatingController extends Controller
 {
@@ -27,9 +28,9 @@ class AdminDatingController extends Controller
 		return view('admin.datingplaces.add',compact('getCities','getType'));
 	}
 
-	public function postAdd(Request $request){
+	public function postAdd(DatingPlaceRequest $request){
 		date_default_timezone_set('Asia/Ho_Chi_Minh');
-		$txtName = trim($request->txtName);
+		$name_place = trim($request->name_place);
 		$slcCity = $request->slcCity;
 		$slcType = $request->slcType;
 		$txtPreview = trim($request->txtPreview);
@@ -41,7 +42,7 @@ class AdminDatingController extends Controller
 			$fImages = end($tmp);
 		}
 		$arItem = array(
-			'name_place' => $txtName,
+			'name_place' => $name_place,
 			'city' => $slcCity,
 			'id_type' => $slcType,
 			'preview_text' => $txtPreview,
@@ -61,12 +62,12 @@ class AdminDatingController extends Controller
 	public function getEdit($id){
 		$getItem = $this->mDatingPlaces->getItem($id);
 		$getCities = $this->mCity->getItems();
-		return view('admin.datingplaces.edit',compact('getItem','getCities'));
+		$getType = $this->mDatingPlaces->getType();
+		return view('admin.datingplaces.edit',compact('getItem','getCities','getType'));
 	}
 
 	public function postEdit($id, Request $request){
 		$getItem = $this->mDatingPlaces->getItem($id);
-		$txtName = trim($request->txtName);
 		$slcCity = $request->slcCity;
 		$slcType = $request->slcType;
 		$txtPreview = trim($request->txtPreview);
@@ -80,7 +81,6 @@ class AdminDatingController extends Controller
 			// xóa hình cũ
 		}
 		$arItem = array(
-			'name_place' => $txtName,
 			'city' => $slcCity,
 			'id_type' => $slcType,
 			'preview_text' => $txtPreview,
