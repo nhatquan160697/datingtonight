@@ -10,12 +10,21 @@
                 </h1>
             </div>
             <!-- /.col-lg-12 -->
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="col-lg-7" style="padding-bottom:120px">
                 <form role="form" action="{{ route('admin.admin.edit',$getItem->id_admin) }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label>Username</label>
-                        <input class="form-control" name="txtUsername" value="{{ $getItem->username }}" />
+                        <input class="form-control" readonly name="username" value="{{ $getItem->username }}" />
                     </div>
                     <div class="form-group">
                         <label>Password</label>

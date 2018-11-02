@@ -695,7 +695,7 @@ Route::namespace('Admin')->prefix('admin')->group(function(){
 			'as' => 'admin.user-properties.constellation.delete'
 			]);
 		});
-  });
+  	});
 
 	// Controller Administrator
 	Route::prefix('administrator')->group(function(){
@@ -724,6 +724,10 @@ Route::namespace('Admin')->prefix('admin')->group(function(){
 			'uses' => 'AdminController@del',
 			'as' => 'admin.admin.del'
 		]);
+		Route::get('/managing-user',[
+			'uses' => 'UserController@index',
+			'as' => 'admin.user.index'
+		]);
 
 	});
 });
@@ -732,6 +736,7 @@ Route::namespace('Admin')->prefix('admin')->group(function(){
 Route::prefix('admin')->group(function() {
     Route::get('/login', 'Admin\Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Admin\Auth\AdminLoginController@login')->name('admin.post.login');
+    Route::get('/logout','Admin\Auth\AdminLoginController@logout')->name('admin.logout');
 });
 
 // mã hóa lại pasword

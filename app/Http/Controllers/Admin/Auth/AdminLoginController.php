@@ -37,6 +37,11 @@ class AdminLoginController extends Controller
         return view('auth.admin.login');
     }
 
+    public function logout()
+    {
+        return Auth::logout();
+    }
+
     /**
      * Get the login username to be used by the controller.
      *

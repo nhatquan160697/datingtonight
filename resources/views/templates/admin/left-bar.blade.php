@@ -24,6 +24,9 @@
                     <li>
                         <a href="{{ route('admin.admin.add') }}">Add Administrator</a>
                     </li>
+                    <li>
+                        <a href="{{ route('admin.user.index') }}">Managing User</a>
+                    </li>
                 </ul>
             </li>
             <li>
