@@ -58,4 +58,10 @@ class DatingPlaces extends Model
     public function delItem($id){
     	return $this->where('id_place',$id)->delete();
     }
+
+    public function getOldImage($id){
+        return (string)DB::table('datingplaces')
+                     ->select('picture')
+                     ->where('id_place', $id)->first()->picture;
+    }
 }

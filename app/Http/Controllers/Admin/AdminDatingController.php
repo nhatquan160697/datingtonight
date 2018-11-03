@@ -37,9 +37,11 @@ class AdminDatingController extends Controller
 		$txtDetail = trim($request->txtDetail);
 		$fImages = "";
 		if($request->file('fImages') != null){
-			$path = $request->file('fImages')->store('files/datingplaces');
-			$tmp = explode("/", $path);
-			$fImages = end($tmp);
+	 		$file = $request->file('fImages');
+			$fileExtension = $file->getClientOriginalExtension();
+			$picture = 'datingplaces-'.time().'.'.$fileExtension;
+			$uploadPath = storage_path('app\files\datingplaces\\');
+			$file->move($uploadPath, $picture);
 		}
 		$arItem = array(
 			'name_place' => $name_place,
@@ -47,7 +49,7 @@ class AdminDatingController extends Controller
 			'id_type' => $slcType,
 			'preview_text' => $txtPreview,
 			'detail_place' => $txtDetail,
-			'picture' => $fImages,
+			'picture' => $picture,
 			'count_number' => 0,
 			'date_created' => now()
 		);
@@ -72,22 +74,34 @@ class AdminDatingController extends Controller
 		$slcType = $request->slcType;
 		$txtPreview = trim($request->txtPreview);
 		$txtDetail = trim($request->txtDetail);
+		// handle the image
 		$fImages = "";
+		$oldPicture = $this->mDatingPlaces->getOldImage($id);
+		$oldPath = storage_path('app\files\datingplaces\\').$oldPicture;
 		if($request->file('fImages') != null){
-			$path = $request->file('fImages')->store('files/datingplaces');
-			$tmp = explode("/", $path);
-			$fImages = end($tmp);
-
-			// xóa hình cũ
+			unlink(storage_path('app\files\datingplaces\\').$oldPicture);
+	 		$file = $request->file('fImages');
+			$fileExtension = $file->getClientOriginalExtension();
+			$picture = 'datingplaces-'.time().'.'.$fileExtension;
+			$uploadPath = storage_path('app\files\datingplaces\\');
+			$file->move($uploadPath, $picture);
+			$arItem = array(
+				'city' => $slcCity,
+				'id_type' => $slcType,
+				'preview_text' => $txtPreview,
+				'detail_place' => $txtDetail,
+				'picture' => $picture,
+				'date_created' => now()
+			);
+		} else {
+			$arItem = array(
+				'city' => $slcCity,
+				'id_type' => $slcType,
+				'preview_text' => $txtPreview,
+				'detail_place' => $txtDetail,
+				'date_created' => now()
+			);
 		}
-		$arItem = array(
-			'city' => $slcCity,
-			'id_type' => $slcType,
-			'preview_text' => $txtPreview,
-			'detail_place' => $txtDetail,
-			'picture' => $fImages,
-			'date_created' => now()
-		);
 		// add to the database
 		if($this->mDatingPlaces->editItem($id, $arItem)) {
 			return redirect(route('admin.datingplaces.index'))->with('msg','Edit successfully');
@@ -97,8 +111,10 @@ class AdminDatingController extends Controller
 	}
 
 	public function del($id){
+		$oldPicture = $this->mDatingPlaces->getOldImage($id);
+		$oldPath = storage_path('app\files\datingplaces\\').$oldPicture;
+		unlink($oldPath);
 		if($this->mDatingPlaces->delItem($id)){
-			// xoa hinh
 			return redirect()->route('admin.datingplaces.index')->with('msg','Delete successfully');
 		} else {
 			return redirect()->route('admin.datingplaces.index')->with('msg','Delete failed');
