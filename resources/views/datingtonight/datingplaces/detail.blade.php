@@ -104,7 +104,7 @@
 
 				<!--//left-->
 				<!--right-->
-				@include('datingtonight.datingplaces.right-bar')
+				@include('datingtonight.datingplaces.related')
 				<!--//right-->
 			</div>
 		</div>
