@@ -93,7 +93,7 @@ class AdminDatingController extends Controller
 				'picture' => $picture,
 				'date_created' => now()
 			);
-		} else {
+		} else { // xu ly neu ko co anh thi giu nguyen
 			$arItem = array(
 				'city' => $slcCity,
 				'id_type' => $slcType,
@@ -102,6 +102,15 @@ class AdminDatingController extends Controller
 				'date_created' => now()
 			);
 		}
+		$this->validate($request,[
+				'txtPreview' =>'required',
+				'txtDetail' => 'required',
+			],
+			[
+				'txtPreview.required' => 'Please input Preview ',
+				'txtDetail.required' => 'Please input Detail ',
+			]
+		);
 		// add to the database
 		if($this->mDatingPlaces->editItem($id, $arItem)) {
 			return redirect(route('admin.datingplaces.index'))->with('msg','Edit successfully');
