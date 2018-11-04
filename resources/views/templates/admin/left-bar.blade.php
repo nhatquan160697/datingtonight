@@ -57,6 +57,9 @@
                         <a href="{{route('admin.user-properties.city.index')}}">City</a>
                     </li>
                     <li>
+                        <a href="{{route('admin.user-properties.gender.index')}}">Gender</a>
+                    </li>
+                    <li>
                         <a href="{{route('admin.user-properties.hair-color.index')}}">Hair color</a>
                     </li>
                     <li>

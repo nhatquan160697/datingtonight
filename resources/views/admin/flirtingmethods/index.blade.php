@@ -14,17 +14,19 @@
             <!-- print error message -->
             @if(count($errors)>0)
                 <div class="alert-danger">
-                         @foreach($errors->all() as $err)
-                            {{$err}}<br>
+                    <ul>
+                        @foreach($errors->all() as $err)
+                            <li>
+                                {{$err}}
+                            </li>
                         @endforeach
+                    </ul>           
                 </div>
             @endif
 
             <!-- print success message -->
             @if(session('success'))
-                <div class="alert-success">
-                    {{session('success')}}
-                </div>
+                <p style="color:red; padding:10px;font-size: 21px;font-weight: 700;">{{session('success')}}</p>
             @endif
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
