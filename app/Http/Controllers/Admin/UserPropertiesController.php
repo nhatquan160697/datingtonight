@@ -21,6 +21,7 @@ use App\Model\educational_level;
 use App\Model\language;
 use App\Model\religion;
 use App\Model\constellation;
+use App\Model\gender;
 
 class UserPropertiesController extends Controller
 {
@@ -436,17 +437,17 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'drinking'=>'required|unique:drinking|min:3|max:50'
+    			'drink'=>'required|unique:drinking|min:3|max:50'
     		],
     		[
-    			'drinking.required'=>'Please input drinking',
-    			'drinking.min'=>'Character between 3-50',
-    			'drinking.max'=>'Character between 3-50',
-    			'drinking.unique'=>'drinking must be unique',
+    			'drink.required'=>'Please input drinking',
+    			'drink.min'=>'Character between 3-50',
+    			'drink.max'=>'Character between 3-50',
+    			'drink.unique'=>'drinking must be unique',
     		]
     	);
     	$drinking = new drinking;
-    	$drinking->drinking=$request->drinking;
+    	$drinking->drink=$request->drink;
     	$drinking->save();
     	return redirect('admin/user-properties/drinking/add')->with('success','Add successfully');
     }
@@ -462,16 +463,16 @@ class UserPropertiesController extends Controller
 		$drinking = drinking::find($id);
 		$this->validate($request,
             [
-                'drinking'=>'required|unique:drinking|min:3|max:50'
+                'drink'=>'required|unique:drinking|min:3|max:50'
             ],
             [
-                'drinking.required'=>'Please input drinking',
-    			'drinking.min'=>'Character between 3-50',
-    			'drinking.max'=>'Character between 3-50',
-    			'drinking.unique'=>'drinking must be unique',
+                'drink.required'=>'Please input drinking',
+    			'drink.min'=>'Character between 3-50',
+    			'drink.max'=>'Character between 3-50',
+    			'drink.unique'=>'drinking must be unique',
             ]
         );
-        $drinking->drinking=$request->drinking;
+        $drinking->drink=$request->drink;
         $drinking->save();
         return redirect('admin/user-properties/drinking/edit/'.$id)->with('success','Edit successfully');
     }
@@ -502,17 +503,17 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'smoking'=>'required|unique:smoking|min:3|max:50'
+    			'smoke'=>'required|unique:smoking|min:3|max:50'
     		],
     		[
-    			'smoking.required'=>'Please input smoking',
-    			'smoking.min'=>'Character between 3-50',
-    			'smoking.max'=>'Character between 3-50',
-    			'smoking.unique'=>'smoking must be unique',
+    			'smoke.required'=>'Please input smoking',
+    			'smoke.min'=>'Character between 3-50',
+    			'smoke.max'=>'Character between 3-50',
+    			'smoke.unique'=>'smoking must be unique',
     		]
     	);
     	$smoking = new smoking;
-    	$smoking->smoking=$request->smoking;
+    	$smoking->smoke=$request->smoke;
     	$smoking->save();
     	return redirect('admin/user-properties/smoking/add')->with('success','Add successfully');
     }
@@ -528,16 +529,16 @@ class UserPropertiesController extends Controller
 		$smoking = smoking::find($id);
 		$this->validate($request,
             [
-                'smoking'=>'required|unique:smoking|min:3|max:50'
+                'smoke'=>'required|unique:smoking|min:3|max:50'
             ],
             [
-                'smoking.required'=>'Please input smoking',
-    			'smoking.min'=>'Character between 3-50',
-    			'smoking.max'=>'Character between 3-50',
-    			'smoking.unique'=>'smoking must be unique',
+                'smoke.required'=>'Please input smoking',
+    			'smoke.min'=>'Character between 3-50',
+    			'smoke.max'=>'Character between 3-50',
+    			'smoke.unique'=>'smoking must be unique',
             ]
         );
-        $smoking->smoking=$request->smoking;
+        $smoking->smoke=$request->smoke;
         $smoking->save();
         return redirect('admin/user-properties/smoking/edit/'.$id)->with('success','Edit successfully');
     }
@@ -1141,5 +1142,71 @@ class UserPropertiesController extends Controller
     	$constellation=constellation::find($id);
     	$constellation->delete();
     	return redirect('admin/user-properties/constellation/index')->with('success','Delete successfully');
+    }
+
+
+
+
+    //Gender Controller
+    public function indexGender()
+    {
+        $gender = gender::all();
+        return view('admin.user-properties.gender.index',['gender'=>$gender]);
+    }
+
+    public function getAddGender()
+    {
+        return view('admin.user-properties.gender.add');
+    }
+
+    public function postAddGender(Request $request)
+    {
+        $this->validate($request,
+            [
+                'gender'=>'required|unique:gender|min:3|max:50'
+            ],
+            [
+                'gender.required'=>'Please input gender',
+                'gender.min'=>'Character between 3-50',
+                'gender.max'=>'Character between 3-50',
+                'gender.unique'=>'gender must be unique',
+            ]
+        );
+        $gender = new gender;
+        $gender->gender=$request->gender;
+        $gender->save();
+        return redirect('admin/user-properties/gender/add')->with('success','Add successfully');
+    }
+
+    public function getEditGender($id)
+    {
+        $gender = gender::find($id);
+        return view('admin.user-properties.gender.edit',['gender'=>$gender]);
+    }
+
+    public function postEditGender($id,Request $request)
+    {
+        $gender = gender::find($id);
+        $this->validate($request,
+            [
+                'gender'=>'required|unique:gender|min:3|max:50'
+            ],
+            [
+                'gender.required'=>'Please input gender',
+                'gender.min'=>'Character between 3-50',
+                'gender.max'=>'Character between 3-50',
+                'gender.unique'=>'gender must be unique',
+            ]
+        );
+        $gender->gender=$request->gender;
+        $gender->save();
+        return redirect('admin/user-properties/gender/edit/'.$id)->with('success','Edit successfully');
+    }
+
+    public function getDeleteGender($id)
+    {
+        $gender=gender::find($id);
+        $gender->delete();
+        return redirect('admin/user-properties/gender/index')->with('success','Delete successfully');
     }
 }

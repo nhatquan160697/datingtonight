@@ -24,16 +24,14 @@ class AdminFlirtingController extends Controller
     	$flirtingmethods = new flirtingmethods;
         $this->validate($request,
             [
-                'name_flirting'=>'required|unique:flirtingmethods|min:3|max:200',
+                'name_flirting'=>'required|unique:flirtingmethods',
                 'preview_text'=>'required',
                 'detail_flirting'=>'required',
-                'author'=>'required|min:3|max:50',
+                'author'=>'required',
             ],
             [
                 //Name
                 'name_flirting.required'=>'Please input Name',
-                'name_flirting.min'=>'Character between 3-200',
-                'name_flirting.max'=>'Character between 3-200',
                 'name_flirting.unique'=>'Name must be unique',
                 //Preview text
                 'preview_text.required'=>'Please input Preview Text',
@@ -41,15 +39,17 @@ class AdminFlirtingController extends Controller
                 'detail_flirting.required'=>'Please input Detail',
                 //Author
                 'author.required'=>'Please input Author',
-                'author.min'=>'Character between 3-50',
-                'author.max'=>'Character between 3-50',
             ]
         );
+        $picture="";
         if($request->file('Image') != null){
-            $path = $request->file('Image')->store('files/flirtingmethods');
-            $tmp = explode("/", $path);
-            $flirtingmethods->image = end($tmp);
+                $file=$request->file('Image');
+                $fileExtension=$file->getClientOriginalExtension();
+                $picture='flirtingmethods-'.time().'.'.$fileExtension;
+                $uploadPath =storage_path('app\files\flirtingmethods\\');
+                $file->move($uploadPath,$picture);
         }
+        $flirtingmethods->image=$picture;
         $flirtingmethods->name_flirting=$request->name_flirting;
         $flirtingmethods->preview_text=$request->preview_text;
         $flirtingmethods->detail_flirting=$request->detail_flirting;
@@ -70,34 +70,34 @@ class AdminFlirtingController extends Controller
         $flirtingmethods = flirtingmethods::find($id);
         $this->validate($request,
             [
-                'name_flirting'=>'required|unique:flirtingmethods|min:3|max:50',
-                'preview_text'=>'required|min:3|max:50',
+                'name_flirting'=>'required',
+                'preview_text'=>'required',
                 'detail_flirting'=>'required',
-                'author'=>'required|min:3|max:50',
+                'author'=>'required',
             ],
             [
                 //Name
                 'name_flirting.required'=>'Please input Name',
-                'name_flirting.min'=>'Character between 3-50',
-                'name_flirting.max'=>'Character between 3-50',
-                'name_flirting.unique'=>'Name must be unique',
                 //Preview text
                 'preview_text.required'=>'Please input Preview Text',
-                'preview_text.min'=>'Character between 3-50',
-                'preview_text.max'=>'Character between 3-50',
                 //Detail
                 'detail_flirting.required'=>'Please input Detail',
                 //Author
                 'author.required'=>'Please input Author',
-                'author.min'=>'Character between 3-50',
-                'author.max'=>'Character between 3-50',
             ]
         );
+        $oldPicture=$flirtingmethods->image;
+        $oldPath=storage_path('app\files\flirtingmethods\\').$oldPicture;
+        $picture=$flirtingmethods->image;
         if($request->file('Image') != null){
-            $path = $request->file('Image')->store('files/flirtingmethods');
-            $tmp = explode("/", $path);
-            $flirtingmethods->image = end($tmp);
+            unlink($oldPath);
+            $file=$request->file('Image');
+            $fileExtension=$file->getClientOriginalExtension();
+            $picture='flirtingmethods-'.time().'.'.$fileExtension;
+            $uploadPath =storage_path('app\files\flirtingmethods\\');
+            $file->move($uploadPath,$picture);
         }
+        $flirtingmethods->image=$picture;
         $flirtingmethods->name_flirting=$request->name_flirting;
         $flirtingmethods->preview_text=$request->preview_text;
         $flirtingmethods->detail_flirting=$request->detail_flirting;
@@ -110,6 +110,9 @@ class AdminFlirtingController extends Controller
     public function getDelete($id)
     {
     	$flirtingmethods=flirtingmethods::find($id);
+        $oldPicture=$flirtingmethods->image;
+        $oldPath=storage_path('app\files\flirtingmethods\\').$oldPicture;
+        unlink($oldPath);
         $flirtingmethods->delete();
         return redirect('admin/flirting-methods/index')->with('success','Delete successfully');
     }

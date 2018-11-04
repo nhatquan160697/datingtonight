@@ -46,10 +46,14 @@ Route::namespace('DatingTonight')->group(function(){
 	});
 
 	Route::prefix('finding-person')->group(function(){
-		// Controller flirting methods for user
+		// Controller finding person for user
 		Route::get('/',[
 			'uses' => 'FindingSuitablePerson@index',
 			'as' => 'datingtonight.findingperson.index'
+		]);
+		Route::post('/result',[
+			'uses' => 'FindingSuitablePerson@result',
+			'as' => 'datingtonight.findingperson.result'
 		]);
 	});
 
@@ -695,7 +699,40 @@ Route::namespace('Admin')->prefix('admin')->group(function(){
 			'as' => 'admin.user-properties.constellation.delete'
 			]);
 		});
-  	});
+
+
+		Route::prefix('gender')->group(function(){
+			//Gender
+			Route::get('index',[
+			'uses' => 'UserPropertiesController@indexGender',
+			'as' => 'admin.user-properties.gender.index'
+			]);
+
+			Route::get('add',[
+			'uses' => 'UserPropertiesController@getAddGender',
+			'as' => 'admin.user-properties.gender.add'
+			]);
+			Route::post('add',[
+			'uses' => 'UserPropertiesController@postAddGender',
+			'as' => 'admin.user-properties.gender.add'
+			]);
+
+			Route::get('edit/{id}',[
+			'uses' => 'UserPropertiesController@getEditGender',
+			'as' => 'admin.user-properties.gender.edit'
+			]);
+			Route::post('edit/{id}',[
+			'uses' => 'UserPropertiesController@postEditGender',
+			'as' => 'admin.user-properties.gender.edit'
+			]);
+
+			Route::get('delete/{id}',[
+			'uses' => 'UserPropertiesController@getDeleteGender',
+			'as' => 'admin.user-properties.gender.delete'
+			]);
+		});
+  });
+
 
 	// Controller Administrator
 	Route::prefix('administrator')->group(function(){

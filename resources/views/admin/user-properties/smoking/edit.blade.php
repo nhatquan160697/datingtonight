@@ -30,7 +30,7 @@
                     <input type="hidden" name="_token" value="{{csrf_token()}}"/>
                     <div class="form-group">
                         <label>Smoking</label>
-                        <input class="form-control" name="smoking" value="{{$smoking->smoking}}" placeholder="Please Enter Smoking" />
+                        <input class="form-control" name="smoke" value="{{$smoking->smoke}}" placeholder="Please Enter Smoking" />
                     </div>
                     <button type="submit" class="btn btn-default">Edit</button>
                     <button type="reset" class="btn btn-default">Reset</button>

@@ -34,126 +34,70 @@
                 <div class="card-body">
                     <ul class="tab-list">
                         <li class="tab-list__item active">
-                            <a class="tab-list__link" href="#tab1" data-toggle="tab">Basic</a>
-                        </li>
-                        <li class="tab-list__item">
-                            <a class="tab-list__link" href="#tab2" data-toggle="tab">Appearance</a>
-                        </li>
-                        <li class="tab-list__item">
-                            <a class="tab-list__link" href="#tab3" data-toggle="tab">Life Style</a>
-                        </li>
-                        <li class="tab-list__item">
-                            <a class="tab-list__link" href="#tab4" data-toggle="tab">Culture</a>
+                            <a class="tab-list__link" href="#tab1" data-toggle="tab">Information</a>
                         </li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab1">
-                            <form method="POST" action="#">
+                            <form method="POST" action="{{route('datingtonight.findingperson.result')}}">
+                            	<input type="hidden" name="_token" value="{{csrf_token()}}"/>
+                            	<!-- Gender and City select option -->
                                 <div class="row row-space">
                                     <div class="col-2">
                                         <div class="input-group">
+                                        	<!-- Gender -->
                                             <label class="label">Gender:</label>
                                             <div class="rs-select2 js-select-simple select--no-search">
-                                                <select name="driver-age">
-                                                    <option>Male</option>
-                                                    <option>Female</option>
-                                                    <option selected="selected">Anything</option>
-                                                    
+                                                <select name="gender">
+                                                	@foreach($gender as $gd)
+                                                	@if($gd->gender=='Anything')
+                                                		<option  value="{{$gd->id}}" selected="selected">{{$gd->gender}}</option>
+                                                	@else
+                                                    	<option value="{{$gd->id}}">{{$gd->gender}}</option>
+                                                    @endif
+                                                    @endforeach
                                                 </select>
                                                 <div class="select-dropdown"></div>
                                             </div>
+                                            <!-- Gender -->
                                         </div>
                                     </div>
                                     <div class="col-2">
                                         <div class="input-group">
+                                        	<!-- City -->
                                             <label class="label">City:</label>
                                             <div class="rs-select2 js-select-simple select--no-search">
-                                                <select name="car-group">
-                                                    <option selected="selected">Group S-car</option>
-                                                    <option>Group 1</option>
-                                                    <option>Group 2</option>
-                                                    <option>Group 3</option>
+                                                <select name="city">
+                                                    @foreach($city as $ct)
+                                                	@if($ct->city=='Anything')
+                                                		<option value="{{$ct->id}}" selected="selected">{{$ct->city}}</option>
+                                                	@else
+                                                    	<option value="{{$ct->id}}">{{$ct->city}}</option>
+                                                    @endif
+                                                    @endforeach
                                                 </select>
                                                 <div class="select-dropdown"></div>
                                             </div>
+                                            <!-- City -->
                                         </div>
                                     </div>
                                 </div>
+                                <!-- Gender and City select option -->
+
+                                <!-- From age to age select option -->
                                 <div class="row row-space">
                                     <div class="col-2">
                                         <div class="input-group">
-                                            <label class="label">check-in:</label>
-                                            <input class="input--style-1" type="text" name="check-in" placeholder="mm/dd/yyyy" id="input-start">
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="input-group">
-                                            <label class="label">check-out:</label>
-                                            <input class="input--style-1" type="text" name="check-out" placeholder="mm/dd/yyyy" id="input-end">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row row-space">
-                                    <div class="col-2">
-                                        <div class="input-group">
-                                            <label class="label">travellers:</label>
-                                            <div class="input-group-icon" id="js-select-special">
-                                                <input class="input--style-1 input--style-1-small" type="text" name="traveller" value="1 Adult, 0 Children, 1 Room" disabled="disabled" id="info">
-                                                <i class="zmdi zmdi-chevron-down input-icon"></i>
-                                            </div>
-                                            <div class="dropdown-select">
-                                                <ul class="list-room">
-                                                    <li class="list-room__item">
-                                                        <span class="list-room__name">Room 1</span>
-                                                        <ul class="list-person">
-                                                            <li class="list-person__item">
-                                                                <span class="name">Adults</span>
-                                                                <div class="quantity quantity1">
-                                                                    <span class="minus">-</span>
-                                                                    <input class="inputQty" type="number" min="0" value="1">
-                                                                    <span class="plus">+</span>
-                                                                </div>
-                                                            </li>
-                                                            <li class="list-person__item">
-                                                                <span class="name">Children</span>
-                                                                <div class="quantity quantity2">
-                                                                    <span class="minus">-</span>
-                                                                    <input class="inputQty" type="number" min="0" value="0">
-                                                                    <span class="plus">+</span>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                                <div class="list-room__footer">
-                                                    <a href="#" id="btn-add-room">Add room</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <button class="btn-submit" type="submit">search</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="tab-pane" id="tab2">
-                            <form method="POST" action="#">
-                                <div class="input-group input-group-big">
-                                    <label class="label">location:</label>
-                                    <input class="input--style-1" type="text" name="location" placeholder="Destination, hotel name" required="required">
-                                    <i class="zmdi zmdi-search input-group-symbol"></i>
-                                </div>
-                                <div class="row row-space">
-                                    <div class="col-2">
-                                        <div class="input-group">
-                                            <label class="label">driver age:</label>
+                                            <label class="label">From age:</label>
                                             <div class="rs-select2 js-select-simple select--no-search">
-                                                <select name="driver-age">
-                                                    <option>23</option>
-                                                    <option>24</option>
-                                                    <option selected="selected">25</option>
-                                                    <option>26</option>
+                                                <select name="fromage">
+                                                	<option selected="selected">Anything</option>
+                                                   	<?php 
+                                                   		for($i=18;$i<=100;$i++)
+                                                   		{
+                                                   			echo '<option value="'.$i.'">'.$i.'</option>';
+                                                   		}
+                                                   	?>
                                                 </select>
                                                 <div class="select-dropdown"></div>
                                             </div>
@@ -161,174 +105,419 @@
                                     </div>
                                     <div class="col-2">
                                         <div class="input-group">
-                                            <label class="label">car group:</label>
+                                            <label class="label">To Age:</label>
                                             <div class="rs-select2 js-select-simple select--no-search">
-                                                <select name="car-group">
-                                                    <option selected="selected">Group S-car</option>
-                                                    <option>Group 1</option>
-                                                    <option>Group 2</option>
-                                                    <option>Group 3</option>
+                                                <select name="toage">
+                                               		<option selected="selected">Anything</option>
+                                                   	<?php 
+                                                   		for($i=18;$i<=100;$i++)
+                                                   		{
+                                                   			echo '<option value="'.$i.'">'.$i.'</option>';
+                                                   		}
+                                                   	?>
                                                 </select>
                                                 <div class="select-dropdown"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- From age to age select option -->
+
+                                <!-- Eye and hair color -->
                                 <div class="row row-space">
                                     <div class="col-2">
                                         <div class="input-group">
-                                            <label class="label">pick up:</label>
-                                            <input class="input--style-1 js-single-datepicker" type="text" name="pickup" placeholder="mm/dd/yyyy" data-drop="1">
-                                            <div class="dropdown-datepicker" id="dropdown-datepicker1"></div>
+                                            <label class="label">Hair Color:</label>
+                                            <div class="rs-select2 js-select-simple select--no-search">
+                                                <select name="hair_color">
+                                                	@foreach($hair_color as $hc)
+                                                	@if($hc->color=='Anything')
+                                                		<option value="{{$hc->id}}" selected="selected">{{$hc->color}}</option>
+                                                	@else
+                                                    	<option value="{{$hc->id}}">{{$hc->color}}</option>
+                                                    @endif
+                                                    @endforeach
+                                                </select>
+                                                <div class="select-dropdown"></div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-2">
                                         <div class="input-group">
-                                            <label class="label">time:</label>
+                                            <label class="label">Eye Color:</label>
                                             <div class="rs-select2 js-select-simple select--no-search">
-                                                <select name="time-pickup">
-                                                    <option selected="selected">10:00 AM</option>
-                                                    <option>5:00 AM</option>
-                                                    <option>6:00 AM</option>
-                                                    <option>7:00 AM</option>
+                                                <select name="eye_color">
+                                               		@foreach($eye_color as $ec)
+                                                	@if($ec->color=='Anything')
+                                                		<option value="{{$ec->id}}" selected="selected">{{$ec->color}}</option>
+                                                	@else
+                                                    	<option value="{{$ec->id}}">{{$ec->color}}</option>
+                                                    @endif
+                                                    @endforeach
                                                 </select>
                                                 <div class="select-dropdown"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- Eye and hair color -->
+
+                                <!-- Hair length and style -->
                                 <div class="row row-space">
                                     <div class="col-2">
                                         <div class="input-group">
-                                            <label class="label">drop off:</label>
-                                            <input class="input--style-1 js-single-datepicker" type="text" name="dropoff" placeholder="mm/dd/yyyy" data-drop="2">
-                                            <div class="dropdown-datepicker" id="dropdown-datepicker2"></div>
+                                            <label class="label">Hair Length:</label>
+                                            <div class="rs-select2 js-select-simple select--no-search">
+                                                <select name="hair_length">
+                                                	@foreach($hair_length as $hl)
+                                                	@if($hl->length=='Anything')
+                                                		<option value="{{$hl->id}}" selected="selected">{{$hl->length}}</option>
+                                                	@else
+                                                    	<option value="{{$hl->id}}">{{$hl->length}}</option>
+                                                    @endif
+                                                    @endforeach
+                                                </select>
+                                                <div class="select-dropdown"></div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-2">
                                         <div class="input-group">
-                                            <label class="label">time:</label>
+                                            <label class="label">Hair Style:</label>
                                             <div class="rs-select2 js-select-simple select--no-search">
-                                                <select name="time-dropoff">
-                                                    <option selected="selected">10:00 AM</option>
-                                                    <option>5:00 AM</option>
-                                                    <option>6:00 AM</option>
-                                                    <option>7:00 AM</option>
+                                                <select name="hair_style">
+                                               		@foreach($hair_style as $hs)
+                                                	@if($hs->style=='Anything')
+                                                		<option value="{{$hs->id}}" selected="selected">{{$hs->style}}</option>
+                                                	@else
+                                                    	<option value="{{$hs->id}}">{{$hs->style}}</option>
+                                                    @endif
+                                                    @endforeach
                                                 </select>
                                                 <div class="select-dropdown"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- Hair length and style -->
+
+                                <!-- Height -->
+                                <div class="row row-space">
+                                    <div class="col-2">
+                                        <div class="input-group">
+                                            <label class="label">Height From:</label>
+                                            <div class="rs-select2 js-select-simple select--no-search">
+                                                <select name="fromheight">
+                                                	<option selected="selected">Anything</option>
+                                                   	<?php 
+                                                   		for($i=140;$i<=220;$i++)
+                                                   		{
+                                                   			echo '<option>'.$i.'</option>';
+                                                   		}
+                                                   	?>
+                                                </select>
+                                                <div class="select-dropdown"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="input-group">
+                                            <label class="label">To Height:</label>
+                                            <div class="rs-select2 js-select-simple select--no-search">
+                                                <select name="toheight">
+                                               		<option selected="selected">Anything</option>
+                                                   	<?php 
+                                                   		for($i=140;$i<=220;$i++)
+                                                   		{
+                                                   			echo '<option value="'.$i.'">'.$i.'</option>';
+                                                   		}
+                                                   	?>
+                                                </select>
+                                                <div class="select-dropdown"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Height -->
+
+                                <!-- Weight -->
+                                <div class="row row-space">
+                                    <div class="col-2">
+                                        <div class="input-group">
+                                            <label class="label">Weight From:</label>
+                                            <div class="rs-select2 js-select-simple select--no-search">
+                                                <select name="fromweight">
+                                                	<option selected="selected">Anything</option>
+                                                   	<?php 
+                                                   		for($i=40;$i<=220;$i++)
+                                                   		{
+                                                   			echo '<option value="'.$i.'">'.$i.'</option>';
+                                                   		}
+                                                   	?>
+                                                </select>
+                                                <div class="select-dropdown"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="input-group">
+                                            <label class="label">To Weight:</label>
+                                            <div class="rs-select2 js-select-simple select--no-search">
+                                                <select name="toweight">
+                                               		<option selected="selected">Anything</option>
+                                                   	<?php 
+                                                   		for($i=40;$i<=220;$i++)
+                                                   		{
+                                                   			echo '<option value="'.$i.'">'.$i.'</option>';
+                                                   		}
+                                                   	?>
+                                                </select>
+                                                <div class="select-dropdown"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Weight -->
+
+                                <!-- Body -->
+                     			<div>
+                                    <div class="input-group">
+                                        <label class="label">Body:</label>
+                                        <div class="rs-select2 js-select-simple select--no-search">
+                                            <select name="body">
+                                              	@foreach($body as $bd)
+                                                @if($bd->body=='Anything')
+                                                	<option value="{{$bd->id}}" selected="selected">{{$bd->body}}</option>
+                                                @else
+                                                  	<option value="{{$bd->id}}">{{$bd->body}}</option>
+                                                @endif
+                                                @endforeach
+                                            </select>
+                                        	<div class="select-dropdown"></div>
+                                    	</div>
+                                	</div>
+                            	</div>
+                            	<!-- Body -->
+
+                            	<!-- Drinking and Smoking -->
+                                <div class="row row-space">
+                                    <div class="col-2">
+                                        <div class="input-group">
+                                            <label class="label">Drinking:</label>
+                                            <div class="rs-select2 js-select-simple select--no-search">
+                                                <select name="drink">
+                                                	@foreach($drinking as $dr)
+                                                	@if($dr->length=='Anything')
+                                                		<option value="{{$dr->id}}" selected="selected">{{$dr->drink}}</option>
+                                                	@else
+                                                    	<option value="{{$dr->id}}">{{$dr->drink}}</option>
+                                                    @endif
+                                                    @endforeach
+                                                </select>
+                                                <div class="select-dropdown"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="input-group">
+                                            <label class="label">Smoking:</label>
+                                            <div class="rs-select2 js-select-simple select--no-search">
+                                                <select name="smoke">
+                                               		@foreach($smoking as $sm)
+                                                	@if($sm->smoke=='Anything')
+                                                		<option value="{{$sm->id}}" selected="selected">{{$sm->smoke}}</option>
+                                                	@else
+                                                    	<option value="{{$sm->id}}">{{$sm->smoke}}</option>
+                                                    @endif
+                                                    @endforeach
+                                                </select>
+                                                <div class="select-dropdown"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Drinking and Smoking -->
+
+                                <!-- Job status -->
+                     			<div>
+                                    <div class="input-group">
+                                        <label class="label">Job Status:</label>
+                                        <div class="rs-select2 js-select-simple select--no-search">
+                                            <select name="job_status">
+                                              	@foreach($job_status as $js)
+                                                @if($js->status=='Anything')
+                                                	<option value="{{$js->id}}" selected="selected">{{$js->status}}</option>
+                                                @else
+                                                  	<option value="{{$js->id}}">{{$js->status}}</option>
+                                                @endif
+                                                @endforeach
+                                            </select>
+                                        	<div class="select-dropdown"></div>
+                                    	</div>
+                                	</div>
+                            	</div>
+                            	<!-- Job status -->
+
+                            	<!-- Home type -->
+                     			<div>
+                                    <div class="input-group">
+                                        <label class="label">Home type:</label>
+                                        <div class="rs-select2 js-select-simple select--no-search">
+                                            <select name="house_type">
+                                              	@foreach($house_type as $ht)
+                                                @if($ht->type=='Anything')
+                                                	<option value="{{$ht->id}}" selected="selected">{{$ht->type}}</option>
+                                                @else
+                                                  	<option value="{{$ht->id}}">{{$ht->type}}</option>
+                                                @endif
+                                                @endforeach
+                                            </select>
+                                        	<div class="select-dropdown"></div>
+                                    	</div>
+                                	</div>
+                            	</div>
+                            	<!-- Home type -->
+
+                            	<!-- Live with -->
+                     			<div>
+                                    <div class="input-group">
+                                        <label class="label">Live with:</label>
+                                        <div class="rs-select2 js-select-simple select--no-search">
+                                            <select name="live_with">
+                                              	@foreach($live_with as $lw)
+                                                @if($lw->livewith=='Anything')
+                                                	<option value="{{$lw->id}}" selected="selected">{{$lw->livewith}}</option>
+                                                @else
+                                                  	<option value="{{$lw->id}}">{{$lw->livewith}}</option>
+                                                @endif
+                                                @endforeach
+                                            </select>
+                                        	<div class="select-dropdown"></div>
+                                    	</div>
+                                	</div>
+                            	</div>
+                            	<!-- Live with -->
+
+                            	<!-- Have children -->
+                     			<div>
+                                    <div class="input-group">
+                                        <label class="label">Have Children:</label>
+                                        <div class="rs-select2 js-select-simple select--no-search">
+                                            <select name="have_children">
+                                              	@foreach($have_children as $hc)
+                                                @if($hc->children=='Anything')
+                                                	<option value="{{$hc->id}}" selected="selected">{{$hc->children}}</option>
+                                                @else
+                                                  	<option value="{{$hc->id}}">{{$hc->children}}</option>
+                                                @endif
+                                                @endforeach
+                                            </select>
+                                        	<div class="select-dropdown"></div>
+                                    	</div>
+                                	</div>
+                            	</div>
+                            	<!-- Have children -->
+
+                            	<!-- National -->
+                     			<div>
+                                    <div class="input-group">
+                                        <label class="label">National:</label>
+                                        <div class="rs-select2 js-select-simple select--no-search">
+                                            <select name="national">
+                                              	@foreach($national as $na)
+                                                @if($na->national=='Anything')
+                                                	<option value="{{$na->id}}" selected="selected">{{$na->national}}</option>
+                                                @else
+                                                  	<option value="{{$na->id}}">{{$na->national}}</option>
+                                                @endif
+                                                @endforeach
+                                            </select>
+                                        	<div class="select-dropdown"></div>
+                                    	</div>
+                                	</div>
+                            	</div>
+                            	<!-- National -->
+
+                            	<!-- Education level -->
+                     			<div>
+                                    <div class="input-group">
+                                        <label class="label">Educational Level:</label>
+                                        <div class="rs-select2 js-select-simple select--no-search">
+                                            <select name="educational_level">
+                                              	@foreach($educational_level as $el)
+                                                @if($el->level=='Anything')
+                                                	<option value="{{$el->id}}" selected="selected">{{$el->level}}</option>
+                                                @else
+                                                  	<option value="{{$el->id}}">{{$el->level}}</option>
+                                                @endif
+                                                @endforeach
+                                            </select>
+                                        	<div class="select-dropdown"></div>
+                                    	</div>
+                                	</div>
+                            	</div>
+                            	<!-- Educational level -->
+
+                            	<!-- Language -->
+                     			<div>
+                                    <div class="input-group">
+                                        <label class="label">Language:</label>
+                                        <div class="rs-select2 js-select-simple select--no-search">
+                                            <select name="language">
+                                              	@foreach($language as $lg)
+                                                @if($lg->language=='Anything')
+                                                	<option value="{{$lg->id}}" selected="selected">{{$lg->language}}</option>
+                                                @else
+                                                  	<option value="{{$lg->id}}">{{$lg->language}}</option>
+                                                @endif
+                                                @endforeach
+                                            </select>
+                                        	<div class="select-dropdown"></div>
+                                    	</div>
+                                	</div>
+                            	</div>
+
+                            	<!-- Religion -->
+                     			<div>
+                                    <div class="input-group">
+                                        <label class="label">Religion:</label>
+                                        <div class="rs-select2 js-select-simple select--no-search">
+                                            <select name="religion">
+                                              	@foreach($religion as $rl)
+                                                @if($rl->religion=='Anything')
+                                                	<option value="{{$rl->id}}" selected="selected">{{$rl->religion}}</option>
+                                                @else
+                                                  	<option value="{{$rl->id}}">{{$rl->religion}}</option>
+                                                @endif
+                                                @endforeach
+                                            </select>
+                                        	<div class="select-dropdown"></div>
+                                    	</div>
+                                	</div>
+                            	</div>
+                            	<!-- Religion -->
+
+                            	<!-- Constellation -->
+                     			<div>
+                                    <div class="input-group">
+                                        <label class="label">Constellation:</label>
+                                        <div class="rs-select2 js-select-simple select--no-search">
+                                            <select name="constellation">
+                                              	@foreach($constellation as $cs)
+                                                @if($cs->constellation=='Anything')
+                                                	<option value="{{$cs->id}}" selected="selected">{{$cs->constellation}}</option>
+                                                @else
+                                                  	<option value="{{$cs->id}}">{{$cs->constellation}}</option>
+                                                @endif
+                                                @endforeach
+                                            </select>
+                                        	<div class="select-dropdown"></div>
+                                    	</div>
+                                	</div>
+                            	</div>
+                            	<!-- Constellation -->
+
                                 <button class="btn-submit m-t-0" type="submit">search</button>
-                            </form>
-                        </div>
-                        <div class="tab-pane" id="tab3">
-                            <form method="POST" action="#">
-                                <div class="input-group input-group-big">
-                                    <label class="label">origin:</label>
-                                    <input class="input--style-1" type="text" name="origin" placeholder="City or airport" required="required">
-                                    <i class="zmdi zmdi-search input-group-symbol"></i>
-                                </div>
-                                <div class="input-group input-group-big">
-                                    <label class="label">destination:</label>
-                                    <input class="input--style-1" type="text" name="destination" placeholder="City or airport" required="required">
-                                    <i class="zmdi zmdi-search input-group-symbol"></i>
-                                </div>
-                                <div class="row row-space">
-                                    <div class="col-2">
-                                        <div class="input-group">
-                                            <label class="label">Departing:</label>
-                                            <input class="input--style-1" type="text" name="check-in" placeholder="mm/dd/yyyy" id="input-start-2">
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="input-group">
-                                            <label class="label">returning:</label>
-                                            <input class="input--style-1" type="text" name="check-out" placeholder="mm/dd/yyyy" id="input-end-2">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="radio-row">
-                                    <label class="radio-container m-r-45">First Class
-                                        <input type="radio" name="class">
-                                        <span class="radio-checkmark"></span>
-                                    </label>
-                                    <label class="radio-container m-r-45">Business
-                                        <input type="radio" name="class">
-                                        <span class="radio-checkmark"></span>
-                                    </label>
-                                    <label class="radio-container">Economy
-                                        <input type="radio" checked="checked" name="class">
-                                        <span class="radio-checkmark"></span>
-                                    </label>
-                                </div>
-                                <button class="btn-submit m-t-35" type="submit">search</button>
-                            </form>
-                        </div>
-                        <div class="tab-pane active" id="tab4">
-                            <form method="POST" action="#">
-                                <div class="input-group input-group-big">
-                                    <label class="label">where:</label>
-                                    <input class="input--style-1" type="text" name="address" placeholder="City, region or specific hotel" required="required">
-                                    <i class="zmdi zmdi-search input-group-symbol"></i>
-                                </div>
-                                <div class="row row-space">
-                                    <div class="col-2">
-                                        <div class="input-group">
-                                            <label class="label">check-in:</label>
-                                            <input class="input--style-1" type="text" name="check-in" placeholder="mm/dd/yyyy" id="input-start">
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="input-group">
-                                            <label class="label">check-out:</label>
-                                            <input class="input--style-1" type="text" name="check-out" placeholder="mm/dd/yyyy" id="input-end">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row row-space">
-                                    <div class="col-2">
-                                        <div class="input-group">
-                                            <label class="label">travellers:</label>
-                                            <div class="input-group-icon" id="js-select-special">
-                                                <input class="input--style-1 input--style-1-small" type="text" name="traveller" value="1 Adult, 0 Children, 1 Room" disabled="disabled" id="info">
-                                                <i class="zmdi zmdi-chevron-down input-icon"></i>
-                                            </div>
-                                            <div class="dropdown-select">
-                                                <ul class="list-room">
-                                                    <li class="list-room__item">
-                                                        <span class="list-room__name">Room 1</span>
-                                                        <ul class="list-person">
-                                                            <li class="list-person__item">
-                                                                <span class="name">Adults</span>
-                                                                <div class="quantity quantity1">
-                                                                    <span class="minus">-</span>
-                                                                    <input class="inputQty" type="number" min="0" value="1">
-                                                                    <span class="plus">+</span>
-                                                                </div>
-                                                            </li>
-                                                            <li class="list-person__item">
-                                                                <span class="name">Children</span>
-                                                                <div class="quantity quantity2">
-                                                                    <span class="minus">-</span>
-                                                                    <input class="inputQty" type="number" min="0" value="0">
-                                                                    <span class="plus">+</span>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                                <div class="list-room__footer">
-                                                    <a href="#" id="btn-add-room">Add room</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <button class="btn-submit" type="submit">search</button>
-                                    </div>
-                                </div>
                             </form>
                         </div>
                     </div>

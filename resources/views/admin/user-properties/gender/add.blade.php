@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Smoking
+                <h1 class="page-header">Gender
                     <small>Add</small>
                 </h1>
             </div>
@@ -28,11 +28,11 @@
                     {{session('success')}}
                 </div>
             @endif
-                <form action="{{route('admin.user-properties.smoking.add')}}" method="POST">
+                <form action="{{route('admin.user-properties.gender.add')}}" method="POST">
                     <input type="hidden" name="_token" value="{{csrf_token()}}"/>
                     <div class="form-group">
-                        <label>Smoking</label>
-                        <input class="form-control" name="smoke" placeholder="Please Enter Smoking" />
+                        <label>Gender</label>
+                        <input class="form-control" name="gender" placeholder="Please Enter Gender" />
                     </div>
                     <button type="submit" class="btn btn-default">Add</button>
                     <button type="reset" class="btn btn-default">Reset</button>
