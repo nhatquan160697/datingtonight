@@ -39,7 +39,7 @@ Route::namespace('DatingTonight')->group(function(){
 			'uses' => 'FlirtingMethodsController@index',
 			'as' => 'datingtonight.flirtingmethods.index'
 		]);
-		Route::get('/detail/{id}',[
+		Route::get('/detail/{slug}-{id}.html',[
 			'uses' => 'FlirtingMethodsController@detail',
 			'as' => 'datingtonight.flirtingmethods.detail'
 		]);
@@ -95,6 +95,22 @@ Route::namespace('Admin')->prefix('admin')->group(function(){
 		Route::get('/del-{id}',[
 			'uses' => 'AdminDatingController@del',
 			'as' => 'admin.datingplaces.delete'
+		]);
+		Route::get('/picture',[
+			'uses' => 'AdminDatingController@listPicture',
+			'as' => 'admin.datingplaces.listpicture'
+		]);
+		Route::get('/picture/add',[
+			'uses' => 'AdminDatingController@getDatingPicture',
+			'as' => 'admin.datingplaces.picture'
+		]);
+		Route::post('/picture/add',[
+			'uses' => 'AdminDatingController@postDatingPicture',
+			'as' => 'admin.datingplaces.picture'
+		]);
+		Route::get('/picture/del-{id}',[
+			'uses' => 'AdminDatingController@delPicture',
+			'as' => 'admin.datingplaces.delPicture'
 		]);
 	});
 
@@ -684,6 +700,7 @@ Route::namespace('Admin')->prefix('admin')->group(function(){
 			]);
 		});
 
+
 		Route::prefix('gender')->group(function(){
 			//Gender
 			Route::get('index',[
@@ -716,6 +733,7 @@ Route::namespace('Admin')->prefix('admin')->group(function(){
 		});
   });
 
+
 	// Controller Administrator
 	Route::prefix('administrator')->group(function(){
 		// Controller user
@@ -743,36 +761,19 @@ Route::namespace('Admin')->prefix('admin')->group(function(){
 			'uses' => 'AdminController@del',
 			'as' => 'admin.admin.del'
 		]);
+		Route::get('/managing-user',[
+			'uses' => 'UserController@index',
+			'as' => 'admin.user.index'
+		]);
 
 	});
 });
 
-Route::namespace('Auth')->group(function(){
-	Route::get('/admin-login',[
-		'uses' => 'AuthController@getAdminLogin',
-		'as' => 'auth.admin.login'
-	]);
-	Route::post('/admin-login',[
-		'uses' => 'AuthController@postAdminLogin',
-		'as' => 'auth.admin.login'
-	]);
-
-	Route::get('/default',[
-		'uses' => 'AuthController@getUserLogin',
-		'as' => 'auth.users.default',
-	]);
-	Route::post('/default',[
-		'uses' => 'AuthController@postUserLogin',
-		'as' => 'auth.users.default',
-	]);
-	Route::get('/register',[
-		'uses'=>'AuthController@getRegister',
-		'as'=>'auth.users.default',
-	]);
-	Route::post('/register',[
-		'uses'=>'AuthController@postRegister',
-		'as'=>'auth.users.default',
-	]);
+// Auth cho admin
+Route::prefix('admin')->group(function() {
+    Route::get('/login', 'Admin\Auth\AdminLoginController@showLoginForm')->name('admin.login');
+    Route::post('/login', 'Admin\Auth\AdminLoginController@login')->name('admin.post.login');
+    Route::get('/logout','Admin\Auth\AdminLoginController@logout')->name('admin.logout');
 });
 
 // mã hóa lại pasword

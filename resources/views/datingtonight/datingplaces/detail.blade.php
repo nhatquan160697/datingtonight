@@ -9,7 +9,7 @@
 		<li class="breadcrumb-item">
 			<a href="index.html">Dating Place</a>
 		</li>
-		<li class="breadcrumb-item active">{{ $getItem->name_place }}</li>
+		<li class="breadcrumb-item" style="color:#910745">{{ $getItem->name_place }}</li>
 	</ol>
 
 	<!--//banner-->
@@ -50,6 +50,53 @@
 						</h3>
 						<p>{!! $getItem->detail_place !!}</p>
 					</div>
+					<!-- Slides -->
+					<!-- Slideshow container -->
+					{{-- <div class="slideshow-container">
+					  <!-- Full-width images with number and caption text -->
+					  <div class="mySlides fade">
+					    <div class="numbertext">1 / 5</div>
+					    <img src="/storage/app/files/datingplaces/dating_place_picture/{{ $getPicture->picture1}}" style="width:100%">
+					    <div class="text">{{ $getItem->name_place }}</div>
+					  </div>
+
+					  <div class="mySlides fade">
+					    <div class="numbertext">2 / 5</div>
+					    <img src="/storage/app/files/datingplaces/dating_place_picture/{{ $getPicture->picture2}}" style="width:100%">
+					    <div class="text">{{ $getItem->name_place }}</div>
+					  </div>
+
+					  <div class="mySlides fade">
+					    <div class="numbertext">3 / 5</div>
+					    <img src="/storage/app/files/datingplaces/dating_place_picture/{{ $getPicture->picture3}}" style="width:100%">
+					    <div class="text">{{ $getItem->name_place }}</div>
+					  </div>
+
+					  <div class="mySlides fade">
+					    <div class="numbertext">4 / 5</div>
+					    <img src="/storage/app/files/datingplaces/dating_place_picture/{{ $getPicture->picture4}}" style="width:100%">
+					    <div class="text">{{ $getItem->name_place }}</div>
+					  </div>
+
+					  <div class="mySlides fade">
+					    <div class="numbertext">5 / 5</div>
+					    <img src="/storage/app/files/datingplaces/dating_place_picture/{{ $getPicture->picture3}}" style="width:100%">
+					    <div class="text">{{ $getItem->name_place }}</div>
+					  </div>
+
+					  <!-- Next and previous buttons -->
+					  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+					  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+					</div>
+					<!-- The dots/circles -->
+					<div style="text-align:center">
+					  <span class="dot" onclick="currentSlide(1)"></span>
+					  <span class="dot" onclick="currentSlide(2)"></span>
+					  <span class="dot" onclick="currentSlide(3)"></span>
+					  <span class="dot" onclick="currentSlide(4)"></span>
+					  <span class="dot" onclick="currentSlide(5)"></span>
+					</div> --}}
+					<!--/Slides -->
 					<!-- Comment -->
 					@include('datingtonight.datingplaces.comment')
 					<!--/Comment-->
@@ -57,7 +104,7 @@
 
 				<!--//left-->
 				<!--right-->
-				@include('datingtonight.datingplaces.right-bar')
+				@include('datingtonight.datingplaces.related')
 				<!--//right-->
 			</div>
 		</div>
@@ -66,6 +113,7 @@
 	<!---->
 	<!-- js -->
 	<script src="/templates/datingtonight/js/jquery-2.2.3.min.js"></script>
+	<script src="/templates/datingtonight/formDatingPlaces/js/script.js"></script>
 	<!-- //js -->
 	<!--/ start-smoth-scrolling -->
 	<script src="/templates/datingtonight/js/move-top.js"></script>

@@ -12,7 +12,35 @@ class DatingPlaces extends Model
     public $timestamps = false;
 
     public function getItems(){
-    	return $this->all();
+    	return DB::table('datingplaces')->join('dating_place_type','datingplaces.id_type','=','dating_place_type.id_type')->orderby('id_place','DESC')->get();
+    }
+
+    public function getIndex(){
+        return DB::table('datingplaces')->paginate(4);
+    }
+
+    public function getTop5(){
+        return DB::table('datingplaces')->join('dating_place_type','datingplaces.id_type','=','dating_place_type.id_type')->orderby('count_number','DESC')->limit('5')->get();
+    }
+
+    public function getTop5byDate(){
+        return DB::table('datingplaces')->join('dating_place_type','datingplaces.id_type','=','dating_place_type.id_type')->orderby('date_created','DESC')->limit('5')->get();
+    }
+
+    public function getTop6(){
+        return DB::table('datingplaces')->join('dating_place_type','datingplaces.id_type','=','dating_place_type.id_type')->orderby('count_number','DESC')->limit('6')->get();
+    }
+
+    public function getTopOne(){
+        return DB::table('datingplaces')->orderby('count_number','DESC')->limit('1')->get();
+    }
+
+    public function getTop23(){
+        return DB::table('datingplaces')->orderby('count_number','DESC')->limit('2')->offset('1')->get();
+    }
+
+    public function getType(){
+        return DB::table('dating_place_type')->get();
     }
 
     public function getItem($id){
@@ -29,5 +57,11 @@ class DatingPlaces extends Model
 
     public function delItem($id){
     	return $this->where('id_place',$id)->delete();
+    }
+
+    public function getOldImage($id){
+        return (string)DB::table('datingplaces')
+                     ->select('picture')
+                     ->where('id_place', $id)->first()->picture;
     }
 }

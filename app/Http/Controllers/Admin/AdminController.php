@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Administrator;
+use App\Http\Requests\AdminRequest;
 
 class AdminController extends Controller
 {
@@ -22,13 +23,13 @@ class AdminController extends Controller
     	return view('admin.admin.add',compact('getNameRoles'));
     }
 
-    public function postAdd(Request $request){
-    	$txtUsername = trim($request->txtUsername);
-		$txtPassword = trim($request->txtPassword);
+    public function postAdd(AdminRequest $request){
+    	$username = trim($request->username);
+		$txtPassword = bcrypt($request->txtPassword);
 		$txtFullname = trim($request->txtFullname);
 		$slcRole = $request->slcRole;
 		$arItem = array(
-			'username' => $txtUsername,
+			'username' => $username,
 			'password' => $txtPassword,
 			'fullname' => $txtFullname,
 			'id_role' => $slcRole,
@@ -49,12 +50,12 @@ class AdminController extends Controller
 
     public function postEdit($id, Request $request){
     	$getItem = $this->mAdministrator->getItem($id);
-    	$txtUsername = trim($request->txtUsername);
-		$txtPassword = trim($request->txtPassword);
+    	$username = trim($request->username);
+		$txtPassword = bcrypt($request->txtPassword);
 		$txtFullname = trim($request->txtFullname);
 		$slcRole = $request->slcRole;
 		$arItem = array(
-			'username' => $txtUsername,
+			'username' => $username,
 			'password' => $txtPassword,
 			'fullname' => $txtFullname,
 			'id_role' => $slcRole,

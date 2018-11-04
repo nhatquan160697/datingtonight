@@ -11,11 +11,20 @@
             </div>
             <!-- /.col-lg-12 -->
             <div class="col-lg-7" style="padding-bottom:120px">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <form role="form" action="{{ route('admin.datingplaces.add') }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label>Name</label>
-                        <input class="form-control" name="txtName" placeholder="Please Enter Username" />
+                        <input class="form-control" name="name_place" placeholder="Please Dating Place's Name" />
                     </div>
                     <div class="form-group">
                         <label style="display: block;">City</label>
@@ -25,6 +34,16 @@
                             @endforeach
                         </select>
                     </div>
+
+                    <div class="form-group">
+                        <label style="display: block;">Type</label>
+                        <select name="slcType">
+                            @foreach($getType as $type)
+                            <option value="{{ $type->id_type }}">{{ $type->name_type }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label>Preview</label>
                         <textarea class="form-control" rows="3" name="txtPreview"></textarea>

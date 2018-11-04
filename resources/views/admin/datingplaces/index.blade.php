@@ -10,12 +10,16 @@
                 </h1>
             </div>
             <!-- /.col-lg-12 -->
+            @if (Session::has('msg'))
+                <p style="color:red; padding:10px; font-size:21px; font-weight: 700;">{{ Session::get('msg') }}</p>
+            @endif
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                     <tr align="center">
                         <th>ID</th>
                         <th>Name</th>
                         <th>City</th>
+                        <th>Type</th>
                         <th>Preview</th>
                         <th>Picture</th>
                         <th>View</th>
@@ -30,6 +34,7 @@
                         $id = $item->id_place;
                         $name = $item->name_place;
                         $city = $item->city;
+                        $type = $item->name_type;
                         $preview = str_limit($item->preview_text,100,'...');
                         $detail = str_limit($item->detail_place,100,'...');
                         $picture = $item->picture;
@@ -43,6 +48,7 @@
                         <td>{{ $id }}</td>
                         <td>{{ $name }}</td>
                         <td>{{ $city }}</td>
+                        <td>{{ $type }}</td>
                         <td>{{ $preview }}</td>
                         <td>
                             @if($picture != '')
@@ -62,6 +68,7 @@
                         <td>{{ $id }}</td>
                         <td>{{ $name }}</td>
                         <td>{{ $city }}</td>
+                        <td>{{ $type }}</td>
                         <td>{{ $preview }}</td>
                         <td>
                             @if($picture != '')

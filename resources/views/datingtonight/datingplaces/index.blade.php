@@ -10,7 +10,7 @@
 		<li class="breadcrumb-item">
 			<a href="index.html">Dating Tonight</a>
 		</li>
-		<li class="breadcrumb-item active">Dating Places</li>
+		<li class="breadcrumb-item" style="color:#910745">Dating Places</li>
 	</ol>
 	<!--//banner-->
 
@@ -71,25 +71,7 @@
 						<a href="{{ $urlDetail }}" class="btn btn-primary read-m">Read More</a>
 					</article>
 					@endforeach
-					<nav aria-label="Page navigation example">
-						<ul class="pagination justify-content-left">
-							<li class="page-item disabled">
-								<a class="page-link" href="#" tabindex="-1">Previous</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">1</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">2</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">3</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">Next</a>
-							</li>
-						</ul>
-					</nav>
+					{{ $getItems->links()}}
 				</div>
 				<!--//left-->
 				<!--right-->
