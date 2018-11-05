@@ -51,7 +51,7 @@
                                                 <select name="gender">
                                                 	@foreach($gender as $gd)
                                                 	@if($gd->gender=='Anything')
-                                                		<option  value="{{$gd->id}}" selected="selected">{{$gd->gender}}</option>
+                                                		<option  value="" selected="selected">{{$gd->gender}}</option>
                                                 	@else
                                                     	<option value="{{$gd->id}}">{{$gd->gender}}</option>
                                                     @endif
@@ -70,7 +70,7 @@
                                                 <select name="city">
                                                     @foreach($city as $ct)
                                                 	@if($ct->city=='Anything')
-                                                		<option value="{{$ct->id}}" selected="selected">{{$ct->city}}</option>
+                                                		<option value="" selected="selected">{{$ct->city}}</option>
                                                 	@else
                                                     	<option value="{{$ct->id}}">{{$ct->city}}</option>
                                                     @endif
@@ -132,7 +132,7 @@
                                                 <select name="hair_color">
                                                 	@foreach($hair_color as $hc)
                                                 	@if($hc->color=='Anything')
-                                                		<option value="{{$hc->id}}" selected="selected">{{$hc->color}}</option>
+                                                		<option value="" selected="selected">{{$hc->color}}</option>
                                                 	@else
                                                     	<option value="{{$hc->id}}">{{$hc->color}}</option>
                                                     @endif
@@ -149,7 +149,7 @@
                                                 <select name="eye_color">
                                                		@foreach($eye_color as $ec)
                                                 	@if($ec->color=='Anything')
-                                                		<option value="{{$ec->id}}" selected="selected">{{$ec->color}}</option>
+                                                		<option value="" selected="selected">{{$ec->color}}</option>
                                                 	@else
                                                     	<option value="{{$ec->id}}">{{$ec->color}}</option>
                                                     @endif
@@ -171,7 +171,7 @@
                                                 <select name="hair_length">
                                                 	@foreach($hair_length as $hl)
                                                 	@if($hl->length=='Anything')
-                                                		<option value="{{$hl->id}}" selected="selected">{{$hl->length}}</option>
+                                                		<option value="" selected="selected">{{$hl->length}}</option>
                                                 	@else
                                                     	<option value="{{$hl->id}}">{{$hl->length}}</option>
                                                     @endif
@@ -188,7 +188,7 @@
                                                 <select name="hair_style">
                                                		@foreach($hair_style as $hs)
                                                 	@if($hs->style=='Anything')
-                                                		<option value="{{$hs->id}}" selected="selected">{{$hs->style}}</option>
+                                                		<option value="" selected="selected">{{$hs->style}}</option>
                                                 	@else
                                                     	<option value="{{$hs->id}}">{{$hs->style}}</option>
                                                     @endif
@@ -287,7 +287,7 @@
                                             <select name="body">
                                               	@foreach($body as $bd)
                                                 @if($bd->body=='Anything')
-                                                	<option value="{{$bd->id}}" selected="selected">{{$bd->body}}</option>
+                                                	<option value="" selected="selected">{{$bd->body}}</option>
                                                 @else
                                                   	<option value="{{$bd->id}}">{{$bd->body}}</option>
                                                 @endif
@@ -307,8 +307,8 @@
                                             <div class="rs-select2 js-select-simple select--no-search">
                                                 <select name="drink">
                                                 	@foreach($drinking as $dr)
-                                                	@if($dr->length=='Anything')
-                                                		<option value="{{$dr->id}}" selected="selected">{{$dr->drink}}</option>
+                                                	@if($dr->drink=='Anything')
+                                                		<option value="" selected="selected">{{$dr->drink}}</option>
                                                 	@else
                                                     	<option value="{{$dr->id}}">{{$dr->drink}}</option>
                                                     @endif
@@ -325,7 +325,7 @@
                                                 <select name="smoke">
                                                		@foreach($smoking as $sm)
                                                 	@if($sm->smoke=='Anything')
-                                                		<option value="{{$sm->id}}" selected="selected">{{$sm->smoke}}</option>
+                                                		<option value="" selected="selected">{{$sm->smoke}}</option>
                                                 	@else
                                                     	<option value="{{$sm->id}}">{{$sm->smoke}}</option>
                                                     @endif
@@ -346,7 +346,7 @@
                                             <select name="job_status">
                                               	@foreach($job_status as $js)
                                                 @if($js->status=='Anything')
-                                                	<option value="{{$js->id}}" selected="selected">{{$js->status}}</option>
+                                                	<option value="" selected="selected">{{$js->status}}</option>
                                                 @else
                                                   	<option value="{{$js->id}}">{{$js->status}}</option>
                                                 @endif
@@ -366,7 +366,7 @@
                                             <select name="house_type">
                                               	@foreach($house_type as $ht)
                                                 @if($ht->type=='Anything')
-                                                	<option value="{{$ht->id}}" selected="selected">{{$ht->type}}</option>
+                                                	<option value="" selected="selected">{{$ht->type}}</option>
                                                 @else
                                                   	<option value="{{$ht->id}}">{{$ht->type}}</option>
                                                 @endif
@@ -386,7 +386,7 @@
                                             <select name="live_with">
                                               	@foreach($live_with as $lw)
                                                 @if($lw->livewith=='Anything')
-                                                	<option value="{{$lw->id}}" selected="selected">{{$lw->livewith}}</option>
+                                                	<option value="" selected="selected">{{$lw->livewith}}</option>
                                                 @else
                                                   	<option value="{{$lw->id}}">{{$lw->livewith}}</option>
                                                 @endif
@@ -406,7 +406,7 @@
                                             <select name="have_children">
                                               	@foreach($have_children as $hc)
                                                 @if($hc->children=='Anything')
-                                                	<option value="{{$hc->id}}" selected="selected">{{$hc->children}}</option>
+                                                	<option value="" selected="selected">{{$hc->children}}</option>
                                                 @else
                                                   	<option value="{{$hc->id}}">{{$hc->children}}</option>
                                                 @endif
@@ -426,7 +426,7 @@
                                             <select name="national">
                                               	@foreach($national as $na)
                                                 @if($na->national=='Anything')
-                                                	<option value="{{$na->id}}" selected="selected">{{$na->national}}</option>
+                                                	<option value="" selected="selected">{{$na->national}}</option>
                                                 @else
                                                   	<option value="{{$na->id}}">{{$na->national}}</option>
                                                 @endif
@@ -446,7 +446,7 @@
                                             <select name="educational_level">
                                               	@foreach($educational_level as $el)
                                                 @if($el->level=='Anything')
-                                                	<option value="{{$el->id}}" selected="selected">{{$el->level}}</option>
+                                                	<option value="" selected="selected">{{$el->level}}</option>
                                                 @else
                                                   	<option value="{{$el->id}}">{{$el->level}}</option>
                                                 @endif
@@ -466,7 +466,7 @@
                                             <select name="language">
                                               	@foreach($language as $lg)
                                                 @if($lg->language=='Anything')
-                                                	<option value="{{$lg->id}}" selected="selected">{{$lg->language}}</option>
+                                                	<option value="" selected="selected">{{$lg->language}}</option>
                                                 @else
                                                   	<option value="{{$lg->id}}">{{$lg->language}}</option>
                                                 @endif
@@ -485,7 +485,7 @@
                                             <select name="religion">
                                               	@foreach($religion as $rl)
                                                 @if($rl->religion=='Anything')
-                                                	<option value="{{$rl->id}}" selected="selected">{{$rl->religion}}</option>
+                                                	<option value="" selected="selected">{{$rl->religion}}</option>
                                                 @else
                                                   	<option value="{{$rl->id}}">{{$rl->religion}}</option>
                                                 @endif
@@ -505,7 +505,7 @@
                                             <select name="constellation">
                                               	@foreach($constellation as $cs)
                                                 @if($cs->constellation=='Anything')
-                                                	<option value="{{$cs->id}}" selected="selected">{{$cs->constellation}}</option>
+                                                	<option value="" selected="selected">{{$cs->constellation}}</option>
                                                 @else
                                                   	<option value="{{$cs->id}}">{{$cs->constellation}}</option>
                                                 @endif

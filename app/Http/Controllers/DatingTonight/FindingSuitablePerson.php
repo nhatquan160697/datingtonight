@@ -22,6 +22,8 @@ use App\Model\live_with;
 use App\Model\national;
 use App\Model\religion;
 use App\Model\smoking;
+use App\Model\Users;
+use App\Model\user_properties;
 
 
 class FindingSuitablePerson extends Controller
@@ -70,9 +72,86 @@ class FindingSuitablePerson extends Controller
     		]);
     }
 
-    public function result(Request $request)
+    public function result(Request $request,user_properties $user_properties, Users $Users)
     {
-    	$x=''.$request->gender.''.$request->hair_color.'';
-    	return $x;
+    	//return $user_properties=user_properties::where('Gender','=',$request->gender)->get();
+    	$user_properties=$user_properties->newQuery();
+    	if($request->gender!='')
+    	{
+    		$user_properties->where('Gender','=',$request->gender);
+    	}
+    	if($request->city!='')
+    	{
+    		$user_properties->where('City','=',$request->city);
+    	}
+    	if($request->hair_color!='')
+    	{
+    		$user_properties->where('Hair_color','=',$request->hair_color);
+    	}
+    	if($request->eye_color!='')
+    	{
+    		$user_properties->where('Eye_color','=',$request->eye_color);
+    	}
+    	if($request->hair_style!='')
+    	{
+    		$user_properties->where('Hair_style','=',$request->hair_style);
+    	}
+    	if($request->hair_length!='')
+    	{
+    		$user_properties->where('Hair_length','=',$request->hair_length);
+    	}
+    	if($request->body!='')
+    	{
+    		$user_properties->where('Body','=',$request->body);
+    	}
+    	if($request->drink!='')
+    	{
+    		$user_properties->where('Drinking','=',$request->drink);
+    	}
+    	if($request->smoke!='')
+    	{
+    		$user_properties->where('Smoking','=',$request->smoke);
+    	}
+    	if($request->job_status!='')
+    	{
+    		$user_properties->where('Job_status','=',$request->job_status);
+    	}
+    	if($request->house_type!='')
+    	{
+    		$user_properties->where('Home_type','=',$request->house_type);
+    	}
+    	if($request->smoke!='')
+    	{
+    		$user_properties->where('Smoking','=',$request->smoke);
+    	}
+    	if($request->live_with!='')
+    	{
+    		$user_properties->where('Live_with','=',$request->live_with);
+    	}
+    	if($request->have_children!='')
+    	{
+    		$user_properties->where('Have_children','=',$request->have_children);
+    	}
+    	if($request->national!='')
+    	{
+    		$user_properties->where('National','=',$request->national);
+    	}
+    	if($request->educational_level!='')
+    	{
+    		$user_properties->where('Educational_level','=',$request->educational_level);
+    	}
+    	if($request->language!='')
+    	{
+    		$user_properties->where('Language','=',$request->language);
+    	}
+    	if($request->religion!='')
+    	{
+    		$user_properties->where('Religion','=',$request->religion);
+    	}
+    	if($request->constellation!='')
+    	{
+    		$user_properties->where('Constellation','=',$request->constellation);
+    	}
+    	return $user_properties->get();
     }
 }
