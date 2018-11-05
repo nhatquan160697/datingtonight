@@ -21,13 +21,13 @@
 			<div class="row inner-sec">
 				<!--left-->
 				<div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
-					<div class="row mb-4">
+					
 						<!-- FLIRTING METHOD LIST -->
 						@foreach($flirtingmethods as $fm)
 						<?php
                         	$url='/storage/app/files/flirtingmethods/'.$fm->image;
                     	?>
-						<div class="col-md-6 card my-4">
+						
 							<a href="{{route('datingtonight.flirtingmethods.detail',['slug' => str_slug($fm->name_flirting), 'id' => $fm->id])}}">
 								<img src="{{$url}}" class="card-img-top img-fluid" alt="This is an image">
 							</a>
@@ -56,9 +56,9 @@
 								<p class="card-text mb-3">{{$preview_text}}</p>
 								<a href="{{route('datingtonight.flirtingmethods.detail',['slug' => str_slug($fm->name_flirting), 'id' => $fm->id])}}" class="btn btn-primary read-m">Read More</a>
 							</div>
-						</div>
+						
 						@endforeach
-					</div>
+					
 					{{$flirtingmethods->links()}}
 				</div>
 				<!--//left-->

@@ -14,4 +14,8 @@ class Users extends Model
     public function getItems(){
     	return $this->all();
     }
+    public function users_properties()
+    {
+    	return $this->hasOne('App\Model\user_properties');
+    }
 }

@@ -10,7 +10,7 @@ class FlirtingMethodsController extends Controller
 {
     public function index()
     {
-    	$flirtingmethods=flirtingmethods::paginate(8);
+    	$flirtingmethods=flirtingmethods::paginate(4);
     	return view('datingtonight.flirtingmethods.index',['flirtingmethods'=>$flirtingmethods]);
     }
 
