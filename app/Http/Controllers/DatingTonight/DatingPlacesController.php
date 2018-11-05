@@ -33,7 +33,7 @@ class DatingPlacesController extends Controller
 		$getItem = $this->mDatingPlaces->getItem($id);
     	$getPicture = $this->mDatingPlacePicture->getItem($id);
 		$getNameType = $this->mDatingType->getNameType();
-		$countHotel = $this->mDatingType->countHotel();
+		$countHotel = $this->mDatingType->countHotel($id);
 		return view('datingtonight.datingplaces.detail',compact('getItem','getPicture','getNameType','countHotel'));
 	}
 }
