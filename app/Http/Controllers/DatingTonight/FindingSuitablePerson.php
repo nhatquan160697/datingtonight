@@ -72,7 +72,7 @@ class FindingSuitablePerson extends Controller
     		]);
     }
 
-    public function result(Request $request,user_properties $user_properties, Users $Users)
+    public function result(Request $request,user_properties $user_properties)
     {
     	//return $user_properties=user_properties::where('Gender','=',$request->gender)->get();
     	$user_properties=$user_properties->newQuery();
@@ -152,6 +152,13 @@ class FindingSuitablePerson extends Controller
     	{
     		$user_properties->where('Constellation','=',$request->constellation);
     	}
-    	return $user_properties->get();
+        $user_properties=$user_properties->get();
+        $city=city::all();
+        $gender=gender::all();
+    	return view('datingtonight.findingperson.result',[
+            'user_properties'=>$user_properties,
+            'gender'=>$gender,
+            'city'=>$city
+        ]);
     }
 }

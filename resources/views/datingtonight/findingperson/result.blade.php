@@ -1,6 +1,6 @@
 @extends('templates.datingtonight.master')
 @section('title')
-	Flirting Methods - Dating Tonight
+	Find Your Suitable Person- Dating Tonight
 @endsection
 @section('content')
 	<!--/banner-->
@@ -8,49 +8,47 @@
 	</div>
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item">
-			<a href="{{route('datingtonight.index.index')}}">Dating Tonight</a>
+			<a href="index.html">Dating Tonight</a>
 		</li>
-		<li class="breadcrumb-item active">
-			<a href="{{route('datingtonight.flirtingmethods.index')}}">Flirting methods</a>
-		</li>
+		<li class="breadcrumb-item" style="color:#910745">Result</li>
 	</ol>
 	<!--//banner-->
 
 	<!--/main-->
 	<section class="main-content-w3layouts-agileits">
 		<div class="container">
-			<h3 class="tittle">FLIRTING METHODS</h3>
+			<h3 class="tittle">RESULT</h3>
 			<div class="row inner-sec">
 				<!--left-->
 				<div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
 					<div class="row mb-4">
-						<!-- FLIRTING METHOD LIST -->up
+						<!-- Result LIST -->
 						@foreach($user_properties as $up)
+						<?php
+                        	$url='/storage/app/files/avatar/'.$up->Avatar;
+                    	?>
 						<div class="col-md-6 card my-4">
 							<a href="#">
-								<img src="#" class="card-img-top img-fluid" alt="This is an image">
+								<img src="{{$url}}" class="card-img-top img-fluid" alt="This is an image">
 							</a>
 							<div class="card-body">
-								<ul class="blog-icons my-4">
-									<li>
-										<a href="#">
-											<i class="far fa-calendar-alt"></i> Feb 23 .2018</a>
-									</li>
-									<li class="mx-2">
-										<a href="#">
-											<i class="far fa-comment"></i> 21</a>
-									</li>
-									<li>
-										<a href="#">
-											<i class="fas fa-eye"></i> 2000</a>
-									</li>
-
-								</ul>
+								
 								<h5 class="card-title ">
 									<a href="single.html">{{$up->Fullname}}</a>
 								</h5>
-								<p class="card-text mb-3">{{$up->id}}</p>
-								<a href="single.html" class="btn btn-primary read-m">Read More</a>
+
+								<p class="card-text mb-3">
+									@foreach($gender as $gd)
+										@if($gd->id==$up->Gender and $gd->gender!='Anything')
+										<span>{{$gd->gender}}</span>
+										@endif
+									@endforeach
+									@foreach($city as $ct)
+										@if($ct->id==$up->City and $ct->city!='Anything')
+											<span>{{$ct->city}}</span>
+										@endif
+									@endforeach
+								</p>
 							</div>
 						</div>
 						@endforeach
