@@ -91,7 +91,7 @@
                                             <label class="label">From age:</label>
                                             <div class="rs-select2 js-select-simple select--no-search">
                                                 <select name="fromage">
-                                                	<option selected="selected">Anything</option>
+                                                	<option value="" selected="selected">Anything</option>
                                                    	<?php 
                                                    		for($i=18;$i<=100;$i++)
                                                    		{
@@ -108,7 +108,7 @@
                                             <label class="label">To Age:</label>
                                             <div class="rs-select2 js-select-simple select--no-search">
                                                 <select name="toage">
-                                               		<option selected="selected">Anything</option>
+                                               		<option value="" selected="selected">Anything</option>
                                                    	<?php 
                                                    		for($i=18;$i<=100;$i++)
                                                    		{
