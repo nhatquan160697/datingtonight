@@ -51,7 +51,7 @@ class AdminController extends Controller
     public function postEdit($id, Request $request){
     	$getItem = $this->mAdministrator->getItem($id);
     	$username = trim($request->username);
-		$txtPassword = bcrypt($request->txtPassword);
+		$txtPassword = trim($request->txtPassword);
 		$txtFullname = trim($request->txtFullname);
 		$slcRole = $request->slcRole;
 		$arItem = array(

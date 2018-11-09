@@ -46,10 +46,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                   <i class="fab fa-linode"></i> Dating Tonight </a>
             </div>
             <div class="col-md-4 top-forms text-center mt-lg-3 mt-md-1 mt-0">
-               <span>Welcome Back  </span>
+               <span>Welcome </span>
                <span>
-                  <a href="register.html">
-                     Quân <i class="far fa-user"></i> </a>
+                  <a href="#">
+                     {{ session()->get('checkUser')[0]->Fullname }} to Dating Tonight <i class="far fa-user"></i> </a>
                </span>
             </div>
             <div class="col-md-4 log-icons text-right">
@@ -82,7 +82,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
          </div>
       </div>
-
+         @php
+            //$previous = url()->previous();
+            if(!session()->has('checkUser')){
+                redirect()->route('auth.users.default')->send();
+            }
+        @endphp
          <div class="header_top" id="home">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                <button class="navbar-toggler navbar-toggler-right mx-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -116,7 +121,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                            <div class="dropdown-divider"></div>
                            <a class="dropdown-item" href="blog2.html">Settings</a>
                            <div class="dropdown-divider"></div>
-                           <a class="dropdown-item" href="blog3.html">Log Out</a>
+                           <a class="dropdown-item" href="{{ route('auth.user.logout') }}">Log Out</a>
                         </div>
                      </li>
                      <li class="nav-item">

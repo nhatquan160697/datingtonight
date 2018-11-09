@@ -769,12 +769,41 @@ Route::namespace('Admin')->prefix('admin')->group(function(){
 	});
 });
 
-// Auth cho admin
-Route::prefix('admin')->group(function() {
-    Route::get('/login', 'Admin\Auth\AdminLoginController@showLoginForm')->name('admin.login');
-    Route::post('/login', 'Admin\Auth\AdminLoginController@login')->name('admin.post.login');
-    Route::get('/logout','Admin\Auth\AdminLoginController@logout')->name('admin.logout');
+// Auth cho admin vs user
+Route::namespace('Auth')->group(function(){
+	Route::prefix('/admin-login')->group(function(){
+		// Controller admin
+		Route::get('/',[
+		'uses' => 'AuthAdminController@getLogin',
+		'as' => 'auth.admin.login'
+		]);
+		Route::post('/',[
+			'uses' => 'AuthAdminController@postLogin',
+			'as' => 'auth.admin.login'
+		]);
+	});
+	Route::get('/admin/log-out',[
+		'uses' => 'AuthAdminController@logOut',
+		'as' => 'auth.admin.logout'
+	]);
+
+	Route::prefix('user-login')->group(function(){
+		// Controller user
+		Route::get('/',[
+			'uses' => 'AuthUserController@getLogin',
+			'as' => 'auth.users.default'
+		]);
+		Route::post('/',[
+			'uses' => 'AuthUserController@postLogin',
+			'as' => 'auth.users.default'
+		]);
+	});
+	Route::get('/user/log-out',[
+		'uses' => 'AuthUserController@logOut',
+		'as' => 'auth.user.logout'
+	]);
 });
+
 
 // mã hóa lại pasword
 Route::get('/pass',function(){

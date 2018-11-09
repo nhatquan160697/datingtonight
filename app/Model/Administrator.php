@@ -13,6 +13,19 @@ class Administrator extends Authenticatable
     protected $primaryKey = "id_admin";
     public $timestamps = false;
 
+    public function checkLogin($username, $password){
+        $checkAdmin = DB::table('administrator')->where('username','=',$username)->where('password','=',$password)->count();
+        if($checkAdmin >= 1){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getIdAdmin($username){
+        return DB::table('administrator')->where('username','=',$username)->get();
+    }
+
     public function getItems(){
     	return DB::table('administrator')->select('id_admin','username','password','fullname','name_role')->join('admin_role','administrator.id_role','=','admin_role.id_role')->get();
     }
