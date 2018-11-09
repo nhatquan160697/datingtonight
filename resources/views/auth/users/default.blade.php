@@ -29,6 +29,14 @@
 </head>
 
 <body>
+	@php
+        if(session()->has('checkUser')){
+            if(Route::has('auth.users.default')){
+                $previous = url()->previous();
+                redirect()->to($previous)->send();
+            }
+        }
+    @endphp
 	<h1 class="header-w3ls">
 		Dating Tonight Form</h1>
 	<div class="icon-stu">

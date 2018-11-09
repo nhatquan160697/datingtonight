@@ -45,18 +45,26 @@
     <div class="content-w3ls">
         <div class="content-bottom">
 			<h2>Sign In Here</h2>
+            @php
+                if(session()->has('checkAdmin')){
+                    if(Route::has('auth.admin.login')){
+                        $previous = url()->previous();
+                        redirect()->to($previous)->send();
+                    }
+                }
+            @endphp
             @if (Session::has('msg'))
-                <p>{{ Session::get('msg') }}</p>
+                <p style="color: #fff; margin: -15px 0px 15px 0px">{{ Session::get('msg') }}</p>
             @endif
 
-            @if ($errors->has('username') || $errors->has('password'))
+            {{-- @if ($errors->has('username') || $errors->has('password'))
                 <span class="help-block" style="color: #fff">
                     <strong>{{ $errors->first('username') }}</strong>
                     <strong>{{ $errors->first('password') }}</strong>
                 </span>
-            @endif
+            @endif --}}
 
-            <form action="{{ route('admin.post.login') }}" method="post">
+            <form action="{{ route('auth.admin.login') }}" method="post">
                 {{ csrf_field() }}
                 <div class="field-group">
                     <span class="fa fa-user" aria-hidden="true"></span>
@@ -67,7 +75,7 @@
                 <div class="field-group">
                     <span class="fa fa-lock" aria-hidden="true"></span>
                     <div class="wthree-field">
-                        <input name="password" id="username" type="Password" placeholder="Password">
+                        <input name="password" id="password" type="Password" placeholder="Password">
                     </div>
                 </div>
                 <div class="wthree-field">
