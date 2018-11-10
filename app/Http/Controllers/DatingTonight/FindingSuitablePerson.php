@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\DatingTonight;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\body;
@@ -24,6 +25,7 @@ use App\Model\religion;
 use App\Model\smoking;
 use App\Model\Users;
 use App\Model\user_properties;
+use Carbon\Carbon;
 
 
 class FindingSuitablePerson extends Controller
@@ -152,6 +154,39 @@ class FindingSuitablePerson extends Controller
     	{
     		$user_properties->where('Constellation','=',$request->constellation);
     	}
+        if($request->fromage!='' && $request->toage!="")
+        {
+            $user_properties->whereBetween(DB::raw('TIMESTAMPDIFF(YEAR,user_properties.Birthdate,CURDATE())'),array(Input::get('fromage'),Input::get('toage')));
+        }
+         if ($request->fromage!='' && $request->toage=='') {
+            $user_properties->where(DB::raw('TIMESTAMPDIFF(YEAR,user_properties.Birthdate,CURDATE())'),'>=',$request->fromage);
+        }
+        if ($request->fromage=='' && $request->toage!='') {
+            $user_properties->where(DB::raw('TIMESTAMPDIFF(YEAR,user_properties.Birthdate,CURDATE())'),'<=',$request->toage);
+        }
+
+        //Height
+        if($request->fromheight!='' && $request->toheight!="")
+        {
+            $user_properties->whereBetween('Height',array(Input::get('fromheight'),Input::get('toheight')));
+        }
+        if ($request->fromheight!='' && $request->toheight=='') {
+            $user_properties->where('Height','>=',$request->fromheight);
+        }
+        if ($request->fromheight=='' && $request->toheight!='') {
+            $user_properties->where('Height','<=',$request->toheight);
+        }
+        //Weight
+        if($request->fromweight!='' && $request->toweight!="")
+        {
+            $user_properties->whereBetween('Weight',array(Input::get('fromweight'),Input::get('toweight')));
+        }
+        if ($request->fromweight!='' && $request->toweight=='') {
+            $user_properties->where('Weight','>=',$request->fromweight);
+        }
+        if ($request->fromheight=='' && $request->toweight!='') {
+            $user_properties->where('Weight','<=',$request->toweight);
+        }
         $user_properties=$user_properties->get();
         $city=city::all();
         $gender=gender::all();

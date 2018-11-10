@@ -91,7 +91,7 @@
                                             <label class="label">From age:</label>
                                             <div class="rs-select2 js-select-simple select--no-search">
                                                 <select name="fromage">
-                                                	<option value="" selected="selected">Anything</option>
+                                                    <option value="" selected="selected">Anything</option>
                                                    	<?php 
                                                    		for($i=18;$i<=100;$i++)
                                                    		{
@@ -108,7 +108,7 @@
                                             <label class="label">To Age:</label>
                                             <div class="rs-select2 js-select-simple select--no-search">
                                                 <select name="toage">
-                                               		<option value="" selected="selected">Anything</option>
+                                                <option value="" selected="selected">Anything</option>	
                                                    	<?php 
                                                    		for($i=18;$i<=100;$i++)
                                                    		{
@@ -208,11 +208,11 @@
                                             <label class="label">Height From:</label>
                                             <div class="rs-select2 js-select-simple select--no-search">
                                                 <select name="fromheight">
-                                                	<option selected="selected">Anything</option>
+                                                	<option value="" selected="selected">Anything</option>
                                                    	<?php 
                                                    		for($i=140;$i<=220;$i++)
                                                    		{
-                                                   			echo '<option>'.$i.'</option>';
+                                                   			echo '<option value="'.$i.'">'.$i.'</option>';
                                                    		}
                                                    	?>
                                                 </select>
@@ -225,7 +225,7 @@
                                             <label class="label">To Height:</label>
                                             <div class="rs-select2 js-select-simple select--no-search">
                                                 <select name="toheight">
-                                               		<option selected="selected">Anything</option>
+                                               		<option value="" selected="selected">Anything</option>
                                                    	<?php 
                                                    		for($i=140;$i<=220;$i++)
                                                    		{
@@ -247,7 +247,7 @@
                                             <label class="label">Weight From:</label>
                                             <div class="rs-select2 js-select-simple select--no-search">
                                                 <select name="fromweight">
-                                                	<option selected="selected">Anything</option>
+                                                	<option value="" selected="selected">Anything</option>
                                                    	<?php 
                                                    		for($i=40;$i<=220;$i++)
                                                    		{
@@ -264,7 +264,7 @@
                                             <label class="label">To Weight:</label>
                                             <div class="rs-select2 js-select-simple select--no-search">
                                                 <select name="toweight">
-                                               		<option selected="selected">Anything</option>
+                                               		<option value="" selected="selected">Anything</option>
                                                    	<?php 
                                                    		for($i=40;$i<=220;$i++)
                                                    		{
