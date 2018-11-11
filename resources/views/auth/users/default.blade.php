@@ -15,8 +15,8 @@
 	<link href="/templates/datingtonight/formRegister/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
 	<!-- //pop-ups-->
 	<!-- Calendar -->
-<link rel="stylesheet" href="/templates/datingtonight/formRegister/css/jquery-ui.css" />
-<!-- //Calendar -->
+	<link rel="stylesheet" href="/templates/datingtonight/formRegister/css/jquery-ui.css" />
+	<!-- //Calendar -->
 
 	<!-- font-awesome icons -->
 	<link rel="stylesheet" href="/templates/datingtonight/formRegister/css/font-awesome.min.css" />
@@ -116,7 +116,7 @@
 <!-- //pop-up-box video -->
 <!-- //js -->
 <!-- Calendar -->
-	<script src="js/jquery-ui.js"></script>
+	<script src="/templates/datingtonight/formRegister/js/jquery-ui.js"></script>
 	  <script>
 			  $(function() {
 				$( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker();

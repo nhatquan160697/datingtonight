@@ -186,7 +186,7 @@ background: rgba(255, 255, 255, 0);}
     -webkit-flex-basis: 48%;
 }
 
-.form-left-to-w3l input[type="text"],.form-right-to-w3ls input[type="text"],.form-left-to-w3l input[type="email"]
+.form-left-to-w3l input[type="text"],.form-left-to-w3l input[type="file"],.form-right-to-w3ls input[type="text"],.form-right-to-w3ls input[type="password"],.form-right-to-w3ls input[type="date"],.form-left-to-w3l input[type="email"]
 ,.form-control-w3l textarea,.form-add-to-w3ls input[type="text"]{
     width:100%;
     color: #fff;
@@ -209,6 +209,12 @@ background: rgba(255, 255, 255, 0);}
 }
 .add input[type="text"]{width:100%}
 .form-right-to-w3ls input[type="text"]{
+   padding-right: 0px; 
+}
+.form-right-to-w3ls input[type="password"]{
+   padding-right: 0px; 
+}
+.form-right-to-w3ls input[type="date"]{
    padding-right: 0px; 
 }
  select.form-control {
@@ -519,10 +525,13 @@ button[type=submit] {
 font-size: 17px;
 width: 39%;}
 .form-left-to-w3l input[type="text"],
- .form-right-to-w3ls input[type="text"],
- .form-left-to-w3l input[type="email"],
- .form-control-w3l textarea,
- .form-add-to-w3ls input[type="text"],select.form-control {
+.form-left-to-w3l input[type="file"],
+.form-right-to-w3ls input[type="text"],
+.form-right-to-w3ls input[type="password"]
+.form-right-to-w3ls input[type="date"],
+.form-left-to-w3l input[type="email"],
+.form-control-w3l textarea,
+.form-add-to-w3ls input[type="text"],select.form-control {
     font-size: 14px;
 	letter-spacing: 1px;
     padding: .6em .5em;
