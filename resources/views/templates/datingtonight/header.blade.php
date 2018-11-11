@@ -49,7 +49,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                <span>Welcome </span>
                <span>
                   <a href="#">
-                     {{ session()->get('checkUser')[0]->Fullname }} to Dating Tonight <i class="far fa-user"></i> </a>
+                     @if (Session::has('checkUser'))
+                           {{ session()->get('checkUser')[0]->Fullname }}
+                     @endif
+                     to Dating Tonight <i class="far fa-user"></i> </a>
                </span>
             </div>
             <div class="col-md-4 log-icons text-right">
