@@ -21,14 +21,14 @@ class Users extends Model
     }
 
     public function getUsername($username){
-    	return DB::table('users')->join('user_properties','users.id','=','user_properties.id')->where('username','=',$username)->get();
+    	return DB::table('users')->where('username','=',$username)->get();
     }
 
     public function getItems(){
     	return $this->all();
     }
-    public function users_properties()
+    /*public function users_properties()
     {
     	return $this->hasOne('App\Model\user_properties');
-    }
+    }*/
 }
