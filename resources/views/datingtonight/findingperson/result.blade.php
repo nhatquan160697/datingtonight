@@ -23,7 +23,7 @@
 				<div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
 					<div class="row mb-4">
 						<!-- Result LIST -->
-						@foreach($user_properties as $up)
+						@foreach($Users as $up)
 						<?php
                         	$url='/storage/app/files/avatar/'.$up->Avatar;
                     	?>
