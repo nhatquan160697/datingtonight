@@ -798,6 +798,13 @@ Route::namespace('Auth')->group(function(){
 			'as' => 'auth.users.default'
 		]);
 	});
+
+
+    Route::post('/user/signup',[
+        'uses' => 'AuthUserController@postSignUp',
+        'as' => 'auth.users.signup'
+    ]);
+
 	Route::get('/user/log-out',[
 		'uses' => 'AuthUserController@logOut',
 		'as' => 'auth.user.logout'
@@ -806,9 +813,9 @@ Route::namespace('Auth')->group(function(){
 
 
 // mã hóa lại pasword
-Route::get('/pass',function(){
-	return bcrypt('123456');
-});
+	Route::get('/pass',function(){
+		return bcrypt('123456');
+	});
 //Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
