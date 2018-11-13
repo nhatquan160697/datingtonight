@@ -28,16 +28,27 @@
 							</div>
 							<div class="blog-info-middle">
 								<ul>
+									@php
+										$date = $getItem->date_created;
+										$date_int = strtotime($date);
+										//$date_format = date('d-month-Y',$date_int);
+										//dd($date_int);
+										$date_array = getdate($date_int);
+										//dd($date_array);
+										$month = $date_array['month'];
+										$day = $date_array['mday'];
+										$year = $date_array['year'];
+									@endphp
 									<li>
-										<a href="#">
-											<i class="far fa-calendar-alt"></i> FEB 15,2018</a>
+										<a href="">
+											<i class="far fa-calendar-alt"></i> {{ $month }} {{ $day }}, {{ $year }}</a>
 									</li>
 									<li class="mx-2">
-										<a href="#">
+										<a href="">
 											<i class="far fa-thumbs-up"></i>{{ $getItem->count_number }}</a>
 									</li>
 									<li>
-										<a href="#">
+										<a href="">
 											<i class="far fa-comment"></i> 0 Comments</a>
 									</li>
 

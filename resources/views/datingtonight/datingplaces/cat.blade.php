@@ -1,6 +1,6 @@
 @extends('templates.datingtonight.master')
 @section('title')
-	Dating Places
+	{{ $getCatItem->name_type }}
 @endsection
 @section('content')
 	<!--/banner-->
@@ -8,20 +8,20 @@
 	</div>
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item">
-			<a href="index.html">Dating Tonight</a>
+			<a href="index.html">Dating Places</a>
 		</li>
-		<li class="breadcrumb-item" style="color:#910745">Dating Places</li>
+		<li class="breadcrumb-item" style="color:#910745">{{ $getCatItem->name_type }}</li>
 	</ol>
 	<!--//banner-->
 
 	<!--/main-->
 	<section class="main-content-w3layouts-agileits">
 		<div class="container">
-			<h3 class="tittle">DATING PLACES</h3>
+			<h3 class="tittle">{{ $getCatItem->name_type }}</h3>
 			<div class="row inner-sec">
 				<!--left-->
 				<div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
-					@foreach($getItems as $item)
+					@foreach($getIdCat as $item)
 					@php
                         $id = $item->id_place;
                         $name = $item->name_place;
@@ -47,19 +47,9 @@
 							</div>
 							<div class="blog-info-middle">
 								<ul>
-									@php
-										$date_int = strtotime($date_created);
-										//$date_format = date('d-month-Y',$date_int);
-										//dd($date_int);
-										$date_array = getdate($date_int);
-										//dd($date_array);
-										$month = $date_array['month'];
-										$day = $date_array['mday'];
-										$year = $date_array['year'];
-									@endphp
 									<li>
 										<a href="{{ $urlDetail }}">
-											<i class="far fa-calendar-alt"></i> {{ $month }} {{ $day }},{{ $year }}</a>
+											<i class="far fa-calendar-alt"></i> FEB 15,2018</a>
 									</li>
 									<li class="mx-2">
 										<a href="{{ $urlDetail }}">
@@ -81,7 +71,7 @@
 						<a href="{{ $urlDetail }}" class="btn btn-primary read-m">Read More</a>
 					</article>
 					@endforeach
-					{{ $getItems->links()}}
+					{{ $getIdCat->links()}}
 				</div>
 				<!--//left-->
 				<!--right-->
@@ -135,6 +125,5 @@
 
 
 </body>
-
 </html>
 @endsection

@@ -183,15 +183,26 @@
                      <div class="blog-info-middle">
                         <ul>
                            <li>
-                              <a href="#">
-                                 <i class="far fa-calendar-alt"></i> FEB 15,2018</a>
+                              <a href="{{ route('datingtonight.datingplaces.detail',['slug' => str_slug($top1->name_place), 'id' => $top1->id_place]) }}">
+                                 @php
+                                    $date = $top1->date_created;
+                                    $date_int = strtotime($date);
+                                    //$date_format = date('d-month-Y',$date_int);
+                                    //dd($date_int);
+                                    $date_array = getdate($date_int);
+                                    //dd($date_array);
+                                    $month = $date_array['month'];
+                                    $day = $date_array['mday'];
+                                    $year = $date_array['year'];
+                                 @endphp
+                                 <i class="far fa-calendar-alt"></i> {{ $month }} {{ $day }}, {{ $year }}</a>
                            </li>
                            <li class="mx-2">
-                              <a href="#">
+                              <a href="{{ route('datingtonight.datingplaces.detail',['slug' => str_slug($top1->name_place), 'id' => $top1->id_place]) }}">
                                  <i class="far fa-thumbs-up"></i> {{$top1->count_number}} Views</a>
                            </li>
                            <li>
-                              <a href="#">
+                              <a href="{{ route('datingtonight.datingplaces.detail',['slug' => str_slug($top1->name_place), 'id' => $top1->id_place]) }}">
                                  <i class="far fa-comment"></i> 0 Comments</a>
                            </li>
 
@@ -245,16 +256,27 @@
                            <p>{!!$top23->preview_text!!}</p>
                         </div>
                         <ul class="blog-icons">
+                           @php
+                              $date = $top23->date_created;
+                              $date_int = strtotime($date);
+                              //$date_format = date('d-month-Y',$date_int);
+                              //dd($date_int);
+                              $date_array = getdate($date_int);
+                              //dd($date_array);
+                              $month = $date_array['month'];
+                              $day = $date_array['mday'];
+                              $year = $date_array['year'];
+                           @endphp
                            <li>
-                              <a href="#">
-                                 <i class="far fa-clock"></i> 5 Monts</a>
+                              <a href="{{ route('datingtonight.datingplaces.detail',['slug' => str_slug($top23->name_place), 'id' => $top23->id_place]) }}">
+                                 <i class="far fa-clock"></i> {{ $month }} {{ $day }}, {{ $year }}</a>
                            </li>
                            <li class="mx-2">
-                              <a href="#">
+                              <a href="{{ route('datingtonight.datingplaces.detail',['slug' => str_slug($top23->name_place), 'id' => $top23->id_place]) }}">
                                  <i class="far fa-comment"></i> 0</a>
                            </li>
                            <li>
-                              <a href="#">
+                              <a href="{{ route('datingtonight.datingplaces.detail',['slug' => str_slug($top23->name_place), 'id' => $top23->id_place]) }}">
                                  <i class="fas fa-eye"></i> {{$top23->count_number}}</a>
                            </li>
                         </ul>

@@ -21,8 +21,8 @@ class DatingPlacesController extends Controller
 		$getNameType = $this->mDatingType->getNameType();
 		$colection = array();
 		foreach($getNameType as $nameType){
-			$countHotel = $this->mDatingType->countHotel($nameType->id_type);
-			array_push($colection, array('name'=>$nameType->name_type,'count'=>$countHotel));
+			$countType = $this->mDatingType->countType($nameType->id_type);
+			array_push($colection, array('cid' =>$nameType->id_type,'name'=>$nameType->name_type,'count'=>$countType));
 		}
 		$mostView = $this->mDatingPlaces->getTop5();
 		$lastestNew = $this->mDatingPlaces->getTop5byDate();
@@ -33,7 +33,27 @@ class DatingPlacesController extends Controller
 		$getItem = $this->mDatingPlaces->getItem($id);
     	$getPicture = $this->mDatingPlacePicture->getItem($id);
 		$getNameType = $this->mDatingType->getNameType();
-		$countHotel = $this->mDatingType->countHotel($id);
-		return view('datingtonight.datingplaces.detail',compact('getItem','getPicture','getNameType','countHotel'));
+		$arrType = array();
+		foreach($getNameType as $nameType){
+			$countType = $this->mDatingType->countType($nameType->id_type);
+			array_push($arrType, array('cid' => $nameType->id_type,'name'=>$nameType->name_type,'count'=>$countType));
+		}
+		$mostView = $this->mDatingPlaces->getTop5();
+		$relatedNews = $this->mDatingPlaces->relatedNews($id,$getItem->id_type);
+		return view('datingtonight.datingplaces.detail',compact('getItem','getPicture','getNameType','arrType','mostView','relatedNews'));
+	}
+
+	public function categories($cslug, $cid){
+		$getIdCat = $this->mDatingPlaces->getCatId($cid);
+		$getCatItem = $this->mDatingType->getCatItem($cid);
+		$getNameType = $this->mDatingType->getNameType();
+		$colection = array();
+		foreach($getNameType as $nameType){
+			$countType = $this->mDatingType->countType($nameType->id_type);
+			array_push($colection, array('cid' =>$nameType->id_type,'name'=>$nameType->name_type,'count'=>$countType));
+		}
+		$mostView = $this->mDatingPlaces->getTop5();
+		$lastestNew = $this->mDatingPlaces->getTop5byDate();
+		return view('datingtonight.datingplaces.cat',compact('getIdCat','getCatItem','colection','mostView','lastestNew'));
 	}
 }

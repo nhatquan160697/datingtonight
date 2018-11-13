@@ -122,7 +122,9 @@ class AdminDatingController extends Controller
 	public function del($id){
 		$oldPicture = $this->mDatingPlaces->getOldImage($id);
 		$oldPath = storage_path('app\files\datingplaces\\').$oldPicture;
-		unlink($oldPath);
+		if(isset($oldPath)){
+			unlink($oldPath);
+		}
 		if($this->mDatingPlaces->delItem($id)){
 			return redirect()->route('admin.datingplaces.index')->with('msg','Delete successfully');
 		} else {

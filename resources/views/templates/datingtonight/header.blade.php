@@ -43,7 +43,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
          <div class="row">
             <div class="col-md-4 logo text-left">
                <a class="navbar-brand" href="{{ route('datingtonight.index.index') }}">
-                  <i class="fab fa-linode"></i> Dating Tonight </a>
+                  <i class="fas fa-male"></i> D <i class="fas fa-heart"></i> T <i class="fas fa-female"></i> </a>
             </div>
             <div class="col-md-4 top-forms text-center mt-lg-3 mt-md-1 mt-0">
                <span>Welcome </span>
