@@ -15,7 +15,11 @@ class DatingType extends Model
         return DB::table('dating_place_type')->get();
     }
 
-    public function countHotel($idType){
+    public function countType($idType){
     	return DB::table('datingplaces')->where('id_type','=',$idType)->count();
+    }
+
+    public function getCatItem($id){
+    	return DB::table('dating_place_type')->where('id_type','=',$id)->first();
     }
 }

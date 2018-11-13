@@ -12,7 +12,8 @@
 */
 
 Route::pattern('id','[0-9]*');
-//Route::pattern('cid','[0-9]*');
+Route::pattern('cid','[0-9]*');
+Route::pattern('cslug','(.*)');
 Route::pattern('slug','(.*)');
 Route::namespace('DatingTonight')->group(function(){
 	Route::get('/',[
@@ -29,6 +30,10 @@ Route::namespace('DatingTonight')->group(function(){
 		Route::get('/detail/{slug}-{id}.html',[
 			'uses' => 'DatingPlacesController@detail',
 			'as' => 'datingtonight.datingplaces.detail'
+		]);
+		Route::get('/categories/{cslug}-{cid}.html',[
+			'uses' => 'DatingPlacesController@categories',
+			'as' => 'datingtonight.datingplaces.cat'
 		]);
 	});
 

@@ -16,9 +16,20 @@
                <h5>
                   <a href="{{ route('datingtonight.flirtingmethods.detail',['slug' => str_slug($top5fm->name_flirting), 'id' => $top5fm->id]) }}"> {{$top5fm->name_flirting}} </a>
                </h5>
+               @php
+                  $date = $top5fm->date_created;
+                  $date_int = strtotime($date);
+                  //$date_format = date('d-month-Y',$date_int);
+                  //dd($date_int);
+                  $date_array = getdate($date_int);
+                  //dd($date_array);
+                  $month = $date_array['month'];
+                  $day = $date_array['mday'];
+                  $year = $date_array['year'];
+               @endphp
                <div class="sub-meta">
                   <span>
-                     <i class="far fa-clock"></i> 20 Jan, 2018</span>
+                     <i class="far fa-clock"></i> {{ $month }} {{ $day }}, {{ $year }}</span>
                </div>
             </div>
          </div>
@@ -36,9 +47,21 @@
                <h5>
                   <a href="{{ route('datingtonight.datingplaces.detail',['slug' => str_slug($top5bd->name_place), 'id' => $top5bd->id_place]) }}"> {{$top5bd->name_place}} </a>
                </h5>
+               <a style="font-size: 13px;" href="{{ route('datingtonight.datingplaces.detail',['slug' => str_slug($top5bd->name_place), 'id' => $top5bd->id_place]) }}"> {{$top5bd->name_type}} </a>
+               @php
+                  $date = $top5bd->date_created;
+                  $date_int = strtotime($date);
+                  //$date_format = date('d-month-Y',$date_int);
+                  //dd($date_int);
+                  $date_array = getdate($date_int);
+                  //dd($date_array);
+                  $month = $date_array['month'];
+                  $day = $date_array['mday'];
+                  $year = $date_array['year'];
+               @endphp
                <div class="sub-meta">
                   <span>
-                     <i class="far fa-clock"></i> 20 Jan, 2018</span>
+                     <i class="far fa-clock"></i> {{ $month }} {{ $day }}, {{ $year }}</span>
                </div>
             </div>
          </div>

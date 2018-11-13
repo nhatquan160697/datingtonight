@@ -28,7 +28,7 @@
 				</select>
 		</div>
 			<div class="form-right-to-w3ls">
-		    <input  id="datepicker1" name="dateofbirth" type="date" placeholder="Date of Birth" required="">
+		    <input  id="date" name="dateofbirth" type="date" placeholder="Date of Birth" required="">
 			<div class="clearfix"></div>
 		</div>
 	</div>

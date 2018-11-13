@@ -60,8 +60,14 @@ class DatingPlaces extends Model
     }
 
     public function getOldImage($id){
-        return (string)DB::table('datingplaces')
-                     ->select('picture')
-                     ->where('id_place', $id)->first()->picture;
+        return (string)DB::table('datingplaces')->select('picture')->where('id_place', $id)->first()->picture;
+    }
+
+    public function getCatId($id){
+        return DB::table('datingplaces')->join('dating_place_type','datingplaces.id_type','=','dating_place_type.id_type')->orderby('date_created','DESC')->where('datingplaces.id_type','=',$id)->paginate(4);
+    }
+
+    public function relatedNews($id, $cid){
+        return DB::table('datingplaces')->join('dating_place_type','datingplaces.id_type','=','dating_place_type.id_type')->where('id_place','<>',$id)->where('datingplaces.id_type','=',$cid)->inRandomOrder()->limit('5')->get();
     }
 }
