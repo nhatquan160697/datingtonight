@@ -27,8 +27,33 @@ class Users extends Model
     public function getItems(){
     	return $this->all();
     }
-    /*public function users_properties()
-    {
-    	return $this->hasOne('App\Model\user_properties');
-    }*/
+    public function checkUserExist($username){
+        $checkUserNameExist = DB::table('users')->where('username', '=', $username)->count();
+        if($checkUserNameExist >= 1){
+            return true;
+        } else {
+            return false;
+        }
+    }
+     public function addNewUser($username,$password,$email,$phonenumber,$gender,$birthday,$fullname,$city,$facebook){
+         $idOfGender = DB::table('gender')->where('gender','=', $gender)->first()->id;
+        $idOfCity = DB::table('city')->where('city','=', $city)->first()->id;
+        $addNewUser = DB::table('users')->insertGetId(
+            [
+                'username' => $username,
+                'password' => $password,
+                'City' => $idOfCity,
+                'Gender' => $idOfGender,
+                'BirthDate' => $birthday,
+                'Fullname' => $fullname,
+                'facebook' => $facebook,
+            ]
+        );
+        if($addNewUser){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

@@ -1,4 +1,5 @@
-<form action="#" method="post">
+<form action="{{ route('auth.users.signup') }}" method="post">
+	{{ csrf_field() }}
 	<div class="main">
 		<div class="form-left-to-w3l">
 			<input type="text" name="username" placeholder="Username" required="">
@@ -15,20 +16,20 @@
 			  <div class="clear"></div>
 		</div>
 		<div class="form-right-to-w3ls">
-			<input type="text" name="phone number" placeholder="Phone Number" required="">
+			<input type="text" name="phone_number" placeholder="Phone Number" required="">
 			  <div class="clear"></div>
 		</div>
 	</div>
 	<div class="main">
  		<div class="form-left-to-w3l">
-				<select class="form-control">
-				<option value="">Gender</option>
-					<option>Male</option>
-					<option>Female</option>
+				<select name="gender" class="form-control">
+				@foreach($gender as $gd)
+					<option value="{{$gd->id}}">{{$gd->gender}}</option>
+				@endforeach
 				</select>
 		</div>
 			<div class="form-right-to-w3ls">
-		    <input  id="date" name="dateofbirth" type="date" placeholder="Date of Birth" required="">
+		    <input  id="datepicker1" name="birthday" type="date"  placeholder="Date of Birth" required="">
 			<div class="clearfix"></div>
 		</div>
 	</div>
@@ -37,10 +38,10 @@
 		<div class="clear"></div>
 	</div>
 	<div class="form-right-to-w3ls">
-			<select class="form-control buttom">
-				<option value="">
-				Select City</option>
-					<option value="category2">Da Nang</option>
+			<select name="city" class="form-control buttom">
+				@foreach($city as $ct)
+					<option value="{{$ct->id}}">{{$ct->city}}</option>
+				@endforeach
 			</select>
            <div class="clear"></div>
 	</div>
