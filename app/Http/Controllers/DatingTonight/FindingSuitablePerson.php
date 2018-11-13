@@ -189,6 +189,14 @@ class FindingSuitablePerson extends Controller
         $Users=$Users->get();
         $city=city::all();
         $gender=gender::all();
+        if($request->session()->has('saveSearch'))
+        {
+            $request->session()->push('saveSearch',$Users);
+        }
+        else
+        {
+            $request->session()->put('saveSearch',$Users);
+        }
     	return view('datingtonight.findingperson.result',[
             'Users'=>$Users,
             'gender'=>$gender,
