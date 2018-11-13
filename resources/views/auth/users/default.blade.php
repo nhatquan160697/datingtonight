@@ -117,11 +117,11 @@
 <!-- //js -->
 <!-- Calendar -->
 	<script src="/templates/datingtonight/formRegister/js/jquery-ui.js"></script>
-	  <script>
+{{-- 	  <script>
 			  $(function() {
 				$( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker();
 			  });
-	  </script>
+	  </script> --}}
 <!-- //Calendar -->
 </body>
 </html>
