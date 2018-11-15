@@ -1,6 +1,6 @@
 @extends('templates.datingtonight.master')
 @section('title')
-	Flirting Methods - Dating Tonight
+	{{ $getIdItem->name_flirting }}
 @endsection
 @section('content')
 	<!--/banner-->
@@ -8,10 +8,10 @@
 	</div>
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item">
-			<a href="{{route('datingtonight.index.index')}}">Dating Tonight</a>
+			<a href="{{route('datingtonight.index.index')}}">Flirting Methods</a>
 		</li>
 		<li class="breadcrumb-item">
-			<a style="color:#910745" href="{{route('datingtonight.flirtingmethods.index')}}">Flirting methods</a>
+			<a style="color:#910745" href="{{route('datingtonight.flirtingmethods.index')}}">{{ $getIdItem->name_flirting }}</a>
 		</li>
 	</ol>
 	<!--//banner-->
@@ -25,33 +25,43 @@
 						<div class="b-grid-top">
 							<div class="blog_info_left_grid">
 								<a href="">
-									<img src="/storage/app/files/flirtingmethods/{{ $flirtingmethods->image }}" class="img-fluid" alt="">
+									<img src="/storage/app/files/flirtingmethods/{{ $getIdItem->image }}" class="img-fluid" alt="">
 								</a>
 							</div>
 							<div class="blog-info-middle">
 								<ul>
+									@php
+										$date_int = strtotime($getIdItem->date_created);
+										//$date_format = date('d-month-Y',$date_int);
+										//dd($date_int);
+										$date_array = getdate($date_int);
+										//dd($date_array);
+										$month = $date_array['month'];
+										$day = $date_array['mday'];
+										$year = $date_array['year'];
+									@endphp
 									<li>
-										<a href="#">
-											<i class="far fa-calendar-alt"></i> FEB 15,2018</a>
+										<a href="">
+											<i class="far fa-calendar-alt"></i> {{ $month }} {{ $day }},{{ $year }}</a>
 									</li>
 									<li class="mx-2">
-										<a href="#">
-											<i class="far fa-thumbs-up"></i>{{ $flirtingmethods->count_number }}</a>
+										<a href="">
+											<i class="fas fa-eye"></i>{{ $getIdItem->count_number }}</a>
 									</li>
 									<li>
-										<a href="#">
-											<i class="far fa-comment"></i> 0 Comments</a>
+										<a href="">
+											 <i class="fa fa-user-secret"></i> {{ $getIdItem->author }}</a>
 									</li>
 
 								</ul>
 							</div>
 						</div>
-						<h2 style="margin-bottom: 10px; margin-top: 5px;">{{ $flirtingmethods->name_flirting }}</h2>
+						<h2 style="margin-bottom: 10px; margin-top: 5px;">{{ $getIdItem->name_flirting }}</h2>
 						<h3>
-							<a href="">{!! $flirtingmethods->preview_text !!}</a>
+							<a href="">{!! $getIdItem->preview_text !!}</a>
 						</h3>
-						<p>{!! $flirtingmethods->detail_flirting !!}</p>
-						<strong>Author : {{ $flirtingmethods->author }}</strong>
+						<p>{!! $getIdItem->detail_flirting !!}</p>
+						<strong>Author : {{ $getIdItem->author }}</strong>
 					</div>
 					<!-- Comment -->
 					@include('datingtonight.flirtingmethods.comment')
@@ -60,7 +70,7 @@
 
 				<!--//left-->
 				<!--right-->
-				@include('datingtonight.flirtingmethods.right-bar')
+				@include('datingtonight.flirtingmethods.related')
 				<!--//right-->
 			</div>
 		</div>

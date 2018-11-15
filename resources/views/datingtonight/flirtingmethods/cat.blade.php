@@ -1,6 +1,6 @@
 @extends('templates.datingtonight.master')
 @section('title')
-	Flirting methods
+	Flirting methods for {{ $getIdType->gender }}
 @endsection
 @section('content')
 	<!--/banner-->
@@ -8,21 +8,21 @@
 	</div>
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item">
-			<a href="{{ route('datingtonight.index.index') }}">Dating Tonight</a>
+			<a href="{{ route('datingtonight.flirtingmethods.index') }}">Flirting methods</a>
 		</li>
-		<li class="breadcrumb-item" style="color:#910745">Flirting methods</li>
+		<li class="breadcrumb-item" style="color:#910745">{{ $getIdType->gender }}</li>
 	</ol>
 	<!--//banner-->
 
 	<!--/main-->
 	<section class="main-content-w3layouts-agileits">
 		<div class="container">
-			<h3 class="tittle">FLIRTING METHODS</h3>
+			<h3 class="tittle">Flirting methods for {{ $getIdType->gender }}</h3>
 			<div class="row inner-sec">
 				<!--left-->
 				<div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
 					<div class="row mb-4">
-						@foreach($flirtingmethods as $fm)
+						@foreach($getAllIdCat as $fm)
 						@php
 							$id = $fm->id;
 							$name = $fm->name_flirting;
@@ -77,14 +77,14 @@
 						</div>
 						@endforeach
 					</div>
-					{{$flirtingmethods->links()}}
+					{{$getAllIdCat->links()}}
 				</div>
 				<!--//left-->
 				<!--right-->
 				@include('datingtonight.flirtingmethods.right-bar')
 				<!--//right-->
-				</div>
 			</div>
+		</div>
 	</section>
 	<!--//main-->
 	<!-- js -->
@@ -108,13 +108,13 @@
 	<script>
 		$(document).ready(function () {
 			/*
-			var defaults = {
-	  			containerID: 'toTop', // fading element id
-				containerHoverID: 'toTopHover', // fading element hover id
-				scrollSpeed: 1200,
-				easingType: 'linear'
-	 		};
-			*/
+				var defaults = {
+		  			containerID: 'toTop', // fading element id
+					containerHoverID: 'toTopHover', // fading element hover id
+					scrollSpeed: 1200,
+					easingType: 'linear'
+		 		};
+				*/
 
 			$().UItoTop({
 				easingType: 'easeOutQuart'
@@ -125,12 +125,8 @@
 	<a href="#home" class="scroll" id="toTop" style="display: block;">
 		<span id="toTopHover" style="opacity: 1;"> </span>
 	</a>
-
 	<!-- //Custom-JavaScript-File-Links -->
 	<script src="/templates/datingtonight/js/bootstrap.js"></script>
-
-
 </body>
-
 </html>
 @endsection
