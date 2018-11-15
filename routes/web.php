@@ -31,7 +31,7 @@ Route::namespace('DatingTonight')->group(function(){
 			'uses' => 'DatingPlacesController@detail',
 			'as' => 'datingtonight.datingplaces.detail'
 		]);
-		Route::get('/categories/{cslug}-{cid}.html',[
+		Route::get('/categories/{cslug}-{cid}',[
 			'uses' => 'DatingPlacesController@categories',
 			'as' => 'datingtonight.datingplaces.cat'
 		]);
@@ -47,6 +47,10 @@ Route::namespace('DatingTonight')->group(function(){
 		Route::get('/detail/{slug}-{id}.html',[
 			'uses' => 'FlirtingMethodsController@detail',
 			'as' => 'datingtonight.flirtingmethods.detail'
+		]);
+		Route::get('/categories/{cslug}-{cid}',[
+			'uses' => 'FlirtingMethodsController@categories',
+			'as' => 'datingtonight.flirtingmethods.cat'
 		]);
 	});
 
