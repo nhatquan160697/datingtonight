@@ -24,6 +24,10 @@ class Users extends Model
     	return DB::table('users')->where('username','=',$username)->get();
     }
 
+    public function getUserID($username){
+        return DB::table('users')->where('username','=',$username)->value('id');
+    }
+
     public function getItems(){
     	return $this->all();
     }

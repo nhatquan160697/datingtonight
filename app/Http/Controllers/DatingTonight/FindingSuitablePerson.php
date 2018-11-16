@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 use App\Model\body;
 use App\Model\gender;
 use App\Model\city;
@@ -24,6 +25,7 @@ use App\Model\national;
 use App\Model\religion;
 use App\Model\smoking;
 use App\Model\Users;
+use App\Model\user_search;
 use Carbon\Carbon;
 
 
@@ -32,6 +34,9 @@ class FindingSuitablePerson extends Controller
     //
     public function index()
     {
+        $id =  Session::get('userID');
+        $check=user_search::find($id);
+
     	$body=body::all();
     	$city=city::all();
     	$constellation=constellation::all();
@@ -71,87 +76,111 @@ class FindingSuitablePerson extends Controller
     			'gender'=>$gender,
     			'smoking'=>$smoking
     		]);
+        
     }
 
     public function result(Request $request,Users $Users)
     {
-    	//return $Users=Users::where('Gender','=',$request->gender)->get();
+        $id =  Session::get('userID');
     	$Users=$Users->newQuery();
+        $check=user_search::find($id);
+        if (empty($check)) {
+            $user_search=new user_search;
+            $user_search->id=$id;
+        }
+        else
+        {
+            $user_search=user_search::find($id);
+        }
     	if($request->gender!='')
     	{
     		$Users->where('Gender','=',$request->gender);
+            $user_search->Gender=$request->gender;
     	}
     	if($request->city!='')
     	{
     		$Users->where('City','=',$request->city);
+            $user_search->City=$request->city;
     	}
     	if($request->hair_color!='')
     	{
     		$Users->where('Hair_color','=',$request->hair_color);
+            $user_search->Hair_color=$request->hair_color;
     	}
     	if($request->eye_color!='')
     	{
     		$Users->where('Eye_color','=',$request->eye_color);
+            $user_search->Eye_color=$request->eye_color;
     	}
     	if($request->hair_style!='')
     	{
     		$Users->where('Hair_style','=',$request->hair_style);
+            $user_search->Hair_style=$request->hair_style;
     	}
     	if($request->hair_length!='')
     	{
     		$Users->where('Hair_length','=',$request->hair_length);
+            $user_search->Hair_length=$request->hair_length;
     	}
     	if($request->body!='')
     	{
     		$Users->where('Body','=',$request->body);
+            $user_search->Body=$request->body;
     	}
     	if($request->drink!='')
     	{
     		$Users->where('Drinking','=',$request->drink);
+            $user_search->Drinking=$request->drink;
     	}
     	if($request->smoke!='')
     	{
     		$Users->where('Smoking','=',$request->smoke);
+            $user_search->Smoking=$request->smoke;
     	}
     	if($request->job_status!='')
     	{
     		$Users->where('Job_status','=',$request->job_status);
+            $user_search->Job_status=$request->job_status;
     	}
     	if($request->house_type!='')
     	{
     		$Users->where('Home_type','=',$request->house_type);
-    	}
-    	if($request->smoke!='')
-    	{
-    		$Users->where('Smoking','=',$request->smoke);
+            $user_search->Home_type=$request->house_type;
     	}
     	if($request->live_with!='')
     	{
     		$Users->where('Live_with','=',$request->live_with);
+            $user_search->Live_with=$request->live_with;
     	}
     	if($request->have_children!='')
     	{
     		$Users->where('Have_children','=',$request->have_children);
+            $user_search->Have_children=$request->have_children;
     	}
     	if($request->national!='')
     	{
     		$Users->where('National','=',$request->national);
+            $user_search->National=$request->national;
     	}
     	if($request->educational_level!='')
     	{
     		$Users->where('Educational_level','=',$request->educational_level);
+            $user_search->Educational_level=$request->educational_level;
     	}
     	if($request->language!='')
     	{
     		$Users->where('Language','=',$request->language);
+            $user_search->Language=$request->language;
     	}
     	if($request->religion!='')
     	{
     		$Users->where('Religion','=',$request->religion);
+            $user_search->Religion=$request->religion;
     	}
     	if($request->constellation!='')
     	{
     		$Users->where('Constellation','=',$request->constellation);
+            $user_search->Constellation=$request->constellation;
     	}
         if($request->fromage!='' && $request->toage!="")
         {
@@ -186,21 +215,24 @@ class FindingSuitablePerson extends Controller
         if ($request->fromheight=='' && $request->toweight!='') {
             $Users->where('Weight','<=',$request->toweight);
         }
+
+        $user_search->fromage=$request->fromage;
+        $user_search->toage=$request->toage;
+        $user_search->fromheight=$request->fromheight;
+        $user_search->toheight=$request->toheight;
+        $user_search->fromweight=$request->fromweight;
+        $user_search->toweight=$request->toweight;
+
+        $user_search->save();
+
         $Users=$Users->get();
         $city=city::all();
         $gender=gender::all();
-        if($request->session()->has('saveSearch'))
-        {
-            $request->session()->push('saveSearch',$Users);
-        }
-        else
-        {
-            $request->session()->put('saveSearch',$Users);
-        }
     	return view('datingtonight.findingperson.result',[
             'Users'=>$Users,
             'gender'=>$gender,
             'city'=>$city
         ]);
+        
     }
 }
