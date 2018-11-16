@@ -27,8 +27,10 @@ class AuthUserController extends Controller
     	$username = trim($request->username);
     	$password = trim($request->password);
     	$getUsername = $this->mUser->getUsername($username);
+        $getUserID = $this->mUser->getUserID($username);
     	if($this->mUser->checkUserLogin($username,$password)){
     		$request->session()->put('checkUser',$getUsername);
+            $request->session()->put('userID',$getUserID);
     		return redirect()->route('datingtonight.index.index');
     	} else {
     		return redirect()->route('auth.users.default')->with('alert','Username or Password is invalid');
