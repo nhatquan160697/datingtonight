@@ -141,6 +141,16 @@
 	</script>
 	<!--// end-smoth-scrolling -->
 
+	{{-- Comment --}}
+	<script>
+		$(document).ready(function(){
+		    $("#clickme").click(function(){
+		        $("#reply-comment").slideToggle();
+		    });
+		});
+	</script>
+	<!--/Comment-->
+
 	<script>
 		$(document).ready(function () {
 			/*
@@ -164,9 +174,6 @@
 
 	<!-- //Custom-JavaScript-File-Links -->
 	<script src="/templates/datingtonight/js/bootstrap.js"></script>
-
-
 </body>
-
 </html>
 @endsection
