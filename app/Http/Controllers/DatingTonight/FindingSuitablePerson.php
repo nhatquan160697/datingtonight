@@ -225,13 +225,46 @@ class FindingSuitablePerson extends Controller
 
         $user_search->save();
 
-        $Users=$Users->get();
-        $city=city::all();
+        $Users=$Users->paginate(9);
+        
         $gender=gender::all();
+        $body=body::all();
+        $city=city::all();
+        $constellation=constellation::all();
+        $drinking=drinking::all();
+        $educational_level=educational_level::all();
+        $eye_color=eye_color::all();
+        $hair_color=hair_color::all();
+        $hair_length=hair_length::all();
+        $hair_style=hair_style::all();
+        $have_children=have_children::all();
+        $house_type=house_type::all();
+        $job_status=job_status::all();
+        $language=language::all();
+        $live_with=live_with::all();
+        $national=national::all();
+        $religion=religion::all();
+        $smoking=smoking::all();
     	return view('datingtonight.findingperson.result',[
             'Users'=>$Users,
+            'body'=>$body,
+            'city'=>$city,
+            'constellation'=>$constellation,
+            'drinking'=>$drinking,
+            'educational_level'=>$educational_level,
+            'eye_color'=>$eye_color,
+            'hair_color'=>$hair_color,
+            'hair_length'=>$hair_length,
+            'hair_style'=>$hair_style,
+            'have_children'=>$have_children,
+            'house_type'=>$house_type,
+            'job_status'=>$job_status,
+            'language'=>$language,
+            'live_with'=>$live_with,
+            'national'=>$national,
+            'religion'=>$religion,
             'gender'=>$gender,
-            'city'=>$city
+            'smoking'=>$smoking
         ]);
         
     }

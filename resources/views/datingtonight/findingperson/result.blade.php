@@ -15,250 +15,235 @@
 	<!--//banner-->
 
 	<!--/main-->
-	<section class="main-content-w3layouts-agileits">
+<section class="main-content-w3layouts-agileits">
 		<div class="container">
-			<h3 class="tittle">RESULT</h3>
-			<div class="row inner-sec">
+			<h3 class="tittle">Blog Posts</h3>
+			<div class="inner-sec">
 				<!--left-->
-				<div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
-					<div class="row mb-4">
-						<!-- Result LIST -->
+				<div class="left-blog-info-w3layouts-agileits text-left">
+					<div class="row">
 						@foreach($Users as $up)
 						<?php
                         	$url='/storage/app/files/avatar/'.$up->Avatar;
-                    	?>
-						<div class="col-md-6 card my-4">
-							<a href="#">
+                        	$Gender;
+                        	$City;
+                        	$Constellation;
+                        	$Drinking;
+                        	$Educational;
+                        	$EyeColor;
+                        	$HairColor;
+                        	$HairLength;
+                        	$HairStyle;
+                        	$HaveChildren;
+                        	$HouseType;
+                        	$JobStatus;
+                        	$Language;
+                        	$LiveWith;
+                        	$National;
+                        	$Religion;
+                        	$Smoking;
+                        	$Body;
+                        	foreach ($gender as $gd) 
+                        	{
+                        		if ($gd->id==$up->Gender) {
+                        			$Gender=$gd->gender;
+                        		}
+                        	}
+                        	foreach ($city as $ct) 
+                        	{
+                        		if ($ct->id==$up->City) {
+                        			$City=$ct->city;
+                        		}
+                        	}
+                        	foreach ($constellation as $cs) 
+                        	{
+                        		if ($cs->id==$up->Constellation) {
+                        			$Constellation=$cs->constellation;
+                        		}
+                        	}
+                        	foreach ($drinking as $dr) 
+                        	{
+                        		if ($dr->id==$up->Drinking) {
+                        			$Drinking=$dr->drink;
+                        		}
+                        	}
+                        	foreach ($educational_level as $el) 
+                        	{
+                        		if ($el->id==$up->Educational_level) {
+                        			$Educational=$el->level;
+                        		}
+                        	}
+                        	foreach ($eye_color as $ec) 
+                        	{
+                        		if ($ec->id==$up->Eye_color) {
+                        			$EyeColor=$ec->color;
+                        		}
+                        	}
+                        	foreach ($hair_color as $hc) 
+                        	{
+                        		if ($hc->id==$up->Hair_color) {
+                        			$HairColor=$hc->color;
+                        		}
+                        	}
+                        	foreach ($hair_length as $hl) 
+                        	{
+                        		if ($hl->id==$up->Hair_length) {
+                        			$HairLength=$hl->length;
+                        		}
+                        	}
+                        	foreach ($hair_style as $hs) 
+                        	{
+                        		if ($hs->id==$up->Hair_style) {
+                        			$HairStyle=$hs->style;
+                        		}
+                        	}
+                        	foreach ($have_children as $hc) 
+                        	{
+                        		if ($hc->id==$up->Have_children) {
+                        			$HaveChildren=$hc->children;
+                        		}
+                        	}
+                        	foreach ($house_type as $ht) 
+                        	{
+                        		if ($ht->id==$up->Home_type) {
+                        			$HouseType=$ht->type;
+                        		}
+                        	}
+                        	foreach ($job_status as $js) 
+                        	{
+                        		if ($js->id==$up->Job_status) {
+                        			$JobStatus=$js->status;
+                        		}
+                        	}
+                        	foreach ($language as $lg) 
+                        	{
+                        		if ($lg->id==$up->Language) {
+                        			$Language=$lg->language;
+                        		}
+                        	}
+                        	foreach ($live_with as $lw) 
+                        	{
+                        		if ($lw->id==$up->Live_with) {
+                        			$LiveWith=$lw->livewith;
+                        		}
+                        	}
+                        	foreach ($national as $na) 
+                        	{
+                        		if ($na->id==$up->National) {
+                        			$National=$na->national;
+                        		}
+                        	}
+                        	foreach ($religion as $rl) 
+                        	{
+                        		if ($rl->id==$up->Religion) {
+                        			$Religion=$rl->religion;
+                        		}
+                        	}
+                        	foreach ($smoking as $sm) 
+                        	{
+                        		if ($sm->id==$up->Smoking) {
+                        			$Smoking=$sm->smoke;
+                        		}
+                        	}
+                        	foreach ($body as $bd) 
+                        	{
+                        		if ($bd->id==$up->Body) {
+                        			$Body=$bd->body;
+                        		}
+                        	}                    	
+                        ?>
+						<div class="col-lg-4 card">
+							<a href="#exampleModal-{{$up->id}}" data-toggle="modal">
 								<img src="{{$url}}" class="card-img-top img-fluid" alt="This is an image">
 							</a>
 							<div class="card-body">
 								
-								<h5 class="card-title ">
-									<a href="single.html">{{$up->Fullname}}</a>
+								<h5 class="card-title">
+									<a href="#">{{$up->Fullname}}</a>
 								</h5>
-
-								<p class="card-text mb-3">
-									@foreach($gender as $gd)
-										@if($gd->id==$up->Gender and $gd->gender!='Anything')
-										<span>{{$gd->gender}}</span>
-										@endif
-									@endforeach
-									@foreach($city as $ct)
-										@if($ct->id==$up->City and $ct->city!='Anything')
-											<span>{{$ct->city}}</span>
-										@endif
-									@endforeach
-								</p>
+								<ul class="blog-icons my-4">
+									<li>
+											<i class="far fa-calendar-alt">{{$up->Birthdate}}</i>
+									</li>
+									<li>
+											<span>{{$Gender}}</span>
+											<span>{{$City}}</span>
+									</li>
+								</ul>
 							</div>
+
+							<!--Modal-->
+							<div class="modal" id="exampleModal-{{$up->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+  								<div class="modal-dialog modal-dialog-centered" role="document">
+    								<div class="modal-content">
+      									<div class="modal-header">
+        									<h5 class="modal-title" id="exampleModalLabel">{{$up->Fullname}}</h5>
+        									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          									<span aria-hidden="true">&times;</span>
+       										 </button>
+      									</div>
+      									<div class="modal-body">
+        									<img src="{{$url}}" class="card-img-top img-fluid" alt="This is an image">
+        									<!-- button chat -->
+        									<hr>
+        									<button type="button" class="btn btn-primary">Chat</button>	
+
+        									<!-- basic information -->
+        									<hr>
+        									<h1>Basic</h1>
+        									<p style="font-weight: bold;">Gender : <span>{{$Gender}}</span></p>
+        									<p style="font-weight: bold;">City : <span>{{$City}}</span></p>
+        									<p style="font-weight: bold;">Birthdate : <span>{{$up->Birthdate}}</span></p>
+        									<p style="font-weight: bold;">Phone number : <span>{{$up->phone_number}}</span></p>
+        									<p style="font-weight: bold;">Email : <span>{{$up->email}}</span></p>
+        									<p style="font-weight: bold;">Facebook : <span>{{$up->Facebook}}</span></p>
+
+        									<!-- Appearance -->
+        									<hr>
+        									<h1>Appearance</h1>
+        									<p style="font-weight: bold;">Hair color : <span>{{$HairColor}}</span></p>
+        									<p style="font-weight: bold;">Hair style : <span>{{$HairStyle}}</span></p>
+        									<p style="font-weight: bold;">Hair length : <span>{{$HairLength}}</span></p>
+        									<p style="font-weight: bold;">Eye color : <span>{{$EyeColor}}</span></p>
+        									<p style="font-weight: bold;">Body : <span>{{$Body}}</span></p>
+        									<p style="font-weight: bold;">Height : <span>{{$up->Height}} cm</span></p>
+        									<p style="font-weight: bold;">Weight : <span>{{$up->Weight}} kg</span></p>	
+
+        									<!-- Life style -->
+        									<hr>
+        									<h1>Life</h1>
+        									<p style="font-weight: bold;">Drinking : <span>{{$Drinking}}</span></p>
+        									<p style="font-weight: bold;">Smoking : <span>{{$Smoking}}</span></p>
+        									<p style="font-weight: bold;">Job status : <span>{{$JobStatus}}</span></p>
+        									<p style="font-weight: bold;">House type : <span>{{$HouseType}}</span></p>
+        									<p style="font-weight: bold;">Live with : <span>{{$LiveWith}}</span></p>
+        									<p style="font-weight: bold;">Children : <span>{{$HaveChildren}}</span></p>
+
+        									<!-- Culture -->
+        									<hr>
+        									<h1>Culture</h1>
+        									<p style="font-weight: bold;">National : <span>{{$National}}</span></p>
+        									<p style="font-weight: bold;">Educational level : <span>{{$Educational}}</span></p>
+        									<p style="font-weight: bold;">Language : <span>{{$Language}}</span></p>
+        									<p style="font-weight: bold;">Religion : <span>{{$Religion}}</span></p>
+        									<p style="font-weight: bold;">Constellation : <span>{{$Constellation}}</span></p>
+      									</div>
+      									<div class="modal-footer">
+      										
+      									</div>
+    							</div>
+  							</div>
+<!--???? deo biet the div cua cai mo ma k dc xoa-->  							
+</div>
+
 						</div>
 						@endforeach
+						{{$Users->links()}}
 					</div>
-				</div>
-				<!--//left-->
-				<!--right-->
-				<aside class="col-lg-4 agileits-w3ls-right-blog-con text-left">
-					<div class="right-blog-info text-left">
-						<div class="tech-btm">
-							<img src="images/banner1.jpg" class="card-img-top img-fluid" alt="">
-						</div>
-						<div class="tech-btm">
-							<h4>Sign up to our newsletter</h4>
-							<p>Pellentesque dui, non felis. Maecenas male </p>
-							<form action="#" method="post">
-								<input type="email" placeholder="Email" required="">
-								<input type="submit" value="Subscribe">
-							</form>
-
-						</div>
-						<div class="tech-btm">
-							<h4>Categories</h4>
-							<ul class="list-group single">
-								<li class="list-group-item d-flex justify-content-between align-items-center">
-									Cras justo odio
-									<span class="badge badge-primary badge-pill">14</span>
-								</li>
-								<li class="list-group-item d-flex justify-content-between align-items-center">
-									Dapibus ac facilisis in
-									<span class="badge badge-primary badge-pill">2</span>
-								</li>
-								<li class="list-group-item d-flex justify-content-between align-items-center">
-									Morbi leo risus
-									<span class="badge badge-primary badge-pill">1</span>
-								</li>
-							</ul>
-						</div>
-						<div class="tech-btm">
-							<h4>Top stories of the week</h4>
-
-							<div class="blog-grids row mb-3">
-								<div class="col-md-5 blog-grid-left">
-									<a href="single.html">
-										<img src="images/1.jpg" class="card-img-top img-fluid" alt="">
-									</a>
-								</div>
-								<div class="col-md-7 blog-grid-right">
-
-									<h5>
-										<a href="single.html">Pellentesque dui, non felis. Maecenas male non felis </a>
-									</h5>
-									<div class="sub-meta">
-										<span>
-											<i class="far fa-clock"></i> 20 Jan, 2018</span>
-									</div>
-								</div>
-
-							</div>
-							<div class="blog-grids row mb-3">
-								<div class="col-md-5 blog-grid-left">
-									<a href="single.html">
-										<img src="images/6.jpg" class="card-img-top img-fluid" alt="">
-									</a>
-								</div>
-								<div class="col-md-7 blog-grid-right">
-									<h5>
-										<a href="single.html">Pellentesque dui, non felis. Maecenas male non felis </a>
-									</h5>
-									<div class="sub-meta">
-										<span>
-											<i class="far fa-clock"></i> 20 Feb, 2018</span>
-									</div>
-								</div>
-
-							</div>
-						</div>
-						<div class="single-gd my-5 tech-btm">
-							<h4>Our Progress</h4>
-							<div class="progress">
-								<div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0"
-								    aria-valuemax="100"></div>
-							</div>
-							<div class="progress">
-								<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
-								    aria-valuemax="100"></div>
-							</div>
-							<div class="progress">
-								<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-								    aria-valuemax="100"></div>
-							</div>
-							<div class="progress">
-								<div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0"
-								    aria-valuemax="100"></div>
-							</div>
-							<div class="progress">
-								<div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0"
-								    aria-valuemax="100"></div>
-							</div>
-						</div>
-						<div class="single-gd tech-btm text-left">
-							<h4>Recent Post</h4>
-							<div class="blog-grids">
-								<div class="blog-grid-left">
-									<a href="single.html">
-										<img src="images/b1.jpg" class="card-img-top img-fluid" alt="">
-									</a>
-								</div>
-								<div class="blog-grid-right">
-
-									<h5>
-										<a href="single.html">Pellentesque dui, non felis. Maecenas male</a>
-									</h5>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-						</div>
-				
-
-
-					<div class="tech-btm widget_social text-left">
-						<h4>Stay Connect</h4>
-						<ul>
-
-							<li>
-								<a class="twitter" href="#">
-									<i class="fab fa-twitter"></i>
-									<span class="count">317K</span> Twitter Followers</a>
-							</li>
-							<li>
-								<a class="facebook" href="#">
-									<i class="fab fa-facebook-f"></i>
-									<span class="count">218k</span> Twitter Followers</a>
-							</li>
-							<li>
-								<a class="dribble" href="#">
-									<i class="fab fa-dribbble"></i>
-
-									<span class="count">215k</span> Dribble Followers</a>
-							</li>
-							<li>
-								<a class="pin" href="#">
-									<i class="fab fa-pinterest"></i>
-									<span class="count">190k</span> Pinterest Followers</a>
-							</li>
-
-						</ul>
-					</div>
-					<div class="tech-btm">
-						<h4>Recent Posts</h4>
-
-						<div class="blog-grids row mb-3 text-left">
-							<div class="col-md-5 blog-grid-left">
-								<a href="single.html">
-									<img src="images/1.jpg" class="card-img-top img-fluid" alt="">
-								</a>
-							</div>
-							<div class="col-md-7 blog-grid-right">
-
-								<h5>
-									<a href="single.html">Pellentesque dui, non felis. Maecenas male non felis </a>
-								</h5>
-								<div class="sub-meta">
-									<span>
-										<i class="far fa-clock"></i> 20 Jan, 2018</span>
-								</div>
-							</div>
-
-						</div>
-						<div class="blog-grids row mb-3 text-left">
-							<div class="col-md-5 blog-grid-left">
-								<a href="single.html">
-									<img src="images/5.jpg" class="card-img-top img-fluid" alt="">
-								</a>
-							</div>
-							<div class="col-md-7 blog-grid-right">
-
-								<h5>
-									<a href="single.html">Pellentesque dui, non felis. Maecenas male non felis </a>
-								</h5>
-								<div class="sub-meta">
-									<span>
-										<i class="far fa-clock"></i> 20 Jan, 2018</span>
-								</div>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="blog-grids row mb-3 text-left">
-							<div class="col-md-5 blog-grid-left">
-								<a href="single.html">
-									<img src="images/3.jpg" class="card-img-top img-fluid" alt="">
-								</a>
-							</div>
-							<div class="col-md-7 blog-grid-right">
-								<h5>
-									<a href="single.html">Pellentesque dui, non felis. Maecenas male non felis </a>
-								</h5>
-								<div class="sub-meta">
-									<span>
-										<i class="far fa-clock"></i> 20 Feb, 2018</span>
-								</div>
-							</div>
-
-						</div>
-					</div>
-				</div>
-				</aside>
-				<!--//right-->
+					<!--//left-->
 				</div>
 			</div>
+		</div>
 	</section>
 	<!--//main-->
 	<!-- js -->

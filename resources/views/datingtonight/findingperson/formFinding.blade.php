@@ -200,10 +200,10 @@
                                                    		for($i=140;$i<=220;$i++)
                                                    		{
                                                             if ($i==150) {
-                                                                echo '<option selected="selected" value="'.$i.'">'.$i.'</option>';
+                                                                echo '<option selected="selected" value="'.$i.'">'.$i.' cm</option>';
                                                             }
                                                             else 
-                                                   			    echo '<option value="'.$i.'">'.$i.'</option>';
+                                                   			    echo '<option value="'.$i.'">'.$i.' cm</option>';
                                                    		}
                                                    	?>
                                                 </select>
@@ -220,10 +220,10 @@
                                                    		for($i=140;$i<=220;$i++)
                                                    		{
                                                             if ($i==180) {
-                                                                echo '<option selected="selected" value="'.$i.'">'.$i.'</option>';
+                                                                echo '<option selected="selected" value="'.$i.'">'.$i.' cm</option>';
                                                             }
                                                             else
-                                                   			    echo '<option value="'.$i.'">'.$i.'</option>';
+                                                   			    echo '<option value="'.$i.'">'.$i.' cm</option>';
                                                    		}
                                                    	?>
                                                 </select>
@@ -245,10 +245,10 @@
                                                    		for($i=40;$i<=220;$i++)
                                                    		{
                                                             if ($i==50) {
-                                                                echo '<option selected="selected" value="'.$i.'">'.$i.'</option>';
+                                                                echo '<option selected="selected" value="'.$i.'">'.$i.' kg</option>';
                                                             }
                                                             else
-                                                   			    echo '<option value="'.$i.'">'.$i.'</option>';
+                                                   			    echo '<option value="'.$i.'">'.$i.' kg</option>';
                                                    		}
                                                    	?>
                                                 </select>
@@ -265,10 +265,10 @@
                                                    		for($i=40;$i<=220;$i++)
                                                    		{
                                                             if ($i==70) {
-                                                                echo '<option selected="selected" value="'.$i.'">'.$i.'</option>';
+                                                                echo '<option selected="selected" value="'.$i.'">'.$i.' kg</option>';
                                                             }
                                                             else
-                                                   			    echo '<option value="'.$i.'">'.$i.'</option>';
+                                                   			    echo '<option value="'.$i.'">'.$i.' kg</option>';
                                                    		}
                                                    	?>
                                                 </select>
