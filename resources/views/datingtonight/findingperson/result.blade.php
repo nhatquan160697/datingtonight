@@ -17,12 +17,12 @@
 	<!--/main-->
 <section class="main-content-w3layouts-agileits">
 		<div class="container">
-			<h3 class="tittle">Blog Posts</h3>
+			<h3 class="tittle">Result</h3>
 			<div class="inner-sec">
 				<!--left-->
 				<div class="left-blog-info-w3layouts-agileits text-left">
 					<div class="row">
-						@foreach($Users as $up)
+						@forelse($Users as $up)
 						<?php
                         	$url='/storage/app/files/avatar/'.$up->Avatar;
                         	$Gender;
@@ -237,7 +237,9 @@
 </div>
 
 						</div>
-						@endforeach
+                        @empty
+                            <h1>Nothing found</h1>
+						@endforelse
 						{{$Users->links()}}
 					</div>
 					<!--//left-->
