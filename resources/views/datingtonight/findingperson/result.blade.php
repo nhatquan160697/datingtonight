@@ -156,10 +156,9 @@
 							<a href="#exampleModal-{{$up->id}}" data-toggle="modal">
 								<img src="{{$url}}" class="card-img-top img-fluid" alt="This is an image">
 							</a>
-							<div class="card-body">
-								
+							<div class="card-body">			
 								<h5 class="card-title">
-									<a href="#">{{$up->Fullname}}</a>
+									<a href="#exampleModal-{{$up->id}}" data-toggle="modal">{{$up->Fullname}}</a>
 								</h5>
 								<ul class="blog-icons my-4">
 									<li>
@@ -187,6 +186,7 @@
         									<!-- button chat -->
         									<hr>
         									<button type="button" class="btn btn-primary">Chat</button>	
+                                            <button type="button" class="btn btn-danger">Report</button>
 
         									<!-- basic information -->
         									<hr>
