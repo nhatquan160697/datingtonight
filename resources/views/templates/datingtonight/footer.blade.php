@@ -1,20 +1,39 @@
-<!-- Chatbot -->
-<!-- Load Facebook SDK for JavaScript -->
+{{-- Comment --}}
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js#xfbml=1&version=v2.12&autoLogAppEvents=1';
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2&appId=350829552332404&autoLogAppEvents=1';
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
+{{-- Endcomment --}}
+{{-- Chatbot --}}
+<script>
+  (function () {
+    let appCode = 'f638f11dc7bf71ccaed44a82520fc0b9';
+    let ws_host = 'wss://bot.fpt.ai/ws/livechat'
+    let appCodeHash = window.location.hash.substr(1);
+    let objLiveChat = {
+        appCode: 'f638f11dc7bf71ccaed44a82520fc0b9',
+        appName: 'Auto'
+    };
+    if (appCodeHash.length == 32) {
+      objLiveChat.appCode = appCodeHash;
+    }
 
-<!-- Your customer chat code -->
-<div class="fb-customerchat"
-  attribution=setup_tool
-  page_id="1993434560750791"
-  theme_color="#fa3c4c">
-</div>
+    var baseUrl = 'https://static.fpt.ai/v3/src';
+    var r = document.createElement("script");
+    r.src = baseUrl + "/livechat.js";
+    var c = document.getElementsByTagName("body")[0];
+    c.appendChild(r);
+    r.onload = function () {
+      new FPTAI_LiveChat(objLiveChat, baseUrl, ws_host);
+    };
+
+  })()
+</script>
+{{-- Endchatbot --}}
 <!--footer-->
    <footer>
       <div class="container">
