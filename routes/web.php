@@ -21,6 +21,16 @@ Route::namespace('DatingTonight')->group(function(){
 		'as' => 'datingtonight.index.index'
 	]);
 
+	// Route::get('/messenger',[
+	// 	'uses' => 'ChattingController@index',
+	// 	'as' => 'datingtonight.chatting.index'
+	// ]);
+
+	Route::get('/',[
+		'uses' => 'IndexController@index',
+		'as' => 'datingtonight.index.index'
+	]);
+
 	Route::prefix('/dating-places')->group(function(){
 		// Controller dating places for user
 		Route::get('/',[
@@ -65,11 +75,6 @@ Route::namespace('DatingTonight')->group(function(){
 			'as' => 'datingtonight.findingperson.result'
 		]);
 	});
-
-	Route::get('/tin-tuc/{slug}-{id}',[
-		'uses' => 'NewsController@detail',
-		'as' => 'aboutme.news.detail'
-	]);
 });
 
 Route::namespace('Admin')->prefix('admin')->group(function(){
