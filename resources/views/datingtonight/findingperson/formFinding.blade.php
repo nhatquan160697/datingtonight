@@ -10,7 +10,7 @@
     <meta name="keywords" content="Colrolib Templates">
 
     <!-- Title Page-->
-    <title>Dating Tonight</title>
+    <title>FINDING PARTNER</title>
 
     <!-- Icons font CSS-->
     <link href="/templates/datingtonight/formFinding/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
@@ -29,6 +29,7 @@
 
 <body>
     <div class="page-wrapper bg-img-1 p-t-200 p-b-120">
+        <a href="{{ route('datingtonight.index.index') }}" title="Back"><img style="width:50px; height: 50px; margin:0px 0px 20px 100px; " src="/templates/datingtonight/formFinding/images/back.ico" alt="Back"></a>
         <div class="wrapper wrapper--w900">
             <div class="card card-4">
                 <div class="card-body">
@@ -489,7 +490,6 @@
             </div>
         </div>
     </div>
-
     <!-- Jquery JS-->
     <script src="/templates/datingtonight/formFinding/vendor/jquery/jquery.min.js"></script>
     <!-- Vendor JS-->

@@ -38,7 +38,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <body>
    <!--Header-->
-
    <header>
       <div class="top-bar_sub_w3layouts container-fluid">
          <div class="row">
