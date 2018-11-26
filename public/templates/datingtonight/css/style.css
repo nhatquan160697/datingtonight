@@ -112,7 +112,7 @@ ul {
 	padding: 8px 16px;
 	letter-spacing: 1px;
 	font-size: 13px;
-	background: #F400A0;
+	background: #F08690;
 	display: inline-block;
 	border: 2px solid transparent;
 	font-weight: bold;
@@ -145,7 +145,7 @@ a.sign {
     color: #707173;
 }
 .top-forms a i{
-	color:#F400A0;
+	color:#F08690;
 }
 .social_list1 li {
 	display: inline-block;
@@ -209,7 +209,7 @@ a.navbar-brand {
 	text-transform: uppercase;
 }
 .logo i {
-    color: #F400A0;
+    color: #F08690;
     text-shadow: none;
 }
 li.nav-item {
@@ -231,7 +231,7 @@ li.nav-item {
 .navbar-light .navbar-nav .nav-link.active,
 .navbar-light .navbar-nav .nav-link:hover,
 .navbar-light .navbar-nav .nav-link:focus {
-	background: #F400A0;
+	background: #F08690;
 	color: #fff;
 }
 .dropdown-item {
@@ -267,7 +267,7 @@ form.header-search {
 	padding: 9px 9px 10px 9px;
 	text-align: center;
 	text-decoration: none;
-	background: #F400A0;
+	background: #F08690;
 	-webkit-transition: 0.5s all;
 	-moz-transition: 0.5s all;
 	-o-transition: 0.5s all;
@@ -403,17 +403,17 @@ form.header-search {
 }
 
 .carousel-indicators .active {
-	background: #F400A0;
+	background:#F08690;
 }
 a.btn.btn-primary.read-m {
     border-radius: 0;
     padding: 0.55em 2em;
     letter-spacing: 1px;
-    background: #F400A0;
+    background: #F08690;
     border: none;
 }
 a.btn.btn-primary.read-m:hover,a.btn.btn-primary.read-m:focus{
-   background:#fff;
+   background:#EF4667;
    color:#222;
    box-shadow:none!important;
 }
@@ -462,7 +462,7 @@ h3.tittle.cen {
 .bt-bottom-info h5 {
 	font-size: 2em;
 	line-height: 1.5em;
-	color: #F400A0;
+	color: #F08690;
 	margin-bottom: 1em;
 }
 
@@ -582,7 +582,7 @@ section.bottom-slider {
 	}
 	.floods-text h3 span{
 		display: block;
-		color: #F400A0;
+		color: #F08690
 		margin: .5em 0 1em;
 		font-size: .8em;
 	}
@@ -592,7 +592,7 @@ section.bottom-slider {
 	}
 	.floods-text h3 i{
 		font-style:normal;
-		color:#F400A0;
+		color:#F08690;
 	}
 
 button.btn.btn-primary.play{
@@ -636,7 +636,7 @@ button.btn.btn-primary.play{
     color: #fff;
 }
 .blog-info-middle ul li a:hover{
-	color:#F400A0;
+	color:#F08690;
 	opacity:0.9;
 }
 .blog-info-middle {
@@ -693,7 +693,7 @@ ul.blog-icons a {
     color: #999;
 }
 ul.blog-icons i {
-    color: #F400A0;
+    color: #F08690;
 }
 .blog-girds-sec {
     border-top: 1px solid #ddd;
@@ -727,7 +727,7 @@ ul.blog-icons i {
     margin: 1em 0;
 }
 .tech-btm input[type="submit"] {
-    background: #F400A0;
+    background: #F08690;
     padding: .7em 1em;
     color: #fff;
     font-size: 15px;
@@ -810,7 +810,7 @@ ul.blog-icons i {
     display: block; 
 }
 .mid-text-info h4 {
-    color: #F400A0;
+    color: #F08690;
 	font-size: 1.1em; 
 }
 .mid-text-info p {
@@ -925,7 +925,7 @@ li.breadcrumb-item a {
 }
 
 .breadcrumb-item.active {
-	color: #F400A0;
+	color: #F08690;
 }
 .card {
     border:none;
@@ -950,7 +950,7 @@ li.breadcrumb-item a {
 }
 
 .a4 {
-	background: #F400A0;
+	background: #F08690;
 }
 
 .a2 {
@@ -1128,7 +1128,7 @@ footer {
 
 .subscribe-main button[type="submit"]:hover {
 	color: #fff;
-	background: #F400A0;
+	background: #F08690;
 }
 
 .instagram-posts {
@@ -1161,7 +1161,7 @@ a.facebook {
 }
 
 a.facebook:hover {
-	color: #F400A0;
+	color: #F08690;
 }
 
 .copyright {
