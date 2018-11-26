@@ -1,15 +1,15 @@
 /* Styles for dialog window */
 #small-dialog,#small-dialog1,#small-dialog2{
-	background:rgb(8, 189, 156);
+	background: rgb(240, 134, 144);
 	padding: 2em;
 	text-align: left;
 	max-width: 500px;
 	margin: 40px auto;
 	position: relative;
 	text-align:center;
- -webkit-box-shadow: 3px 17px 43px 6px rgba(0,0,0,0.75);
--moz-box-shadow: 3px 17px 43px 6px rgba(0,0,0,0.75);
-box-shadow: 3px 17px 43px 6px rgba(0,0,0,0.75);
+	-webkit-box-shadow: 3px 17px 43px 6px rgba(0,0,0,0.75);
+	-moz-box-shadow: 3px 17px 43px 6px rgba(0,0,0,0.75);
+	box-shadow: 3px 17px 43px 6px rgba(0,0,0,0.75);
 }
 #small-dialog-it,#small-dialog-in,#small-dialog-fr,#small-dialog-sh,#small-dialog-sf,#small-dialog-su,#small-dialog-me,#small-dialog-ch,#small-dialog-pi,#small-dialog-am {
 	background: #fff;
