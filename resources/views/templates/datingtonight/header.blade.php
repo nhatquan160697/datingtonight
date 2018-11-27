@@ -122,9 +122,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                            <a class="dropdown-item" href="#"></a>
-                           <a class="dropdown-item" href="blog1.html">Information</a>
+                           <a class="dropdown-item" href="{{ route('datingtonight.user.index' )}}">Information</a>
                            <div class="dropdown-divider"></div>
-                           <a class="dropdown-item" href="blog2.html">Settings</a>
+                           <a class="dropdown-item" href="{{ route('datingtonight.user.edit', ['id' => 1]) }}">Edit Information</a>
                            <div class="dropdown-divider"></div>
                            <a class="dropdown-item" href="{{ route('auth.user.logout') }}">Log Out</a>
                         </div>

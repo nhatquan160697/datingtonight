@@ -21,14 +21,14 @@ Route::namespace('DatingTonight')->group(function(){
 		'as' => 'datingtonight.index.index'
 	]);
 
-	// Route::get('/messenger',[
-	// 	'uses' => 'ChattingController@index',
-	// 	'as' => 'datingtonight.chatting.index'
-	// ]);
+	Route::get('/account',[
+		'uses' => 'UserController@index',
+		'as' => 'datingtonight.user.index'
+	]);
 
-	Route::get('/',[
-		'uses' => 'IndexController@index',
-		'as' => 'datingtonight.index.index'
+	Route::get('/edit-{id}',[
+		'uses' => 'UserController@edit',
+		'as' => 'datingtonight.user.edit'
 	]);
 
 	Route::prefix('/dating-places')->group(function(){
