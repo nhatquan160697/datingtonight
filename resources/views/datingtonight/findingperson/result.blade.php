@@ -43,6 +43,7 @@
                         	$Religion;
                         	$Smoking;
                         	$Body;
+                            $id=$up->id;
                         	foreach ($gender as $gd) 
                         	{
                         		if ($gd->id==$up->Gender) {
@@ -185,7 +186,7 @@
         									<img src="{{$url}}" class="card-img-top img-fluid" alt="This is an image">
         									<!-- button chat -->
         									<hr>
-        									<button type="button" class="btn btn-primary">Chat</button>	
+                                            <a href="{{route('datingtonight.chat.index',$id)}}" class="btn btn-primary" role="button">Chat</a>	
                                             <button type="button" class="btn btn-danger">Report</button>
 
         									<!-- basic information -->

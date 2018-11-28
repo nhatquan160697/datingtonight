@@ -34,8 +34,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
    <link href="//fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800"
        rel="stylesheet">
    <link rel="stylesheet" href="/templates/datingtonight/formDatingPlaces/css/style.css">
+   <link rel="stylesheet" type="text/css" href="/templates/datingtonight/chat/style.css">
    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
-   <link rel="stylesheet" href="/templates/datingtonight/formMessenger/css/style.css">
 </head>
 
 <body>
