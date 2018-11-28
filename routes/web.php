@@ -15,12 +15,22 @@ Route::pattern('id','[0-9]*');
 Route::pattern('cid','[0-9]*');
 Route::pattern('cslug','(.*)');
 Route::pattern('slug','(.*)');
+
 Route::namespace('DatingTonight')->group(function(){
 	Route::get('/',[
 		'uses' => 'IndexController@index',
 		'as' => 'datingtonight.index.index'
 	]);
 
+
+ 	Route::get('/chat-{id}',[
+ 		'uses'=>'ChatController@index',
+ 		'as'=>'datingtonight.chat.index'
+ 	]);
+ 	Route::post('/chat-{id}',[
+ 		'uses'=>'ChatController@sendMessage',
+ 		'as'=>'datingtonight.chat.send'
+ 	]);
 	Route::prefix('/dating-places')->group(function(){
 		// Controller dating places for user
 		Route::get('/',[
