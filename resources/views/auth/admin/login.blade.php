@@ -41,7 +41,7 @@
 <!-- Body -->
 
 <body>
-    <h1 class="title-agile text-center">Dating Tonight Sign in form</h1>
+    <h1 class="title-agile text-center"> Dating Tonight Admin Login</h1>
     <div class="content-w3ls">
         <div class="content-bottom">
 			<h2>Sign In Here</h2>

@@ -235,14 +235,14 @@ body a:hover {
 /*/////////////// GLOBAL STYLES ////////////////////*/
 
 body {
-    background: url(/templates/admin/login-form/images/b1.jpg) no-repeat center;
+    background: url(/templates/admin/login-form/images/b3.jpg) no-repeat center;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     -ms-background-size: cover;
     background-attachment: fixed;
-	font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .text-center {
@@ -415,12 +415,12 @@ form .field-group .wthree-field {
 }
 
 .wthree-field input[type="submit"] {
-    background: #03A9F4;
+    background: #F08690;
     border: none;
     color: #fff;
     padding: 12px 15px;
     text-transform: uppercase;
-	font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 15px;
     font-weight: 600;
     letter-spacing: 2px;
@@ -435,20 +435,20 @@ form .field-group .wthree-field {
 }
 
 .wthree-field input[type="submit"]:hover {
-    background: #222;
-    color: #fff;
+    background: #EF4667;
+    color: #222;
 }
 
 .wthree-field input {
     padding: 15px 15px 15px 0px;
     font-size: 16px;
-	color:#333;
+    color:#333;
     letter-spacing: 1px;
     border: none;
     border-width: 1px 1px 1px 1px;
     background: #fff;
     box-sizing: border-box;
-	font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     width: 100%;
     outline: none;
     border-top-right-radius: 30px;
@@ -490,7 +490,7 @@ li:nth-child(2) a {
     right: 0;
     bottom: 0;
     width: 25%;
-    background-color: #252525;
+    background-color:#F08690;
     -webkit-transition: .4s;
     transition: .4s;
 }
@@ -508,7 +508,7 @@ li:nth-child(2) a {
 }
 
 input:checked+.slider {
-    background-color: #03A9F4;
+    background-color: #EF4667;
 }
 
 input:focus+.slider {
@@ -550,9 +550,9 @@ input:checked+.slider:before {
     }
 }
 @media screen and (max-width: 1024px) {
-	h1.title-agile {
-		font-size: 3em;
-	}
+    h1.title-agile {
+        font-size: 3em;
+    }
 }
 @media screen and (max-width: 768px) {
     h1.title-agile {

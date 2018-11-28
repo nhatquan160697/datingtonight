@@ -21,61 +21,61 @@ a{text-decoration:none;}
 .clear{clear:both;}/* clear float */
 .pos-relative{position:relative;}/* Position Relative */
 .pos-absolute{position:absolute;}/* Position Absolute */
-.vertical-base{	vertical-align:baseline;}/* vertical align baseline */
-.vertical-top{	vertical-align:top;}/* vertical align top */
-nav.vertical ul li{	display:block;}/* vertical menu */
-nav.horizontal ul li{	display: inline-block;}/* horizontal menu */
+.vertical-base{ vertical-align:baseline;}/* vertical align baseline */
+.vertical-top{  vertical-align:top;}/* vertical align top */
+nav.vertical ul li{ display:block;}/* vertical menu */
+nav.horizontal ul li{   display: inline-block;}/* horizontal menu */
 img{max-width:100%;}
 /*end reset*/
 html,body{
-	padding:0;
-	margin:0;
-	background:#fff;
+    padding:0;
+    margin:0;
+    background:#fff;
 font-family: 'Cuprum', sans-serif;
  }
 body a{
     transition:0.5s all;
-	-webkit-transition:0.5s all;
-	-moz-transition:0.5s all;
-	-o-transition:0.5s all;
-	-ms-transition:0.5s all;
-	text-decoration:none;
+    -webkit-transition:0.5s all;
+    -moz-transition:0.5s all;
+    -o-transition:0.5s all;
+    -ms-transition:0.5s all;
+    text-decoration:none;
 }
 body a:hover {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 body a:focus, a:hover {
-	text-decoration: none;
+    text-decoration: none;
 }
 select,input[type="email"],input[type="text"],input[type=password],
 input[type="button"],input[type="submit"],textarea{
 font-family: 'Cuprum', sans-serif;
-	transition:0.5s all;
-	-webkit-transition:0.5s all;
-	-moz-transition:0.5s all;
-	-o-transition:0.5s all;
-	-ms-transition:0.5s all;
-	letter-spacing: 1px;
-	
+    transition:0.5s all;
+    -webkit-transition:0.5s all;
+    -moz-transition:0.5s all;
+    -o-transition:0.5s all;
+    -ms-transition:0.5s all;
+    letter-spacing: 1px;
+    
 }
 h1,h2,h3,h4,h5,h6{
-	margin:0;	
-	padding:0;
+    margin:0;   
+    padding:0;
 font-family: 'Cuprum', sans-serif;
-	letter-spacing:1px;
-}	
+    letter-spacing:1px;
+}   
 p{
-	margin:0;
-	padding:0;
-	letter-spacing:1px;
+    margin:0;
+    padding:0;
+    letter-spacing:1px;
 font-family: 'Cuprum', sans-serif;
 letter-spacing: 1px;
 }
 ul{
-	margin:0;
-	padding:0;
-	letter-spacing: 1px;
+    margin:0;
+    padding:0;
+    letter-spacing: 1px;
 }
 /*-- //Reset-Code --*/
 
@@ -100,9 +100,9 @@ h1.header-w3ls {
 }
 .icon-stu {
     width: 38%;
-	border:3px solid rgba(239, 239, 239, 0.28);
+    border:3px solid rgba(239, 239, 239, 0.28);
     margin:4em auto;
-	 padding:53px 46px 60px;
+     padding:53px 46px 60px;
  background:rgba(0, 0, 0, 0.4);
  box-sizing: border-box;
  -webkit-box-shadow: 3px 17px 43px 6px rgba(0,0,0,0.75);
@@ -114,22 +114,22 @@ h2.student-w3l{
    font-size: 37px;
     color: #dedede;
     letter-spacing: 2px;
-	font-family: 'Pacifico', cursive;
-	text-align: center;}
-.stude-user-wls	{text-align: center;}
+    font-family: 'Pacifico', cursive;
+    text-align: center;}
+.stude-user-wls {text-align: center;}
 .row-col{    text-align: center;}
 .stude-user-wls span{
-	text-align: center;
-	font-size: 77px;
-	margin:20px 0px 25px;
+    text-align: center;
+    font-size: 77px;
+    margin:20px 0px 25px;
     color: #e6e6e6;}
-	.banner-its-btm{margin-top: 32px;}
+    .banner-its-btm{margin-top: 32px;}
 .w3layouts_more-buttn a {
     font-size: 14px;
 }
 .w3layouts_more-buttn a ,.outs_more-buttn a{
-	width:72%;
-	text-align:center;
+    width:72%;
+    text-align:center;
     padding: 14px 0px;
     font-size: 19px;
     color: #fff;
@@ -137,22 +137,24 @@ h2.student-w3l{
     text-transform: uppercase;
     display: inline-block;
     letter-spacing: 2px;
-    background:rgb(8, 159, 189);
+    background:#6B7779;
     outline: none;
     border: 2px solid rgba(255, 255, 255, 0.32);
-	  box-sizing: border-box;
+      box-sizing: border-box;
 }
-.w3layouts_more-buttn a:hover ,.outs_more-buttn a:hover{color: #fff;
-background: rgba(255, 255, 255, 0);}
+.w3layouts_more-buttn a:hover ,.outs_more-buttn a:hover{
+   color: #fff;
+background: rgb(240, 134, 144);
+}
 .newsletter {
     text-align: center;
-	  box-sizing: border-box;
+      box-sizing: border-box;
 }
 .newsletter h2 ,.student-reg-w3 h3{
     font-size: 48px;
     color: #fff;
     letter-spacing: 2px;
-	padding-bottom: 21px;
+    padding-bottom: 21px;
 }
 .form-left-w3l input[type="text"],.form-right-w3ls input[type="password"],.form-left-w3l input[type="email"]
 {
@@ -162,8 +164,8 @@ background: rgba(255, 255, 255, 0);}
     font-size: 15px;
     padding: .8em 1em;
     border:1px solid #fff;
-	letter-spacing: 2px;
-	margin: 0px 0px 16px;
+    letter-spacing: 2px;
+    margin: 0px 0px 16px;
     -webkit-appearance: none;
     display: inline-block;
     background:none;
@@ -172,7 +174,7 @@ background: rgba(255, 255, 255, 0);}
     -moz-transition: all 0.5s ease-in-out;
     -o-transition: all 0.5s ease-in-out;
     -ms-transition: all 0.5s ease-in-out;
-	  box-sizing: border-box;
+      box-sizing: border-box;
 
 }
 .main {
@@ -194,17 +196,17 @@ background: rgba(255, 255, 255, 0);}
     font-size: 15px;
     padding: .8em 1em;
     border: 1px solid #fff;
-	margin: 0px 0px 16px;
+    margin: 0px 0px 16px;
     -webkit-appearance: none;
     display: inline-block;
     background:none;
-	letter-spacing: 2px;
+    letter-spacing: 2px;
     transition: all 0.5s ease-in-out;
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
     -o-transition: all 0.5s ease-in-out;
     -ms-transition: all 0.5s ease-in-out;
-	  box-sizing: border-box;
+      box-sizing: border-box;
 
 }
 .add input[type="text"]{width:100%}
@@ -222,15 +224,15 @@ background: rgba(255, 255, 255, 0);}
     font-size: 15px;
     padding:0.8em 1em;
     width: 100%;
-	height:43px;
+    height:43px;
     margin: 0px 0px 16px;
-	border-radius:0;
+    border-radius:0;
     background:none;
     color: #fff;
-	letter-spacing:2px;
+    letter-spacing:2px;
     border:1px solid #fff;
-	box-sizing: border-box;
-	transition: all 0.5s ease-in-out;
+    box-sizing: border-box;
+    transition: all 0.5s ease-in-out;
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
     -o-transition: all 0.5s ease-in-out;
@@ -240,8 +242,8 @@ option{background:#000;}
 textarea{
     height: 134px;
     padding: 1em;
-	overflow: hidden;
-	resize:none;
+    overflow: hidden;
+    resize:none;
 }
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
      color: #fff;
@@ -256,29 +258,29 @@ textarea{
     color: #fff;
 }
 button[type=submit]{
-	 width:34%;
-	 background:#000;
-	 outline:none;
-	 color:#fff;
-	 margin:18px 0px 0px;
-	 font-size:18px;
-	 font-weight:400;
+     width:34%;
+     background: #fff;
+     outline:none;
+     color: #000;
+     margin:18px 0px 0px;
+     font-size:18px;
+     font-weight:400;
      border: 1px solid #fff;
      padding:11px 11px;
-	 letter-spacing:1px;
-	 text-transform:uppercase;
-	 cursor:pointer;
-	 transition: 0.5s all;
-	-webkit-transition: 0.5s all;
-	-o-transition: 0.5s all;
-	-moz-transition: 0.5s all;
-	-ms-transition: 0.5s all;
+     letter-spacing:1px;
+     text-transform:uppercase;
+     cursor:pointer;
+     transition: 0.5s all;
+     -webkit-transition: 0.5s all;
+     -o-transition: 0.5s all;
+     -moz-transition: 0.5s all;
+     -ms-transition: 0.5s all;
 }
-button:hover{color:#000;
-     background:#fff;
-	
-            }
-			.copy {
+button:hover{
+    color:#fff;
+    background:#EF4667;
+}
+.copy {
     padding-bottom: 30px;
 }
 .copy p {
@@ -298,10 +300,10 @@ button:hover{color:#000;
 
 /*--responsive--*/
 @media(max-width:1920px){
-	h1.header-w3ls {
+    h1.header-w3ls {
     font-size: 63px;
     padding-top: 2em;
-	letter-spacing: 12px;
+    letter-spacing: 12px;
 }
 .copy p {
     font-size: 18px;
@@ -313,7 +315,7 @@ button:hover{color:#000;
 }
 h2.student-w3l {
     font-size: 45px;
-	letter-spacing:3px;
+    letter-spacing:3px;
 }
 .stude-user-wls span {
     font-size: 90px;
@@ -321,7 +323,7 @@ h2.student-w3l {
 }
 }
 @media(max-width:1680px){
-	h1.header-w3ls {
+    h1.header-w3ls {
     font-size: 57px;
     padding-top: 1.5em;
     letter-spacing: 10px;
@@ -341,10 +343,10 @@ h2.student-w3l {
 }
 }
 @media(max-width:1600px){
-		h1.header-w3ls {
+        h1.header-w3ls {
     font-size: 57px;
-	padding-top: 1.2em;
-	 letter-spacing: 8px;
+    padding-top: 1.2em;
+     letter-spacing: 8px;
 }
 .icon-stu {
     width: 38%;
@@ -363,44 +365,44 @@ h2.student-w3l {
 }
 }
 @media(max-width:1440px){
-	.icon-stu {
+    .icon-stu {
     padding: 53px 43px 60px;
-	}
+    }
 }
 @media(max-width:1366px){
-	.icon-stu {
+    .icon-stu {
     width: 42%;
-	    margin: 3.5em auto;
-	}
-	h1.header-w3ls {
+        margin: 3.5em auto;
+    }
+    h1.header-w3ls {
     font-size: 55px;
     padding-top: 1em;
-	}
+    }
 }
 @media(max-width:1280px){
-	.icon-stu {
+    .icon-stu {
     width: 43%;
-	}
-	.w3layouts_more-buttn a, .outs_more-buttn a {
+    }
+    .w3layouts_more-buttn a, .outs_more-buttn a {
     padding: 11px 0px;
     font-size: 18px;
-	}
+    }
 }
 @media(max-width:1080px){
-	.icon-stu {
+    .icon-stu {
     width: 52%;
 }
 }
 @media(max-width:1050px){
 .icon-stu {
     width: 55%;
-}	
+}   
 }
 @media(max-width:1024px){
-	h1.header-w3ls {
+    h1.header-w3ls {
     font-size: 53px;
-	}
-	.icon-stu {
+    }
+    .icon-stu {
     padding: 42px 43px 53px;
 }
 .icon-stu {
@@ -414,9 +416,9 @@ h2.student-w3l {
 }
 }
 @media(max-width:991px){
-	.icon-stu {
+    .icon-stu {
     width: 58%;
-	  padding: 28px 43px 53px;
+      padding: 28px 43px 53px;
 }
 h1.header-w3ls {
     font-size: 50px;
@@ -433,7 +435,7 @@ h1.header-w3ls {
 }
 }
 @media(max-width:900px){
-	.icon-stu {
+    .icon-stu {
     width: 63%;
 }
 }
@@ -444,26 +446,26 @@ h1.header-w3ls {
 h1.header-w3ls {
     font-size: 49px;
     letter-spacing: 5px;
-}	
+}   
 }
 @media(max-width:768px){
 h1.header-w3ls {
     font-size: 53px;
     letter-spacing: 5px;
-	    padding-top: 1.5em;
+        padding-top: 1.5em;
 }
 .icon-stu {
     width: 85%;
-	margin: 3em auto 4em;
-	    padding: 38px 43px 63px;
+    margin: 3em auto 4em;
+        padding: 38px 43px 63px;
 }
 h2.student-w3l {
     font-size: 42px;
-	letter-spacing: 4px;
-}	
+    letter-spacing: 4px;
+}   
 .stude-user-wls span {
     font-size: 83px;
-	margin: 22px 0px 27px;
+    margin: 22px 0px 27px;
 }
 .w3layouts_more-buttn a, .outs_more-buttn a {
     padding: 11px 0px;
@@ -479,7 +481,7 @@ h1.header-w3ls {
 h2.student-w3l {
     font-size: 39px;
     letter-spacing: 3px;
-}	
+}   
 .stude-user-wls span {
     font-size: 75px;
     margin: 16px 0px 20px;
@@ -494,7 +496,7 @@ h2.student-w3l {
 }
 }
 @media(max-width:736px){
-	.icon-stu {
+    .icon-stu {
     width: 82%;
     margin: 2em auto;
     padding: 31px 39px 51px;
@@ -512,14 +514,14 @@ h1.header-w3ls {
 h2.student-w3l {
     font-size: 36px;
     letter-spacing: 2px;
-}	
+}   
 .newsletter h2, .student-reg-w3 h3 {
     font-size: 43px;
     padding-bottom: 14px;
 }
 .form-left-w3l input[type="text"], .form-right-w3ls input[type="password"], .form-left-w3l input[type="email"] {
     width: 100%;
-	    padding: .6em .7em;
+        padding: .6em .7em;
 }
 button[type=submit] {
 font-size: 17px;
@@ -533,18 +535,18 @@ width: 39%;}
 .form-control-w3l textarea,
 .form-add-to-w3ls input[type="text"],select.form-control {
     font-size: 14px;
-	letter-spacing: 1px;
+    letter-spacing: 1px;
     padding: .6em .5em;
 }
 select.form-control {
-	    height: 35px;
+        height: 35px;
 }
 textarea {
     height: 117px;
 }
 }
 @media(max-width:640px){
-	.icon-stu {
+    .icon-stu {
     width: 85%;
     margin: 2.5em auto;
     padding: 23px 41px 46px;
@@ -562,19 +564,19 @@ h1.header-w3ls {
 }
 .w3layouts_more-buttn a, .outs_more-buttn a {
     width: 80%;
-	    padding: 10px 0px;
-}	
+        padding: 10px 0px;
+}   
 .copy p {
     letter-spacing: 1.5px;
     padding: 0px 20px;
-	line-height:27px;
+    line-height:27px;
 }
 .copy {
     padding-bottom: 20px;
 }
 }
 @media(max-width:568px){
-	.icon-stu {
+    .icon-stu {
     width: 90%;
     margin: 2em auto;
     padding: 19px 23px 39px;
@@ -595,12 +597,12 @@ h1.header-w3ls {
 }
 }
 @media(max-width:480px){
-	h1.header-w3ls {
+    h1.header-w3ls {
     font-size: 42px;
-	line-height: 51px;
+    line-height: 51px;
     padding-top: .9em;
-	}
-	.icon-stu {
+    }
+    .icon-stu {
     width: 92%;
     margin: 2em auto;
     padding: 15px 23px 35px;
@@ -621,10 +623,10 @@ h2.student-w3l {
 .icon-stu {
     width: 92%;
     padding: 15px 15px 35px;
-}	
+}   
 }
 @media(max-width:414px){
-	.newsletter h2, .student-reg-w3 h3 {
+    .newsletter h2, .student-reg-w3 h3 {
     font-size: 37px;
 }
 button[type=submit] {
@@ -634,14 +636,14 @@ textarea {
     height: 103px;
 }
 .main{-webkit-flex-direction: column;
-	flex-direction:column;}
+    flex-direction:column;}
 }
 @media(max-width:384px){
 h1.header-w3ls {
     font-size: 36px;
 }
 .icon-stu {
-    margin: 1.5em auto;	
+    margin: 1.5em auto; 
 }
 .w3layouts_more-buttn a, .outs_more-buttn a {
     width: 86%;
@@ -657,14 +659,14 @@ h1.header-w3ls {
 
 }
 @media(max-width:375px){
-	.w3layouts_more-buttn a, .outs_more-buttn a {
+    .w3layouts_more-buttn a, .outs_more-buttn a {
     width: 90%;
-	}
+    }
 }
 @media(max-width:320px){
-	h1.header-w3ls {
+    h1.header-w3ls {
     font-size: 39px;
-	    letter-spacing: 2px;
+        letter-spacing: 2px;
 }
 .icon-stu {
     margin: 1em auto;

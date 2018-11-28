@@ -14,6 +14,7 @@
    <meta charset="utf-8">
    <meta name="keywords" content="Weblog a Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+   <meta property="350829552332404" content="100001348658954" />
 
    <script>
       addEventListener("load", function () {
@@ -34,11 +35,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
        rel="stylesheet">
    <link rel="stylesheet" href="/templates/datingtonight/formDatingPlaces/css/style.css">
    <link rel="stylesheet" type="text/css" href="/templates/datingtonight/chat/style.css">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
    <!--Header-->
-
    <header>
       <div class="top-bar_sub_w3layouts container-fluid">
          <div class="row">
@@ -121,9 +122,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                            <a class="dropdown-item" href="#"></a>
-                           <a class="dropdown-item" href="blog1.html">Information</a>
+                           <a class="dropdown-item" href="{{ route('datingtonight.user.index' )}}">Information</a>
                            <div class="dropdown-divider"></div>
-                           <a class="dropdown-item" href="blog2.html">Settings</a>
+                           <a class="dropdown-item" href="{{ route('datingtonight.user.edit', ['id' => 1]) }}">Edit Information</a>
                            <div class="dropdown-divider"></div>
                            <a class="dropdown-item" href="{{ route('auth.user.logout') }}">Log Out</a>
                         </div>
