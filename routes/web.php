@@ -22,8 +22,6 @@ Route::namespace('DatingTonight')->group(function(){
 		'as' => 'datingtonight.index.index'
 	]);
 
-
-
  	Route::get('/chat-{id}',[
  		'uses'=>'ChatController@index',
  		'as'=>'datingtonight.chat.index'
@@ -38,8 +36,13 @@ Route::namespace('DatingTonight')->group(function(){
 		'as' => 'datingtonight.user.index'
 	]);
 
-	Route::get('/edit-{id}',[
-		'uses' => 'UserController@edit',
+	Route::get('/account-edit',[
+		'uses' => 'UserController@getEdit',
+		'as' => 'datingtonight.user.edit'
+	]);
+
+	Route::post('/account-edit',[
+		'uses' => 'UserController@postEdit',
 		'as' => 'datingtonight.user.edit'
 	]);
 

@@ -34,8 +34,26 @@ class Users extends Model
 
     public function getInfoUser($id){
         return DB::table('users')
-            ->select('users.id','users.username','users.password','users.Fullname','users.Avatar','users.email','users.Birthdate','users.phone_number','users.Facebook','gender.gender','city.city','hair_color.color as hairColor','hair_length.length','hair_style.style','eye_color.color as eyeColor','height','weight','body.body','drinking.drink','smoking.smoke','job_status.status','house_type.type','live_with.livewith','have_children.children','national.national','educational_level.level','language.language','religion.religion'
-                ,'constellation.constellation')
+            ->select('users.id','users.username','users.password','users.Fullname','users.Avatar','users.email','users.Birthdate','users.phone_number','users.Facebook',
+                'gender.id as idGender','gender.gender',
+                'city.id as idCity','city.city',
+                'hair_color.id as idHairColor','hair_color.color as hairColor',
+                'hair_length.id as idHairLength','hair_length.length',
+                'hair_style.id as idHairStyle','hair_style.style',
+                'eye_color.id as idEyeColor','eye_color.color as eyeColor',
+                'height','weight',
+                'body.id as idBody','body.body',
+                'drinking.id as idDrinking','drinking.drink',
+                'smoking.id as idSmoking','smoking.smoke',
+                'job_status.id as idJobStatus','job_status.status',
+                'house_type.id as idHomeType','house_type.type',
+                'live_with.id as idLivewith','live_with.livewith',
+                'have_children.id as idHaveChild','have_children.children',
+                'national.id as idNational','national.national',
+                'educational_level.id as idEducation','educational_level.level',
+                'language.id as idLanguage','language.language',
+                'religion.id as idReligion','religion.religion',
+                'constellation.id as idConstellation','constellation.constellation')
             ->join('gender','users.Gender','=','gender.id')
             ->join('city','users.City','=','city.id')
             ->join('hair_color','users.Hair_color','=','hair_color.id')
@@ -56,6 +74,7 @@ class Users extends Model
             ->join('constellation','users.Constellation','=','constellation.id')
             ->where('users.id','=',$id)->first();
     }
+
     public function checkUserExist($username){
         $checkUserNameExist = DB::table('users')->where('username', '=', $username)->count();
         if($checkUserNameExist >= 1){
