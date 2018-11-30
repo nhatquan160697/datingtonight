@@ -9,6 +9,12 @@ class smoking extends Model
     //
     protected $table="smoking";
     public $timestamps = false;
+    protected $primaryKey = "id";
+
+    public function getItems(){
+    	return $this->all();
+    }
+
     public function users_properties()
     {
     	return $this->hasMany('App\user_properties','Smoking','id');
