@@ -148,42 +148,78 @@
 		<div class="container-sub-one">
 		    <label class="csslb">Hair Color</label>
 		    <select id="hair-color" name="txtHairColor">
-		    	<option value="{{ $getInfoUser->idHairColor }}" selected>{{ $getInfoUser->hairColor }}</option>
-				@foreach($getHairColor as $iHC)
-					@if($iHC->id != $getInfoUser->idHairColor) continue;
-			    		<option value="{{ $iHC->id }}">{{ $iHC->color }}</option>
-			    	@endif
-		    	@endforeach
+		    	@if($getInfoUser->idHairColor == 0)
+					<option value="{{ $getInfoUser->idHairColor }}" selected>{{ $getInfoUser->hairColor }}</option>
+					@foreach($getHairColor as $iHC)
+						@if($iHC->id != $getInfoUser->idHairColor) continue;
+				    		<option value="{{ $iHC->id }}">{{ $iHC->color }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+		    		<option value="{{ $getInfoUser->idHairColor }}" selected>{{ $getInfoUser->hairColor }}</option>
+					@foreach($getHairColor as $iHC)
+						@if($iHC->id != $getInfoUser->idHairColor && $iHC->id != 0 ) continue;
+				    		<option value="{{ $iHC->id }}">{{ $iHC->color }}</option>
+				    	@endif
+			    	@endforeach
+		    	@endif
 		    </select>
 
 		    <label class="csslb">Hair length</label>
 		    <select id="hair-length" name="txtHairLength">
-		    	<option value="{{ $getInfoUser->idHairLength }}" selected>{{ $getInfoUser->length }}</option>
-				@foreach($getHairLength as $iHL)
-					@if($iHL->id != $getInfoUser->idHairLength) continue;
-			    		<option value="{{ $iHL->id }}">{{ $iHL->length }}</option>
-			    	@endif
-		    	@endforeach
+		    	@if($getInfoUser->idHairLength == 0)
+					<option value="{{ $getInfoUser->idHairLength }}" selected>{{ $getInfoUser->length }}</option>
+					@foreach($getHairLength as $iHL)
+						@if($iHL->id != $getInfoUser->idHairLength) continue;
+				    		<option value="{{ $iHL->id }}">{{ $iHL->length }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idHairLength }}" selected>{{ $getInfoUser->length }}</option>
+					@foreach($getHairLength as $iHL)
+						@if($iHL->id != $getInfoUser->idHairLength && $iHL->id != 0) continue;
+				    		<option value="{{ $iHL->id }}">{{ $iHL->length }}</option>
+				    	@endif
+			    	@endforeach
+			    @endif
 		    </select>
 
 		    <label class="csslb">Hair style</label>
 		    <select id="hair-style" name="txtHairStyle">
-		    	<option value="{{ $getInfoUser->idHairStyle }}" selected>{{ $getInfoUser->style }}</option>
-				@foreach($getHairStyle as $iHS)
-					@if($iHS->id != $getInfoUser->idHairStyle) continue;
-			    		<option value="{{ $iHS->id }}">{{ $iHS->style }}</option>
-			    	@endif
-		    	@endforeach
+		    	@if($getInfoUser->idHairStyle == 0)
+					<option value="{{ $getInfoUser->idHairStyle }}" selected>{{ $getInfoUser->style }}</option>
+					@foreach($getHairStyle as $iHS)
+						@if($iHS->id != $getInfoUser->idHairStyle) continue;
+				    		<option value="{{ $iHS->id }}">{{ $iHS->style }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idHairStyle }}" selected>{{ $getInfoUser->style }}</option>
+					@foreach($getHairStyle as $iHS)
+						@if($iHS->id != $getInfoUser->idHairStyle && $iHS->id != 0) continue;
+				    		<option value="{{ $iHS->id }}">{{ $iHS->style }}</option>
+				    	@endif
+			    	@endforeach
+		    	@endif
 		    </select>
 
 		    <label class="csslb">Eye color</label>
 		   	<select id="eye-color" name="txtEyeColor">
-		    	<option value="{{ $getInfoUser->idEyeColor }}" selected>{{ $getInfoUser->eyeColor }}</option>
-				@foreach($getEyeColor as $iEC)
-					@if($iEC->id != $getInfoUser->idEyeColor) continue;
-			    		<option value="{{ $iEC->id }}">{{ $iEC->color }}</option>
-			    	@endif
-		    	@endforeach
+		    	@if($getInfoUser->idEyeColor == 0)
+					<option value="{{ $getInfoUser->idEyeColor }}" selected>{{ $getInfoUser->eyeColor }}</option>
+					@foreach($getEyeColor as $iEC)
+						@if($iEC->id != $getInfoUser->idEyeColor) continue;
+				    		<option value="{{ $iEC->id }}">{{ $iEC->color }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idEyeColor }}" selected>{{ $getInfoUser->eyeColor }}</option>
+					@foreach($getEyeColor as $iEC)
+						@if($iEC->id != $getInfoUser->idEyeColor && $iEC->id != 0) continue;
+				    		<option value="{{ $iEC->id }}">{{ $iEC->color }}</option>
+				    	@endif
+			    	@endforeach
+		    	@endif
 		    </select>
 
 		   	<label class="csslb">Height</label>
@@ -194,12 +230,21 @@
 
 		   	<label class="csslb">Body</label>
 			<select name="txtBody">
-		    	<option value="{{ $getInfoUser->idBody }}" selected>{{ $getInfoUser->body }}</option>
-				@foreach($getBody as $iBD)
-					@if($iBD->id != $getInfoUser->idBody) continue;
-			    		<option value="{{ $iBD->id }}">{{ $iBD->body }}</option>
-			    	@endif
-		    	@endforeach
+				@if($getInfoUser->idBody == 0)
+					<option value="{{ $getInfoUser->idBody }}" selected>{{ $getInfoUser->body }}</option>
+					@foreach($getBody as $iBD)
+						@if($iBD->id != $getInfoUser->idBody) continue;
+				    		<option value="{{ $iBD->id }}">{{ $iBD->body }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idBody }}" selected>{{ $getInfoUser->body }}</option>
+					@foreach($getBody as $iBD)
+						@if($iBD->id != $getInfoUser->idBody && $iBD->id != 0) continue;
+				    		<option value="{{ $iBD->id }}">{{ $iBD->body }}</option>
+				    	@endif
+			    	@endforeach
+		    	@endif
 		    </select>
 	    </div>
 	    <a href="javascript:void(0)" >
@@ -210,112 +255,211 @@
 		<div class="container-sub-two">
 		    <label class="csslb">Drinking</label>
 		    <select id="drinking" name="txtDrinking">
-		    	<option value="{{ $getInfoUser->idDrinking }}" selected>{{ $getInfoUser->drink }}</option>
-				@foreach($getDrinking as $iDK)
-					@if($iDK->id != $getInfoUser->idDrinking) continue;
-			    		<option value="{{ $iDK->id }}">{{ $iDK->drink }}</option>
-			    	@endif
-		    	@endforeach
+		    	@if($getInfoUser->idDrinking == 0)
+					<option value="{{ $getInfoUser->idDrinking }}" selected>{{ $getInfoUser->drink }}</option>
+					@foreach($getDrinking as $iDK)
+						@if($iDK->id != $getInfoUser->idDrinking) continue;
+				    		<option value="{{ $iDK->id }}">{{ $iDK->drink }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idDrinking }}" selected>{{ $getInfoUser->drink }}</option>
+					@foreach($getDrinking as $iDK)
+						@if($iDK->id != $getInfoUser->idDrinking && $iDK->id != 0) continue;
+				    		<option value="{{ $iDK->id }}">{{ $iDK->drink }}</option>
+				    	@endif
+			    	@endforeach
+		    	@endif
 		    </select>
 
 		    <label class="csslb">Smoking</label>
 		    <select id="smoking" name="txtSmoking">
-		    	<option value="{{ $getInfoUser->idSmoking }}" selected>{{ $getInfoUser->smoke }}</option>
-				@foreach($getSmoking as $iSK)
-					@if($iSK->id != $getInfoUser->idSmoking) continue;
-			    		<option value="{{ $iSK->id }}">{{ $iSK->smoke }}</option>
-			    	@endif
-		    	@endforeach
+		    	@if($getInfoUser->idSmoking == 0)
+					<option value="{{ $getInfoUser->idSmoking }}" selected>{{ $getInfoUser->smoke }}</option>
+					@foreach($getSmoking as $iSK)
+						@if($iSK->id != $getInfoUser->idSmoking) continue;
+				    		<option value="{{ $iSK->id }}">{{ $iSK->smoke }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idSmoking }}" selected>{{ $getInfoUser->smoke }}</option>
+					@foreach($getSmoking as $iSK)
+						@if($iSK->id != $getInfoUser->idSmoking && $iSK->id != 0) continue;
+				    		<option value="{{ $iSK->id }}">{{ $iSK->smoke }}</option>
+				    	@endif
+			    	@endforeach
+		    	@endif
 		    </select>
 
 		    <label class="csslb">Job status</label>
 		    <select id="jobStatus" name="txtJobStatus">
-		    	<option value="{{ $getInfoUser->idJobStatus }}" selected>{{ $getInfoUser->status }}</option>
-				@foreach($getJobStatus as $iJS)
-					@if($iJS->id != $getInfoUser->idJobStatus) continue;
-			    		<option value="{{ $iJS->id }}">{{ $iJS->status }}</option>
-			    	@endif
-		    	@endforeach
+		    	@if($getInfoUser->idJobStatus == 0)
+					<option value="{{ $getInfoUser->idJobStatus }}" selected>{{ $getInfoUser->status }}</option>
+					@foreach($getJobStatus as $iJS)
+						@if($iJS->id != $getInfoUser->idJobStatus) continue;
+				    		<option value="{{ $iJS->id }}">{{ $iJS->status }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idJobStatus }}" selected>{{ $getInfoUser->status }}</option>
+					@foreach($getJobStatus as $iJS)
+						@if($iJS->id != $getInfoUser->idJobStatus && $iJS->id != 0) continue;
+				    		<option value="{{ $iJS->id }}">{{ $iJS->status }}</option>
+				    	@endif
+			    	@endforeach
+		    	@endif
 		    </select>
 
 		    <label class="csslb">Home type</label>
 		   	<select id="homeType" name="txtHomeType">
-		    	<option value="{{ $getInfoUser->idHomeType }}" selected>{{ $getInfoUser->type }}</option>
-				@foreach($getHomeType as $iHT)
-					@if($iHT->id != $getInfoUser->idHomeType) continue;
-			    		<option value="{{ $iHT->id }}">{{ $iHT->type }}</option>
-			    	@endif
-		    	@endforeach
+		   		@if($getInfoUser->idHomeType == 0)
+					<option value="{{ $getInfoUser->idHomeType }}" selected>{{ $getInfoUser->type }}</option>
+					@foreach($getHomeType as $iHT)
+						@if($iHT->id != $getInfoUser->idHomeType) continue;
+				    		<option value="{{ $iHT->id }}">{{ $iHT->type }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idHomeType }}" selected>{{ $getInfoUser->type }}</option>
+					@foreach($getHomeType as $iHT)
+						@if($iHT->id != $getInfoUser->idHomeType && $iHT->id != 0) continue;
+				    		<option value="{{ $iHT->id }}">{{ $iHT->type }}</option>
+				    	@endif
+			    	@endforeach
+		    	@endif
 		    </select>
 
 		   	<label class="csslb">Live with</label>
 		   	<select id="liveWith" name="txtLiveWith">
-		    	<option value="{{ $getInfoUser->idLivewith }}" selected>{{ $getInfoUser->livewith }}</option>
-				@foreach($getLivewith as $iLW)
-					@if($iLW->id != $getInfoUser->idLivewith) continue;
-			    		<option value="{{ $iLW->id }}">{{ $iLW->livewith }}</option>
-			    	@endif
-		    	@endforeach
+		   		@if($getInfoUser->idLivewith == 0)
+					<option value="{{ $getInfoUser->idLivewith }}" selected>{{ $getInfoUser->livewith }}</option>
+					@foreach($getLivewith as $iLW)
+						@if($iLW->id != $getInfoUser->idLivewith) continue;
+				    		<option value="{{ $iLW->id }}">{{ $iLW->livewith }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idLivewith }}" selected>{{ $getInfoUser->livewith }}</option>
+					@foreach($getLivewith as $iLW)
+						@if($iLW->id != $getInfoUser->idLivewith && $iLW->id != 0) continue;
+				    		<option value="{{ $iLW->id }}">{{ $iLW->livewith }}</option>
+				    	@endif
+			    	@endforeach
+			    @endif
 		    </select>
 
 		   	<label class="csslb">Have children</label>
 		   	<select id="haveChildren" name="txtHaveChildren">
-		    	<option value="{{ $getInfoUser->idHaveChild }}" selected>{{ $getInfoUser->children }}</option>
-				@foreach($getHaveChild as $iHChild)
-					@if($iHChild->id != $getInfoUser->idHaveChild) continue;
-			    		<option value="{{ $iHChild->id }}">{{ $iHChild->children }}</option>
-			    	@endif
-		    	@endforeach
+		   		@if($getInfoUser->idHaveChild == 0)
+					<option value="{{ $getInfoUser->idHaveChild }}" selected>{{ $getInfoUser->children }}</option>
+					@foreach($getHaveChild as $iHChild)
+						@if($iHChild->id != $getInfoUser->idHaveChild) continue;
+				    		<option value="{{ $iHChild->id }}">{{ $iHChild->children }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idHaveChild }}" selected>{{ $getInfoUser->children }}</option>
+					@foreach($getHaveChild as $iHChild)
+						@if($iHChild->id != $getInfoUser->idHaveChild && $iHChild->id != 0) continue;
+				    		<option value="{{ $iHChild->id }}">{{ $iHChild->children }}</option>
+				    	@endif
+			    	@endforeach
+		    	@endif
 		    </select>
 
 		   	<label class="csslb">National</label>
 		   	<select id="national" name="txtNational">
-		    	<option value="{{ $getInfoUser->idNational }}" selected>{{ $getInfoUser->national }}</option>
-				@foreach($getNational as $iNA)
-					@if($iNA->id != $getInfoUser->idNational) continue;
-			    		<option value="{{ $iNA->id }}">{{ $iNA->national }}</option>
-			    	@endif
-		    	@endforeach
+		   		@if($getInfoUser->idNational == 0)
+					<option value="{{ $getInfoUser->idNational }}" selected>{{ $getInfoUser->national }}</option>
+					@foreach($getNational as $iNA)
+						@if($iNA->id != $getInfoUser->idNational) continue;
+				    		<option value="{{ $iNA->id }}">{{ $iNA->national }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idNational }}" selected>{{ $getInfoUser->national }}</option>
+					@foreach($getNational as $iNA)
+						@if($iNA->id != $getInfoUser->idNational && $iNA->id != 0) continue;
+				    		<option value="{{ $iNA->id }}">{{ $iNA->national }}</option>
+				    	@endif
+			    	@endforeach
+		    	@endif
 		    </select>
 
 		   	<label class="csslb">Education level</label>
 		   	<select id="education" name="txtEducation">
-		    	<option value="{{ $getInfoUser->idEducation }}" selected>{{ $getInfoUser->level }}</option>
-				@foreach($getEducation as $iEDU)
-					@if($iEDU->id != $getInfoUser->idEducation) continue;
-			    		<option value="{{ $iEDU->id }}">{{ $iEDU->level }}</option>
-			    	@endif
-		    	@endforeach
+		   		@if($getInfoUser->idEducation == 0)
+					<option value="{{ $getInfoUser->idEducation }}" selected>{{ $getInfoUser->level }}</option>
+					@foreach($getEducation as $iEDU)
+						@if($iEDU->id != $getInfoUser->idEducation) continue;
+				    		<option value="{{ $iEDU->id }}">{{ $iEDU->level }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idEducation }}" selected>{{ $getInfoUser->level }}</option>
+					@foreach($getEducation as $iEDU)
+						@if($iEDU->id != $getInfoUser->idEducation && $iEDU->id != 0) continue;
+				    		<option value="{{ $iEDU->id }}">{{ $iEDU->level }}</option>
+				    	@endif
+			    	@endforeach
+		    	@endif
 		    </select>
 
 		   	<label class="csslb">Language</label>
 		   	<select id="language" name="txtLanguage">
-		    	<option value="{{ $getInfoUser->idLanguage }}" selected>{{ $getInfoUser->language }}</option>
-				@foreach($getLanguage as $iLANG)
-					@if($iLANG->id != $getInfoUser->idLanguage) continue;
-			    		<option value="{{ $iLANG->id }}">{{ $iLANG->language }}</option>
-			    	@endif
-		    	@endforeach
+		   		@if($getInfoUser->idLanguage == 0)
+					<option value="{{ $getInfoUser->idLanguage }}" selected>{{ $getInfoUser->language }}</option>
+					@foreach($getLanguage as $iLANG)
+						@if($iLANG->id != $getInfoUser->idLanguage) continue;
+				    		<option value="{{ $iLANG->id }}">{{ $iLANG->language }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idLanguage }}" selected>{{ $getInfoUser->language }}</option>
+					@foreach($getLanguage as $iLANG)
+						@if($iLANG->id != $getInfoUser->idLanguage && $iLANG->id != 0) continue;
+				    		<option value="{{ $iLANG->id }}">{{ $iLANG->language }}</option>
+				    	@endif
+			    	@endforeach
+		    	@endif
 		    </select>
 
 		   	<label class="csslb">Religion</label>
 		   	<select id="religion" name="txtReligion">
-		    	<option value="{{ $getInfoUser->idReligion }}" selected>{{ $getInfoUser->religion }}</option>
-				@foreach($getReligion as $iRG)
-					@if($iRG->id != $getInfoUser->idReligion) continue;
-			    		<option value="{{ $iRG->id }}">{{ $iRG->religion }}</option>
-			    	@endif
-		    	@endforeach
+		   		@if($getInfoUser->idReligion == 0)
+					<option value="{{ $getInfoUser->idReligion }}" selected>{{ $getInfoUser->religion }}</option>
+					@foreach($getReligion as $iRG)
+						@if($iRG->id != $getInfoUser->idReligion) continue;
+				    		<option value="{{ $iRG->id }}">{{ $iRG->religion }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idReligion }}" selected>{{ $getInfoUser->religion }}</option>
+					@foreach($getReligion as $iRG)
+						@if($iRG->id != $getInfoUser->idReligion && $iRG->id != 0) continue;
+				    		<option value="{{ $iRG->id }}">{{ $iRG->religion }}</option>
+				    	@endif
+			    	@endforeach
+		    	@endif
 		    </select>
 
 			<label class="csslb">Constellation</label>
 		   	<select id="constellation" name="txtConstellation">
-		    	<option value="{{ $getInfoUser->idConstellation }}" selected>{{ $getInfoUser->constellation }}</option>
-				@foreach($getConstellation as $iCON)
-					@if($iCON->id != $getInfoUser->idConstellation) continue;
-			    		<option value="{{ $iCON->id }}">{{ $iCON->constellation }}</option>
-			    	@endif
-		    	@endforeach
+		   		@if($getInfoUser->idConstellation == 0)
+					<option value="{{ $getInfoUser->idConstellation }}" selected>{{ $getInfoUser->constellation }}</option>
+					@foreach($getConstellation as $iCON)
+						@if($iCON->id != $getInfoUser->idConstellation) continue;
+				    		<option value="{{ $iCON->id }}">{{ $iCON->constellation }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idConstellation }}" selected>{{ $getInfoUser->constellation }}</option>
+					@foreach($getConstellation as $iCON)
+						@if($iCON->id != $getInfoUser->idConstellation && $iCON->id != 0 ) continue;
+				    		<option value="{{ $iCON->id }}">{{ $iCON->constellation }}</option>
+				    	@endif
+			    	@endforeach
+		    	@endif
 		    </select>
 	    </div>
 	    <input type="submit" name="submit" value="Edit Information">
