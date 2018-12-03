@@ -24,12 +24,20 @@ class Users extends Model
     	return DB::table('users')->where('username','=',$username)->get();
     }
 
+    public function getOldImage($iduser){
+        return (string)DB::table('users')->select('Avatar')->where('id', $iduser)->first()->Avatar;
+    }
+
     public function getUserID($username){
         return DB::table('users')->where('username','=',$username)->value('id');
     }
 
     public function getItems(){
     	return $this->all();
+    }
+
+    public function editUser($id, $arItem){
+        return $this->where('id',$id)->update($arItem);
     }
 
     public function getInfoUser($id){

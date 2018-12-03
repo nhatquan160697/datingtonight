@@ -1,8 +1,6 @@
 @extends('templates.datingtonight.master')
 @section('title')
-	@if (Session::has('checkUser'))
-	   {{ $getInfoUser->Fullname }}
-	@endif
+   {{ $getInfoUser->Fullname }}
 @endsection
 @section('content')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -99,29 +97,29 @@
 		</a>
 		<div class="container-main">
 		  	<label class="csslb">Avatar</label>
-		    <img src="#" alt="This is image">
+		    <img style="width: 200px; height: 200px;" src="/storage/app/files/avatar/{{ $getInfoUser->Avatar }}" alt="Please input your avatar">
 		    <input type="file" name="fAvatar">
 
 		    <label class="csslb">Username</label>
 		    <input type="text" id="username" name="username" value="{{ $getInfoUser->username }}" >
 
 		    <label class="csslb">Password</label>
-		    <input type="password" id="password" name="password" value="{{ $getInfoUser->password }}" >
+		    <input type="password" id="password" name="txtPassword" value="{{ $getInfoUser->password }}" >
 
 		    <label class="csslb">Full name</label>
-		    <input type="text" id="fullname" name="fullname" value="{{ $getInfoUser->Fullname }}" >
+		    <input type="text" id="fullname" name="txtFullname" value="{{ $getInfoUser->Fullname }}" >
 
 		    <label class="csslb">Email</label>
-		   	<input type="text" id="email" name="email" value="{{ $getInfoUser->email }}" >
+		   	<input type="text" id="email" name="txtEmail" value="{{ $getInfoUser->email }}" >
 
 		   	<label class="csslb">Phone number</label>
-		   	<input type="text" id="phone" name="phone" value="{{ $getInfoUser->phone_number }}" >
+		   	<input type="text" id="phone" name="txtPhone" value="{{ $getInfoUser->phone_number }}" >
 
 		   	<label class="csslb">Birthday</label>
-		   	<input type="date" id="birthday" name="birthday" value="{{ $getInfoUser->Birthdate }}">
+		   	<input type="date" id="birthday" name="txtBirthday" value="{{ $getInfoUser->Birthdate }}">
 
 		   	<label class="csslb">Facebook</label>
-		   	<input type="text" id="facebook" name="facebook" value="{{ $getInfoUser->Facebook }}" >
+		   	<input type="text" id="facebook" name="txtFacebook" value="{{ $getInfoUser->Facebook }}" >
 		   	<label class="csslb">Gender</label>
 		   	<select id="gender" name="txtGender">
 		   		<option value="{{ $getInfoUser->idGender }}" selected>{{ $getInfoUser->gender }}</option>
@@ -133,7 +131,7 @@
 		    </select>
 
 		   	<label class="csslb">City</label>
-		    <select id="city" name="city">
+		    <select id="city" name="txtCity">
 		    	<option value="{{ $getInfoUser->idCity }}" selected>{{ $getInfoUser->city }}</option>
 				@foreach($getCity as $iCity)
 					@if($iCity->id != $getInfoUser->idCity) continue;

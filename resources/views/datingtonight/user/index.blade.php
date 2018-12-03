@@ -1,8 +1,6 @@
 @extends('templates.datingtonight.master')
 @section('title')
-	@if (Session::has('checkUser'))
-	   {{ $getInfoUser->Fullname }}
-	@endif
+	{{ $getInfoUser->Fullname }}
 @endsection
 @section('content')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -94,9 +92,14 @@
 				PERSONAL INFORMATION
 			</div>
 		</a>
+		@if (session('alert'))
+		    <script type="text/javascript" charset="utf-8">
+		    	alert("{{ session('alert') }}");
+		    </script>
+		@endif
 		<div class="container-main">
 		  	<label class="csslb">Avatar</label>
-		    <img src="#" alt="This is image">
+		    <img style="width: 200px; height: 200px;" src="/storage/app/files/avatar/{{ $getInfoUser->Avatar }}" alt="This is image">
 
 		    <label class="csslb">Username</label>
 		    <input type="text" id="username" name="username" value="{{ $getInfoUser->username }}" readonly>

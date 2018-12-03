@@ -82,7 +82,115 @@ class UserController extends Controller
     	return view('datingtonight.user.edit',compact('getInfoUser','getCity','getGender','getHairColor','getHairLength','getHairStyle','getEyeColor','getBody','getDrinking','getSmoking','getJobStatus','getHomeType','getLivewith','getHaveChild','getNational','getEducation','getLanguage','getReligion','getConstellation'));
     }
 
-    public function postEdit($id){
-
+    public function postEdit(Request $request){
+        if(session()->has('checkUser')){
+            $id_user = session()->get('checkUser')[0]->id;
+        }
+        // INFORMATION
+        $username = trim($request->username);
+        $txtPassword = $request->txtPassword;
+        $txtFullname = trim($request->txtFullname);
+        $txtEmail = trim($request->txtEmail);
+        $txtPhone = trim($request->txtPhone);
+        $txtBirthday = trim($request->txtBirthday);
+        $txtFacebook = trim($request->txtFacebook);
+        $txtGender = $request->txtGender;
+        $txtCity = $request->txtCity;
+        //BODY
+        $txtHairColor = $request->txtHairColor;
+        $txtHairLength = $request->txtHairLength;
+        $txtHairStyle = $request->txtHairStyle;
+        $txtEyeColor = $request->txtEyeColor;
+        $height = trim($request->height);
+        $weight = trim($request->weight);
+        $txtBody = $request->txtBody;
+        //OTHER
+        $txtDrinking = trim($request->txtDrinking);
+        $txtSmoking = trim($request->txtSmoking);
+        $txtJobStatus = trim($request->txtJobStatus);
+        $txtHomeType = trim($request->txtHomeType);
+        $txtLiveWith = trim($request->txtLiveWith);
+        $txtHaveChildren = trim($request->txtHaveChildren);
+        $txtNational = trim($request->txtNational);
+        $txtEducation = trim($request->txtEducation);
+        $txtLanguage = trim($request->txtLanguage);
+        $txtReligion = trim($request->txtReligion);
+        $txtConstellation = trim($request->txtConstellation);
+        $fAvatar = "";
+        $oldPicture = $this->mUser->getOldImage($id_user);
+        $oldPath = storage_path('app\files\avatar\\').$oldPicture;
+        if($request->file('fAvatar') != null){
+            unlink(storage_path('app\files\avatar\\').$oldPicture);
+            $file = $request->file('fAvatar');
+            $fileExtension = $file->getClientOriginalExtension();
+            $picture = 'avatar-'.time().'.'.$fileExtension;
+            $uploadPath = storage_path('app\files\avatar\\');
+            $file->move($uploadPath, $picture);
+            $arItem = array(
+                'Avatar' => $picture,
+                'username' => $username,
+                'password' => $txtPassword,
+                'Fullname' => $txtFullname,
+                'email' => $txtEmail,
+                'phone_number' => $txtPhone,
+                'Facebook' => $txtFacebook,
+                'Gender' => $txtGender,
+                'City' => $txtCity,
+                'Birthdate' => $txtBirthday,
+                'Hair_color' => $txtHairColor,
+                'Hair_length' => $txtHairLength,
+                'Hair_style' => $txtHairStyle,
+                'Eye_color' => $txtEyeColor,
+                'Height' => $height,
+                'Weight' => $weight,
+                'Body' => $txtBody,
+                'Drinking' => $txtDrinking,
+                'Smoking' => $txtSmoking,
+                'Job_status' => $txtJobStatus,
+                'Home_type' => $txtHomeType,
+                'Live_with' => $txtLiveWith,
+                'Have_children' => $txtHaveChildren,
+                'National' => $txtNational,
+                'Educational_level' => $txtEducation,
+                'Language' => $txtLanguage,
+                'Religion' => $txtReligion,
+                'Constellation' => $txtConstellation,
+            );
+        } else { // xu ly neu ko co anh thi giu nguyen
+            $arItem = array(
+                'username' => $username,
+                'password' => $txtPassword,
+                'Fullname' => $txtFullname,
+                'email' => $txtEmail,
+                'phone_number' => $txtPhone,
+                'Facebook' => $txtFacebook,
+                'Gender' => $txtGender,
+                'City' => $txtCity,
+                'Birthdate' => $txtBirthday,
+                'Hair_color' => $txtHairColor,
+                'Hair_length' => $txtHairLength,
+                'Hair_style' => $txtHairStyle,
+                'Eye_color' => $txtEyeColor,
+                'Height' => $height,
+                'Weight' => $weight,
+                'Body' => $txtBody,
+                'Drinking' => $txtDrinking,
+                'Smoking' => $txtSmoking,
+                'Job_status' => $txtJobStatus,
+                'Home_type' => $txtHomeType,
+                'Live_with' => $txtLiveWith,
+                'Have_children' => $txtHaveChildren,
+                'National' => $txtNational,
+                'Educational_level' => $txtEducation,
+                'Language' => $txtLanguage,
+                'Religion' => $txtReligion,
+                'Constellation' => $txtConstellation,
+            );
+        }
+        if($this->mUser->editUser($id_user, $arItem)) {
+            return redirect(route('datingtonight.user.index'))->with('alert','Edit successfully');
+        } else {
+            return redirect(route('datingtonight.user.index'))->with('alert','Edit failed');
+        }
     }
 }
