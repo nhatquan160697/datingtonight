@@ -120,7 +120,9 @@ class UserController extends Controller
         $oldPicture = $this->mUser->getOldImage($id_user);
         $oldPath = storage_path('app\files\avatar\\').$oldPicture;
         if($request->file('fAvatar') != null){
-            unlink(storage_path('app\files\avatar\\').$oldPicture);
+            if($oldPicture != "default.jpg") {
+                unlink(storage_path('app\files\avatar\\').$oldPicture);
+            }
             $file = $request->file('fAvatar');
             $fileExtension = $file->getClientOriginalExtension();
             $picture = 'avatar-'.time().'.'.$fileExtension;

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 03, 2018 at 07:35 AM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 7.2.3
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th12 03, 2018 lúc 05:48 PM
+-- Phiên bản máy phục vụ: 10.1.33-MariaDB
+-- Phiên bản PHP: 7.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,608 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `datingtonight`
+-- Cơ sở dữ liệu: `aboutme`
 --
+CREATE DATABASE IF NOT EXISTS `aboutme` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `aboutme`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `administrator`
+-- Cấu trúc bảng cho bảng `category`
+--
+
+CREATE TABLE `category` (
+  `id_cat` int(11) NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `category`
+--
+
+INSERT INTO `category` (`id_cat`, `name`) VALUES
+(1, 'Thời sự'),
+(2, 'Góc nhìn'),
+(3, 'Thế giới'),
+(4, 'Kinh doanh');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `contact`
+--
+
+CREATE TABLE `contact` (
+  `id_contact` int(11) NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` text COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `contact`
+--
+
+INSERT INTO `contact` (`id_contact`, `name`, `email`, `address`, `phone`, `message`) VALUES
+(1, 'Mỹ Linh', 'mylinh@gmail.com', 'Thanh Trà, Hà Nội', '0931.234.560', ''),
+(2, 'Hồng Nhung', 'hongnhungtran@gmail.com', 'Quảng Nam', '05113.345.636', ''),
+(3, 'Trần Thu Hà', 'thuha12@gmail.com', 'Thanh Khê, Đà Nẵng', '0909.324.678', ''),
+(4, 'Tôn Quân', 'nhatquan160697@gmail.com', '08 Hà Văn TÍnh', '012213', 'sadasdasdasd');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `news`
+--
+
+CREATE TABLE `news` (
+  `id_news` int(11) NOT NULL,
+  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `preview_text` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `detail_text` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_cat` int(11) NOT NULL,
+  `picture` varchar(225) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `count_number` int(11) NOT NULL,
+  `active` bit(1) NOT NULL DEFAULT b'1',
+  `id_user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `news`
+--
+
+INSERT INTO `news` (`id_news`, `name`, `preview_text`, `detail_text`, `id_cat`, `picture`, `count_number`, `active`, `id_user`) VALUES
+(1, 'Trung Quốc điều thêm 17 tàu đến khu vực giàn khoan\r\n', 'Để bảo vệ giàn khoan, Trung Quốc đã điều thêm 17 tàu các loại so với hôm trước, sẵn sàng đâm va vào tàu Việt Nam.\r\n', 'Để bảo vệ giàn khoan, Trung Quốc đã điều thêm 17 tàu các loại so với hôm trước, sẵn sàng đâm va vào tàu Việt Nam. Để bảo vệ giàn khoan, Trung Quốc đã điều thêm 17 tàu các loại so với hôm trước, sẵn sàng đâm va vào tàu Việt Nam.\r\n', 1, 'hinh1.jpg', 4, b'1', 1),
+(2, 'Trọng tài - vết đen của kỳ World Cup sôi động \r\n', 'World Cup 2014 chưa đi hết lượt đầu vòng bảng nhưng các trọng tài đẳng cấp FIFA đã có tới bốn trận bị chỉ trích dữ dội.\r\n', 'World Cup 2014 chưa đi hết lượt đầu vòng bảng nhưng các trọng tài đẳng cấp FIFA đã có tới bốn trận bị chỉ trích dữ dội. World Cup 2014 chưa đi hết lượt đầu vòng bảng nhưng các trọng tài đẳng cấp FIFA đã có tới bốn trận bị chỉ trích dữ dội.\r\n', 1, 'hinh2.jpg', 1, b'1', 1),
+(3, 'Những mỹ nhân Việt duyên dáng ở tuổi tứ tuần\r\n', 'Để bảo vệ giàn khoan, Trung Quốc đã điều thêm 17 tàu các loại so với hôm trước, sẵn sàng đâm va vào tàu Việt Nam.\r\n', 'Để bảo vệ giàn khoan, Trung Quốc đã điều thêm 17 tàu các loại so với hôm trước, sẵn sàng đâm va vào tàu Việt Nam. Để bảo vệ giàn khoan, Trung Quốc đã điều thêm 17 tàu các loại so với hôm trước, sẵn sàng đâm va vào tàu Việt Nam.\r\n', 2, 'hinh3.jpg\r\n', 0, b'0', 2),
+(4, 'Chuyển nhượng 17/6: Arsenal mua Balotelli, tráo hàng Man Utd\r\n', 'Đội bóng thành London đang đẩy mạnh việc tuyển lựa những vị trí còn yếu trong đội hình ở cả ba tuyến.\r\n', 'Đội bóng thành London đang đẩy mạnh việc tuyển lựa những vị trí còn yếu trong đội hình ở cả ba tuyến. Đội bóng thành London đang đẩy mạnh việc tuyển lựa những vị trí còn yếu trong đội hình ở cả ba tuyến.\r\n', 4, 'hinh4.jpg\r\n', 8, b'1', 2),
+(5, 'Chuyên gia Anh tin chắc vị trí MH370 rơi\r\n', 'Các chuyên gia thuộc công ty viễn thông Anh Inmarsat cho rằng họ xác định được vị trí chiếc máy bay MH370 đã rơi xuống trên Ấn Độ Dương, tuy nhiên đội.\r\n', 'Các chuyên gia thuộc công ty viễn thông Anh Inmarsat cho rằng họ xác định được vị trí chiếc máy bay MH370 đã rơi xuống trên Ấn Độ Dương, tuy nhiên đội. Các chuyên gia thuộc công ty viễn thông Anh Inmarsat cho rằng họ xác định được vị trí chiếc máy bay MH370 đã rơi xuống trên Ấn Độ Dương, tuy nhiên đội.\r\n', 3, 'hinh5.jpg\r\n', 2, b'0', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `project`
+--
+
+CREATE TABLE `project` (
+  `id_project` int(11) NOT NULL,
+  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `preview_text` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `link` text COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `project`
+--
+
+INSERT INTO `project` (`id_project`, `name`, `preview_text`, `link`) VALUES
+(1, 'Website Báo Chí VNTimes', 'Trang web báo chí Đà Nẵng, cập nhật những tin tức liên quan đến kinh tế, chính trị, giải trí Việt Nam', 'http://vntimes.com.vn'),
+(2, 'VinaEnter Edu', 'Trang web trung tâm đào tạo VinaEnter', 'http://vinaenter.edu.vn'),
+(3, 'VNEpress', 'Website tin tức 24h', 'http://vnexpress.net');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `users`
+--
+
+CREATE TABLE `users` (
+  `id_user` int(11) NOT NULL,
+  `username` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fullname` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `users`
+--
+
+INSERT INTO `users` (`id_user`, `username`, `password`, `fullname`) VALUES
+(1, 'admin', '123456', 'Trần Gia Huy'),
+(2, 'vinaenter', 'vne123', 'VinaEnter EDU');
+
+--
+-- Chỉ mục cho các bảng đã đổ
+--
+
+--
+-- Chỉ mục cho bảng `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`id_cat`);
+
+--
+-- Chỉ mục cho bảng `contact`
+--
+ALTER TABLE `contact`
+  ADD PRIMARY KEY (`id_contact`);
+
+--
+-- Chỉ mục cho bảng `news`
+--
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`id_news`);
+
+--
+-- Chỉ mục cho bảng `project`
+--
+ALTER TABLE `project`
+  ADD PRIMARY KEY (`id_project`);
+
+--
+-- Chỉ mục cho bảng `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id_user`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
+--
+
+--
+-- AUTO_INCREMENT cho bảng `category`
+--
+ALTER TABLE `category`
+  MODIFY `id_cat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT cho bảng `contact`
+--
+ALTER TABLE `contact`
+  MODIFY `id_contact` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT cho bảng `news`
+--
+ALTER TABLE `news`
+  MODIFY `id_news` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT cho bảng `project`
+--
+ALTER TABLE `project`
+  MODIFY `id_project` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT cho bảng `users`
+--
+ALTER TABLE `users`
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- Cơ sở dữ liệu: `bstory`
+--
+CREATE DATABASE IF NOT EXISTS `bstory` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `bstory`;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `cat`
+--
+
+CREATE TABLE `cat` (
+  `cat_id` int(255) NOT NULL,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `cat`
+--
+
+INSERT INTO `cat` (`cat_id`, `name`) VALUES
+(2, 'Tình bạn'),
+(5, 'Ngôn tình'),
+(7, 'Xuyên không'),
+(8, 'Truyện Blog'),
+(9, 'Tâm sự');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `contact`
+--
+
+CREATE TABLE `contact` (
+  `contact_id` int(255) NOT NULL,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `website` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `content` text COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `contact`
+--
+
+INSERT INTO `contact` (`contact_id`, `name`, `email`, `website`, `content`) VALUES
+(4, 'long hoàng', 'longht@vinaenter.com', 'http://vinaenter.edu.vn/', 'liên hệ 2'),
+(5, 'asd', 'sd@gmail.com', 'https://www.facebook.com/', 'https://www.facebook.com/'),
+(6, 'asd', 'sdf@fsdf', 'https://www.youtube.com/', 'sf');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `story`
+--
+
+CREATE TABLE `story` (
+  `story_id` int(255) NOT NULL,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `preview_text` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `detail_text` text COLLATE utf8_unicode_ci NOT NULL,
+  `picture` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `counter` int(11) NOT NULL,
+  `cat_id` int(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `story`
+--
+
+INSERT INTO `story` (`story_id`, `name`, `preview_text`, `detail_text`, `picture`, `counter`, `cat_id`, `created_at`) VALUES
+(3, 'HÔN NHÂN KHÔNG TÌNH YÊU', 'Trước đây tôi từng nói sẽ không đào hố, đó là vì công việc chất đống, tôi cố gắng mãi cũng không hoàn thành. Một khi mở hố, mọi người theo cũng mệt, tôi viết truyện cũng mệt. Nhưng không còn cách nào khác, một \"bad guy\" đột nhiên xuất hiện trong đầu óc tô', 'Trước đây tôi từng nói sẽ không đào hố, đó là vì công việc chất đống, tôi cố gắng mãi cũng không hoàn thành. Một khi mở hố, mọi người theo cũng mệt, tôi viết truyện cũng mệt. Nhưng không còn cách nào khác, một \"bad guy\" đột nhiên xuất hiện trong đầu óc tôi, ngày càng đầy đặn, ngày càng đáng yêu. Tôi không cẩn thận đã yêu anh ta, nên muốn mọi người làm quen với anh ta, tìm hiểu anh ta. Vì vậy, tôi cắn răng, không chùn bước nhảy thẳng xuống \"hố lửa\". Đừng nói tôi không nhắc nhở mọi người đấy nhé. Đây là \"hố lửa\", ai nhảy vào người đó tự chịu trách nhiệm', 'VNE-1501229201.jpg', 5, 5, '2017-07-28 08:06:41'),
+(4, 'TÌNH ĐẦU ONLINE', 'GIẤC MƠ HỒNG Tôi thích anh bởi anh rất đàn ông, một chuẩn đàn ông thời thượng mà bọn con gái sinh viên chúng tôi thường bình. Còn...', 'Ở cái trường này tôi sớm \"nổi tiếng\" không chỉ bởi danh hiệu xì teen hoa khôi mà còn là một giọng hát hay, một cây bút thơ teen đã có bài đăng trên báo Tuổi trẻ và báo Văn nghệ thành phố. Tôi được giới thiệu tham gia thi đàn và đã vài lần xuất hiện trên truyền hình. Bấy nhiêu thôi cũng đủ cho tôi có nhiều bạn người lớn. Với tôi tụi bạn trang lứa hình như nhiều đứa vẫn còn trẻ con, còn tôi một thế giới mới lạ, người lớn hấp dẫn, đang ban cho tôi sự hãnh diện. Bủa vây quanh tôi là những chàng trai hào hoa con nhà giàu hứa hẹn nhiều thứ, vậy mà sao tôi cứ dửng dưng để đến với anh. Anh không phải là người đầu tiên quan tâm đến tôi, càng không phải người đầu tiên khiến tôi có cảm giác hứng thú kết bạn trên facebook nhưng anh lại là người đầu tiên và duy nhất đến giờ khiến tôi rất có ấn tượng và nhanh chóng bị cảm hóa trên mạng xã hội.\r\n\r\nAnh nói cuộc sống riêng tư có gì phơi bày cả trên fb. Anh đã ba hai tuổi là hộ độc thân do trục trặc hôn nhân nhiều năm nay chưa lập lại gia đình và hiện đang sống với cô con gái Lưu Ly sáu tuổi. Đương nhiên cô sinh viên năm thứ nhất mười tám tuổi như tôi phải gọi anh là chú. Hi, tình cảm chú cháu cứ thế xưng hô nhưng mà chẳng thể cứ vậy trong con tim non ngu ngơ của tôi. Thú thật tôi thực sự bị choáng không chỉ bởi hình ảnh chú trên fb vừa đẹp trai, phong độ mà fb chú cũng thể hiện một chất trí thức với bao nhiêu lời ngợi khen. Giao tiếp với chú tôi vô cùng thán phục bởi sự học cao hiểu rộng, trải nghiệm trường đời và biểu lộ phẩm chất tốt đẹp của con người.\r\n\r\nTôi và chú tâm đầu ý hợp trong đời sống tình cảm, trong giao lưu chia sẻ bạn bè trên fb và trong sáng tác thơ, lấy đó làm niềm vui mỗi ngày. Lâu dần thành quen một ngày không tin nhắn chú là buồn là nhớ, là ngóng là đợi. Chú nói chú cũng có tâm trạng vậy, nhưng chú kiểm soát được tình cảm và chú thương tôi lắm. Chú bảo đó là tình tri kỷ, bạn thơ tri âm trên fb. Hầu như tôi luôn là người chủ động kết nối online, và bao giờ cũng mở đầu bằng câu \"Chú ơi\" và nhận được câu đáp lại \"Chú đây\" trìu mến. Thơ chú rất hay và chú nhận ra thơ tôi không đến nỗi tồi. Cả tôi và chú đều có cảm giác như đã quen thân nhau từ rất lâu rồi và như đã xóa nhòa đi khoảng cách không gian, thời gian. Tôi và chú tạo nếp online hàng ngày vào 9 giờ tối nhưng rồi cái tính nhõng nhẽo trẻ con của tôi buộc chú phải yêu chiều, bất cứ khi nào tôi online chú đều trả lời. Thời gian hai chú cháu dành cho nhau trên fb ngày một nhiều hơn và nỗi nhớ chú nơi xa trong tôi theo đó cũng đầy dần lên.', 'VNE-1501229287.jpg', 17, 1, '2017-07-28 08:08:07'),
+(5, 'GIẢ THÀNH THẬT', 'Tôi uống rượu khi nào? Cô mới là người uống rượu ấy, nói lung tung không đâu... _ Anh cũng giật mình. Cô phát hiện ra anh hôn trộm cô mất rồi.', 'Họ bước vào, những tiếng cười vang lên, những câu chào hỏi nhiều không đếm xuể. Chẳng là hôm nay gia đình Việt Đức có tổ chức một bữa tiệc nhỏ để họp mặt thành viên trong gia đình. Việt Đức và Linh Chi tất nhiên không phải ngoại lệ.\r\n\r\nHọ cưới nhau cách đây gần một năm. Khi đó Đức đang cần một người phù hợp để làm vợ mình, anh đã nhanh nhảu chọn Chi, tất nhiên là trong lúc đang cần tiền thì Chi đã gật đầu cái rụp. Có lẽ hẳn mọi người sẽ thắc mắc rằng tại sao họ vốn không yêu mà cưới, đúng chứ? Haha, tất cả cũng chỉ vì cái công ty của bố Việt Đức để lại. Nhưng để lấy được cái công ty đó thì đâu phải là dễ dàng. Họ bắt anh phải lấy vợ, còn anh thì nhất quyết nói không bởi anh ghét bị ràng buộc, anh thích được tự do bay nhảy thỏa thích, hôm nay đi cô này, ngày mai đi cô kia. Nhưng dù thế nào thì cuối cùng anh vẫn phải lấy vợ, và bây giờ cái công ty ấy đang nằm gọn trong tay anh. À khoan, còn một điều cũng quan trọng không kém đó chính là nếu cuộc hôn nhân giả này mà bị phát hiện thì chắc chắn rằng Việt Đức sẽ bị tước đoạt mọi thứ, có khi anh còn bị đuổi ra khỏi nhà luôn ấy chứ. Chính vì vậy cho nên Đức và Chi đã đòi ra ở riêng, họ còn diễn xuất vô cùng chân thật và nhập tâm hệt như diễn viên vậy.', 'VNE-1501229352.jpg', 7, 1, '2017-07-28 08:09:12'),
+(6, 'GIÓ', 'Con gái thường thích Badboy - phải, không sai. Vậy nếu từ đầu bạn xác định hắn là một tên Badboy chính hiệu, và từ đầu người hắn có ý định tán tỉnh không phải là bạn mà là con bạn thân của bạn, thì bạn có đâm đầu vào quen hắn không? Chà, bảo là không thì ', 'Sau chia tay, con người ta vốn yếu đuối và cần người chia sẻ. Và hắn- cái người mà tôi sắp kể ra đây- đang trong trạng thái đó. Tức là hắn ta vừa thất tình. Thêm một yếu tố nữa để tôi phải nhắn tin nói chuyện với một tên con trai không quen không biết trước, đó là vì hắn ta mang danh \"anh trai kết nghĩa\" của con bạn tôi. Ông trời trớ trêu khi sinh ra tôi- một con nhỏ với cái đầu của một bà lão- lại chơi với một con nhỏ mang đầu óc của một đứa trẻ ba tuổi. Thế là thay vì con bạn tôi là đứa trực tiếp \"an ủi\" ông anh kết nghĩa thất tình của nó, thì tôi lại là người làm công việc đó thay nó. À vâng, tất nhiên tôi biết mặt hắn, còn hắn thì chẳng biết tôi là ai. Vậy mà cũng có hai đứa rảnh hàng ngày ngồi nhắn tin nói chuyện trên trời dưới đất\r\n\r\n- Có em nói chuyện anh đỡ buồn hơn nhiều, cảm ơn em. Mà em sắp thi tốt nghiệp nhỉ?', 'VNE-1501229397.jpg', 8, 1, '2017-07-28 08:09:57'),
+(7, 'TÌNH BẠN CÒN LÃNG MẠN HƠN CẢ TÌNH YÊU', 'Yêu mà không dám nói giống như đói mà không dám ăn vậy\r\n\r\n- So sánh gì kỳ vậy mày?\r\n\r\n- Chứ còn không. Khi yêu thầm một người mày nhìn thấy người ta nhưng không dám lại gần, giống như mày thấy đồ ăn nhưng không dám ăn vì sợ mập. Bởi thế mày dằn vặt trong ', 'Tôi - tức thằng Hải đã nói ở trên - là một thằng con trai chính hiệu, mê thể thao, ưa \"bạo lực\" và dị ứng với những câu chuyện tình cảm sến súa khác. Mà người ta thường bảo \"ghét của nào trời trao của nấy\", bạn thân tôi lại là một con nhỏ ưa ngôn tình và đang dính vào một vụ tình cảm sến súa nào đó. Ấy vậy mà thằng tôi - 19 tuổi - chưa một mảnh tình vắt vai lại phải đi làm quân sư quạt mo cho nó.', 'VNE-1501229446.jpg', 15, 2, '2017-07-28 08:10:46'),
+(8, 'TÌNH BẠN', '- Ồ ... tớ không nghĩ thế... là thế này cơ... Mình thấy mình được nhận nhiều thứ quá... mình cứ thấy ngài ngại và áy náy thế nào ấy, mình nghĩ hay là thế này... mình ... nhưng mình lại sợ..', 'Danh sách 17 học sinh nghèo đã được ban giám hiệu nhà trường thông qua và được thông báo đến từng lớp. Các em sẽ là những học sinh được toàn trường quyên góp, ủng hộ cùng chương trình \"Thắp sáng ước mơ cho em\" sẽ được tổ chức ngay trong dịp trước tết.', 'VNE-1501229493.jpg', 32, 2, '2017-07-28 08:11:33'),
+(9, 'YÊU EM TỪ CÁI NHÌN ĐẦU TIÊN', '                                            <p>Thế giới ảo- cầu nối của những trái tim... Truyện Yêu Em Từ Cái Nhìn Đầu Tiên của Cố Mạn kể về câu chuyện tình yêu bắt đầu từ thế giới ảo, nơi giao lưu giữa các bạn trẻ với nhau. Trong thế giới hiện đại, côn<', '<p>CHƯƠNG 1: BỊ Đ&Aacute; RỒI &ldquo;Vi Vi, đến Vong T&igrave;nh Đảo đi, ch&uacute;ng ta ly h&ocirc;n!&rdquo;<br />\r\n<br />\r\n&ldquo;Vi Vi, đến Vong T&igrave;nh Đảo đi, ch&uacute;ng ta ly h&ocirc;n!&rdquo;<br />\r\n<br />\r\nBối Vi Vi vừa đăng nhập v&agrave;o game (tr&ograve; chơi điện tử) th&igrave; thấy ngay tin nhắn của &ldquo;chồng&rdquo; m&igrave;nh l&agrave; Ch&acirc;n Thủy V&ocirc; Hương gửi đến. Vi Vi bỗng ngẩn ra. Kh&ocirc;ng phải chứ, chẳng qua l&agrave; đường d&acirc;y mạng trong k&yacute; t&uacute;c x&aacute; bị hư phải sửa nửa th&aacute;ng th&ocirc;i, mới c&oacute; mười mấy ng&agrave;y chứ mấy, thế m&agrave; đ&atilde; &ldquo;thay l&ograve;ng&rdquo; rồi ư?<br />\r\n<br />\r\nM&atilde;i một l&uacute;c l&acirc;u sau Vi Vi mới định thần lại: &ldquo;Tại sao vậy?&rdquo;<br />\r\n<br />\r\nCh&acirc;n Thủy V&ocirc; Hương: &ldquo;Vi Vi, xin lỗi nh&eacute;, nguy&ecirc;n nh&acirc;n v&igrave; sao th&igrave; muội đừng hỏi, huynh tặng muội một bộ trang bị Ti&ecirc;n Kh&iacute; để b&ugrave; đắp nh&eacute;.&rdquo;<br />\r\n<br />\r\nLại c&ograve;n ph&iacute; cấp dưỡng nữa? Vi Vi hơi rầu rĩ, &ldquo;Kh&ocirc;ng cần đ&acirc;u.&rdquo;<br />\r\n<br />\r\nKết h&ocirc;n trong game vốn kh&ocirc;ng đến nỗi xem l&agrave; thật, l&uacute;c đầu kết h&ocirc;n với Ch&acirc;n Thủy V&ocirc; Hương cũng chỉ để l&agrave;m nhiệm vụ th&ocirc;i, số l&agrave; c&oacute; một phần thưởng nhiệm vụ rất tuyệt nhưng chỉ c&oacute; c&aacute;c cặp kết đ&ocirc;i mới được l&agrave;m, n&ecirc;n nam nữ độc th&acirc;n trong bang ph&aacute;i đều lần lượt cưới nhau, Ch&acirc;n Thủy V&ocirc; Hương gửi tin nhắn hỏi Vi Vi c&oacute; thể kết h&ocirc;n với anh ta kh&ocirc;ng, Vi Vi nghĩ ngợi rồi đồng &yacute;.<br />\r\n<br />\r\nĐến giờ th&igrave; cưới nhau cũng được mấy th&aacute;ng rồi, tuy Vi Vi vốn chưa từng sến tới mức &ldquo;chồng ơi chồng &agrave;&rdquo;, lu&ocirc;n chỉ gọi thẳng t&ecirc;n Ch&acirc;n Thủy V&ocirc; Hương nhưng hợp t&aacute;c với nhau ăn &yacute;, s&aacute;t vai t&aacute;c chiến cũng nhiều, dường như cũng c&oacute; ch&uacute;t cảm t&igrave;nh c&aacute;ch mạng.<br />\r\n<br />\r\nTh&igrave; l&agrave; game m&agrave;&hellip;<br />\r\n<br />\r\nVi Vi trả lời tin nhắn lại: &ldquo;Muội đến ngay đ&acirc;y.&rdquo;<br />\r\n<br />\r\nNh&acirc;n vật &ldquo;L&ocirc; Vĩ Vi Vi&rdquo; trong game của Vi Vi l&ecirc;n ngựa, bắt đầu phi về ph&iacute;a Vong T&igrave;nh Đảo. &ldquo;L&ocirc; Vĩ Vi Vi&rdquo; l&agrave; một Hồng y Nữ hiệp được trang bị đầy m&igrave;nh.<br />\r\n<br />\r\nTr&ograve; chơi Mộng Du Giang Hồ m&agrave; Vi Vi tham gia l&agrave; một trong những game online v&otilde; hiệp đang &ldquo;hot&rdquo; nhất tr&ecirc;n thị trường hiện nay, thực ra game n&agrave;y x&eacute;t tr&ecirc;n c&aacute;c phương diện kh&aacute;c th&igrave; ho&agrave;n to&agrave;n chẳng c&oacute; g&igrave; đặc biệt cả, chỉ c&oacute; thiết kế rất đẹp, nh&acirc;n vật lại v&ocirc; c&ugrave;ng nhiều, c&aacute;c nh&acirc;n vật nam nữ trong game mỗi b&ecirc;n c&oacute; tới mười t&aacute;m loại c&oacute; thể lựa chọn. Hồng y Nữ hiệp m&agrave; Vi Vi chọn cũng kh&aacute; hiếm người th&iacute;ch, chẳng phải v&igrave; vẻ ngo&agrave;i của n&oacute; kh&ocirc;ng xinh đẹp, m&agrave; v&igrave; vũ kh&iacute; của n&oacute; l&agrave; một thanh đao cực lớn.<br />\r\n<br />\r\nThanh đao cực lớn, so với c&acirc;y s&aacute;o phỉ ngọc ưu nh&atilde;, so với d&acirc;y lụa bay lượn trắng như tuyết, so với kiếm mềm s&oacute;ng s&aacute;nh như nước thu, so với Nga My Th&iacute;ch, th&igrave; quả thực chẳng c&oacute; mĩ cảm, rất kh&ocirc;ng c&oacute; vẻ phụ nữ, v&igrave; vậy c&aacute;c game thủ nữ rất &iacute;t chọn n&oacute;, nhưng Vi Vi lại th&iacute;ch, cảm thấy rất oai h&ugrave;ng, rất ph&ugrave; hợp với h&igrave;nh tượng của m&igrave;nh.<br />\r\n<br />\r\nChạy đến Vong T&igrave;nh Đảo, hai người c&ugrave;ng uống nước Vong T&igrave;nh, hệ thống tuy&ecirc;n bố: &ldquo;L&ocirc; Vĩ Vi Vi v&agrave; Ch&acirc;n Thủy V&ocirc; Hương t&igrave;nh cảm rạn nứt, tuy&ecirc;n bố ly h&ocirc;n, từ đ&acirc;y đ&ocirc;i b&ecirc;n c&oacute; quyền tự do t&igrave;m kiếm đối tượng kh&aacute;c.&rdquo;<br />\r\n<br />\r\nCh&acirc;n Thủy V&ocirc; Hương muốn đưa cho Vi Vi một bộ trang bị Ti&ecirc;n Kh&iacute;, Vi Vi bấm chọn từ chối, kh&ocirc;ng chấp nhận, gửi đến khu&ocirc;n mặt cười, Hồng y Nữ hiệp bỏ đi rất kh&iacute; ph&aacute;ch.</p>\r\n\r\n<p><iframe frameborder=\"0\" height=\"500\" id=\"mgiframe\" src=\"http://mg.mgid.com/mghtml/framehtml/c/w/e/webtruyen1.com.47735.html\" width=\"100%\"></iframe></p>\r\n\r\n<p><br />\r\n<br />\r\nKết quả l&agrave; buổi trưa h&ocirc;m sau, Vi Vi ăn cơm xong l&ecirc;n mạng, L&ocirc;i Thần Ni Ni &ndash; c&ocirc; g&aacute;i m&agrave; Vi Vi cũng hay tr&ograve; chuyện trong bang ph&aacute;i &ndash; gửi tin nhắn đến: &ldquo;Vi Vi, chuyện g&igrave; vậy? Cậu với Ch&acirc;n Thủy ly h&ocirc;n rồi? Nghe n&oacute;i tối nay 8 giờ, anh ta với Tiểu Vũ Y&ecirc;u Y&ecirc;u cưới nhau đ&oacute;!&rdquo;<br />\r\n<br />\r\nVi Vi: &ldquo;&hellip;&hellip;&rdquo;<br />\r\n<br />\r\nL&ocirc;i Thần Ni Ni: &ldquo;Ly h&ocirc;n thật hả?&rdquo;<br />\r\n<br />\r\nVi Vi: &ldquo;Ừ.&rdquo;<br />\r\n<br />\r\nL&ocirc;i Thần Ni Ni: &ldquo;Tiếc thật đ&oacute;, Ch&acirc;n Thủy đ&oacute; cũng được, kh&ocirc;ng ngờ cũng h&aacute;o sắc như ai, nhưng Tiểu Vũ Y&ecirc;u Y&ecirc;u th&igrave; đ&uacute;ng thật l&agrave; qu&aacute; xinh đẹp.&rdquo;<br />\r\n<br />\r\nNi Ni n&oacute;i đến vẻ đẹp đ&oacute; đương nhi&ecirc;n l&agrave; kh&ocirc;ng phải chỉ nh&acirc;n vật trong game m&agrave; l&agrave; chỉ ngo&agrave;i đời thực. Ba th&aacute;ng trước, c&ocirc;ng ty game tiến h&agrave;nh hoạt động b&igrave;nh chọn c&aacute;c game thủ, ba game thủ c&oacute; phiếu bầu cao nhất sẽ nhận được c&aacute;c loại giải thưởng như bộ trang bị cao cấp, kinh nghiệm v.v&hellip; Tiểu Vũ Y&ecirc;u Y&ecirc;u nhờ mấy tấm h&igrave;nh v&agrave; một đoạn video clip với cốt c&aacute;ch phi ph&agrave;m của m&igrave;nh đ&atilde; đọat giải qu&aacute;n qu&acirc;n, hệ thống xưng tặng danh hiệu &ldquo;Giang hồ đệ nhất mĩ nh&acirc;n&rdquo;, chuyện n&agrave;y lập tức chấn động vang dội to&agrave;n hệ thống game Vi Vi đang chơi, Tiểu Vũ Y&ecirc;u Y&ecirc;u cũng trở th&agrave;nh mục ti&ecirc;u th&egrave;m thuồng của đ&aacute;m h&aacute;o sắc trong đ&oacute;.<br />\r\n<br />\r\n&ldquo;Chồng trước&rdquo; chớp mắt c&aacute;i đ&atilde; cưới người con g&aacute;i kh&aacute;c, tuy chỉ c&oacute; ch&uacute;t ch&uacute;t t&igrave;nh cảm c&aacute;ch mạng với Ch&acirc;n Thủy, Vi Vi vẫn kh&ocirc;ng thể kh&ocirc;ng thấy ủ rũ, đập đầu v&agrave;o b&agrave;n (đứa trẻ n&agrave;y hễ buồn l&agrave; vậy đấy&hellip;), g&agrave;o to: &ldquo;Kh&ocirc;ng chịu vậy đ&acirc;u, lấy sắc dụ người!!!&rdquo;<br />\r\n<br />\r\nC&acirc;u n&agrave;y Vi Vi kh&ocirc;ng g&agrave;o trong tr&ograve; chơi m&agrave; l&agrave; trong k&yacute; t&uacute;c x&aacute;, thế l&agrave; lập tức c&ocirc; n&agrave;ng bị bạn c&ugrave;ng ph&ograve;ng d&ugrave;ng gối đập v&agrave;o đầu:<br />\r\n<br />\r\n&ldquo;Bối Vi Vi! Đại mĩ nữ ch&acirc;n ch&iacute;nh như cậu c&ograve;n g&agrave;o như thế th&igrave; bọn tớ c&ograve;n sống được nữa kh&ocirc;ng?&rdquo;<br />\r\n<br />\r\nQuả vậy, Bối Vi Vi l&agrave; mĩ nữ, hơn nữa c&ograve;n l&agrave; đại mĩ nữ si&ecirc;u cấp. Nhưng m&agrave; mĩ nữ cũng c&oacute; nhiều loại m&agrave;, c&oacute; dạng ưu nh&atilde;, dạng gợi cảm, dạng ngọt ng&agrave;o, dạng dịu d&agrave;ng, dạng thục nữ&hellip;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><iframe height=\"100%\" id=\"iframe-ns-inread-itvc\" scrolling=\"no\" width=\"100%\"></iframe></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><br />\r\nC&ograve;n c&oacute; dạng như Vi Vi &ndash; dạng b&igrave;nh hoa&hellip;<br />\r\n<br />\r\nTuy Vi Vi lu&ocirc;n cố gắng học h&agrave;nh, ng&agrave;y ng&agrave;y phấn đấu tiến đến gần dạng tr&iacute; thức, nhưng m&agrave;&hellip;<br />\r\n<br />\r\nCặp l&ocirc;ng m&agrave;y đẹp, s&oacute;ng mắt h&uacute;t hồn, m&agrave;u m&ocirc;i lu&ocirc;n đỏ như son, d&aacute;ng người bốc lửa, Bối Vi Vi d&ugrave; cho c&oacute; kho&aacute;c l&ecirc;n người bộ đồng phục đạo mạo của Đại học A bước ra ngo&agrave;i, th&igrave; cũng sẽ kh&ocirc;ng ai cảm thấy c&ocirc; l&agrave; sinh vi&ecirc;n của một trường đại học danh tiếng cả.<br />\r\n<br />\r\nVi Vi nhớ đến chuyện đ&aacute;ng hận đ&oacute;, tiếp tục đập đầu v&agrave;o b&agrave;n.<br />\r\n<br />\r\nTrong m&aacute;y t&iacute;nh, L&ocirc;i Thần Ni Ni tiếp tục bu&ocirc;n dưa: &ldquo;Hồi đ&oacute; cũng nghe n&oacute;i Tiểu Vũ Y&ecirc;u Y&ecirc;u muốn cưới ai đ&oacute; trong bảng xếp hạng đẳng cấp, kh&ocirc;ng ngờ lại l&agrave; với Ch&acirc;n Thủy V&ocirc; Hương, nhưng mấy đợt trước cũng thường thấy Ch&acirc;n Thủy v&agrave; c&ocirc; ta luyện cấp với nhau thật.&rdquo;<br />\r\n<br />\r\nQuả nhi&ecirc;n l&agrave; trong l&uacute;c c&ocirc; kh&ocirc;ng c&oacute; ở đ&oacute; đ&atilde; nảy sinh &ldquo;gian t&igrave;nh&rdquo; với nhau, Vi Vi gửi đi một biểu tượng gương mặt bị shock nặng.<br />\r\n<br />\r\n&ldquo;Thực ra cũng kh&ocirc;ng tr&aacute;ch Ch&acirc;n Thủy được, Vi Vi &agrave;, thực ra&hellip;&rdquo;<br />\r\n<br />\r\n&ldquo;Thực ra c&aacute;i g&igrave;?&rdquo; Vi Vi đ&atilde; đập xong đầu v&agrave;o b&agrave;n, cầm ly tr&agrave; l&ecirc;n uống, một tay g&otilde; chữ.<br />\r\n<br />\r\n&ldquo;Thực ra&hellip; thực lực cậu mạnh thế, đứng thứ 6 trong bảng PK (chiến đấu), vả lại chưa từng đ&ograve;i hỏi con trai phải trang bị đồ đạc cho, cho n&ecirc;n&hellip; mọi người đều nghi ngờ cậu l&agrave; p&ecirc;-đ&ecirc; đ&oacute;!&rdquo;<br />\r\n<br />\r\n&ldquo;Phụt!&rdquo; Vi Vi phun hết nước l&ecirc;n m&agrave;n h&igrave;nh vi t&iacute;nh.</p>\r\n', 'VNE-1501262072.jpg', 14, 5, '2017-08-08 03:25:14');
+INSERT INTO `story` (`story_id`, `name`, `preview_text`, `detail_text`, `picture`, `counter`, `cat_id`, `created_at`) VALUES
+(10, 'BÊN NHAU TRỌN ĐỜI', '                                            <p>Triệu Mặc Sênh lặng người nhìn cặp trai gái đứng trước quầy bán rau, một lần nữa chị cảm nhận sự lạ lùng của số phận. Bảy năm trước, chính họ khiến chị quyết định ra đi. Bây giờ họ lại cùng nhau đi mua sắm, v', '<p>Triệu Mặc S&ecirc;nh lặng người nh&igrave;n cặp trai g&aacute;i đứng trước quầy b&aacute;n rau, một lần nữa chị cảm nhận sự lạ l&ugrave;ng của số phận. Bảy năm trước, ch&iacute;nh họ khiến chị quyết định ra đi. B&acirc;y giờ họ lại c&ugrave;ng nhau đi mua sắm, vậy l&agrave; cuối c&ugrave;ng họ vẫn c&ugrave;ng nhau! May m&agrave; hồi ấy chị bỏ ra đi, nếu kh&ocirc;ng&hellip;Mặc S&ecirc;nh kh&ocirc;ng d&aacute;m nghĩ th&ecirc;m&hellip;&nbsp;<br />\r\n<br />\r\nH&agrave; Dĩ Th&acirc;m, H&agrave; Dĩ Văn, sao m&igrave;nh ngốc thế, tại sao cứ một mực cho rằng hai người ấy t&ecirc;n giống nhau th&igrave; nhất định l&agrave; anh em?<br />\r\n<br />\r\n&ldquo;Ch&uacute;ng t&ocirc;i kh&ocirc;ng phải l&agrave; anh em, trước đ&acirc;y hai gia đ&igrave;nh ch&uacute;ng t&ocirc;i l&agrave; h&agrave;ng x&oacute;m của nhau, đều họ H&agrave; cho n&ecirc;n cũng đặt t&ecirc;n cho c&aacute;c con giống nhau. Về sau, cha mẹ Dĩ Th&acirc;m đột ngột qua đời, cha mẹ t&ocirc;i nhận nu&ocirc;i Dĩ Th&acirc;m.&rdquo;<br />\r\n<br />\r\n&ldquo;Chị tưởng, chị mạnh hơn t&igrave;nh cảm hai mươi năm giữa t&ocirc;i v&agrave; Dĩ Th&acirc;m sao?&rdquo;<br />\r\n<br />\r\n&ldquo;H&ocirc;m nay t&ocirc;i ch&iacute;nh thức cho chị biết, t&ocirc;i y&ecirc;u Dĩ Th&acirc;m, nhưng t&ocirc;i kh&ocirc;ng muốn y&ecirc;u thầm y&ecirc;u vụng. T&ocirc;i v&agrave; chị sẽ cạnh tranh c&ocirc;ng khai.&rdquo;<br />\r\n<br />\r\nNăm19 tuổi, một ng&agrave;y trước sinh nhật Mặc S&ecirc;nh, c&ocirc; bạn g&aacute;i H&agrave; Dĩ Văn vốn điềm đạm, bỗng nhi&ecirc;n thẳng thắn tuy&ecirc;n bố với chị. Một người dịu d&agrave;ng, kh&ocirc;ng bao giờ tranh gi&agrave;nh với ai như Dĩ Văn m&agrave; quả quyết như vậy, chắc hẳn c&ocirc; ấy phải y&ecirc;u Dĩ Th&acirc;m nhiều lắm.<br />\r\n<br />\r\nC&ograve;n chị? Chị c&oacute; g&igrave; để cạnh tranh với Dĩ Văn? Ch&iacute;nh v&agrave;o ng&agrave;y Dĩ Văn tuy&ecirc;n chiến, chị đ&atilde; thua, sau đ&oacute; chị đ&atilde; chạy trốn sang Mỹ suốt bảy năm trời.<br />\r\n<br />\r\n&ldquo;&Ocirc;i, H&agrave; Dĩ Th&acirc;m&rdquo; &ndash; Nghĩ đến &aacute;nh mắt lạnh l&ugrave;ng, những lời n&oacute;i tuyệt t&igrave;nh của anh ta, Mặc S&ecirc;nh thấy nhoi nh&oacute;i trong l&ograve;ng. Tuy cảm gi&aacute;c rất mơ hồ, kh&oacute; nhận ra, nhưng chắc chắn l&agrave; c&oacute; thật.<br />\r\n<br />\r\nAnh đi về ph&iacute;a chị, b&agrave;n tay Mặc S&ecirc;nh nắm chặt tay đẩy xe h&agrave;ng đến mức c&aacute;c đầu khớp ng&oacute;n tay trắng bệch, như sắp long ra. Nhưng si&ecirc;u thị l&uacute;c đ&oacute; qu&aacute; đ&ocirc;ng, chị lại đang đẩy c&aacute;i xe chứa h&agrave;ng n&ecirc;n ho&agrave;n to&agrave;n kh&ocirc;ng thể dễ d&agrave;ng quay người bỏ chạy. Tuy nhi&ecirc;n ngay lập tức chị nghĩ, v&igrave; sao m&igrave;nh phải lẩn tr&aacute;nh? M&igrave;nh n&ecirc;n b&igrave;nh thản n&oacute;i với họ một c&acirc;u đại loại: &ldquo;Ồ, đ&atilde; l&acirc;u kh&ocirc;ng gặp.&rdquo;<br />\r\n<br />\r\nRồi ki&ecirc;u h&atilde;nh quay đi, để lại cho họ một h&igrave;nh ảnh đẹp về m&igrave;nh mới phải.<br />\r\n<br />\r\nNhưng, c&oacute; thể họ kh&ocirc;ng nhận ra m&igrave;nh. C&oacute; thể lắm chứ, m&igrave;nh đ&atilde; thay đổi nhiều, m&aacute;i t&oacute;c d&agrave;i bu&ocirc;ng x&otilde;a năm xưa giờ biến th&agrave;nh m&aacute;i t&oacute;c ngắn chấm tai, l&agrave;n da trắng n&otilde;n ng&agrave;y n&agrave;o giờ đ&atilde; sạm đi nhiều bởi c&aacute;i nắng bang California, lại c&ograve;n quần b&ograve;, &aacute;o ph&ocirc;ng rộng th&ugrave;ng th&igrave;nh, gi&agrave;y thể thao, kh&aacute;c xưa nhiều qu&aacute;!<br />\r\n<br />\r\nHọ bước từng bước, chầm chậm tiến lại gần nhau, rồi&hellip; lướt qua nhau.<br />\r\n<br />\r\nĐau đớn qu&aacute;!<br />\r\n<br />\r\nH&igrave;nh như c&oacute; tiếng n&oacute;i vẳng lại.<br />\r\n<br />\r\n&ldquo;C&oacute; cần mua th&ecirc;m sữa kh&ocirc;ng?&rdquo; &ndash; Đ&uacute;ng l&agrave; tiếng Dĩ Văn rồi, vẫn nhỏ nhẹ như xưa.<br />\r\n<br />\r\n&ldquo;&hellip;&rdquo;<br />\r\n<br />\r\nChị kh&ocirc;ng nghe r&otilde; c&acirc;u trả lời. Nhớ qu&aacute;, giọng n&oacute;i trầm ấm như tiếng vĩ cầm của Dĩ Th&acirc;m lu&ocirc;n vẳng b&ecirc;n tai Mặc S&ecirc;nh trong suốt bảy năm chị lưu lạc xứ người.<br />\r\n<br />\r\nHẫng hụt, nhưng đồng thời cũng thấy nhẹ nh&otilde;m. Mặc S&ecirc;nh ngẩng đầu n&atilde;y giờ vẫn c&uacute;i, quả quyết bước đi.<br />\r\n<br />\r\n&ldquo;Rầm&rdquo;, chiếc xe đẩy x&ocirc; v&agrave;o đống x&agrave; ph&ograve;ng hạ gi&aacute; chất như n&uacute;i tr&ecirc;n lối đi. Thủ phạm l&agrave; chị đứng ng&acirc;y nh&igrave;n mấy trăm b&aacute;nh x&agrave; ph&ograve;ng đổ tung to&eacute;, ngổn ngang .<br />\r\n<br />\r\nTệ thật, liệu c&oacute; thể vờ tỏ ra kh&ocirc;ng biết m&igrave;nh l&agrave; người g&acirc;y ra chuyện?<br />\r\n<br />\r\n&ldquo;Trời ơi, đ&acirc;y l&agrave; lần thứ ba trong ng&agrave;y rồi.&rdquo; &ndash; Người quản l&yacute; si&ecirc;u thị kh&ocirc;ng biết từ đ&acirc;u chạy đến n&oacute;i như r&ecirc;n l&ecirc;n.<br />\r\n<br />\r\nCho n&ecirc;n, cũng kh&ocirc;ng n&ecirc;n tr&aacute;ch người ta, sao lại chất h&agrave;ng ngay giữa lối đi như vậy. Mặc S&ecirc;nh lẩm bẩm, cố l&agrave;m ra vẻ hối hận.<br />\r\n<br />\r\nCảnh tượng đương nhi&ecirc;n thu h&uacute;t sự ch&uacute; &yacute; của những người xung quanh, trong đ&oacute; c&oacute; Dĩ Văn. Dĩ Văn liếc nh&igrave;n về ph&iacute;a c&oacute; nhiều tiếng ồn &agrave;o, bỗng giật m&igrave;nh &ndash; C&ocirc; ta! C&oacute; phải c&ocirc; ta kh&ocirc;ng? Dĩ Văn dường như kh&ocirc;ng tin v&agrave;o mắt m&igrave;nh&hellip; Đ&uacute;ng l&agrave; c&ocirc; ta! Trở về rồi ư?<br />\r\n<br />\r\n&ldquo;Chuyện g&igrave; thế Dĩ Văn?&rdquo; &ndash; H&agrave; Dĩ Th&acirc;m, kh&ocirc;ng hiểu, quay sang hỏi, bất gi&aacute;c nh&igrave;n theo &aacute;nh mắt của Dĩ Văn.<br />\r\n<br />\r\nTh&acirc;n h&igrave;nh cao lớn của Dĩ Th&acirc;m bỗng khựng lại.<br />\r\n<br />\r\nTriệu Mặc S&ecirc;nh!<br />\r\n<br />\r\nNgười phụ nữ c&uacute;i đầu như một đứa trẻ mắc lỗi kia chẳng phải l&agrave; Triệu Mặc S&ecirc;nh? Vẻ mặt thiếu tự nhi&ecirc;n, mắt thấp tho&aacute;ng nụ cười tinh qu&aacute;i kh&ocirc;ng thể chối c&atilde;i. Từ xa kh&oacute; nh&igrave;n r&otilde; n&eacute;t mặt c&ocirc; ta, nhưng Dĩ Th&acirc;m biết. Anh vẫn biết, c&ocirc; ta l&agrave; vậy, sau khi khuấy đảo cho nước ao đục ngầu rồi bỏ đi một c&aacute;ch v&ocirc; tr&aacute;ch nhiệm, ương ngạnh, &iacute;ch kỷ v&agrave; đ&aacute;ng gh&eacute;t.<br />\r\n<br />\r\nChẵn bảy năm, c&ocirc; ta vẫn c&ograve;n nhớ đường về ư?<br />\r\n<br />\r\nH&agrave; Dĩ Th&acirc;m gọi: &ldquo;Dĩ Văn, về th&ocirc;i!&rdquo;<br />\r\n<br />\r\nDĩ Văn kinh ngạc nh&igrave;n vẻ mặt b&igrave;nh thản của Dĩ Th&acirc;m: &ldquo;Anh kh&ocirc;ng định đến ch&agrave;o một c&acirc;u ư? Hay l&agrave;&hellip;&rdquo;<br />\r\n<br />\r\n&ldquo;C&ocirc; ấy từ l&acirc;u đ&atilde; kh&ocirc;ng c&ograve;n tồn tại trong cuộc sống của anh.&rdquo; &ndash; Giọng Dĩ Th&acirc;m dửng dưng, c&oacute; vẻ như kh&ocirc;ng c&oacute; chuyện g&igrave; thật .<br />\r\n<br />\r\nDĩ Văn thầm quan s&aacute;t n&eacute;t mặt Dĩ Th&acirc;m, nhưng kh&ocirc;ng t&igrave;m thấy g&igrave; hơn, đoạn n&oacute;i nhỏ: &ldquo;Đi th&ocirc;i anh!&rdquo;<br />\r\n<br />\r\nNhưng cuối c&ugrave;ng c&aacute;i nh&igrave;n của Dĩ Văn vẫn v&ocirc; t&igrave;nh hướng về Mặc S&ecirc;nh, đ&uacute;ng l&uacute;c chị ngoảnh lại, &aacute;nh mắt hai người gặp nhau, Mặc S&ecirc;nh lộ vẻ ngạc nhi&ecirc;n, nụ cười tho&aacute;ng hiện tr&ecirc;n mặt, chị bối rối gật đầu.<br />\r\n<br />\r\nDĩ Văn vội v&agrave;ng quay đầu gọi: &ldquo;Dĩ Th&acirc;m&hellip;&rdquo;<br />\r\n<br />\r\n&ldquo;G&igrave; thế?&rdquo;<br />\r\n<br />\r\n&ldquo;Chị ấy&hellip;&rdquo;- Dĩ Văn đột nhi&ecirc;n dừng lại, trong đ&aacute;m người đằng trước kh&ocirc;ng nh&igrave;n thấy b&oacute;ng d&aacute;ng Mặc S&ecirc;nh đ&acirc;u nữa.<br />\r\n<br />\r\n&ldquo;Sao thế?&rdquo; &ndash; Dĩ Th&acirc;m hỏi.<br />\r\n<br />\r\n&ldquo;Kh&ocirc;ng, kh&ocirc;ng c&oacute; g&igrave;.&rdquo; &ndash; Dĩ Văn c&uacute;i đầu. Chỉ c&oacute; điều vừa rồi c&ocirc; đ&atilde; nh&igrave;n thấy họ, tại sao họ lại dễ d&agrave;ng bỏ qua, cố t&igrave;nh kh&ocirc;ng nhận nhau? Lại c&ograve;n Dĩ Th&acirc;m nữa, r&otilde; r&agrave;ng đ&atilde; nh&igrave;n thấy&hellip;<br />\r\n<br />\r\nKh&ocirc;ng ngờ lại c&oacute; ng&agrave;y m&igrave;nh trở về đ&acirc;y.<br />\r\n<br />\r\nChủ bi&ecirc;n hỏi Mặc S&ecirc;nh trong lần đầu gặp nhau: &ldquo;C&ocirc; Triệu, v&igrave; sao c&ocirc; lại chọn l&agrave;m việc ở th&agrave;nh phố n&agrave;y?&rdquo;<br />\r\n<br />\r\nMặc S&ecirc;nh bỗng l&uacute;ng t&uacute;ng kh&ocirc;ng biết trả lời thế n&agrave;o. V&igrave; sao ư? Bởi v&igrave;, đ&acirc;y l&agrave; nơi t&ocirc;i đ&atilde; học một năm đại học? Bởi v&igrave; nơi đ&acirc;y t&ocirc;i đ&atilde; quen anh? Bởi v&igrave; nơi đ&acirc;y t&ocirc;i đ&atilde; c&oacute; nhiều kỷ niệm, rất nhiều?<br />\r\n<br />\r\nL&uacute;c đầu ch&iacute;nh Mặc S&ecirc;nh cũng kh&ocirc;ng biết, tại sao nơi đầu ti&ecirc;n chị nghĩ tới sau khi về nước l&agrave; th&agrave;nh phố nơi n&agrave;y. M&atilde;i đến h&ocirc;m gặp lại Dĩ Th&acirc;m chị mới hiểu, chị muốn gặp anh, mặc d&ugrave; anh đ&atilde; kh&ocirc;ng c&ograve;n thuộc về chị, nhưng chị vẫn muốn nh&igrave;n thấy anh.<br />\r\n<br />\r\nChỉ nh&igrave;n th&ocirc;i.<br />\r\n<br />\r\n&ldquo;C&oacute; lẽ l&agrave; do t&ocirc;i kh&ocirc;ng thể về nh&agrave;.&rdquo; &ndash; Mặc S&ecirc;nh n&oacute;i. Chủ bi&ecirc;n nh&igrave;n chị rất l&acirc;u c&oacute; vẻ ngạc nhi&ecirc;n, c&oacute; thể giữ c&ocirc; ta l&agrave;m ph&oacute;ng vi&ecirc;n ảnh &ndash; B&agrave; chủ bi&ecirc;n thầm nghĩ.<br />\r\n<br />\r\nTuy nhi&ecirc;n, việc chủ bi&ecirc;n qu&aacute; coi trọng l&yacute; lịch l&agrave;m việc ở nước ngo&agrave;i của chị lại khiến Mặc S&ecirc;nh cảm thấy bất an.<br />\r\n<br />\r\n&ldquo;Đ&oacute; chỉ l&agrave; một tạp ch&iacute; nhỏ.&rdquo; &ndash; Chị n&oacute;i với b&agrave; ta như vậy.<br />\r\n<br />\r\n&ldquo;Ồ, c&ocirc; S&ecirc;nh.&rdquo; &ndash; B&agrave; chủ bi&ecirc;n hơn 40 tuổi th&acirc;n mật gọi t&ecirc;n Mặc S&ecirc;nh: &ldquo;Chị khen kiến thức s&acirc;u rộng của t&ocirc;i ư? Kiến thức của t&ocirc;i rất b&igrave;nh thường. T&ocirc;i chỉ l&agrave;m việc ở một tờ b&aacute;o nhỏ của Mỹ, biết kh&aacute; r&otilde; tờ b&aacute;o đ&oacute; th&ocirc;i.&rdquo;- Mặc S&ecirc;nh cười đ&aacute;p lại lời khen của b&agrave; chủ bi&ecirc;n, cảm gi&aacute;c bất an trong chị bỗng chốc ti&ecirc;u tan.<br />\r\n<br />\r\n&ldquo;C&ocirc; S&ecirc;nh, t&ocirc;i biết, một người Trung Quốc l&agrave;m ph&oacute;ng vi&ecirc;n ảnh ở Mỹ đ&acirc;u phải dễ, nhất định chị phải ưu t&uacute; hơn người da trắng. Bọn họ lu&ocirc;n cho rằng người Trung Quốc ch&uacute;ng ta kh&ocirc;ng c&oacute; gen nghệ thuật.&rdquo;- B&agrave; chủ bi&ecirc;n tiếp tục c&acirc;u chuyện.<br />\r\n<br />\r\nViệc l&agrave;m vậy l&agrave; đ&atilde; ổn. Chị được nhận v&agrave;o l&agrave;m ph&oacute;ng vi&ecirc;n ảnh cho tờ tạp ch&iacute; phụ nữ n&agrave;y. Mặc S&ecirc;nh vẫn đến si&ecirc;u thị đ&oacute; mua đồ, nhưng kh&ocirc;ng hề gặp lại họ. M&atilde;i đến một h&ocirc;m, người bảo vệ si&ecirc;u thị gọi chị lại: &ldquo;Chị ơi, mời chị đến ph&ograve;ng bảo vệ một l&aacute;t.&rdquo;<br />\r\n<br />\r\nMặc S&ecirc;nh ngạc nhi&ecirc;n, cảm gi&aacute;c c&oacute; chuyện chẳng l&agrave;nh, b&aacute;o ch&iacute; nhiều lần đăng tin nh&acirc;n vi&ecirc;n bảo vệ ở một số si&ecirc;u thị cưỡng chế kh&aacute;m x&eacute;t, thậm ch&iacute; đ&aacute;nh kh&aacute;ch h&agrave;ng.<br />\r\n<br />\r\nMặc S&ecirc;nh nh&igrave;n anh ta với &aacute;nh mắt cảnh gi&aacute;c, anh bảo vệ tỏ vẻ &aacute;i ngại, n&oacute;i: &ldquo;Xin lỗi chị, ch&uacute;ng t&ocirc;i kh&ocirc;ng c&oacute; &yacute; g&igrave;, chỉ muốn hỏi, một th&aacute;ng trước đ&acirc;y chị c&oacute; đ&aacute;nh mất thứ g&igrave; kh&ocirc;ng?&rdquo;<br />\r\n<br />\r\nMột th&aacute;ng trước m&igrave;nh vừa về nước, chẳng lẽ đ&aacute;nh mất thứ g&igrave; m&agrave; m&igrave;nh kh&ocirc;ng biết? Chị lặng lẽ đi theo người bảo vệ với một ch&uacute;t hiếu kỳ. Đến ph&ograve;ng bảo vệ, anh ta đưa cho Mặc S&ecirc;nh một c&aacute;i v&iacute; da m&agrave;u đen.<br />\r\n<br />\r\nNh&igrave;n qua Mặc S&ecirc;nh cũng biết đ&oacute; kh&ocirc;ng phải l&agrave; v&iacute; của m&igrave;nh, chị lắc đầu n&oacute;i: &ldquo;Anh nhầm rồi, kh&ocirc;ng phải của t&ocirc;i.&rdquo;<br />\r\n<br />\r\nNgười bảo vệ ngạc nhi&ecirc;n, hỏi lại: &ldquo;Chị mở ra xem.&rdquo;<br />\r\n<br />\r\nChị đ&oacute;n c&aacute;i v&iacute;, mở ra, b&ecirc;n trong c&oacute; bức ảnh của chị.<br />\r\n<br />\r\nNgười bảo vệ n&oacute;i: &ldquo;Ảnh của chị phải kh&ocirc;ng, mặc d&ugrave; giờ chị đ&atilde; kh&aacute;c nhiều, nhưng t&ocirc;i vẫn nhận ra.&rdquo;<br />\r\n<br />\r\nKh&aacute;c rất nhiều, bởi v&igrave; bức ảnh chụp l&uacute;c Mặc S&ecirc;nh vừa v&agrave;o đại học, vẫn c&ograve;n để t&oacute;c d&agrave;i, tết th&agrave;nh b&iacute;m đu&ocirc;i ngựa, cười một c&aacute;ch ngốc nghếch.<br />\r\n<br />\r\nSao n&oacute; lại c&oacute; trong v&iacute; của một người lạ?<br />\r\n<br />\r\nMặc S&ecirc;nh trả c&aacute;i v&iacute; cho người bảo vệ: &ldquo;Đ&acirc;y ho&agrave;n to&agrave;n kh&ocirc;ng phải t&ocirc;i.&rdquo;<br />\r\n<br />\r\nNgười bảo vệ vẫn một mực: &ldquo;Người trong ảnh kh&ocirc;ng phải chị sao?&rdquo;<br />\r\n<br />\r\n&ldquo;Đ&uacute;ng l&agrave; t&ocirc;i, nhưng c&aacute;i v&iacute; kh&ocirc;ng phải của t&ocirc;i.&rdquo;<br />\r\n<br />\r\n&ldquo;Nhưng nhất định l&agrave; người quen của chị. N&agrave;y, c&oacute; khi chủ nh&acirc;n của c&aacute;i v&iacute; thầm y&ecirc;u chị cũng n&ecirc;n&hellip;&rdquo;<br />\r\n<br />\r\nỒ, thật bất ngờ! Ai bảo người Trung Quốc thiếu &oacute;c li&ecirc;n tưởng?<br />\r\n<br />\r\n&ldquo;Nhưng&hellip;&rdquo;<br />\r\n<br />\r\n&ldquo;Chị cầm đi, cầm đi. M&atilde;i chẳng c&oacute; ai đến nhận, để ở đ&acirc;y ch&uacute;ng t&ocirc;i cũng kh&oacute; xử l&yacute;, đem nộp coi như sung c&ocirc;ng, th&agrave; trả lại cho chị, chị v&agrave; chủ nh&acirc;n c&aacute;i v&iacute; nhất định c&oacute; quan hệ với nhau. Ồ, m&agrave; biết đ&acirc;u t&ocirc;i chẳng t&aacute;c th&agrave;nh một cuộc h&ocirc;n nh&acirc;n&hellip;&rdquo; &ndash; Người bảo vệ h&igrave;nh như m&ecirc; xem phim truyền h&igrave;nh, một mực tin v&agrave;o suy diễn của anh ta.<br />\r\n<br />\r\nMột th&aacute;ng trước, c&oacute; thể Dĩ Th&acirc;m đ&atilde; đ&aacute;nh rơi c&aacute;i v&iacute; v&agrave;o l&uacute;c họ gặp lại nhau. Dĩ Th&acirc;m đ&aacute;nh rơi ư? Mặc S&ecirc;nh mang c&aacute;i v&iacute; về nh&agrave; với suy diễn vẩn vơ.<br />\r\n<br />\r\nBuổi tối sau khi tắm xong, nằm tr&ecirc;n giường, Mặc S&ecirc;nh giở xem lại c&aacute;i v&iacute;, kiểu d&aacute;ng đơn giản, nh&atilde;n hiệu nổi tiếng, tiền kh&ocirc;ng nhiều, ho&agrave;n to&agrave;n kh&ocirc;ng thể x&aacute;c định được th&acirc;n phận chủ nh&acirc;n của n&oacute;.<br />\r\n<br />\r\nMặc S&ecirc;nh thận trọng r&uacute;t bức ảnh ra, ở một g&oacute;c bức ảnh c&oacute; mấy chữ nổi, chắc chắn được b&oacute;c ra từ giấy tờ n&agrave;o đ&oacute;, lật bức ảnh, chị ngỡ ng&agrave;ng, mặt sau c&oacute; chữ! N&eacute;t chữ ph&oacute;ng kho&aacute;ng, rắn rỏi như c&agrave;o r&aacute;ch giấy của anh, Mặc S&ecirc;nh kh&ocirc;ng bao giờ qu&ecirc;n.<br />\r\n<br />\r\nĐ&oacute; l&agrave; n&eacute;t chữ của Dĩ Th&acirc;m. D&ograve;ng chữ viết bằng b&uacute;t m&aacute;y, mực đen: My sun shine!<br />\r\n<br />\r\nTrong một th&agrave;nh phố phức tạp vẫn c&oacute; thể sống rất đơn giản, l&agrave;m việc, ăn, ngủ, chỉ c&oacute; vậy. Sau thời kỳ th&iacute;ch nghi ban đầu, những ng&agrave;y tiếp theo chỉ l&agrave; sự lặp lại m&aacute;y m&oacute;c.<br />\r\n<br />\r\n&ldquo;Chị S&ecirc;nh, t&ocirc;i t&igrave;m chị khắp nơi.&rdquo; &ndash; Mặc S&ecirc;nh vừa bước v&agrave;o t&ograve;a soạn, đ&atilde; nghe c&oacute; người gọi từ xa.<br />\r\n<br />\r\n&ldquo;Bạch hả, c&oacute; việc g&igrave; thế?&rdquo;<br />\r\n<br />\r\nBạch họ L&yacute;, c&ograve;n rất trẻ, cũng l&agrave; ph&oacute;ng vi&ecirc;n ảnh. Cậu ta rất c&oacute; t&agrave;i tiếp x&uacute;c với c&aacute;c si&ecirc;u sao, si&ecirc;u mẫu n&ecirc;n được giao phụ tr&aacute;ch ảnh b&igrave;a.<br />\r\n<br />\r\n&ldquo;Vợ em sinh ch&aacute;u, buổi chụp ảnh si&ecirc;u mẫu Ti&ecirc;u Ti&ecirc;u ng&agrave;y mai chị gi&uacute;p em được kh&ocirc;ng?&rdquo;<br />\r\n<br />\r\nTi&ecirc;u Ti&ecirc;u? Mặc S&ecirc;nh hơi do dự: &ldquo;T&ocirc;i th&igrave; kh&ocirc;ng c&oacute; vấn đề g&igrave;, c&oacute; điều nghe n&oacute;i t&iacute;nh kh&iacute; c&ocirc; ta rất kh&oacute; chịu, nếu kh&ocirc;ng phải l&agrave; người quen chưa chắc c&ocirc; ta đ&atilde; đồng &yacute; cho chụp.&rdquo;<br />\r\n<br />\r\nBạch đ&atilde; nghĩ tới chuyện n&agrave;y, anh nghĩ một l&aacute;t n&oacute;i: &ldquo;Thế n&agrave;y vậy, chị cứ đi thử, nếu kh&ocirc;ng được th&igrave; gọi cho em.&rdquo;<br />\r\n<br />\r\nNg&agrave;y h&ocirc;m sau, khi nh&igrave;n thấy người mẫu Ti&ecirc;u Ti&ecirc;u nổi tiếng lạnh l&ugrave;ng, Mặc S&ecirc;nh ho&agrave;n to&agrave;n bị bất ngờ, chị kh&ocirc;ng biết giới người mẫu trong nước, trước đ&oacute; lại chưa bao giờ xem ảnh Ti&ecirc;u Ti&ecirc;u, kh&ocirc;ng ngờ c&ocirc; ta lại&hellip;lại rất giống một người bạn thời đại học của chị.<br />\r\n<br />\r\nNhưng bạn đại học của Mặc S&ecirc;nh l&agrave; c&ocirc; g&aacute;i n&ocirc;ng th&ocirc;n chất ph&aacute;c, vụng về, c&ograve;n c&ocirc; người mẫu trước mặt chị, cặp ch&acirc;n d&agrave;i ngọc ng&agrave; vắt ch&eacute;o nhau, động t&aacute;c h&uacute;t thuốc vừa điệu nghệ vừa quyến rũ&hellip;<br />\r\n<br />\r\nMặc S&ecirc;nh kh&ocirc;ng d&aacute;m nhận, c&oacute; lẽ chỉ l&agrave; hai người giống nhau th&ocirc;i.<br />\r\n<br />\r\nNhưng người đẹp Ti&ecirc;u Ti&ecirc;u nheo mắt nh&igrave;n Mặc S&ecirc;nh, đoạn sải những bước d&agrave;i đến b&ecirc;n chị:<br />\r\n<br />\r\n&ldquo;Thế n&agrave;o, kh&ocirc;ng nhận ra nhau &agrave;?&rdquo;<br />\r\n<br />\r\n&ldquo;&hellip;Thiếu Mai ư?&rdquo;<br />\r\n<br />\r\n&ldquo;Hừ, kh&ocirc;ng phải tớ th&igrave; ai đ&acirc;y.&rdquo; C&ocirc; ta cười đắc &yacute;.</p>\r\n\r\n<p><iframe frameborder=\"0\" height=\"500\" id=\"mgiframe\" src=\"http://mg.mgid.com/mghtml/framehtml/c/w/e/webtruyen1.com.47735.html\" width=\"100%\"></iframe></p>\r\n\r\n<p><br />\r\n&ldquo;Chị S&ecirc;nh, th&igrave; ra chị l&agrave; người quen của Ti&ecirc;u Ti&ecirc;u? Tốt qu&aacute;.&rdquo; &ndash; Cậu Đồng đi c&ugrave;ng vui vẻ g&oacute;p chuyện.<br />\r\n<br />\r\n&ldquo;Hồi học năm thứ nhất, cậu ở giường tr&ecirc;n, tớ giường dưới.&rdquo;<br />\r\n<br />\r\n&ldquo;Thời sinh vi&ecirc;n ai cũng th&iacute;ch giường tầng.&rdquo; &ndash; Người quản l&yacute; của Ti&ecirc;u Ti&ecirc;u chen lời.<br />\r\n<br />\r\n&ldquo;Chẳng phải c&aacute;c vị đến chụp ảnh sao, mau chụp đi!&rdquo; &ndash; Ti&ecirc;u Ti&ecirc;u nhiệt t&igrave;nh giục.<br />\r\n<br />\r\nThiếu Mai thay đổi nhiều qu&aacute;! Mặc S&ecirc;nh vừa lấy g&oacute;c chụp vừa nghĩ, trước ống k&iacute;nh ho&agrave;n to&agrave;n kh&ocirc;ng phải l&agrave; một Thiếu Mai vụng về đến đ&aacute;ng y&ecirc;u. Vậy c&ocirc; ta l&agrave; ai?<br />\r\n<br />\r\nC&oacute; lẽ chẳng l&agrave; ai hết. Một nhiếp ảnh gia c&oacute; thể chụp được c&aacute;i thần của người mẫu, nhưng Mặc S&ecirc;nh kh&ocirc;ng chụp được c&aacute;i thần của Ti&ecirc;u Ti&ecirc;u, c&oacute; lẽ chị chưa đủ t&agrave;i, hay n&oacute;i đ&uacute;ng hơn, c&oacute; lẽ người đứng trước ống k&iacute;nh ho&agrave;n to&agrave;n kh&ocirc;ng c&oacute; c&aacute;i đ&oacute;.<br />\r\n<br />\r\nTi&ecirc;u Ti&ecirc;u rất trống rỗng! Một sự trống rỗng đến tuyệt vọng, c&oacute; lẽ ch&iacute;nh sự trỗng rỗng n&agrave;y khiến c&ocirc; ta nổi như cồn.<br />\r\n<br />\r\nChụp xong một tổ hợp ảnh, Ti&ecirc;u Ti&ecirc;u xua tay: &ldquo;H&ocirc;m nay chụp đến đ&acirc;y th&ocirc;i.&rdquo;<br />\r\n<br />\r\n&ldquo;Nhưng, Ti&ecirc;u Ti&ecirc;u vẫn c&ograve;n phải&hellip;&rdquo; &ndash; Người quản l&yacute; của Ti&ecirc;u Ti&ecirc;u ngạc nhi&ecirc;n nhắc.<br />\r\n<br />\r\n&ldquo;Đến đ&acirc;y th&ocirc;i.&rdquo; &ndash; Ti&ecirc;u Ti&ecirc;u ki&ecirc;n quyết quay sang n&oacute;i với Mặc S&ecirc;nh: &ldquo;Ch&uacute;ng m&igrave;nh đi uống c&agrave; ph&ecirc;.&rdquo;<br />\r\n<br />\r\n&ldquo;L&acirc;u ng&agrave;y kh&ocirc;ng gặp, n&ecirc;n uống rượu mới phải, tiếc l&agrave; gần đ&acirc;y dạ d&agrave;y m&igrave;nh c&oacute; vấn đề, đ&agrave;nh uống c&agrave; ph&ecirc; vậy.&rdquo;<br />\r\n<br />\r\n&ldquo;Ồ, uống c&agrave; ph&ecirc; rất tốt, c&oacute; lẽ bạn n&ecirc;n uống c&ugrave;ng với sữa.&rdquo; &ndash; Mặc S&ecirc;nh kh&ocirc;ng biết n&ecirc;n n&oacute;i thế n&agrave;o. C&oacute; bao nhi&ecirc;u, bao nhi&ecirc;u chuyện cần hỏi, thực sự kh&ocirc;ng biết bắt đầu từ đ&acirc;u.<br />\r\n<br />\r\n&ldquo;Sức khỏe rất quan trọng, ăn ki&ecirc;ng cũng n&ecirc;n c&oacute; điều độ.&rdquo; &ndash; Mặc S&ecirc;nh chọn một chủ đề ngo&agrave;i r&igrave;a n&oacute;i.<br />\r\n<br />\r\n&ldquo;Xưa nay tớ chưa bao giờ ăn ki&ecirc;ng.&rdquo; &ndash; Ti&ecirc;u Ti&ecirc;u nửa cười, nửa kh&ocirc;ng: &ldquo;Tớ nghiện rượu.&rdquo;<br />\r\n<br />\r\n&ldquo;Thiếu Mai!&rdquo; &ndash; Mặc S&ecirc;nh kinh ngạc bởi c&aacute;i c&aacute;ch c&ocirc; ta đối sử với bản th&acirc;n. Chị x&uacute;c động nắm tay người bạn cũ. Thiếu Mai, tại sao lại trở n&ecirc;n như vậy?<br />\r\n<br />\r\nTi&ecirc;u Ti&ecirc;u theo phản xạ hất tay Mặc S&ecirc;nh, l&agrave;m chị ngẩn người, cả hai im lặng c&oacute; phần l&uacute;ng t&uacute;ng.<br />\r\n<br />\r\n&ldquo;Cậu thay đổi nhiều qu&aacute;.&rdquo; &ndash; L&uacute;c l&acirc;u sau, Mặc S&ecirc;nh l&ecirc;n tiếng vẻ x&oacute;t xa.<br />\r\n<br />\r\n&ldquo;Đ&uacute;ng vậy, c&ograve;n nhớ hồi năm thứ nhất tớ thầm y&ecirc;u một người kh&ocirc;ng?&rdquo; &ndash; Ti&ecirc;u Ti&ecirc;u lạnh l&ugrave;ng kể: &ldquo;Một h&ocirc;m, tớ n&oacute;i thẳng với anh ta, tớ th&iacute;ch anh ta, anh ta thừa nhận nhưng kh&ocirc;ng y&ecirc;u tớ. Sau đ&oacute; Thiếu Mai đ&atilde; chết, tớ b&acirc;y giờ l&agrave; Ti&ecirc;u Ti&ecirc;u&rdquo;<br />\r\n<br />\r\nLời Ti&ecirc;u Ti&ecirc;u như kh&iacute;a v&agrave;o t&acirc;m can. Mặc S&ecirc;nh thấy đau l&ograve;ng, chẳng biết n&oacute;i g&igrave; th&ecirc;m.<br />\r\n<br />\r\nL&aacute;t sau, Ti&ecirc;u Ti&ecirc;u lại n&oacute;i giọng mỉa mai: &ldquo;Rốt cuộc cậu vẫn kh&ocirc;ng thay đổi. Vẫn giả bộ cao thượng. Sao lại từ bỏ nước Mỹ v&agrave;ng son m&agrave; về?&rdquo;<br />\r\n<br />\r\nC&acirc;u n&oacute;i &iacute;t nhiều l&agrave;m tổn thương Mặc S&ecirc;nh, nhưng nghĩ lại m&igrave;nh cũng c&oacute; lỗi. Năm xưa, chị lẳng lặng bỏ đi, bảy năm bặt v&ocirc; &acirc;m t&iacute;n, chị c&oacute; lỗi với bạn b&egrave;: &ldquo;L&uacute;c đ&oacute;, m&igrave;nh đi vội qu&aacute;&hellip;&rdquo;<br />\r\n<br />\r\n&ldquo;Kh&ocirc;ng cần n&oacute;i với tớ những c&aacute;i đ&oacute;.&rdquo; &ndash; Ti&ecirc;u Ti&ecirc;u ngắt lời: &ldquo;Những c&aacute;i đ&oacute; n&ecirc;n n&oacute;i với Dĩ Th&acirc;m.&rdquo;<br />\r\n<br />\r\nH&agrave; Dĩ Th&acirc;m? Sao lại li&ecirc;n quan đến anh ta? &ndash; Mặc S&ecirc;nh nhớ lại cảnh Dĩ Th&acirc;m, Dĩ Văn cặp k&egrave; b&ecirc;n nhau h&ocirc;m ở si&ecirc;u thị: &ldquo;M&igrave;nh nghĩ anh ta chẳng quan t&acirc;m đ&acirc;u&hellip;&rdquo;<br />\r\n<br />\r\n&ldquo;Kh&ocirc;ng quan t&acirc;m? Cậu tưởng ai cũng v&ocirc; t&acirc;m như cậu sao?&rdquo;<br />\r\n<br />\r\nTi&ecirc;u Ti&ecirc;u c&oacute; vẻ x&uacute;c động: &ldquo;Mấy ng&agrave;y đầu l&uacute;c cậu mất t&iacute;ch, anh ta t&igrave;m cậu, tr&ocirc;ng giống một người đi&ecirc;n, về sau anh ta nhất định ở lại k&yacute; t&uacute;c x&aacute; chờ, kết quả anh ta chờ được c&aacute;i g&igrave;?&rdquo; Ti&ecirc;u Ti&ecirc;u cau m&agrave;y: &ldquo;Kết quả l&agrave; c&oacute; mấy người đến mang đồ của cậu đi, họ bảo với anh ta, bảo với ch&uacute;ng tớ, cậu đ&atilde; đi Mỹ, c&oacute; thể kh&ocirc;ng bao giờ trở lại.&rdquo;<br />\r\n<br />\r\n&ldquo;Mặc S&ecirc;nh, cậu &aacute;c qu&aacute;.&rdquo; &ndash; Ti&ecirc;u Ti&ecirc;u dừng một l&uacute;c, lại tiếp: &ldquo;Tớ kh&ocirc;ng bao giờ qu&ecirc;n phản ứng của Dĩ Th&acirc;m l&uacute;c đ&oacute;, anh ta c&oacute; c&aacute;i vẻ của một người bị rơi xuống vực, mặt tối tăm, tuyệt vọng khiến bọn tớ ph&aacute;t sợ, kh&ocirc;ng ngờ một người ki&ecirc;u ngạo như Dĩ Th&acirc;m, lại như vậy&hellip;&rdquo;<br />\r\n<br />\r\nMặc S&ecirc;nh cho&aacute;ng v&aacute;ng, chuyện đ&oacute; c&oacute; thật ư ?<br />\r\n<br />\r\n&ldquo;C&oacute; lẽ anh ta thấy &aacute;y n&aacute;y&hellip;&rdquo;<br />\r\n<br />\r\n&ldquo;Triệu Mặc S&ecirc;nh, người bỏ Dĩ Th&acirc;m đi Mỹ l&agrave; cậu, cậu mới l&agrave; người phải &aacute;y n&aacute;y,&rdquo;<br />\r\n<br />\r\n&ldquo;Thiếu Mai, cậu kh&ocirc;ng hiểu đ&acirc;u&hellip;&rdquo;<br />\r\n<br />\r\n&ldquo;Tớ c&oacute; mắt, tớ hiểu.&rdquo;<br />\r\n<br />\r\nTi&ecirc;u Ti&ecirc;u kh&ocirc;ng n&oacute;i nữa. &ldquo;Vậy ra mọi người cho rằng m&igrave;nh bỏ anh ta! R&otilde; r&agrave;ng kh&ocirc;ng phải thế!&rdquo;- Mặc S&ecirc;nh mỉm cười cay đắng.<br />\r\n<br />\r\nR&otilde; r&agrave;ng anh ta đ&atilde; n&oacute;i như vậy&hellip;Anh ta n&oacute;i anh ta kh&ocirc;ng muốn gặp chị, kh&ocirc;ng bao giờ muốn nh&igrave;n thấy chị nữa. Anh ta bảo chị đi đi, c&agrave;ng xa c&agrave;ng tốt&hellip;<br />\r\n<br />\r\nR&otilde; r&agrave;ng l&agrave; anh ta!<br />\r\n<br />\r\nTừ biệt Ti&ecirc;u Ti&ecirc;u, Mặc S&ecirc;nh đi tr&ecirc;n đường phố khi đ&oacute; đ&atilde; v&agrave;o hạ, lời Ti&ecirc;u Ti&ecirc;u vẫn vang b&ecirc;n tai.<br />\r\n<br />\r\n&ldquo;Về sau anh ta ở một m&igrave;nh m&atilde;i&hellip;&rdquo; Thế c&ograve;n H&agrave; Dĩ Văn? Kh&ocirc;ng phải c&ocirc; ấy y&ecirc;u Dĩ Th&acirc;m m&atilde;nh liệt, quyết theo đuổi anh ấy bằng được sao?&rdquo;<br />\r\n<br />\r\nRốt cuộc họ kh&ocirc;ng ở với nhau. Vậy chuyện năm xưa l&agrave; thế n&agrave;o?<br />\r\n<br />\r\nV&igrave; sao Dĩ Th&acirc;m lại n&oacute;i như vậy?<br />\r\n<br />\r\nMặc S&ecirc;nh x&ograve;e b&agrave;n tay, b&ecirc;n trong c&oacute; mảnh giấy viết địa chỉ của &ldquo;Văn ph&ograve;ng luật sư H&agrave; Dĩ Th&acirc;m.&rdquo;<br />\r\n<br />\r\nTi&ecirc;u Ti&ecirc;u n&oacute;i: &ldquo;C&oacute; thể cậu cần.&rdquo;<br />\r\n<br />\r\nKh&ocirc;ng phải m&igrave;nh đến t&igrave;m m&agrave; chỉ l&agrave; tiện đường rẽ qua. Nhưng quả thực Mặc S&ecirc;nh đang đứng trước cửa &ldquo;Văn ph&ograve;ng luật sư&hellip;&rdquo;<br />\r\n<br />\r\nC&ocirc; g&aacute;i trẻ n&oacute;i như người c&oacute; lỗi: &ldquo;Luật sư H&agrave; kh&ocirc;ng c&oacute; đ&acirc;y, xin hỏi, chị c&oacute; hẹn trước kh&ocirc;ng?&rdquo;<br />\r\n<br />\r\nMặc S&ecirc;nh kh&ocirc;ng nhớ cảm gi&aacute;c của chị l&uacute;c đ&oacute;, thất vọng hay nhẹ nh&otilde;m: &ldquo;Kh&ocirc;ng.&rdquo;<br />\r\n<br />\r\n&ldquo;Vậy nếu chị c&oacute; việc, t&ocirc;i sẽ nhắn với luật sư H&agrave;, hoặc l&agrave;&hellip;&rdquo; &ndash; C&ocirc; g&aacute;i nh&igrave;n đồng hồ tr&ecirc;n tường: &ldquo;Chị c&oacute; thể chờ, luật sư H&agrave; cũng sắp về.&rdquo;<br />\r\n<br />\r\n&ldquo;Ồ kh&ocirc;ng, lần sau t&ocirc;i đến.&rdquo; &ndash; Mặc S&ecirc;nh đi v&agrave;i bước, đoạn quay lại: &ldquo;Đ&acirc;y l&agrave; c&aacute;i v&iacute; của luật sư H&agrave;, nhờ c&ocirc; chuyển gi&uacute;p, cảm ơn.&rdquo;<br />\r\n<br />\r\nMột kết quả đến l&agrave; hay!<br />\r\n<br />\r\nVốn duy&ecirc;n mỏng chẳng tr&aacute;ch t&igrave;nh kh&ocirc;ng s&acirc;u.<br />\r\n<br />\r\n&ldquo;Chị S&ecirc;nh, chị thấy l&agrave;m việc ở trong nước v&agrave; ở nước ngo&agrave;i c&oacute; g&igrave; kh&aacute;c nhau?&rdquo; &ndash; Sắp hết giờ l&agrave;m việc, một nh&acirc;n vi&ecirc;n c&ugrave;ng ph&ograve;ng đột nhi&ecirc;n hỏi.<br />\r\n<br />\r\n&ldquo;&Agrave;,&rdquo; &ndash; Mặc S&ecirc;nh nh&igrave;n quanh, thấy kh&ocirc;ng c&oacute; sếp, n&ecirc;n n&oacute;i thẳng thẳn: &ldquo;Lương cao hơn nhiều.&rdquo;<br />\r\n<br />\r\n&ldquo;Tiếc thế!&rdquo; &ndash; Đồng nghiệp su&yacute;t xoa.<br />\r\n<br />\r\n&ldquo;Ở b&ecirc;n đ&oacute; chị c&oacute; bị ph&acirc;n biệt đối xử kh&ocirc;ng?&rdquo;<br />\r\n<br />\r\n&ldquo;&Iacute;t nhiều cũng c&oacute;.&rdquo;<br />\r\n<br />\r\n&ldquo;Thực ra chuyện đ&oacute; cũng chẳng đ&aacute;ng quan t&acirc;m, ngay người Hồng C&ocirc;ng cũng c&ograve;n coi thường người Đại lục nữa l&agrave;!&rdquo; &ndash; Đồng nghiệp Đại Bảo vừa từ Hồng C&ocirc;ng về xen lời.<br />\r\n<br />\r\n&ldquo;Khi bản th&acirc;n m&igrave;nh gặp phải chuyện đ&oacute; m&igrave;nh sẽ kh&ocirc;ng nghĩ tho&aacute;ng được như thế đ&acirc;u. Một lần trước mặt bao nhi&ecirc;u đồng nghiệp của t&ocirc;i, &ocirc;ng chủ đột nhi&ecirc;n tuy&ecirc;n bố, Trung Quốc kh&ocirc;ng c&oacute; một nh&agrave; nghệ thuật thực sự. T&ocirc;i tức lắm, chưa bao giờ cảm thấy m&igrave;nh đ&iacute;ch thực l&agrave; người Trung Quốc đến vậy, ngay l&uacute;c đ&oacute; t&ocirc;i chỉ v&agrave;o mũi &ocirc;ng ta n&oacute;i, &ocirc;ng biết g&igrave; về nghệ thuật Trung Quốc. Khi người Trung Quốc ch&uacute;ng t&ocirc;i l&agrave;m nghệ thuật, kh&ocirc;ng biết người Mỹ c&aacute;c &ocirc;ng đang lang thang ở đ&acirc;u!<br />\r\n<br />\r\n&ldquo;C&oacute; thế chứ, rất khảng kh&aacute;i!&rdquo; &ndash; C&aacute;c đồng nghiệp vỗ tay t&aacute;n thưởng, khen c&acirc;u đối đ&aacute;p hay tuyệt, sau đ&oacute; c&oacute; ai đ&oacute; hỏi: &ldquo;Về sau v&igrave; sao chị bị sa thải?&rdquo;<br />\r\n<br />\r\n&ldquo;&hellip;&rdquo; Mặc S&ecirc;nh cười &ndash; &ldquo;&Ocirc;ng chủ tuy ngạo mạn, nhưng cũng kh&aacute; độ lượng. Về sau, một h&ocirc;m kh&ocirc;ng biết &ocirc;ng ta lấy đ&acirc;u ra tờ giấy to c&oacute; c&aacute;c &ocirc; vu&ocirc;ng bảo t&ocirc;i viết mấy chữ Trung Quốc, &ocirc;ng ta n&oacute;i muốn treo ở ph&ograve;ng kh&aacute;ch.&rdquo;<br />\r\n<br />\r\n&ldquo;Thật kh&ocirc;ng?&rdquo;<br />\r\n<br />\r\n&ldquo;Chị S&ecirc;nh, chữ chị c&oacute; được kh&ocirc;ng&rdquo;&rsquo;<br />\r\n<br />\r\n&ldquo;T&ocirc;i thể hiện ngay bản lĩnh của Trịnh Bản Kiều, đầu ti&ecirc;n t&ocirc;i l&ocirc;i n&agrave;o b&uacute;t n&agrave;o nghi&ecirc;n để tất l&ecirc;n b&agrave;n, l&agrave;m ra vẻ loay hoay một hồi, t&ocirc;i ngo&aacute;y liền mấy chữ. N&oacute;i thực mấy chữ đ&oacute; nếu kh&ocirc;ng phải ch&iacute;nh tay t&ocirc;i viết, t&ocirc;i cũng chịu kh&ocirc;ng thể n&agrave;o đọc ra.&rdquo;<br />\r\n<br />\r\n&ldquo;Chị viết chữ g&igrave;?&rdquo;<br />\r\n<br />\r\n&ldquo;Nhĩ n&atilde;i man di&rdquo; (&ldquo;&Ocirc;ng cũng l&agrave; đồ man di&rdquo;)<br />\r\n<br />\r\n&ldquo;Ọc!&rdquo; &ndash; C&oacute; ai đ&oacute; cười bắn cả tr&agrave; trong miệng ra.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><iframe height=\"100%\" id=\"iframe-ns-inread-itvc\" scrolling=\"no\" width=\"100%\"></iframe></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><br />\r\nTrong tiếng cười rộ, c&oacute; người gọi: &ldquo;Chị S&ecirc;nh, c&oacute; người t&igrave;m.&rdquo;<br />\r\n<br />\r\nMặc S&ecirc;nh quay đầu, Hoa Ti&ecirc;n Tử &ndash; Tiểu Hồng biệt hiệu &ldquo; Hoa Ti&ecirc;n Tử&rdquo; te t&aacute;i chạy v&agrave;o, thở gấp: &ldquo;Chị S&ecirc;nh, ở ph&ograve;ng kh&aacute;ch kia k&igrave;a, điển trai lắm, rất lạnh l&ugrave;ng, rất đ&agrave;n &ocirc;ng, thoạt nh&igrave;n đ&atilde; biết ngay thuộc loại đ&agrave;n &ocirc;ng th&agrave;nh đạt. Chị S&ecirc;nh, chị vừa về nước đ&atilde; đ&atilde; tăm được đ&aacute;m hời thế. Vậy m&agrave; cứ giấu t&agrave;i.&rdquo;<br />\r\n<br />\r\nLời của Hoa Ti&ecirc;n Tử nếu tin được c&oacute; họa l&agrave; lợn cũng biết bay, lời c&ocirc; ta &iacute;t nhất cũng phải trừ hao mấy phần, thậm ch&iacute; một nửa.<br />\r\n<br />\r\nNhưng Mặc S&ecirc;nh rất t&ograve; m&ograve;, chị vừa về nước đ&atilde; quen biết ai đ&acirc;u, ai c&oacute; thể đến t&igrave;m m&igrave;nh chứ?<br />\r\n<br />\r\nTuyệt nhi&ecirc;n kh&ocirc;ng thể nghĩ lại l&agrave; anh!<br />\r\n<br />\r\nNhưng người đ&agrave;n &ocirc;ng đứng b&ecirc;n cửa sổ ph&ograve;ng kh&aacute;ch t&ograve;a soạn quay lưng về ph&iacute;a chị, ch&iacute;nh l&agrave; H&agrave; Dĩ Th&acirc;m.<br />\r\n<br />\r\nNghe tiếng kẹt cửa anh quay đầu lại, &aacute;nh mắt lạnh l&ugrave;ng hướng về ph&iacute;a chị, ho&agrave;n to&agrave;n l&atilde;nh đạm, kh&ocirc;ng một ch&uacute;t biểu cảm.<br />\r\n<br />\r\nHoa Ti&ecirc;n Tử kh&ocirc;ng n&oacute;i qu&aacute;, người đ&agrave;n &ocirc;ng n&agrave;y rất mực tuấn t&uacute;, phong th&aacute;i đường ho&agrave;ng, bộ comple đắt tiền vừa vặn l&agrave;m t&ocirc;n v&oacute;c người cao lớn tuyệt đẹp, vẫn điềm tĩnh tự tin như truớc, nhưng c&oacute; g&igrave; đ&oacute; xa c&aacute;ch khiến người ta e ngại.<br />\r\n<br />\r\nMặc S&ecirc;nh kh&ocirc;ng thể n&agrave;o mở miệng.<br />\r\n<br />\r\nNgười đ&agrave;n &ocirc;ng điềm tĩnh, chậm r&atilde;i gật đầu ch&agrave;o: &ldquo;Triệu tiểu thư&rdquo;<br />\r\n<br />\r\nTriệu tiểu thư?<br />\r\n<br />\r\nMặc S&ecirc;nh thực sự muốn mỉm cười nhưng kh&oacute; qu&aacute;: &ldquo;H&agrave;&hellip; ti&ecirc;n sinh&rdquo;<br />\r\n<br />\r\nChỉ c&aacute;i ghế ph&iacute;a xa, chị n&oacute;i: &ldquo;Mời ngồi!&rdquo;<br />\r\n<br />\r\nMặc S&ecirc;nh đi lấy hộp tr&agrave;, chị kh&ocirc;ng thể b&igrave;nh tĩnh như anh, chỉ cố che giấu x&uacute;c động của m&igrave;nh: &ldquo;Anh uống g&igrave;?&rdquo;<br />\r\n<br />\r\n&ldquo;Cảm ơn, kh&ocirc;ng cần.&rdquo; &ndash; &Aacute;nh mắt nghi&ecirc;m nghị, anh ta n&oacute;i. &ldquo;T&ocirc;i n&oacute;i v&agrave;i c&acirc;u rồi sẽ đi ngay.&rdquo;<br />\r\n<br />\r\n&ldquo;Anh đến t&igrave;m t&ocirc;i, sao biết t&ocirc;i ở đ&acirc;y?&rdquo; Anh im lặng, l&aacute;t sau mới n&oacute;i: &ldquo;Ti&ecirc;u Ti&ecirc;u, t&ocirc;i l&agrave; luật sư của Ti&ecirc;u Ti&ecirc;u.&rdquo;<br />\r\n<br />\r\n&ldquo;C&oacute; việc g&igrave; kh&ocirc;ng?&rsquo;<br />\r\n<br />\r\nKhẩu kh&iacute; của anh ta như to&aacute;t ra hơi lạnh: &ldquo;Mấy h&ocirc;m trước Triệu tiểu thư hạ cố đến văn ph&ograve;ng của t&ocirc;i, n&oacute;i l&agrave; sẽ quay trở lại, chờ m&atilde;i kh&ocirc;ng thấy, t&ocirc;i đ&agrave;nh th&acirc;n h&agrave;nh đến thăm.&rdquo;<br />\r\n<br />\r\nMặc S&ecirc;nh kinh ngạc, ngẩng đầu bắt gặp &aacute;nh mắt s&aacute;ng quắc của anh ta: &ldquo;Sao anh biết..&rdquo; Chị kh&ocirc;ng để lại t&ecirc;n, sao anh ta biết người đến trả c&aacute;i v&iacute; l&agrave; chị?<br />\r\n<br />\r\n&ldquo;Tiểu thư, t&ocirc;i đương nhi&ecirc;n c&oacute; khả năng suy đo&aacute;n của một người b&igrave;nh thường&rdquo; &ndash; Anh ta n&oacute;i giọng đầy vẻ chế nhạo.<br />\r\n<br />\r\nC&oacute; lẽ c&aacute;c luật sư đều thế. &ldquo;Khả năng suy đo&aacute;n của một người b&igrave;nh thường.&rdquo; Mặc S&ecirc;nh nh&igrave;n v&agrave;o bức tường trước mặt: &ldquo;T&ocirc;i đến trả c&aacute;i v&iacute;, anh nhận được rồi, cần g&igrave; phải đến đ&acirc;y.&rdquo;<br />\r\n<br />\r\nMắt H&agrave; Dĩ Th&acirc;m đột nhi&ecirc;n lo&eacute; l&ecirc;n: &ldquo;Ngo&agrave;i trả c&aacute;i v&iacute;, c&ocirc; kh&ocirc;ng c&oacute; việc g&igrave; nữa ư?&rdquo;<br />\r\n<br />\r\nC&ograve;n c&oacute; việc g&igrave; nữa? Mặc S&ecirc;nh n&oacute;i dứt kho&aacute;t: &ldquo;Kh&ocirc;ng&rdquo;<br />\r\n<br />\r\n&ldquo;Rất tốt&rdquo; &ndash; Mắt anh ta tho&aacute;ng thất vọng, anh bước đến trước mặt chị: &ldquo;Nhưng t&ocirc;i c&oacute; việc.&rdquo;<br />\r\n<br />\r\nAnh lấy c&aacute;i v&iacute; để trước mặt chị: &ldquo;Trong c&aacute;i v&iacute; n&agrave;y vốn dĩ c&oacute; một bức ảnh, c&ocirc; Triệu c&oacute; biết g&igrave; về n&oacute; kh&ocirc;ng?&rdquo;<br />\r\n<br />\r\nĐương nhi&ecirc;n biết, Mặc S&ecirc;nh c&uacute;i đầu: &ldquo;Thế ư? Qủa thật t&ocirc;i kh&ocirc;ng để &yacute;.&rdquo;<br />\r\n<br />\r\n&ldquo;Thật sao? Trong v&iacute; ngo&agrave;i tiền chẳng c&oacute; g&igrave; nữa, sao c&ocirc; Triệu biết n&oacute; l&agrave; của t&ocirc;i?&rdquo;<br />\r\n<br />\r\nMặc S&ecirc;nh im lặng. Chị qu&ecirc;n rằng anh l&agrave; luật sư, lu&ocirc;n biết t&igrave;m ra sơ hở trong lời n&oacute;i của đối phương. Nếu muốn lừa anh ta phải biết lượng sức m&igrave;nh.<br />\r\n<br />\r\nAnh ta hơi c&uacute;i người n&oacute;i như n&oacute;i thầm: &ldquo;C&ocirc; c&oacute; thể cho t&ocirc;i xin lại bức ảnh kh&ocirc;ng?&rdquo;<br />\r\n<br />\r\nMặc S&ecirc;nh bỗng cảm thấy kỳ lạ. Anh ta c&oacute; &yacute; g&igrave; vậy? Vừa tỏ ra l&agrave; người ngo&agrave;i, vừa muốn đ&ograve;i lại bức ảnh.<br />\r\n<br />\r\n&ldquo;Người trong ảnh l&agrave; t&ocirc;i, tại sao t&ocirc;i phải trả lại anh?&rdquo;<br />\r\n<br />\r\n&ldquo;Triệu tiểu thư, t&ocirc;i khuy&ecirc;n c&ocirc; kh&ocirc;ng n&ecirc;n tranh luận vấn đề quyền sở hữu với một luật sư.&rdquo; &ndash; Dĩ Th&acirc;m l&atilde;nh đạm n&oacute;i.<br />\r\n<br />\r\nMặc S&ecirc;nh tức giận, một Dĩ Th&acirc;m như vậy, chị kh&ocirc;ng quen, cũng kh&ocirc;ng thể đối ph&oacute;. &ldquo;Bức ảnh kh&ocirc;ng c&oacute; ở đ&acirc;y.&rdquo; &ndash; Cuối c&ugrave;ng chị n&oacute;i.<br />\r\n<br />\r\n&ldquo;Vậy ng&agrave;y mai xin c&ocirc; trả cho t&ocirc;i.&rdquo;<br />\r\n<br />\r\n&ldquo;Ng&agrave;y mai t&ocirc;i c&oacute;&hellip;&rdquo;<br />\r\n<br />\r\n&ldquo;Triệu tiểu thư!&rdquo; &ndash; H&agrave; Dĩ Th&acirc;m ngắt lời chị: &ldquo;T&ocirc;i nghĩ, ch&uacute;ng ta đều kh&ocirc;ng muốn quấy rầy người kh&aacute;c, tại sao kh&ocirc;ng kết th&uacute;c sớm đi.&rdquo;<br />\r\n<br />\r\nKết th&uacute;c sớm ư? Mặc S&ecirc;nh im lặng hồi l&acirc;u: &ldquo;Anh cần bức ảnh l&agrave;m g&igrave;?&rdquo;<br />\r\n<br />\r\n&ldquo;Ai biết được.&rdquo; &Aacute;nh mắt Dĩ Th&acirc;m u &aacute;m: &ldquo;C&oacute; lẽ t&ocirc;i muốn c&oacute; n&oacute; ở b&ecirc;n để nhắc t&ocirc;i c&aacute;i qu&aacute; khứ xuẩn ngốc của t&ocirc;i.&rdquo;<br />\r\n<br />\r\nXuẩn ngốc, đ&uacute;ng thế, qu&aacute; xuẩn ngốc! Vậy m&agrave; chị đ&atilde; hy vọng.<br />\r\n<br />\r\nH&agrave; Dĩ Th&acirc;m n&oacute;i giọng ki&ecirc;n quyết: &ldquo;Ng&agrave;y mai t&ocirc;i đến lấy, nếu c&ocirc; bận c&oacute; thể nhờ người chuyển cho t&ocirc;i. Tạm biệt, Triệu tiểu thư.&rdquo;<br />\r\n<br />\r\n&ldquo;Tốt&rdquo; &ndash; H&agrave; Dĩ Th&acirc;m đột nhi&ecirc;n quay đầu lại, mặt vẫn rắn đanh: &ldquo;Cảm ơn sự hợp t&aacute;c của c&ocirc;, ng&agrave;y mai gặp lại.&rdquo;<br />\r\n<br />\r\nMặc S&ecirc;nh lặng nh&igrave;n c&aacute;i d&aacute;ng cao lớn đi xa dần. Kh&ocirc;ng phải chị kh&ocirc;ng h&igrave;nh dung cảnh tượng hai người gặp nhau, nhưng như thế n&agrave;y qủa thực chị kh&ocirc;ng hề ngờ tới, ngay một ch&uacute;t th&acirc;n t&igrave;nh khi n&oacute;i: &ldquo;Ng&agrave;y mai gặp lại&rdquo; anh ta cũng kh&ocirc;ng c&oacute;.<br />\r\n<br />\r\nQu&aacute; khứ xuẩn ngốc ư?<br />\r\n<br />\r\nMặc S&ecirc;nh đứng trước tấm gương lớn trong ph&ograve;ng ngủ, chăm ch&uacute; nh&igrave;n người phụ nữ đối diện với m&igrave;nh trong gương. Nếu m&aacute;i t&oacute;c ngắn biến th&agrave;nh những lọn đu&ocirc;i sam, nếu l&agrave;n da r&aacute;m nắng trở n&ecirc;n trắng mịn, nếu c&oacute; thể cười một c&aacute;ch thoải m&aacute;i v&ocirc; tư&hellip;Điều quan trọng nhất l&agrave;, nếu c&oacute; thể x&oacute;a đi vẻ u uất chất chứa trong đ&aacute;y mắt, thay v&agrave;o đ&oacute; l&agrave; vẻ thơ ng&acirc;y học tr&ograve;, chị sẽ trở th&agrave;nh Triệu Mặc S&ecirc;nh khi mới quen H&agrave; Dĩ Th&acirc;m ng&agrave;y mới v&agrave;o đại học<br />\r\n<br />\r\n&ldquo;H&agrave; Dĩ Th&acirc;m &hellip;&rdquo;<br />\r\n<br />\r\n&ldquo;H&agrave; Dĩ Th&acirc;m&hellip;&rdquo;<br />\r\n<br />\r\nMặc S&ecirc;nh kh&ocirc;ng r&otilde; m&igrave;nh đ&atilde; đeo b&aacute;m H&agrave; Dĩ Th&acirc;m như thế n&agrave;o, Dĩ Th&acirc;m lại c&agrave;ng kh&ocirc;ng biết, đằng n&agrave;o l&uacute;c đ&oacute; chị cũng l&agrave; người chạy theo anh. Cho đến một h&ocirc;m, kh&ocirc;ng chịu nổi, Dĩ Th&acirc;m nghi&ecirc;m mặt hỏi: &ldquo;Triệu Mặc S&ecirc;nh, tại sao c&ocirc; cứ b&aacute;m theo t&ocirc;i như vậy?&rdquo;<br />\r\n<br />\r\nNếu l&agrave; b&acirc;y giờ chị sẽ ngượng đến chết! Tuy nhi&ecirc;n, l&uacute;c đ&oacute; chị kh&ocirc;ng biết ngượng l&agrave; g&igrave;, chị nhướn m&agrave;y hỏi: &ldquo;Dĩ Th&acirc;m, anh ngốc hay l&agrave; t&ocirc;i ngốc, ồ m&agrave; anh th&ocirc;ng minh như vậy, nhất định l&agrave; t&ocirc;i ngốc rồi, sao t&ocirc;i lại thảm hại đến thế, b&aacute;m theo người ta m&agrave; kh&ocirc;ng biết m&igrave;nh đang l&agrave;m g&igrave;!&rdquo;<br />\r\n<br />\r\nC&ograve;n nhớ l&uacute;c đ&oacute; Dĩ Th&acirc;m đ&atilde; tr&ograve;n mắt kinh ngạc hồi l&acirc;u. Về sau nhắc lại chuyện n&agrave;y, anh c&oacute; vẻ vừa bực vừa buồn cười tuy&ecirc;n bố, anh ta vốn cố t&igrave;nh l&agrave;m vậy để Mặc S&ecirc;nh phải xấu hổ, ai ngờ tr&ecirc;n đời lại c&oacute; người mặt d&agrave;y đến thế, kết cục người xấu hổ lại ch&iacute;nh l&agrave; anh.<br />\r\n<br />\r\nCho n&ecirc;n ch&agrave;ng sinh vi&ecirc;n luật khoa sau một hồi im lặng cuối c&ugrave;ng đ&atilde; c&oacute; thể đối ph&oacute; được, tuy nhi&ecirc;n cũng chỉ c&oacute; thể bắp bắp: &ldquo;T&ocirc;i kh&ocirc;ng định c&oacute; bạn g&aacute;i l&uacute;c c&ograve;n đang đi học.&rdquo;<br />\r\n<br />\r\nL&uacute;c đ&oacute; Mặc S&ecirc;nh ng&acirc;y thơ đến mức kh&ocirc;ng nhận ra đ&oacute; chỉ l&agrave; c&aacute;i cớ, n&ecirc;n lại tiếp tục tấn c&ocirc;ng: &ldquo;Vậy th&igrave; t&ocirc;i xếp h&agrave;ng trước, đợi anh tốt nghiệp đại học, xem liệu c&oacute; được anh ưu ti&ecirc;n lựa chọn ?&rdquo;<br />\r\n<br />\r\nTrước một đối thủ ngoan cố đến vậy, ch&agrave;ng luật sư tương lai đ&agrave;nh b&oacute; tay, ch&agrave;ng ta vội chuồn thẳng sau khi n&eacute;m lại một c&acirc;u: &ldquo;T&ocirc;i phải l&ecirc;n lớp.&rdquo;<br />\r\n<br />\r\nMặc S&ecirc;nh đương nhi&ecirc;n kh&ocirc;ng cam chịu thất bại, nhưng trước khi chị nghĩ ra biện ph&aacute;p tốt hơn, th&igrave; đ&atilde; nghe mọi người b&agrave;n t&aacute;n: &ldquo;H&agrave; Dĩ Th&acirc;m khoa luật nghe đ&acirc;u mới c&oacute; bồ, h&igrave;nh như t&ecirc;n l&agrave; Triệu Mặc S&ecirc;nh, c&aacute;i t&ecirc;n nghe l&agrave; lạ&rdquo;<br />\r\n<br />\r\nNghe vậy Mặc S&ecirc;nh chạy như bay đến giảng đường t&igrave;m Dĩ Th&acirc;m, thanh minh: &ldquo;Tin đồn kh&ocirc;ng phải do t&ocirc;i tung ra, anh phải tin t&ocirc;i mới được.&rdquo;<br />\r\n<br />\r\nDĩ Th&acirc;m ngẩng đầu khỏi cuốn s&aacute;ch, mắt trong veo nh&igrave;n chị n&oacute;i: &ldquo;T&ocirc;i biết&rdquo;<br />\r\n<br />\r\nMặc S&ecirc;nh hỏi lại một c&aacute;ch ngốc nghếch: &ldquo;Sao anh biết?&rdquo;<br />\r\n<br />\r\nDĩ Th&acirc;m trả lời tỉnh kh&ocirc;: &ldquo;Bởi v&igrave; ch&iacute;nh t&ocirc;i tung ra tin đ&oacute;.&rdquo;<br />\r\n<br />\r\nLần n&agrave;y đến lượt Mặc S&ecirc;nh im bặt, Dĩ Th&acirc;m giải th&iacute;ch: &ldquo;T&ocirc;i đ&atilde; nghĩ kỹ rồi, nếu ba năm sau, c&ocirc; nhất định l&agrave; bạn g&aacute;i của t&ocirc;i, vậy sao t&ocirc;i kh&ocirc;ng sớm sử dụng quyền đ&oacute; của m&igrave;nh.&rdquo;<br />\r\n<br />\r\nTrời! L&uacute;c đ&oacute;!<br />\r\n<br />\r\nKh&oacute;e miệng của người phụ nữ trong gương hiện l&ecirc;n nụ cười. Nhưng nụ cười vẫn chưa kịp hiện l&ecirc;n đ&ocirc;i mắt, đ&atilde; lại biến mất.<br />\r\n<br />\r\nMặc S&ecirc;nh bước ra ban c&ocirc;ng, l&ograve;ng ngổn ngang. Ngước nh&igrave;n bầu trời, sao thưa thớt, ng&agrave;y mai c&oacute; lẽ l&agrave; một ng&agrave;y nắng đẹp.</p>\r\n', 'VNE-1501262128.jpg', 15, 2, '2017-08-08 03:25:53'),
+(11, 'SAM SAM ĐẾN ĐÂY ĂN NÈ!', '                                            <p>Sự việc diễn ra sau năm ngày liên tục đi làm tăng ca của Tiết Sam Sam.<br />\r\n<br />\r\nRõ ràng đang trong dịp nghỉ lễ Quốc Khánh, nhưng vì cuối tháng phải kiểm kê sổ sách nên tất cả nhân viên phòng tài vụ đều<', '<p>Sự việc diễn ra sau năm ng&agrave;y li&ecirc;n tục đi l&agrave;m tăng ca của Tiết Sam Sam.<br />\r\n<br />\r\nR&otilde; r&agrave;ng đang trong dịp nghỉ lễ Quốc Kh&aacute;nh, nhưng v&igrave; cuối th&aacute;ng phải kiểm k&ecirc; sổ s&aacute;ch n&ecirc;n tất cả nh&acirc;n vi&ecirc;n ph&ograve;ng t&agrave;i vụ đều phải tăng ca. Một nh&acirc;n vi&ecirc;n mới như Tiết Sam Sam đương nhi&ecirc;n đ&atilde; bị một đống c&aacute;c bảng biểu b&aacute;o c&aacute;o l&agrave;m cho rối tung l&ecirc;n, cho&aacute;ng v&aacute;ng đến hoa đầu ch&oacute;ng mặt. Cuối c&ugrave;ng đến ng&agrave;y mồng 3 trưởng ph&ograve;ng cũng đ&atilde; tuy&ecirc;n bố kết th&uacute;c việc kiểm tra sổ s&aacute;ch, Sam Sam về đến ph&ograve;ng trọ liền lao ngay l&ecirc;n giường v&agrave; ngủ một giấc ngon l&agrave;nh.<br />\r\n<br />\r\nSam Sam đang mơ m&agrave;ng th&igrave; c&oacute; tiếng chu&ocirc;ng điện thoại vang l&ecirc;n, vẫn nhắm mắt c&ocirc; m&ograve; mẫm một l&uacute;c l&acirc;u mới t&igrave;m thấy điện thọai, dựa v&agrave;o cảm gi&aacute;c liền ấn n&uacute;t nghe, ng&aacute;i ngủ n&oacute;i: &lsquo;&rsquo;Alo&rdquo;.<br />\r\n<br />\r\n&ldquo;Xin ch&agrave;o, xin hỏi c&ocirc; c&oacute; phải l&agrave; Tiết Sam Sam kh&ocirc;ng?&rdquo;<br />\r\n<br />\r\n&ldquo;V&acirc;ng.&rdquo;<br />\r\n<br />\r\n&ldquo;Đ&acirc;y l&agrave; bệnh vi&ecirc;n XX, mời c&ocirc; đến ngay khoa phụ sản bệnh vi&ecirc;n XX .&rdquo;<br />\r\n<br />\r\n&ldquo;Oh, được.&rdquo;<br />\r\n<br />\r\nĐối phương vẫn đang n&oacute;i huy&ecirc;n thuy&ecirc;n c&aacute;i g&igrave; đ&oacute;, Sam Sam kh&ocirc;ng hề ch&uacute; &yacute;, ậm ừ đồng &yacute;. Cuối c&ugrave;ng đầu d&acirc;y b&ecirc;n kia cũng g&aacute;c m&aacute;y, thế giới lại y&ecirc;n tĩnh rồi, Sam Sam lủi v&agrave;o trong chăn tiếp tục ngủ.<br />\r\n<br />\r\nV&agrave;i ph&uacute;t sau Sam Sam đột ngột bật dậy khỏi giường.<br />\r\n<br />\r\nC&ocirc; vừa nghe thấy c&aacute;i g&igrave;? Bệnh viện?<br />\r\n<br />\r\n！！！！！！<br />\r\n<br />\r\nKo phải l&agrave; &ocirc;ng cụ ở nh&agrave; xảy ra chuyện g&igrave; chứ.<br />\r\n<br />\r\nSam Sam xỏ giầy vội v&atilde; chạy ra khỏi cửa, trong l&uacute;c đang giục người l&aacute;i xe taxi tăng tốc đến bệnh viện XX, đột nhi&ecirc;n c&ocirc; nhớ ra l&agrave; &hellip;kh&ocirc;ng đ&uacute;ng, c&ocirc; đ&atilde; tới th&agrave;nh phố S c&ocirc;ng t&aacute;c, c&ocirc; đ&acirc;u c&oacute; ở qu&ecirc;, &ocirc;ng cụ l&agrave;m sao c&oacute; thể tới bệnh viện của th&agrave;nh phố S, hơn nữa l&uacute;c n&atilde;y h&igrave;nh như c&ocirc; nghe thấy đầu d&acirc;y b&ecirc;n kia n&oacute;i l&agrave; &hellip;&hellip;khoa phụ sản?<br />\r\n<br />\r\nNhững chuyện diễn ra sau đ&oacute;, đối với loại d&acirc;n thường như Sam Sam quả thật l&agrave; hoang đường như tiểu thuyết.<br />\r\n<br />\r\nĐầu ti&ecirc;n l&agrave; vừa mới xuống xe ở cổng bệnh viện, Sam Sam vẫn chưa hết x&oacute;t ruột v&igrave; 50 tệ tiền taxi th&igrave; đ&atilde; thấy hai người đ&agrave;n &ocirc;ng cao to đeo k&iacute;nh đen, h&igrave;nh như đ&atilde; đứng đợi ở cổng bệnh viện từ trước, thậm ch&iacute; c&ograve;n biết cả mặt c&ocirc;.<br />\r\n<br />\r\n&ldquo;C&ocirc; Tiết Sam Sam, mời đi theo ch&uacute;ng t&ocirc;i.&rdquo;<br />\r\n<br />\r\nSau đ&oacute; Sam Sam được đưa đến trước cửa khoa phụ sản trong t&igrave;nh trạng sợ h&atilde;i như gặp phải x&atilde; hội đen,rồi một người đ&agrave;n &ocirc;ng đầu đầy mồ h&ocirc;i chạy xộc đến chỗ c&ocirc;, nắm chặt lấy tay c&ocirc;.<br />\r\n<br />\r\n&ldquo;C&ocirc; Tiết Sam Sam, xin h&atilde;y cứu gi&uacute;p vợ t&ocirc;i.&rdquo;<br />\r\n<br />\r\n&ldquo;C&aacute;i đ&oacute;&hellip;&hellip;&hellip;&rdquo; Sam Sam hoang mang v&igrave; bị &ocirc;ng ta lay đi lay lại.<br />\r\n<br />\r\nC&oacute; ai n&oacute;i cho c&ocirc; rốt cuộc l&agrave; đang xảy ra chuyện g&igrave;, c&ograve;n nữa vị đại ca n&agrave;y, tay của c&ocirc; sắp bị b&oacute;p n&aacute;t rồi&hellip;<br />\r\n<br />\r\n&ldquo;Ng&ocirc;n Thanh, bu&ocirc;ng tay ra.&rdquo;</p>\r\n', 'VNE-1501262173.jpg', 46, 5, '2017-08-08 16:50:35'),
+(12, 'ĐẤU PHÁ THƯƠNG KHUNG', '                                            Nhìn năm chữ to lớn có chút chói mắt trên trắc nghiệm ma thạch, thiếu niên mặt không chút thay đổi, thần sắc tự giễu, nắm chặt tay, bởi vì dùng lực quá mạnh làm móng tay đâm thật sâu vào trong lòng bàn tay, mang', '- Đấu Phá Thương Khung là một câu chuyện huyền huyễn đặc sắc kể về Tiêu Viêm, một thiên chi kiêu tử với thiên phú tu luyện mà ai ai cũng hâm mộ, bỗng một ngày người mẹ mất đi đễ lại di vật là một chiếc giới chỉ màu đen nhưng từ khi đó Tiêu Viêm đã mất đi  ', 'VNE-1502127545.jpg', 0, 1, '2017-08-07 05:39:05'),
+(13, 'ĐẠI CHÚA TỂ', '                                            <h3>Chương 01. Bắc Linh viện</h3>\r\n\r\n<p> </p>\r\n\r\n<p>Nắng chói chang, ánh mặt trời rực lửa dần lên cao khiến mặt đất bên dưới gần như khô cằn, dương liễu rủ xuống, cành lá cũng như co lại, đìu hiu không sức sống.', '<h3>Chương 01. Bắc Linh viện</h3>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Nắng ch&oacute;i chang, &aacute;nh mặt trời rực lửa dần l&ecirc;n cao khiến mặt đất b&ecirc;n dưới gần như kh&ocirc; cằn, dương liễu rủ xuống, c&agrave;nh l&aacute; cũng như co lại, đ&igrave;u hiu kh&ocirc;ng sức sống.</p>\r\n', 'VNE-1502206494.jpg', 3, 7, '2017-08-08 03:34:54'),
+(14, 'VŨ ĐỘNG CÀN KHÔN', '                                            <h3>Chương 1: Lâm Động</h3>\r\n\r\n<p> </p>\r\n\r\n<p>Dịch: (A Sãi)</p>\r\n\r\n<p> </p>\r\n\r\n<p>Nguồn: Bàn Long Hội</p>\r\n\r\n<p> </p>\r\n\r\n<p>\"A...\"</p>\r\n\r\n<p> </p>\r\n\r\n<p>Khi Lâm Động hao hết khí lực mở ra đôi mi nặng trĩu, nhất ', '<h3>Chương 1: L&acirc;m Động</h3>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Dịch: (A S&atilde;i)</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Nguồn: B&agrave;n Long Hội</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;A...&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Khi L&acirc;m Động hao hết kh&iacute; lực mở ra đ&ocirc;i mi nặng trĩu, nhất</p>\r\n', 'VNE-1502206477.jpg', 1, 7, '2017-08-08 03:34:37');
+INSERT INTO `story` (`story_id`, `name`, `preview_text`, `detail_text`, `picture`, `counter`, `cat_id`, `created_at`) VALUES
+(15, 'YÊU THẦN KÝ', '                                            <h3>Chương 1: Trùng Sinh</h3>\r\n\r\n<p> </p>\r\n\r\n<p>Sơn mạch Thánh Tổ liên miên không dứt, ánh mặt trời xuyên thấu qua những khe hở của dãy núi, chiếu sâu vào trong hạp cốc. Giữa sườn núi bên cạnh hạp cốc còn lưu lạ', '<h3>Chương 1: Tr&ugrave;ng Sinh</h3>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Sơn mạch Th&aacute;nh Tổ li&ecirc;n mi&ecirc;n kh&ocirc;ng dứt, &aacute;nh mặt trời xuy&ecirc;n thấu qua những khe hở của d&atilde;y n&uacute;i, chiếu s&acirc;u v&agrave;o trong hạp cốc. Giữa sườn n&uacute;i b&ecirc;n cạnh hạp cốc c&ograve;n lưu lạ</p>\r\n', 'VNE-1502206512.jpg', 0, 7, '2017-08-08 03:35:12');
+INSERT INTO `story` (`story_id`, `name`, `preview_text`, `detail_text`, `picture`, `counter`, `cat_id`, `created_at`) VALUES
+(16, 'CON ĐƯỜNG ĐẾ VƯƠNG', '                                            <p>Quyển 1 - Chương 1: Birth of a Dark Gamer (Khởi đầu của một Dark Gamer) Một cuộc sống nghèo đói, nhưng vẫn cao quý, tao nhã và đẹp như tranh vẽ, bạn chỉ có thể tìm thấy trong một vở opera, và dù bạn có nghèo ', '<h3>Chương 1: Birth of a Dark Gamer (Khởi đầu của một Dark Gamer)</h3>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Một cuộc sống ngh&egrave;o đ&oacute;i, nhưng vẫn cao qu&yacute;, tao nh&atilde; v&agrave; đẹp như tranh vẽ, bạn chỉ c&oacute; thể t&igrave;m thấy trong một vở opera, v&agrave; d&ugrave; bạn c&oacute; ngh&egrave;o như thế n&agrave;o, n&oacute; vẫn kh&ocirc;ng thể ngăn cản bạn thể hiện t&igrave;nh y&ecirc;u của m&igrave;nh v&ocirc; điều kiện đến với những người xa lạ hoặc ngăn bạn chia sẻ với mọi người một mẩu b&aacute;nh m&igrave; c&ugrave;ng nụ cười ấm &aacute;p.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Nếu ai đ&oacute; d&aacute;m tuy&ecirc;n bố rằng c&oacute; một ảo ảnh như vậy tồn tại trong hiện thực, Lee Huyn chắc chắn sẽ đ&aacute;nh kẻ đ&oacute; một trận nhừ tử.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Cuộc sống n&agrave;y qu&aacute; t&agrave;n nhẫn với người ngh&egrave;o. Luật ph&uacute;c lợi lao động sau khi được sửa đổi bởi Quốc hội, đ&atilde; kh&ocirc;ng cho ph&eacute;p cho trẻ vị th&agrave;nh ni&ecirc;n l&agrave;m việc. D&ugrave; luật ph&aacute;p l&agrave; như vậy, n&oacute; vẫn kh&ocirc;ng thể ngăn cậu l&agrave;m nhiều việc.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Từ năm mười bốn tuổi cậu đ&atilde; l&agrave;m thợ may trong một nh&agrave; m&aacute;y. Mức lương ở đ&oacute; thực sự rất &iacute;t ỏi nhưng &iacute;t nhất cậu c&oacute; thể ăn miễn ph&iacute;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>D&ugrave; vậy, phải ở dưới tầng hầm, nơi chỉ c&oacute; hai c&aacute;i quạt th&ocirc;ng gi&oacute; chaỵ, sức khỏe của cậu nhanh ch&oacute;ng xấu đi. Phổi của cậu bị ph&aacute; hủy, v&agrave; phải trả những h&oacute;a đơn y tế nặng.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Sau đ&oacute; l&agrave; c&ocirc;ng việc tại trạm gas v&agrave; thỉnh thoảng cậu c&ograve;n đi xung quanh k&eacute;o một chiếc xe đẩy tay thu thập v&agrave; b&aacute;n vật liệu t&aacute;i chế.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Nhưng d&ugrave; cho cậu l&agrave;m việc chăm chỉ như thế n&agrave;o, v&agrave;o cuối ng&agrave;y, số tiền trong t&uacute;i cậu chẳng c&ograve;n lại l&agrave; bao.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>L&agrave; một trẻ vị th&agrave;nh ni&ecirc;n, nhưng cậu buộc phải c&oacute; việc l&agrave;m, điều n&agrave;y l&agrave; bất hợp ph&aacute;p, v&agrave; do đ&oacute; c&aacute;c nh&agrave; tuyển dụng đ&atilde; t&agrave;n nhẫn b&oacute;c lột cậu đến tận xương kh&ocirc;ng thương tiếc.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Cậu đ&atilde; sống cuộc sống bị b&oacute;c lột cho đến tận năm hai mươi tuổi, v&agrave; nhờ đ&oacute;, cậu hiểu rất r&otilde; về gi&aacute; trị của đồng tiền. Nhưng d&ugrave; sao đi nữa, mọi chuyện sẽ trở n&ecirc;n kh&aacute;c biệt từ b&acirc;y giờ. B&acirc;y giờ cậu đ&atilde; ho&agrave;n to&agrave;n được thừa nhận l&agrave; một người trưởng th&agrave;nh, c&ugrave;ng với một tấm thẻ ID, giờ cậu c&oacute; thể l&agrave;m việc một c&aacute;ch hợp ph&aacute;p.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Bỏ thẻ ID v&agrave;o t&uacute;i m&igrave;nh Lee Huyn tự nhủ:</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;M&igrave;nh sẽ l&agrave;m việc đến khi cơ thể kiệt sức. M&igrave;nh sẽ l&agrave;m được với ba c&ocirc;ng việc một ng&agrave;y&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Khi cậu chỉ l&agrave; một đứa trẻ, cha mẹ cậu đ&atilde; chết trong một tai nạn, giờ đ&acirc;y gia đ&igrave;nh cậu chỉ c&ograve;n lại b&agrave; cậu v&agrave; một người em g&aacute;i.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Mọi chuyện sẽ ổn, từ giờ trở đi ch&uacute;ng ta sẽ trở n&ecirc;n gi&agrave;u c&oacute;&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Lee Huyn tự hứa như vậy v&agrave; trở về nh&agrave;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Lee Huyn, ch&aacute;u về từ bao giờ?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>B&agrave; cậu hỏi trong khi đang nằm xuống dưới chăn m&igrave;nh.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>B&agrave; cậu đ&atilde; bị trật khớp h&ocirc;ng, sau khi ng&atilde; xuống cầu thang v&agrave;i ng&agrave;y trước, hiện tại b&agrave; kh&ocirc;ng thể l&agrave;m việc g&igrave;, mặc d&ugrave; đ&atilde; uống thuốc giảm đau, gia đ&igrave;nh n&agrave;y thực sự kh&oacute; khăn, b&agrave; kh&ocirc;ng thể đi đến bệnh viện để nhận sự điều trị th&iacute;ch hợp v&agrave; do đ&oacute; chỉ c&oacute; thể nghỉ ngơi tại nh&agrave;, cũng v&igrave; kh&ocirc;ng được điều trị, hằng đ&ecirc;m b&agrave; chỉ c&oacute; thể r&ecirc;n rỉ một c&aacute;ch đau đớn.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Khi Lee Huyn v&agrave;o nh&agrave;, cậu cảm thấy nghẹt thở. Ng&ocirc;i nh&agrave; dường như kh&ocirc;ng c&ograve;n sự sống, c&ugrave;ng với một người em g&aacute;i v&agrave; người b&agrave; gi&agrave; cả. Mặc d&ugrave; cậu kh&ocirc;ng nhận ra, nhưng n&oacute; c&oacute; thể l&agrave; l&yacute; do tại sao cậu kh&ocirc;ng c&ograve;n muốn về nh&agrave; như trước kia.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Hayan đ&acirc;u rồi b&agrave;?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;B&agrave; kh&ocirc;ng r&otilde;. N&oacute; đi ra ngo&agrave;i v&agrave; chưa về. C&oacute; thể n&oacute; lại đi xung quanh tụ tập c&ugrave;ng với bọn xấu một lần nữa.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Lee Hayan l&agrave; em g&aacute;i cậu. Gần đ&acirc;y cậu kh&ocirc;ng thường nh&igrave;n thấy mặt c&ocirc; b&eacute; .</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;N&oacute; sẽ ổn th&ocirc;i. C&oacute; chuyện g&igrave; xảy ra với n&oacute; được chứ?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Ch&aacute;u l&agrave; anh trai duy nhất của n&oacute;. Một người anh trai th&igrave; n&ecirc;n bảo vệ em g&aacute;i của m&igrave;nh&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;V&acirc;ng ạ&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Lee Huyn cười gượng v&agrave; đi về ph&ograve;ng. Thậm ch&iacute; d&ugrave; cậu phải lao động ch&acirc;n tay hoặc l&aacute;i taxi, cậu vẫn muốn đưa em g&aacute;i m&igrave;nh v&agrave;o đại học.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>D&ugrave; Hayan c&oacute; vẻ đang lạc lối, nhưng con b&eacute; tỏa s&aacute;ng v&agrave; th&ocirc;ng minh, kh&ocirc;ng giống như Lee Huyn. Cậu tin tưởng rằng trong trường đại học, con b&eacute; c&oacute; thể gặp một người chồng tốt v&agrave; sau đ&oacute; c&oacute; một cuộc sống tốt. Cậu cũng mong c&oacute; thể b&ugrave; đắp lại cho người b&agrave; ốm yếu v&igrave; tất cả những g&igrave; b&agrave; đ&atilde; hy sinh cho hai anh em cậu.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Được, m&igrave;nh sẽ t&igrave;m một c&ocirc;ng việc ngay ng&agrave;y mai. D&ugrave; phải trở th&agrave;nh một người lao động cũng kh&ocirc;ng sao...&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Tự nhủ với bản th&acirc;n, Lee Huyn bật chiếc m&aacute;y t&iacute;nh cũ l&ecirc;n. Ngay sau khi kết nối internet, như thường lệ, cậu truy cập v&agrave;o tr&ograve; chơi. Tr&ograve; chơi mang t&ecirc;n Lục địa ph&eacute;p thuật, một tr&ograve; chơi cổ điển được ph&aacute;t h&agrave;nh 20 năm trước. Tr&ograve; chơi trực truyến n&agrave;y đ&atilde; tạo l&ecirc;n một cơn sốt cho rất nhiều game thủ tại H&agrave;n Quốc khi mới ph&aacute;t h&agrave;nh. Tr&ograve; chơi n&agrave;y vẫn ở đỉnh cao cho đến 3 năm gần đ&acirc;y.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Chiếc m&aacute;y t&iacute;nh của Lee Huyn đ&atilde; cũ, được lắp r&aacute;p từ nhiều phần kh&aacute;c nhau, đ&atilde; kh&ocirc;ng c&ograve;n khả năng chạy phần lớn c&aacute;c tr&ograve; chơi hiện nay. Trừ một tr&ograve; duy nhất: Lục địa ph&eacute;p thuật, v&agrave; n&oacute; vẫn c&ograve;n chạy tốt.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Đ&acirc;y l&agrave; game đầu ti&ecirc;n cậu chơi v&agrave; cũng l&agrave; game duy nhất mang lại cho cậu cảm gi&aacute;c hứng th&uacute;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Phong c&aacute;ch chơi của Lee Huyn rất k&igrave; lạ. Cậu kh&ocirc;ng hợp t&aacute;c c&ugrave;ng những người xung quanh m&agrave; thay v&agrave;o đ&oacute; l&agrave; đi săn bắn trong những ng&agrave;y d&agrave;i. Sau khi giết chết nhiều qu&aacute;i vật v&agrave; n&acirc;ng cao level, cậu tiến đến những b&atilde;i săn qu&aacute;i kh&oacute; hơn. Sau tất cả, cậu kh&ocirc;ng tham gia v&acirc;y h&atilde;m hoặc những trận chiến giữa c&aacute;c guild.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Cậu cảm thấy h&agrave;i l&ograve;ng trong game bởi khả năng của nh&acirc;n vật được ph&aacute;t triển dần dần v&agrave; c&aacute;c trang bị cũng được n&acirc;ng cấp. Cậu đ&atilde; từng đi săn trong 200 giờ li&ecirc;n tục (8 ng&agrave;y) m&agrave; kh&ocirc;ng hề ngủ. N&oacute; cũng kh&ocirc;ng phải điều k&igrave; lạ với cậu, cậu c&oacute; thể đấu tranh trong một th&aacute;ng chỉ để l&ecirc;n một level hoặc ti&ecirc;u diệt một con qu&aacute;i vật.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Mọi người c&oacute; thể đặt c&acirc;u hỏi rằng cậu đang t&igrave;m kiếm niềm vui n&agrave;o trong đ&oacute;, nhưng niềm vui với cậu chỉ đơn giản l&agrave; chứng kiến nh&acirc;n vật của m&igrave;nh trở n&ecirc;n mạnh hơn v&agrave; khi cậu c&oacute; thể đ&aacute;nh bại những con qu&aacute;i m&agrave; trước đ&oacute; cậu kh&ocirc;ng thể, cậu thực sự vui v&igrave; điều đ&oacute;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Trong một thời gian ngắn, Lee Huyn đ&atilde; đạt cấp độ cuối c&ugrave;ng. Đ&oacute; l&agrave; trạng th&aacute;i m&agrave; level kh&ocirc;ng c&ograve;n tăng.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Đ&atilde; hai thập kỷ kể từ ng&agrave;y Lục địa ph&eacute;p thuật ph&aacute;t h&agrave;nh, đ&oacute; l&agrave; kỷ lục đầu ti&ecirc;n v&agrave; duy nhất trong lịch sử. Khi Lee Huyn nh&igrave;n lại, cậu kh&ocirc;ng c&ograve;n thấy ai c&oacute; thể cạnh tranh với nh&acirc;n vật của m&igrave;nh. Trong những b&atilde;i săn qu&aacute;i, nơi những người kh&aacute;c phải vất vả chiến đấu trong một đội, cậu c&oacute; thể một m&igrave;nh ti&ecirc;u diệt tất cả.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Sau khi leo l&ecirc;n đến level cao nhất, cậu một m&igrave;nh săn tất cả c&aacute;c boss cuối, bao gồm cả những con rồng.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>D&ugrave; vậy, cậu đ&atilde; mất tất cả hứng th&uacute; với Lục địa ph&eacute;p thuật. Ng&agrave;y nay c&ugrave;ng với c&ocirc;ng nghệ ph&aacute;t triển, mục ti&ecirc;u cuối c&ugrave;ng của mọi tr&ograve; chơi l&agrave; c&oacute; thể trang bị cho n&oacute; một hệ thống thực tế ảo.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Một tr&ograve; chơi thực sự ho&agrave;nh tr&aacute;ng mang t&ecirc;n &quot;Royal Road&quot;, được coi như một ti&ecirc;u chuẩn cho game thực tế ảo. Bắt đầu c&ugrave;ng với một thế giới ho&agrave;n hảo, tr&ograve; chơi bao gồm h&agrave;ng chục ng&agrave;n chủng tộc v&agrave; người chơi. Hơn mười ng&agrave;n c&ocirc;ng việc v&agrave; h&agrave;ng trăm ng&agrave;n kĩ năng.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Bạn c&oacute; thể tận hưởng bất k&igrave; cuộc phi&ecirc;u lưu n&agrave;o giống như bạn từng khao kh&aacute;t hoặc bạn c&oacute; thể đi đ&aacute;nh c&aacute; trến biển c&ugrave;ng những người bạn khi ng&agrave;y kết th&uacute;c, well tất nhi&ecirc;n l&agrave; nếu bạn kh&ocirc;ng gặp phải những cơn b&atilde;o.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Quy m&ocirc; lớn quả l&agrave; tuyệt vời, nhưng tuyệt vời hơn tr&ecirc;n tất cả l&agrave; hệ thống diệu k&igrave; của game. Royal Road nổi tiếng với những niềm vui bất tận đối với mọi game thủ.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Haizzz, với m&igrave;nh, đ&oacute; chỉ l&agrave; một miếng b&aacute;nh tr&ecirc;n trời&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Lee Huyn c&oacute; thể hy vọng điều g&igrave; từ một chiếc m&aacute;y t&iacute;nh c&oacute; thể bị chậm nếu cố mở một trang web chỉ hơi phức tạp?</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Giống như sự nổi tiếng của n&oacute;, để c&agrave;i đặt c&aacute;c thiết bị tạo n&ecirc;n tr&ograve; chơi thực tế ảo, gi&aacute; của một bộ thiết bị c&oacute; thể vượt tr&ecirc;n 10.000.000 won (khoảng 200.000.000 Đ). Thậm ch&iacute; nếu cậu c&oacute; số tiền đ&oacute;, d&ugrave; trong bất kỳ ho&agrave;n cảnh n&agrave;o cậu cũng sẽ trả c&aacute;c h&oacute;a đơn y tế cho b&agrave; hoặc cậu cho n&oacute; v&agrave;o quỹ học ph&iacute; đại học của em g&aacute;i m&igrave;nh.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Để tập trung l&agrave;m việc, Lee Huyn sẽ kh&ocirc;ng để bất k&igrave; điều g&igrave; khiến cậu ph&acirc;n t&acirc;m ra khỏi mục ti&ecirc;u kiếm tiền của m&igrave;nh, vậy n&ecirc;n cậu quyết định x&oacute;a t&agrave;i khoản Lục địa ph&eacute;p thuật.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&mdash;Bạn c&oacute; chắc chắn muốn x&oacute;a t&agrave;i khoản?&mdash;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>C&oacute; | Kh&ocirc;ng</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Lee Huyn di chuyển con trỏ chuột l&ecirc;n n&uacute;t &quot;C&oacute;&quot;. Giờ đ&acirc;y, chỉ cần một c&uacute; click chuột, nh&acirc;n vật m&agrave; cậu y&ecirc;u qu&yacute; sẽ biến mất m&atilde;i m&atilde;i. Trong khoảnh khắc cậu uốn cong ng&oacute;n tay xuống, một &yacute; nghĩ chạy qua t&acirc;m tr&iacute; cậu.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Liệu m&igrave;nh c&oacute; thể b&aacute;n nh&acirc;n vật n&agrave;y lấy tiền?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Lee Huyn nhớ đ&atilde; từng đọc tr&ecirc;n b&aacute;o hoặc đ&acirc;u đ&oacute; rằng việc mua v&agrave; b&aacute;n nh&acirc;n vật hiện nay đang rất phổ biến. Cậu chợt nhận ra rằng d&ugrave; thế n&agrave;o th&igrave; việc x&oacute;a nh&acirc;n vật cũng l&agrave; một &yacute; tưởng tồi hơn so với việc b&aacute;n n&oacute; cho người kh&aacute;c.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Cậu bắt đầu t&igrave;m tr&ecirc;n internet một trang web kinh doanh nh&acirc;n vật. Kết quả cho ra h&agrave;ng chục trang web, cậu t&igrave;m v&agrave; truy cập v&agrave;o một trang c&oacute; khối lượng giao dịch lớn nhất trong số đ&oacute;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Vậy m&igrave;nh chỉ cần để gửi nh&acirc;n vật của m&igrave;nh ở đ&acirc;y c&ugrave;ng với một c&aacute;i gi&aacute; l&agrave; xong?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Lee Huyn tải h&igrave;nh ảnh nh&acirc;n vật của m&igrave;nh, c&ugrave;ng những h&igrave;nh ảnh li&ecirc;n quan l&ecirc;n.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Nh&acirc;n vật với level cao nhất trong Lục địa ph&eacute;p thuật, c&ugrave;ng với trang bị tốt nhất đến từ những con rồng.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Cậu quyết định bắt đầu đấu gi&aacute; c&ugrave;ng với gi&aacute; khởi điểm l&agrave; 50.000 won (1.000.000 Đ). Cậu sợ rằng kh&ocirc;ng ai sẽ bỏ tiền mua nếu cậu đ&ograve;i một c&aacute;i gi&aacute; qu&aacute; cao.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Đấu gi&aacute; sẽ kết th&uacute;c trong một ng&agrave;y.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Việc đợi một thời gian d&agrave;i hơn ột khoản tiền lớn hơn l&agrave; rất kh&oacute; xảy ra. Trong khi đ&oacute;, để kiếm một c&ocirc;ng việc, cậu cần một bộ quần &aacute;o tươm tất, &iacute;t nhất l&agrave; một chiếc &aacute;o sơ mi v&agrave; c&agrave; vạt, cậu cần một số tiền ngay.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Th&ocirc;ng thường c&oacute; một loạt c&aacute;c nh&acirc;n vật v&agrave; vật phẩm để x&aacute;c định gi&aacute;, nhưng nội dung đấu gi&aacute; của người kh&aacute;c chỉ c&oacute; thể được nh&igrave;n thấy bằng c&aacute;ch trả ph&iacute; th&agrave;nh vi&ecirc;n vậy n&ecirc;n Lee Huyn từ chối truy cập.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Cậu gửi xong b&agrave;i v&agrave; đi ngủ. Dậy sớm v&agrave;o ng&agrave;y h&ocirc;m sau, cậu đ&atilde; l&ecirc;n kế hoạch đi xin việc tại một văn ph&ograve;ng gần nh&agrave;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Khoảng một giờ sau khi Lee Huyn gửi b&agrave;i l&ecirc;n trang đấu gi&aacute;, c&aacute;c cư d&acirc;n tr&ecirc;n mạng internet bắt đầu n&oacute;ng l&ecirc;n.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>*****</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Ban đầu, kh&ocirc;ng ai tin v&agrave;o b&agrave;i đấu gi&aacute;. Với bản cập nhật mới nhất của Lục địa ph&eacute;p thuật, mọi người đều biết giới hạn level đ&atilde; được n&acirc;ng cao l&ecirc;n đ&aacute;ng kể.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Hiện nay, level tối đa l&agrave; 200.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Tr&ecirc;n to&agrave;n server, kh&ocirc;ng một ai đạt level như vậy được t&igrave;m thấy.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>V&agrave; b&acirc;y giờ, c&oacute; một nh&acirc;n vật đạt level cao nhất được b&aacute;n đấu gi&aacute;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Đ&acirc;y chỉ l&agrave; tr&ograve; đ&ugrave;a của một kẻ n&agrave;o đ&oacute;.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Loại người đần độn n&agrave;o lại gửi c&aacute;i thứ nh&agrave;m ch&aacute;n n&agrave;y?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Điều n&agrave;y xảy ra thường xuy&ecirc;n v&agrave; chẳng c&oacute; g&igrave; buồn cười cả.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Một v&agrave;i người bắt đầu nhận x&eacute;t. B&ecirc;n cạnh l&agrave; một số lời khuy&ecirc;n kh&ocirc;ng n&ecirc;n để bị lừa, trong khi một v&agrave;i người kh&aacute;c nghĩ rằng đ&acirc;y chỉ l&agrave; một tr&ograve; đ&ugrave;a.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Ch&uacute;ng ta đang ở đầu thế kỷ 21, lừa đảo ăn cắp th&ocirc;ng tin người d&ugrave;ng đ&atilde; trở th&agrave;nh một xu hướng v&agrave; bởi v&igrave; thường xuy&ecirc;n c&oacute; người bị lừa, rất nhiều người nghĩ rằng đ&acirc;y l&agrave; một trường hợp nữa.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Kh&ocirc;ng, kh&ocirc;ng thể n&agrave;o...&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Kh&ocirc;ng thể như vậy được.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Những cư d&acirc;n mạng cố gắng phớt lờ b&agrave;i đấu gi&aacute; n&agrave;y. Nhưng họ kh&ocirc;ng thể cưỡng lại sự t&ograve; m&ograve; v&agrave; cứ tiếp tục v&agrave;o xem th&ecirc;m một lần nữa, một lần nữa...</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Ảnh chụp m&agrave;n h&igrave;nh của nh&acirc;n vật được đăng l&ecirc;n d&ugrave; b&agrave;i đấu gi&aacute; kh&ocirc;ng y&ecirc;u cầu bắt buộc.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Mọi file đ&iacute;nh k&egrave;m đều được mở ra. Th&ocirc;ng tin của nh&acirc;n vật thật sự nổi bật. Những th&ocirc;ng số kh&aacute;c nhau đều đạt tối đa v&agrave; trang bị đi k&egrave;m thực sự tuyệt vời.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Anh ta lấy được những vũ kh&iacute; n&agrave;y ở chỗ qu&aacute;i n&agrave;o?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Đủ bộ gi&aacute;p v&agrave; khi&ecirc;n Red Dragon? Wow...&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Cậu ta n&oacute;i ch&uacute;ng được trao bởi Hắc Th&aacute;nh tại Valor.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Mọi người dần tin tưởng hơn. Bằng một c&aacute;ch n&agrave;o đ&oacute; n&oacute; dường như kh&ocirc;ng c&ograve;n giống một b&agrave;i lừa đảo. Để c&oacute; thể giả mạo những h&igrave;nh ảnh như vậy thực sự rất kh&oacute; khăn.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Ch&agrave;ng trai n&agrave;y thực sự đ&atilde; d&agrave;nh nhiều thời gian cho n&oacute;.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Giao diện lấy từ Lục địa ph&eacute;p thuật, nhưng với những thiết bị n&agrave;y cậu ta c&oacute; thể lấy từ đ&acirc;u?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Trong số những người hiện đang xem b&agrave;i đấu gi&aacute; c&oacute; một số người l&agrave;m về đồ họa. Nh&igrave;n v&agrave;o bức ảnh cơ sở, họ cố gắng t&igrave;m ra điểm m&ugrave;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Nếu bức ảnh được chỉnh sửa, d&ugrave; c&oacute; chỉnh sửa tốt đến thế n&agrave;o th&igrave; vẫn c&oacute; những dấu vết cực nhỏ.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Thậm ch&iacute; dưới con mắt c&ocirc;ng ch&uacute;ng n&oacute; ho&agrave;n to&agrave;n ho&agrave;n hảo nhưng khi &aacute;p dụng những c&ocirc;ng nghệ mới nhất, những phần l&agrave;m giả sẽ bị phơi b&agrave;y.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Dạ, điều n&agrave;y... thưa gi&aacute;m đốc, c&oacute; phải trước kia ng&agrave;i đ&atilde; từng chơi Lục địa ph&eacute;p thuật?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Sao cơ!!! &Yacute; cậu l&agrave; W-We-Weed?!&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;V&acirc;ng, vậy gi&aacute;m đốc đ&atilde; biết về cậu ấy, cấp độ của nh&acirc;n vật hiện tại l&agrave; 200. C&aacute;c số liệu v&agrave; trang bị cũng đ&atilde; đạt tối đa.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Xin ch&agrave;o.&quot; Thật bất ngờ, đến từ ph&iacute;a b&ecirc;n kia l&agrave; một giọng n&oacute;i của một phụ nữ xinh đẹp.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Lee Huyn chắc chắn rằng cậu chưa từng nghe giọng n&oacute;i n&agrave;y v&agrave; bắt đầu hạ ống nghe xuống.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Phải, đ&oacute; l&agrave; t&ocirc;i...&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;T&ocirc;i gọi từ c&ocirc;ng ty truyền th&ocirc;ng CTS. T&ocirc;i l&agrave; thư k&yacute; của chủ tịch, t&ocirc;i t&ecirc;n Yoon Nahee. Ch&uacute;ng t&ocirc;i đ&atilde; chuyển số tiền đấu gi&aacute; v&agrave;o t&agrave;i khoản của anh, anh c&oacute; thể x&aacute;c nhận tr&ecirc;n trang web b&aacute;n h&agrave;ng. Xin h&atilde;y li&ecirc;n hệ với ch&uacute;ng t&ocirc;i nếu anh c&oacute; bất k&igrave; vấn đề g&igrave;.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>C&aacute;c nh&agrave; thiết kế đồ họa ph&oacute;ng đại h&igrave;nh ảnh l&ecirc;n 10.000 lần để t&igrave;m kiếm những điểm ảnh được chỉnh sửa, nghi&ecirc;n cứu mọi điểm tối, v&agrave; thậm ch&iacute; c&ograve;n qu&eacute;t những tập tin h&igrave;nh ảnh sang dạng 3D, cố gắng chứng minh n&oacute; l&agrave; giả mạo. Nhưng những cố gắng của họ tỏ ra v&ocirc; &iacute;ch. Cuối c&ugrave;ng họ buộc phải thừa nhận.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Tất cả những h&igrave;nh ảnh n&agrave;y l&agrave; thật.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;T&ocirc;i l&agrave; nh&agrave; thiết kế ch&iacute;nh của c&ocirc;ng ty LK. T&ocirc;i đảm bảo những bức ảnh n&agrave;y chưa hề qua chỉnh sửa dưới bất k&igrave; h&igrave;nh thức n&agrave;o.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Tr&aacute;i với sự mong đợi, những nh&agrave; thiết kế đồ họa bắt đầu thừa nhận t&iacute;nh ch&acirc;n thực của những bức ảnh.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Sau đ&oacute;, những người chơi của Lục địa ph&eacute;p thuật xuất hiện. Khoảnh khắc họ nh&igrave;n v&agrave;o bức ảnh, họ phải thốt l&ecirc;n trong kinh ngạc. Trong đầu họ kh&ocirc;ng hề c&oacute; một ch&uacute;t nghi ngờ.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Đ&oacute; l&agrave; sự thật. Nh&acirc;n vật n&agrave;y t&ecirc;n l&agrave; &quot;Weed&quot;. Người chơi n&agrave;y thực sự rất nổi tiếng.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;C&aacute;c trang bị n&agrave;y l&agrave; của cậu ấy, nhưng t&ocirc;i kh&ocirc;ng hề biết cậu ta đ&atilde; đạt top level, điều n&agrave;y thật qu&aacute; ấn tượng!&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Lee Huyn lu&ocirc;n chơi một m&igrave;nh, cố gắng tr&aacute;nh những b&atilde;i qu&aacute;i đ&ocirc;ng người. Cậu kh&ocirc;ng bao giờ tham gia v&agrave;o c&aacute;c cuộc v&acirc;y h&atilde;m, v&agrave; thường bỏ qua những tranh chấp nhỏ. D&ugrave; vậy những tin đồn về cậu chẳng bao giờ dừng lại.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Kẻ c&oacute; thể dễ d&agrave;ng t&agrave;n s&aacute;t những con rồng hay qu&aacute;i vật Kraken, c&oacute; thể một m&igrave;nh qu&eacute;t sạch những b&atilde;i qu&aacute;i cấp độ cao, kẻ đ&oacute; đơn giản l&agrave; bất khả chiến bại.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Kh&ocirc;ng tham gia c&ugrave;ng những người kh&aacute;c kh&ocirc;ng c&oacute; nghĩ l&agrave; họ kh&ocirc;ng nhận ra cậu. Trong số những người c&ograve;n chơi Lục địa ph&eacute;p thuật, cậu l&agrave; một huyền thoại. Chỉ l&agrave; Lee Huyn kh&ocirc;ng hề biết rằng cậu l&agrave; một người nổi tiếng.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Vậy n&ecirc;n những trang bị n&agrave;y l&agrave; thật?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Ai mua được nh&acirc;n vật n&agrave;y thực sự l&agrave; đ&atilde; tr&uacute;ng giải độc đắc.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Gi&aacute; khởi điểm l&agrave; 50.000 won. Bao gồm cả nh&acirc;n vật v&agrave; trang bị, d&ugrave; vậy, chỉ cần sở hữu một trong hai th&ocirc;i theo gi&aacute; hiện h&agrave;nh th&igrave; vẫn l&agrave; qu&aacute; thấp.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Mọi người vội v&atilde; bắt đầu đầu gi&aacute;. Chỉ trong chớp mắt đ&atilde; l&ecirc;n từ 50.000 đến 300.000 won, sau đ&oacute; l&ecirc;n đến 700.000 won. Khoảng một giờ sau đ&oacute; đ&atilde; vượt qua 1.000.000 won.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>D&ugrave; chỉ cần b&aacute;n một phần của trang bị cũng đủ để b&ugrave; đắp mọi chi ph&iacute;. Gi&aacute; bắt đầu tăng vọt.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Đến thời điểm n&agrave;y, nhiều người quyết định dừng cuộc chơi, họ c&oacute; thể tưởng tượng ra con số cuối c&ugrave;ng khủng khiếp như thế n&agrave;o.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>D&ugrave; người chơi Lục địa ph&eacute;p thuật đ&atilde; giảm theo thời gian, nhưng sau khi c&aacute;c server được gộp lại th&agrave;nh một v&agrave; miễn ph&iacute;, vẫn c&ograve;n c&oacute; kh&aacute; nhiều người chơi.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Ban đầu, chỉ những người chơi Lục địa ph&eacute;p thuật l&ecirc;n gi&aacute;, v&agrave; theo sau đ&oacute; l&agrave; những nh&acirc;n vi&ecirc;n văn ph&ograve;ng gi&agrave;u c&oacute; đẩy gi&aacute; l&ecirc;n cao hơn.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Trước đ&acirc;y, khi Lục địa ph&eacute;p thuật mới được tạo ra, n&oacute; đ&atilde; tạo ra cơn sốt to&agrave;n H&agrave;n Quốc. Nh&acirc;n vật với level cao nhất trong tr&ograve; chơi n&agrave;y, c&oacute; được n&oacute; giống như việc sở hữu một m&oacute;n đồ cổ m&agrave; bạn muốn đem ra khoe với người kh&aacute;c.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Một số người l&agrave;m thu&ecirc; kh&ocirc;n ngoan đ&atilde; nhanh ch&oacute;ng gọi điện thoại cho &ocirc;ng chủ của họ.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Thưa gi&aacute;m đốc&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Tại sao cậu lại gọi cho t&ocirc;i v&agrave;o nửa đ&ecirc;m? Cậu muốn bị sa thải phải kh&ocirc;ng?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Phải, c&oacute; chuyện g&igrave;?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Hiện tại, nh&acirc;n vật c&oacute; cấp độ cao nhất trong Lục địa ph&eacute;p thuật đang được đấu gi&aacute;. T&ocirc;i nghĩ rằng gi&aacute;m đốc chắc hẳn sẽ c&oacute; một ch&uacute;t hứng th&uacute;...&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Ngay sau lời giải th&iacute;ch, gi&aacute;m đốc trả lời:</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Ngay b&acirc;y giờ. T&ocirc;i cho ph&eacute;p cậu d&ugrave;ng 30.000.000 won để đấu gi&aacute;. T&ocirc;i sẽ quay về nh&agrave; ngay lập tức để kiểm tra, h&atilde;y cố gắng lấy cho được vị tr&iacute; đầu ti&ecirc;n!&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Trong đời đại hiện nay, những người nắm giữ vị tr&iacute; chủ chốt trong c&aacute;c c&ocirc;ng ty đều thuộc thế hệ người đ&atilde; từng chơi Lục địa ph&eacute;p thuật hồi c&ograve;n trẻ. Nhờ vậy, họ tiếp tục đẩy mạnh mức gi&aacute; cao hơn.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Trong c&aacute;c trang th&ocirc;ng tin lớn v&agrave; c&aacute;c trang web c&oacute; li&ecirc;n quan đến tr&ograve; chơi, chủ đề n&oacute;ng nhất đang n&oacute;i về cuộc đấu gi&aacute; nh&acirc;n vật c&oacute; cấp độ cao nhất trong Lục địa ph&eacute;p thuật. Rất nhiều người bắt đầu t&igrave;m kiếm n&oacute;, v&agrave; ngay thứ hạng c&aacute;c từ kh&oacute;a li&ecirc;n quan được đẩy l&ecirc;n cao ngay lập tức. Từ thời điểm n&agrave;y trở đi, cuộc đấu gi&aacute; mới thực sự bắt đầu.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>*****</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Trong l&uacute;c chờ đợi, Lee Huyn đ&atilde; ngủ say, ho&agrave;n to&agrave;n kh&ocirc;ng biết những việc đang xảy ra.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Nogada... 50.000 won một ng&agrave;y. Rửa b&aacute;t đĩa tại nh&agrave; h&agrave;ng, 30.000 won. Bữa tối, thịt ch&acirc;n gi&ograve;...&quot; (m&igrave;nh thực sự kh&ocirc;ng biết nogada l&agrave; c&aacute;i g&igrave; T__T)</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Cậu đang bận rộn với những việc phải l&agrave;m v&agrave;o ng&agrave;y mai trong giấc mơ..</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>*****</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>C&ugrave;ng với sự ch&uacute; &yacute; của tất cả mọi người, gi&aacute; b&aacute;n thực sự tăng vọt.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Cho đến nay, kh&ocirc;ng ai biết người đạt level cao nhất tại Lục địa ph&eacute;p thuật l&agrave; ai, d&ugrave; vậy, tất cả mọi người đều khao kh&aacute;t chiếm hữu một nh&acirc;n vật huyền thoại trong một tr&ograve; chơi lớn nhất.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Cuối c&ugrave;ng, gi&aacute; b&aacute;n đ&atilde; vượt qu&aacute; 100.000.000 won (khoảng 2 tỷ Đ)</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Tại điểm n&agrave;y, người sở hữu đ&atilde; phải bỏ ra số tiền vượt qua gi&aacute; trị trường để c&oacute; thể sở hữu nh&acirc;n vật v&agrave; trang bị. Một v&agrave;i người than phiền v&igrave; thiếu tiền v&agrave; đ&agrave;nh phải từ bỏ cuộc đấu gi&aacute;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;T&ocirc;i nghĩ kẻ b&aacute;n nh&acirc;n vật n&agrave;y thực sự l&agrave; một t&ecirc;n lập dị c&oacute; vấn đề về thời gian.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Tại sao cậu ta c&oacute; thể thiết lập thời gian chỉ một ng&agrave;y ột nh&acirc;n vật v&ocirc; gi&aacute; như vậy?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;C&aacute;i chết tiệt g&igrave; khiến hắn ta nghĩ rằng m&igrave;nh sẽ nhận được c&aacute;i gi&aacute; tối đa chỉ trong một ng&agrave;y chứ?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Những người biết chắc chắn kh&ocirc;ng thể sở hữu nh&acirc;n vật bắt đầu ment để l&agrave;m dịu nỗi buồn của họ. Chẳng bao l&acirc;u, số lượng ment đ&atilde; vượt qua 900.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Lại tiếp tục c&oacute; th&ecirc;m những người đấu gi&aacute;, v&agrave; khi n&oacute; vượt qu&aacute; 300.000.000 won, một v&agrave;i c&ocirc;ng ty bắt đầu tham gia.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Cuộc đấu gi&aacute; dựa tr&ecirc;n những điều rất đơn giản, nhưng một v&agrave;i người biết rằng n&oacute; sẽ kh&ocirc;ng kết th&uacute;c một c&aacute;ch đơn giản như vậy. Nếu cuộc giao dịch n&agrave;y kết th&uacute;c c&ugrave;ng với một số tiền khổng lồ, nhiều người sẽ biết đến n&oacute; th&ocirc;ng qua b&aacute;o ch&iacute; hoặc truyền miệng, v&agrave; c&aacute;c t&aacute;c động truyền th&ocirc;ng xung quanh thực sự gh&ecirc; gớm.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Để tạo ra một b&agrave;i quảng c&aacute;o cần rất nhiều tiền, nhưng, sau khi chi h&agrave;ng đống tiền cho quảng c&aacute;o, mọi người vẫn kh&ocirc;ng hề quan t&acirc;m đến n&oacute;. C&ograve;n với th&ocirc;ng tin về một nh&acirc;n vật mang cấp độ cao nhất đ&atilde; được b&aacute;n với c&aacute;i gi&aacute; bằng cả một gia t&agrave;i. Tất cả mọi người đều sẽ quan t&acirc;m v&agrave; ch&uacute; &yacute;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Bộ phận quan hệ c&ocirc;ng ch&uacute;ng trong mỗi c&ocirc;ng ty đều hiểu về vấn đề theo c&aacute;ch đ&oacute;. C&aacute;c c&ocirc;ng ty truyền th&ocirc;ng kỹ thuật số đang cạnh tranh nhau gay gắt, c&aacute;c đ&agrave;i truyền h&igrave;nh về tr&ograve; chơi cần một nh&acirc;n vật với cấp độ cao nhất. Gi&aacute; trị hoặc gi&aacute; thị trường kh&ocirc;ng phải l&agrave; vấn đề. Họ muốn tổ chức một loạt chương tr&igrave;nh đặc biệt về những tr&ograve; chơi nổi tiếng trong qu&aacute; khứ, điều n&agrave;y sẽ tăng độ tin cậy v&agrave; h&igrave;nh ảnh của đ&agrave;i truyền h&igrave;nh với c&ocirc;ng ch&uacute;ng.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Cạnh tranh khốc liệt dẫn đến gi&aacute; li&ecirc;n tục tăng, c&ugrave;ng với số lượng người truy cập trang web thực hiện giao dịch, điều n&agrave;y khiến c&aacute;c nh&agrave; quản l&yacute; trang web mỉm cười h&agrave;i l&ograve;ng.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Cuối c&ugrave;ng, cuộc đấu gi&aacute; đến hồi kết th&uacute;c.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Năm đ&agrave;i truyền hinh lớn nhất tham gia v&agrave;o trận chiến tranh gi&agrave;nh một nh&acirc;n vật trong game. Vượt qua tất cả, CTS Media đ&atilde; th&agrave;nh c&ocirc;ng đấu gi&aacute; v&agrave; nhận được nh&acirc;n vật. C&ocirc;ng ty n&agrave;y gần đ&acirc;y đ&atilde; nhanh ch&oacute;ng mở rộng v&agrave; tăng c&aacute;c khung giờ ph&aacute;t s&oacute;ng, trở th&agrave;nh một c&ocirc;ng ty đầy hứa hẹn trong tương lai. Người tr&uacute;ng thầu đ&atilde; được quyết định v&agrave; cuộc đấu gi&aacute; kết th&uacute;c.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>*****</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Xin ch&agrave;o?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Lee Huyn nhận được cuộc gọi đ&aacute;nh thức cậu v&agrave;o buổi s&aacute;ng.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Việc l&agrave;m ở c&ocirc;ng trường x&acirc;y dựng ng&agrave;y h&ocirc;m qua khiến cậu kiệt sức v&agrave; cần phải đi ngủ. Cậu chỉ kiếm được 30.000 won. &Iacute;t hơn b&igrave;nh thường bởi v&igrave; &ocirc;ng chủ n&oacute;i cậu kh&ocirc;ng đủ năng lực.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Um... T&ocirc;i nghĩ c&ocirc; đ&atilde; gọi nhầm số rồi.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Tuy nhi&ecirc;n, trước khi l&agrave;m như vậy, cậu nghe giọng người phụ nữ một lần nữa.....</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Anh c&oacute; phải l&agrave; người đang rao b&aacute;n t&agrave;i khoản tr&ecirc;n internet?&quot; c&ocirc; ta hỏi.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Đơ...đợi một chuts! Vậy l&agrave; cuộc đấu gi&aacute; đ&atilde; th&agrave;nh c&ocirc;ng?&quot;&rdquo;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Hmm. Phải. Chẳng lẽ anh vẫn chưa kiểm tra th&ocirc;ng tin về buổi đấu gi&aacute;?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Vẫn chưa, t&ocirc;i c&oacute; một ch&uacute;t việc bận...&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Yoon Nahee của CTS Media, l&agrave; thư k&yacute; của chủ tịch. C&ocirc; đ&atilde; l&agrave;m việc trong ng&agrave;nh t&agrave;i ch&iacute;nh nhiều năm, th&agrave;nh thạo 8 ng&ocirc;n ngữ. C&ocirc; kh&ocirc;ng phải l&agrave; một người phụ nữ b&igrave;nh thường, v&agrave; tất cả những người xung quanh đều bận rộn để t&acirc;ng bốc c&ocirc;. Nhưng khi đối diện với thực tế rằng Lee Huyn chưa hề kiểm tra một cuộc đấu gi&aacute; với số t&agrave;i sản như vậy vẫn đủ khiến c&ocirc; cho&aacute;ng ngợp.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Vậy gi&aacute; cuối c&ugrave;ng l&agrave; bao nhi&ecirc;u?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Lee Huyn hỏi đầy bất an. Cậu hi vọng sẽ b&aacute;n được &iacute;t nhất 200.000 won để trả h&oacute;a đơn thuốc men. Nhưng giọng n&oacute;i của Lee Huyn nghe qua điện thoại khiến cậu ho&agrave;n to&agrave;n bị shock.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;3.090.000.000 won&quot; (khoảng 60 tỷ Đ)</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Ban đầu, nh&acirc;n vật của Lee Huyn &quot;Weed&quot; theo gi&aacute; thị trường rơi v&agrave;o khoảng 150.000.000 won. Th&ocirc;ng thường khi tr&ograve; chơi đang ở đỉnh cao của sự nổi tiếng, việc b&aacute;n c&aacute;c trang bị c&oacute; thể vượt qua 100.000.000 won, nhưng với một tr&ograve; chơi đ&atilde; cũ, như lục địa ph&eacute;p thuật, gi&aacute; thị trường bị hạ xuống cực k&igrave; thấp.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>D&ugrave; vậy, do một v&agrave;i yếu tố, bao gồm cả thời gian đấu gi&aacute; hạn chế, sự hiếm c&oacute; v&agrave; danh tiếng nh&acirc;n vật của cậu, đ&atilde; khiến c&aacute;i gi&aacute; vượt qua 3.000.000.000 won. Cuộc đấu gi&aacute; tự n&oacute; đ&atilde; l&agrave; một tin tức gi&aacute; trị, v&agrave; đ&oacute; ch&iacute;nh x&aacute;c l&agrave; những điều m&agrave; c&ocirc;ng ty truyền th&ocirc;ng CTS đang nhắm đến.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Tuy nhi&ecirc;n, Lee Huyn đ&atilde; trả lời thẳng thừng.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;C&ocirc; đang đ&ugrave;a t&ocirc;i phải kh&ocirc;ng?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Sao cơ&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;T&ocirc;i kh&ocirc;ng thể tin được rằng c&ocirc; gọi cho t&ocirc;i để n&oacute;i một điều vớ vẩn giống như vậy. T&ocirc;i c&uacute;p m&aacute;y đ&acirc;y.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Sau khi c&uacute;p m&aacute;y, Lee Huyn cười cay đắng.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Bằng c&aacute;ch n&agrave;o c&ocirc; ta c&oacute; thể biết về b&agrave;i đấu gi&aacute;? V&agrave; bằng c&aacute;ch n&agrave;o c&ocirc; ta c&oacute; số của m&igrave;nh để chơi một tr&ograve; đ&ugrave;a như vậy?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Lee Huyn kh&ocirc;ng thể tin v&agrave;o điều đ&oacute;, điều n&agrave;y thực sự qu&aacute; v&ocirc; l&yacute;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>D&ugrave; vậy, v&agrave;o khoảnh khắc cậu truy cập v&agrave;o trang web, b&agrave;i đấu gi&aacute; của cậu xuất hiện tr&ecirc;n m&agrave;n h&igrave;nh ch&iacute;nh. V&ocirc; số người v&agrave;o ment v&agrave; số tiền đấu gi&aacute; th&agrave;nh c&ocirc;ng như những g&igrave; c&ocirc; ấy n&oacute;i: 3.090.000.000 won!</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Lee Huyn chỉ cố gắng ngăn m&igrave;nh khỏi ng&atilde; xuống.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Nếu điều n&agrave;y l&agrave; một giấc mơ, t&ocirc;i hi vọng m&igrave;nh sẽ kh&ocirc;ng bao giờ thức dậy&quot;, cậu nghĩ.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Ng&agrave;y h&ocirc;m sau, Lee Huyn nhận được th&ocirc;ng b&aacute;o l&agrave; c&oacute; hơn 3.000.000.000 won đ&atilde; thực sự được gửi v&agrave;o t&agrave;i khoản của cậu.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Cậu tự v&eacute;o v&agrave;o m&aacute; m&igrave;nh cho đến khi chảy m&aacute;u. Điều n&agrave;y l&agrave; sự thực. Lee Huyn vội v&agrave;ng đưa cho b&agrave; ngoại sổ tiết kiệm. Cậu vẫn chưa d&aacute;m n&oacute;i với b&agrave; to&agrave;n bộ c&acirc;u chuyện.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;B&agrave; ơi, ch&aacute;u đ&atilde; kiếm được một &iacute;t tiền.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Vậy sao?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>B&agrave; cậu trả lời lại một c&aacute;ch mệt mỏi. Chỉ mới 3 ng&agrave;y trước cậu c&ograve;n chưa được nhận thẻ ID. Cậu kh&ocirc;ng thể kiếm được qu&aacute; nhiều.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;L&agrave;m tốt lắm, Huyn-ah.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&ldquo;Well, good work, Hyun-ah.&rdquo;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Cũng kh&ocirc;ng kh&oacute; khăn lắm đ&acirc;u, b&agrave; ạ.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Lee Huyn đưa b&agrave; quyển sổ tiết kiệm.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Đ&acirc;y l&agrave; c&aacute;i g&igrave;?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Nh&igrave;n n&agrave;y. Đ&acirc;y l&agrave; số tiền ch&aacute;u kiếm được.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>B&agrave; cậu chớp đ&ocirc;i mắt mờ của m&igrave;nh v&agrave;i lần trong khi nh&igrave;n v&agrave;o quyển sổ. Nh&igrave;n v&agrave;o số tiền trong t&agrave;i khoản, tr&agrave;n đầy sự ho&agrave;i nghi.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Ch&aacute;u! Ch&aacute;u đ&atilde; trộm n&oacute;?!!! Kh&ocirc;ng, kh&ocirc;ng thể n&agrave;o, khoản tiền n&agrave;y kh&ocirc;ng thể bị trộm...&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Ch&aacute;u đ&atilde; b&aacute;n t&agrave;i khoản game của m&igrave;nh.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;T&agrave;i khoản game?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;N&oacute; kh&aacute; kh&oacute; để giải th&iacute;ch... D&ugrave; sao, ch&aacute;u đ&atilde; kiếm số tiền n&agrave;y một c&aacute;ch hợp ph&aacute;p.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Điều n&agrave;y thật sự l&agrave;...&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>B&agrave; cậu bắt đầu kh&oacute;c v&igrave; qu&aacute; x&uacute;c động.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Huyn-ah, c&oacute; phải giống như những người kh&aacute;c, giờ ch&uacute;ng ta c&oacute; thể sống m&agrave; kh&ocirc;ng cần phải lo lắng về c&aacute;c h&oacute;a đơn điện nước nữa phải kh&ocirc;ng?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Đương nhi&ecirc;n. Thậm ch&iacute; ch&uacute;ng ta c&ograve;n c&oacute; thể mua nh&agrave;.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Ch&aacute;u c&oacute; thể đi học lại... v&agrave; Hayan c&oacute; thể v&agrave;o đại học. Ch&uacute;ng ta kh&ocirc;ng c&ograve;n phải ghen tị với những người kh&aacute;c nữa.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>B&agrave; cậu đang rơi nước mắt, cũng như Lee Huyn.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Cậu nhớ lại tất cả những đau khổ v&agrave; cay đắng từng trải qua.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Giờ đ&acirc;y ch&uacute;ng ta c&oacute; thể sống c&ugrave;ng nhau, b&agrave; ạ!&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Phải, phải.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Sau khi trải qua những kh&oacute; khăn c&ugrave;ng nhau, hai người thậm ch&iacute; c&ograve;n vui mừng hơn nữa. V&agrave;i ng&agrave;y sau họ chuyển đến một ng&ocirc;i nh&agrave; mới v&agrave; b&agrave; cậu cuối c&ugrave;ng cũng c&oacute; thể nhận được sự điều trị tại bệnh viện. Tại đ&oacute;, ngo&agrave;i vết thương tại h&ocirc;ng, c&aacute;c b&aacute;c sĩ ph&aacute;t hiện b&agrave; cậu c&ograve;n bị nhiều bệnh kh&aacute;c nữa v&agrave; phải nhập viện một thời gian. Em g&aacute;i cậu Hayan cũng rất vui mừng. Nhưng, khoảng thời gian hạnh ph&uacute;c của họ qu&aacute; &iacute;t ỏi.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Khoảng khắc đ&oacute; kết th&uacute;c ngay khi năm người đ&agrave;n &ocirc;ng mặc vest đen xuất hiện tại bệnh viện. Những người m&agrave; cậu kh&ocirc;ng muốn thấy nhất.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Khoảnh khắc họ đẩy cửa bước v&agrave;o ph&ograve;ng bệnh của b&agrave; cậu, căn ph&ograve;ng dường như được lấp đầy, mặc d&ugrave; đ&acirc;y l&agrave; một trong những ph&ograve;ng bệnh lớn nhất.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Tất cả những bệnh nh&acirc;n kh&aacute;c hoảng sợ, c&ugrave;ng với sự gi&uacute;p đỡ từ y t&aacute;, họ lần lượt rời khỏi ph&ograve;ng một c&aacute;ch im lặng.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Trong ph&ograve;ng giờ chỉ c&ograve;n Lee Huyn, b&agrave; cậu v&agrave; năm người đ&agrave;n &ocirc;ng. D&ugrave; vậy, cậu vẫn cảm thấy may mắn v&igrave; giờ ph&uacute;t n&agrave;y em g&aacute;i cậu kh&ocirc;ng ở đ&acirc;y. Khi những người n&agrave;y đến, họ chẳng bao giờ đem lại điều g&igrave; tốt đẹp cả. Cậu kh&ocirc;ng nghĩ lần n&agrave;y sẽ kh&aacute;c những lần trước.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Lee Huyn. Tao nghe được tin gần đ&acirc;y m&agrave;y đ&atilde; kiếm được một khoản kha kh&aacute; về cho gia đ&igrave;nh.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Người đ&agrave;n &ocirc;ng t&oacute;c v&agrave;ng n&oacute;i.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Lee Huyn trả lời lại một c&aacute;ch mạnh mẽ.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Vậy th&igrave; sao?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Trước kia cha m&agrave;y nợ tiền của tao, giờ bọn tao đến đ&acirc;y để thu hồi khoản nợ n&agrave;y.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Nợ?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Phải, v&agrave; giờ m&agrave;y đ&atilde; c&oacute; tiền, tao tin rằng m&agrave;y c&oacute; thể trả lại cho tao.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Cậu nuốt nước miếng. Khi cha mẹ cậu qua đời. Họ để lại cho cậu một khoản nợ trị gi&aacute; 100.000.000 won.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Mọi chuyện sẽ ổn nếu cậu từ bỏ quyền thừa kế, nhưng khi đ&oacute; Lee Huyn vẫn c&ograve;n qu&aacute; trẻ, cậu kh&ocirc;ng hiểu v&agrave; cũng kh&ocirc;ng hề biết về điều luật n&agrave;y. Trong khi đ&oacute;, b&agrave; cậu, c&ugrave;ng với nỗi đau mất người con trai duy nhất, cũng kh&ocirc;ng đủ tỉnh t&aacute;o để từ bỏ quyền thừa kế trong v&ograve;ng 3 th&aacute;ng. Vậy n&ecirc;n giờ cậu phải g&aacute;nh chịu khoản nợ n&agrave;y.Trước đ&acirc;y, cậu chỉ l&agrave; một con nợ của những kẻ kh&aacute;t m&aacute;u chỉ biết đến tiền n&agrave;y. Cậu hiểu rất r&otilde; về sự t&agrave;n bạo của ch&uacute;ng. Nhưng giờ cậu đ&atilde; c&oacute; rất nhiều tiền, cậu kh&ocirc;ng c&ograve;n cần phải sợ h&atilde;i nữa.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;T&ocirc;i sẽ trả. Bao nhi&ecirc;u?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Tốt. Rất ngắn gọn. Bọn tao th&iacute;ch những kh&aacute;ch h&agrave;ng giống như m&agrave;y. Số tiền m&agrave; m&agrave;y phải trả cho tao l&agrave; 3.000.000.000 won.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Nghe hắn n&oacute;i, tim cậu đập mạnh c&ugrave;ng với sự tức giận.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Đồ khốn! Cha t&ocirc;i chỉ vay c&aacute;c người 100.000.000 won.&quot;&quot;Phải, đ&oacute; l&agrave; 8 năm trước. Đến b&acirc;y giờ, bọn tao đ&atilde; cộng th&ecirc;m tiền l&atilde;i.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Thật v&ocirc; l&yacute;. T&ocirc;i sẽ b&aacute;o cảnh s&aacute;t!&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Cứ b&aacute;o đi. M&agrave;y nghĩ cảnh s&aacute;t sẽ đứng về ph&iacute;a m&agrave;y sao?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Cảnh s&aacute;t sẽ bảo vệ người d&acirc;n.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&ldquo;Puhahahaha.&rdquo;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Sau khi nghe Lee Huyn n&oacute;i, những người đ&agrave;n &ocirc;ng bắt đầu cười. Đặc biệt l&agrave; người đ&agrave;n &ocirc;ng t&oacute;c v&agrave;ng, &ocirc;ng ta đặt tay l&ecirc;n tr&aacute;n v&agrave; cười lớn. Sau đ&oacute;, những người c&ograve;n lại bắt đầu im lặng đứng đằng sau người đ&agrave;n &ocirc;ng n&agrave;y. Nh&igrave;n v&agrave;o bầu kh&ocirc;ng kh&iacute;, dường như &ocirc;ng ta ch&iacute;nh l&agrave; kẻ l&atilde;nh đạo.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;N&oacute;i cho n&oacute; hiểu. Đừng g&acirc;y rắc rối kh&ocirc;ng cần thiết.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;V&acirc;ng, Huynh-nim. N&agrave;y nh&oacute;c, nghe cẩn thận. Ch&uacute;ng tao kh&ocirc;ng l&agrave;m điều g&igrave; tr&aacute;i luật cả. Bởi v&igrave; ch&uacute;ng tao cho vay hợp ph&aacute;p. Bắt đầu, l&atilde;i suất l&agrave; 50% mỗi năm. Để tao t&iacute;nh. Năm đầu số tiền tăng từ 100.000.000 l&ecirc;n 150.000.000, năm tiếp theo, số tiền l&ecirc;n khoảng 220.000.000, sang năm 3, số tiền l&agrave; 330.000.000, đến năm 4 l&agrave; gần 500.000.000...&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>C&agrave;ng nghe Lee Huyn lại c&agrave;ng cảm thấy tuyệt vọng. Khoản nợ đ&atilde; tăng gấp 5 lần chỉ sau 4 năm. 8 năm đ&atilde; tr&ocirc;i qua, vậy n&ecirc;n n&oacute; sẽ l&agrave; 2.500.000.000, nhưng thời gian đ&atilde; tr&ocirc;i qua hơn 8 năm, vậy n&ecirc;n kh&ocirc;ng hề sai khi n&oacute;i khoản nợ hiện tại của cậu l&agrave; 3.000.000.000.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Cậu đ&atilde; bị những t&ecirc;n n&agrave;y l&agrave;m phiền rất nhiều, nhưng cậu kh&ocirc;ng hề biết khoản nợ sau khi t&iacute;ch lũy lại nhiều đến như vậy, tận 3.000.000.000 won.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Ph&aacute; sản!</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Những người kh&aacute;c với một khoản nợ 3.000.000.000 won c&oacute; thể sẽ đệ đơn ph&aacute; sản. Lee Huyn kh&ocirc;ng hề c&acirc;n nhắc về việc ph&aacute; sản. Những chi ph&iacute; sẽ mất khi l&agrave;m thủ tục, t&ograve;a &aacute;n v&agrave; cố vấn ph&aacute;p l&yacute;, trả họ tiền v&agrave; l&agrave;m theo những hướng dẫn cần thiết, v&agrave; sau đ&oacute; bạn sẽ rơi v&agrave;o t&igrave;nh trạng ph&aacute; sản.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Lee Huyn kh&ocirc;ng thể đệ đơn ph&aacute; sản. B&ecirc;n cạnh đ&oacute;, thậm ch&iacute; nếu bạn muốn, liệu bạn c&oacute; tin những con c&aacute; mập cho vay nặng l&atilde;i n&agrave;y sẽ để bạn y&ecirc;n ổn l&agrave;m điều đ&oacute;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Bọn tao cần 3.000.000.000 won&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Kh&ocirc;ng-kh&ocirc;ng thể n&agrave;o!&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Kh&ocirc;ng thể n&agrave;o? Nếu m&agrave;y thực sự muốn ch&uacute;ng tao ng&agrave;y mai lại đến, v&agrave; khi đ&oacute; khoản nợ của m&agrave;y lại tăng l&ecirc;n một &iacute;t. M&agrave;y đ&atilde; nghĩ kĩ chưa?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Người đ&agrave;n &ocirc;ng mặc vest đen tr&agrave;n ngập sự tự tin, sự tự tin của kẻ mạnh.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Lee Huyn bắt đầu cảm thấy tốt hơn hết l&agrave; cậu n&ecirc;n trả nợ ngay khi c&oacute; thể. Cậu kh&ocirc;ng c&ograve;n sự lựa chọn n&agrave;o kh&aacute;c, bọn ch&uacute;ng đ&atilde; biết cậu c&oacute; tiền. Người đ&agrave;n &ocirc;ng bắt đầu cười nhếch m&eacute;p.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Người b&agrave; tội nghiệp, bị thương v&agrave; phải nằm viện, nh&igrave;n b&agrave; c&oacute; vẻ thoải m&aacute;i ở trong viện. Giống như đứa em g&aacute;i b&eacute; nhỏ của m&agrave;y ở h&agrave;nh lang. Tr&ocirc;ng con b&eacute; nh&igrave;n c&oacute; vẻ ngon l&agrave;nh, tao cược rằng n&oacute; sẽ b&aacute;n được gi&aacute; nếu đưa ra đảo...&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Sao m&agrave;y d&aacute;m chạm v&agrave;o Hayan!&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Thư gi&atilde;n đi, bọn tao vẫn chưa l&agrave;m g&igrave; con b&eacute; cả. Nhưng điều đ&oacute; c&oacute; thể sẽ xảy ra, v&agrave; giờ đ&acirc;y, tao đang nghĩ điều g&igrave; sẽ xảy ra nếu gia đ&igrave;nh ba người của m&agrave;y c&ugrave;ng nhập viện một l&uacute;c. Thật l&agrave; một cảnh tượng cảm động.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Lee Huyn kh&ocirc;ng thể phớt lờ những mối đe dọa n&agrave;y được nữa. Điều n&agrave;y kh&ocirc;ng thể gi&uacute;p được g&igrave;. Cậu đ&atilde; nh&igrave;n thấy số phận của những người, những người kh&ocirc;ng thể trả nổi tiền vay, những người sống trong c&aacute;c khu ổ chuột. Nếu thực sự c&oacute; tội, vậy tội lỗi ở đ&acirc;y ch&iacute;nh l&agrave; đ&atilde; vay tiền bọn ch&uacute;ng.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Kh&ocirc;ng thể dựa v&agrave;o ph&aacute;p luật, Lee Huyn đầu h&agrave;ng, cậu đưa cho bọn ch&uacute;ng sổ tiết kiệm của m&igrave;nh. Người đ&agrave;n &ocirc;ng nhận quyển số v&agrave; lấy ra 90.000.000 won bằng tiền mặt từ một c&aacute;i t&uacute;i ra ngay tại chỗ. C&ugrave;ng với n&oacute; l&agrave; một giấy nợ 100.000.000 won được viết bởi cha cậu từ 8 năm về trước. Bọn ch&uacute;ng biết tất cả mọi thứ v&agrave; đ&atilde; chuẩn bị đầy đủ.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Cảm ơn. V&agrave; xin lỗi v&igrave; những rắc rối.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Khi những người đ&agrave;n &ocirc;ng rời khỏi ph&ograve;ng bệnh, Lee Hyun h&eacute;t l&ecirc;n.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Đợi một ch&uacute;t!&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Sao vậy nh&oacute;c?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;H&atilde;y đợi đấy, rồi tao sẽ khiến bọn m&agrave;y phải trả gi&aacute; v&igrave; điều n&agrave;y!&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;C&aacute;i g&igrave;?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Bởi v&igrave; tao đ&atilde; trả tiền, bọn m&agrave;y c&oacute; thể nghĩ l&agrave; mọi chuyện đ&atilde; kết th&uacute;c. Nhưng rồi tao sẽ đ&ograve;i lại gấp bội.&quot;Những kẻ cho vay nặng l&atilde;i bắt đầu cười một lần nữa. D&ugrave; vậy, sau khi nh&igrave;n v&agrave;o mắt của Lee Huyn, tiếng cười của bọn ch&uacute;ng tắt ngấm ngay lập tức.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Anh mắt của cậu khiến họ lạnh xương sống. &Aacute;nh mắt của một con th&uacute;, mạnh mẽ v&agrave; hoang dại.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Nh&igrave;n m&agrave;y c&oacute; vẻ kh&ocirc;ng biết sợ. Tao nghĩ l&agrave; bọn tao n&ecirc;n dạy ột đứa như m&agrave;y hiểu về thế giới.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Một v&agrave;i kẻ bắt đầu xắn tay &aacute;o. Nhưng Lee Huyn kh&ocirc;ng hề cảm thấy d&ugrave; chỉ l&agrave; một ch&uacute;t sợ h&atilde;i.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Đủ rồi. Ch&uacute;ng ta đ&atilde; lấy được tiền, kh&ocirc;ng cần phải l&agrave;m điều thừa th&atilde;i.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Nhưng...&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Cậu thật sự muốn c&oacute; một người phải nằm viện?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Người đ&agrave;n &ocirc;ng t&oacute;c v&agrave;ng bắt đầu gầm l&ecirc;n.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Em hiểu rồi, Huyng-nim.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;N&agrave;y nh&oacute;c.&quot; - Kẻ cầm đầu nh&igrave;n v&agrave;o Lee Huyn v&agrave; n&oacute;i.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Ta l&agrave; Han Jinsup tại Myongdong. Nếu cậu thực sự tin rằng m&igrave;nh sẽ tồn tại được trong thế giới độc &aacute;c n&agrave;y. Nếu cậu nghĩ ta đ&atilde; kh&ocirc;ng c&ocirc;ng bằng, h&atilde;y kiếm lại 3.000.000.000 won trong v&ograve;ng 5 năm v&agrave; gặp ta. Khi đ&oacute;, ta sẽ coi cậu như Huyng-nim của ta.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Những kẻ cho vay rời đi. Lee Huyn khuỵu xuống đất một c&aacute;ch bất lực. B&ecirc;n cạnh đ&oacute; l&agrave; tiếng kh&oacute;c của c&ocirc; em g&aacute;i cậu trong h&agrave;nh lang, b&agrave; cậu nh&igrave;n tất cả rồi thở d&agrave;i buồn b&atilde;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>*****</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Sau khi bị cướp mất 3.000.000.000 won, cậu cảm thấy m&igrave;nh kh&ocirc;ng c&ograve;n đủ sức để l&agrave;m bất kỳ điều g&igrave;. Cậu rơi v&agrave;o trạng th&aacute;i trống rỗng tột độ. D&ugrave; vậy, v&agrave;o ng&agrave;y thứ ba sau đ&oacute;, Lee Huyn đứng dậy.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Vẫn c&ograve;n hi vọng. Vậy n&ecirc;n cậu kh&ocirc;ng thể chỉ ngồi v&agrave; do dự. Một nụ cười xuất hiện tr&ecirc;n m&ocirc;i cậu, giữa những giọt nước mắt.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>D&ugrave; chỉ l&agrave; một khoảnh khắc, nhưng việc từng sở hữu một số tiền lớn, điều đ&oacute; đ&atilde; soi s&aacute;ng cho cậu, một ch&uacute;t &aacute;nh s&aacute;ng nhỏ đủ để khiến cậu hiểu l&agrave;m thế n&agrave;o để c&oacute; thể sống trong thế giới n&agrave;y.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Phải. Nếu đ&atilde; kiếm được một lần, m&igrave;nh sẽ kiếm được một lần nữa.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Cậu thật sự bận rộn. Tuy cậu vẫn c&ograve;n lại 90.000.000 won, nhưng kh&ocirc;ng c&oacute; nghĩa l&agrave; cậu c&oacute; thể sử dụng tất cả. Bởi v&igrave; cậu vẫn c&ograve;n một hợp đồng nh&agrave; trị gi&aacute; 50.000.000 won đang chờ được k&iacute;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Cậu c&oacute; thể hủy bỏ hợp đồng nếu cậu muốn, nhưng nếu l&agrave;m vậy cậu sẽ phải trả một khoản tiền phạt. Cậu th&agrave; chết c&ograve;n hơn.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Sau c&ugrave;ng, tất cả số tiền cậu c&oacute; thể sử dụng được chỉ c&ograve;n 40.000.000 won!</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Cũng may l&agrave; gi&aacute; nh&agrave; đất đ&atilde; giảm nhiều v&agrave;o đầu thế kỷ 21...</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>*****</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Với số tiền c&ograve;n lại, Lee Huyn đăng k&iacute; rất nhiều lớp học v&otilde; như aikido, kendo v&agrave; taekwondo. Cậu tự lập &igrave;nh một lịch tr&igrave;nh nghi&ecirc;m ngặt để c&oacute; thể đi đến 6 nơi kh&aacute;c nhau trong một ng&agrave;y. Theo thời gian, cơ thể cậu dần kiệt sức v&agrave; cậu lại tiếp tục cải thiện tại c&aacute;c ph&ograve;ng tập gym, như vậy, cậu c&oacute; thể nắm vững những m&ocirc;n v&otilde; n&agrave;y một c&aacute;ch nhanh ch&oacute;ng.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Huấn luyện vi&ecirc;n gọi cậu l&agrave; một &quot;con th&uacute; hoang&quot;. Để tăng sức chịu đựng, cậu tập vung kiếm cả ng&agrave;y, cho đến khi b&agrave;n tay chảy m&aacute;u.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Tr&ograve; chơi thực tế ảo!</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Một nơi m&agrave; c&aacute;ch di chuyển của bạn ngo&agrave;i đời c&oacute; thể ảnh hưởng đến nh&acirc;n vật của ch&iacute;nh bạn. Vậy n&ecirc;n, việc học những m&ocirc;n v&otilde; thuật v&agrave; hệ thống game sẽ c&oacute; &iacute;ch.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Đương nhi&ecirc;n, những người học v&otilde; kh&ocirc;ng phải ho&agrave;n to&agrave;n c&oacute; lợi. Nhưng d&ugrave; chỉ mạnh hơn một ch&uacute;t, việc học v&otilde; vẫn tốt hơn.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Thử nghĩ đến việc mạnh hơn &iacute;t nhất 10% trong suốt tr&ograve; chơi, những lợi &iacute;ch n&oacute; mang lại l&agrave; hết sức to lớn. Bởi vậy, Lee Huyn đ&atilde; d&agrave;nh cả buổi s&aacute;ng v&agrave; chiều để học về v&otilde; thuật, trong suốt buổi tối, cậu học về game thực tế ảo. Những điều như: game n&agrave;o c&oacute; nhiều người chơi nhất v&agrave; c&aacute;ch m&agrave; hệ thống l&agrave;m việc đều được cậu nghi&ecirc;n cứu kỹ lưỡng.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Với mọi ng&agrave;nh nghề, th&agrave;nh phố v&agrave; kĩ năng Lee Huyn đều tạo một bảng ph&acirc;n t&iacute;ch kỹ lưỡng v&agrave; d&aacute;n ch&uacute;ng l&ecirc;n tường ph&ograve;ng m&igrave;nh. Căn ph&ograve;ng cậu tr&agrave;n ngập những tờ ghi ch&uacute;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Suốt 1 năm, cậu học về c&aacute;c m&ocirc;n v&otilde; v&agrave; về game thực tế ảo. Thời gian 1 năm kh&ocirc;ng chỉ l&agrave; giai đoạn chuẩn bị, cậu c&ograve;n d&ugrave;ng n&oacute; để quan s&aacute;t chặt chẽ sự ph&aacute;t triển của Royal Road.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Kết th&uacute;c giống như mong đợi, Royal Road, giống như c&aacute;i t&ecirc;n của n&oacute;, bước đi tr&ecirc;n con đường đế vương c&ugrave;ng với sự thanh b&igrave;nh. Sở hữu hơn 75% thị trường game to&agrave;n thế giới, hơn 90% game thủ tại H&agrave;n Quốc.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Đặc biệt trong thời gian diễn gia sự kiện &quot;cuộc chiến giữa c&aacute;c vị vua&quot;, một chương tr&igrave;nh &aacute;p đảo ho&agrave;n to&agrave;n lượng người xem của c&aacute;c nh&agrave; đ&agrave;i kh&aacute;c. Tr&ograve; chơi duy nhất tr&ecirc;n to&agrave;n thế giới nơi bất kỳ ai đều c&oacute; thể chiếm được danh vọng, sức mạnh v&agrave; tiền bạc. Royal Road l&agrave; kết quả của một chuỗi hệ thống được kh&eacute;o l&eacute;o lồng v&agrave;o nhau c&ugrave;ng c&ocirc;ng nghệ game thực tế ảo.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Tốt. Tất cả đều theo kế hoạch.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Lee Huyn d&otilde;i đ&ocirc;i mắt lạnh nh&igrave;n v&agrave;o m&agrave;n h&igrave;nh.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>H&ocirc;m đ&oacute;, cậu đ&atilde; mua thiết bị d&ugrave;ng để kết nối tới Royal Road, n&oacute; c&oacute; gi&aacute; 10.000.000 won. C&aacute;i gi&aacute; n&agrave;y đủ khiến cậu rơi nước mắt, cậu phải lu&ocirc;n tự nhắc nhở m&igrave;nh rằng đ&acirc;y l&agrave; sự đầu tư cần thiết. Mọi sự chuẩn bị đều đ&atilde; ho&agrave;n th&agrave;nh. Cậu bắt đầu tr&ograve; chơi, giống như một người l&iacute;nh chuẩn bị ra chiến trường.</p>\r\n', 'VNE-1502127907.jpg', 5, 7, '2017-08-08 03:24:06');
+INSERT INTO `story` (`story_id`, `name`, `preview_text`, `detail_text`, `picture`, `counter`, `cat_id`, `created_at`) VALUES
+(17, 'ĐẤU PHÁ THƯƠNG KHUNG', '                                            Chương 1: Thiên tài rơi rụng\r\n\"Đấu lực, ba đoạn\"\r\n\r\nNhìn năm chữ to lớn có chút chói mắt trên trắc nghiệm ma thạch, thiếu niên mặt không chút thay đổi, thần sắc tự giễu, nắm chặt tay, bởi vì dùng lực quá mạnh là', ' Đấu Phá Thương Khung là một câu chuyện huyền huyễn đặc sắc kể về Tiêu Viêm, một thiên chi kiêu tử với thiên phú tu luyện mà ai ai cũng hâm mộ, bỗng một ngày người mẹ mất đi đễ lại di vật là một chiếc giới chỉ màu đen nhưng từ khi đó Tiêu Viêm đã mất đi t ', 'VNE-1502128016.jpg', 1, 1, '2017-08-07 05:46:56'),
+(18, 'CỰC PHẨM GIA ĐINH', '                                            <h3>Chương 1: công tử, công tử (Phần I)</h3>\r\n\r\n<p> </p>\r\n\r\n<p>Gió xuân khẽ thổi, hàng dương liễu đu đưa trước gió, mặt hồ Huyền Vũ tựa như một mặt gương khổng lồ sáng bóng, khi ánh nắng chiều chiếu xuống, mặt h', '<h3>Chương 1: c&ocirc;ng tử, c&ocirc;ng tử (Phần I)</h3>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Gi&oacute; xu&acirc;n khẽ thổi, h&agrave;ng dương liễu đu đưa trước gi&oacute;, mặt hồ Huyền Vũ tựa như một mặt gương khổng lồ s&aacute;ng b&oacute;ng, khi &aacute;nh nắng chiều chiếu xuống, mặt hồ phản xạ &aacute;nh v&agrave;ng nh&agrave;n nhạt.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Tr&ecirc;n mặt hồ s&oacute;ng vỗ nh&egrave; nhẹ, du thuyền đi lại như thoi đưa, kh&ocirc;ng ngừng truyền đến tiếng cười n&oacute;i từ những con thuyền, đều l&agrave; c&aacute;c tiểu thư tỷ muội xuất du v&atilde;n cảnh, quang cảnh thật l&agrave; n&aacute;o nhiệt.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>V&ocirc; số c&aacute;c nho sinh tử sĩ đứng tr&ecirc;n đầu thuyền, đ&ocirc;i mắt như d&iacute;nh v&agrave;o những hoa thuyền của c&aacute;c thi&ecirc;n kim tiểu thư, n&eacute;t mặt kh&ocirc;ng hề che dấu kh&aacute;t vọng như ch&oacute; s&oacute;i r&igrave;nh mồi. Nhưng ngay khi tiếp cận hoa thuyền, bọn họ nhất thời cải biến sắc mặt, trở lại một d&aacute;ng dấp rất mực ch&aacute;nh trực thanh cao, mắt kh&ocirc;ng t&agrave; niệm, phe phẩy quạt, ng&acirc;m thơ vịnh ph&uacute;, v&ocirc; c&ugrave;ng phong lưu.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>V&agrave;i chiếc quan thuyền thả neo tr&ecirc;n mặt hồ, c&aacute;c n&agrave;ng thi&ecirc;n kim tiểu thư ẩn sau những tấm m&agrave;nh, len l&eacute;n nh&igrave;n đ&aacute;m phong lưu t&agrave;i tử xung quanh, lựa chọn &yacute; trung nh&acirc;n cho m&igrave;nh.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Đứng tr&ecirc;n bờ hồ Huyền Vũ, nếu muốn d&ugrave;ng một từ để tả t&acirc;m sự của L&acirc;m V&atilde;n Vinh b&acirc;y giờ, th&igrave; kh&ocirc;ng g&igrave; đ&uacute;ng bằng &quot;giải đen&quot;, thực sự hắn đang &quot;giải đen&quot;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Từ khi đến nơi n&agrave;y đ&atilde; được một th&aacute;ng rồi, vận đen vẫn kh&ocirc;ng hề bu&ocirc;ng tha hắn, c&oacute; lẽ, ngay khi quyết định tham gia đo&agrave;n du lịch của c&ocirc;ng ty đến Th&aacute;i Sơn du lịch, vận đen đ&atilde; chộp lấy hắn. Đặc biệt l&agrave; khi đo&agrave;n lữ h&agrave;nh điểm danh gặp t&ecirc;n của &quot;tiểu nữ &quot; kia, hắn đ&atilde; c&oacute; những cảm gi&aacute;c bất an.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>M&agrave; sự thực đ&atilde; chứng minh sự ph&aacute;n đo&aacute;n của hắn.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>L&acirc;m V&atilde;n Vinh quay về mặt hồ, hung hăng nhổ một ngụm nước bọt lớn, t&acirc;m t&igrave;nh c&oacute; kh&aacute; hơn một ch&uacute;t, một cảm gi&aacute;c khoan kho&aacute;i tr&agrave;n ngập cơ thể hắn. Việc nhổ bọt m&agrave; thực sự sảng kh&oacute;ai &agrave;, đ&atilde; l&acirc;u kh&ocirc;ng c&oacute; thống kho&aacute;i vậy, mẹ n&oacute; chứ, thời đại n&agrave;y may m&agrave; chưa c&oacute; những l&atilde;o b&agrave; đeo băng đỏ hầm hầm h&egrave; h&egrave; ghi bi&ecirc;n lai phạt ta năm mươi đồng &agrave;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>L&acirc;m V&atilde;n Vinh tự đ&aacute;nh gi&aacute; h&igrave;nh ảnh m&igrave;nh phản chiếu trong l&agrave;n nước, mắt s&aacute;ng m&agrave;y kiếm, mũi to, nụ cười th&acirc;n thiện, nếu y mặc một bộ sỹ phục (văn nh&acirc;n y phục), th&igrave; c&oacute; lẽ so với đ&aacute;m văn nh&acirc;n đang c&oacute; mặt tr&ecirc;n mặt hồ l&uacute;c n&agrave;y y c&ograve;n phong tao hơn v&agrave;i phần.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Chỉ tiếc y mặc một th&acirc;n trường sam m&agrave;u xanh, ch&acirc;n đi đ&ocirc;i giầy vải gần hỏng, so với đ&aacute;m văn nh&acirc;n phong lưu t&agrave;i tử ở đ&acirc;y, thật sự l&agrave; c&oacute; ch&uacute;t ngh&egrave;o n&agrave;n thanh bần qu&aacute;. Hơn nữa tr&ecirc;n đầu l&agrave; bộ t&oacute;c ngắn ngủn ho&agrave;n to&agrave;n kh&aacute;c biệt với người ở đ&acirc;y, tr&ecirc;n đầu cũng kh&ocirc;ng vấn lấy một chiếc khăn, lại c&agrave;ng kh&ocirc;ng ph&ugrave; hợp với ho&agrave;n cảnh ở đ&acirc;y.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>C&oacute; v&agrave;i tiểu nữ đi qua, chỉ cần tho&aacute;ng nh&igrave;n bộ dạng quần &aacute;o của L&acirc;m V&atilde;n Vinh, căn bản kh&ocirc;ng cần nh&igrave;n đến mặt y, trực tiếp bỏ qua hắn, &aacute;nh mắt ng&oacute; thẳng về đ&aacute;m t&agrave;i tử uy phong đang run run v&igrave; gi&oacute; lạnh tr&ecirc;n đầu thuyền.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Đột nhi&ecirc;n đ&aacute;m mỹ nữ như bị gi&oacute; thổi t&uacute;m tụm lại b&ecirc;n bờ hồ, kh&ocirc;ng ngừng nh&igrave;n về ph&iacute;a mặt hồ xa xa b&agrave;n t&aacute;n, tiếng oanh oanh yền yến thỏ thẻ thật dễ nghe.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;&Ocirc;i, mau nh&igrave;n k&igrave;a, nh&igrave;n xem, đ&oacute; l&agrave; Kim Lăng đệ nhất t&agrave;i tử Hậu Dược Bạch, Hậu c&ocirc;ng tử đ&oacute; -&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;&Ocirc;i, thật l&agrave; đẹp trai&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;&Ocirc;i, thật l&agrave; si t&igrave;nh k&igrave;a&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Ai, đ&acirc;y l&agrave; tiểu thư n&agrave;o m&agrave; may mắn vậy&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>L&acirc;m V&atilde;n Vinh theo hướng c&aacute;c ả chỉ chỏ, nh&igrave;n về hướng đ&oacute;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Chỉ thấy tr&ecirc;n mặt hồ c&oacute; ba chiếc hoa thuyền đang theo d&ograve;ng tiến tr&ocirc;i đến, mỗi chiếc đều c&oacute; hai tầng, cao khoảng 6, 7 thước, tr&ecirc;n treo đ&egrave;n lồng, tầng tr&ecirc;n l&agrave; lầu c&aacute;c, xưng đắc thượng thị kh&iacute; vũ hi&ecirc;n ngang.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Tr&ecirc;n ba chiếc hoa thuyền đề treo cờ quạt tung bay, chiếc b&ecirc;n phải v&agrave; b&ecirc;n tr&aacute;i c&oacute; treo một tấm hồng điều lớn từ tr&ecirc;n bụng thuyền rủ xuống .</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>B&ecirc;n phải l&agrave; &quot;Xu&acirc;n phong phủ ng&atilde; &yacute;&quot;, b&ecirc;n tr&aacute;i l&agrave; &quot;Ch&iacute;ch vi qu&acirc;n khuynh t&acirc;m&quot;. (gi&oacute; xu&acirc;n vỗ về l&ograve;ng ta- chỉ v&igrave; qu&acirc;n tử xi&ecirc;u l&ograve;ng)</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Tr&ecirc;n chiếc thuyền ở giữa, một vị c&ocirc;ng tử đứng thẳng tr&ecirc;n đầu thuyền, mặt đẹp như ngọc, phe phẩy quạt giấy, mặt c&oacute; n&eacute;t cười, &aacute;o bay theo gi&oacute;, d&aacute;ng tr&ocirc;ng thật l&agrave; phong lưu ti&ecirc;u s&aacute;i.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Chiếc hoa thuyền thứ ba to v&agrave; sang trọng hơn nhiều, so với chiếc hoa thuyền của Hậu c&ocirc;ng tử c&ograve;n lớn hơn, phi di&ecirc;m lầu c&aacute;c, kh&ocirc;ng thể tả hết sự qu&yacute; ph&aacute;i của n&oacute;. Chỉ tiếc r&egrave;m treo bốn bề, khiến người người kh&ocirc;ng thể thấy r&otilde;, tr&ecirc;n đầu thuyền treo một chiếc đ&egrave;n lồng thật lớn tung bay theo gi&oacute;, tr&ecirc;n đ&oacute; một chữ v&agrave;ng thật lớn &quot;Lạc&quot;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>L&agrave; Lạc tiểu thư, l&agrave; Kim Lăng đệ nhất mỹ nữ đồng thời l&agrave; đệ nhất nữ nh&acirc;n t&agrave;i ba lỗi lạc, một nữ tử đứng b&ecirc;n cạnh L&acirc;m V&atilde;n Vinh k&ecirc;u lớn, tr&ecirc;n mặt tr&agrave;n đầy hưng phấn, hiển nhi&ecirc;n l&agrave; kẻ đang thần tượng Lạc tiểu tỷ kia.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Kim lăng đệ nhất t&agrave;i tử th&igrave; l&agrave; c&aacute;i qu&aacute;i g&igrave;, L&acirc;m V&atilde;n Vinh t&acirc;m trạng ho&agrave;n to&agrave;n kh&ocirc;ng ở mặt hồ. Kim Lăng đệ nhất mỹ nữ v&agrave; Kim Lăng đệ nhất nữ nh&acirc;n &agrave;, c&agrave;ng l&agrave;m hắn c&oacute; ch&uacute;t xem thường. Ng&agrave;y nay, cứ hơi n&oacute;i chuyện với đ&aacute;m phụ nữ một ch&uacute;t l&agrave; đ&atilde; thấy họ tự cho m&igrave;nh l&agrave; mỹ nữ g&igrave; đ&oacute;. Tại c&aacute;i thế giới kia của hắn, nếu đem th&acirc;n thể mấy t&aacute;c gia nữ sĩ ra so s&aacute;nh, chắc hầu như to&agrave;n thấy kiểu gầy c&ograve;m cỡ da bọc sắt, chẳng c&oacute; g&igrave; đ&aacute;ng kinh ngạc khen ngợi cả.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Nghe n&oacute;i Hậu c&ocirc;ng tử đ&atilde; theo đuổi Lạc tiểu thư đ&atilde; hai năm rồi, hắn th&acirc;n l&agrave; c&ocirc;ng thử con phủ do&atilde;n Kim Lăng, vừa l&agrave; t&agrave;i tử được t&ocirc;n xưng &agrave; Giang Chiết T&agrave;i tử, với gia thế v&agrave; t&agrave;i năng của y, nếu ta l&agrave; Lạc tiểu thư th&igrave; đ&atilde; hạnh ph&uacute;c đến chết mất&quot;, một hoa si nữ n&oacute;i .</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Thiết nghĩ, Lạc tiểu thư l&agrave; Kim Lăng đệ nhất nữ nh&acirc;n đồng thời l&agrave; t&agrave;i ba đệ nhất mỹ nữ, luận văn t&agrave;i kh&ocirc;ng thể so l&agrave; k&eacute;m Hậu c&ocirc;ng tử, lại l&agrave; thi&ecirc;n kim tiểu thư của Giang T&ocirc; tổng đốc, luận gia thế, c&oacute; lẽ c&ograve;n cao hơn Hậu c&ocirc;ng tử một bậc. Cho n&ecirc;n, Lạc tiểu thư chưa chắc đ&atilde; nh&igrave;n tr&uacute;ng Hậu c&ocirc;ng tử&quot;, một người hiển nhi&ecirc;n l&agrave; kẻ h&acirc;m mộ Lạc tiểu thư đ&aacute;p lời.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Theo ta thấy, Kim Lăng đệ nhất t&agrave;i tử v&agrave; Kim Lăng đệ nhất t&agrave;i hoa nữ nh&acirc;n, bọn họ đ&uacute;ng l&agrave; trai t&agrave;i g&aacute;i sắc, trời sinh một đ&ocirc;i, kh&ocirc;ng chỉ ở Kim Lăng th&agrave;nh n&agrave;y, m&agrave; ngay cả Giang Chiết tỉnh, nếu muốn t&igrave;m một đ&ocirc;i tương xứng với bọn họ, cũng thật kh&oacute; khăn &agrave;.&quot; Hoa si nữ n&oacute;i tiếp.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>L&acirc;m V&atilde;n Vinh bất lực lắc lắc đầu, đ&agrave;n b&agrave; trời sanh qu&aacute;i quỷ &agrave;, người ở thời đại n&agrave;o cũng giống nhau.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Tr&ecirc;n hồ vị phong lưu Hậu c&ocirc;ng tử kia đ&atilde; đậu thuyền hoa của m&igrave;nh b&ecirc;n cạnh thuyền của Lạc tiểu thư, rồi &ocirc;m quyền c&uacute;i m&igrave;nh, hiển nhi&ecirc;n l&agrave; đang cầu g&igrave; đ&oacute; với Lạc tiểu thư ở trong thuyền.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Một l&aacute;t sau, từ trong thuyền của Lạc tiểu thư một nha ho&agrave;n xinh đẹp bước ra, đứng ở đầu thuyền hướng đến Hầu c&ocirc;ng tử n&oacute;i v&agrave;i c&acirc;u, sắc mặt Hậu c&ocirc;ng tử lộ r&otilde; vẻ thất vọng, tiếp theo lại biến th&agrave;nh vui sướng thần sắc.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>L&acirc;m V&atilde;n Vinh đứng c&aacute;ch họ qu&aacute; xa, căn bản kh&ocirc;ng nghe thấy họ n&oacute;i với nhau c&aacute;i g&igrave;, bất qu&aacute; nh&igrave;n vẻ mặt Hậu c&ocirc;ng tử thật kỳ qu&aacute;i, thế n&agrave;y cuối c&ugrave;ng vị tiểu thư họ Lạc kia c&oacute; cự tuyệt hắn ta kh&ocirc;ng thế? Sao vị Hậu c&ocirc;ng tử l&uacute;c đầu thất vọng sau lại cao hứng thế.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Hai vị nữ tử gần hắn hiển nhi&ecirc;n cũng t&acirc;m trạng nghi hoặc như hắn, thấy chiếc thuyền hoa của Lạc tiểu thư từ từ đi đến giữa hồ, vị nữ tử h&acirc;m mộ Lạc tiểu thư vui vẻ n&oacute;i: &quot; Thế l&agrave; thế n&agrave;o, ta kh&ocirc;ng c&oacute; n&oacute;i sai nh&eacute;, Hậu c&ocirc;ng tử kh&ocirc;ng hẳn đ&atilde; c&oacute; khả năng khiến Lạc tiểu thư động t&acirc;m đ&acirc;u.&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Nữ tử h&acirc;m mộ Hậu c&ocirc;ng tử cắt ngang n&oacute;i : &quot;Ta thấy chưa chắc thế, xem h&igrave;nh d&aacute;ng Hậu c&ocirc;ng tử l&uacute;c n&agrave;y thực sự cao hứng, n&oacute;i kh&ocirc;ng chừng, một th&aacute;ng nữa, sẽ c&oacute; ước hẹn c&ugrave;ng giai nh&acirc;n&quot;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Thế n&agrave;y cũng b&igrave;nh thường, để xem phong tục của thế giới n&agrave;y ra sao, d&ugrave; sao nam nữ hữu biệt, n&oacute;i chuyện t&igrave;nh &aacute;i đương nhi&ecirc;n phải t&igrave;m nơi vắng người, trăng thanh gi&oacute; m&aacute;t mới l&agrave; tuyệt vời chứ.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Hậu c&ocirc;ng tử nh&igrave;n hoa thuyền của Lạc tiểu thư đi xa dần, nhưng vẫn như cũ d&otilde;i theo, khu&ocirc;n mặt nở nụ cười, mắt nh&igrave;n đăm đăm, thể hiện ra ng&ograve;ai về phong lưu đa t&igrave;nh bộ d&aacute;ng khiến cho L&acirc;m V&atilde;n Vinh đến phản cảm.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Tiểu tử, c&oacute; g&igrave; m&agrave; đắc &yacute; chứ, n&oacute;i chuyện t&aacute;n g&aacute;i, &ocirc;ng nội ngươi đ&acirc;y c&oacute; thủ đoạn cao hơn ngươi gấp vạn lần, nh&igrave;n điệu bộ si m&ecirc; của ngươi k&igrave;a. L&acirc;m V&atilde;n Vinh tự dưng bất b&igrave;nh nghĩ thầm.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Thời tiết cuối thu, sắp sửa sang đ&ocirc;ng, gi&oacute; hồ từ ph&iacute;a sau thổi đến, Hậu c&ocirc;ng tử dường như thấm lạnh, đầu vai run l&ecirc;n.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>L&acirc;m V&atilde;n Vinh soi m&oacute;i, nh&igrave;n tường tận từng động t&aacute;c của y, nhịn kh&ocirc;ng được cười hắc hắc, &ocirc;ng trời ơi, r&eacute;t chết thằng nh&atilde;i chỉ cần phong độ kh&ocirc;ng cần &ocirc;n độ( ấm &aacute;p n&agrave;y đi), ta c&ograve;n đang bảo sao m&agrave; m&ugrave;a xu&acirc;n đến nhanh vậy, th&igrave; ra l&agrave; thằng nh&atilde;i n&agrave;y v&agrave; đ&aacute;m tiểu nữu kia muốn đ&oacute;n xu&acirc;n &agrave;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>L&acirc;m V&atilde;n Vinh cười lạnh khiến cho mấy t&ecirc;n nữ tử b&ecirc;n cạnh ch&uacute; &yacute;, c&aacute;c n&agrave;ng &aacute;nh mắt nh&igrave;n ng&oacute; L&acirc;m V&atilde;n Vinh, nh&igrave;n thấy bộ dạng ngh&egrave;o đ&oacute;i bần h&agrave;n v&agrave; bộ t&oacute;c ngắn ngủn, đều cho miệng cười rộ l&ecirc;n khinh rẻ, đến khi nh&igrave;n thấy th&acirc;n h&igrave;nh của hắn, lập tức mặt đỏ l&ecirc;n, kh&ocirc;ng d&aacute;m nh&igrave;n hắn nữa.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>L&acirc;m V&atilde;n Vinh cao 1m 77,v&igrave; lu&ocirc;n lu&ocirc;n chăm chỉ tập thể dục quanh năm, n&ecirc;n th&acirc;n h&igrave;nh c&acirc;n đối, tr&agrave;n đầy sinh lực, dung mạo kh&ocirc;ng xấu, mầu da khỏe mạnh như mầu hạt l&uacute;a tiểu mạch, so s&aacute;nh với một bạch diện t&agrave;i tử m&ocirc;n, th&igrave; động t&aacute;c của hắn c&oacute; một mị lực lay động l&ograve;ng người.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Cũng kh&oacute; tr&aacute;nh những nữ tử kia khi tho&aacute;ng nh&igrave;n hắn đều kh&ocirc;ng d&aacute;m quay lại nh&igrave;n, nam nh&acirc;n n&agrave;y, c&oacute; một mị lực rất lớn t&aacute;c động v&agrave; t&acirc;m linh c&aacute;c n&agrave;ng.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Năm đ&oacute; trong khi tại Bắc Kinh học đại học, L&acirc;m V&atilde;nh Vinh được gọi l&agrave; hắc m&atilde; vương tử, rất nhiều nữ tử đ&atilde; thầm thương trộm mến hắn.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Ở đ&acirc;y c&oacute; m&ugrave;i g&igrave; vậy ......&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Nh&igrave;n điệu bộ ngh&egrave;o đ&oacute;i của y k&igrave;a......&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&quot;Ho&agrave;ng huynh, c&ugrave;ng với thằng nh&atilde;i n&agrave;y đứng một chỗ , c&oacute; khi l&agrave;m nhục th&acirc;n phận của ngươi, ch&uacute;ng ta tr&aacute;nh xa hắn ra ......&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Đ&oacute; l&agrave; v&agrave;i t&ecirc;n t&agrave;i tử đứng b&ecirc;n cạnh hắn, sau khi nh&igrave;n thấy Hậu c&ocirc;ng tử cưa cẩm tiểu thư, vốn sự tự tin đ&atilde; bị đả k&iacute;ch rất lớn, vừa rồi c&aacute;c mỹ nữ b&ecirc;n cạnh lại ho&agrave;n to&agrave;n kh&ocirc;ng ch&uacute; &yacute; g&igrave; tới họ, ngược lại &aacute;nh mắt lại tập trung v&agrave;o L&acirc;m V&atilde;n Vinh, ch&uacute;ng kh&ocirc;ng bực tức sao được</p>\r\n', 'VNE-1502128096.jpg', 9, 7, '2017-08-08 03:23:32'),
+(19, 'GIA ĐÌNH - NƠI TA TRỞ VỀ SUM HỌP', '                                            Những ngày bận rộn cuối năm, ai ai cũng tất bật lo toan bao nhiêu việc từ việc cơ quan đến việc gia đình để tất cả công việc phải hoàn tất trước ngày 30 Tết. Rồi đến ngày cuối cùng của năm, mọi bộn bề lo toan sẽ', '<p><strong>Gia đ&igrave;nh - nơi ta trở về sum họp.</strong></p>\r\n\r\n<p><strong>***</strong></p>\r\n\r\n<p>Những ng&agrave;y bận rộn cuối năm, ai ai cũng tất bật lo toan bao nhi&ecirc;u việc từ việc cơ quan đến việc gia đ&igrave;nh để tất cả c&ocirc;ng việc phải ho&agrave;n tất trước ng&agrave;y 30 Tết. Rồi đến ng&agrave;y cuối c&ugrave;ng của năm, mọi bộn bề lo toan sẽ tan biến mất để nhường lại cho sự nhẹ nh&agrave;ng, b&igrave;nh y&ecirc;n trong t&acirc;m hồn khi h&ograve;a v&agrave;o kh&ocirc;ng kh&iacute; ấm &aacute;p t&igrave;nh th&acirc;n của gia đ&igrave;nh.</p>\r\n\r\n<p><img alt=\"gia-dinh-noi-ta-tro-ve-sum-hop\" src=\"http://www.truyenngan.com.vn/images/Phuongvtm/2017-07/gia-dinh-noi-ta-tro-ve-sum-hop.jpg\" style=\"height:540px; width:540px\" /></p>\r\n\r\n<p>T&ocirc;i tin chắc rằng ai trong mỗi ch&uacute;ng ta cũng kh&ocirc;ng thể n&agrave;o qu&ecirc;n v&agrave; lu&ocirc;n tr&ocirc;ng đợi bữa cơm tất ni&ecirc;n sum họp với gia đ&igrave;nh. Đặc biệt đối với những người con xa xứ th&igrave; nỗi nhớ lại lớn gấp nhiều lần khi những ng&agrave;y cuối năm đang đến. Bởi đ&oacute; khoảnh khắc qu&aacute; thi&ecirc;ng li&ecirc;ng đối với mọi người v&igrave; đ&acirc;y l&agrave; buổi họp mặt cuối c&ugrave;ng của năm cũ, &ocirc;n lại những vất vả, buồn vui để chuẩn bị sang một năm mới tr&agrave;n đầy hi vọng.</p>\r\n\r\n<p>Đối với đại gia đ&igrave;nh t&ocirc;i, cứ đ&uacute;ng ng&agrave;y 28 th&aacute;ng chạp th&igrave; c&aacute;c anh chị em lại sắp xếp c&ocirc;ng việc để c&ugrave;ng về với ba mẹ sửa soạn bữa cơm tất ni&ecirc;n trong sự vui vẻ v&agrave; ấm c&uacute;ng. N&agrave;o l&agrave; b&aacute;nh t&eacute;t ba mẹ vừa nấu ch&iacute;n chưa kịp vớt ra v&agrave; l&agrave;n kh&oacute;i cay mắt tỏa ra từ bếp than vẫn c&ograve;n &acirc;m ỉ ch&aacute;y; n&agrave;o l&agrave; dưa m&oacute;n, củ kiệu, dưa h&agrave;nh chua ngọt chị vừa mới l&agrave;m xong...tất cả được b&agrave;y l&ecirc;n b&agrave;n thờ để th&agrave;nh k&iacute;nh mời &ocirc;ng b&agrave; tổ ti&ecirc;n về c&ugrave;ng nhau ăn bữa cơm tất ni&ecirc;n c&ugrave;ng với gia đ&igrave;nh. Ba mẹ, anh chị em, con ch&aacute;u chuyện tr&ograve;, hỏi han, vui đ&ugrave;a r&ocirc;m rả...</p>\r\n\r\n<p>Trong bữa cơm chiều tất ni&ecirc;n ấy, nh&igrave;n v&agrave;o &aacute;nh mắt hiền từ của ba mẹ, anh chị em ch&uacute;ng t&ocirc;i hiểu được niềm vui của ba mẹ khi c&aacute;c con đứa n&agrave;o cũng đ&atilde; kh&ocirc;n lớn trưởng th&agrave;nh v&agrave; c&aacute;c ch&aacute;u đều ngoan hiền khỏe mạnh. Với t&ocirc;i cho d&ugrave; cả năm với vất vả lo toan nhưng khi cuối năm về b&ecirc;n ba mẹ, bưng b&aacute;t cơm ăn, thấy l&ograve;ng m&igrave;nh b&igrave;nh y&ecirc;n k&igrave; lạ, mới thấy hạnh ph&uacute;c từ gia đ&igrave;nh thật giản dị nhưng lại ngọt ng&agrave;o v&agrave; ch&acirc;n th&agrave;nh biết bao. Mới thấy v&ograve;ng tay y&ecirc;u thương của những người th&acirc;n trong gia đ&igrave;nh lu&ocirc;n rộng mở v&agrave; thoải m&aacute;i nhất để ta trở về sau mỗi chuyến đi của cuộc đời.</p>\r\n\r\n<p>Mỗi người con của ba mẹ như l&agrave; những con chim non. Khi chim non vừa mới nở, chim mẹ hằng ng&agrave;y phải tung c&aacute;nh bay đi kiếm mồi; khi gặp những trận mưa to, b&atilde;o lớn &ndash; chim mẹ phải tung c&aacute;nh ấp ủ chở che. Cho d&ugrave; khi chim con đ&atilde; trưởng th&agrave;nh v&agrave; đủ l&ocirc;ng đủ c&aacute;nh. Sẽ bay đi khắp bốn phương để kiếm sống, để thỏa sức v&ugrave;ng vẫy trong bầu trời m&ecirc;nh m&ocirc;ng, nhưng c&aacute;nh chim n&agrave;o rồi cũng mỏi, cũng gặp những trận cuồng phong b&atilde;o t&aacute;p, v&agrave; l&uacute;c n&agrave;o cũng nhớ m&igrave;nh đang ở chốn xa qu&ecirc;, đang xa v&ograve;ng tay của cha mẹ. V&agrave; lại nhanh ch&oacute;ng hối hả bay về t&igrave;m chỗ nương n&aacute;u b&igrave;nh y&ecirc;n nhất nơi m&igrave;nh đ&atilde; sinh ra. Đ&oacute; l&agrave; gia đ&igrave;nh.</p>\r\n', 'VNE-1502128336.jpg', 1, 2, '2017-08-08 03:13:31'),
+(20, 'NẾU CÓ 30 GIÂY GỌI ĐIỆN CHO CHÍNH MÌNH CÁCH ĐÂY 10 NĂM, BẠN SẼ NÓI GÌ?', 'rên trang Quora, một người dùng đã hỏi mọi người rằng: \"Nếu có 30s gọi điện cho chính mình cách đây 10 năm, bạn sẽ nói gì?\". Từ khắp nơi trên thế giới, họ đã đưa ra những câu trả lời thú vị và khiến người đọc vô cùng ngạc nhiên.\r\n\r\n2. Cuộc sống phía trước', '<p><strong>r&ecirc;n trang Quora, một người d&ugrave;ng đ&atilde; hỏi mọi người rằng: &quot;Nếu c&oacute; 30s gọi điện cho ch&iacute;nh m&igrave;nh c&aacute;ch đ&acirc;y 10 năm, bạn sẽ n&oacute;i g&igrave;?&quot;. Từ khắp nơi tr&ecirc;n thế giới, họ đ&atilde; đưa ra những c&acirc;u trả lời th&uacute; vị v&agrave; khiến người đọc v&ocirc; c&ugrave;ng ngạc nhi&ecirc;n.</strong></p>\r\n\r\n<p><strong>***</strong></p>\r\n\r\n<p><strong>1. Bạn sẽ kh&ocirc;ng c&ocirc; đơn m&atilde;i m&atilde;i - Shruthi Tuplur</strong></p>\r\n\r\n<p>Bạn l&uacute;c n&agrave;o cũng thấy xấu x&iacute; v&agrave; nghĩ rằng kh&ocirc;ng ai y&ecirc;u m&igrave;nh. Nhưng h&atilde;y nhớ rằng, bạn c&ograve;n rất trẻ; tuổi trẻ kh&ocirc;ng c&oacute; người y&ecirc;u cũng n&agrave;o đ&acirc;u c&oacute; sao. Nhưng 10 năm sau, bạn sẽ gặp được ch&agrave;ng trai đ&aacute;ng y&ecirc;u, tuyệt vời, n&oacute;ng bỏng v&agrave; hai người sẽ y&ecirc;u nhau. Từ lần đầu gặp gỡ, bạn v&agrave; anh ấy sẽ đi hẹn h&ograve;, tr&ograve; chuyện; hai người sẽ n&oacute;i cho nhau về những dự định tương lai. Bạn sẽ gối l&ecirc;n đ&ugrave;i anh &yacute;, trong một buổi chiều đầy nắng v&agrave; hai người sẽ ngắm ho&agrave;ng h&ocirc;n b&ecirc;n nhau. Anh ấy y&ecirc;u bạn, v&agrave; chắc chắn, bạn sẽ kh&ocirc;ng bao giờ phải c&ocirc; đơn m&atilde;i m&atilde;i.</p>\r\n\r\n<p><img alt=\"neu-co-30-giay-ban-se-noi-gi\" src=\"http://www.truyenngan.com.vn/images/Phuongvtm/2017-07/neu-co-30-giay-ban-se-noi-gi.jpg\" style=\"height:500px; width:500px\" /></p>\r\n\r\n<p><strong>2. Cuộc sống ph&iacute;a trước rất tươi đẹp, đừng sợ h&atilde;i g&igrave; - Madhuri Sen</strong></p>\r\n\r\n<p><iframe frameborder=\"0\" id=\"ifvideoinpage\" scrolling=\"no\" src=\"http://media.adnetwork.vn/assets/player/jwp722/videoinpage-player-jwp722.html?flash=false&amp;volume=30&amp;autoStart=false&amp;skipAd=7&amp;tag=http%3A%2F%2Fdelivery.adnetwork.vn%2F247%2Fxmlvideoad%2Fwid_1377161727%2Fzid_1396944246%2Ftype_inline%2Feff_vidinpage%2Fcb_25032%2Fw_610%2Fh_344%2Fpurl_aHR0cDovL3d3dy50cnV5ZW5uZ2FuLmNvbS52bi90cnV5ZW4tYmxvZy90cmFpLW5naGllbS1zb25nLzQ0MzAyLW5ldS1jby0zMC1naWF5LWJhbi1zZS1ub2ktZ2kuaHRtbA%253D%253D&amp;media_path=http%3A%2F%2Fmedia.adnetwork.vn%2Fassets%2F&amp;w=610&amp;h=344\"></iframe></p>\r\n\r\n<p>T&ocirc;i kh&ocirc;ng nghĩ rằng t&ocirc;i cần tới 30s để n&oacute;i ra, chắc 10s l&agrave; đủ rồi. T&ocirc;i sẽ th&igrave; thầm v&agrave; n&oacute;i rằng: &quot;Bạn đ&atilde; đi qua những điều tồi tệ nhất của cuộc đời. V&agrave; n&oacute; khiến bạn trở n&ecirc;n mạnh mẽ. Cuộc sống ph&iacute;a trước rất tươi đẹp, đừng sợ h&atilde;i g&igrave;. Bạn sẽ c&oacute; cuộc sống hạnh ph&uacute;c với nụ cười rạng rỡ tr&ecirc;n m&ocirc;i v&agrave; kh&uacute;c ca trong tr&aacute;i tim&quot;.</p>\r\n\r\n<p><strong>3. Đừng chần chừ g&igrave;, h&atilde;y bắt đầu ngay b&acirc;y giờ - Anirudh Dahiya</strong></p>\r\n\r\n<p>&quot;Nghe n&agrave;y, bởi v&igrave; t&ocirc;i chỉ c&oacute; 30 gi&acirc;y để n&oacute;i chuyện với bạn n&ecirc;n t&ocirc;i sẽ tập trung v&agrave;o điều quan trọng nhất m&agrave; bạn cần l&agrave;m trong cuộc đời, d&ugrave; ở bất cứ thời điểm n&agrave;o.</p>\r\n\r\n<p>H&atilde;y bắt đầu ngay b&acirc;y giờ, đừng chần chừ g&igrave; cả&quot;.</p>\r\n\r\n<p><strong>4. Trường trung học chỉ l&agrave; vở kịch nhỏ, cuộc đời ph&iacute;a trước mới l&agrave; tấn bi kịch lớn - Samantha Castaneda</strong></p>\r\n\r\n<p>V&igrave; bạn đang c&ograve;n ở trung học n&ecirc;n h&atilde;y cố gắng ăn uống đảm bảo, ngủ đủ, thường xuy&ecirc;n tập thể dục v&agrave; nhớ rằng: trường trung học chỉ l&agrave; vở kịch nhỏ, cuộc đời ph&iacute;a trước mới l&agrave; tấn bi kịch lớn n&ecirc;n chẳng phải lo về những tr&ograve; lố m&agrave; những đứa bạn trung học chơi xấu với bạn. H&atilde;y tập trung v&agrave;o bản th&acirc;n, cố gắng thật giỏi trong lĩnh vực m&agrave; bạn đang theo đuổi v&agrave; đừng để &yacute; mọi thứ xung quanh.</p>\r\n\r\n<p><strong>5. Theo đuổi ước mơ kh&ocirc;ng gi&uacute;p trả được h&oacute;a đơn tiền điện đ&acirc;u - Mari Del Rio</strong></p>\r\n\r\n<p>Ước mơ chỉ l&agrave; thứ cho bọn con n&iacute;t th&ocirc;i. Theo đuổi ước mơ kh&ocirc;ng gi&uacute;p bạn trả được h&oacute;a đơn tiền điện đ&acirc;u. H&atilde;y theo học c&aacute;i g&igrave; đ&oacute; m&agrave; gi&uacute;p bạn kiếm được nhiều tiền trước. Rồi khi đ&oacute;, theo đuổi đam m&ecirc; cũng chưa muộn. Nếu kh&ocirc;ng, bạn sẽ vẫn kẹt m&atilde;i trong căn ph&ograve;ng vẽ tr&ecirc;n g&aacute;c m&aacute;i v&agrave; chật vật với từng bữa ăn mỗi ng&agrave;y như tớ đ&acirc;y n&agrave;y.</p>\r\n\r\n<p><strong>6. Bạn sẽ gặp thất bại trong cuộc sống, nhưng kh&ocirc;ng sao cả - Tash Sen</strong></p>\r\n\r\n<p>Chẳng c&oacute; g&igrave; đ&aacute;ng sợ nếu bạn kh&ocirc;ng được điểm A với m&ocirc;n học m&agrave; bạn đ&atilde; cố gắng rất nhiều. Đừng lo qu&aacute;, v&igrave; d&ugrave; sao th&igrave; bạn cũng sẽ v&agrave;o được trường đại học tốt nhất th&ocirc;i. Bạn sẽ c&oacute; nhiều bạn b&egrave;, nhiều niềm vui v&agrave; cuối c&ugrave;ng gặp được người bạn trai m&agrave; bạn sẽ d&agrave;nh cả cuộc đời để chung sống c&ugrave;ng.</p>\r\n\r\n<p>Đừng lo nếu bạn kh&ocirc;ng thể th&agrave;nh c&ocirc;ng trong lần đầu ti&ecirc;n; cuối c&ugrave;ng ch&uacute;ng ta đều đến được đ&iacute;ch th&ocirc;i m&agrave;.</p>\r\n\r\n<p>Thất bại kh&ocirc;ng đ&aacute;ng sợ v&igrave; bạn sẽ lu&ocirc;n học được c&aacute;ch vực bản th&acirc;n dậy sau mỗi lần vấp ng&atilde;.</p>\r\n\r\n<p><strong>7. Đừng từ bỏ th&oacute;i quen đọc s&aacute;ch - Vishnu Rajeev</strong></p>\r\n\r\n<p>Sẽ c&oacute; l&uacute;c kể từ khoảnh khắc n&agrave;y, bạn dần đ&aacute;nh mất th&oacute;i quen đọc s&aacute;ch. Đừng! Bạn sẽ hối hận v&agrave; phải cảm ơn t&ocirc;i sau n&agrave;y. H&atilde;y để đọc s&aacute;ch l&agrave; một phần cuộc sống của bạn. Đừng c&oacute; vứt bỏ n&oacute;. Đ&oacute; l&agrave; những người bạn đem lại tri thức cho bạn, lu&ocirc;n lu&ocirc;n ch&acirc;n th&agrave;nh v&agrave; khiến cuộc sống của bạn trở n&ecirc;n b&igrave;nh y&ecirc;n hơn mỗi ng&agrave;y. C&oacute; thể &iacute;t đi chơi, &iacute;t ra ngo&agrave;i, hạn chế giao du với những người bạn kh&ocirc;ng muốn nhưng đừng từ bỏ th&oacute;i quen đọc s&aacute;ch.</p>\r\n\r\n<p><strong>8. Chăm s&oacute;c ba mẹ nếu kh&ocirc;ng muốn hối tiếc v&igrave; một ng&agrave;y phải rời xa họ m&atilde;i m&atilde;i - Shreyas Wade</strong></p>\r\n\r\n<p>&quot;Nghe n&agrave;y, m&atilde; pin ATM t&agrave;i khoản của cha bạn l&agrave; XXX tại ng&acirc;n h&agrave;ng YYY. Đ&acirc;y l&agrave; điều quan trọng m&agrave; bạn phải nhớ đấy.</p>\r\n\r\n<p>H&atilde;y lu&ocirc;n nhắc cha phải để &yacute; đến tim v&agrave; c&aacute;c cơn đau. V&agrave; kể cả &ocirc;ng c&oacute; n&oacute;i rằng &ocirc;ng biết c&aacute;i g&igrave; l&agrave; tốt cho bản th&acirc;n th&igrave; cũng đừng tin! Đừng bao giờ để &ocirc;ng tiến h&agrave;nh phẫu thuật mạch v&agrave;nh. H&atilde;y chăm s&oacute;c ba mẹ nếu kh&ocirc;ng muốn hối tiếc v&igrave; một ng&agrave;y phải rời xa họ m&atilde;i m&atilde;i&quot;.</p>\r\n\r\n<p>Cha t&ocirc;i qua đời c&aacute;ch đ&acirc;y 8 năm v&igrave; bệnh tim. &Ocirc;ng bị nghẽn động mạch v&agrave; phải tiến h&agrave;nh phẫu thuật mạch v&agrave;nh. Tuy nhi&ecirc;n, v&igrave; t&iacute;nh phức tạp của ca phẫu thuật, cha t&ocirc;i đ&atilde; kh&ocirc;ng qua khỏi v&agrave; từ trần.</p>\r\n\r\n<p><strong>9. Đừng kh&oacute;c v&igrave; những kẻ kh&oacute; chịu trong cuộc đời, kh&ocirc;ng đ&aacute;ng đ&acirc;u - Michelle Collin</strong></p>\r\n\r\n<p>Tớ nhớ lại khoảnh khắc khi bạn c&oacute; c&ocirc;ng việc đầu ti&ecirc;n, bạn đ&atilde; kh&oacute;c trong toilet rất nhiều v&igrave; &ocirc;ng sếp kh&oacute; chịu, phải kh&ocirc;ng? Đừng kh&oacute;c v&igrave; &ocirc;ng ta hay bất cứ kẻ kh&oacute; chịu n&agrave;o xuất hiện trong cuộc đời bạn. Rồi sẽ c&oacute; một c&ocirc;ng việc tốt hơn, những đồng nghiệp tử tế hơn v&agrave; nhiều cơ hội đến trong cuộc đời. Mọi thứ mới chỉ bắt đầu th&ocirc;i.</p>\r\n\r\n<p>***</p>\r\n\r\n<p>C&ograve;n ri&ecirc;ng t&ocirc;i, t&ocirc;i sẽ im lặng trong 30s đ&oacute;. Bởi lẽ, t&ocirc;i c&oacute; thể n&oacute;i g&igrave; với qu&aacute; khứ được chứ. Nếu như kh&ocirc;ng c&oacute; những năm th&aacute;ng đ&oacute; c&oacute; lẽ t&ocirc;i đ&atilde; kh&ocirc;ng được trải qua những trải nghiệm th&uacute; vị, những gi&acirc;y ph&uacute;t thăng trầm trong cuộc sống. T&ocirc;i sẽ kh&ocirc;ng c&oacute; được những b&agrave;i học qu&yacute; gi&aacute; từ những lần vấp ng&atilde; cho d&ugrave; t&ocirc;i đ&atilde; mất rất l&acirc;u, rất rất l&acirc;u để c&oacute; thể đứng dậy v&agrave; c&oacute; lẽ t&ocirc;i cũng sẽ bỏ lỡ mất nhưng con người tốt đẹp trong cuộc đời m&igrave;nh. T&ocirc;i b&acirc;y giờ cũng kh&ocirc;ng phải đang trong thời kỳ hạnh ph&uacute;c của đời người cũng chẳng phải đang trải qua một thời k&igrave; tăm tối nhưng cuộc đời n&agrave;y tạo th&agrave;nh từ chuỗi những bất ngờ, h&atilde;y để n&oacute; tr&ocirc;i đi theo c&aacute;ch n&oacute; phải diễn ra, đừng can thiệp hay n&oacute;i g&igrave; cả, c&ograve;n một chặng đường d&agrave;i đang chờ ta ph&iacute;a trước vậy tại sao ch&uacute;ng ta lại phải ho&agrave;i niệm qu&aacute; khứ để l&agrave;m g&igrave;? - Đừng hối hận v&igrave; những g&igrave; bạn chọn bởi v&igrave; khi ấy đ&oacute; ch&iacute;nh x&aacute;c l&agrave; những g&igrave; bạn muốn l&agrave;m.</p>\r\n\r\n<p>Bạn h&atilde;y chia sẻ c&acirc;u trả lời của m&igrave;nh nếu được hỏi: Nếu c&oacute; 30 gi&acirc;y gọi điện cho ch&iacute;nh m&igrave;nh c&aacute;ch đ&acirc;y 10 năm, bạn sẽ n&oacute;i g&igrave;?</p>\r\n', 'VNE-1502128385.jpg', 3, 2, '2017-08-08 03:13:08'),
+(21, 'TRAI HUẾ ĂN NÓI CÓ DUYÊN', '                                            Ông cha ta thường nói \"lời nói chẳng mất tiền mua, lựa lời mà nói cho vừa lòng nhau\", bạn có thể nhận thấy rằng, trong cuộc sống, có nhiều người không đẹp, giọng nói không hay, nhưng nói chuyện vẫn rất có duyên.', '<p><strong>&Ocirc;ng cha ta thường n&oacute;i &quot;lời n&oacute;i chẳng mất tiền mua, lựa lời m&agrave; n&oacute;i cho vừa l&ograve;ng nhau&quot;, bạn c&oacute; thể nhận thấy rằng, trong cuộc sống, c&oacute; nhiều người kh&ocirc;ng đẹp, giọng n&oacute;i kh&ocirc;ng hay, nhưng n&oacute;i chuyện vẫn rất c&oacute; duy&ecirc;n. Kh&ocirc;ng phải mới sinh ra họ đ&atilde; c&oacute; khả năng ấy đ&acirc;u, m&agrave; đ&oacute; l&agrave; kết quả của sự học tập, r&egrave;n luyện qua nhiều năm th&aacute;ng.</strong></p>\r\n\r\n<p><strong>**</strong></p>\r\n\r\n<p><strong><img alt=\"trai-hue-an-noi-co-duyen\" src=\"http://www.truyenngan.com.vn/images/Phuongvtm/2017-06/trai-hue-an-noi-co-duyen.jpg\" style=\"height:250px; width:500px\" /></strong></p>\r\n\r\n<p>Chuyện l&agrave; năm cuối đại học, t&ocirc;i c&ugrave;ng 8 bạn, 4 nam, 4 nữ được Trường gửi ra H&agrave; Nội để thực tập tại Viện nghi&ecirc;n cứu Nh&agrave; nước v&agrave; Ph&aacute;p luật v&agrave; một số Bộ ng&agrave;nh li&ecirc;n quan. C&aacute;c c&ocirc;, c&aacute;c cậu khi đ&oacute; ai nấy đều lo lắng cho việc thực tập mấy th&aacute;ng tại H&agrave; Nội. T&ocirc;i c&ograve;n nhớ, ng&agrave;y đ&oacute; trước khi đi, mẹ t&ocirc;i phải b&aacute;n mấy tạ th&oacute;c, 4 con heo mới đủ tiền cho chuyến đi thực tập ấy.</p>\r\n\r\n<p>Sau một đ&ecirc;m d&agrave;i hồi hộp kh&ocirc;ng ngủ tr&ecirc;n t&agrave;u, tất cả ch&uacute;ng t&ocirc;i cũng đến được H&agrave; Nội v&agrave;o s&aacute;ng mơ sương. C&oacute; thầy ở trong Viện ra đ&oacute;n tại nh&agrave; ga v&agrave; dẫn tất cả ch&uacute;ng t&ocirc;i về nh&agrave; của một thầy cũng l&agrave;m ở Viện nhưng đang đi nghi&ecirc;n cứu sinh ở nước ngo&agrave;i n&ecirc;n nh&agrave; để trống v&agrave; cho ở. Thế l&agrave; 4 bạn nam ở tầng dưới, 4 bạn nữ tầng tr&ecirc;n.</p>\r\n\r\n<p>S&aacute;ng s&aacute;ng, c&aacute;c bạn lần lượt đạp xe đến Viện hoặc c&aacute;c Bộ li&ecirc;n quan để li&ecirc;n hệ xin t&agrave;i liệu viết b&agrave;i. Bạn Ph&uacute;c li&ecirc;n hệ xin t&agrave;i liệu ở Bộ Lao động Thương Binh v&agrave; X&atilde; hội, Bạn Luận th&igrave; Bộ T&agrave;i ch&iacute;nh, t&ocirc;i v&agrave; bạn Thủy th&igrave; Bộ Kế hoạch Đầu tư....; tối đến tất cả ch&uacute;ng t&ocirc;i lại cặm cụi ngồi viết b&agrave;i.</p>\r\n\r\n<p><iframe frameborder=\"0\" id=\"ifvideoinpage\" scrolling=\"no\" src=\"http://media.adnetwork.vn/assets/player/jwp722/videoinpage-player-jwp722.html?flash=false&amp;volume=30&amp;autoStart=false&amp;skipAd=7&amp;tag=http%3A%2F%2Fdelivery.adnetwork.vn%2F247%2Fxmlvideoad%2Fwid_1377161727%2Fzid_1396944246%2Ftype_inline%2Feff_vidinpage%2Fcb_61722%2Fw_610%2Fh_344%2Fpurl_aHR0cDovL3d3dy50cnV5ZW5uZ2FuLmNvbS52bi90cnV5ZW4tYmxvZy90cmFpLW5naGllbS1zb25nLzQzOTY0LXRyYWktaHVlLWFuLW5vaS1jby1kdXllbi5odG1s&amp;media_path=http%3A%2F%2Fmedia.adnetwork.vn%2Fassets%2F&amp;w=610&amp;h=344\"></iframe></p>\r\n\r\n<p>Hồi đ&oacute; c&aacute;c thầy c&ocirc; bắt tất cả l&agrave; phải viết tay để thầy c&ocirc; sửa b&agrave;i, viết xong mỗi phần hoặc mỗi chương th&igrave; nộp cho thầy, nếu sai &yacute; hoặc bố cục chưa logic l&agrave; về viết lại. Đối với c&aacute;c bạn nữ chữ đẹp c&ograve;n dễ thở, chữ xấu tệ t&ocirc;i th&igrave; kh&oacute; khăn gấp vạn lần, phải nắn n&oacute;t viết từng trang m&agrave; luận văn th&igrave; d&agrave;i gần trăm trang chưa t&iacute;nh viết đi viết lại, cho n&ecirc;n c&oacute; đ&ecirc;m đến tận 2 giờ s&aacute;ng mới viết xong b&agrave;i. Sau khi viết xong v&agrave; được thầy hướng dẫn duyệt lần cuối &quot;ok&quot; th&igrave; mới đem ra tiệm thu&ecirc; đ&aacute;nh chữ, đ&oacute;ng tập để nộp.</p>\r\n\r\n<p>Do 4 nam 4 nữ ở chung một nh&agrave;, cho n&ecirc;n ban đầu c&aacute;c b&agrave; h&agrave;ng x&oacute;m cứ tưởng l&agrave; ch&uacute;ng t&ocirc;i từ miền Nam rủ nhau đi bụi để ở chung...m&agrave; nh&agrave; ch&uacute;ng t&ocirc;i ở trong ng&otilde;, đi v&agrave;o nh&agrave; l&agrave; phải đi qua mấy nh&agrave; h&agrave;ng x&oacute;m. Thế l&agrave; c&aacute;c b&agrave; đay nghiến kh&oacute; chịu v&agrave; họ bắt đầu chửi &ndash; họ chửi xa, chửi gần, chửi b&oacute;ng, chửi gi&oacute; &ndash; ban đầu tưởng l&agrave; họ chửi ai, rồi sau đ&oacute; mới biết họ chửi tụi m&igrave;nh. C&oacute; b&agrave; v&agrave;o tận ph&ograve;ng chửi &quot; tụi m&agrave;y ban ng&agrave;y đ&agrave;n đ&uacute;m, tối về đ&uacute; đởn kh&ocirc;ng cho b&agrave; ngủ &agrave;?&quot; .....khi đ&oacute; c&aacute;c bạn phải đi r&oacute;n r&eacute;n nhẹ nh&agrave;ng, tắm giặt cũng xả nước từ từ kẻo sợ h&agrave;ng x&oacute;m chửi...</p>\r\n\r\n<p>Hồi đ&oacute; cũng chưa c&oacute; điện thoại di động, n&ecirc;n c&oacute; ng&agrave;y được nghỉ ở nh&agrave; l&agrave; tranh thủ ra qu&aacute;n trước ng&otilde; gọi điện về cho gia đ&igrave;nh, nh&acirc;n tiện ch&agrave;o h&agrave;ng x&oacute;m lu&ocirc;n thể. Ở ngay ng&otilde; c&oacute; một b&agrave; đang nh&oacute;m than tổ ong để nấu ăn, c&ograve;n một b&agrave; th&igrave; đang ngồi lặt rau. T&ocirc;i đến gần hỏi:</p>\r\n\r\n<p>Con ch&agrave;o c&aacute;c c&ocirc;! c&ocirc; cho con hỏi ở đ&acirc;y c&oacute; ai cho thu&ecirc; điện thoại kh&ocirc;ng ạ?</p>\r\n\r\n<p>- Thế ch&uacute;ng m&agrave;y trong Nam ra hả?</p>\r\n\r\n<p>- Dạ kh&ocirc;ng, ch&uacute;ng con từ Huế ra.</p>\r\n\r\n<p>- Thế ch&uacute;ng m&agrave;y l&agrave;m g&igrave; m&agrave; tối n&agrave;o cũng ồn &agrave;o đến khuya kh&ocirc;ng cho ch&uacute;ng tao ngủ thế hả?</p>\r\n\r\n<p>- Dạ, ch&uacute;ng con xin lỗi, lần sau ch&uacute;ng con sẽ để &yacute; hơn, mấy đứa con l&agrave; sinh vi&ecirc;n từ Huế ra đ&acirc;y thực tập. Mỗi tối ch&uacute;ng con viết b&agrave;i đến khuya mới ngủ ạ.</p>\r\n\r\n<p>Rồi b&agrave; đổi c&aacute;ch xưng h&ocirc; từ m&agrave;y th&agrave;nh ch&aacute;u.</p>\r\n\r\n<p>- Thế bọn ch&aacute;u học g&igrave;?.</p>\r\n\r\n<p>- Dạ tụi ch&aacute;u học Luật ạ.</p>\r\n\r\n<p>- Uh, thế lần sau ch&uacute; &yacute; nh&eacute;. &Agrave; m&agrave; trong nh&agrave; c&ocirc; c&oacute; điện thoại, ch&aacute;u v&agrave;o nh&agrave; c&ocirc; m&agrave; gọi.</p>\r\n\r\n<p>- Dạ, con c&aacute;m ơn c&ocirc;.</p>\r\n\r\n<p>C&ograve;n b&agrave; đứng b&ecirc;n cạnh n&oacute;i: Người Huế ăn n&oacute;i nghe th&iacute;ch nhỉ, nghe chữ &quot;dạ&quot; v&agrave; xưng &quot;con&quot; th&iacute;ch qu&aacute;. Khi n&agrave;o rỗi ra đ&acirc;y n&oacute;i chuyện với c&aacute;c c&ocirc; nh&eacute;!.</p>\r\n\r\n<p>- &Agrave;, m&agrave; c&ocirc; nghe n&oacute;i con trai Huế đểu lắm phải kh&ocirc;ng ch&aacute;u?</p>\r\n\r\n<p>- Dạ, rứa c&ocirc; thấy con c&oacute; đểu kh&ocirc;ng c&ocirc;?</p>\r\n\r\n<p>Rồi tất cả c&ugrave;ng cười.</p>\r\n\r\n<p>Thế l&agrave; những ng&agrave;y sau h&agrave;ng x&oacute;m vui vẻ ch&agrave;o hỏi lẫn nhau v&agrave; kh&ocirc;ng nghe chửi nữa. T&ocirc;i nghĩ chắc tại m&igrave;nh ăn n&oacute;i c&oacute; duy&ecirc;n n&ecirc;n được mấy b&agrave; khen đ&acirc;y. N&oacute;i đ&ugrave;a vui th&ocirc;i chứ c&aacute;c bạn đừng nghĩ t&ocirc;i &quot;m&egrave;o khen m&egrave;o d&agrave;i đu&ocirc;i&quot; m&agrave; tội nh&eacute;.</p>\r\n\r\n<p>Qua đ&acirc;y, t&ocirc;i muốn n&oacute;i rằng: n&oacute;i chuyện c&oacute; duy&ecirc;n l&agrave; một n&eacute;t đẹp rất cần trong đời sống gia đ&igrave;nh, trong c&ocirc;ng sở v&agrave; cả những nơi c&ocirc;ng cộng. Kh&ocirc;ng cần phải &quot;khua m&ocirc;i m&uacute;a m&eacute;p&quot;, ng&ocirc;n từ hoa mỹ m&agrave; lời n&oacute;i phải xuất ph&aacute;t từ tấm l&ograve;ng của m&igrave;nh. Khi ch&uacute;ng ta n&oacute;i lời nặng nề, th&ocirc; lỗ, kh&ocirc;ng những người nghe cảm thấy bị x&uacute;c phạm, m&agrave; ch&iacute;nh bản th&acirc;n ch&uacute;ng ta cũng c&oacute; nhiều điều bất lợi. Khi lời n&oacute;i được n&oacute;i theo c&aacute;ch &ocirc;n h&ograve;a, người nghe sẽ dễ chấp nhận hơn v&igrave; điều đ&oacute; tỏ ra l&agrave; họ đang được t&ocirc;n trọng.</p>\r\n\r\n<p>C&oacute; lần, t&ocirc;i đến một cơ quan nọ li&ecirc;n hệ c&ocirc;ng việc, khi v&agrave;o gặp một c&ocirc; ngồi ở ph&ograve;ng văn thư, t&ocirc;i hỏi nhờ chỉ gi&uacute;p ph&ograve;ng cần li&ecirc;n hệ th&igrave; c&ocirc; văn thư chẳng n&oacute;i chẳng rằng, hai mắt cứ d&iacute; v&agrave;o m&aacute;y t&iacute;nh rồi đưa tay chỉ về ph&iacute;a cầu thang. T&ocirc;i nghĩ, chắc c&ocirc; n&agrave;y đang bị đau v&ograve;m họng n&ecirc;n kh&oacute; n&oacute;i chăng? Ngay sau đ&oacute;, c&oacute; một chị đứng tuổi gần bằng mẹ của c&ocirc; ta đến nộp hồ sơ, c&ocirc; ta bảo phải bổ sung c&aacute;i n&agrave;y, c&aacute;i kia n&ecirc;n chị nộp hồ sơ hỏi: &quot;Em ơi! Rứa ng&agrave;y mai chị bổ sung v&agrave; đến nộp được kh&ocirc;ng?&quot; C&ocirc; ta cũng chẳng n&oacute;i c&acirc;u n&agrave;o, đến khi chị đ&oacute; hỏi lần thứ 2 th&igrave; c&ocirc; ta qu&aacute;t: &quot;Chị h&atilde;y nh&igrave;n th&ocirc;ng b&aacute;o lịch l&agrave;m việc d&aacute;n ở cửa, cứ hỏi ho&agrave;i.&quot;</p>\r\n\r\n<p>&Ocirc;ng cha ta thường n&oacute;i &quot;lời n&oacute;i chẳng mất tiền mua, lựa lời m&agrave; n&oacute;i cho vừa l&ograve;ng nhau&quot;, bạn c&oacute; thể nhận thấy rằng, trong cuộc sống, c&oacute; nhiều người kh&ocirc;ng đẹp, giọng n&oacute;i kh&ocirc;ng hay, nhưng n&oacute;i chuyện vẫn rất c&oacute; duy&ecirc;n. Kh&ocirc;ng phải mới sinh ra họ đ&atilde; c&oacute; khả năng ấy đ&acirc;u, m&agrave; đ&oacute; l&agrave; kết quả của sự học tập, r&egrave;n luyện qua nhiều năm th&aacute;ng. Phải c&ocirc;ng nhận l&agrave; c&oacute; nhiều người bẩm sinh đ&atilde; c&oacute; t&agrave;i ăn n&oacute;i nhưng c&oacute; t&agrave;i ăn n&oacute;i chưa hẳn đ&atilde; l&agrave; c&oacute; duy&ecirc;n.</p>\r\n\r\n<p>Ca dao c&oacute; c&acirc;u &quot;Người thanh, tiếng n&oacute;i cũng thanh. Chu&ocirc;ng k&ecirc;u khẽ đ&aacute;nh b&ecirc;n th&agrave;nh cũng k&ecirc;u&quot;. Lời n&oacute;i l&agrave; một trong những yếu tố chi phối phần lớn cuộc sống của ch&uacute;ng ta. Khi tiếp x&uacute;c với ai lần đầu ti&ecirc;n, phong c&aacute;ch n&oacute;i năng của người ấy c&oacute; thể để lại trong ta một ấn tượng tốt hay xấu. Do đ&oacute;, c&aacute;c bạn h&atilde;y ăn n&oacute;i c&oacute; duy&ecirc;n như trai Huế nh&eacute;.</p>\r\n', 'VNE-1502128423.jpg', 6, 2, '2017-08-08 03:12:18');
+INSERT INTO `story` (`story_id`, `name`, `preview_text`, `detail_text`, `picture`, `counter`, `cat_id`, `created_at`) VALUES
+(22, '26 TUỔI VÀ 26 ĐIỀU CẦN BIẾT', '                                            Bạn năm nay đã 26 tuổi? Một con số không nhỏ nữa, nhưng liệu bạn đã thật sự trưởng thành chưa? Sự trưởng thành đôi khi không được đo bằng những con số của tuổi tác, có những người mỗi năm lại thêm một tuổi nhưng', '<p><strong><em>Bạn năm nay đ&atilde; 26 tuổi? Một con số kh&ocirc;ng nhỏ nữa, nhưng liệu bạn đ&atilde; thật sự trưởng th&agrave;nh chưa? Sự trưởng th&agrave;nh đ&ocirc;i khi kh&ocirc;ng được đo bằng những con số của tuổi t&aacute;c, c&oacute; những người mỗi năm lại th&ecirc;m một tuổi nhưng t&acirc;m hồn th&igrave; m&atilde;i kh&ocirc;ng chịu lớn. Vậy khi 26 tuổi, bạn h&atilde;y ghi nhớ 26 điều gợi &yacute; sau đ&acirc;y để bản th&acirc;n m&igrave;nh trở n&ecirc;n tuyệt vời hơn.</em></strong></p>\r\n\r\n<p><strong><em>***</em></strong></p>\r\n\r\n<p><strong><em><img alt=\"26-tuoi-va-26-dieu-can-biet\" src=\"http://www.truyenngan.com.vn/images/Phuongvtm/2017-07/26-tuoi-va-26-dieu-can-biet.jpg\" style=\"height:288px; width:432px\" /></em></strong></p>\r\n\r\n<p><strong>1. Sai lầm cũng kh&ocirc;ng sao cả</strong></p>\r\n\r\n<p>C&oacute; đ&ocirc;i khi, bạn kh&ocirc;ng thể tr&aacute;nh được những sai lầm hay những lựa chọn tồi tệ về cuộc sống. V&agrave; thực sự th&igrave;, điều đ&oacute; cũng chẳng sao cả. Sai lầm l&agrave;m cho cuộc sống của bạn th&uacute; vị hơn. Đ&ocirc;i khi những ng&atilde; rẽ sai lầm sẽ dẫn bạn tới một nơi tuyệt vời. H&atilde;y tự nhủ với bản th&acirc;n rằng &quot;sai lầm cũng chẳng sao hết, bởi đ&oacute; mới l&agrave; cuộc sống.&quot;</p>\r\n\r\n<p><strong>2. Học từ sai lầm</strong></p>\r\n\r\n<p>Đ&uacute;ng l&agrave; mắc sai lầm th&igrave; chẳng sao hết, nhưng bạn phải học được g&igrave; những sai lầm của bản th&acirc;n m&igrave;nh để chắc chắn rằng m&igrave;nh kh&ocirc;ng phạm phải sai lầm đ&oacute; trong thời gian tiếp theo.</p>\r\n\r\n<p><strong>3. H&atilde;y l&agrave;m những g&igrave; bạn th&iacute;ch</strong></p>\r\n\r\n<p>Nếu như bạn ng&agrave;y n&agrave;o cũng l&agrave;m một c&ocirc;ng việc bạn gh&eacute;t th&igrave; đ&atilde; đến l&uacute;c bạn đứng dậy v&agrave; bỏ c&ocirc;ng việc ấy được rồi đ&oacute;. H&atilde;y l&agrave;m những g&igrave; khiến bạn hạnh ph&uacute;c.</p>\r\n\r\n<p><strong>4. Đừng quan t&acirc;m đến những thứ kh&ocirc;ng li&ecirc;n quan đến m&igrave;nh</strong></p>\r\n\r\n<p>Nếu như bạn lu&ocirc;n phải trăn trở người kh&aacute;c đang nghĩ g&igrave; về bạn, bạn lu&ocirc;n sợ h&atilde;i kh&ocirc;ng biết sau lưng m&igrave;nh người ta đang b&agrave;n t&aacute;n chuyện g&igrave;, h&atilde;y h&iacute;t một hơi thật s&acirc;u v&agrave; ngừng l&agrave;m khổ bản th&acirc;n m&igrave;nh đi. Bạn kh&ocirc;ng thể kiểm so&aacute;t được những g&igrave; người kh&aacute;c nghĩ về bạn, vậy tại sao phải l&agrave;m tự tra tấn ch&iacute;nh m&igrave;nh bởi những g&igrave; bạn kh&ocirc;ng thể kiếm so&aacute;t?</p>\r\n\r\n<p><strong>5. Ch&uacute; t&acirc;m v&agrave;o hiện tại</strong></p>\r\n\r\n<p>Dừng tự sướng v&agrave; sống ảo đi th&ocirc;i. H&atilde;y đi ra ngo&agrave;i, thực sự h&ograve;a m&igrave;nh v&agrave;o phong cảnh xung quanh bạn.</p>\r\n\r\n<p><strong>6. H&atilde;y sống chậm lại</strong></p>\r\n\r\n<p>Đừng l&uacute;c n&agrave;o cũng cắm đầu v&agrave;o m&aacute;y t&iacute;nh hay điện thoại thay v&igrave; tr&ograve; chuyện với gia đ&igrave;nh v&agrave; bạn b&egrave;. H&atilde;y cố gắng sống chậm lại một lần v&agrave; thưởng thức những thứ xung quanh bạn thay v&igrave; bị cuốn v&agrave;o c&ocirc;ng việc, bạn sẽ thấy cuộc đời thực sự đẹp hơn rất nhiều đấy.</p>\r\n\r\n<p><strong>7. Đừng tức giận nữa</strong></p>\r\n\r\n<p>Trong qu&aacute; khứ, chắc hẳn c&oacute; những người l&agrave;m bạn tổn thương v&agrave; bạn đ&atilde; đem theo nỗi giận dữ suốt ngần ấy thời gian. Giờ đ&acirc;y, h&atilde;y học c&aacute;ch tha thứ cho những ai l&agrave;m tổn thương bạn. H&atilde;y hiểu rằng bạn cần phải bu&ocirc;ng bỏ qu&aacute; khứ th&igrave; mới tiến đến tương lai được. Đừng cất giữ m&atilde;i nỗi giận dữ trong tr&aacute;i tim m&igrave;nh. H&atilde;y tha thứ cho người kh&aacute;c v&agrave; tha thứ cho ch&iacute;nh m&igrave;nh.</p>\r\n\r\n<p><strong>8. Học c&aacute;ch n&oacute;i kh&ocirc;ng</strong></p>\r\n\r\n<p>Bạn kh&ocirc;ng cần phải chứng minh bất cứ điều g&igrave; cho bất cứ ai. H&atilde;y sống thực với bản th&acirc;n m&igrave;nh. V&agrave; nếu điều g&igrave; đ&oacute; l&agrave;m bạn kh&ocirc;ng thoải m&aacute;i, h&atilde;y thẳng thắn từ chối thay v&igrave; cố chịu đựng v&agrave; c&aacute;u kỉnh.</p>\r\n\r\n<p><strong>9. Học c&aacute;ch n&oacute;i c&oacute;</strong></p>\r\n\r\n<p>Ngược lại, c&oacute; đ&ocirc;i khi, bạn cần phải bước ra khỏi v&ugrave;ng an to&agrave;n của m&igrave;nh. Đừng cứ lặp đi lặp lại một th&oacute;i quen. H&atilde;y học c&aacute;ch thử những thứ mới mẻ.</p>\r\n\r\n<p><strong>10. Thay đổi l&agrave; một điều tốt</strong></p>\r\n\r\n<p>H&atilde;y dừng sợ h&atilde;i khi nghĩ về những thay đổi trong đời. Cuộc sống kh&ocirc;ng ngừng thay đổi, bạn phải học c&aacute;ch th&iacute;ch nghi với ho&agrave;n cảnh chứ đừng l&uacute;c n&agrave;o cũng bỏ chạy v&agrave; từ chối thay đổi.</p>\r\n\r\n<p><strong>11. Th&agrave;nh thật với ch&iacute;nh m&igrave;nh</strong></p>\r\n\r\n<p>Người duy nhất hiểu bạn v&agrave; chấp nhận bạn ch&iacute;nh l&agrave; bản th&acirc;n bạn. H&atilde;y học c&aacute;ch th&agrave;nh thật với bản th&acirc;n m&igrave;nh. H&atilde;y biết rằng bạn l&agrave; một người rất tuyệt vời, cho d&ugrave; bạn c&oacute; bao nhi&ecirc;u khuyết điểm đi chăng nữa.</p>\r\n\r\n<p><strong>12. Bạn kh&ocirc;ng thể kiểm so&aacute;t người kh&aacute;c</strong></p>\r\n\r\n<p>Bạn phải học c&aacute;ch chấp nhận đối phương v&agrave; ngừng đ&ograve;i hỏi đối phương phải thay đổi chỉ v&igrave; bạn muốn thế. Bạn chỉ c&oacute; thể đưa ra lời khuy&ecirc;n v&agrave; nếu người ta kh&ocirc;ng thay đổi, bạn chẳng c&oacute; thể l&agrave;m g&igrave; hơn thế.</p>\r\n\r\n<p><strong>13. Lu&ocirc;n đối xử tốt với bản th&acirc;n m&igrave;nh</strong></p>\r\n\r\n<p>H&atilde;y nhớ rằng nếu bạn kh&ocirc;ng đối xử tốt với ch&iacute;nh m&igrave;nh th&igrave; sẽ chẳng c&oacute; ai đối xử tốt với bạn nữa đ&acirc;u. H&atilde;y nhớ bạn l&agrave; một người rất quan trọng, &iacute;t nhất l&agrave; đối với gia đ&igrave;nh người th&acirc;n của bạn.</p>\r\n\r\n<p><strong>14. Học c&aacute;ch n&oacute;i chuyện th&ocirc;ng minh</strong></p>\r\n\r\n<p>Lời n&oacute;i c&oacute; sức s&aacute;t thương rất lớn. H&atilde;y học c&aacute;ch kiểm so&aacute;t c&aacute;ch tr&ograve; chuyện của m&igrave;nh. Bạn kh&ocirc;ng thể l&agrave;m tổn thương người kh&aacute;c chỉ v&igrave; bạn đang c&aacute;u giận. H&atilde;y học c&aacute;ch nghĩ trước khi n&oacute;i.</p>\r\n\r\n<p><strong>15. Chờ đợi cũng kh&ocirc;ng sao cả</strong></p>\r\n\r\n<p>C&oacute; những việc kh&ocirc;ng thể n&agrave;o xảy ra chỉ trong t&iacute;ch tắc. C&oacute; đ&ocirc;i khi bạn cần phải nhẫn nại v&agrave; ki&ecirc;n tr&igrave;, rồi mọi chuyện sẽ ổn cả th&ocirc;i.</p>\r\n\r\n<p><strong>16. Bạn kh&ocirc;ng thể l&agrave;m h&agrave;i l&ograve;ng tất cả mọi người</strong></p>\r\n\r\n<p>Bạn kh&ocirc;ng thể n&agrave;o &eacute;p người kh&aacute;c phải nh&igrave;n nhận bạn như bạn muốn. C&oacute; nhiều người sẽ chẳng bao giờ h&agrave;i l&ograve;ng với bạn ngay cả khi bạn cố gắng hết sức. Tuy nhi&ecirc;n điều n&agrave;y cũng chẳng sao hết. Bạn kh&ocirc;ng tồn tại chỉ để l&agrave;m h&agrave;i l&ograve;ng người kh&aacute;c.</p>\r\n\r\n<p><strong>17. Cởi mở</strong></p>\r\n\r\n<p>Đừng sống bảo thủ. Đừng khư khư cố chấp rằng bản th&acirc;n m&igrave;nh mới l&agrave; đ&uacute;ng. H&atilde;y cởi mở v&agrave; lắng nghe người kh&aacute;c.</p>\r\n\r\n<p><strong>18. Sống hết m&igrave;nh ngay b&acirc;y giờ</strong></p>\r\n\r\n<p>Trong độ tuổi n&agrave;y, bạn c&ograve;n trẻ, c&ograve;n c&oacute; thời gian, chưa c&oacute; qu&aacute; nhiều vướng bận. Bạn c&oacute; thể l&agrave;m tất cả những g&igrave; bạn muốn. Chỉ qua v&agrave;i năm nữa khi bạn c&oacute; gia đ&igrave;nh, bạn sẽ chẳng c&oacute; đủ thời gian cho bản th&acirc;n được đ&acirc;u.</p>\r\n\r\n<p><strong>19. Chẳng bao giờ l&agrave; qu&aacute; muộn</strong></p>\r\n\r\n<p>Bạn muốn học vẽ từ khi bạn 12 tuổi v&agrave; giờ đ&acirc;y bạn cho rằng đ&atilde; qu&aacute; muộn để bắt đầu học một thứ g&igrave; đ&oacute;? H&atilde;y nhớ rằng chẳng bao giờ l&agrave; qu&aacute; muộn để l&agrave;m những g&igrave; bạn th&iacute;ch, kể cả khi bạn 62 tuổi thay v&igrave; 26 tuổi.</p>\r\n\r\n<p><strong>20. Mỉm cười</strong></p>\r\n\r\n<p>Bất kể bạn đang phải trải qua điều g&igrave;, h&atilde;y học c&aacute;ch mỉm cười với mọi người, mỉm cười mỗi ng&agrave;y v&agrave; rồi cuộc sống sẽ mỉm cười với bạn.</p>\r\n\r\n<p><strong>21. H&atilde;y tốt với mọi người</strong></p>\r\n\r\n<p>Bạn kh&ocirc;ng biết người ấy đang trải qua điều g&igrave; trong đời họ. H&atilde;y học c&aacute;ch tử tế với những người xung quanh bạn.</p>\r\n\r\n<p><strong>22. Tin v&agrave;o những điều thần kỳ</strong></p>\r\n\r\n<p>C&oacute; thể cổ t&iacute;ch kh&ocirc;ng chỉ l&agrave; thần thoại. Cuộc sống n&agrave;y c&oacute; rất nhiều thần kỳ m&agrave; bạn chẳng thể biết được đ&acirc;u.</p>\r\n\r\n<p><strong>23. Bạn sẽ đ&aacute;nh mất một ai đ&oacute;</strong></p>\r\n\r\n<p>Mỗi cuộc gặp gỡ đều c&oacute; l&yacute; do của ri&ecirc;ng n&oacute; v&agrave; mỗi người đều l&agrave; một b&agrave;i học trong đời bạn. Bạn đừng cố gắng n&iacute;u k&eacute;o một ai đấy trong đời bạn trong khi họ chẳng muốn ở lại. H&atilde;y để những người cũ đi v&agrave; những người mới sẽ đến.</p>\r\n\r\n<p><strong>24. Trưởng th&agrave;nh đồng nghĩa với tổn thương</strong></p>\r\n\r\n<p>V&agrave; bạn sẽ bị tổn thương rất nhiều. Bạn sẽ phải học c&aacute;ch chấp nhận v&agrave; đối mặt với những sự tổn thương ấy, c&oacute; đ&ocirc;i khi l&agrave; một m&igrave;nh. V&agrave; bạn sẽ mạnh mẽ hơn rất nhiều.</p>\r\n\r\n<p><strong>25. Rồi mọi chuyện sẽ ổn th&ocirc;i</strong></p>\r\n\r\n<p>Bạn mới chỉ hơn 25 tuổi, vẫn c&ograve;n nhiều thời gian ở ph&iacute;a trước. Chỉ cần bạn kh&ocirc;ng bỏ cuộc th&igrave; mọi chuyện sẽ ổn cả th&ocirc;i. Bạn sẽ gặp những người tuyệt vời trong đời bạn. Rồi bạn sẽ ổn th&ocirc;i.</p>\r\n\r\n<p><strong>26. Chẳng c&oacute; cuộc đời ai l&agrave; ho&agrave;n hảo</strong></p>\r\n\r\n<p>Ngay cả c&ocirc; g&aacute;i xinh đẹp m&agrave; bạn vẫn thầm ngưỡng mộ v&agrave; c&oacute; ch&uacute;t ganh tị. Mọi người dường như đều c&oacute; một c&ocirc;ng việc ổn định trong khi bạn vẫn đang phải cố gắng h&agrave;ng ng&agrave;y với một c&ocirc;ng việc m&agrave; bạn gh&eacute;t tận xương tủy. H&atilde;y nhớ rằng chẳng c&oacute; ai l&agrave; ho&agrave;n hảo. Ai cũng cảm thấy c&ocirc; đơn. Ai cũng c&oacute; những khoảng thời gian chấp chới kh&ocirc;ng biết tương lai sẽ thế n&agrave;o. Bạn cần phải dừng lo lắng v&agrave; cứ sống cuộc đời của bạn. H&atilde;y nhớ, rồi mọi chuyện sẽ ổn cả th&ocirc;i.</p>\r\n', 'VNE-1502128465.jpg', 5, 8, '2017-08-08 03:11:18'),
+(23, 'HÃY THA THỨ NHỮNG NGƯỜI LÀM TỔN THƯƠNG TA', '                                            Trong đời đôi khi ta cũng bị ai đó làm tổn thương.\r\n\r\n***\r\n\r\nTổn thương đó nó có thể là ngắn, nhưng cũng có thể kéo dài âm ỉ chiếm gần hết cuộc đời. Có người bị tổn thương mà trở nên điên loạn. Có người bị tổn t', '<p><strong>Trong đời đ&ocirc;i khi ta cũng bị ai đ&oacute; l&agrave;m tổn thương.</strong></p>\r\n\r\n<p><strong>***</strong></p>\r\n\r\n<p>Tổn thương đ&oacute; n&oacute; c&oacute; thể l&agrave; ngắn, nhưng cũng c&oacute; thể k&eacute;o d&agrave;i &acirc;m ỉ chiếm gần hết cuộc đời. C&oacute; người bị tổn thương m&agrave; trở n&ecirc;n đi&ecirc;n loạn. C&oacute; người bị tổn thương rồi nghĩ quẩn chấm dứt cuộc đời m&igrave;nh. Nhưng cũng c&oacute; người sau khi bị tổn thương m&agrave; trở th&agrave;nh con người kh&aacute;c, mạnh mẽ hơn, &yacute; ch&iacute; ki&ecirc;n cường, đầy nghị lực hơn v&agrave; từ tổn thương đ&oacute; đ&atilde; gi&uacute;p họ th&agrave;nh c&ocirc;ng, biết y&ecirc;u thương cuộc đời hơn.</p>\r\n\r\n<p><img alt=\"hay-tha-thu-nhung-nguoi-lam-ton-thuong-ta\" src=\"http://www.truyenngan.com.vn/images/Phuongvtm/2017-07/hay-tha-thu-nhung-nguoi-lam-ton-thuong-ta.jpg\" style=\"height:281px; width:500px\" /></p>\r\n\r\n<p>Cho n&ecirc;n nếu ai đ&oacute; l&agrave;m tổn thương ta th&igrave; ta n&ecirc;n tự t&igrave;m c&aacute;ch chữa l&agrave;nh n&oacute;. Đừng đem l&ograve;ng o&aacute;n hận v&agrave; t&igrave;m c&aacute;ch trả th&ugrave; bởi như vậy ch&iacute;nh ta lại l&agrave;m cho cuộc đời m&igrave;nh th&ecirc;m phức tạp. H&atilde;y bao dung v&agrave; tha thứ cho những kẻ đ&atilde; từng l&agrave;m tổn thương ta, để t&igrave;m thấy những điều đẹp đẽ kh&aacute;c trong cuộc sống n&agrave;y m&agrave; ta chưa biết tới.</p>\r\n\r\n<p>V&agrave; kh&ocirc;ng những tha thứ cho những người l&agrave;m tổn thương ta, m&agrave; ta phải c&ograve;n học c&aacute;ch tha thứ cho ch&iacute;nh bản th&acirc;n m&igrave;nh.</p>\r\n\r\n<p><iframe frameborder=\"0\" id=\"ifvideoinpage\" scrolling=\"no\" src=\"http://media.adnetwork.vn/assets/player/jwp722/videoinpage-player-jwp722.html?flash=false&amp;volume=30&amp;autoStart=false&amp;skipAd=7&amp;tag=http%3A%2F%2Fdelivery.adnetwork.vn%2F247%2Fxmlvideoad%2Fwid_1377161727%2Fzid_1396944246%2Ftype_inline%2Feff_vidinpage%2Fcb_39207%2Fw_610%2Fh_344%2Fpurl_aHR0cDovL3d3dy50cnV5ZW5uZ2FuLmNvbS52bi90cnV5ZW4tYmxvZy90cmFpLW5naGllbS1zb25nLzQ0MjkxLWhheS10aGEtdGh1LW5odW5nLW5ndW9pLWxhbS10b24tdGh1b25nLXRhLmh0bWw%253D&amp;media_path=http%3A%2F%2Fmedia.adnetwork.vn%2Fassets%2F&amp;w=610&amp;h=344\"></iframe></p>\r\n\r\n<p>Đời người chỉ c&oacute; một lần để sống, bất kể mọi lời khen ch&ecirc; của người đời như thế n&agrave;o th&igrave; ta phải lu&ocirc;n tin v&agrave;o bản th&acirc;n m&igrave;nh. Phải h&agrave;nh động theo trực gi&aacute;c m&aacute;ch bảo v&agrave; dũng cảm đối diện với những kh&oacute; khăn. Đ&ocirc;i khi ta tự &acirc;m thầm cảm nhận được bản th&acirc;n ta cũng rất đặc biệt. Đặc biệt ở chỗ ta ch&iacute;nh l&agrave; ta, ta kh&ocirc;ng phải như người kh&aacute;c; kh&ocirc;ng a dua, kh&ocirc;ng xu nịnh, kh&ocirc;ng ch&ecirc; tr&aacute;ch người đời, kh&ocirc;ng o&aacute;n hờn th&ugrave; hận. Ta sống tốt với những người m&agrave; ta quan t&acirc;m v&agrave; y&ecirc;u thương họ v&ocirc; điều kiện. Ta cũng nhận thấy rằng ta may mắn v&agrave; hạnh ph&uacute;c hơn bao nhiều người.</p>\r\n', 'VNE-1502128518.jpg', 8, 8, '2017-08-08 03:08:31'),
+(24, 'SẼ CÓ MỘT NGƯỜI YÊU EM NHƯ THẾ', '                                            SẼ CÓ MỘT NGƯỜI YÊU EM NHƯ THẾ\r\nchỉ đáng tiếc là người đó sẽ mãi mãi chẳng là anh...\r\n\r\n***\r\n\r\nse-co-mot-nguoi-yeu-em-nhu-the\r\n\r\nRồi sẽ có một người yêu em như thế...\r\n\r\nĐó sẽ không phải là người mà em yêu nhất ', '<h1>SẼ C&Oacute; MỘT NGƯỜI Y&Ecirc;U EM NHƯ THẾ</h1>\r\n\r\n<p><em><strong>chỉ đ&aacute;ng tiếc l&agrave; người đ&oacute; sẽ m&atilde;i m&atilde;i chẳng l&agrave; anh...</strong></em></p>\r\n\r\n<p><em><strong>***</strong></em></p>\r\n\r\n<p><em><strong><img alt=\"se-co-mot-nguoi-yeu-em-nhu-the\" src=\"http://www.truyenngan.com.vn/images/Phuongvtm/2017-04/se-co-mot-nguoi-yeu-em-nhu-the.jpg\" style=\"height:355px; width:524px\" /></strong></em></p>\r\n\r\n<p>Rồi sẽ c&oacute; một người y&ecirc;u em như thế...</p>\r\n\r\n<p>Đ&oacute; sẽ kh&ocirc;ng phải l&agrave; người m&agrave; em y&ecirc;u nhất nhưng l&agrave; hợp l&iacute;, l&agrave; đ&uacute;ng thời điểm.Một ch&agrave;ng trai chấp nhận c&ugrave;ng em l&agrave;m những việc n&ocirc;ng nổi, c&ugrave;ng trải qua tuổi thanh xu&acirc;n đầy nhiệt huyết, c&ugrave;ng ngắm nh&igrave;n nhau trưởng th&agrave;nh, nắm tay nhau đi qua mọi con phố, mọi qu&aacute;n x&aacute; ven đường. Mỗi sớm người ấy sẽ c&ugrave;ng em nh&acirc;m nhi t&aacute;ch tr&agrave; hay một ly cafe sữa ngọt thơm b&eacute;o ngậy, c&ugrave;ng trải nghiệm, c&ugrave;ng sống v&igrave; cả hai...</p>\r\n\r\n<p>Rồi sẽ c&oacute; một người y&ecirc;u em như thế...</p>\r\n\r\n<p><iframe frameborder=\"0\" id=\"ifvideoinpage\" scrolling=\"no\" src=\"http://media.adnetwork.vn/assets/player/jwp722/videoinpage-player-jwp722.html?flash=false&amp;volume=30&amp;autoStart=false&amp;skipAd=7&amp;tag=http%3A%2F%2Fdelivery.adnetwork.vn%2F247%2Fxmlvideoad%2Fwid_1377161727%2Fzid_1396944246%2Ftype_inline%2Feff_vidinpage%2Fcb_17017%2Fw_610%2Fh_344%2Fpurl_aHR0cDovL3d3dy50cnV5ZW5uZ2FuLmNvbS52bi90cnV5ZW4tYmxvZy90cmFpLW5naGllbS15ZXUvNDM2NDEtc2UtY28tbW90LW5ndW9pLXlldS1lbS1uaHUtdGhlLmh0bWw%253D&amp;media_path=http%3A%2F%2Fmedia.adnetwork.vn%2Fassets%2F&amp;w=610&amp;h=344\"></iframe></p>\r\n\r\n<p>Một người c&oacute; thể chấp nhận một tr&aacute;i tim đầy thương tổn sau những năm th&aacute;ng y&ecirc;u người vội v&atilde;, lặng lẽ từng ch&uacute;t từng ch&uacute;t v&aacute; l&agrave;nh tr&aacute;i tim ấy. Một người sẽ c&ugrave;ng em ho&agrave;n thiện ước mơ dang dở thay v&igrave; những lời hứa xu&ocirc;ng rằng sau n&agrave;y sẽ l&agrave;m cho em tất cả như anh đ&atilde; từng. Người ấy sẽ chấp nhận c&aacute;i t&iacute;nh trẻ con, hay m&egrave; nheo đầy phiền phức, sẽ kh&ocirc;ng v&igrave; em ngốc nghếch m&agrave; ch&aacute;n gh&eacute;t, bỏ rơi em.</p>\r\n\r\n<p>Em sẽ kh&ocirc;ng đ&ograve;i hỏi nhiều nữa, kh&ocirc;ng bắt người ấy phải n&oacute;i y&ecirc;u em mỗi ng&agrave;y, kh&ocirc;ng cần người ấy trao ng&agrave;n lời y&ecirc;u thương như những th&aacute;ng ng&agrave;y non trẻ v&ocirc; tư nữa. Em chỉ cần một người thấu hiểu, một người quan t&acirc;m. Như vậy th&igrave; c&oacute; c&aacute;ch xa ngh&igrave;n tr&ugrave;ng cũng như đang kề b&ecirc;n cạnh. Người ấy sẽ kh&ocirc;ng v&igrave; những lần giận dỗi của em m&agrave; bu&ocirc;ng tay vứt bỏ, người ấy sẽ &ocirc;m chặt lấy em, chịu tr&aacute;ch nhiệm v&agrave; đối tốt với em cả đời.</p>\r\n\r\n<p>Rồi người ấy sẽ chịu lấy em, kho&aacute;c l&ecirc;n người em bộ v&aacute;y c&ocirc; d&acirc;u v&agrave; mang hết t&igrave;nh cảm của m&igrave;nh đặt v&agrave;o nụ h&ocirc;n ngọt ng&agrave;o trong lễ đường trước con mắt của bao nhi&ecirc;u con người. Kh&ocirc;ng một lời hứa hẹn nhưng sẽ tự biết m&igrave;nh phải chịu tr&aacute;ch nhiệm với em cả đời. Mỗi lần em giận dỗi, d&ugrave; l&agrave; em sai anh ấy sẽ xuống nước nhường nhịn em, kh&ocirc;ng tr&aacute;ch m&oacute;c, kh&ocirc;ng im lặng, chờ đợi đến khi em th&ocirc;i giận dỗi, giảng giải cho em hiểu rồi lại &ocirc;m em trong v&ograve;ng tay, &aacute;p đầu em v&agrave;o bờ ngực vững chắc, nhẹ nh&agrave;ng n&oacute;i :&quot; Ngoan, anh thương !!!&quot;. D&ugrave; em biết l&agrave; m&igrave;nh sai, nhưng trong l&uacute;c n&oacute;ng giận kh&ocirc;ng thể kiềm chế bản th&acirc;n, em cần một người bao dung như thế, bắc cho cả hai một c&aacute;i thang h&ograve;a giải, chỉ như vậy c&oacute; lẽ cả đời sẽ chẳng xa nhau được.</p>\r\n\r\n<p>Anh ấy kh&ocirc;ng cần c&oacute; qu&aacute; nhiều tiền nhưng sẽ vui vẻ chi trả mọi khoản tiền cho em. Anh ấy sẽ kh&ocirc;ng k&igrave; k&egrave;o, đ&ocirc;i co với em về chuyện tiền bạc, sẽ kh&ocirc;ng mang tiền bạc ra l&agrave;m đề t&agrave;i c&atilde;i v&atilde; của cả hai. Sau n&agrave;y d&ugrave; cuộc đời c&oacute; nhiều ch&ocirc;ng ch&ecirc;nh, người ấy sẽ c&ugrave;ng em g&aacute;nh chịu, c&ugrave;ng em đối mặt. Mặc kệ gặp phải chuyện g&igrave;, c&oacute; người đ&oacute; ở b&ecirc;n, gi&ocirc;ng b&atilde;o cũng h&oacute;a b&igrave;nh y&ecirc;n....</p>\r\n\r\n<p>Anh &agrave; ! Sẽ c&oacute; một người y&ecirc;u em như thế, chỉ đ&aacute;ng tiếc l&agrave; người đ&oacute; sẽ m&atilde;i m&atilde;i chẳng l&agrave; anh...</p>\r\n\r\n<p><em>&quot;T&ocirc;i muốn y&ecirc;u một người thật l&acirc;u</em></p>\r\n\r\n<p><em>Chung t&aacute;n &ocirc; che đầu</em></p>\r\n\r\n<p><em>Đi qua ng&agrave;n gi&ocirc;ng b&atilde;o</em></p>\r\n\r\n<p><em>Kh&ocirc;ng ai hứa hẹn về m&atilde;i m&atilde;i</em></p>\r\n\r\n<p><em>M&agrave; mỗi người đều ki&ecirc;n tr&igrave; v&igrave; hạnh ph&uacute;c cả hai...&quot;(st)</em></p>\r\n', 'VNE-1502128560.jpg', 12, 2, '2017-08-08 16:46:59'),
+(25, 'SAU CHIA TAY..', 'Tôi có bất dịch một nguyên tắc, khi đã quyết định chia tay rồi thì tuyệt nhiên không liên lạc. Bởi có trao đổi lại qua cũng chẳng nghĩa ý gì khi đã nhủ lòng buông bỏ, đã lạ đã dưng, mà còn làm vương đau lòng nhau thêm nữa.', '<p><em><strong>T&ocirc;i có b&acirc;́t dịch m&ocirc;̣t nguy&ecirc;n tắc, khi đã quy&ecirc;́t định chia tay r&ocirc;̀i thì tuy&ecirc;̣t nhi&ecirc;n kh&ocirc;ng li&ecirc;n lạc. Bởi có trao đ&ocirc;̉i lại qua cũng chẳng nghĩa ý gì khi đã nhủ lòng bu&ocirc;ng bỏ, đã lạ đã dưng, mà còn làm vương đau lòng nhau th&ecirc;m nữa.</strong></em></p>\r\n\r\n<p><em><strong>***</strong></em></p>\r\n\r\n<p><em><strong><img alt=\"sau-chia-tay\" src=\"http://www.truyenngan.com.vn/images/Phuongvtm/2017-08/sau-chia-tay.jpg\" style=\"height:333px; width:500px\" /></strong></em></p>\r\n\r\n<p>T&ocirc;i cũng có m&ocirc;̣t nguy&ecirc;n tắc b&acirc;́t di, kh&ocirc;ng y&ecirc;u ai sau m&ocirc;̣t cu&ocirc;̣c tình vừa dứt. Như mặc ý đ&ecirc;̉ tang cho tình vừa đứt vừa rơi. Cũng kh&ocirc;ng phải vì còn thương nhớ m&ocirc;̣ng cũ mi&ecirc;̣ng cười, mà đơn giản là đ&ecirc;̉ suy ng&acirc;̃m v&ecirc;̀ cu&ocirc;̣c tình đã qua, người tình đã qua cu&ocirc;̣c đời mình sao nhanh đ&ecirc;́n v&acirc;̣y. Đ&ecirc;̉ y&ecirc;u người sau cho t&ocirc;́t cho l&acirc;u v&ecirc;̀ cu&ocirc;́i. Nhi&ecirc;̀u khi cũng đơn giản là m&ecirc;̣t dạ nhi&ecirc;̀u r&ocirc;̀i chỉ mu&ocirc;́n c&ocirc; đơn. Mu&ocirc;́n lang thang m&ocirc;̣t mình, cà ph&ecirc; m&ocirc;̣t mình, vui m&ocirc;̣t mình, bu&ocirc;̀n cũng m&ocirc;̣t mình cho.... đã.</p>\r\n\r\n<p>Suy cho cùng h&ecirc;́t y&ecirc;u th&igrave; mọi thứ đ&ecirc;̀u hết trần v&ocirc; nghĩa. Khi t&acirc;́t thảy kh&ocirc;ng còn can dự đ&ecirc;́n cu&ocirc;̣c s&ocirc;́ng của nhau b&acirc;́t cứ l&acirc;̀n nào. C&ograve;n y&ecirc;u, c&ograve;n b&ecirc;n nhau được th&igrave; h&atilde;y luyến h&atilde;y vương, bằng kh&ocirc;ng chỉ thải thừa v&ocirc; định, phải kh&ocirc;ng. Thanh xu&acirc;n của chúng ta y&ecirc;u đúng người thì đó là tình y&ecirc;u, y&ecirc;u sai người là b&ocirc;̀ng b&ocirc;̣t nổi n&ocirc;ng của tu&ocirc;̉i trẻ là chuy&ecirc;̣n giản thường của s&ocirc;́ ki&ecirc;́p. Chỉ là phải lu&ocirc;n học cách bình &ocirc;̉n đ&ecirc;̉ thương y&ecirc;u trọn mãi người sau. Tình y&ecirc;u rồi cũng đến l&uacute;c chẳng c&acirc;̀n hoa mỹ gì nhi&ecirc;̀u, chỉ là mong là được thở cạnh nhau tới cu&ocirc;́i...</p>\r\n', 'VNE-1502128595.jpg', 11, 8, '2017-08-08 03:09:59'),
+(26, 'TỜ ĐƠN LY HÔN', '                                            <p>Những kí ức tồi tệ đó chưa khi nào nó quên nó trách bố, trách ông không làm tốt nghĩa vụ của một người chồng, một người cha. Nó thèm khát bố nó được như những ông bố trên quảng cáo ở tivi mà nó vẫn thường đượ', '<p><em><strong>Những k&iacute; ức tồi tệ đ&oacute; chưa khi n&agrave;o n&oacute; qu&ecirc;n n&oacute; tr&aacute;ch bố, tr&aacute;ch &ocirc;ng kh&ocirc;ng l&agrave;m tốt nghĩa vụ của một người chồng, một người cha. N&oacute; th&egrave;m kh&aacute;t bố n&oacute; được như những &ocirc;ng bố tr&ecirc;n quảng c&aacute;o ở tivi m&agrave; n&oacute; vẫn thường được xem, nhưng đ&acirc;u phải những g&igrave; n&oacute; muốn đều được...</strong></em></p>\r\n\r\n<p><em><strong>***</strong></em></p>\r\n\r\n<p><em><strong><img alt=\"to-don-ly-hon\" src=\"http://www.truyenngan.com.vn/images/Phuongvtm/2017-07/to-don-ly-hon.jpg\" style=\"height:477px; width:500px\" /></strong></em></p>\r\n\r\n<p>Thế l&agrave; chỉ c&ograve;n mấy ng&agrave;y nữa l&agrave; đến sinh nhật n&oacute;, kh&ocirc;ng hiểu tại sao lần n&agrave;y n&oacute; lại h&aacute;o hức nhiều đến thế, nhất định n&oacute; sẽ tự tổ chức cho m&igrave;nh một sinh nhật thật &yacute; nghĩa thật vui giống như niềm vui m&agrave; v&agrave;o ng&agrave;y ng&agrave;y của 24 năm về trước bố mẹ n&oacute; c&oacute; được.. N&oacute; quyết định thế bởi c&oacute; một giấc mơ đ&atilde; từ rất l&acirc;u rồi n&oacute; kh&ocirc;ng c&ograve;n mơ thấy, kh&ocirc;ng hiểu tại sao c&aacute;ch đ&acirc;y v&agrave;i ng&agrave;y, giấc mơ n&agrave;y lại chạy về t&igrave;m n&oacute;. C&oacute; lẽ c&aacute;i sự thật đ&oacute; với n&oacute; qu&aacute; tệ hại, m&agrave; người ta thường n&oacute;i, những g&igrave; hoặc l&agrave; thật tốt hoặc l&agrave; thật xấu sẽ in s&acirc;u v&agrave;o tr&iacute; nhớ mỗi người v&igrave; thế điều m&agrave; n&oacute; cho l&agrave; tồi tệ nhất v&agrave; muốn qu&ecirc;n đi nhất lại l&agrave; điều khiến n&oacute; nhớ l&acirc;u nhất...</p>\r\n\r\n<p>C&aacute;ch đ&acirc;y 12 năm khi n&oacute; c&ograve;n l&agrave; một học sinh lớp s&aacute;u, gia đ&igrave;nh n&oacute; bắt đầu gặp những biến cố, thực ra n&oacute; cũng kh&ocirc;ng cho đ&oacute; l&agrave; biến cố v&igrave; đ&atilde; gọi l&agrave; biến cố th&igrave; đều l&agrave; những chuyện đến một c&aacute;ch bất ngờ, c&ograve;n ở gia đ&igrave;nh n&oacute;, c&oacute; lẽ n&oacute; phải gọi l&agrave; &quot;Tức nước vỡ bờ&quot; th&igrave; mới đ&uacute;ng. Bởi sự chịu đựng n&agrave;o cũng c&oacute; giới hạn của n&oacute;, v&agrave; tại thời điểm đ&oacute; th&igrave; c&oacute; lẽ sự chịu đựng của mẹ n&oacute; với bố n&oacute; đ&atilde; đi qua c&aacute;i giới hạn cho ph&eacute;p. Bố n&oacute; l&agrave; một người nghiện rượu nặng, v&igrave; thế những lần say xỉn kh&ocirc;ng c&ograve;n biết trời đất l&agrave; đ&acirc;u diễn ra thường xuy&ecirc;n trong gia đ&igrave;nh n&oacute;, đ&atilde; trở th&agrave;nh một k&iacute; ức xấu hằn l&ecirc;n trong đầu mỗi khi n&oacute; nhớ lại. Ng&agrave;y đ&oacute; tuy c&ograve;n l&agrave; một đứa nhỏ nhưng n&oacute; hiểu v&agrave; chấp nhận một điều rằng bố n&oacute; c&oacute; thể ch&eacute;n l&ecirc;n ch&eacute;n xuống trong những bữa m&agrave; n&oacute; gọi l&agrave; cỗ, c&ograve;n với những bữa cơm b&igrave;nh thường ở nh&agrave; m&agrave; chỉ c&oacute; n&oacute;, chị n&oacute;, mẹ n&oacute; v&agrave; bố th&igrave; bố n&oacute; kh&ocirc;ng n&ecirc;n say như vậy. Những lần say xỉn khiến bố n&oacute; kh&ocirc;ng c&ograve;n l&agrave;m chủ được lời n&oacute;i cũng như cảm x&uacute;c của ch&iacute;nh m&igrave;nh. &Ocirc;ng bắt đầu chửi bới thậm ch&iacute; l&agrave; đ&aacute;nh mắng nếu &ocirc;ng cho l&agrave; cần thiết để răn đe. Đồ đạc trong nh&agrave; c&oacute; l&uacute;c mới sắm đ&atilde; phải bỏ đi v&igrave; bị biến dạng do bố n&oacute; bực tức v&agrave; n&eacute;m đi...N&oacute; kh&ocirc;ng c&ograve;n nhớ đ&atilde; xin bố n&oacute; mấy lần để bố n&oacute; kh&ocirc;ng xuống tay đ&aacute;nh mẹ n&oacute;...Một cảnh tượng mẹ kh&oacute;c, con kh&oacute;c h&ograve;a lẫn &acirc;m thanh chửi bới, qu&aacute;t nạt của bố n&oacute; khiến n&oacute; &aacute;m ảnh rất nhiều năm sau đ&oacute;. Lần n&oacute; cho rằng mẹ n&oacute; đau nhất c&oacute; lẽ l&agrave; lần bố n&oacute; cầm c&aacute;i ch&eacute;n n&eacute;m thẳng v&agrave;o đầu mẹ n&oacute;, m&aacute;u chảy từ ch&aacute;n xuống mặt, n&oacute; sợ đến run người, mẹ n&oacute; một tay che vết thương, một tay &ocirc;m con che cho con... mẹ &ocirc;m n&oacute;, chị cũng &ocirc;m n&oacute;, nhưng c&oacute; lẽ l&agrave; kh&ocirc;ng đủ...n&oacute; vẫn kh&oacute;c, vẫn sợ.. Những k&iacute; ức tồi tệ đ&oacute; chưa khi n&agrave;o n&oacute; qu&ecirc;n n&oacute; tr&aacute;ch bố, tr&aacute;ch &ocirc;ng kh&ocirc;ng l&agrave;m tốt nghĩa vụ của một người chồng, một người cha. N&oacute; th&egrave;m kh&aacute;t bố n&oacute; được như những &ocirc;ng bố tr&ecirc;n quảng c&aacute;o ở tivi m&agrave; n&oacute; vẫn thường được xem, nhưng đ&acirc;u phải những g&igrave; n&oacute; muốn đều được...</p>\r\n\r\n<p>Nếu cảm x&uacute;c trong n&oacute; l&agrave; một th&igrave; cảm x&uacute;c ở mẹ n&oacute; sẽ l&agrave; mười, n&oacute; c&ograve;n b&eacute; c&oacute; thể sau một ng&agrave;y, một tuần hoặc một th&aacute;ng l&agrave; n&oacute; qu&ecirc;n đi c&aacute;i cảm x&uacute;c tồi tệ đ&oacute;, nhưng mẹ n&oacute; th&igrave; kh&ocirc;ng thế. Mẹ n&oacute; kh&ocirc;ng phải l&agrave; trẻ con như n&oacute;, c&oacute; thể qu&ecirc;n nhanh sau một khoảng thời gian ngắn ngủi. Sự nhẫn nại v&agrave; chịu đựng của mẹ n&oacute; c&oacute; lẽ đ&atilde; hết. N&oacute; biết chắc điều đ&oacute; bởi m&ocirc;t ng&agrave;y, v&ocirc; t&igrave;nh ch&iacute;nh mắt n&oacute; đ&atilde; nh&igrave;n thấy tờ giấy &quot;Đơn ly h&ocirc;n&quot; m&agrave; mẹ n&oacute; dấu kĩ trong tủ, n&oacute; kh&ocirc;ng biết mẹ n&oacute; đ&atilde; viết từ khi n&agrave;o, cầm tờ giấy tr&ecirc;n tay, n&oacute; chẳng hiểu cảm x&uacute;c của m&igrave;nh l&agrave; như thế n&agrave;o, chỉ biết l&uacute;c đấy n&oacute; kh&oacute;c, nước mắt cứ thế tr&agrave;o ra mặc d&ugrave; kh&ocirc;ng ai đ&aacute;nh n&oacute;, mắng n&oacute;, cũng kh&ocirc;ng ai đ&aacute;nh hay mắng mẹ n&oacute; cả. Thế tại sao n&oacute; lại kh&oacute;c? Cất tờ đơn v&agrave;o đ&uacute;ng vị tr&iacute; cũ, n&oacute; lờ đi như chưa từng nh&igrave;n thấy thứ g&igrave;...Nhưng mọi thứ cần đến sẽ đến chỉ l&agrave; sớm hay muộn m&agrave; th&ocirc;i, v&agrave;i ng&agrave;y sau mẹ n&oacute; quyết định n&oacute;i cho n&oacute; biết những điều mẹ n&oacute; nghĩ v&agrave; c&oacute; lẽ sẽ n&oacute;i về cả tờ đơn m&agrave; mẹ đ&atilde; viết.</p>\r\n\r\n<p><iframe frameborder=\"0\" id=\"ifvideoinpage\" scrolling=\"no\" src=\"http://media.adnetwork.vn/assets/player/jwp722/videoinpage-player-jwp722.html?flash=false&amp;volume=30&amp;autoStart=false&amp;skipAd=7&amp;tag=http%3A%2F%2Fdelivery.adnetwork.vn%2F247%2Fxmlvideoad%2Fwid_1377161727%2Fzid_1396944246%2Ftype_inline%2Feff_vidinpage%2Fcb_13038%2Fw_610%2Fh_344%2Fpurl_aHR0cDovL3d3dy50cnV5ZW5uZ2FuLmNvbS52bi90YW0tc3UvNDQzNzAtdG8tZG9uLWx5LWhvbi5odG1s&amp;media_path=http%3A%2F%2Fmedia.adnetwork.vn%2Fassets%2F&amp;w=610&amp;h=344\"></iframe></p>\r\n\r\n<p>- Mẹ sẽ về ngoại? Con ở nh&agrave; với bố được chứ?</p>\r\n\r\n<p>-Mẹ về ngoại bao l&acirc;u?</p>\r\n\r\n<p>-Mẹ chưa biết, c&oacute; thể l&agrave; rất l&acirc;u.</p>\r\n\r\n<p>-V&igrave; sao mẹ lại về ngoại ạ?</p>\r\n\r\n<p>-Mẹ thấy mệt mỏi lắm rồi...</p>\r\n\r\n<p>N&oacute; chững lại rất l&acirc;u như để nghĩ kĩ lại to&agrave;n bộ mọi thứ trước khi quyết định. N&oacute; n&oacute;i:</p>\r\n\r\n<p>-T&ugrave;y mẹ th&ocirc;i, con chỉ l&agrave; một đứa trẻ con, con kh&ocirc;ng hiểu cảm x&uacute;c của người lớn, cũng chẳng biết đ&acirc;u l&agrave; đ&uacute;ng l&agrave; sai, cả mẹ v&agrave; bố đều l&agrave; người lớn cả rồi, chắc chắn sẽ biết nghĩ hơn con nhiều n&ecirc;n nếu mẹ nghĩ về ngoại l&agrave; hợp l&yacute; th&igrave; mẹ cứ về ạ, con ở nh&agrave; cũng được.</p>\r\n\r\n<p>Mẹ n&oacute; kh&ocirc;ng n&oacute;i g&igrave;, cả hai mẹ con đều im lặng....N&oacute; kh&ocirc;ng biết c&oacute; phải v&igrave; c&acirc;u n&oacute;i của n&oacute; ng&agrave;y đấy kh&ocirc;ng m&agrave; sau h&ocirc;m đấy n&oacute; thấy mẹ kh&ocirc;ng đi đ&acirc;u cả, cũng kh&ocirc;ng nhắc đến tờ đơn hay bất cứ điều g&igrave; c&oacute; li&ecirc;n quan đến ch&uacute;ng.</p>\r\n\r\n<p>N&oacute; tr&aacute;ch bố n&oacute; nhiều lắm, nhưng n&oacute; cũng thương &ocirc;ng nhiều v&agrave; trong n&oacute; c&oacute; lẽ t&igrave;nh thương đ&atilde; nhiều hơn sự tr&aacute;ch m&oacute;c. Khi kh&ocirc;ng c&oacute; bất cứ thứ nước c&oacute; nồng đồ cồn n&agrave;o trong người th&igrave; với n&oacute;, bố l&agrave; người tuyệt vời nhất, n&oacute; nhớ đến những lần &ocirc;ng chở n&oacute; tr&ecirc;n chiếc xe đạp c&agrave; t&agrave;ng để đưa n&oacute; đi ăn phở, c&ograve;n bố th&igrave; chỉ ăn một suất cơm b&igrave;nh d&acirc;n v&agrave; bảo n&oacute; &quot;Con ăn đi, phở n&agrave;y bố ăn suốt rồi, nay bố ăn cơm v&igrave; bố th&egrave;m cơm&quot;, n&oacute; nhớ những lần bố n&oacute; cho n&oacute; ngồi tr&ecirc;n vai v&agrave; đưa n&oacute; ra s&ocirc;ng của l&agrave;ng để tập bơi, n&oacute; nhớ đ&atilde; c&oacute; lần bố n&oacute; c&atilde;i nhau với &ocirc;ng b&aacute;c sĩ ở trạm x&aacute; v&igrave; &ocirc;ng ấy kh&ocirc;ng đến ti&ecirc;m đ&uacute;ng giờ cho con g&aacute;i bố, n&oacute; nhớ những lần bố bảo với mẹ n&oacute; &quot;mẹ m&agrave;y th&iacute;ch ăn g&igrave; mai bố mua&quot; hay l&agrave; &quot;mẹ m&agrave;y c&oacute; đi kh&aacute;m bệnh kh&ocirc;ng, dạo n&agrave;y bố thấy mẹ m&agrave;y mệt thế&quot;...v&agrave; c&ograve;n nhiều hơn thế nữa, n&oacute; biết thực sự bố n&oacute; y&ecirc;u n&oacute;, y&ecirc;u chị n&oacute; cũng y&ecirc;u mẹ n&oacute; rất nhiều, chỉ l&agrave;...chỉ l&agrave; đ&ocirc;i khi &ocirc;ng kh&ocirc;ng biết m&igrave;nh đang n&oacute;i g&igrave;, đang l&agrave;m g&igrave; do c&oacute; những thứ t&aacute;c động v&agrave;o m&igrave;nh.</p>\r\n\r\n<p>Sau lần hai mẹ con n&oacute;i chuyện, mẹ n&oacute; c&oacute; lẽ đ&atilde; n&oacute;i g&igrave; đ&oacute; với bố...v&agrave; n&oacute; thấy, cả bố v&agrave; mẹ đ&atilde; c&oacute; điều thay đổi, những c&atilde;i v&atilde; vẫn c&ograve;n nhưng &iacute;t đi rất nhiều, quan trọng hơn cả l&agrave; n&oacute; kh&ocirc;ng c&ograve;n thấy bố đ&aacute;nh mẹ n&oacute; nữa. Những lần say rượu bố vẫn cứ c&agrave;m r&agrave;m, mắng chửi nhưng mẹ n&oacute; th&igrave; ho&agrave;n to&agrave;n im lặng, kh&ocirc;ng n&oacute;i g&igrave; v&agrave; đứng dậy đi chỗ kh&aacute;c... n&oacute; học theo mẹ cũng đứng l&ecirc;n đi ra ngo&agrave;i. Mẹ n&oacute; đ&atilde; t&igrave;m ra một c&aacute;ch thực sự hợp l&yacute;, để c&oacute; thể duy tr&igrave; sự y&ecirc;n b&igrave;nh của một gia đ&igrave;nh trong nhiều năm qua v&agrave; cho đến tận b&acirc;y giờ. N&oacute; thương mẹ nhiều, n&oacute; biết mẹ đ&atilde; v&igrave; n&oacute; m&agrave; chịu đựng rất nhiều, rất nhiều...nhưng n&oacute; cũng thương bố n&oacute;, bởi n&oacute; c&oacute; mặt tr&ecirc;n đời n&agrave;y l&agrave; th&agrave;nh quả từ t&igrave;nh y&ecirc;u của bố mẹ n&oacute;, chẳng qua thời gian v&agrave; một số yếu tố l&agrave;m bố n&oacute; kh&ocirc;ng c&ograve;n được như thời c&ograve;n y&ecirc;u mẹ n&oacute;, nhưng n&oacute; biết t&igrave;nh y&ecirc;u của cả bố v&agrave; mẹ d&agrave;nh cho n&oacute; đều giống nhau, c&oacute; kh&aacute;c th&igrave; chỉ kh&aacute;c ở c&aacute;ch thể hiện m&agrave; th&ocirc;i..v&agrave; với n&oacute; gia đ&igrave;nh vẫn l&agrave; t&agrave;i sản gi&aacute; trị nhất m&agrave; n&oacute; c&oacute; được khi đặt ch&acirc;n đến thế giới n&agrave;y.</p>\r\n', 'VNE-1502128738.jpg', 6, 9, '2017-08-08 03:40:44');
+INSERT INTO `story` (`story_id`, `name`, `preview_text`, `detail_text`, `picture`, `counter`, `cat_id`, `created_at`) VALUES
+(27, 'NHỮNG NGƯỜI PHỤ NỮ ĐAU KHỔ', '                                            <p>Chuyện xảy ra lúc sáng sớm đến gần trưa anh đi làm về tới nhà, anh đá thúng đụng lia, chị tránh không muốn va chạm, lằng lặng đi làm việc khác. Khi chị đang đứng nhặt rau để nấu cơm anh từ đằng sau đến đạp ch', '<p><strong><em>Chuyện xảy ra l&uacute;c s&aacute;ng sớm đến gần trưa anh đi l&agrave;m về tới nh&agrave;, anh đ&aacute; th&uacute;ng đụng lia, chị tr&aacute;nh kh&ocirc;ng muốn va chạm, lằng lặng đi l&agrave;m việc kh&aacute;c. Khi chị đang đứng nhặt rau để nấu cơm anh từ đằng sau đến đạp chị một c&aacute;i v&agrave;o ngang lưng, chị sụn cả lưng đau điếng người, kh&ocirc;ng dừng lại anh lao v&agrave;o t&aacute;t chị v&agrave; đ&aacute;nh chị v&agrave;o đầu li&ecirc;n tiếp khiến chị th&agrave;nh ra như thế n&agrave;y.</em></strong></p>\r\n\r\n<p><strong><em>***</em></strong></p>\r\n\r\n<p><strong><em><img alt=\"nhung-nguoi-phu-nu-dau-kho\" src=\"http://www.truyenngan.com.vn/images/Phuongvtm/2017-07/nhung-nguoi-phu-nu-dau-kho.jpg\" style=\"height:500px; width:500px\" /></em></strong></p>\r\n\r\n<p>T&igrave;nh bạn của ch&uacute;ng t&ocirc;i t&iacute;nh đến nay cũng 15 năm rồi. T&ocirc;i v&agrave; chị gần thật gần m&agrave; xa cũng rất xa? T&ocirc;i viết c&acirc;u n&agrave;y kh&ocirc;ng phải l&agrave; lời n&oacute;i vu vơ, kh&ocirc;ng phải l&agrave; v&ocirc; l&yacute;? Gần v&igrave;, ch&uacute;ng t&ocirc;i rất th&acirc;n thiết với nhau, chia sẻ mọi nỗi buồn v&agrave; niềm vui cho nhau... chị chia sẻ với t&ocirc;i bằng tất cả tấm l&ograve;ng ch&acirc;n th&agrave;nh của m&igrave;nh, d&atilde;i b&agrave;y mọi thứ trong cuộc sống của chị d&ugrave; đ&oacute; c&oacute; l&agrave; xấu xa hay tốt đẹp nhất. Chị t&acirc;m sự với t&ocirc;i cả những điều m&agrave; chị kh&ocirc;ng thể l&ecirc;n tiếng với gia đ&igrave;nh m&aacute;u mủ của chị. Xa v&igrave; sao? L&agrave; bởi lẽ ch&uacute;ng t&ocirc;i chẳng hề m&aacute;u mủ ruột gi&agrave; v&agrave; cũng chẳng họ h&agrave;ng th&acirc;n th&iacute;ch hay d&acirc;y mơ rễ m&aacute; g&igrave;. Nhưng! Ch&uacute;ng t&ocirc;i l&agrave; những người phụ nữ c&oacute; n&eacute;t tương đồng về cảnh ngộ. Chỉ một v&agrave;i n&eacute;t th&ocirc;i, nhưng cũng đủ ấm &aacute;p, đủ sự tin tưởng để ch&uacute;ng t&ocirc;i thật sự trải l&ograve;ng cho nhau v&agrave; động vi&ecirc;n nhau tiếp tục sống qua những ng&agrave;y th&aacute;ng ảm đạm hay ch&iacute;nh x&aacute;c hơn l&agrave; chuỗi ng&agrave;y u tối mịt m&ugrave;.</p>\r\n\r\n<p>V&agrave;o một ng&agrave;y gần đ&acirc;y, t&ocirc;i cảm thấy ngộp thở với cuộc sống ri&ecirc;ng của m&igrave;nh, kh&ocirc;ng thể k&igrave;m n&eacute;n sự uất ức trong l&ograve;ng. Một ph&uacute;t chốc bỗng nhi&ecirc;n ấy, t&ocirc;i đ&atilde; th&eacute;t l&ecirc;n &quot;Bất lực... Bất lực qu&aacute;... Bất lực to&agrave;n phần&quot;, Th&eacute;t xong rồi t&ocirc;i thấy m&igrave;nh thoải m&aacute;i hơn, dễ chịu hơn v&agrave; cũng dễ d&agrave;ng giải quyết mọi việc hơn. Sau đấy chẳng bao l&acirc;u, chu&ocirc;ng điện thoại reo, d&ograve;ng chữ &quot;người c&ugrave;ng khổ&quot; hiện tr&igrave;nh &igrave;nh tr&ecirc;n m&agrave;n h&igrave;nh, t&ocirc;i giật thột m&igrave;nh, n&iacute;n thở chắc mẩm trong bụng &quot;lại chuyện g&igrave; nữa đ&acirc;y, &ocirc;ng trời ơi con chỉ l&agrave; một người b&igrave;nh thường&quot;... V&agrave;i ph&uacute;t sau, chấn tĩnh lại tinh thần m&igrave;nh rồi t&ocirc;i gọi lại cho chị, chị trả lời t&ocirc;i bằng giọng n&oacute;i thều th&agrave;o: Em ơi! Chị... chị... chết mất. Đau khổ qu&aacute; em ạ.</p>\r\n\r\n<p>- Nhưng! Chị chết rồi con chị sẽ như thế n&agrave;o? C&ograve;n gia đ&igrave;nh chị nữa...</p>\r\n\r\n<p><iframe frameborder=\"0\" id=\"ifvideoinpage\" scrolling=\"no\" src=\"http://media.adnetwork.vn/assets/player/jwp722/videoinpage-player-jwp722.html?flash=false&amp;volume=30&amp;autoStart=false&amp;skipAd=7&amp;tag=http%3A%2F%2Fdelivery.adnetwork.vn%2F247%2Fxmlvideoad%2Fwid_1377161727%2Fzid_1396944246%2Ftype_inline%2Feff_vidinpage%2Fcb_33131%2Fw_610%2Fh_344%2Fpurl_aHR0cDovL3d3dy50cnV5ZW5uZ2FuLmNvbS52bi90YW0tc3UvNDQyOTgtbmh1bmctbmd1b2ktcGh1LW51LWRhdS1raG8uaHRtbA%253D%253D&amp;media_path=http%3A%2F%2Fmedia.adnetwork.vn%2Fassets%2F&amp;w=610&amp;h=344\"></iframe></p>\r\n\r\n<p>- &Ocirc;i... Chị v&ocirc; dụng qu&aacute;...</p>\r\n\r\n<p>- Chị Thu &agrave;, chị b&igrave;nh tĩnh đi, chị đang ở đ&acirc;u? Em qua.</p>\r\n\r\n<p>- Chị đang ở nh&agrave;.</p>\r\n\r\n<p>- Em qua chị ngay đ&acirc;y, đừng đi đ&acirc;u nh&eacute;, chị b&igrave;nh tĩnh đi, uống nước đi cho đỡ mệt. Đợi em, em qua ngay đ&acirc;y.</p>\r\n\r\n<p>N&oacute;i xong t&ocirc;i vội v&agrave;ng kh&oacute;a cửa, dắt xe m&aacute;y chạy ngay tới nh&agrave; chị. V&igrave; t&ocirc;i biết, chị vừa phải hứng trận &quot;b&atilde;o&quot; đ&ograve;n của &ocirc;ng chồng... Nh&agrave; t&ocirc;i c&aacute;ch nh&agrave; chị khoảng chừng 15km, chị năm nay đ&atilde; 35 tuổi rồi, chị lấy chồng k&eacute;m chị mấy tuổi n&ecirc;n cuộc sống của chị gặp v&ocirc; v&agrave;n kh&oacute; khăn. Kh&oacute; khăn kh&ocirc;ng ho&agrave;n to&agrave;n v&igrave; chồng chị m&agrave; kh&oacute; khăn với to&agrave;n gia đ&igrave;nh chồng, to&agrave;n bộ gia đ&igrave;nh nh&agrave; chồng c&aacute;c bạn ạ.</p>\r\n\r\n<p>Chị kể với t&ocirc;i trước đ&acirc;y chị từng c&oacute; &yacute; định l&agrave; sinh con với người chị y&ecirc;u v&agrave; một m&igrave;nh nu&ocirc;i con chứ kh&ocirc;ng hề muốn lấy chồng, ho&agrave;n cảnh x&ocirc; đẩy cuối c&ugrave;ng chị lại lấy chồng v&agrave; l&agrave;m d&acirc;u. Chị v&agrave; anh y&ecirc;u nhau chưa được một năm, do chị c&oacute; &yacute; định nu&ocirc;i con m&igrave;nh một n&ecirc;n khi anh ngỏ &yacute; muốn cưới chị đ&atilde; trả lời anh rằng &quot;c&oacute; con rồi mới cưới c&ograve;n kh&ocirc;ng c&oacute; th&igrave; th&ocirc;i&quot;.</p>\r\n\r\n<p>Thế rồi chẳng bao l&acirc;u chỉ hai hay ba lần qua lại chị đ&atilde; mang trong m&igrave;nh một sinh linh nhỏ b&eacute;. L&agrave; phụ nữ m&agrave;, chậm 10 ng&agrave;y th&ocirc;i chị đi kh&aacute;m b&aacute;c sĩ n&oacute;i đ&atilde; được hơn hai tuần rồi. Ng&agrave;y l&agrave;m mẹ với chị rất gần, chị mừng lắm. Nhưng! Khi chị nhớ ra lời hứa của m&igrave;nh &quot;c&oacute; rồi mới cưới&quot; chị lại thấy sợ, v&igrave; chị chứng kiến bao nhi&ecirc;u người phụ nữ đau khổ v&igrave; chồng... chị thấy sợ... sợ lắm. Cuối c&ugrave;ng, l&yacute; tr&iacute; của chị đ&atilde; phải chịu thua t&iacute;nh cả nể của chị, chị đến b&ecirc;n anh v&agrave; x&acirc;y dựng m&aacute;i ấm sau những lời n&oacute;i của bố mẹ người y&ecirc;u v&agrave; nhất l&agrave; lời n&oacute;i của mẹ chị. Từ thủa ấu thơ tới giờ chị chưa hề c&atilde;i mẹ một lời, chưa hề dấu giếm mẹ chị nửa c&acirc;u, nhưng giờ n&agrave;y chị &quot;kh&ocirc;ng d&aacute;m nh&igrave;n mẹ v&igrave; mặc cảm tội nỗi&quot;. Chị thấy m&igrave;nh l&agrave; người con bất hiếu, mẹ nu&ocirc;i chị kh&ocirc;n lớn, cho ăn học đ&agrave;ng ho&agrave;ng, bằng ch&uacute;ng bằng bạn chị chưa b&aacute;o đ&aacute;p mẹ được ch&uacute;t &acirc;n t&igrave;nh n&agrave;o m&agrave; chỉ mang lại nỗi buồn, sự lo lắng cho mẹ m&agrave; th&ocirc;i. Chị lấy chồng v&igrave; muốn đem lại cho con m&igrave;nh một gia đ&igrave;nh đầy đủ, bằng bạn bằng b&egrave; như mẹ chị từng khuy&ecirc;n răn, nhưng c&aacute;i gia đ&igrave;nh của chị b&acirc;y giờ l&agrave; một gia đ&igrave;nh vụn vỡ.</p>\r\n\r\n<p>Một người chồng vũ phu, l&aacute;o lếu, khiến chị tự thấy xấu hổ với ch&iacute;nh m&igrave;nh, xấu hổ với gia đ&igrave;nh m&igrave;nh đặc biệt l&agrave; người mẹ đ&atilde; sinh ra chị. Kh&ocirc;ng b&aacute;o đ&aacute;p gi&uacute;p đỡ g&igrave; cho mẹ m&agrave; c&ograve;n bị người c&ograve;n rể lu&ocirc;n r&eacute;o l&ecirc;n mỗi ng&agrave;y với những lời tục tĩu, th&ocirc; bỉ. Sau cơn giận chị cũng đ&atilde; t&acirc;m sự khuy&ecirc;n răn rất nhiều nhưng cũng chỉ được v&agrave;i ng&agrave;y, ... v&agrave;i ng&agrave;y b&igrave;nh y&ecirc;n rồi lại sấm chớp mưa rơi, b&atilde;o b&ugrave;ng. Giờ đ&acirc;y c&ograve;n chẳng được v&agrave;i ng&agrave;y nữa m&agrave; mỗi ng&agrave;y đều như vậy, chồng chị sỉ nhục thậm tệ hơn v&agrave; đ&aacute;nh chị cũng t&agrave;n nhẫn hơn.</p>\r\n\r\n<p>Cuộc sống của chị trở l&ecirc;n ng&agrave;y c&agrave;ng tồi tệ. Nhiều l&uacute;c bức x&uacute;c qu&aacute; chị n&oacute;i với t&ocirc;i chẳng lẽ chị lại tr&igrave;nh b&aacute;o ch&iacute;nh quyền, may ra c&ograve;n c&oacute; thể cứu v&atilde;n được t&igrave;nh thế. Nghĩ một l&uacute;c chị lại n&oacute;i: Nếu b&aacute;o ch&iacute;nh quyền liệu c&oacute; gi&uacute;p &iacute;ch g&igrave; kh&ocirc;ng hay gia đ&igrave;nh lại c&agrave;ng tồi tệ hơn. Ch&iacute;nh quyền b&acirc;y giờ...? C&ocirc;ng l&yacute; b&acirc;y giờ...? Kh&oacute; tin lắm em ạ. Chị kh&ocirc;ng gi&aacute;m mạo hiểm đặt l&ograve;ng tin v&agrave;o nơi c&ocirc;ng l&yacute; bị vẩn đục, bị &ocirc; nhiễm n&agrave;y. Chồng chị cũng l&agrave; một đảng vi&ecirc;n, cũng l&agrave;m c&aacute;n bộ phường chứ đ&acirc;u phải l&agrave; n&ocirc;ng d&acirc;n qu&egrave;n hay l&agrave; kẻ l&ocirc;ng b&ocirc;ng hư hỏng đ&acirc;u? Nhưng sao anh kh&ocirc;ng một lần nghĩ cho chị, x&oacute;t thương chị...? T&ocirc;i đang đặt một dấu chấm hỏi rất lớn? Anh hết y&ecirc;u chị rồi hay anh đang đồng l&otilde;a với gia đ&igrave;nh h&agrave;nh hạ chị? Hay anh l&agrave; người c&oacute; vẫn đề về nhận thức... l&agrave; người bị chi phối bởi sự tưởng tượng...? Rất nhiều... rất nhiều c&acirc;u hỏi đang trong đầu t&ocirc;i m&agrave; kh&ocirc;ng t&igrave;m được lời giải đ&aacute;p...</p>\r\n\r\n<p>Thấy t&ocirc;i đến... chị lết th&acirc;n h&igrave;nh nhỏ b&eacute;, đ&ocirc;i mắt xung huyết đỏ tấy, b&ecirc;n m&aacute; tr&aacute;i th&acirc;m t&iacute;m... &ocirc;m chầm lấy t&ocirc;i kh&oacute;c nức nở. Em ơi!... T&ocirc;i im lặng đưa tay ra &ocirc;m lấy chị, mắt t&ocirc;i vẫn mở trừng trừng m&agrave; sao sống mũi cay cay rồi hai d&ograve;ng lệ cứ tr&agrave;o ra kh&ocirc;ng ngừng. 15 ph&uacute;t đau khổ tột c&ugrave;ng, 15 ph&uacute;t chết lặng ấy chị mới bu&ocirc;ng t&ocirc;i ra.</p>\r\n\r\n<p>- Chị lại thế rồi? lại phiền em nữa rồi? Chị xin lỗi - một giọng n&oacute;i yếu ớt m&eacute;o m&oacute; nghe m&agrave; thương kh&ocirc;ng thể cầm l&ograve;ng m&igrave;nh. T&ocirc;i đến gần lau nước mắt cho chị, đ&ocirc;i bờ vai chị lại rung l&ecirc;n bần bật. Tiếng kh&oacute;c nấc lại bắt đầu vang l&ecirc;n.</p>\r\n\r\n<p>- Chị &agrave;. Đừng kh&oacute;c nữa. Chị kh&oacute;c c&oacute; được g&igrave; đ&acirc;u. Chị kh&oacute;c nhiều n&oacute;ng bốc l&ecirc;n đầu lại đau đầu nữa đấy. Chị m&agrave; ốm ra ai chăm con cho chị?</p>\r\n\r\n<p>- Chị phải l&agrave;m g&igrave; b&acirc;y giờ? Hết thuốc chữa rồi? Hết rồi... Kh&ocirc;ng thể l&agrave;m g&igrave; thay đổi được nữa. Kiếp n&agrave;y của chị coi như xong.</p>\r\n\r\n<p>- Chị đừng nghĩ quẩn như thế? Chị sống b&acirc;y giờ v&igrave; con l&agrave; ch&iacute;nh. Chị thấy đ&oacute; c&aacute;c cụ c&oacute; c&acirc;u &quot;mấy đời b&aacute;nh đ&uacute;c c&oacute; xương, mấy đời d&igrave; ghẻ lại thương con chồng&quot;. Chị muốn con chị sau n&agrave;y sống khổ sở hay sao? Ki&ecirc;n cường l&ecirc;n chị.</p>\r\n\r\n<p>- Nhưng chị....</p>\r\n\r\n<p>- Kh&ocirc;ng nhưng g&igrave; hết. B&acirc;y giờ chị đang kh&ocirc;ng được b&igrave;nh tĩnh, nghe em. Nằm gối đầu n&ecirc;n ch&acirc;n em, em b&oacute;p đầu cho, nhắm mắt v&agrave;o nghỉ 10 ph&uacute;t th&ocirc;i cũng được. Đỡ mệt rồi kể lại em nghe.</p>\r\n\r\n<p>- N&agrave;o... nằm xuống.</p>\r\n\r\n<p>- Em... Chị ch&acirc;n th&agrave;nh mang ơn em nhiều lắm.</p>\r\n\r\n<p>- Chị n&agrave;y, h&acirc;m &agrave;. Ơn huệ g&igrave; ở đ&acirc;y. Nghỉ đi, đỡ mệt rồi n&oacute;i chuyện.</p>\r\n\r\n<p>T&ocirc;i b&oacute;p đầu cho chị, t&ocirc;i thấy thương chị nhiều lắm. Những vết bầm t&iacute;m ấy l&agrave;m t&ocirc;i đau thắt con tim. T&ocirc;i c&ograve;n nhớ, chị kể với t&ocirc;i khi bố mẹ người y&ecirc;u gọi chị đến nh&agrave; th&igrave; b&agrave; ngoại của chồng chị kh&ocirc;ng th&iacute;ch chị t&iacute; n&agrave;o. Ch&ecirc; chị l&agrave; người nh&agrave; qu&ecirc; (chị sinh ra ở tỉnh lẻ (TNT) gi&aacute;p ranh với H&agrave; Nội), gặp ngay phải &ocirc;ng ch&uacute; rể ba que h&atilde;m t&agrave;i l&agrave;m nghề cầm đồ, vịn được mấy đồng của mẹ vợ mua chiếc &ocirc; t&ocirc; 5 tạ chạy chở c&aacute;t sỏi thu&ecirc;, l&ecirc;n mặt sỉ nhục chị ngay sau lễ cưới 2 ng&agrave;y. Chị l&agrave;m sự kiện cho c&ocirc;ng ty truyền th&ocirc;ng, con g&aacute;i tỉnh lẻ xuống H&agrave; Nội l&agrave;m th&igrave; l&agrave;m g&igrave; mua được &ocirc; t&ocirc;, chạy xe m&aacute;y suốt. Chị va phải ổ g&agrave; n&ecirc;n xảy thai trước lễ vu quy 1 ng&agrave;y, &ocirc;ng ch&uacute; rể nh&acirc;n cơ hội đ&oacute; sỉ nhục chị kh&ocirc;ng tiếc lời, n&oacute;i chị lừa đảo, chiếm đoạt t&agrave;i sản, bỏ b&ugrave;a cho ch&aacute;u họ lấy chị, giả vờ c&oacute; thai... Chị chết lặng người v&igrave; chưa bao giờ chị l&agrave;m g&igrave; tr&aacute;i với lương t&acirc;m nay bị người n&oacute;i m&igrave;nh l&agrave;m điều thất đức...</p>\r\n\r\n<p>- Ng&agrave;y chị bị sỉ nhục cũng l&agrave; ng&agrave;y chồng chị đi trực đ&ecirc;m noel, tới khuya chồng chị về nh&agrave;, chị thấy chồng c&oacute; phần nghe ch&uacute; rể n&ecirc;n lạnh nhạt với chị, chị cũng im lặng... Sau đ&oacute; một ng&agrave;y chị quyết định gặp bố mẹ chồng v&agrave; n&oacute;i: Con muốn biết &yacute; kiến của bố mẹ, chuyện đ&atilde; xảy ngo&agrave;i &yacute; muốn, con l&agrave; người mất con, con đau hơn ai hết. B&acirc;y giờ con muốn biết &yacute; của bố mẹ, chỉ cần bố mẹ n&oacute;i &quot;Bố mẹ kh&ocirc;ng chấp nhận một người con d&acirc;u như con&quot; ngay lập tức con sẽ bước ch&acirc;n ra khỏi nh&agrave; bố mẹ. Con sẽ ra đi tay trắng v&agrave; kh&ocirc;ng n&oacute;i nửa lời. Nhưng bố mẹ chị lại n&oacute;i bố mẹ tin con, kh&ocirc;ng c&oacute; chuyện g&igrave; đ&acirc;u con đừng suy nghĩ nhiều... Đi nghỉ đi.... Chị ch&agrave;o bố mẹ v&agrave; lặng lẽ l&ecirc;n ph&ograve;ng. Chị im lặng kh&ocirc;ng tr&ograve; chuyện với ai kể cả chồng mới cưới. Sau ba ng&agrave;y chị mới n&oacute;i với chồng m&igrave;nh:</p>\r\n\r\n<p>- Em hỏi anh 3 c&acirc;u, em mong anh th&agrave;nh thật m&agrave; n&oacute;i. Anh nghĩ thế n&agrave;o về em sau những g&igrave; ch&uacute; anh đ&atilde; l&agrave;m mấy ng&agrave;y qua?</p>\r\n\r\n<p>- Anh kh&ocirc;ng nghĩ g&igrave;? Anh rất thương em.</p>\r\n\r\n<p>- Anh n&oacute;i thương em nhưng em kh&ocirc;ng cảm nhận được. Em chỉ thấy anh lạnh nhạt v&agrave; hắt hủi em th&ocirc;i. Trước khi cưới, l&uacute;c c&oacute; thai được hơn 1 th&aacute;ng đi si&ecirc;u &acirc;m anh c&oacute; đi c&ugrave;ng em kh&ocirc;ng?</p>\r\n\r\n<p>- Em hỏi buồn cười, h&ocirc;m ấy anh chở em đi kh&aacute;m ở khoa sản bệnh viện e c&ograve;n g&igrave;? Em đừng nhắc lại chuyện cũ.</p>\r\n\r\n<p>- Vậy sao anh tin lời ch&uacute; anh n&oacute;i em giả vờ c&oacute; thai, chỉ l&agrave; chậm kinh th&ocirc;i?</p>\r\n\r\n<p>- Đ&acirc;u. Anh c&oacute; tin đ&acirc;u, chỉ l&agrave; anh kh&oacute; chịu trong người th&ocirc;i.</p>\r\n\r\n<p>- Anh ạ. B&acirc;y giờ con đ&atilde; mất, anh kh&ocirc;ng c&ograve;n phải lo lắng cho tương lai con sau n&agrave;y nữa. Gia đ&igrave;nh anh cũng vậy. Em kh&ocirc;ng muốn ch&uacute;ng ta phải sống những ng&agrave;y bế tắc về sau. Ch&uacute;ng ta mới cưới th&ocirc;i chưa đăng k&yacute; chia tay vẫn l&agrave; chưa muộn. Suốt ba ng&agrave;y ch&uacute;ng ta kh&ocirc;ng ai n&oacute;i với ai c&acirc;u n&agrave;o, em nghĩ m&igrave;nh n&ecirc;n suy nghĩ lại cho kỹ. Em kh&ocirc;ng r&agrave;ng buộc anh đ&acirc;u.</p>\r\n\r\n<p>- Em đừng n&oacute;i thế, anh xin lỗi, anh biết lỗi rồi...</p>\r\n\r\n<p>... Từ đ&acirc;y cuộc sống của chị đỡ ngột ngạt hơn một ch&uacute;t. Ở đời kh&ocirc;ng dễ g&igrave; bỏ qua hết mọi chuyện, khi đ&atilde; nhuốm ch&agrave;m th&igrave; cuộc sống kh&ocirc;ng thể trở lại b&igrave;nh thường được... 4 ng&agrave;y sau lễ cưới chị bị sốt, v&igrave; buồn l&ograve;ng chị kh&ocirc;ng n&oacute;i với chồng nửa c&acirc;u, v&igrave; chị nặng l&ograve;ng với những lời n&oacute;i thất đức m&agrave; họ cố t&igrave;nh gieo cho chị khi chị mới ch&acirc;n ướt ch&acirc;n d&aacute;o về nh&agrave; chồng, mặc d&ugrave; anh cũng đ&atilde; quan t&acirc;m tới chị. Nhưng! Chị vẫn kh&ocirc;ng hề n&oacute;i với chồng... Chị tự uống thuốc hạ sốt, chỉ được một thời gian thuốc hết t&aacute;c dụng lại sốt trở lại...</p>\r\n\r\n<p>Những lần sốt sau c&agrave;nh nhanh hơn, đến ng&agrave;y thứ 3 chị thấy mệt, uống thuốc xong l&agrave; l&ecirc;n giường nằm v&agrave; m&ecirc; mệt đi kh&ocirc;ng biết g&igrave; nữa. Chồng chị đi l&agrave;m về thấy chị mặt t&aacute;i m&eacute;t, mồ h&ocirc;i đầm đ&igrave;a, người lạnh to&aacute;t anh hốt hoảng gọi: Thu ơi! Thu ơi!... Người nh&agrave; thấy anh gọi thất thanh đ&atilde; chạy l&ecirc;n ph&ograve;ng xem sao? Anh vội bế chị l&ecirc;n chạy xuống cầu thang vừa chạy anh vừa n&oacute;i nh&agrave; con c&oacute; chuyện rồi. Bố chồng chị tiện để xe ở s&acirc;n n&ecirc;n chạy lu&ocirc;n xe m&aacute;y thật nhanh.</p>\r\n\r\n<p>Đến viện 108, anh bế chị vừa kh&oacute;c vừa chạy, cứu vợ em với b&aacute;c sĩ ơi... Chị sốt qu&aacute; cao, 39oc, người lịm đi, người chị t&iacute;m t&aacute;i v&agrave; b&agrave;n tay bắt đầu run run. B&aacute;c sĩ n&oacute;i với nhau, chườm hạ sốt khẩn cấp. Nghe thấy b&aacute;c sĩ n&oacute;i chồng chị đứng ngo&agrave;i nh&igrave;n vợ lo lắng, đứng ngồi kh&ocirc;ng y&ecirc;n... Một l&uacute;c sau b&aacute;c sĩ th&ocirc;ng b&aacute;o với chồng chị, chị qua cơ nguy kịch... Ng&agrave;y h&ocirc;m sau khi kiểm tra, x&eacute;t nghiệm x&aacute;c định chị bị &quot;s&oacute;t rau&quot; dẫn đến sốt cao... chị phải phẫu thuật tử cung cấp cứu....</p>\r\n\r\n<p>Qua trận đ&oacute; chồng chị y&ecirc;u thương chị v&agrave; quan t&acirc;m tới chị gần như l&uacute;c đầu... Tưởng như thế chuyện đ&atilde; xu&ocirc;i nhưng kh&ocirc;ng? B&agrave; ngoại chồng chị lu&ocirc;n miệng chửi mắng chị l&agrave; con nh&agrave; kh&ocirc;ng cha kh&ocirc;ng mẹ, kh&ocirc;ng c&oacute; học, l&agrave; con người lừa đảo, dở hết tr&ograve; nọ đến tr&ograve; kia để lừa con ch&aacute;u b&agrave;, thậm ch&iacute; ng&agrave;y bố chồng xấu số của chị mất được 1 tuần b&agrave; đang t&acirc;m đứng trước b&agrave;n vong linh con rể vỗ c&aacute;i ng&agrave;n v&agrave;ng v&agrave;o mặt vợ chồng chị m&agrave; chửi: Nh&agrave; tao kh&ocirc;ng c&oacute; c&aacute;i giống mất dạy ấy, c&aacute;i giống lừa đảo, người th&igrave; xấu như con ma đi&ecirc;n ch&oacute; chả th&egrave;m, m&agrave;y ngu ăn b&ugrave;a ăn bả mới r&uacute;c v&agrave;o n&oacute;...</p>\r\n\r\n<p>Kh&ocirc;ng chỉ c&oacute; thế đ&atilde; th&ocirc;i m&agrave; Bố chồng chị qua đời về căn bệnh ung thư phổi v&agrave; chị lại th&ecirc;m một c&aacute;i tội nữa, đ&oacute; l&agrave; giết bố chồng. Đ&ecirc;m d&acirc;n l&agrave;ng đến viếng b&agrave; ngoại chồng chị thu&ecirc; thợ k&egrave;n kh&oacute;c rằng: Con ơi mẹ n&oacute;i con kh&ocirc;ng nghe lời, con kh&ocirc;ng cưới vợ cho con con th&igrave; con kh&ocirc;ng chết, cưới vợ cho con con rồi con chết ngay. Tiền mẹ c&oacute; tiếc con đ&acirc;u... nhưng mẹ n&oacute;i con chẳng nghe lời... C&ograve;n về ph&iacute;a mẹ chồng, Mẹ chồng chị suốt ng&agrave;y để &yacute; soi m&oacute;i v&agrave; ch&ecirc; bai chị đủ điều, t&igrave;m đủ c&aacute;ch g&acirc;y kh&oacute; khăn cho chị. C&ograve;n n&agrave;ng d&acirc;u cả của mẹ chồng th&igrave; hễ l&uacute;c n&agrave;o chỉ c&oacute; hai chị em lại n&oacute;i những lời g&acirc;y bất đồng cho chị v&agrave; mẹ chồng. Mọi tội lỗi đổ hết l&ecirc;n đầu chị, mặc d&ugrave; họ biết chị kh&ocirc;ng hề c&oacute; lỗi g&igrave; cả m&agrave; đơn giản chỉ l&agrave; họ th&iacute;ch như thế m&agrave; th&ocirc;i...</p>\r\n\r\n<p>Kh&ocirc;ng chịu được sức &eacute;p vợ chồng chị xin ra ở ri&ecirc;ng. Dần d&agrave; chị cũng c&oacute; bầu v&agrave; sinh được cậu con trai kh&aacute;u khỉnh, t&ocirc;i cũng rất thương y&ecirc;u v&agrave; qu&yacute; b&eacute;. Biết chị sinh con trai n&agrave;ng d&acirc;u cả nh&agrave; chị c&agrave;ng tức v&igrave; người ta chỉ c&oacute; 2 c&ocirc;ng ch&uacute;a, rồi họ xui xiểm mẹ chồng xuống chửi chị... Mẹ chồng th&igrave; k&iacute;ch b&aacute;c con trai bỏ vợ, chồng chị l&agrave; người lập trường kh&ocirc;ng vững dễ bị k&iacute;ch động, n&ecirc;n từ ng&agrave;y chị chửa được 6 th&aacute;ng anh đ&atilde; dở t&iacute;nh vũ phu đ&aacute;nh vợ, sỉ nhục vợ, gia đ&igrave;nh nh&agrave; vợ, mặc kệ cho vợ đang mang bầu vượt mặt.</p>\r\n\r\n<p>Chuyện cứ diễn ra như thế 5 suốt năm liền... cho tới tận ng&agrave;y h&ocirc;m nay. B&eacute; nh&agrave; chị đ&atilde; sắp được 3 tuổi m&agrave; anh vẫn cứ chửi mắng thậm tệ v&agrave; đ&aacute;nh đập chị một c&aacute;ch t&agrave;n nhẫn. T&ocirc;i nh&igrave;n chị đ&ocirc;i mắt xung huyết đỏ tấy, mặt m&agrave;y th&acirc;m t&iacute;m, sau g&aacute;y xưng như quả ổi găng, tay ch&acirc;n bầm dập... thương chị v&ocirc; c&ugrave;ng... Nhưng kết cục t&ocirc;i cũng chỉ l&agrave; kẻ ngo&agrave;i cuộc kh&ocirc;ng thể gi&uacute;p g&igrave; cho chị ngo&agrave;i an ủi động vi&ecirc;n v&agrave; đến b&ecirc;n chị những l&uacute;c chị cần.</p>\r\n\r\n<p>- Chị dậy rồi &agrave;? Ngủ th&ecirc;m ch&uacute;t nữa đi.</p>\r\n\r\n<p>- Chị thiếp đi l&uacute;c n&agrave;o kh&ocirc;ng hay. Em mệt rồi lại bị chị quấy dầy. Ngại qu&aacute;.</p>\r\n\r\n<p>- Lại thế rồi? Sao? Chuyện g&igrave; m&agrave; chị ra n&ocirc;ng nỗi n&agrave;y.</p>\r\n\r\n<p>- C&oacute; g&igrave; to t&aacute;t đ&acirc;u em, con người l&ograve;ng tham v&ocirc; đ&aacute;y em ạ. Cảnh l&agrave;m d&acirc;u như chị em m&igrave;nh em biết rồi con g&igrave;. Mẹ con họ c&atilde;i chửi nhau nhưng kh&ocirc;ng ai động đến họ được v&agrave; họ cũng kh&ocirc;ng bao giờ bỏ nhau đ&acirc;u. Chị th&igrave; nghĩ, đời m&igrave;nh chẳng thiết g&igrave;, chỉ mong con bằng ch&uacute;ng bằng bạn, nhưng em ạ, b&acirc;y giờ chị sống trong nh&agrave; n&agrave;y được ng&agrave;y n&agrave;o hay ng&agrave;y đấy th&ocirc;i. Mệt mỏi lắm rồi.</p>\r\n\r\n<p>- Chị n&oacute;i g&igrave; động đến mẹ anh ấy hả?</p>\r\n\r\n<p>- Kh&ocirc;ng. Chị em m&igrave;nh l&agrave; người được dạy dỗ ăn học đ&agrave;ng ho&agrave;ng m&agrave; em.</p>\r\n\r\n<p>- Chẳng hiểu sao b&agrave; tức chuyện g&igrave;, xuống đ&acirc;y mặt hằn học n&oacute;i chị T n&oacute; chửa m&agrave; m&agrave;y kh&ocirc;ng gọi điện hỏi thăm chị. N&oacute; chửa mệt mỏi cũng kh&ocirc;ng quan t&acirc;m tới chị. Chồng chị n&oacute;i: B&agrave; kh&ocirc;ng phải nhiều chuyện, chửa ai chả phải chửa. Nh&agrave; con đi viện vợ chồng anh chị c&oacute; hỏi thăm đ&acirc;u, Thằng ku Đ nh&agrave; con đi viện hai lần vợ chồng chị c&oacute; hỏi c&acirc;u n&agrave;o. B&agrave; buồn cười thật, hễ xuống l&agrave; c&oacute; chuyện, tốt nhất b&agrave; đừng xuống nữa. Thế l&agrave; mẹ chồng chị được thể chửi to&aacute;ng l&ecirc;n, hai mẹ con họ c&atilde;i nhau ầm ĩ... Chuyện xảy ra l&uacute;c s&aacute;ng sớm đến gần trưa anh đi l&agrave;m về tới nh&agrave;, anh đ&aacute; th&uacute;ng đụng lia, chị tr&aacute;nh kh&ocirc;ng muốn va chạm, lằng lặng đi l&agrave;m việc kh&aacute;c. Khi chị đang đứng nhặt rau để nấu cơm anh từ đằng sau đến đạp chị một c&aacute;i v&agrave;o ngang lưng, chị sụn cả lưng đau điếng người, kh&ocirc;ng dừng lại anh lao v&agrave;o t&aacute;t chị v&agrave; đ&aacute;nh chị v&agrave;o đầu li&ecirc;n tiếp khiến chị th&agrave;nh ra như thế n&agrave;y.</p>\r\n\r\n<p>- T&ocirc;i thực l&ograve;ng kh&ocirc;ng biết n&ecirc;n an ủi, động vi&ecirc;n chị thế n&agrave;o? T&ocirc;i chỉ im lặng &ocirc;m chị v&agrave;o l&ograve;ng v&agrave; n&oacute;i, chị thấy trong người sao rồi?</p>\r\n\r\n<p>- Chị thấy dễ thở hơn rồi?</p>\r\n\r\n<p>- Thế anh ấy đ&acirc;u?</p>\r\n\r\n<p>- Đi đ&acirc;u chị cũng chẳng quan t&acirc;m nữa...</p>\r\n\r\n<p>... C&aacute;c bạn ạ, chị thường xuy&ecirc;n bị như vậy. Chị l&agrave; người cao c&oacute; 1m48cm, nặng 45,5 kg th&ocirc;i, chồng chị cao 1m 65cm, từ ng&agrave;y lấy chị về, được sự y&ecirc;u thương chăm s&oacute;c của vợ anh từ 52 kg vọt l&ecirc;n 70 kg chỉ sau 3 th&aacute;ng, anh lu&ocirc;n tập tạ v&agrave;o mỗi buổi chiều tối đi l&agrave;m về. Sức người như vậy đ&aacute;nh chị như thế? Hỏi rằng chị th&agrave;nh ra thế n&agrave;o???.... Chị l&agrave; người phụ nữa đau khổ, qu&aacute; đau khổ, giờ đ&acirc;y chị vẫn phải gặm nhấm nỗi đau đ&oacute; mỗi ng&agrave;y...</p>\r\n\r\n<p>Thế đ&oacute; c&aacute;c bạn ạ! Ở đời n&agrave;y c&oacute; ai n&oacute;i hay được đ&acirc;u. T&ocirc;i đ&atilde; rất nhiều lần đến nh&agrave; chị, cũng gặp chồng chị nhiều lần, t&igrave;m hiểu về gia đ&igrave;nh chồng chị, rồi d&acirc;n l&agrave;ng nơi chị sinh sống... Nhưng quả thực, t&ocirc;i qu&aacute; bất ngờ, t&ocirc;i phải thừa nhận đ&oacute; ho&agrave;n to&agrave;n l&agrave; sự thật. Sự thật c&ograve;n khủng khiếp hơn thế nữa. Nếu c&aacute;c bạn ở cạnh nơi chị sinh sống, t&ocirc;i tin chắc c&aacute;c bạn sẽ hiểu những g&igrave; t&ocirc;i đ&atilde; n&oacute;i v&agrave; sẽ gh&ecirc; tởm những con người ấy...</p>\r\n\r\n<p>...T&ocirc;i kh&ocirc;ng thể hiểu được, họ đ&aacute;nh chị như thế họ cảm thấy thế n&agrave;o? Nếu người nh&agrave; họ bị đ&aacute;nh như vậy họ c&oacute; để y&ecirc;n kh&ocirc;ng? Họ c&oacute; chịu đừng như chị kh&ocirc;ng? Nếu ch&iacute;nh bản th&acirc;n họ bị ngược đ&atilde;i như thế th&igrave; sẽ như thế n&agrave;o???....</p>\r\n\r\n<p>Đ&oacute;! C&aacute;c bạn thấy kh&ocirc;ng, xung quanh ch&uacute;ng ta vẫn c&ograve;n c&oacute; những người phụ nữ đau khổ như thế, t&ocirc;i tin trong x&atilde; hội n&agrave;y vẫn c&ograve;n nhiều chứ kh&ocirc;ng &iacute;t lắm đ&acirc;u... Ph&aacute;p luật sinh ra để bảo vệ con người, bảo vệ những người bị ngược đ&atilde;i như chị nhưng c&ograve;n người thi h&agrave;nh ph&aacute;p luật th&igrave; sao???....</p>\r\n', 'VNE-1502128804.jpg', 11, 9, '2017-08-08 03:40:23'),
+(28, 'ANH, TÔI VÀ MƯA', '                                            <p>\"Mình chia tay nha. \" Bốn chữ thôi, tôi chết lặng. Chất lỏng ở mắt chảy khi nào không hay. Tôi mặc cho mưa chạy nhanh tới nhà anh. Mưa hoà vào nước mắt rồi rơi xuồn</p>\r\n \r\n                                   ', '<p><strong><em>Sớm nay, gi&oacute; cuốn cơn mưa tr&agrave;o qua ng&agrave;o ngạt. Em v&eacute;n tấm r&egrave;m cửa đ&atilde; rủ xuống từ bao ng&agrave;y... đợi mưa! Khẽ đưa đ&ocirc;i mắt v&ocirc; hồn gượng gạo những n&iacute;u k&eacute;o nh&igrave;n ra cơn mưa &agrave;o ạt lội xuống đời, em lại tự hỏi ấy l&agrave; cơn mưa ngo&agrave;i trời hay những tu&ocirc;n xối trong l&ograve;ng người đ&acirc;y mưa ơi? Qua m&agrave;n mưa, sao mắt em nh&ograve;a đi qu&aacute; anh &agrave;, rồi tự nhi&ecirc;n em lại thấy cay cay nơi kh&oacute;e mắt ấy nữa. M&agrave; anh ơi... sao l&ograve;ng em cứ dậy l&ecirc;n bao thương mong, tiếc nuối, bao hẫng hụt, kh&oacute; hiểu rồi cả bao thương tổn chẳng biết c&oacute; tồn tại hay kh&ocirc;ng nữa. Ph&uacute;t ch&ecirc;nh chao m&agrave; ngỡ v&ocirc; hồi x&uacute;c cảm, em mơ hồ tựa v&agrave;o g&oacute;c dựa chẳng b&igrave;nh y&ecirc;n n&agrave;o ấy trong mưa gạt vội c&otilde;i l&ograve;ng chia hai.</em></strong></p>\r\n\r\n<p><strong><em>V&ocirc; t&igrave;nh qu&aacute;! Bỗng đ&acirc;u d&ograve;ng mưa bước v&agrave;o cung bậc cảm x&uacute;c gờn gợn trong em. Rồi v&ocirc; thức em lại nhớ về anh...</em></strong></p>\r\n\r\n<p><strong><em>***</em></strong></p>\r\n\r\n<p><strong><em><img alt=\"mua-anh-a\" src=\"http://www.truyenngan.com.vn/images/Phuongvtm/2017-05/mua-anh-a.jpg\" style=\"height:330px; width:400px\" /></em></strong></p>\r\n\r\n<p>Anh &agrave;! H&ocirc;m nay trời đang mưa phải kh&ocirc;ng? Em thấy c&oacute; tiếng mưa vội v&atilde; trong kh&ocirc;ng gian thầm lắng, m&ecirc;nh mang n&agrave;y đấy. C&aacute;i vội v&atilde; ấy hệt như của cơn mưa đầu th&aacute;ng 10 năm ấy... Một ng&agrave;y mưa v&agrave; anh gặp em. Ừ! Anh gặp em v&agrave;o một ng&agrave;y mưa anh nhỉ, anh cũng thấy n&oacute; đẹp lắm phải kh&ocirc;ng anh. Ng&agrave;y ấy, tr&ecirc;n bến xe về cuối ng&agrave;y, em thấy một ch&agrave;ng trai dưới chiếc d&ugrave; m&agrave;u xanh đứng tựa dưới bến chờ. S&acirc;u sắc lắm, nỗi nhớ của em c&ograve;n in dấu nguy&ecirc;n vẹn gương mặt của anh ng&agrave;y h&ocirc;m ấy. Ấy một ch&agrave;ng trai em rất y&ecirc;u v&agrave; đ&atilde; từng y&ecirc;u em. Anh... c&oacute; khu&ocirc;n mặt l&atilde;ng tử, khu&ocirc;n miệng mềm mại, sống mũi thẳng, đ&ocirc;i mắt s&acirc;u xa mở rộng nh&igrave;n l&agrave;m mưa đang tu&ocirc;n b&ecirc;n g&oacute;c trời. Phải n&oacute;i l&agrave; anh đẹp lắm! Anh cứ như ho&agrave;ng tử mưa ng&agrave;y ấy vậy. Ta gặp nhau dưới mưa, em chẳng quen anh, anh cũng chẳng quen em.</p>\r\n\r\n<p>V&agrave; rồi ng&agrave;y h&ocirc;m ấy cũng chẳng phải c&aacute;i ng&agrave;y dầm mưa dữ dội với lớp &aacute;o ướt sũng m&agrave; ta đ&atilde; hẹn trời cơn mưa đổ thật l&atilde;ng mạn như phim truyện H&agrave;n Quốc, khi ấy... k&iacute; ức của ta n&oacute; ch&acirc;n thực v&agrave; y&ecirc;u thương lắm anh &agrave;! Trong một ph&uacute;t trống vắng ta đưa &aacute;nh mắt định mệnh v&ocirc; t&igrave;nh chạm c&aacute;i nh&igrave;n của nhau, em cứ thế nh&igrave;n anh để bao cảm x&uacute;c trực tr&agrave;o l&ecirc;n qu&ecirc;n đi tất cả m&agrave; cũng vẫn t&igrave;m được &aacute;nh mắt ấm &aacute;p khẽ tr&ocirc;i v&agrave;o cuộc đời em. Rồi bỗng nhi&ecirc;n trong &aacute;nh mắt ho&agrave;ng h&ocirc;n của anh, trời v&ocirc; t&igrave;nh đổ mưa nặng hạt, chẳng gợn ch&uacute;t l&agrave;nh lạnh với em. Ngay b&ecirc;n thềm mưa, chẳng phải em kh&ocirc;ng c&oacute; d&ugrave;, vậy m&agrave; từ trong gi&acirc;y ph&uacute;t em ch&igrave;m trong v&ocirc; thức, anh vội v&atilde; hơn cơn mưa đang trực tr&agrave;o chạy tới khoảng c&aacute;ch rất ngắn để d&ugrave;ng chiếc d&ugrave; của anh che cho em. Khẽ kh&agrave;ng v&agrave; ngơ ng&aacute;c, anh &ocirc;m lấy em v&agrave;o lồng ngực của anh, thật nhẹ nh&agrave;ng mang bao ấm &aacute;p v&agrave; rung cảm bất tận. Trong sự đi&ecirc;n loạn đang được sưởi ấm của con tim, em v&ocirc; t&igrave;nh lắng nghe tr&aacute;i tim thổn từ một người mới quen bỗng h&oacute;a chung một nhịp. Gi&acirc;y ph&uacute;t rộn r&atilde; nhất trong l&ograve;ng em, h&igrave;nh như l&agrave; anh đang muốn che chở cho em bằng tất cả những g&igrave; anh c&oacute; v&agrave; dẫu em c&oacute; l&agrave;m sao, th&igrave; anh vẫn m&atilde;i b&ecirc;n em. Rồi... tr&ecirc;n g&oacute;c trời th&aacute;ng 10 ướt dầm cơn mưa đ&atilde; c&oacute; hai chiếc d&ugrave; kề s&aacute;t nhau chẳng tồn tại một khe hở, bởi lẽ g&oacute;c trời của ta khi ấy đ&atilde; h&oacute;a th&agrave;nh một tự bao giờ? V&agrave; gi&acirc;y ph&uacute;t ấy trong c&otilde;i l&ograve;ng anh c&oacute; biết kh&ocirc;ng anh, em đ&atilde; cứ tự đinh ninh rằng: &quot;Anh l&agrave; định mệnh đời em rồi&quot;...</p>\r\n\r\n<p><iframe frameborder=\"0\" id=\"ifvideoinpage\" scrolling=\"no\" src=\"http://media.adnetwork.vn/assets/player/jwp722/videoinpage-player-jwp722.html?flash=false&amp;volume=30&amp;autoStart=false&amp;skipAd=7&amp;tag=http%3A%2F%2Fdelivery.adnetwork.vn%2F247%2Fxmlvideoad%2Fwid_1377161727%2Fzid_1396944246%2Ftype_inline%2Feff_vidinpage%2Fcb_71577%2Fw_610%2Fh_344%2Fpurl_aHR0cDovL3d3dy50cnV5ZW5uZ2FuLmNvbS52bi90YW0tc3UvNDM3MDEtbXVhLWFuaC1hLmh0bWw%253D&amp;media_path=http%3A%2F%2Fmedia.adnetwork.vn%2Fassets%2F&amp;w=610&amp;h=344\"></iframe></p>\r\n\r\n<p>Thời gian tr&ocirc;i, theo cơn mưa ng&agrave;y ấy l&agrave; những ng&agrave;y che chở nắng gi&oacute; v&ocirc; tận với hạnh ph&uacute;c mi&ecirc;n man em c&oacute; anh, hạnh ph&uacute;c ấy đ&uacute;ng do mưa ban tặng, thế m&agrave; rồi tới một ng&agrave;y vắng anh tại sao cũng l&agrave; ng&agrave;y mưa t&agrave;n gi&oacute; lụi?! Ừ! N&oacute;i l&agrave; mưa t&agrave;n nhưng thực ra n&oacute; vẫn đang rơi đấy th&ocirc;i! C&aacute;i t&agrave;n ở đ&acirc;y l&agrave; tr&aacute;i tim em k&igrave;a. Ng&agrave;y vắng anh, l&agrave; vắng đến m&atilde;i m&atilde;i, vắng bởi anh bu&ocirc;ng lời chia tay. Em đ&atilde; b&acirc;ng quơ tưởng như anh tan v&agrave;o vạt nắng từ l&acirc;u lắm rồi. Vậy m&agrave;... cuối c&ugrave;ng vẫn l&agrave; một ng&agrave;y mưa như ng&agrave;y đ&ocirc;i ta gặp nhau. Khi ấy v&igrave; qu&aacute; đau em vẫn c&ograve;n cứ ngộ nhận trong t&acirc;m thức rằng l&agrave; v&igrave; anh sợ em kh&oacute;c, anh muốn nhờ mưa gạt tr&ocirc;i hết đi những cay đắng, thẫn thờ hoen l&ecirc;n ngh&egrave;n nghẹn tr&ecirc;n kh&oacute;e mi em. Thế nhưng m&agrave;... Mưa ơi! Sao ta cứ buồn tủi, cứ tự ch&ocirc;n ta v&agrave;o tuyệt vọng đến thế? Ta quện m&agrave;n đ&ecirc;m trong t&acirc;m hồn lạnh gi&aacute; v&agrave;o cả những y&ecirc;u thương phải cất s&acirc;u tận g&oacute;c trời hiu quạnh của ri&ecirc;ng em th&ocirc;i. Rồi lặng lẽ... Ph&iacute;a bầu trời vừa chia rẽ chẳng kịp dứt b&ecirc;n kia đang l&agrave; anh, người con trai thật sự chẳng phải của ri&ecirc;ng em kể khi tiếng n&oacute;i y&ecirc;u anh vẫn c&ograve;n. Nhưng cứ nh&igrave;n b&oacute;ng anh bước vội đến l&ograve;a nh&ograve;a cả m&agrave;n mưa ấy, rồi mưa ướt vai anh... em vẫn thấy l&agrave;nh lạnh từ trong đ&aacute;y t&acirc;m hồn... Nhưng mưa ơi, gọi t&ecirc;n anh cũng chẳng được nữa rồi. Bởi em biết, vắng em bờ vai cũng sẽ kh&ocirc; mau th&ocirc;i m&agrave;. Th&ocirc;i, mưa vơi đi nh&eacute; v&igrave; biết đ&acirc;u c&oacute; ai đ&oacute; kh&ocirc;ng lau hết bao ướt lạnh vai anh. Trở về dưới mưa, c&oacute; một người đi m&atilde;i theo một người, một người đợi chờ m&atilde;i theo niềm đau... Đau thật đấy! Nhưng y&ecirc;u... l&agrave; y&ecirc;u thật đấy.</p>\r\n\r\n<p>Th&igrave; t&igrave;nh y&ecirc;u l&agrave; thế m&agrave;! Khi y&ecirc;u bao giờ em cũng ngu ngơ, cũng dại khờ, cũng lầm lỡ rồi cũng chẳng biết được ng&agrave;y mai sẽ ra sao. Y&ecirc;u th&ocirc;i! Cứ y&ecirc;u th&ocirc;i, ng&agrave;y ấy h&igrave;nh dung anh vẫn c&ograve;n trong miền nhớ như c&ograve;n trong g&oacute;c hồn l&agrave;nh lặn nhất của con tim em đ&acirc;y. Anh ơi! Thực t&acirc;m l&ograve;ng n&agrave;y chẳng d&aacute;m gọi anh nữa, v&igrave; em sợ thương nhớ n&oacute; tr&agrave;n về trong l&ograve;ng em th&ocirc;i anh &agrave;. M&agrave; mưa ơi sao hờ hững qu&aacute;, bụi mưa trời m&atilde;i c&ograve;n rải r&aacute;c như bụi l&ograve;ng em vậy. Mưa x&agrave;o xạc, vội v&atilde; đi qua em chẳng buồn nh&igrave;n lại. Ừ th&igrave; em đ&acirc;u đ&aacute;ng để ai nh&igrave;n phải kh&ocirc;ng anh?</p>\r\n\r\n<p>Em cứ thế, cứ thế nhớ về anh bằng những y&ecirc;u thương thực sự đ&atilde; t&agrave;n phế. Nhất l&agrave; v&agrave;o những ng&agrave;y mưa gh&eacute; qua em mang theo nỗi buồn vời vợi như vậy. Giờ với em mưa bao giờ cũng rầu rĩ hết nữa. Em thấy kh&ocirc; khan, trơ trụi thậm ch&iacute; l&agrave; h&eacute;o &uacute;a hết một sự sống của ri&ecirc;ng em. N&oacute; kh&ocirc; khan lắm! Dẫu ngo&agrave;i trời đang ướt mưa đến dữ dội. Cứ muốn x&eacute; l&ograve;ng m&igrave;nh ra cho mưa gội rửa để m&agrave; tan biến đi hết những nỗi buồn c&acirc;m lặng. Tựa hồ tưởng chừng khao kh&aacute;t c&oacute; một lối vắng n&agrave;o đ&oacute; mang em đi thật xa, mang em đi t&igrave;m anh. Đi v&agrave;o lối vắng ấy, em sẽ mang theo một vạt nắng tr&ecirc;n vai x&oacute;a tan hết những ng&agrave;y mưa u buồn, nhưng em sẽ chẳng bao giờ x&oacute;a đi kỉ niệm anh v&agrave; em. Thế sao mưa k&igrave;a, sao n&oacute; cứ l&ograve;a nh&ograve;a m&agrave; tr&ocirc;i tan đi tất cả đến thế! Mưa ơi mưa! Kh&acirc;u gi&ugrave;m ta c&otilde;i l&ograve;ng...</p>\r\n\r\n<p>Trong kh&ocirc;ng gian m&ecirc;nh mang, buồn tủi, ngập tiếng mưa &aacute;p cả tiếng rối l&ograve;ng, nhưng cũng chẳng ngập nổi nhung ngớ trong em anh &agrave;. Mưa mang đến cho em t&igrave;nh anh rực nắng, mưa cuốn h&igrave;nh anh đi m&atilde;i nơi xa. Mưa b&ecirc;n ta khi ng&agrave;y c&ograve;n thổn thức tiếng y&ecirc;u vội v&agrave;ng, rồi mưa cũng b&ecirc;n em khi chỉ c&ograve;n em đơn c&ocirc;i chốn n&agrave;y. Em b&ecirc;n mưa, mưa tựa l&ecirc;n l&agrave;n t&oacute;c, một c&aacute;i tựa thật như tạt v&agrave;o những c&ocirc; đơn, m&agrave; chẳng ai lau gi&ugrave;m m&aacute;i t&oacute;c. Bởi giờ em v&agrave; anh đ&atilde; kết th&uacute;c đi một mối t&igrave;nh d&agrave;i hạn, một mối t&igrave;nh m&agrave; chưa bao giờ em d&aacute;m lầm lỡ đứng cạnh hai từ kết th&uacute;c. Nhưng kết th&uacute;c vẫn l&agrave; kết th&uacute;c. C&oacute; người cứ n&oacute;i, em qu&aacute; dai dẳng đấy anh &agrave;. Chẳng k&igrave;m lời xin lỗi bản th&acirc;n kh&ocirc;ng đ&aacute;ng n&oacute;i ra, chắc em cũng như mưa . Mưa l&agrave; thứ đối với em đầy những dai dẳng v&agrave; th&ecirc;m một c&aacute;i nữa l&agrave; sự r&agrave;y v&ograve;. Em xin lỗi anh v&igrave; chẳng thể trao anh hạnh ph&uacute;c như anh muốn c&oacute;. Xin lỗi người v&igrave; đ&atilde; v&ocirc; t&igrave;nh k&eacute;o b&oacute;ng của những phiền muộn trao anh. Rồi xin lỗi anh v&igrave; em chẳng thể ngừng nhớ đến anh được nữa. Em &iacute;ch kỉ, bao giờ cũng v&igrave; yếu đuối của m&igrave;nh r&agrave;ng buộc lấy anh. Em chẳng xứng đ&aacute;ng g&igrave; cả anh nhỉ? Nhưng anh cũng v&ocirc; t&igrave;nh nữa anh &agrave;. Em hiểu c&otilde;i l&ograve;ng anh nhưng em chẳng n&oacute;i ra được nữa. Anh bảo em đi đi, nhưng anh người đi trước. R&agrave;y v&ograve; đến như thế, m&agrave; em cứ nghĩ về anh. Em xấu xa đ&aacute;nh đổ mọi sai lầm cho cơn mưa đang rơi rớt. Ừ! Tại mưa đ&ocirc;i ta gặp nhau. Tại mưa ta rời bỏ nhau. Tại mưa đ&atilde; đọng lại bao k&iacute; ức s&acirc;u đậm giữa em v&agrave; anh. C&oacute; phải, mưa định đoạt c&aacute;i dang dở n&agrave;y kh&ocirc;ng hả anh? Mưa tạt v&agrave;o l&ograve;ng em c&aacute;i l&agrave;nh lạnh tỉnh ngộ. Th&igrave; lại người chứ đ&acirc;u phải tại mưa. C&oacute; y&ecirc;u mưa, hận mưa, mang lỗi lầm với mưa nhưng thực t&igrave;nh cũng hận mưa lắm. Em m&ocirc;ng lung trong những mộng mị. Cứ nghĩ suy nhưng lại phải qu&ecirc;n anh th&ocirc;i. Những ng&agrave;y mưa thế n&agrave;y kh&ocirc;ng được dầm mưa nữa, chẳng d&aacute;m đứng giữa trời mưa v&igrave; mối sợ thấy mối t&igrave;nh năm nao. Đ&acirc;y l&agrave; mối t&igrave;nh kh&ocirc;ng mưa ngăn lối kh&ocirc;ng trở về được nữa, cứ trở về sẽ tổn thương cho anh. Mưa thấy đấy ta tồi tệ, ngu muội lắm đ&uacute;ng kh&ocirc;ng mưa. Hứa với mưa sẽ l&agrave; lần cuối ta như thế. Mưa l&agrave; của m&acirc;y trời phải để mưa rơi. Mưa... Mưa rơi l&agrave;m ta kh&ocirc; h&eacute;o. Xin lỗi mưa nh&eacute;! Nhiều lần gọi mưa ngừng để t&ocirc;i qu&ecirc;n anh. Th&ocirc;i! Mưa cứ rơi đi, tự ta y&ecirc;u, tự ta qu&ecirc;n được anh... Cũng v&igrave; y&ecirc;u anh, cũng v&igrave; dưới mưa anh sẽ kh&ocirc;ng bận l&ograve;ng v&igrave; tr&aacute;i tim xấu xa, &iacute;ch kỉ trong em.</p>\r\n\r\n<p>Mưa rơi, mưa rơi...</p>\r\n\r\n<p>Sẫm g&oacute;c trời</p>\r\n\r\n<p>Sẫm v&igrave; nỗi buồn ai tr&aacute;ch mưa.</p>\r\n', 'VNE-1502128883.jpg', 16, 9, '2017-08-08 03:39:38'),
+(29, 'HÀ NỘI, NGÀY KHÔNG ANH...', '                                                                                        <p>Mình buông tay nhau thật nhẹ trong một chiều thu Hà Nội buồn đến nao lòng... Anh quay lưng bước đi, thế giới của em như chuyển động nhanh hơn chỉ có bóng anh là chậ', '<h1>H&Agrave; NỘI, NG&Agrave;Y KH&Ocirc;NG ANH...</h1>\r\n\r\n<p><strong>M&igrave;nh bu&ocirc;ng tay nhau thật nhẹ trong một chiều thu H&agrave; Nội buồn đến nao l&ograve;ng...</strong></p>\r\n\r\n<p><strong>Anh quay lưng bước đi, thế giới của em như chuyển động nhanh hơn chỉ c&oacute; b&oacute;ng anh l&agrave; chậm đến lạ l&ugrave;ng.</strong></p>\r\n\r\n<p><strong>Lang thang một m&igrave;nh nơi h&egrave; phố, em nhận ra kh&ocirc;ng c&oacute; anh s&aacute;nh bước c&ugrave;ng, khung cảnh nơi đ&acirc;y c&oacute; v&agrave;i phần kh&aacute;c. Chiều thu H&agrave; Nội...</strong></p>\r\n\r\n<p><strong>***</strong></p>\r\n\r\n<p><strong><img alt=\"ha-noi-ngay-khong-anh\" src=\"http://www.truyenngan.com.vn/images/Phuongvtm/2017-06/ha-noi-ngay-khong-anh.jpg\" style=\"height:371px; width:660px\" /></strong></p>\r\n\r\n<p>L&aacute; v&agrave;ng rơi trải thảm tr&ecirc;n từng con đường, h&egrave; phố nhỏ. Tiếng l&aacute; kh&ocirc; vụn vỡ dưới b&agrave;n ch&acirc;n d&ograve;ng người hối hả ngược xu&ocirc;i, tiếng l&aacute; kh&ocirc; x&agrave;o xạc dưới những nh&aacute;t chổi của c&ocirc; lao c&ocirc;ng... Phải chăng đ&acirc;y l&agrave; thanh &acirc;m của m&ugrave;a thu? Gi&oacute; heo m&acirc;y &ugrave;a về, trời đất hanh kh&ocirc; v&agrave; nắng thu dường như chẳng c&ograve;n đủ sức nhuộm l&ecirc;n những con phố m&agrave;u v&agrave;ng &oacute;ng ả ng&agrave;y n&agrave;o. H&agrave; Nội lu&ocirc;n mang một n&eacute;t buồn thương l&atilde;ng đ&atilde;ng v&agrave;o những ng&agrave;y n&agrave;y, nhưng l&ograve;ng em chắc c&ograve;n buồn thương hơn H&agrave; Nội.</p>\r\n\r\n<p><iframe frameborder=\"0\" id=\"ifvideoinpage\" scrolling=\"no\" src=\"http://media.adnetwork.vn/assets/player/jwp722/videoinpage-player-jwp722.html?flash=false&amp;volume=30&amp;autoStart=false&amp;skipAd=7&amp;tag=http%3A%2F%2Fdelivery.adnetwork.vn%2F247%2Fxmlvideoad%2Fwid_1377161727%2Fzid_1396944246%2Ftype_inline%2Feff_vidinpage%2Fcb_15370%2Fw_610%2Fh_344%2Fpurl_aHR0cDovL3d3dy50cnV5ZW5uZ2FuLmNvbS52bi90YW0tc3UvNDM5NTktaGEtbm9pLW5nYXkta2hvbmctYW5oLmh0bWw%253D&amp;media_path=http%3A%2F%2Fmedia.adnetwork.vn%2Fassets%2F&amp;w=610&amp;h=344\"></iframe></p>\r\n\r\n<p>Bởi một người từng rất thương em, rất thương H&agrave; Nội đ&atilde; bỏ đi rồi.</p>\r\n\r\n<p>Em kh&ocirc;ng kh&oacute;c. Trong khoảnh khắc anh bu&ocirc;ng lời chia tay ấy em chỉ nh&igrave;n anh m&agrave; lặng lẽ, nở một nụ cười đầy gượng gạo rồi d&otilde;i mắt theo b&oacute;ng lưng quen thuộc ấy khuất dần dưới b&oacute;ng ho&agrave;ng h&ocirc;n đang đổ xuống. Kh&ocirc;ng phải em kh&ocirc;ng muốn kh&oacute;c m&agrave; em chỉ đang cố gắng k&igrave;m n&eacute;n cảm x&uacute;c của m&igrave;nh. V&agrave;o khoảnh khắc cuối c&ugrave;ng ấy, em muốn người đ&oacute; nhớ đến em về sau n&agrave;y rằng: C&ocirc; g&aacute;i anh từng thương mạnh mẽ v&agrave; xinh đẹp như thế n&agrave;o. Để mỗi lần nhớ về em, người đ&oacute; kh&ocirc;ng cần cảm thấy c&oacute; lỗi hay ngại ng&ugrave;ng. Chỉ nhớ về em với nụ vười trong s&aacute;ng, đ&aacute;ng y&ecirc;u. Nhớ về em về những ng&agrave;y m&igrave;nh c&ograve;n tay đan tay dạo qua bao con phố. Nhớ về ng&agrave;y tr&ecirc;n chiếc xe cub ấy, sau tay l&aacute;i của anh l&agrave; một v&ograve;ng tay &ocirc;m chặt từ em, l&agrave; em ngh&ecirc;u ngao h&aacute;t vang suốt dọc đường về. Những ng&agrave;y đợi nhau tan học, những ng&agrave;y chocolate, b&aacute;nh gấu lu&ocirc;n được đặt &acirc;m thầm đ&acirc;u đ&oacute;. Những ng&agrave;y theo ch&acirc;n ai ra s&acirc;n b&oacute;ng rổ ngồi xem; cuống qu&yacute;t đ&oacute;n đưa ai đi học mỗi ng&agrave;y. V&agrave; nếu c&oacute; l&uacute;c n&agrave;o đ&oacute; em yếu l&ograve;ng, bờ vai anh lu&ocirc;n l&agrave; điểm tựa để em bật kh&oacute;c. Những ng&agrave;y đ&atilde; tr&ocirc;i về nơi rất xa, về miền m&agrave; người ta vẫn hay đặt cho n&oacute; hai chữ: k&yacute; ức.</p>\r\n\r\n<p>Người ta thường n&oacute;i: &quot;Ch&agrave;ng trai m&agrave; c&aacute;c em y&ecirc;u năm 17 tuổi ch&iacute;nh l&agrave; người c&aacute;c em y&ecirc;u nhất cuộc đời n&agrave;y. Nhưng em &agrave;, ch&agrave;ng trai 17 tuổi năm đ&oacute; đi c&ugrave;ng em sẽ kh&ocirc;ng thể c&ugrave;ng em đi hết cuộc đời n&agrave;y.&quot; h&oacute;a ra l&agrave; thật. Ch&uacute;ng ta b&ecirc;n nhau v&agrave;o những ng&agrave;y n&ocirc;ng nổi nhất, trao cho nhau những cảm x&uacute;c ch&acirc;n thật nhất, non nớt nhất nhưng rồi lại chẳng thể c&ugrave;ng nhau bước tiếp v&agrave;o những ng&agrave;y tr&aacute;i tim đ&atilde; đủ lớn.</p>\r\n\r\n<p>Giờ chỉ c&ograve;n em ở lại H&agrave; Nội. Những ng&agrave;y t&acirc;m can như bị c&agrave;o x&eacute; n&agrave;y ai sẽ b&ecirc;n em chở che như ng&agrave;y trước? Lần đầu ti&ecirc;n em hiểu nỗi nhớ đến đau l&ograve;ng l&agrave; như thế n&agrave;o. Lần đầu ti&ecirc;n em phải học c&aacute;ch tự m&igrave;nh đứng l&ecirc;n sau khi bị bỏ lại. Em kh&ocirc;ng tr&aacute;ch anh, em tin v&agrave;o duy&ecirc;n số. V&agrave; khi người ta phải xa nhau, c&oacute; lẽ, duy&ecirc;n đ&atilde; hết; l&ograve;ng người l&agrave; thứ kh&ocirc;ng thể &eacute;p buộc v&igrave; vậy em kh&ocirc;ng n&iacute;u k&eacute;o. Rồi v&agrave;o một thời điểm n&agrave;o đấy trong cuộc đời n&agrave;y, nhất định, em sẽ lại t&igrave;m được một người y&ecirc;u em, một người khiến em rung động một lần nữa. Em cũng tin v&agrave;o c&aacute;i gọi l&agrave; cơ hội.</p>\r\n\r\n<p>Tạm biệt anh, cảm ơn anh, t&igrave;nh đầu của em.</p>\r\n', 'VNE-1502129114.jpg', 26, 8, '2017-08-08 16:48:10');
+INSERT INTO `story` (`story_id`, `name`, `preview_text`, `detail_text`, `picture`, `counter`, `cat_id`, `created_at`) VALUES
+(30, 'MÙA HÈ 18', '                                            <p><strong><em>Đó là mùa hè tôi đang phải đi qua mà nơi kết thúc là kì thi đại học.</em></strong></p>\r\n\r\n<p><strong><em>***</em></strong></p>\r\n\r\n<p>Mùa hè bắt đầu từ lúc nào, dường như cũng chẳng nhớ nữa. Không<', '<p><strong><em>Đ&oacute; l&agrave; m&ugrave;a h&egrave; t&ocirc;i đang phải đi qua m&agrave; nơi kết th&uacute;c l&agrave; k&igrave; thi đại học.</em></strong></p>\r\n\r\n<p><strong><em>***</em></strong></p>\r\n\r\n<p>M&ugrave;a h&egrave; bắt đầu từ l&uacute;c n&agrave;o, dường như cũng chẳng nhớ nữa. Kh&ocirc;ng ai cho t&ocirc;i một c&acirc;u trả lời. Bản th&acirc;n t&ocirc;i l&uacute;c ấy dường như chỉ mơ hồ cảm nhận được hơi thở của m&ugrave;a h&egrave; từ những đợt n&oacute;ng kinh khủng, n&oacute;ng ph&aacute;t sốt, rồi mưa đến v&agrave; đi như thể m&ugrave;a h&egrave; kh&ocirc;ng buồn n&iacute;u giữ.</p>\r\n\r\n<p><img alt=\"mua-he-18\" src=\"http://www.truyenngan.com.vn/images/Phuongvtm/2017-07/mua-he-18.jpg\" style=\"height:675px; width:500px\" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Cứ n&oacute;i lớp 12 l&agrave; 18 th&igrave; ở c&aacute;i ngưỡng cửa thứ mấy của cuộc đời n&agrave;y, t&ocirc;i chỉ thật sự biến n&oacute; th&agrave;nh dấu mốc khi mang về tờ giấy đỗ-Đại-học. V&agrave; những ng&agrave;y khi nắng l&ecirc;n, mưa đến một c&aacute;ch kh&oacute; hiểu, t&ocirc;i đ&atilde; ch&ocirc;n m&ugrave;a hạ của m&igrave;nh trong những trang vở chi ch&iacute;t chữ, những tập đề kh&oacute; nhằn v&agrave; cố lấp đầy n&atilde;o bộ bằng những c&ocirc;ng thức, những lưu &yacute; v&agrave; bao điều kh&aacute;c nữa trước ng&agrave;y thi. T&ocirc;i h&iacute;t v&agrave;o lồng ngực c&aacute;i kh&ocirc;ng kh&iacute; lo lắng, hồi hộp, tr&ocirc;ng mong của bao người v&agrave; thở ra l&agrave; những mệt mỏi, n&ocirc;n nao. Những ng&agrave;y thức đến 4,5 giờ s&aacute;ng, kh&ocirc;ng phải để ngắm b&igrave;nh minh, để nh&igrave;n cuộc sống đang dần hiện l&ecirc;n s&ocirc;i động. Gấp lại một quyển vở, để lại chồng s&aacute;ch một tập để, mệt mỏi lăn ra giường ngủ, bỏ lại sau lưng tiếng &acirc;m thanh cuộc sống đang vỡ ra n&aacute;o nhiệt ngo&agrave;i kia, bỏ lại những trong veo ng&agrave;y đầu h&egrave; dịu ngọt. Lại th&ecirc;m một đề văn v&agrave; tự cười v&agrave;o ch&iacute;nh m&igrave;nh, một kẻ giả dối đang viết những b&agrave;i văn nghị luận x&atilde; hội ph&ecirc; ph&aacute;n thế hệ trẻ sống gấp, thu m&igrave;nh trong vỏ ốc, kh&eacute;p cửa với b&ecirc;n ngo&agrave;i. C&oacute; s&aacute;ng n&agrave;o kh&ocirc;ng muốn mở mắt, nhưng nghe tiếng mẹ ngo&agrave;i ph&ograve;ng hỏi con dậy chưa, lại cố gắng giả vờ qu&ecirc;n đi m&igrave;nh mới ngủ l&uacute;c 6 giờ s&aacute;ng để bật dậy. C&oacute; ng&agrave;y n&agrave;o một m&igrave;nh trong ph&ograve;ng tối, chỉ tiếng lật giấy v&agrave; tiếng quạt chạy &ugrave; &ugrave; b&ecirc;n tai, để t&ocirc;i biết rằng m&igrave;nh đang chạy tr&ecirc;n con đường dẫn đến c&aacute;nh cổng Đại học, tự nhắc kh&ocirc;ng thể ngừng lại giữa cuộc đua.</p>\r\n\r\n<p><iframe frameborder=\"0\" id=\"ifvideoinpage\" scrolling=\"no\" src=\"http://media.adnetwork.vn/assets/player/jwp722/videoinpage-player-jwp722.html?flash=false&amp;volume=30&amp;autoStart=false&amp;skipAd=7&amp;tag=http%3A%2F%2Fdelivery.adnetwork.vn%2F247%2Fxmlvideoad%2Fwid_1377161727%2Fzid_1396944246%2Ftype_inline%2Feff_vidinpage%2Fcb_41509%2Fw_610%2Fh_344%2Fpurl_aHR0cDovL3d3dy50cnV5ZW5uZ2FuLmNvbS52bi90YW0tc3UvNDQzMDAtbXVhLWhlLTE4Lmh0bWw%253D&amp;media_path=http%3A%2F%2Fmedia.adnetwork.vn%2Fassets%2F&amp;w=610&amp;h=344\"></iframe></p>\r\n\r\n<p>M&ugrave;a hạ đ&atilde; chết trong những ng&agrave;y ấy, v&agrave; m&ugrave;a hạ cũng kh&ocirc;ng thể quay lại được khi k&igrave; thi đ&atilde; kết th&uacute;c. Cả m&ugrave;a hạ ch&uacute;ng ta nỗ lực đi t&igrave;m c&acirc;u trả lời cho c&acirc;u hỏi: m&igrave;nh sẽ đi về đ&acirc;u. Rốt cuộc, c&acirc;u trả lời chỉ nằm ở khoảnh khắc bạn click v&agrave;o đường link tra cứu. T&ocirc;i hốt hoảng khi nh&igrave;n v&agrave;o trang Nhật k&iacute; online bao ng&agrave;y chưa viết. Thời gian đ&atilde; lấy đi của t&ocirc;i những con chữ, khả năng viết l&aacute;ch. Giờ đ&acirc;y khi nh&igrave;n trang Nhật k&iacute; t&ocirc;i đặt ph&ocirc;ng nền m&agrave;u xanh của bầu trời, t&ocirc;i cảm thấy trống rỗng, tựa như bạn nh&igrave;n l&ecirc;n trời xanh cao v&agrave;o một ng&agrave;y thu nhưng lại thấy trước mắt l&agrave; c&aacute;i u &aacute;m của ng&agrave;y đ&ocirc;ng.</p>\r\n\r\n<p>T&ocirc;i g&otilde; v&agrave;o trang nhật k&iacute; bỏ hoang những d&ograve;ng vẩn vơ m&agrave; thậm ch&iacute; t&ocirc;i cũng chẳng hiểu được m&igrave;nh đang viết g&igrave;. Cả một năm phấn đầu v&igrave; một k&igrave; thi lớn, rồi chỉ d&agrave;nh n&oacute; trong vỏn vẹn 3 ng&agrave;y đ&atilde; r&uacute;t cạn linh hồn t&ocirc;i. T&ocirc;i y&ecirc;u con chữ, d&ugrave; t&ocirc;i viết chẳng hay, n&oacute;i chẳng thấm, nhưng viết l&agrave; c&aacute;ch t&ocirc;i cho thế giới biết t&ocirc;i đang tồn tại. N&oacute; b&igrave;nh thường nhưngkh&ocirc;ng k&eacute;m quan trọng như bầu kh&ocirc;ng kh&iacute; t&ocirc;i thở, như b&aacute;t cơm t&ocirc;i ăn. Mỗi một lần viết ra một c&acirc;u từ v&ocirc; nghĩa, t&ocirc;i lại thấy nơi lồng ngực tức thở. C&oacute; lẽ v&igrave; qu&aacute; l&acirc;u rồi, t&ocirc;i phải h&iacute;t v&agrave;o c&aacute;i bầu kh&ocirc;ng kh&iacute; ngột ngạt, thiếu dưỡng kh&iacute;. Qu&aacute; l&acirc;u rồi t&ocirc;i kh&ocirc;ng được viết những g&igrave; m&igrave;nh muốn m&agrave; chỉ viết những g&igrave; người chấm b&agrave;i cho l&agrave; hợp nhất.</p>\r\n\r\n<p>Đ&atilde; qua v&agrave;i ng&agrave;y từ h&ocirc;m biết điểm, đ&atilde; th&ocirc;i cảm gi&aacute;c mong ng&oacute;ng từng ng&agrave;y để được biết một ố điểm m&igrave;nh bỏ c&ocirc;ng sức ra để gi&agrave;nh lại. Kh&ocirc;ng kh&iacute; l&uacute;c n&agrave;y v&agrave; l&uacute;c ấy thật kh&aacute;c nhau. C&ograve;n t&ocirc;i, ngay từ khi v&agrave;o 12, t&ocirc;i đ&atilde; thấy đ&oacute; l&agrave; sự ch&aacute;n nản. Nhiều l&uacute;c dừng tay giải một b&agrave;i to&aacute;n, ngừng lại sau khi viết một đoạn văn, t&ocirc;i tự hỏi m&igrave;nh đang l&agrave;m g&igrave;, m&igrave;nh l&agrave;m thế n&agrave;y để l&agrave;m g&igrave;, mai n&agrave;y sẽ ra sao, sao m&igrave;nh chẳng thấy g&igrave; cả d&ugrave; sức học của m&igrave;nh kh&ocirc;ng phải l&agrave; k&eacute;m, sao cuộc đời kh&ocirc;ng dễ như l&agrave;m một ph&eacute;p đạo h&agrave;m giản đơn?</p>\r\n\r\n<p>Rồi t&ocirc;i nhận thấy, kh&ocirc;ng chỉ m&igrave;nh t&ocirc;i m&agrave; bao bạn b&egrave; xung quanh cũng vậy. C&agrave;ng gần đến ng&agrave;y biết điểm chuẩn, t&ocirc;i c&agrave;ng ch&aacute;n nản hơn. D&ugrave; v&agrave;o được trường m&igrave;nh y&ecirc;u th&iacute;ch, d&ugrave; vậy rồi m&igrave;nh cũng sẽ ra sao. T&ocirc;i đ&atilde; đốt cả m&ugrave;a h&egrave; v&agrave;o trong trang giấy để đổi lại những m&ugrave;a sau kh&ocirc;ng c&oacute; h&egrave; về. Những đ&ecirc;m n&agrave;y trời H&agrave; Nội thật s&aacute;ng bởi những &aacute;nh sao đ&ecirc;m. T&ocirc;i cứ nh&igrave;n, nh&igrave;n m&atilde;i, l&ograve;ng thầm hỏi H&agrave; Nội rằng, liệu b&agrave;u trời ng&agrave;y h&ocirc;m nay t&ocirc;i thấy c&oacute; phải l&agrave; bầu trời t&ocirc;i ngắm nh&igrave;n mười năm sau? Nhưng H&agrave; Nội kh&ocirc;ng trả lời. Kh&ocirc;ng ai trả lời. &Aacute;nh sao vẫn thật s&aacute;ng tr&ecirc;n bầu trời đ&ecirc;m.</p>\r\n\r\n<p>T&ocirc;i đ&atilde; nhiều lần đặt ra những c&acirc;u hỏi kh&ocirc;ng lời đ&aacute;p như thế, nhưng thật đặc biệt bởi ch&uacute;ng chỉ thuường xuy&ecirc;n nảy ra v&agrave;o năm 12 - năm của tuổi 18. C&oacute; lẽ ch&uacute;ng sẽ kh&ocirc;ng trở th&agrave;nh một đoạn k&iacute; ức kh&oacute; qu&ecirc;n d&ugrave; đến tận sau n&agrave;y như ai n&oacute;i. Ch&uacute;ng kh&ocirc;ng thật đẹp đ&acirc;u. Nhưng nếu thế, người ta sẽ nhớ n&oacute; nhiều nhất trong c&aacute;c mảnh k&iacute; ức v&igrave; đ&oacute; l&agrave; một m&ugrave;a h&egrave; b&ecirc;n r&igrave;a 18 thật ch&ocirc;ng v&ecirc;nh, trắc trở, khởi nguồn của bao con s&oacute;ng ngầm trong đ&ograve;i về sau.</p>\r\n\r\n<p>V&agrave; d&ugrave; thế n&agrave;o, những người như t&ocirc;i, những người đang mất phương hướng trong cuộc đời, hoang mang v&agrave; đầy bất trắc như đứng giữa th&agrave;nh phố kh&ocirc;ng người, nhưng lại chẳng biết đi về đ&acirc;u. Liệu ch&uacute;ng ta trở về nơi ta bắt đầu, đứng lại hay t&igrave;m đường đi tiếp? Kh&ocirc;ng ai biết. Nhưng t&ocirc;i biết, lạc đường l&agrave; để ch&uacute;ng ta nhận ra con đường m&igrave;nh đang đi l&agrave; chưa đ&uacute;ng. V&agrave; mỗi khi như thế, ta lại cắn răng quay lại điểm bắt đầu để t&igrave;m một lối đi n&agrave;o đ&uacute;ng hơn. Nhưng ai biết, liệu ch&uacute;ng ta sẽ kh&ocirc;ngđi lạc th&ecirc;m lần nữa khi ch&uacute;ng ta đ&atilde; đặt niềm tin v&agrave;o con đường m&igrave;nh tin tưởng cất bước?</p>\r\n\r\n<p>Đường H&agrave; Nội c&oacute; trăm h&igrave;nh trăm vẻ, mỗi ng&agrave;y đi qua d&ugrave; chỉ một con đường, t&ocirc;i đều nhận thấy con đường ấy c&oacute; những sự đổi kh&aacute;c. Người ta lu&ocirc;n cho rằng chẳng ai c&oacute; thể lạc đường tr&ecirc;n con đường m&agrave; m&igrave;nh đ&atilde; đi qu&aacute; l&acirc;u. Nhưng người ta cũng cần biết rằng, con người c&oacute; thể biến con đường m&igrave;nh đi l&acirc;u th&agrave;nh con đường lạc. Giai đoạn kh&oacute; khăn, mong manh n&agrave;y sẽ qua, v&agrave; mọi chuyện sẽ sớm ổn. Kh&ocirc;ng ai c&oacute; thể cho t&ocirc;i khẳng định trăm phần trăm rằng con đường t&ocirc;i đi tới, d&ugrave; quen thuộc hay lạ lẫm sẽ c&oacute; những đổi thay g&igrave;, liệu sẽ dẫn t&ocirc;i đến đ&iacute;ch chăng. Nhưng t&ocirc;i biết chắc chắn một điều rằng, một khi t&ocirc;i lạc lối, t&ocirc;i sẽ lại điểm xuất ph&aacute;t v&agrave; t&igrave;m cho m&igrave;nh một c&aacute;i la b&agrave;n để đi.</p>\r\n', 'VNE-1502129313.jpg', 24, 9, '2017-08-08 03:38:01'),
+(31, 'BỮA TRƯA TÌNH YÊU', 'Rõ ràng là lễ Quốc khánh nhưng vì cuối tháng phải kết toán nên tất cả mọi người trong phòng tài vụ đều phải tăng ca. Tiết Sam Sam là nhân viên quèn mới vào đã bị một mớ bảng biểu hành hạ đến mức quýnh quáng cả chân tay, đầu váng mắt hoa, cuối cùng đến tối', '<p>R&otilde; r&agrave;ng l&agrave; lễ Quốc kh&aacute;nh nhưng v&igrave; cuối th&aacute;ng phải kết to&aacute;n n&ecirc;n tất cả mọi người trong ph&ograve;ng t&agrave;i vụ đều phải tăng ca. Tiết Sam Sam l&agrave; nh&acirc;n vi&ecirc;n qu&egrave;n mới v&agrave;o đ&atilde; bị một mớ bảng biểu h&agrave;nh hạ đến mức qu&yacute;nh qu&aacute;ng cả ch&acirc;n tay, đầu v&aacute;ng mắt hoa, cuối c&ugrave;ng đến tối ng&agrave;y m&ugrave;ng ba, trưởng ph&ograve;ng tuy&ecirc;n bố đ&atilde; ho&agrave;n th&agrave;nh xong mọi c&ocirc;ng việc, Sam Sam vừa về đến nh&agrave; trọ l&agrave; nh&agrave;o ngay l&ecirc;n giường ngủ m&ecirc; mệt.<br />\r\n<br />\r\nTrong l&uacute;c mơ m&agrave;ng h&igrave;nh như nghe thấy c&oacute; tiếng điện thoại di động, Sam Sam nhắm tịt mắt lần m&ograve; tr&ecirc;n giường m&atilde;i mới t&igrave;m thấy điện thoại, bấm n&uacute;t nghe theo cảm gi&aacute;c, ậm ừ: &ldquo;A l&ocirc;&rdquo;.<br />\r\n<br />\r\n&ldquo;Ch&agrave;o c&ocirc;, xin hỏi c&oacute; phải l&agrave; c&ocirc; Tiết Sam Sam kh&ocirc;ng ạ?&rdquo;.<br />\r\n<br />\r\n&ldquo;Ừm, v&acirc;ng&rdquo;.<br />\r\n<br />\r\n&ldquo;Đ&acirc;y l&agrave; bệnh viện XX, mời c&ocirc; đến ngay khoa phụ sản bệnh viện XX&rdquo;.<br />\r\n<br />\r\n&ldquo;Ồ&hellip; v&acirc;ng&rdquo;.<br />\r\n<br />\r\nĐối phương vẫn c&ograve;n bla bla một th&ocirc;i một hồi, Sam Sam nghe tai n&agrave;y lại cho ra tai kia, cứ &ldquo;ừ &agrave; ồ&rdquo; đ&aacute;p lại. Cuối c&ugrave;ng b&ecirc;n kia g&aacute;c điện thoại, thế giới đ&atilde; y&ecirc;n tĩnh, Sam Sam r&uacute;c v&agrave;o trong chăn tiếp tục ngủ.<br />\r\n<br />\r\nMấy ph&uacute;t sau, Tiết Sam Sam ngồi bật dậy.<br />\r\n<br />\r\nL&uacute;c n&atilde;y c&ocirc; nghe thấy g&igrave; nhỉ? Bệnh viện?<br />\r\n<br />\r\n!!!!!!!!<br />\r\n<br />\r\nChắc kh&ocirc;ng phải l&agrave; &ocirc;ng b&agrave; gi&agrave; nh&agrave; c&ocirc; xảy ra chuyện g&igrave; chứ!<br />\r\n<br />\r\nSam Sam mang gi&agrave;y v&agrave;o rồi chạy như bay ra cửa, l&uacute;c gọi xe giục t&agrave;i xế l&aacute;i nhanh đến bệnh viện XX, c&ocirc; bỗng nhớ ra &ndash; Kh&ocirc;ng đ&uacute;ng, c&ocirc; đ&atilde; đến l&agrave;m việc ở th&agrave;nh phố S rồi, kh&ocirc;ng c&ograve;n ở qu&ecirc; nữa, bố mẹ kh&ocirc;ng thể n&agrave;o ở bệnh viện th&agrave;nh phố S được, hơn nữa l&uacute;c n&atilde;y h&igrave;nh như c&ocirc; nghe người b&ecirc;n kia n&oacute;i l&agrave;&hellip; khoa phụ sản?<br />\r\n<br />\r\nViệc xảy ra sau đ&oacute; đối với một c&ocirc; n&agrave;ng thường d&acirc;n như Sam Sam m&agrave; n&oacute;i quả đ&uacute;ng l&agrave; ly kỳ hệt tiểu thuyết.<br />\r\n<br />\r\nĐầu ti&ecirc;n l&agrave; khi vừa xuống xe ở cổng bệnh viện, Sam Sam c&ograve;n chưa hết x&oacute;t xa năm mươi tệ tiền xe, th&igrave; đ&atilde; gặp ngay hai g&atilde; đ&agrave;n &ocirc;ng cao to đeo k&iacute;nh đen, c&oacute; vẻ đ&atilde; đợi ở cổng l&acirc;u lắm rồi, hơn nữa vừa nh&igrave;n l&agrave; đ&atilde; nhận ngay ra c&ocirc;.<br />\r\n<br />\r\n&ldquo;C&ocirc; Tiết Sam Sam, xin mời đi theo ch&uacute;ng t&ocirc;i&rdquo;.<br />\r\n<br />\r\nSau đ&oacute; Sam Sam bị hai người đ&oacute; đưa đến trước ph&ograve;ng mổ khoa phụ sản trong nỗi kinh ho&agrave;ng khi gặp phải x&atilde; hội đen, rồi sau đ&oacute; lại bị một người đ&agrave;n &ocirc;ng mồ h&ocirc;i mồ k&ecirc; đầm đ&igrave;a lao đến, nắm chặt lấy tay c&ocirc;.<br />\r\n<br />\r\n&ldquo;C&ocirc; Tiết Sam Sam, xin c&ocirc; h&atilde;y cứu lấy vợ t&ocirc;i&rdquo;.<br />\r\n<br />\r\nSam Sam hoang mang bị anh ta lay lắc dữ dội. &ldquo;Hừm&hellip; chuyện đ&oacute;&hellip;&rdquo;.<br />\r\n<br />\r\nC&oacute; ai n&oacute;i c&ocirc; biết rốt cuộc l&agrave; chuyện g&igrave; kh&ocirc;ng&hellip; C&ograve;n nữa, &ocirc;ng anh n&agrave;y, tay t&ocirc;i sắp bị anh b&oacute;p n&aacute;t vụn ra rồi đ&acirc;y n&agrave;y&hellip;</p>\r\n\r\n<p><iframe frameborder=\"0\" height=\"500\" id=\"mgiframe\" src=\"http://mg.mgid.com/mghtml/framehtml/c/w/e/webtruyen1.com.47735.html\" width=\"100%\"></iframe></p>\r\n\r\n<p><br />\r\n&ldquo;Ng&ocirc;n Thanh, bu&ocirc;ng tay ra&rdquo;.<br />\r\n<br />\r\nMột mệnh lệnh ngắn gọn nhưng v&ocirc; c&ugrave;ng mạnh mẽ, người đ&agrave;n &ocirc;ng t&ecirc;n Ng&ocirc;n Thanh kia lập tức bu&ocirc;ng tay.<br />\r\n<br />\r\nSam Sam bất gi&aacute;c nh&igrave;n về ph&iacute;a ph&aacute;t ra giọng n&oacute;i ấy, sau đ&oacute; mắt như đứng tr&ograve;ng. Chỉ l&agrave; gương mặt nh&igrave;n nghi&ecirc;ng của một người đ&agrave;n &ocirc;ng đang ngồi m&agrave; th&ocirc;i, nhưng lại thu h&uacute;t &aacute;nh mắt c&ocirc; như đang tỏa h&agrave;o quang. H&igrave;nh như người đ&oacute; vừa rời khỏi một buổi tiệc n&agrave;o đ&oacute;, vận một bộ &Acirc;u phục đen rất chỉnh tề, gương mặt hơi mệt mỏi v&agrave; c&oacute; vẻ xa c&aacute;ch cao ngạo theo th&oacute;i quen. Anh giũ giũ vạt &aacute;o rồi đứng dậy, bước lại gần Tiết Sam Sam bằng những bước ch&acirc;n ngạo mạn.<br />\r\n<br />\r\n&ldquo;Tiết Sam Sam?&rdquo;.<br />\r\n<br />\r\nSam Sam đờ đẫn gật đầu.<br />\r\n<br />\r\n&ldquo;Nh&oacute;m m&aacute;u AB Rh-?&rdquo;.<br />\r\n<br />\r\nSam Sam tiếp tục gật đầu.<br />\r\n<br />\r\nNgười đ&agrave;n &ocirc;ng đ&oacute; tuy vẫn giữ vẻ mặt ngạo mạn, nhưng trong &aacute;nh mắt đ&atilde; tho&aacute;ng n&eacute;t nhẹ nh&otilde;m.<br />\r\n<br />\r\n&ldquo;Em g&aacute;i của t&ocirc;i c&ugrave;ng nh&oacute;m m&aacute;u hiếm như c&ocirc;, n&oacute; vừa được đưa v&agrave;o ph&ograve;ng đợi sinh, ng&acirc;n h&agrave;ng m&aacute;u lại thiếu tạm thời, để tr&aacute;nh rủi ro xin c&ocirc; h&atilde;y đợi ở đ&acirc;y ph&ograve;ng l&uacute;c cần đến&rdquo;.<br />\r\n<br />\r\nTh&igrave; ra l&agrave; chuyện n&agrave;y, Sam Sam vỡ lẽ. L&uacute;c kh&aacute;m sức khỏe hồi đại học, c&ocirc; đ&atilde; biết nh&oacute;m m&aacute;u của m&igrave;nh rất hiếm, v&igrave; thế mỗi lần qua đường đều rất cẩn thận, sợ xảy ra sự cố, mất m&aacute;u th&igrave; chết chắc.<br />\r\n<br />\r\n&ldquo;Kh&ocirc;ng sao kh&ocirc;ng sao&rdquo;. Sam Sam bỗng nảy sinh cảm gi&aacute;c &ldquo;đồng bệnh tương l&acirc;n&rdquo; với sản phụ trong ph&ograve;ng kia, nhận lời kh&ocirc;ng ch&uacute;t do dự, c&oacute; điều&hellip;<br />\r\n<br />\r\nSam Sam ngượng ngập n&oacute;i: &ldquo;&Agrave;&hellip; t&ocirc;i c&oacute; thể hỏi một c&acirc;u kh&ocirc;ng?&rdquo;.<br />\r\n<br />\r\n&ldquo;C&ocirc; hỏi đi&rdquo;. R&otilde; r&agrave;ng l&agrave; kẻ cần được gi&uacute;p, nhưng người đ&agrave;n &ocirc;ng kia cứ tỏ vẻ bề tr&ecirc;n, m&agrave; người xung quanh dường như cũng cảm thấy th&aacute;i độ đ&oacute; của anh ta l&agrave; lẽ đương nhi&ecirc;n, đến nỗi Tiết Sam Sam cũng sắp bị ảo gi&aacute;c đ&oacute; mất rồi.<br />\r\n<br />\r\n&ldquo;Ừm&hellip; Mọi người l&agrave; ai vậy?&rdquo;. C&ograve;n nữa, sao họ lại li&ecirc;n lạc được với c&ocirc; chứ?</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><iframe height=\"100%\" id=\"iframe-ns-inread-itvc\" scrolling=\"no\" width=\"100%\"></iframe></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><br />\r\nNgười đ&agrave;n &ocirc;ng đ&oacute; nh&igrave;n Tiết Sam Sam bằng &aacute;nh mắt kỳ quặc v&agrave;i gi&acirc;y, sau đ&oacute; chậm r&atilde;i mở miệng, &ldquo;Kẻ h&egrave;n n&agrave;y l&agrave; Phong Đằng&rdquo;.<br />\r\n<br />\r\nSam Sam nghĩ m&atilde;i rồi n&oacute;i với vẻ xấu hổ, &ldquo;Thế th&igrave;, t&ocirc;i c&oacute; quen anh kh&ocirc;ng?&rdquo;.<br />\r\n<br />\r\nNg&ocirc;n Thanh lau mồ h&ocirc;i. &ldquo;C&ocirc; Tiết &agrave;, c&ocirc; l&agrave; nh&acirc;n vi&ecirc;n c&ocirc;ng ty Phong Đằng phải kh&ocirc;ng. Chẳng lẽ l&uacute;c học bồi dưỡng c&ocirc; chưa học lịch sử ph&aacute;t triển c&ocirc;ng ty, cũng chưa bao giờ l&ecirc;n trang web c&ocirc;ng ty?&rdquo;.<br />\r\n<br />\r\nMiệng Sam Sam l&uacute;c th&igrave; h&aacute; hốc th&agrave;nh chữ O, l&uacute;c lại th&agrave;nh chữ A. C&ocirc;&hellip; c&ocirc; nhớ ra rồi&hellip;<br />\r\n<br />\r\nPhong Đằng(*)&hellip; Phong Đằng&hellip;<br />\r\n<br />\r\n____________<br />\r\n<br />\r\n(*) Chữ Phong 风 trong c&ocirc;ng ty Phong Đằng v&agrave; Phong 封 trong t&ecirc;n của Phong Đằng viết kh&aacute;c nhau nhưng ph&aacute;t &acirc;m giống nhau (ND).<br />\r\n<br />\r\nL&agrave; tổng, tổng, tổng&hellip; gi&aacute;m đốc.<br />\r\n<br />\r\nSam Sam v&ocirc; c&ugrave;ng ngoan ngo&atilde;n ngồi đợi trước ph&ograve;ng sinh l&agrave;m ng&acirc;n h&agrave;ng m&aacute;u tạm thời, trong l&uacute;c đ&oacute; lại bị tổng gi&aacute;m đốc sai bảo đi l&agrave;m x&eacute;t nghiệm m&aacute;u, để chứng minh cơ thể khỏe mạnh, m&aacute;u đạt chuẩn.<br />\r\n<br />\r\nSản phụ trong l&uacute;c sinh quả nhi&ecirc;n c&oacute; l&uacute;c gặp nguy hiểm, Sam Sam ngoan ngo&atilde;n cho r&uacute;t 300cc m&aacute;u, sản phụ đ&atilde; được b&igrave;nh an, Sam Sam ra khỏi bệnh viện trước sự cảm tạ rối r&iacute;t của Ng&ocirc;n Thanh, đi được một l&uacute;c, c&ocirc; dừng lại, nh&igrave;n mặt trăng m&agrave; ngửa đầu thở d&agrave;i thườn thượt.<br />\r\n<br />\r\n&ldquo;Bọn tư bản quả nhi&ecirc;n l&agrave; quỷ h&uacute;t m&aacute;u, v&ocirc; nh&acirc;n t&iacute;nh, qu&aacute; v&ocirc; nh&acirc;n t&iacute;nh&rdquo;.<br />\r\n<br />\r\nSam Sam đang lắc đầu lia lịa kh&ocirc;ng ch&uacute; &yacute; thấy một chiếc xe Limousine d&agrave;i m&agrave;u đen dừng lại sau lưng c&ocirc;, nghe thấy lời than thở của c&ocirc;, người đ&agrave;n &ocirc;ng ngồi ghế sau nhếch m&ocirc;i l&ecirc;n, sau đ&oacute; lại đ&oacute;ng cửa k&iacute;nh xe vừa mở ra ban n&atilde;y.<br />\r\n<br />\r\n&ldquo;L&aacute;i đi&rdquo;.<br />\r\n<br />\r\n&ldquo;Sếp &agrave;, l&uacute;c n&atilde;y sếp chẳng đ&atilde; bảo l&agrave; đưa c&ocirc; Tiết về hay sao?&rdquo;.<br />\r\n<br />\r\n&ldquo;Kh&ocirc;ng cần&rdquo;. Người đ&agrave;n &ocirc;ng n&oacute;i với vẻ dửng dưng, &ldquo;Bọn tư bản đều v&ocirc; nh&acirc;n t&iacute;nh&rdquo;.</p>\r\n', 'VNE-1502206139.jpg', 11, 5, '2017-08-08 03:28:59'),
+(32, 'TÔI NHƯ ÁNH DƯƠNG RỰC RỠ ', '                                            <p>Học kỳ thứ 2 năm tư ấy, là thời kỳ khó khăn nhất tôi phải trải qua trong quãng thời gian học đại học.<br />\r\n<br />\r\nNgày hội tuyển dụng liên tiếp, đủ loại phỏng vấn chồng chất, luận văn phản biện đau đầu phi', '<p><strong>Ta &ndash; nh&igrave;n lại ta.</strong></p>\r\n\r\n<p><em><strong>Một ng&ocirc;i nh&agrave; nho nhỏ, một mảnh đất đủ để trồng c&acirc;y rau, cọng h&agrave;nh, một người vợ hiền v&agrave; hai đứa con ngoan nếp, tẻ. Đ&oacute;, đối với ta l&agrave; qu&aacute; đủ. Từ nhỏ ta ước muốn nhiều thứ. Khi bước v&agrave;o đời cũng n&oacute;ng nảy, s&ocirc;i nổi, bon chen v&agrave; nhiều tham vọng. Gồng m&igrave;nh để h&ograve;a nhập với đời. Chạy đua với vật chất, tiền t&agrave;i, danh vọng. Cố cười bả lả khi nghe những lời xu nịnh hay những lời n&oacute;i đ&atilde;i b&ocirc;i.</strong></em></p>\r\n\r\n<p><em><strong>***</strong></em></p>\r\n\r\n<p><em><strong><img alt=\"ta-nhin-lai-ta\" src=\"http://www.truyenngan.com.vn/images/Phuongvtm/2017-06/ta-nhin-lai-ta.jpg\" style=\"height:640px; width:480px\" /></strong></em></p>\r\n\r\n<p>Nay, ta thấy cuộc đời đ&atilde; đem đến cho ta nhiều may mắn. Tất cả những ước mơ của ta điều trở th&agrave;nh hiện thực. C&oacute; nhiều thứ ta kh&ocirc;ng ước nhưng n&oacute; lại tự t&igrave;m đến với ta. Từ đ&acirc;y, ta kh&ocirc;ng ham muốn phải được c&aacute;i n&agrave;y, phải c&oacute; c&aacute;i kia; kh&ocirc;ng phải bon chen, cầu cạnh hay mưu cầu chuốc lợi điều g&igrave;, chỉ mong tất cả những người th&acirc;n thương của ta lu&ocirc;n hạnh ph&uacute;c, b&igrave;nh an, sức khỏe. Nhiều năm qua ta thấy bản th&acirc;n kh&ocirc;ng r&agrave;ng buộc vật chất, tiền t&agrave;i, ta thấy m&igrave;nh qu&aacute; đủ v&agrave; mỗi ng&agrave;y thấy y&ecirc;u thương những khoảnh khắc, những x&uacute;c cảm b&eacute; nhỏ m&agrave; c&oacute; l&uacute;c m&igrave;nh chẳng kịp nhận ra ngay.</p>\r\n\r\n<p>Những c&aacute;i g&aacute;c ch&acirc;n bất chợt mỗi đ&ecirc;m l&agrave;m giật m&igrave;nh tỉnh giấc. Những c&aacute;i &ocirc;m h&ocirc;n nụng nịu v&agrave;o m&aacute; mỗi khi được nhận qu&agrave;. Những c&acirc;u chuyện kể kh&ocirc;ng đầu, kh&ocirc;ng cuối sau giờ tan học.....của con trẻ đ&oacute; l&agrave; những cảm x&uacute;c b&eacute; nhỏ rất dung dị đời thường đ&atilde; l&agrave;m cho ta y&ecirc;u cuộc sống n&agrave;y hơn.</p>\r\n\r\n<p><iframe frameborder=\"0\" id=\"ifvideoinpage\" scrolling=\"no\" src=\"http://media.adnetwork.vn/assets/player/jwp722/videoinpage-player-jwp722.html?flash=false&amp;volume=30&amp;autoStart=false&amp;skipAd=7&amp;tag=http%3A%2F%2Fdelivery.adnetwork.vn%2F247%2Fxmlvideoad%2Fwid_1377161727%2Fzid_1396944246%2Ftype_inline%2Feff_vidinpage%2Fcb_65118%2Fw_610%2Fh_344%2Fpurl_aHR0cDovL3d3dy50cnV5ZW5uZ2FuLmNvbS52bi90YW0tc3UvNDQxOTYtdGEtbmhpbi1sYWktdGEuaHRtbA%253D%253D&amp;media_path=http%3A%2F%2Fmedia.adnetwork.vn%2Fassets%2F&amp;w=610&amp;h=344\"></iframe></p>\r\n\r\n<p>Ta thấy hiện ở đời c&oacute; rất nhiều người đ&aacute;ng thương: Thương cho người anh khi thấy con của người em học giỏi hơn con m&igrave;nh th&igrave; đ&acirc;m ra đố kị, ganh gh&eacute;t. Thương cho người chị khi thấy cha mẹ để của cải cho người em nhiều hơn th&igrave; đ&acirc;m ra o&aacute;n gh&eacute;t, hận th&ugrave;. Thương cho những người khi thấy đồng nghiệp được thăng chức th&igrave; n&oacute;ng m&agrave;y n&oacute;ng mặt, ch&ecirc; bai. Thương cho người h&agrave;ng x&oacute;m khi thấy nh&agrave; b&ecirc;n cạnh l&agrave;m ăn ph&aacute;t đạt th&igrave; đ&acirc;m ra khiềm kh&iacute;ch, n&oacute;i xấu lẫn nhau. Thương cho những người h&aacute;o danh, h&aacute;o sắc, bị tiền t&agrave;i, danh vọng sai khiến m&agrave; trở n&ecirc;n t&ugrave; tội. Thương cho những người lu&ocirc;n muốn chen lấn, x&ocirc; đẩy, ch&agrave; đạp l&ecirc;n nhau.</p>\r\n\r\n<p>Tại sao ta lại thương nhiều người như thế? Bởi những người n&agrave;y lu&ocirc;n căng &oacute;c n&atilde;o ra suy nghĩ những mưu c&aacute;ch để ứng ph&oacute; với đời. T&acirc;m của họ sẽ lu&ocirc;n lăng xăng, lộn xộn kh&ocirc;ng c&oacute; một ph&uacute;t b&igrave;nh y&ecirc;n, bởi họ lu&ocirc;n t&igrave;m c&aacute;ch mưu cầu c&aacute; nh&acirc;n để t&igrave;m được niềm vui v&agrave; sự thỏa m&atilde;n của c&aacute; nh&acirc;n.</p>\r\n\r\n<p>Ta c&aacute;m ơn những lời giảng dạy của Thiền sư Th&iacute;ch Nhất Hạnh đ&atilde; chỉ dạy cho ta biết vứt bỏ hết mọi ham muốn để t&igrave;m được hạnh ph&uacute;c bản th&acirc;n. V&agrave; từ đ&acirc;y, mỗi ng&agrave;y ta dừng lại v&agrave; nh&igrave;n s&acirc;u v&agrave;o t&acirc;m m&igrave;nh để thấy r&otilde; sự vận h&agrave;nh của t&acirc;m v&agrave; rồi bu&ocirc;ng xả hết những ham muốn. Khi đ&oacute;, ta thấy mọi thứ đều l&agrave; v&ocirc; thường, v&ocirc; ng&atilde;. V&agrave; &quot;c&aacute;m ơn đời, mỗi sớm mai thức dậy, ta c&oacute; th&ecirc;m một ng&agrave;y mới nữa để y&ecirc;u thương.</p>\r\n', 'VNE-1502206193.jpg', 38, 9, '2017-08-08 03:46:34'),
+(33, 'EM SẼ ĐẾN CÙNG CƠN MƯA - ICHIKAMA TAKUJI', '                                                                                        <p><strong>Phải mất đến mấy ngày sau khi đọc xong \"Em sẽ đến cùng cơn mưa\", tôi mới có thể sắp xếp lại những cảm xúc xáo trộn đặc biệt mà trước nay, khi đọc các tác ph', '<p><img alt=\"Em sẽ đến cùng cơn mưa\" src=\"http://www.truyenngan.com.vn/images/linhbp/2015-tieu-thuyet/em-se-den-cung-con-mua.jpg\" style=\"height:771px; width:500px\" /></p>\r\n\r\n<p>Khi Mio qua đời, t&ocirc;i đ&atilde; nghĩ thế n&agrave;y.</p>\r\n\r\n<p>Ai đ&oacute;, người đ&atilde; tạo ra tinh cầu của ch&uacute;ng ta, phải chăng l&uacute;c ấy, đang tạo th&ecirc;m một tinh cầu kh&aacute;c trong vũ trụ...</p>\r\n\r\n<p>Tinh cầu người ta sẽ tới sau khi qua đời.</p>\r\n\r\n<p>Tinh cầu mang t&ecirc;n Lưu Trữ.</p>\r\n\r\n<p>&quot;Lưu Trứ?&quot; Yuji hỏi.</p>\r\n\r\n<p>Kh&ocirc;ng phải, tinh cầu Lưu Trữ.</p>\r\n\r\n<p>&quot;Lưu Trứ?&quot;</p>\r\n\r\n<p>Lưu Trữ.</p>\r\n\r\n<p>&quot;Lưu,&quot; Yuji ngẫm nghĩ rồi n&oacute;i tiếp, &quot;Trứ?&quot;</p>\r\n\r\n<p>Th&ocirc;i được rồi.</p>\r\n\r\n<p>Nơi ấy giống như một thư viện khổng lồ, rất mực y&ecirc;n tĩnh, sạch sẽ v&agrave; ngăn nắp.</p>\r\n\r\n<p>Đại để l&agrave; một nơi rộng m&ecirc;nh m&ocirc;ng, với h&agrave;nh lang d&agrave;i ng&uacute;t mắt chạy xuy&ecirc;n c&aacute;c t&ograve;a nh&agrave;.</p>\r\n\r\n<p>Tại đ&acirc;y, những người r&ograve;i bỏ tinh cầu của ch&uacute;ng ta đang tận hưởng một cuộc sống an b&igrave;nh.</p>\r\n\r\n<p>C&oacute; thể n&oacute;i tinh cầu n&agrave;y ở trong tr&aacute;i tim ch&uacute;ng ta</p>\r\n\r\n<p>&quot;Nghĩa l&agrave; sao ạ?&quot;</p>\r\n\r\n<p>Yuji thắc mắc.</p>\r\n\r\n<p>L&agrave; thế n&agrave;y, khi mẹ Mio qua đời, c&aacute;c c&ocirc; c&aacute;c b&aacute;c đ&atilde; n&oacute;i với Yuji thế n&agrave;o nhỉ? L&agrave; mẹ vẫn ở trong tr&aacute;i tim của con đ&uacute;ng kh&ocirc;ng?</p>\r\n\r\n<p>&quot;V&acirc;ng&quot;</p>\r\n\r\n<p>Bởi vậy, tinh cầu n&agrave;y l&agrave; nơi những người sống ở trong tim của tất cả mọi người tr&ecirc;n thế giới cư ngụ c&ugrave;ng nhau.</p>\r\n\r\n<p>Chừng n&agrave;o vẫn c&oacute; ai đ&oacute; nghĩ đến, họ c&ograve;n được sống ở tinh cầu đ&oacute;.</p>\r\n\r\n<p>&quot;Nếu c&oacute; ai đ&oacute; qu&ecirc;n họ th&igrave; sao ạ?&quot;</p>\r\n\r\n<p>Ừ, th&igrave; họ buộc phải rời tinh cầu.</p>\r\n\r\n<p>Lần n&agrave;y mới l&agrave; &quot;chia tay&quot; thực sự.</p>\r\n\r\n<p>V&agrave;o buổi tối cuối c&ugrave;ng, tất cả bạn b&egrave; sẽ tụ tập lại để tổ chức tiệc chia tay.</p>\r\n\r\n<p>&quot;C&oacute; ăn b&aacute;nh ga t&ocirc; kh&ocirc;ng?&quot;</p>\r\n\r\n<p>C&oacute;, c&oacute; b&aacute;nh ga t&ocirc;.</p>\r\n\r\n<p>&quot;Cả trứng c&aacute; hồi?&quot;</p>\r\n\r\n<p>Ừ, cả trứng c&aacute; hồi. (Trứng c&aacute; hồi l&agrave; m&oacute;n kho&aacute;i khẩu của Yuji.)</p>\r\n\r\n<p>&quot;Thế c&ograve;n...&quot;</p>\r\n\r\n<p>Đủ mọi thứ. Con kh&ocirc;ng phải lo.</p>\r\n\r\n<p>&quot;Thế, tinh cầu ấy c&oacute; Jim Button kh&ocirc;ng?&quot;</p>\r\n\r\n<p>Sao cơ?</p>\r\n\r\n<p>&quot;V&igrave; con biết Jim Button. Tức l&agrave; Jim Button ở trong tr&aacute;i tim con phải kh&ocirc;ng?&quot;</p>\r\n\r\n<p>Ừ, ừ (tối qua, t&ocirc;i đ&atilde; đọc cho Yuji nghe truyện Jim Button v&agrave; b&aacute;c l&aacute;i t&agrave;u Luke), bố nghĩ l&agrave; c&oacute;, c&oacute; thể lắm.</p>\r\n\r\n<p>&quot;Thế c&ograve;n đầu m&aacute;y Emma? Emma cũng ở đấy chứ?&quot;</p>\r\n\r\n<p>Emma kh&ocirc;ng ở đấy.</p>\r\n\r\n<p>Chỉ c&oacute; con người mới ở đấy th&ocirc;i.</p>\r\n\r\n<p>&quot;Hừm&quot; Yuji n&oacute;i</p>\r\n\r\n<p>C&oacute; Jim Button, c&oacute; cả Momo (t&ecirc;n nh&acirc;n vật ch&iacute;nh trong truyện thiếu nhi c&ugrave;ng t&ecirc;n của nh&agrave; văn Michael Ende.)</p>\r\n\r\n<p>C&oacute; cả c&ocirc; b&eacute; qu&agrave;ng khăn đỏ, đương nhi&ecirc;n cả Anne Frank (c&ocirc; b&eacute; người Đức gốc Do Th&aacute;i, t&aacute;c giả cuốn nhật k&iacute; nổi tiếng Nhật k&iacute; Anne Frank) nữa, Hitler v&agrave; Rudolf Hess (Cận vệ th&acirc;n t&iacute;n của Hitler dưới thời Đức Quốc x&atilde;) chắc cũng ở đ&oacute;.<br />\r\nC&oacute; cả Aristotle v&agrave; Newton.</p>\r\n\r\n<p>&quot;Mọi người l&agrave;m g&igrave; ở trong đ&oacute; ạ?&quot;</p>\r\n\r\n<p>L&agrave;m g&igrave; &agrave;, họ cứ lặng lẽ sống th&ocirc;i.</p>\r\n\r\n<p>&quot;Chỉ thế th&ocirc;i?&quot;</p>\r\n\r\n<p>Chỉ thế th&ocirc;i l&agrave; sao, &agrave;, c&oacute; lẽ họ c&ograve;n suy nghĩ về điều g&igrave; đ&oacute; chăng?</p>\r\n\r\n<p>&quot;Suy nghĩ? Nghĩ g&igrave; thế ạ?&quot;</p>\r\n\r\n<p>Điều g&igrave; đ&oacute; v&ocirc; c&ugrave;ng phức tạp. Phải suy nghĩ rất claau mới ra được c&acirc;u trả lời. V&igrave; thế, ngay cả khi đến tinh cầu Lưu Trữ, họ vẫn tiếp tục suy nghĩ.</p>\r\n\r\n<p>&quot;Cả mẹ cũng thế?&quot;Kh&ocirc;ng, mẹ chỉ nghĩ về Yuji.</p>\r\n\r\n<p>&quot;Thật hả?&quot;</p>\r\n\r\n<p>Thật.</p>\r\n\r\n<p>N&ecirc;n Yuji kh&ocirc;ng được qu&ecirc;n mẹ đ&acirc;u đấy.</p>\r\n\r\n<p>&quot;Con kh&ocirc;ng qu&ecirc;n đ&acirc;u.&quot;</p>\r\n\r\n<p>Nhưng con c&ograve;n nhỏ qu&aacute;. Mới ở được với mẹ c&oacute; năm năm.</p>\r\n\r\n<p>&quot;V&acirc;ng&quot;</p>\r\n\r\n<p>Vậy bố sẽ kể cho con trước kia mẹ l&agrave; c&ocirc; g&aacute;i như thế n&agrave;o.</p>\r\n\r\n<p>Mẹ đ&atilde; gặp v&agrave; kết h&ocirc;n với bố ra sao.</p>\r\n\r\n<p>Mẹ đ&atilde; vui mừng thế n&agrave;o khi Yuji ch&agrave;o đời.</p>\r\n\r\n<p>&quot;V&acirc;ng&quot;</p>\r\n\r\n<p>Bố mong con sẽ lu&ocirc;n nhớ những điều ấy.</p>\r\n\r\n<p>Nhất định con phải nhớ đến mẹ đấy, để khi đến lượt bố đến tinh cầu ấy, bố vẫn c&oacute; thể gặp được mẹ.</p>\r\n\r\n<p>Con hiểu chứ?</p>\r\n\r\n<p>&quot;G&igrave; ạ?&quot;</p>\r\n\r\n<p>Th&ocirc;i được rồi.</p>\r\n', 'VNE-1502206295.jpg', 61, 5, '2017-08-08 16:52:00');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(255) NOT NULL,
+  `username` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `fullname` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `fullname`) VALUES
+(1, 'admin', 'vinaenter22', 'Admin'),
+(3, 'admindemo', 'vinaenter22', 'vinaenter'),
+(4, 'user', 'vinaenter22', 'user');
+
+--
+-- Chỉ mục cho các bảng đã đổ
+--
+
+--
+-- Chỉ mục cho bảng `cat`
+--
+ALTER TABLE `cat`
+  ADD PRIMARY KEY (`cat_id`);
+
+--
+-- Chỉ mục cho bảng `contact`
+--
+ALTER TABLE `contact`
+  ADD PRIMARY KEY (`contact_id`);
+
+--
+-- Chỉ mục cho bảng `story`
+--
+ALTER TABLE `story`
+  ADD PRIMARY KEY (`story_id`);
+
+--
+-- Chỉ mục cho bảng `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
+--
+
+--
+-- AUTO_INCREMENT cho bảng `cat`
+--
+ALTER TABLE `cat`
+  MODIFY `cat_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT cho bảng `contact`
+--
+ALTER TABLE `contact`
+  MODIFY `contact_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT cho bảng `story`
+--
+ALTER TABLE `story`
+  MODIFY `story_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
+--
+-- AUTO_INCREMENT cho bảng `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- Cơ sở dữ liệu: `chotel`
+--
+CREATE DATABASE IF NOT EXISTS `chotel` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `chotel`;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `aboutus`
+--
+
+CREATE TABLE `aboutus` (
+  `aid` int(255) NOT NULL,
+  `preview_text` text COLLATE utf8_unicode_ci NOT NULL,
+  `detail_text` text COLLATE utf8_unicode_ci NOT NULL,
+  `picture` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `active` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `aboutus`
+--
+
+INSERT INTO `aboutus` (`aid`, `preview_text`, `detail_text`, `picture`, `active`) VALUES
+(3, 'VinaTAB thiết kế website theo chuẩn W3C, thông minh và tối ưu hóa google: Giúp cho Google tìm thấy những nội dung trang web của bạn dễ hơn, nhanh hơn với thứ hạng cao. Website tải NHANH, giao diện ĐẸP, quản trị DỄ DÀNG, THÂN THIỆN với người dùng. Tích hợp cung cụ thông minh, nhận biết khách hàng đang muốn gì, để đưa ra chiến lược bán hàng phù hợp.\r\n\r\nGiải pháp quảng bá thương hiệu, marketing online tăng lượng truy cập, đưa khách hàng tiềm năng tới website. Khám bệnh website, đẩy hàng loạt từ khóa tiềm năng lên TOP GOOGLE, tăng nhanh doanh số bán hàng!', 'VinaTAB thiết kế website theo chuẩn W3C, thông minh và tối ưu hóa google: Giúp cho Google tìm thấy những nội dung trang web của bạn dễ hơn, nhanh hơn với thứ hạng cao. Website tải NHANH, giao diện ĐẸP, quản trị DỄ DÀNG, THÂN THIỆN với người dùng. Tích hợp cung cụ thông minh, nhận biết khách hàng đang muốn gì, để đưa ra chiến lược bán hàng phù hợp.\r\n\r\nGiải pháp quảng bá thương hiệu, marketing online tăng lượng truy cập, đưa khách hàng tiềm năng tới website. Khám bệnh website, đẩy hàng loạt từ khóa tiềm năng lên TOP GOOGLE, tăng nhanh doanh số bán hàng!', 'tj8dfVjFhnTLnMNxPkcOSycfT1hvvA96zUexbXY3.png', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `rooms`
+--
+
+CREATE TABLE `rooms` (
+  `rid` int(255) NOT NULL,
+  `rname` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `description` text COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `type_id` int(255) NOT NULL,
+  `picture` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `uid` int(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `rooms`
+--
+
+INSERT INTO `rooms` (`rid`, `rname`, `description`, `created_at`, `updated_at`, `type_id`, `picture`, `uid`) VALUES
+(2, 'Suite 001', '<p>Ph&ograve;ng Suite 001 - Gi&aacute; ph&ograve;ng: 999.99$/day (bao gồm ăn s&aacute;ng tự chọn, VAT &amp; ph&iacute; phục vụ. ) - Miễn ph&iacute; tiền ph&ograve;ng cho tối đa 02 b&eacute; dưới 10 tuổi ngủ chung với bố mẹ (kh&ocirc;ng bố tr&iacute; th&ecirc;m giường, kh&ocirc;ng miễn ph&iacute; ăn s&aacute;ng). - Kh&aacute;ch sạn sẽ giữ ph&ograve;ng đ&atilde; đăng k&yacute; trước theo ng&agrave;y đến chậm nhất l&agrave; 18h00, ngoại trừ những trường hợp được th&ocirc;ng b&aacute;o trước hoặc đặt ph&ograve;ng c&oacute; bảo đảm. - Giờ nhận ph&ograve;ng : 14h00 - Giờ trả ph&ograve;ng : 12h00 trưa - Trả ph&ograve;ng trễ : + Trước 18h00 : t&iacute;nh th&ecirc;m 50% + Sau 18h00 : t&iacute;nh th&agrave;nh 100% - Gi&aacute; ph&ograve;ng tr&ecirc;n c&oacute; thể thay đổi m&agrave; kh&ocirc;ng phải b&aacute;o trước. - Giảm gi&aacute; đặc biệt cho kh&aacute;ch đi theo đo&agrave;n v&agrave; kh&aacute;ch ở d&agrave;i hạn. - Thanh to&aacute;n c&aacute;c loại thẻ : MASTER, VISA -L&agrave; loại ph&ograve;ng cao cấp nhất trong một kh&aacute;ch sạn, thường ở tầng cao nhất với c&aacute;c trang bị v&agrave; dịch vụ đặc biệt. Th&ocirc;ng thường mỗi ph&ograve;ng Suite gồm 1 ph&ograve;ng ngủ, 1 ph&ograve;ng kh&aacute;ch, 2 ph&ograve;ng vệ sinh v&agrave; nhiều ban c&ocirc;ng hướng đẹp nhất.</p>', '2017-08-18 05:38:29', '2017-08-18 10:38:29', 1, '', 4),
+(4, 'Suite 002', '<p>Ph&ograve;ng Suite 003 - Gi&aacute; ph&ograve;ng bao gồm ăn s&aacute;ng tự chọn, VAT &amp; ph&iacute; phục vụ. - C&oacute; view nh&igrave;n ra biển - C&oacute; c&aacute;c loại h&igrave;nh nh&agrave; h&agrave;ng, bar, ph&ograve;ng gym - Miễn ph&iacute; tiền ph&ograve;ng cho tối đa 02 b&eacute; dưới 10 tuổi ngủ chung với bố mẹ (kh&ocirc;ng bố tr&iacute; th&ecirc;m giường, kh&ocirc;ng miễn ph&iacute; ăn s&aacute;ng). - Kh&aacute;ch sạn sẽ giữ ph&ograve;ng đ&atilde; đăng k&yacute; trước theo ng&agrave;y đến chậm nhất l&agrave; 18h00, ngoại trừ những trường hợp được th&ocirc;ng b&aacute;o trước hoặc đặt ph&ograve;ng c&oacute; bảo đảm. - Giờ nhận ph&ograve;ng : 14h00 - Giờ trả ph&ograve;ng : 12h00 trưa - Trả ph&ograve;ng trễ : + Trước 18h00 : t&iacute;nh th&ecirc;m 50% + Sau 18h00 : t&iacute;nh th&agrave;nh 100% - Gi&aacute; ph&ograve;ng tr&ecirc;n c&oacute; thể thay đổi m&agrave; kh&ocirc;ng phải b&aacute;o trước. - Giảm gi&aacute; đặc biệt cho kh&aacute;ch đi theo đo&agrave;n v&agrave; kh&aacute;ch ở d&agrave;i hạn. - Thanh to&aacute;n c&aacute;c loại thẻ : MASTER, VISA -L&agrave; loại ph&ograve;ng cao cấp nhất trong một kh&aacute;ch sạn, thường ở tầng cao nhất với c&aacute;c trang bị v&agrave; dịch vụ đặc biệt. Th&ocirc;ng thường mỗi ph&ograve;ng Suite gồm 1 ph&ograve;ng ngủ, 1 ph&ograve;ng kh&aacute;ch, 2 ph&ograve;ng vệ sinh v&agrave; nhiều ban c&ocirc;ng hướng đẹp nhất.</p>\r\n\r\n<p>&nbsp;</p>', '2017-08-18 05:38:24', '2017-08-18 10:38:24', 1, '', 4),
+(5, 'Suite 003', 'Mô tả', '2017-08-11 19:05:58', '2018-09-11 13:26:42', 1, 'Nh4FFTVMypZIkGVfqzJfpsxY4hpp6MdN7rsDJo3Z.jpeg', 5),
+(6, 'Suite 004', 'Phòng Suite 001 - Giá phòng: 999.99$/day (bao gồm ăn sáng tự chọn, VAT & phí phục vụ. ) - Miễn phí tiền phòng cho tối đa 02 bé dưới 10 tuổi ngủ chung với bố mẹ (không bố trí thêm giường, không miễn phí ăn sáng). - Khách sạn sẽ giữ phòng đã đăng ký trước theo ngày đến chậm nhất là 18h00, ngoại trừ những trường hợp được thông báo trước hoặc đặt phòng có bảo đảm. - Giờ nhận phòng : 14h00 - Giờ trả phòng : 12h00 trưa - Trả phòng trễ : + Trước 18h00 : tính thêm 50% + Sau 18h00 : tính thành 100% - Giá phòng trên có thể thay đổi mà không phải báo trước. - Giảm giá đặc biệt cho khách đi theo đoàn và khách ở dài hạn. - Thanh toán các loại thẻ : MASTER, VISA -Là loại phòng cao cấp nhất trong một khách sạn, thường ở tầng cao nhất với các trang bị và dịch vụ đặc biệt. Thông thường mỗi phòng Suite gồm 1 phòng ngủ, 1 phòng khách, 2 phòng vệ sinh và nhiều ban công hướng đẹp nhất.', '2017-08-11 19:07:09', '2017-08-12 00:07:09', 1, '0OxjN9rG7Y0jzoGCAzg3nvLY5A3KwX3aSHPdX1JA.jpeg', 4),
+(7, 'Deluxe 001', 'Giá : 699.99$/day\r\n\r\nPhòng nằm từ tầng thứ 3 đến tầng 10 của  Hotel - phòng Deluxe mang đến một không gian nhẹ nhàng và thanh lịch.\r\n\r\nPhòng tắm bằng đá cẩm thạch đầy đủ bao gồm một bồn tắm với vòi sen, đồ dùng vệ sinh với phòng tắm đầy đủ và tiện nghi\r\n\r\nCác phòng có máy lạnh,  TV màn hình phẳng, két an toàn và minibar. Phòng tắm riêng bằng đá cẩm thạch có bồn tắm ngâm sâu, vòi sen và đồ dùng vệ sinh miễn phí.', '2017-08-11 19:04:22', '2017-08-12 00:04:22', 2, '7S0HsuopMTNdiiqNyaX4N6XD5VMRHHJa2qT1dXut.jpeg', 5),
+(8, 'Deluxe 002', 'Giá : 599.99$/day\r\n\r\nPhòng nằm từ tầng thứ 3 đến tầng 10 của  Hotel - phòng Deluxe mang đến một không gian nhẹ nhàng và thanh lịch.\r\n\r\nPhòng tắm bằng đá cẩm thạch đầy đủ bao gồm một bồn tắm với vòi sen, đồ dùng vệ sinh với phòng tắm đầy đủ và tiện nghi\r\n\r\nCác phòng có máy lạnh,  TV màn hình phẳng, két an toàn và minibar. Phòng tắm riêng bằng đá cẩm thạch có bồn tắm ngâm sâu, vòi sen và đồ dùng vệ sinh miễn phí.', '2017-08-11 19:05:24', '0000-00-00 00:00:00', 2, 'osJhnaDBbt0vlzUZLjBYmPHZWg77TRwQZhLtjt5J.jpeg', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `room_type`
+--
+
+CREATE TABLE `room_type` (
+  `type_id` int(255) NOT NULL,
+  `tname` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `room_type`
+--
+
+INSERT INTO `room_type` (`type_id`, `tname`) VALUES
+(1, 'Phòng Suite (SUT)'),
+(2, 'Phòng Deluxe (DLX)'),
+(3, 'Phòng Superior (SUP)');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `fullname` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `fullname`) VALUES
+(1, 'admin', '$2y$10$Z1Ohtzq1V1Ed7JhulqqRAOaWoNIpPgHBycV1qpi77hnM0jcVkyGZi', 'Nguyễn Vă nB'),
+(2, 'admindemo', '$2y$10$jN1nKgIU/ZMZMfKz.8Xk9OapwbD0GcfUWCbOfva5YW3xFW.iA8pxq', 'VinaEnter EDU'),
+(3, 'mod', '$2y$10$jN1nKgIU/ZMZMfKz.8Xk9OapwbD0GcfUWCbOfva5YW3xFW.iA8pxq', 'Mod hệ thống');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `utilities`
+--
+
+CREATE TABLE `utilities` (
+  `uid` int(255) NOT NULL,
+  `uname` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `utilities`
+--
+
+INSERT INTO `utilities` (`uid`, `uname`) VALUES
+(1, 'tivi'),
+(2, 'Tủ lạnh'),
+(3, 'Bàn làm việc'),
+(4, 'Đa dạng'),
+(5, 'TiVI 4K, Tủ lạnh. v..v..');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `vnecontact`
+--
+
+CREATE TABLE `vnecontact` (
+  `cid` int(255) NOT NULL,
+  `fullname` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `subject` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `content` text COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Chỉ mục cho các bảng đã đổ
+--
+
+--
+-- Chỉ mục cho bảng `aboutus`
+--
+ALTER TABLE `aboutus`
+  ADD PRIMARY KEY (`aid`);
+
+--
+-- Chỉ mục cho bảng `rooms`
+--
+ALTER TABLE `rooms`
+  ADD PRIMARY KEY (`rid`);
+
+--
+-- Chỉ mục cho bảng `room_type`
+--
+ALTER TABLE `room_type`
+  ADD PRIMARY KEY (`type_id`);
+
+--
+-- Chỉ mục cho bảng `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `utilities`
+--
+ALTER TABLE `utilities`
+  ADD PRIMARY KEY (`uid`);
+
+--
+-- Chỉ mục cho bảng `vnecontact`
+--
+ALTER TABLE `vnecontact`
+  ADD PRIMARY KEY (`cid`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
+--
+
+--
+-- AUTO_INCREMENT cho bảng `aboutus`
+--
+ALTER TABLE `aboutus`
+  MODIFY `aid` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT cho bảng `rooms`
+--
+ALTER TABLE `rooms`
+  MODIFY `rid` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT cho bảng `room_type`
+--
+ALTER TABLE `room_type`
+  MODIFY `type_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT cho bảng `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT cho bảng `utilities`
+--
+ALTER TABLE `utilities`
+  MODIFY `uid` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT cho bảng `vnecontact`
+--
+ALTER TABLE `vnecontact`
+  MODIFY `cid` int(255) NOT NULL AUTO_INCREMENT;
+--
+-- Cơ sở dữ liệu: `datingtonight`
+--
+CREATE DATABASE IF NOT EXISTS `datingtonight` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `datingtonight`;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `administrator`
 --
 
 CREATE TABLE `administrator` (
@@ -37,7 +632,7 @@ CREATE TABLE `administrator` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `administrator`
+-- Đang đổ dữ liệu cho bảng `administrator`
 --
 
 INSERT INTO `administrator` (`id_admin`, `username`, `password`, `fullname`, `id_role`) VALUES
@@ -50,7 +645,7 @@ INSERT INTO `administrator` (`id_admin`, `username`, `password`, `fullname`, `id
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin_role`
+-- Cấu trúc bảng cho bảng `admin_role`
 --
 
 CREATE TABLE `admin_role` (
@@ -59,7 +654,7 @@ CREATE TABLE `admin_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `admin_role`
+-- Đang đổ dữ liệu cho bảng `admin_role`
 --
 
 INSERT INTO `admin_role` (`id_role`, `name_role`) VALUES
@@ -72,7 +667,7 @@ INSERT INTO `admin_role` (`id_role`, `name_role`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `body`
+-- Cấu trúc bảng cho bảng `body`
 --
 
 CREATE TABLE `body` (
@@ -81,19 +676,19 @@ CREATE TABLE `body` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `body`
+-- Đang đổ dữ liệu cho bảng `body`
 --
 
 INSERT INTO `body` (`id`, `body`) VALUES
+(0, 'Please input your body'),
 (1, 'Slim'),
 (2, 'Thin'),
-(3, 'Fat'),
-(4, 'Anything');
+(3, 'Fat');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `city`
+-- Cấu trúc bảng cho bảng `city`
 --
 
 CREATE TABLE `city` (
@@ -102,7 +697,7 @@ CREATE TABLE `city` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `city`
+-- Đang đổ dữ liệu cho bảng `city`
 --
 
 INSERT INTO `city` (`id`, `city`) VALUES
@@ -113,7 +708,7 @@ INSERT INTO `city` (`id`, `city`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comment_dating_places`
+-- Cấu trúc bảng cho bảng `comment_dating_places`
 --
 
 CREATE TABLE `comment_dating_places` (
@@ -127,7 +722,7 @@ CREATE TABLE `comment_dating_places` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comment_dating_places_rep`
+-- Cấu trúc bảng cho bảng `comment_dating_places_rep`
 --
 
 CREATE TABLE `comment_dating_places_rep` (
@@ -141,7 +736,7 @@ CREATE TABLE `comment_dating_places_rep` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `constellation`
+-- Cấu trúc bảng cho bảng `constellation`
 --
 
 CREATE TABLE `constellation` (
@@ -150,19 +745,19 @@ CREATE TABLE `constellation` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `constellation`
+-- Đang đổ dữ liệu cho bảng `constellation`
 --
 
 INSERT INTO `constellation` (`id`, `constellation`) VALUES
+(0, 'Your constellation'),
 (1, 'Aquarius'),
 (2, 'Scorpion'),
-(3, 'Lion'),
-(4, 'Anything');
+(3, 'Lion');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `datingplaces`
+-- Cấu trúc bảng cho bảng `datingplaces`
 --
 
 CREATE TABLE `datingplaces` (
@@ -178,7 +773,7 @@ CREATE TABLE `datingplaces` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `datingplaces`
+-- Đang đổ dữ liệu cho bảng `datingplaces`
 --
 
 INSERT INTO `datingplaces` (`id_place`, `name_place`, `city`, `id_type`, `preview_text`, `detail_place`, `picture`, `date_created`, `count_number`) VALUES
@@ -196,7 +791,7 @@ INSERT INTO `datingplaces` (`id_place`, `name_place`, `city`, `id_type`, `previe
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dating_place_picture`
+-- Cấu trúc bảng cho bảng `dating_place_picture`
 --
 
 CREATE TABLE `dating_place_picture` (
@@ -212,7 +807,7 @@ CREATE TABLE `dating_place_picture` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dating_place_type`
+-- Cấu trúc bảng cho bảng `dating_place_type`
 --
 
 CREATE TABLE `dating_place_type` (
@@ -221,7 +816,7 @@ CREATE TABLE `dating_place_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `dating_place_type`
+-- Đang đổ dữ liệu cho bảng `dating_place_type`
 --
 
 INSERT INTO `dating_place_type` (`id_type`, `name_type`) VALUES
@@ -232,7 +827,7 @@ INSERT INTO `dating_place_type` (`id_type`, `name_type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `drinking`
+-- Cấu trúc bảng cho bảng `drinking`
 --
 
 CREATE TABLE `drinking` (
@@ -241,18 +836,18 @@ CREATE TABLE `drinking` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `drinking`
+-- Đang đổ dữ liệu cho bảng `drinking`
 --
 
 INSERT INTO `drinking` (`id`, `drink`) VALUES
+(0, 'Do you have drink?'),
 (1, 'Usually'),
-(2, 'No drinking'),
-(3, 'Anything');
+(2, 'No drinking');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `educational_level`
+-- Cấu trúc bảng cho bảng `educational_level`
 --
 
 CREATE TABLE `educational_level` (
@@ -261,18 +856,18 @@ CREATE TABLE `educational_level` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `educational_level`
+-- Đang đổ dữ liệu cho bảng `educational_level`
 --
 
 INSERT INTO `educational_level` (`id`, `level`) VALUES
+(0, 'Educational level'),
 (1, 'University'),
-(2, 'College'),
-(3, 'Anything');
+(2, 'College');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `eye_color`
+-- Cấu trúc bảng cho bảng `eye_color`
 --
 
 CREATE TABLE `eye_color` (
@@ -281,19 +876,19 @@ CREATE TABLE `eye_color` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `eye_color`
+-- Đang đổ dữ liệu cho bảng `eye_color`
 --
 
 INSERT INTO `eye_color` (`id`, `color`) VALUES
+(0, 'Please input your eye color'),
 (1, 'Red'),
 (2, 'Green'),
-(3, 'Yellow'),
-(4, 'Anything');
+(3, 'Yellow');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `flirtingmethods`
+-- Cấu trúc bảng cho bảng `flirtingmethods`
 --
 
 CREATE TABLE `flirtingmethods` (
@@ -309,7 +904,7 @@ CREATE TABLE `flirtingmethods` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `flirtingmethods`
+-- Đang đổ dữ liệu cho bảng `flirtingmethods`
 --
 
 INSERT INTO `flirtingmethods` (`id`, `name_flirting`, `preview_text`, `detail_flirting`, `author`, `id_gender`, `count_number`, `date_created`, `image`) VALUES
@@ -325,7 +920,7 @@ INSERT INTO `flirtingmethods` (`id`, `name_flirting`, `preview_text`, `detail_fl
 -- --------------------------------------------------------
 
 --
--- Table structure for table `gender`
+-- Cấu trúc bảng cho bảng `gender`
 --
 
 CREATE TABLE `gender` (
@@ -335,18 +930,18 @@ CREATE TABLE `gender` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `gender`
+-- Đang đổ dữ liệu cho bảng `gender`
 --
 
 INSERT INTO `gender` (`id`, `gender`, `icon`) VALUES
 (1, 'Male', '<i class=\"fas fa-male\"></i>'),
 (4, 'Female', '<i class=\"fas fa-female\"></i>'),
-(6, 'Male & Female', '<i class=\"fas fa-male\"></i> <i class=\"fas fa-heart\"></i> <i class=\"fas fa-female\"></i>');
+(6, 'Other', '<i class=\"fas fa-male\"></i> <i class=\"fas fa-heart\"></i> <i class=\"fas fa-female\"></i>');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `hair_color`
+-- Cấu trúc bảng cho bảng `hair_color`
 --
 
 CREATE TABLE `hair_color` (
@@ -355,19 +950,19 @@ CREATE TABLE `hair_color` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `hair_color`
+-- Đang đổ dữ liệu cho bảng `hair_color`
 --
 
 INSERT INTO `hair_color` (`id`, `color`) VALUES
+(0, 'Please input hair color'),
 (1, 'Red'),
 (2, 'Green'),
-(3, 'Yellow'),
-(4, 'Anything');
+(3, 'Yellow');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `hair_length`
+-- Cấu trúc bảng cho bảng `hair_length`
 --
 
 CREATE TABLE `hair_length` (
@@ -376,18 +971,18 @@ CREATE TABLE `hair_length` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `hair_length`
+-- Đang đổ dữ liệu cho bảng `hair_length`
 --
 
 INSERT INTO `hair_length` (`id`, `length`) VALUES
+(0, 'Please input your hair length'),
 (1, 'Long'),
-(2, 'Short'),
-(3, 'Anything');
+(2, 'Short');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `hair_style`
+-- Cấu trúc bảng cho bảng `hair_style`
 --
 
 CREATE TABLE `hair_style` (
@@ -396,17 +991,17 @@ CREATE TABLE `hair_style` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `hair_style`
+-- Đang đổ dữ liệu cho bảng `hair_style`
 --
 
 INSERT INTO `hair_style` (`id`, `style`) VALUES
-(1, 'Curly'),
-(2, 'Anything');
+(0, 'Please input your hair style'),
+(1, 'Curly');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `have_children`
+-- Cấu trúc bảng cho bảng `have_children`
 --
 
 CREATE TABLE `have_children` (
@@ -415,17 +1010,18 @@ CREATE TABLE `have_children` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `have_children`
+-- Đang đổ dữ liệu cho bảng `have_children`
 --
 
 INSERT INTO `have_children` (`id`, `children`) VALUES
+(0, 'Do you have children?'),
 (1, 'No Children'),
 (2, 'Anything');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `house_type`
+-- Cấu trúc bảng cho bảng `house_type`
 --
 
 CREATE TABLE `house_type` (
@@ -434,18 +1030,18 @@ CREATE TABLE `house_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `house_type`
+-- Đang đổ dữ liệu cho bảng `house_type`
 --
 
 INSERT INTO `house_type` (`id`, `type`) VALUES
+(0, 'What type of your house?'),
 (1, 'Department'),
-(2, 'Villa'),
-(3, 'Anything');
+(2, 'Villa');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `job_status`
+-- Cấu trúc bảng cho bảng `job_status`
 --
 
 CREATE TABLE `job_status` (
@@ -454,18 +1050,18 @@ CREATE TABLE `job_status` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `job_status`
+-- Đang đổ dữ liệu cho bảng `job_status`
 --
 
 INSERT INTO `job_status` (`id`, `status`) VALUES
+(0, 'Do you have job?'),
 (1, 'No Job'),
-(2, 'Have Job'),
-(3, 'Anything');
+(2, 'Have Job');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `language`
+-- Cấu trúc bảng cho bảng `language`
 --
 
 CREATE TABLE `language` (
@@ -474,18 +1070,18 @@ CREATE TABLE `language` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `language`
+-- Đang đổ dữ liệu cho bảng `language`
 --
 
 INSERT INTO `language` (`id`, `language`) VALUES
+(0, 'Your language'),
 (1, 'Vietnamese'),
-(2, 'English'),
-(3, 'Anything');
+(2, 'English');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `live_with`
+-- Cấu trúc bảng cho bảng `live_with`
 --
 
 CREATE TABLE `live_with` (
@@ -494,18 +1090,18 @@ CREATE TABLE `live_with` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `live_with`
+-- Đang đổ dữ liệu cho bảng `live_with`
 --
 
 INSERT INTO `live_with` (`id`, `livewith`) VALUES
+(0, 'You live with?'),
 (1, 'Parent'),
-(2, 'Alone'),
-(3, 'Anything');
+(2, 'Alone');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `message`
+-- Cấu trúc bảng cho bảng `message`
 --
 
 CREATE TABLE `message` (
@@ -517,7 +1113,7 @@ CREATE TABLE `message` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `message`
+-- Đang đổ dữ liệu cho bảng `message`
 --
 
 INSERT INTO `message` (`id`, `fromuser`, `touser`, `content`, `time`) VALUES
@@ -526,7 +1122,7 @@ INSERT INTO `message` (`id`, `fromuser`, `touser`, `content`, `time`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `national`
+-- Cấu trúc bảng cho bảng `national`
 --
 
 CREATE TABLE `national` (
@@ -535,18 +1131,18 @@ CREATE TABLE `national` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `national`
+-- Đang đổ dữ liệu cho bảng `national`
 --
 
 INSERT INTO `national` (`id`, `national`) VALUES
+(0, 'Your national'),
 (1, 'Vietnamese'),
-(2, 'USA'),
-(3, 'Anything');
+(2, 'USA');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `religion`
+-- Cấu trúc bảng cho bảng `religion`
 --
 
 CREATE TABLE `religion` (
@@ -555,17 +1151,17 @@ CREATE TABLE `religion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `religion`
+-- Đang đổ dữ liệu cho bảng `religion`
 --
 
 INSERT INTO `religion` (`id`, `religion`) VALUES
-(1, 'Budha'),
-(2, 'Anything');
+(0, 'Your religion'),
+(1, 'Budha');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `smoking`
+-- Cấu trúc bảng cho bảng `smoking`
 --
 
 CREATE TABLE `smoking` (
@@ -574,18 +1170,18 @@ CREATE TABLE `smoking` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `smoking`
+-- Đang đổ dữ liệu cho bảng `smoking`
 --
 
 INSERT INTO `smoking` (`id`, `smoke`) VALUES
+(0, 'Do you smoke?'),
 (1, 'Usually'),
-(2, 'Never'),
-(3, 'Anything');
+(2, 'Never');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Cấu trúc bảng cho bảng `users`
 --
 
 CREATE TABLE `users` (
@@ -593,49 +1189,51 @@ CREATE TABLE `users` (
   `username` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
   `Fullname` varchar(255) NOT NULL,
-  `Avatar` varchar(255) DEFAULT NULL,
+  `Avatar` varchar(255) DEFAULT 'default.jpg',
   `email` text NOT NULL,
   `phone_number` text NOT NULL,
   `Facebook` varchar(255) NOT NULL,
   `Gender` int(11) DEFAULT NULL,
   `City` int(11) DEFAULT NULL,
   `Birthdate` date DEFAULT NULL,
-  `Hair_color` int(11) DEFAULT NULL,
-  `Hair_length` int(11) DEFAULT NULL,
-  `Hair_style` int(11) DEFAULT NULL,
-  `Eye_color` int(11) DEFAULT NULL,
-  `Height` int(11) DEFAULT NULL,
-  `Weight` int(11) DEFAULT NULL,
-  `Body` int(11) DEFAULT NULL,
-  `Drinking` int(11) DEFAULT NULL,
-  `Smoking` int(11) DEFAULT NULL,
-  `Job_status` int(11) DEFAULT NULL,
-  `Home_type` int(11) DEFAULT NULL,
-  `Live_with` int(11) DEFAULT NULL,
-  `Have_children` int(11) DEFAULT NULL,
-  `National` int(11) DEFAULT NULL,
-  `Educational_level` int(11) DEFAULT NULL,
-  `Language` int(11) DEFAULT NULL,
-  `Religion` int(11) DEFAULT NULL,
-  `Constellation` int(11) DEFAULT NULL
+  `Hair_color` int(11) DEFAULT '0',
+  `Hair_length` int(11) DEFAULT '0',
+  `Hair_style` int(11) DEFAULT '0',
+  `Eye_color` int(11) DEFAULT '0',
+  `Height` int(11) DEFAULT '0',
+  `Weight` int(11) DEFAULT '0',
+  `Body` int(11) DEFAULT '0',
+  `Drinking` int(11) DEFAULT '0',
+  `Smoking` int(11) DEFAULT '0',
+  `Job_status` int(11) DEFAULT '0',
+  `Home_type` int(11) DEFAULT '0',
+  `Live_with` int(11) DEFAULT '0',
+  `Have_children` int(11) DEFAULT '0',
+  `National` int(11) DEFAULT '0',
+  `Educational_level` int(11) DEFAULT '0',
+  `Language` int(11) DEFAULT '0',
+  `Religion` int(11) DEFAULT '0',
+  `Constellation` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `users`
+-- Đang đổ dữ liệu cho bảng `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `Fullname`, `Avatar`, `email`, `phone_number`, `Facebook`, `Gender`, `City`, `Birthdate`, `Hair_color`, `Hair_length`, `Hair_style`, `Eye_color`, `Height`, `Weight`, `Body`, `Drinking`, `Smoking`, `Job_status`, `Home_type`, `Live_with`, `Have_children`, `National`, `Educational_level`, `Language`, `Religion`, `Constellation`) VALUES
-(3, 'tandam', '123456', 'Tân Đàm', '1.jpg', '', '', '', 1, 1, '1997-01-31', 1, 2, 1, 1, 160, 61, 1, 2, 2, 2, 2, 1, 1, 1, 2, 1, 1, 1),
-(4, 'nhatquan', '123456', 'Nhật Quân', '1.jpg', '', '', '', 4, 1, '1997-10-10', 3, 2, 1, 1, 150, 65, 2, 2, 2, 2, 1, 2, 2, 1, 2, 2, 2, 2),
+(3, 'tandam', '123456', 'Tân Đàm', '1.jpg', '', '', '', 1, 1, '1997-01-31', 0, 2, 1, 1, 160, 61, 1, 2, 2, 2, 2, 1, 1, 1, 2, 1, 1, 1),
+(4, 'nhatquan', '123456', 'Nhật Quân', 'avatar-1543841247.jpg', '', '', '', 4, 1, '1997-10-10', 3, 2, 1, 1, 150, 65, 2, 2, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2),
 (5, 'aaaaaa', '123456', 'a\r\n', '1.jpg', '', '', '', 4, 2, '2000-10-10', 2, 2, 1, 1, 170, 71, 3, 2, 2, 1, 1, 2, 1, 2, 2, 2, 1, 2),
 (6, 'bbbbbb', '123456', 'b', '1.jpg', 'abc@gmail.com', '123456778', 'fb.com\\abc', 4, 2, '1990-10-10', 2, 1, 1, 3, 150, 44, 2, 1, 2, 2, 1, 2, 1, 2, 1, 1, 1, 3),
 (7, 'cccccc', '123456', 'c', '1.jpg', 'abc@gmail.com', '124561111', 'fb.com\\myfb', 1, 1, '1994-10-10', 1, 2, 1, 3, 180, 55, 2, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 3),
-(8, 'vuphan', '123456', 'Vu Phan', '1.jpg', 'vuphan@gmail.com', '012321313', 'fb.com/VuPhan', 1, 1, '1997-12-12', NULL, NULL, NULL, NULL, 150, 66, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(8, 'vuphan', '123456', 'Vu Phan', '1.jpg', 'vuphan@gmail.com', '012321313', 'fb.com/VuPhan', 1, 1, '1997-12-12', 1, 2, 1, 3, 150, 66, 2, 1, 1, 2, 1, 2, 1, 1, 2, 1, 1, 1),
+(9, 'test01', '123456', 'Test 01', NULL, 'test01@gmail.com', '0123456789', 'fb.com/test', 1, 1, '2001-12-21', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(10, 'test02', '123123', 'Test 02', 'default.jpg', 'test02@gmail.com', '0122312312', 'fb.com/test02', 1, 1, '2012-12-12', 2, 1, 1, 1, 150, 50, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_search`
+-- Cấu trúc bảng cho bảng `user_search`
 --
 
 CREATE TABLE `user_search` (
@@ -667,7 +1265,7 @@ CREATE TABLE `user_search` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `user_search`
+-- Đang đổ dữ liệu cho bảng `user_search`
 --
 
 INSERT INTO `user_search` (`id`, `Gender`, `City`, `Hair_color`, `Hair_length`, `Hair_style`, `Eye_color`, `Body`, `Drinking`, `Smoking`, `Job_status`, `Home_type`, `Live_with`, `Have_children`, `National`, `Educational_level`, `Language`, `Religion`, `Constellation`, `fromage`, `toage`, `fromheight`, `toheight`, `fromweight`, `toweight`) VALUES
@@ -675,176 +1273,176 @@ INSERT INTO `user_search` (`id`, `Gender`, `City`, `Hair_color`, `Hair_length`, 
 (4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 18, 30, 150, 180, 50, 70);
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `administrator`
+-- Chỉ mục cho bảng `administrator`
 --
 ALTER TABLE `administrator`
   ADD PRIMARY KEY (`id_admin`),
   ADD KEY `id_role` (`id_role`);
 
 --
--- Indexes for table `admin_role`
+-- Chỉ mục cho bảng `admin_role`
 --
 ALTER TABLE `admin_role`
   ADD PRIMARY KEY (`id_role`);
 
 --
--- Indexes for table `body`
+-- Chỉ mục cho bảng `body`
 --
 ALTER TABLE `body`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `city`
+-- Chỉ mục cho bảng `city`
 --
 ALTER TABLE `city`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `comment_dating_places`
+-- Chỉ mục cho bảng `comment_dating_places`
 --
 ALTER TABLE `comment_dating_places`
   ADD PRIMARY KEY (`comment_place_id`);
 
 --
--- Indexes for table `comment_dating_places_rep`
+-- Chỉ mục cho bảng `comment_dating_places_rep`
 --
 ALTER TABLE `comment_dating_places_rep`
   ADD PRIMARY KEY (`rep_place_id`);
 
 --
--- Indexes for table `constellation`
+-- Chỉ mục cho bảng `constellation`
 --
 ALTER TABLE `constellation`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `datingplaces`
+-- Chỉ mục cho bảng `datingplaces`
 --
 ALTER TABLE `datingplaces`
   ADD PRIMARY KEY (`id_place`);
 
 --
--- Indexes for table `dating_place_picture`
+-- Chỉ mục cho bảng `dating_place_picture`
 --
 ALTER TABLE `dating_place_picture`
   ADD PRIMARY KEY (`id`),
   ADD KEY `place_picture` (`id_place`);
 
 --
--- Indexes for table `dating_place_type`
+-- Chỉ mục cho bảng `dating_place_type`
 --
 ALTER TABLE `dating_place_type`
   ADD PRIMARY KEY (`id_type`);
 
 --
--- Indexes for table `drinking`
+-- Chỉ mục cho bảng `drinking`
 --
 ALTER TABLE `drinking`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `educational_level`
+-- Chỉ mục cho bảng `educational_level`
 --
 ALTER TABLE `educational_level`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `eye_color`
+-- Chỉ mục cho bảng `eye_color`
 --
 ALTER TABLE `eye_color`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `flirtingmethods`
+-- Chỉ mục cho bảng `flirtingmethods`
 --
 ALTER TABLE `flirtingmethods`
   ADD PRIMARY KEY (`id`),
   ADD KEY `flirting_gender` (`id_gender`);
 
 --
--- Indexes for table `gender`
+-- Chỉ mục cho bảng `gender`
 --
 ALTER TABLE `gender`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `hair_color`
+-- Chỉ mục cho bảng `hair_color`
 --
 ALTER TABLE `hair_color`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `hair_length`
+-- Chỉ mục cho bảng `hair_length`
 --
 ALTER TABLE `hair_length`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `hair_style`
+-- Chỉ mục cho bảng `hair_style`
 --
 ALTER TABLE `hair_style`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `have_children`
+-- Chỉ mục cho bảng `have_children`
 --
 ALTER TABLE `have_children`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `house_type`
+-- Chỉ mục cho bảng `house_type`
 --
 ALTER TABLE `house_type`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `job_status`
+-- Chỉ mục cho bảng `job_status`
 --
 ALTER TABLE `job_status`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `language`
+-- Chỉ mục cho bảng `language`
 --
 ALTER TABLE `language`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `live_with`
+-- Chỉ mục cho bảng `live_with`
 --
 ALTER TABLE `live_with`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `message`
+-- Chỉ mục cho bảng `message`
 --
 ALTER TABLE `message`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `national`
+-- Chỉ mục cho bảng `national`
 --
 ALTER TABLE `national`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `religion`
+-- Chỉ mục cho bảng `religion`
 --
 ALTER TABLE `religion`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `smoking`
+-- Chỉ mục cho bảng `smoking`
 --
 ALTER TABLE `smoking`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -868,7 +1466,7 @@ ALTER TABLE `users`
   ADD KEY `user_gender` (`Gender`);
 
 --
--- Indexes for table `user_search`
+-- Chỉ mục cho bảng `user_search`
 --
 ALTER TABLE `user_search`
   ADD PRIMARY KEY (`id`),
@@ -892,201 +1490,201 @@ ALTER TABLE `user_search`
   ADD KEY `user_gender` (`Gender`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `administrator`
+-- AUTO_INCREMENT cho bảng `administrator`
 --
 ALTER TABLE `administrator`
   MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `admin_role`
+-- AUTO_INCREMENT cho bảng `admin_role`
 --
 ALTER TABLE `admin_role`
   MODIFY `id_role` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `body`
+-- AUTO_INCREMENT cho bảng `body`
 --
 ALTER TABLE `body`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `city`
+-- AUTO_INCREMENT cho bảng `city`
 --
 ALTER TABLE `city`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `comment_dating_places`
+-- AUTO_INCREMENT cho bảng `comment_dating_places`
 --
 ALTER TABLE `comment_dating_places`
   MODIFY `comment_place_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `comment_dating_places_rep`
+-- AUTO_INCREMENT cho bảng `comment_dating_places_rep`
 --
 ALTER TABLE `comment_dating_places_rep`
   MODIFY `rep_place_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `constellation`
+-- AUTO_INCREMENT cho bảng `constellation`
 --
 ALTER TABLE `constellation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `datingplaces`
+-- AUTO_INCREMENT cho bảng `datingplaces`
 --
 ALTER TABLE `datingplaces`
   MODIFY `id_place` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT for table `dating_place_picture`
+-- AUTO_INCREMENT cho bảng `dating_place_picture`
 --
 ALTER TABLE `dating_place_picture`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `dating_place_type`
+-- AUTO_INCREMENT cho bảng `dating_place_type`
 --
 ALTER TABLE `dating_place_type`
   MODIFY `id_type` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `drinking`
+-- AUTO_INCREMENT cho bảng `drinking`
 --
 ALTER TABLE `drinking`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `educational_level`
---
-ALTER TABLE `educational_level`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `eye_color`
---
-ALTER TABLE `eye_color`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `flirtingmethods`
+-- AUTO_INCREMENT cho bảng `educational_level`
+--
+ALTER TABLE `educational_level`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT cho bảng `eye_color`
+--
+ALTER TABLE `eye_color`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT cho bảng `flirtingmethods`
 --
 ALTER TABLE `flirtingmethods`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `gender`
+-- AUTO_INCREMENT cho bảng `gender`
 --
 ALTER TABLE `gender`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `hair_color`
+-- AUTO_INCREMENT cho bảng `hair_color`
 --
 ALTER TABLE `hair_color`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT cho bảng `hair_length`
+--
+ALTER TABLE `hair_length`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `hair_length`
---
-ALTER TABLE `hair_length`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `hair_style`
+-- AUTO_INCREMENT cho bảng `hair_style`
 --
 ALTER TABLE `hair_style`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `have_children`
+-- AUTO_INCREMENT cho bảng `have_children`
 --
 ALTER TABLE `have_children`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `house_type`
+-- AUTO_INCREMENT cho bảng `house_type`
 --
 ALTER TABLE `house_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `job_status`
+-- AUTO_INCREMENT cho bảng `job_status`
 --
 ALTER TABLE `job_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `language`
+-- AUTO_INCREMENT cho bảng `language`
 --
 ALTER TABLE `language`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `live_with`
+-- AUTO_INCREMENT cho bảng `live_with`
 --
 ALTER TABLE `live_with`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `message`
+-- AUTO_INCREMENT cho bảng `message`
 --
 ALTER TABLE `message`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `national`
+-- AUTO_INCREMENT cho bảng `national`
 --
 ALTER TABLE `national`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `religion`
+-- AUTO_INCREMENT cho bảng `religion`
 --
 ALTER TABLE `religion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `smoking`
---
-ALTER TABLE `smoking`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT cho bảng `smoking`
+--
+ALTER TABLE `smoking`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- Constraints for dumped tables
+-- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Constraints for table `administrator`
+-- Các ràng buộc cho bảng `administrator`
 --
 ALTER TABLE `administrator`
   ADD CONSTRAINT `administrator_ibfk_1` FOREIGN KEY (`id_role`) REFERENCES `admin_role` (`id_role`);
 
 --
--- Constraints for table `dating_place_picture`
+-- Các ràng buộc cho bảng `dating_place_picture`
 --
 ALTER TABLE `dating_place_picture`
   ADD CONSTRAINT `place_picture` FOREIGN KEY (`id_place`) REFERENCES `datingplaces` (`id_place`);
 
 --
--- Constraints for table `flirtingmethods`
+-- Các ràng buộc cho bảng `flirtingmethods`
 --
 ALTER TABLE `flirtingmethods`
   ADD CONSTRAINT `flirting_gender` FOREIGN KEY (`id_gender`) REFERENCES `gender` (`id`);
 
 --
--- Constraints for table `users`
+-- Các ràng buộc cho bảng `users`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `user_body` FOREIGN KEY (`Body`) REFERENCES `body` (`id`),
@@ -1107,6 +1705,2404 @@ ALTER TABLE `users`
   ADD CONSTRAINT `user_national` FOREIGN KEY (`National`) REFERENCES `national` (`id`),
   ADD CONSTRAINT `user_religion` FOREIGN KEY (`Religion`) REFERENCES `religion` (`id`),
   ADD CONSTRAINT `user_smoke` FOREIGN KEY (`Smoking`) REFERENCES `smoking` (`id`);
+--
+-- Cơ sở dữ liệu: `dbqlvanban`
+--
+CREATE DATABASE IF NOT EXISTS `dbqlvanban` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `dbqlvanban`;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `bieumau`
+--
+
+CREATE TABLE `bieumau` (
+  `MA_BIEU_MAU` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `TEN_NHOM_BIEU_MAU` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `DON_VI_BAN_HANH` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `NGAY_BAN_HANH` date NOT NULL,
+  `NGAY_GUI` date NOT NULL,
+  `TRICH_YEU_NOI_DUNG` text COLLATE utf8_unicode_ci NOT NULL,
+  `NGUOI_KY_DUYET` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `bieumau`
+--
+
+INSERT INTO `bieumau` (`MA_BIEU_MAU`, `TEN_NHOM_BIEU_MAU`, `DON_VI_BAN_HANH`, `NGAY_BAN_HANH`, `NGAY_GUI`, `TRICH_YEU_NOI_DUNG`, `NGUOI_KY_DUYET`) VALUES
+('1534049982', 'BM01', '1', '2018-08-07', '2018-08-12', 'không có', 'NS01'),
+('1534050009', 'BM01', '1', '2018-08-07', '2018-08-12', 'không có', 'NS01'),
+('1534050039', 'BM01', '1', '2018-08-07', '2018-08-12', 'không có', 'NS01');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `bieumau_filedinhkem`
+--
+
+CREATE TABLE `bieumau_filedinhkem` (
+  `MA_BIEU_MAU` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `FILE_DINH_KEM` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `bieumau_filedinhkem`
+--
+
+INSERT INTO `bieumau_filedinhkem` (`MA_BIEU_MAU`, `FILE_DINH_KEM`) VALUES
+('1534050039', '15340500392.-Tai-lieu-ghi-tiet-giao-dien.docx');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `chucvu`
+--
+
+CREATE TABLE `chucvu` (
+  `MA_CHUC_VU` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
+  `TEN_CHUC_VU` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `chucvu`
+--
+
+INSERT INTO `chucvu` (`MA_CHUC_VU`, `TEN_CHUC_VU`) VALUES
+('1', 'Trưởng phòng'),
+('2', 'Phó phòng'),
+('3', 'Giáo vụ');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `congvan`
+--
+
+CREATE TABLE `congvan` (
+  `SO_CONG_VAN` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `LOAI_VAN_BAN` int(11) NOT NULL,
+  `NGAY_BAN_HANH` date NOT NULL,
+  `DON_VI_BAN_HANH` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `CAP_DO_QUAN_TRONG` int(11) NOT NULL,
+  `TRICH_YEU_NOI_DUNG` text COLLATE utf8_unicode_ci NOT NULL,
+  `NGUOI_GUI` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `NGUOI_KY_DUYET` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `LOAI_GUI` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `congvan`
+--
+
+INSERT INTO `congvan` (`SO_CONG_VAN`, `LOAI_VAN_BAN`, `NGAY_BAN_HANH`, `DON_VI_BAN_HANH`, `CAP_DO_QUAN_TRONG`, `TRICH_YEU_NOI_DUNG`, `NGUOI_GUI`, `NGUOI_KY_DUYET`, `LOAI_GUI`) VALUES
+('CV001', 2, '2018-06-19', '2', 0, 'Hôm qua Đức thua', 'NS01', 'NS02', 1),
+('cv002', 1, '2018-07-03', '1', 1, 'vũ', 'NS01', 'NS01', 1),
+('cv003', 1, '2018-07-16', '2', 1, 'trích yếu', 'NS01', 'NS01', 1),
+('CV004', 1, '2018-07-24', '2', 1, 'Daily scrum', 'NS01', 'NS01', 2),
+('CV005', 1, '2018-07-25', '2', 1, 'aaa', 'NS01', 'NS01', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `congvan_donvi`
+--
+
+CREATE TABLE `congvan_donvi` (
+  `SO_CONG_VAN` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `MA_DON_VI` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `LOAI_GUI` int(11) NOT NULL,
+  `NGAY_NHAN` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `congvan_donvi`
+--
+
+INSERT INTO `congvan_donvi` (`SO_CONG_VAN`, `MA_DON_VI`, `LOAI_GUI`, `NGAY_NHAN`) VALUES
+('cv002', '2', 1, '2018-07-11'),
+('CV004', '1', 1, '2018-07-24'),
+('CV004', '2', 1, '2018-07-24'),
+('CV005', '1', 3, '2018-07-25'),
+('CV005', '2', 3, '2018-07-25');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `congvan_filedinhkem`
+--
+
+CREATE TABLE `congvan_filedinhkem` (
+  `SO_CONG_VAN` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `FILE_DINH_KEM` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `FILE_KHA_DUNG` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `congvan_filedinhkem`
+--
+
+INSERT INTO `congvan_filedinhkem` (`SO_CONG_VAN`, `FILE_DINH_KEM`, `FILE_KHA_DUNG`) VALUES
+('cv002', '1530808809ac4_Wallpaper1_1280x720.jpg', 0),
+('cv002', '1530808810ac4_Wallpaper1_1920x1080.jpg', 1),
+('cv002', '1530808810ac4_Wallpaper2_1280x720.jpg', 1),
+('CV004', '1532409970cv_hamy.docx', 1),
+('CV005', '1532527113Bản-gộp.docx', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `congvan_nhansu`
+--
+
+CREATE TABLE `congvan_nhansu` (
+  `SO_CONG_VAN` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `MA_NHAN_SU` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `NGAY_NHAN` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `congvan_nhansu`
+--
+
+INSERT INTO `congvan_nhansu` (`SO_CONG_VAN`, `MA_NHAN_SU`, `NGAY_NHAN`) VALUES
+('CV001', 'NS01', '2018-06-28'),
+('CV001', 'NS02', '0000-00-00'),
+('cv002', 'NS01', '2018-07-05'),
+('cv002', 'NS02', '2018-07-05'),
+('cv003', 'NS01', '2018-07-16'),
+('cv003', 'NS02', '2018-07-16');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `congvan_phanhoi`
+--
+
+CREATE TABLE `congvan_phanhoi` (
+  `MA_PHAN_HOI` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `SO_CONG_VAN` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `MA_DON_VI` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `NOI_DUNG_PHAN_HOI` text COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `congvan_phanhoi`
+--
+
+INSERT INTO `congvan_phanhoi` (`MA_PHAN_HOI`, `SO_CONG_VAN`, `MA_DON_VI`, `NOI_DUNG_PHAN_HOI`) VALUES
+('1534000009', 'CV001', '2', 'aaaa'),
+('1534000188', 'CV001', '2', 'bbbbb'),
+('1534000285', 'CV001', '2', 'cccccc'),
+('1534000874', 'CV001', '2', 'ddddd'),
+('1534000980', 'CV001', '2', 'eeeee'),
+('1534001059', 'CV001', '2', 'ffffff');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `congvan_phanhoi_filedinhkem`
+--
+
+CREATE TABLE `congvan_phanhoi_filedinhkem` (
+  `MA_PHAN_HOI` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `FILE_DINH_KEM` varchar(250) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `congvan_phanhoi_filedinhkem`
+--
+
+INSERT INTO `congvan_phanhoi_filedinhkem` (`MA_PHAN_HOI`, `FILE_DINH_KEM`) VALUES
+('1534000980', '15340009812.-Tai-lieu-ghi-tiet-giao-dien.docx'),
+('1534001059', '1534001059testcase_Publisher.xlsx');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `ctkhtuan`
+--
+
+CREATE TABLE `ctkhtuan` (
+  `MA_CTKHTUAN` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `MA_KHTUAN` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `THU` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `BUOI` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `NOI_DUNG` text COLLATE utf8_unicode_ci NOT NULL,
+  `NGAY` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `dangvien`
+--
+
+CREATE TABLE `dangvien` (
+  `MA_NHAN_SU` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `NGAY_KET_NAP` date NOT NULL,
+  `GHI_CHU` text COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `donvi`
+--
+
+CREATE TABLE `donvi` (
+  `MA_DON_VI` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `TEN_DON_VI` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `SO_DIEN_THOAI` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `EMAIL` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `GHI_CHU` text COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `donvi`
+--
+
+INSERT INTO `donvi` (`MA_DON_VI`, `TEN_DON_VI`, `SO_DIEN_THOAI`, `EMAIL`, `GHI_CHU`) VALUES
+('1', 'Phòng công tác sinh viên', '01654525110', 'ctsv@gmail.com', 'Quản lý thủ tục'),
+('2', 'Khoa đào tạo quốc tế', '08123131', 'kdtqt@gmail.com', 'PSU,CMU,UIU,CSU\r\n');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc đóng vai cho view `dscongvanden`
+-- (See below for the actual view)
+--
+CREATE TABLE `dscongvanden` (
+`DON_VI_BAN_HANH` varchar(50)
+,`LOAI_GUI` varchar(11)
+,`CAP_DO_QUAN_TRONG` int(11)
+,`MA_CVNS` varchar(50)
+,`MA_CVDV` varchar(11)
+,`TEN_DON_VI` varchar(50)
+,`SO_CONG_VAN` varchar(50)
+,`TRICH_YEU_NOI_DUNG` mediumtext
+,`NGAY_BAN_HANH` date
+,`NGUOI_GUI` varchar(50)
+,`TEN_DANG_NHAP` varchar(50)
+,`MAT_KHAU` varchar(50)
+,`DEN_NGAY` varchar(10)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `khtuan`
+--
+
+CREATE TABLE `khtuan` (
+  `MA_KHTUAN` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `TUAN_THU` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `TU_NGAY` date NOT NULL,
+  `DEN_NGAY` date NOT NULL,
+  `FILE_DINH_KEM` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `NOI_NHAN` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `l_nhanvien`
+--
+
+CREATE TABLE `l_nhanvien` (
+  `MA_LOAI_NV` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `TEN_LOAI_NV` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `l_nhanvien`
+--
+
+INSERT INTO `l_nhanvien` (`MA_LOAI_NV`, `TEN_LOAI_NV`) VALUES
+('1', 'Nhân viên chính thức'),
+('2', 'Nhân viên kiêm nhiệm'),
+('3', 'Nhân viên hợp đồng');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `l_vanban`
+--
+
+CREATE TABLE `l_vanban` (
+  `MA_L_NVANBAN` int(11) NOT NULL,
+  `TEN_L_NVANBAN` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `l_vanban`
+--
+
+INSERT INTO `l_vanban` (`MA_L_NVANBAN`, `TEN_L_NVANBAN`) VALUES
+(1, 'Văn bản hàng chính'),
+(2, 'Biên bản');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `ngaylenghi`
+--
+
+CREATE TABLE `ngaylenghi` (
+  `MA_NGAY_LE_NGHI` int(11) NOT NULL,
+  `TEN_NGAY_LE_NGHI` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `THOI_GIAN` date NOT NULL,
+  `GHI_CHU` text COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `nhansu`
+--
+
+CREATE TABLE `nhansu` (
+  `MA_NHAN_SU` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `HO_VA_TEN` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `NAM_SINH` varchar(4) COLLATE utf8_unicode_ci NOT NULL,
+  `GIOI_TINH` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `DIA_CHI` text COLLATE utf8_unicode_ci NOT NULL,
+  `SO_DIEN_THOAI` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `EMAIL` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `nhansu`
+--
+
+INSERT INTO `nhansu` (`MA_NHAN_SU`, `HO_VA_TEN`, `NAM_SINH`, `GIOI_TINH`, `DIA_CHI`, `SO_DIEN_THOAI`, `EMAIL`) VALUES
+('NS01', 'Phan Đặng Hải Vũ', '1997', 'Nam', 'Quảng Ngãi', '01654525110', 'vugalopg@gmail.com'),
+('NS02', 'Tôn Quân', '1997', 'Nam', 'Huế', '0123123131', 'nhatquan@gmail.com'),
+('NV02', 'Phan Đặng Hải Vũ', '1997', 'nam', 'Đà Nẵng', '012313131231', 'vugalopg@gmail.com'),
+('NV03', 'Phan Đặng Hải Vũ', '1997', 'nam', 'Đà Nẵng', '012313131231', 'vugalopg@gmail.com'),
+('NV04', 'Phan đang hai dung', '2000', 'nu', 'abc', '01231231', '123');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `nhansu_thuocdonvi`
+--
+
+CREATE TABLE `nhansu_thuocdonvi` (
+  `MA_NHAN_SU` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `MA_DON_VI` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `MA_CHUC_VU` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `MA_LOAI_NV` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `TU_NGAY` date NOT NULL,
+  `DEN_NGAY` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `nhansu_thuocdonvi`
+--
+
+INSERT INTO `nhansu_thuocdonvi` (`MA_NHAN_SU`, `MA_DON_VI`, `MA_CHUC_VU`, `MA_LOAI_NV`, `TU_NGAY`, `DEN_NGAY`) VALUES
+('NS01', '2', '1', '1', '2018-07-02', NULL),
+('NV03', '1', '1', '1', '2018-07-26', '2018-07-25'),
+('NV03', '2', '2', '2', '2018-07-17', NULL),
+('NV04', '1', '1', '1', '2018-07-11', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `taikhoan`
+--
+
+CREATE TABLE `taikhoan` (
+  `MA_NHAN_SU` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `TEN_DANG_NHAP` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `MAT_KHAU` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `TINH_TRANG` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `taikhoan`
+--
+
+INSERT INTO `taikhoan` (`MA_NHAN_SU`, `TEN_DANG_NHAP`, `MAT_KHAU`, `TINH_TRANG`) VALUES
+('NS01', 'vugalopg', '123', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `taisandonvi`
+--
+
+CREATE TABLE `taisandonvi` (
+  `MA_TAI_SAN` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `TEN_TAI_SAN` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `MA_DON_VI` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `NGUOI_CHIU_TRACH_NHIEM` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `SO_LUONG` int(11) NOT NULL,
+  `GHI_CHU` text COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc cho view `dscongvanden`
+--
+DROP TABLE IF EXISTS `dscongvanden`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `dscongvanden`  AS  (select `cv`.`DON_VI_BAN_HANH` AS `DON_VI_BAN_HANH`,'NA' AS `LOAI_GUI`,`cv`.`CAP_DO_QUAN_TRONG` AS `CAP_DO_QUAN_TRONG`,`cn`.`MA_NHAN_SU` AS `MA_CVNS`,'NA' AS `MA_CVDV`,`dv`.`TEN_DON_VI` AS `TEN_DON_VI`,`cv`.`SO_CONG_VAN` AS `SO_CONG_VAN`,`cv`.`TRICH_YEU_NOI_DUNG` AS `TRICH_YEU_NOI_DUNG`,`cv`.`NGAY_BAN_HANH` AS `NGAY_BAN_HANH`,`cv`.`NGUOI_GUI` AS `NGUOI_GUI`,`tk`.`TEN_DANG_NHAP` AS `TEN_DANG_NHAP`,`tk`.`MAT_KHAU` AS `MAT_KHAU`,'NA' AS `DEN_NGAY` from (((`congvan` `cv` join `congvan_nhansu` `cn` on((`cv`.`SO_CONG_VAN` = `cn`.`SO_CONG_VAN`))) join `taikhoan` `tk` on((`cn`.`MA_NHAN_SU` = `tk`.`MA_NHAN_SU`))) join `donvi` `dv` on((`dv`.`MA_DON_VI` = `cv`.`DON_VI_BAN_HANH`)))) union all (select `cv`.`DON_VI_BAN_HANH` AS `DON_VI_BAN_HANH`,`cd`.`LOAI_GUI` AS `LOAI_GUI`,`cv`.`CAP_DO_QUAN_TRONG` AS `CAP_DO_QUAN_TRONG`,'NA' AS `MA_CVNS`,`cd`.`LOAI_GUI` AS `MA_CVDV`,`dv`.`TEN_DON_VI` AS `TEN_DON_VI`,`cv`.`SO_CONG_VAN` AS `SO_CONG_VAN`,`cv`.`TRICH_YEU_NOI_DUNG` AS `TRICH_YEU_NOI_DUNG`,`cv`.`NGAY_BAN_HANH` AS `NGAY_BAN_HANH`,`cv`.`NGUOI_GUI` AS `NGUOI_GUI`,`tk`.`TEN_DANG_NHAP` AS `TEN_DANG_NHAP`,`tk`.`MAT_KHAU` AS `MAT_KHAU`,`nt`.`DEN_NGAY` AS `DEN_NGAY` from ((((`congvan` `cv` join `congvan_donvi` `cd` on((`cd`.`SO_CONG_VAN` = `cv`.`SO_CONG_VAN`))) join `nhansu_thuocdonvi` `nt` on((`cd`.`MA_DON_VI` = `nt`.`MA_DON_VI`))) join `taikhoan` `tk` on((`nt`.`MA_NHAN_SU` = `tk`.`MA_NHAN_SU`))) join `donvi` `dv` on((`dv`.`MA_DON_VI` = `cv`.`DON_VI_BAN_HANH`)))) ;
+
+--
+-- Chỉ mục cho các bảng đã đổ
+--
+
+--
+-- Chỉ mục cho bảng `bieumau`
+--
+ALTER TABLE `bieumau`
+  ADD PRIMARY KEY (`MA_BIEU_MAU`);
+
+--
+-- Chỉ mục cho bảng `chucvu`
+--
+ALTER TABLE `chucvu`
+  ADD PRIMARY KEY (`MA_CHUC_VU`);
+
+--
+-- Chỉ mục cho bảng `congvan`
+--
+ALTER TABLE `congvan`
+  ADD PRIMARY KEY (`SO_CONG_VAN`);
+
+--
+-- Chỉ mục cho bảng `congvan_donvi`
+--
+ALTER TABLE `congvan_donvi`
+  ADD PRIMARY KEY (`SO_CONG_VAN`,`MA_DON_VI`);
+
+--
+-- Chỉ mục cho bảng `congvan_filedinhkem`
+--
+ALTER TABLE `congvan_filedinhkem`
+  ADD PRIMARY KEY (`SO_CONG_VAN`,`FILE_DINH_KEM`);
+
+--
+-- Chỉ mục cho bảng `congvan_nhansu`
+--
+ALTER TABLE `congvan_nhansu`
+  ADD PRIMARY KEY (`SO_CONG_VAN`,`MA_NHAN_SU`);
+
+--
+-- Chỉ mục cho bảng `congvan_phanhoi`
+--
+ALTER TABLE `congvan_phanhoi`
+  ADD PRIMARY KEY (`MA_PHAN_HOI`);
+
+--
+-- Chỉ mục cho bảng `ctkhtuan`
+--
+ALTER TABLE `ctkhtuan`
+  ADD PRIMARY KEY (`MA_CTKHTUAN`);
+
+--
+-- Chỉ mục cho bảng `dangvien`
+--
+ALTER TABLE `dangvien`
+  ADD PRIMARY KEY (`MA_NHAN_SU`);
+
+--
+-- Chỉ mục cho bảng `donvi`
+--
+ALTER TABLE `donvi`
+  ADD PRIMARY KEY (`MA_DON_VI`);
+
+--
+-- Chỉ mục cho bảng `khtuan`
+--
+ALTER TABLE `khtuan`
+  ADD PRIMARY KEY (`MA_KHTUAN`);
+
+--
+-- Chỉ mục cho bảng `l_nhanvien`
+--
+ALTER TABLE `l_nhanvien`
+  ADD PRIMARY KEY (`MA_LOAI_NV`);
+
+--
+-- Chỉ mục cho bảng `l_vanban`
+--
+ALTER TABLE `l_vanban`
+  ADD PRIMARY KEY (`MA_L_NVANBAN`);
+
+--
+-- Chỉ mục cho bảng `ngaylenghi`
+--
+ALTER TABLE `ngaylenghi`
+  ADD PRIMARY KEY (`MA_NGAY_LE_NGHI`);
+
+--
+-- Chỉ mục cho bảng `nhansu`
+--
+ALTER TABLE `nhansu`
+  ADD PRIMARY KEY (`MA_NHAN_SU`);
+
+--
+-- Chỉ mục cho bảng `nhansu_thuocdonvi`
+--
+ALTER TABLE `nhansu_thuocdonvi`
+  ADD PRIMARY KEY (`MA_NHAN_SU`,`MA_DON_VI`,`TU_NGAY`);
+
+--
+-- Chỉ mục cho bảng `taikhoan`
+--
+ALTER TABLE `taikhoan`
+  ADD PRIMARY KEY (`MA_NHAN_SU`);
+
+--
+-- Chỉ mục cho bảng `taisandonvi`
+--
+ALTER TABLE `taisandonvi`
+  ADD PRIMARY KEY (`MA_TAI_SAN`);
+--
+-- Cơ sở dữ liệu: `lanews`
+--
+CREATE DATABASE IF NOT EXISTS `lanews` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `lanews`;
+--
+-- Cơ sở dữ liệu: `ldemo`
+--
+CREATE DATABASE IF NOT EXISTS `ldemo` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `ldemo`;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `cat`
+--
+
+CREATE TABLE `cat` (
+  `id` int(11) NOT NULL,
+  `name` varchar(250) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `cat`
+--
+
+INSERT INTO `cat` (`id`, `name`) VALUES
+(1, 'Nhạc trữ tình'),
+(2, 'Nhạc trẻ'),
+(3, 'Pop'),
+(4, 'Nhạc Trịnh'),
+(5, 'Rock'),
+(6, 'R&B'),
+(7, 'Nhạc dân tộc');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `news`
+--
+
+CREATE TABLE `news` (
+  `id` int(11) NOT NULL,
+  `name` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `preview_text` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `detail_text` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `picture` varchar(250) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `song`
+--
+
+CREATE TABLE `song` (
+  `id` int(11) NOT NULL,
+  `name` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `preview_text` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `cnumber` int(11) NOT NULL,
+  `cid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `song`
+--
+
+INSERT INTO `song` (`id`, `name`, `preview_text`, `cnumber`, `cid`) VALUES
+(1, 'Một Cõi Đi Về', 'Bao nhiêu năm rồi còn mãi ra đi...', 10, 4),
+(2, 'Ca Dao Mẹ', 'Mẹ ngồi ru con đong đưa võng buồn đong đưa võng buồn...', 20, 4),
+(3, 'Về Đâu Mái Tóc Người Thương', 'Hồn lỡ sa vào đôi mắt em...', 13, 1),
+(4, 'Nơi Này Có Anh', 'Em là ai từ đâu bước đến nơi đây dịu dàng...', 59, 2),
+(5, 'Lạc Trôi', 'Người theo hương hoa mây mù giăng lối...', 20, 2);
+
+--
+-- Chỉ mục cho các bảng đã đổ
+--
+
+--
+-- Chỉ mục cho bảng `cat`
+--
+ALTER TABLE `cat`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `news`
+--
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `song`
+--
+ALTER TABLE `song`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
+--
+
+--
+-- AUTO_INCREMENT cho bảng `cat`
+--
+ALTER TABLE `cat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT cho bảng `news`
+--
+ALTER TABLE `news`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `song`
+--
+ALTER TABLE `song`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- Cơ sở dữ liệu: `phpmyadmin`
+--
+CREATE DATABASE IF NOT EXISTS `phpmyadmin` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+USE `phpmyadmin`;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__bookmark`
+--
+
+CREATE TABLE `pma__bookmark` (
+  `id` int(11) NOT NULL,
+  `dbase` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `user` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `label` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `query` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Bookmarks';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__central_columns`
+--
+
+CREATE TABLE `pma__central_columns` (
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `col_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `col_type` varchar(64) COLLATE utf8_bin NOT NULL,
+  `col_length` text COLLATE utf8_bin,
+  `col_collation` varchar(64) COLLATE utf8_bin NOT NULL,
+  `col_isNull` tinyint(1) NOT NULL,
+  `col_extra` varchar(255) COLLATE utf8_bin DEFAULT '',
+  `col_default` text COLLATE utf8_bin
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Central list of columns';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__column_info`
+--
+
+CREATE TABLE `pma__column_info` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `column_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `comment` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `mimetype` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `transformation` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `transformation_options` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `input_transformation` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `input_transformation_options` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Column information for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__designer_settings`
+--
+
+CREATE TABLE `pma__designer_settings` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `settings_data` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Settings related to Designer';
+
+--
+-- Đang đổ dữ liệu cho bảng `pma__designer_settings`
+--
+
+INSERT INTO `pma__designer_settings` (`username`, `settings_data`) VALUES
+('root', '{\"angular_direct\":\"direct\",\"snap_to_grid\":\"off\",\"relation_lines\":\"true\"}');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__export_templates`
+--
+
+CREATE TABLE `pma__export_templates` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `export_type` varchar(10) COLLATE utf8_bin NOT NULL,
+  `template_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `template_data` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved export templates';
+
+--
+-- Đang đổ dữ liệu cho bảng `pma__export_templates`
+--
+
+INSERT INTO `pma__export_templates` (`id`, `username`, `export_type`, `template_name`, `template_data`) VALUES
+(1, 'root', 'database', 'shareit', '{\"quick_or_custom\":\"quick\",\"what\":\"sql\",\"structure_or_data_forced\":\"0\",\"table_select[]\":[\"cat_list\",\"comment\",\"news\",\"rep_comment\",\"slide\",\"user\"],\"table_structure[]\":[\"cat_list\",\"comment\",\"news\",\"rep_comment\",\"slide\",\"user\"],\"table_data[]\":[\"cat_list\",\"comment\",\"news\",\"rep_comment\",\"slide\",\"user\"],\"aliases_new\":\"\",\"output_format\":\"sendit\",\"filename_template\":\"@DATABASE@\",\"remember_template\":\"on\",\"charset\":\"utf-8\",\"compression\":\"none\",\"maxsize\":\"\",\"codegen_structure_or_data\":\"data\",\"codegen_format\":\"0\",\"csv_separator\":\",\",\"csv_enclosed\":\"\\\"\",\"csv_escaped\":\"\\\"\",\"csv_terminated\":\"AUTO\",\"csv_null\":\"NULL\",\"csv_structure_or_data\":\"data\",\"excel_null\":\"NULL\",\"excel_columns\":\"something\",\"excel_edition\":\"win\",\"excel_structure_or_data\":\"data\",\"json_structure_or_data\":\"data\",\"json_unicode\":\"something\",\"latex_caption\":\"something\",\"latex_structure_or_data\":\"structure_and_data\",\"latex_structure_caption\":\"Cáº¥u trÃºc cá»§a báº£ng @TABLE@\",\"latex_structure_continued_caption\":\"Cáº¥u trÃºc cá»§a báº£ng @TABLE@ (cÃ²n ná»¯a)\",\"latex_structure_label\":\"tab:@TABLE@-structure\",\"latex_relation\":\"something\",\"latex_comments\":\"something\",\"latex_mime\":\"something\",\"latex_columns\":\"something\",\"latex_data_caption\":\"Ná»™i dung cá»§a báº£ng @TABLE@\",\"latex_data_continued_caption\":\"Ná»™i dung cá»§a báº£ng @TABLE@ (cÃ²n ná»¯a)\",\"latex_data_label\":\"tab:@TABLE@-data\",\"latex_null\":\"\\\\textit{NULL}\",\"mediawiki_structure_or_data\":\"structure_and_data\",\"mediawiki_caption\":\"something\",\"mediawiki_headers\":\"something\",\"htmlword_structure_or_data\":\"structure_and_data\",\"htmlword_null\":\"NULL\",\"ods_null\":\"NULL\",\"ods_structure_or_data\":\"data\",\"odt_structure_or_data\":\"structure_and_data\",\"odt_relation\":\"something\",\"odt_comments\":\"something\",\"odt_mime\":\"something\",\"odt_columns\":\"something\",\"odt_null\":\"NULL\",\"pdf_report_title\":\"\",\"pdf_structure_or_data\":\"structure_and_data\",\"phparray_structure_or_data\":\"data\",\"sql_include_comments\":\"something\",\"sql_header_comment\":\"\",\"sql_use_transaction\":\"something\",\"sql_compatibility\":\"NONE\",\"sql_structure_or_data\":\"structure_and_data\",\"sql_create_table\":\"something\",\"sql_auto_increment\":\"something\",\"sql_create_view\":\"something\",\"sql_procedure_function\":\"something\",\"sql_create_trigger\":\"something\",\"sql_backquotes\":\"something\",\"sql_type\":\"INSERT\",\"sql_insert_syntax\":\"both\",\"sql_max_query_size\":\"50000\",\"sql_hex_for_binary\":\"something\",\"sql_utc_time\":\"something\",\"texytext_structure_or_data\":\"structure_and_data\",\"texytext_null\":\"NULL\",\"xml_structure_or_data\":\"data\",\"xml_export_events\":\"something\",\"xml_export_functions\":\"something\",\"xml_export_procedures\":\"something\",\"xml_export_tables\":\"something\",\"xml_export_triggers\":\"something\",\"xml_export_views\":\"something\",\"xml_export_contents\":\"something\",\"yaml_structure_or_data\":\"data\",\"\":null,\"lock_tables\":null,\"as_separate_files\":null,\"csv_removeCRLF\":null,\"csv_columns\":null,\"excel_removeCRLF\":null,\"json_pretty_print\":null,\"htmlword_columns\":null,\"ods_columns\":null,\"sql_dates\":null,\"sql_relation\":null,\"sql_mime\":null,\"sql_disable_fk\":null,\"sql_views_as_tables\":null,\"sql_metadata\":null,\"sql_create_database\":null,\"sql_drop_table\":null,\"sql_if_not_exists\":null,\"sql_truncate\":null,\"sql_delayed\":null,\"sql_ignore\":null,\"texytext_columns\":null}');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__favorite`
+--
+
+CREATE TABLE `pma__favorite` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `tables` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Favorite tables';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__history`
+--
+
+CREATE TABLE `pma__history` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `username` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `db` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `table` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `timevalue` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `sqlquery` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='SQL history for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__navigationhiding`
+--
+
+CREATE TABLE `pma__navigationhiding` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `item_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `item_type` varchar(64) COLLATE utf8_bin NOT NULL,
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Hidden items of navigation tree';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__pdf_pages`
+--
+
+CREATE TABLE `pma__pdf_pages` (
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `page_nr` int(10) UNSIGNED NOT NULL,
+  `page_descr` varchar(50) CHARACTER SET utf8 NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='PDF relation pages for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__recent`
+--
+
+CREATE TABLE `pma__recent` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `tables` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Recently accessed tables';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__relation`
+--
+
+CREATE TABLE `pma__relation` (
+  `master_db` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `master_table` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `master_field` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `foreign_db` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `foreign_table` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `foreign_field` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Relation table';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__savedsearches`
+--
+
+CREATE TABLE `pma__savedsearches` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `username` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `search_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `search_data` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved searches';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__table_coords`
+--
+
+CREATE TABLE `pma__table_coords` (
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `pdf_page_number` int(11) NOT NULL DEFAULT '0',
+  `x` float UNSIGNED NOT NULL DEFAULT '0',
+  `y` float UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table coordinates for phpMyAdmin PDF output';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__table_info`
+--
+
+CREATE TABLE `pma__table_info` (
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `display_field` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table information for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__table_uiprefs`
+--
+
+CREATE TABLE `pma__table_uiprefs` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `prefs` text COLLATE utf8_bin NOT NULL,
+  `last_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Tables'' UI preferences';
+
+--
+-- Đang đổ dữ liệu cho bảng `pma__table_uiprefs`
+--
+
+INSERT INTO `pma__table_uiprefs` (`username`, `db_name`, `table_name`, `prefs`, `last_update`) VALUES
+('root', 'shareit', 'comment', '[]', '2018-07-13 10:25:26'),
+('root', 'shareit', 'news', '[]', '2018-07-09 10:11:07');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__tracking`
+--
+
+CREATE TABLE `pma__tracking` (
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `version` int(10) UNSIGNED NOT NULL,
+  `date_created` datetime NOT NULL,
+  `date_updated` datetime NOT NULL,
+  `schema_snapshot` text COLLATE utf8_bin NOT NULL,
+  `schema_sql` text COLLATE utf8_bin,
+  `data_sql` longtext COLLATE utf8_bin,
+  `tracking` set('UPDATE','REPLACE','INSERT','DELETE','TRUNCATE','CREATE DATABASE','ALTER DATABASE','DROP DATABASE','CREATE TABLE','ALTER TABLE','RENAME TABLE','DROP TABLE','CREATE INDEX','DROP INDEX','CREATE VIEW','ALTER VIEW','DROP VIEW') COLLATE utf8_bin DEFAULT NULL,
+  `tracking_active` int(1) UNSIGNED NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Database changes tracking for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__userconfig`
+--
+
+CREATE TABLE `pma__userconfig` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `timevalue` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `config_data` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User preferences storage for phpMyAdmin';
+
+--
+-- Đang đổ dữ liệu cho bảng `pma__userconfig`
+--
+
+INSERT INTO `pma__userconfig` (`username`, `timevalue`, `config_data`) VALUES
+('root', '2018-12-03 16:46:56', '{\"lang\":\"vi\",\"Console\\/Mode\":\"collapse\",\"NavigationWidth\":269}');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__usergroups`
+--
+
+CREATE TABLE `pma__usergroups` (
+  `usergroup` varchar(64) COLLATE utf8_bin NOT NULL,
+  `tab` varchar(64) COLLATE utf8_bin NOT NULL,
+  `allowed` enum('Y','N') COLLATE utf8_bin NOT NULL DEFAULT 'N'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User groups with configured menu items';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__users`
+--
+
+CREATE TABLE `pma__users` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `usergroup` varchar(64) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Users and their assignments to user groups';
+
+--
+-- Chỉ mục cho các bảng đã đổ
+--
+
+--
+-- Chỉ mục cho bảng `pma__bookmark`
+--
+ALTER TABLE `pma__bookmark`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `pma__central_columns`
+--
+ALTER TABLE `pma__central_columns`
+  ADD PRIMARY KEY (`db_name`,`col_name`);
+
+--
+-- Chỉ mục cho bảng `pma__column_info`
+--
+ALTER TABLE `pma__column_info`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `db_name` (`db_name`,`table_name`,`column_name`);
+
+--
+-- Chỉ mục cho bảng `pma__designer_settings`
+--
+ALTER TABLE `pma__designer_settings`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Chỉ mục cho bảng `pma__export_templates`
+--
+ALTER TABLE `pma__export_templates`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `u_user_type_template` (`username`,`export_type`,`template_name`);
+
+--
+-- Chỉ mục cho bảng `pma__favorite`
+--
+ALTER TABLE `pma__favorite`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Chỉ mục cho bảng `pma__history`
+--
+ALTER TABLE `pma__history`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `username` (`username`,`db`,`table`,`timevalue`);
+
+--
+-- Chỉ mục cho bảng `pma__navigationhiding`
+--
+ALTER TABLE `pma__navigationhiding`
+  ADD PRIMARY KEY (`username`,`item_name`,`item_type`,`db_name`,`table_name`);
+
+--
+-- Chỉ mục cho bảng `pma__pdf_pages`
+--
+ALTER TABLE `pma__pdf_pages`
+  ADD PRIMARY KEY (`page_nr`),
+  ADD KEY `db_name` (`db_name`);
+
+--
+-- Chỉ mục cho bảng `pma__recent`
+--
+ALTER TABLE `pma__recent`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Chỉ mục cho bảng `pma__relation`
+--
+ALTER TABLE `pma__relation`
+  ADD PRIMARY KEY (`master_db`,`master_table`,`master_field`),
+  ADD KEY `foreign_field` (`foreign_db`,`foreign_table`);
+
+--
+-- Chỉ mục cho bảng `pma__savedsearches`
+--
+ALTER TABLE `pma__savedsearches`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `u_savedsearches_username_dbname` (`username`,`db_name`,`search_name`);
+
+--
+-- Chỉ mục cho bảng `pma__table_coords`
+--
+ALTER TABLE `pma__table_coords`
+  ADD PRIMARY KEY (`db_name`,`table_name`,`pdf_page_number`);
+
+--
+-- Chỉ mục cho bảng `pma__table_info`
+--
+ALTER TABLE `pma__table_info`
+  ADD PRIMARY KEY (`db_name`,`table_name`);
+
+--
+-- Chỉ mục cho bảng `pma__table_uiprefs`
+--
+ALTER TABLE `pma__table_uiprefs`
+  ADD PRIMARY KEY (`username`,`db_name`,`table_name`);
+
+--
+-- Chỉ mục cho bảng `pma__tracking`
+--
+ALTER TABLE `pma__tracking`
+  ADD PRIMARY KEY (`db_name`,`table_name`,`version`);
+
+--
+-- Chỉ mục cho bảng `pma__userconfig`
+--
+ALTER TABLE `pma__userconfig`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Chỉ mục cho bảng `pma__usergroups`
+--
+ALTER TABLE `pma__usergroups`
+  ADD PRIMARY KEY (`usergroup`,`tab`,`allowed`);
+
+--
+-- Chỉ mục cho bảng `pma__users`
+--
+ALTER TABLE `pma__users`
+  ADD PRIMARY KEY (`username`,`usergroup`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
+--
+
+--
+-- AUTO_INCREMENT cho bảng `pma__bookmark`
+--
+ALTER TABLE `pma__bookmark`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `pma__column_info`
+--
+ALTER TABLE `pma__column_info`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `pma__export_templates`
+--
+ALTER TABLE `pma__export_templates`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT cho bảng `pma__history`
+--
+ALTER TABLE `pma__history`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `pma__pdf_pages`
+--
+ALTER TABLE `pma__pdf_pages`
+  MODIFY `page_nr` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `pma__savedsearches`
+--
+ALTER TABLE `pma__savedsearches`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- Cơ sở dữ liệu: `quanlyvanban`
+--
+CREATE DATABASE IF NOT EXISTS `quanlyvanban` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `quanlyvanban`;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `bieumau`
+--
+
+CREATE TABLE `bieumau` (
+  `MA_BIEU_MAU` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `TEN_NHOM_BIEU_MAU` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `DON_VI_BAN_HANH` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `NGAY_BAN_HANH` date NOT NULL,
+  `NGAY_GUI` date NOT NULL,
+  `TRICH_YEU_NOI_DUNG` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `NGUOI_KY_DUYET` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `bieumau`
+--
+
+INSERT INTO `bieumau` (`MA_BIEU_MAU`, `TEN_NHOM_BIEU_MAU`, `DON_VI_BAN_HANH`, `NGAY_BAN_HANH`, `NGAY_GUI`, `TRICH_YEU_NOI_DUNG`, `NGUOI_KY_DUYET`) VALUES
+('1534049982', 'BM01', '1', '2018-08-07', '2018-08-12', 'không có', 'NS01'),
+('1534050009', 'BM02', '1', '2018-08-07', '2018-08-12', 'không có', 'NS01'),
+('1534050039', 'BM03', '1', '2018-08-07', '2018-08-12', 'không có', 'NS01'),
+('1535022535', 'BM04', '1', '2018-08-16', '2018-08-08', 'aaaaaaaa', 'NS01'),
+('1535022688', 'BM04', '1', '2018-08-16', '2018-08-08', 'aaaaaaaa', 'NS01');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `bieumau_filedinhkem`
+--
+
+CREATE TABLE `bieumau_filedinhkem` (
+  `MA_BIEU_MAU` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `FILE_DINH_KEM` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `bieumau_filedinhkem`
+--
+
+INSERT INTO `bieumau_filedinhkem` (`MA_BIEU_MAU`, `FILE_DINH_KEM`) VALUES
+('1534050039', '15340500392.-Tai-lieu-ghi-tiet-giao-dien.docx'),
+('1535022688', '15350226882ffa021e-2b46-42ae-b860-c9ca4bbc66b4_newanduniquethesistitlesandcapstoneprojectideasforinformationtechnology.docx');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `chucvu`
+--
+
+CREATE TABLE `chucvu` (
+  `MA_CHUC_VU` varchar(11) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `TEN_CHUC_VU` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `chucvu`
+--
+
+INSERT INTO `chucvu` (`MA_CHUC_VU`, `TEN_CHUC_VU`) VALUES
+('1', 'Trưởng Đơn Vị'),
+('2', 'Phó Trưởng Đơn Vị'),
+('3', 'Giáo Vụ'),
+('4', 'Nhân Viên');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `congvan`
+--
+
+CREATE TABLE `congvan` (
+  `SO_CONG_VAN` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `LOAI_VAN_BAN` int(11) NOT NULL,
+  `NGAY_BAN_HANH` date NOT NULL,
+  `DON_VI_BAN_HANH` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `CAP_DO_QUAN_TRONG` int(11) NOT NULL,
+  `TRICH_YEU_NOI_DUNG` text COLLATE utf8_unicode_ci NOT NULL,
+  `NGUOI_GUI` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `NGUOI_KY_DUYET` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `LOAI_GUI` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `congvan`
+--
+
+INSERT INTO `congvan` (`SO_CONG_VAN`, `LOAI_VAN_BAN`, `NGAY_BAN_HANH`, `DON_VI_BAN_HANH`, `CAP_DO_QUAN_TRONG`, `TRICH_YEU_NOI_DUNG`, `NGUOI_GUI`, `NGUOI_KY_DUYET`, `LOAI_GUI`) VALUES
+('asdasd', 1, '2018-09-10', '2', 1, 'asdasdasd', 'NS01', 'NS01', 3),
+('CV001', 2, '2018-06-19', '2', 0, 'Hôm qua Đức thua', 'NS01', 'NS02', 1),
+('cv002', 1, '2018-07-03', '1', 1, 'vũ', 'NS01', 'NS01', 1),
+('cv003', 1, '2018-07-16', '2', 1, 'trích yếu', 'NS01', 'NS01', 1),
+('CV004', 1, '2018-07-24', '2', 1, 'Daily scrum', 'NS01', 'NS01', 2),
+('CV005', 1, '2018-07-25', '2', 1, 'aaa', 'NS01', 'NS01', 3),
+('CV007', 1, '2018-09-10', '2', 1, 'asdasdasda', 'NS01', 'NV03', 1),
+('CV008', 1, '2018-09-11', '2', 0, 'asdasda', 'NS01', 'NS01', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `congvan_donvi`
+--
+
+CREATE TABLE `congvan_donvi` (
+  `ID` int(11) NOT NULL,
+  `SO_CONG_VAN` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `MA_DON_VI` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `LOAI_GUI` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `NGAY_NHAN` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `congvan_donvi`
+--
+
+INSERT INTO `congvan_donvi` (`ID`, `SO_CONG_VAN`, `MA_DON_VI`, `LOAI_GUI`, `NGAY_NHAN`) VALUES
+(1, 'asdasd', '1', '3', '2018-09-11'),
+(2, 'asdasd', '2', '3', '2018-09-11'),
+(3, 'cv002', '2', '1', '2018-07-11'),
+(4, 'CV004', '1', '1', '2018-07-24'),
+(5, 'CV004', '2', '1', '2018-07-24'),
+(6, 'CV005', '1', '3', '2018-07-25'),
+(7, 'CV005', '2', '3', '2018-07-25'),
+(8, 'CV008', '2', '1', '2018-09-11');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `congvan_filedinhkem`
+--
+
+CREATE TABLE `congvan_filedinhkem` (
+  `SO_CONG_VAN` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `FILE_DINH_KEM` varchar(150) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `FILE_KHA_DUNG` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `congvan_filedinhkem`
+--
+
+INSERT INTO `congvan_filedinhkem` (`SO_CONG_VAN`, `FILE_DINH_KEM`, `FILE_KHA_DUNG`) VALUES
+('cv002', '1530808809ac4_Wallpaper1_1280x720.jpg', 0),
+('cv002', '1530808810ac4_Wallpaper1_1920x1080.jpg', 1),
+('cv002', '1530808810ac4_Wallpaper2_1280x720.jpg', 1),
+('CV004', '1532409970cv_hamy.docx', 1),
+('CV005', '1532527113Bản-gộp.docx', 1),
+('CV006', '15342521002.-Tai-lieu-ghi-tiet-giao-dien.docx', 1),
+('CV007', '15342521352.-Tai-lieu-ghi-tiet-giao-dien.docx', 1),
+('CV007', '15366746702.-Tai-lieu-ghi-tiet-giao-dien.docx', 1),
+('CV008', '15342525272.-Tai-lieu-ghi-tiet-giao-dien.docx', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `congvan_nhansu`
+--
+
+CREATE TABLE `congvan_nhansu` (
+  `ID` int(11) NOT NULL,
+  `SO_CONG_VAN` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `MA_NHAN_SU` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `NGAY_NHAN` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `congvan_nhansu`
+--
+
+INSERT INTO `congvan_nhansu` (`ID`, `SO_CONG_VAN`, `MA_NHAN_SU`, `NGAY_NHAN`) VALUES
+(1, 'CV001', 'NS01', '2018-06-28'),
+(2, 'CV001', 'NS02', '0000-00-00'),
+(3, 'cv002', 'NS01', '2018-07-05'),
+(4, 'cv002', 'NS02', '2018-07-05'),
+(5, 'cv003', 'NS01', '2018-07-16'),
+(6, 'cv003', 'NS02', '2018-07-16'),
+(7, 'CV006', 'NV04', '2018-08-14'),
+(8, 'CV007', 'NS02', '2018-09-11'),
+(9, 'CV007', 'NV04', '2018-08-14'),
+(10, 'CV008', 'NV04', '2018-08-14');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `congvan_phanhoi`
+--
+
+CREATE TABLE `congvan_phanhoi` (
+  `MA_PHAN_HOI` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `SO_CONG_VAN` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `MA_DON_VI` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `NOI_DUNG_PHAN_HOI` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `congvan_phanhoi`
+--
+
+INSERT INTO `congvan_phanhoi` (`MA_PHAN_HOI`, `SO_CONG_VAN`, `MA_DON_VI`, `NOI_DUNG_PHAN_HOI`) VALUES
+('1534000009', 'CV001', '2', 'aaaa'),
+('1534000188', 'CV001', '2', 'bbbbb'),
+('1534000285', 'CV001', '2', 'cccccc'),
+('1534000874', 'CV001', '2', 'ddddd'),
+('1534000980', 'CV001', '2', 'eeeee'),
+('1534001059', 'CV001', '2', 'ffffff');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `congvan_phanhoi_filedinhkem`
+--
+
+CREATE TABLE `congvan_phanhoi_filedinhkem` (
+  `MA_PHAN_HOI` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `FILE_DINH_KEM` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `congvan_phanhoi_filedinhkem`
+--
+
+INSERT INTO `congvan_phanhoi_filedinhkem` (`MA_PHAN_HOI`, `FILE_DINH_KEM`) VALUES
+('1534000980', '15340009812.-Tai-lieu-ghi-tiet-giao-dien.docx'),
+('1534001059', '1534001059testcase_Publisher.xlsx');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `ctkhtuan`
+--
+
+CREATE TABLE `ctkhtuan` (
+  `MA_CTKHTUAN` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `MA_KHTUAN` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `THU` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `BUOI` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `NOI_DUNG` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `NGAY` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `dangvien`
+--
+
+CREATE TABLE `dangvien` (
+  `MA_NHAN_SU` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `NGAY_KET_NAP` date NOT NULL,
+  `GHI_CHU` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `donvi`
+--
+
+CREATE TABLE `donvi` (
+  `MA_DON_VI` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `TEN_DON_VI` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `SO_DIEN_THOAI` varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `EMAIL` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `DIA_CHI` text NOT NULL,
+  `GHI_CHU` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `donvi`
+--
+
+INSERT INTO `donvi` (`MA_DON_VI`, `TEN_DON_VI`, `SO_DIEN_THOAI`, `EMAIL`, `DIA_CHI`, `GHI_CHU`) VALUES
+('1', 'Phòng công tác sinh viên', '01654525110', 'ctsv@gmail.com', '', 'Quản lý thủ tục'),
+('2', 'Khoa đào tạo quốc tế', '08123131', 'kdtqt@gmail.com', '', 'PSU,CMU,UIU,CSU\r\n');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc đóng vai cho view `dscongvanden`
+-- (See below for the actual view)
+--
+CREATE TABLE `dscongvanden` (
+`LOAI_GUI` varchar(10)
+,`DON_VI_BAN_HANH` varchar(50)
+,`CAP_DO_QUAN_TRONG` int(11)
+,`MA_CVNS` varchar(10)
+,`MA_CVDV` varchar(10)
+,`TEN_DON_VI` varchar(50)
+,`SO_CONG_VAN` varchar(50)
+,`TRICH_YEU_NOI_DUNG` mediumtext
+,`NGAY_BAN_HANH` date
+,`NGUOI_GUI` varchar(50)
+,`TEN_DANG_NHAP` varchar(30)
+,`MAT_KHAU` varchar(30)
+,`DEN_NGAY` date
+);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `khtuan`
+--
+
+CREATE TABLE `khtuan` (
+  `MA_KHTUAN` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `TUAN_THU` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `TU_NGAY` date NOT NULL,
+  `DEN_NGAY` date NOT NULL,
+  `FILE_DINH_KEM` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `NOI_NHAN` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `l_nhanvien`
+--
+
+CREATE TABLE `l_nhanvien` (
+  `MA_LOAI_NV` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `TEN_LOAI_NV` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `l_nhanvien`
+--
+
+INSERT INTO `l_nhanvien` (`MA_LOAI_NV`, `TEN_LOAI_NV`) VALUES
+('1', 'Nhân viên chính thức'),
+('2', 'Nhân viên kiêm nhiệm'),
+('3', 'Nhân viên hợp đồng');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `l_vanban`
+--
+
+CREATE TABLE `l_vanban` (
+  `MA_L_NVANBAN` int(11) NOT NULL,
+  `TEN_L_NVANBAN` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `l_vanban`
+--
+
+INSERT INTO `l_vanban` (`MA_L_NVANBAN`, `TEN_L_NVANBAN`) VALUES
+(1, 'Văn bản hàng chính'),
+(2, 'Biên bản');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `ngaylenghi`
+--
+
+CREATE TABLE `ngaylenghi` (
+  `MA_NGAY_LE_NGHI` int(11) NOT NULL,
+  `TEN_NGAY_LE_NGHI` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `THOI_GIAN` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `GHI_CHU` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `nhansu`
+--
+
+CREATE TABLE `nhansu` (
+  `MA_NHAN_SU` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `HO_VA_TEN` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `NAM_SINH` varchar(4) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `GIOI_TINH` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `DIA_CHI` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `SO_DIEN_THOAI` varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `EMAIL` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `nhansu`
+--
+
+INSERT INTO `nhansu` (`MA_NHAN_SU`, `HO_VA_TEN`, `NAM_SINH`, `GIOI_TINH`, `DIA_CHI`, `SO_DIEN_THOAI`, `EMAIL`) VALUES
+('2121117313', 'Phan Đặng Hải Vũ', '1997', 'Nam', '123 Đà Nẵng', '01654525118', 'vugalopg@gmail.com'),
+('NS01', 'Phan Đặng Hải Vũ', '1997', 'Nam', 'Quảng Ngãi', '01654525110', 'vugalopg@gmail.com'),
+('NS02', 'Tôn Quân', '1997', 'Nam', 'Huế', '0123123131', 'nhatquan@gmail.com'),
+('NV02', 'Phan Đặng Hải Vũ', '1997', 'nam', 'Đà Nẵng', '012313131231', 'vugalopg@gmail.com'),
+('NV03', 'Phan Đặng Hải Vũ', '1997', 'nam', 'Đà Nẵng', '012313131231', 'vugalopg@gmail.com'),
+('NV04', 'Phan đang hai dung', '2000', 'nu', 'abc', '01231231', '123');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `nhansu_thuocdonvi`
+--
+
+CREATE TABLE `nhansu_thuocdonvi` (
+  `MA_NHAN_SU` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `MA_DON_VI` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `MA_CHUC_VU` varchar(11) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `SO_DIEN_THOAI` varchar(20) NOT NULL,
+  `MA_LOAI_NV` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `TU_NGAY` date NOT NULL,
+  `DEN_NGAY` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `nhansu_thuocdonvi`
+--
+
+INSERT INTO `nhansu_thuocdonvi` (`MA_NHAN_SU`, `MA_DON_VI`, `MA_CHUC_VU`, `SO_DIEN_THOAI`, `MA_LOAI_NV`, `TU_NGAY`, `DEN_NGAY`) VALUES
+('NS01', '2', '1', '', '1', '2018-07-02', NULL),
+('NV03', '1', '1', '', '1', '2018-07-26', '2018-07-25'),
+('NV03', '2', '2', '', '2', '2018-07-17', NULL),
+('NV04', '1', '1', '', '1', '2018-07-11', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `taikhoan`
+--
+
+CREATE TABLE `taikhoan` (
+  `MA_NHAN_SU` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `TEN_DANG_NHAP` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `MAT_KHAU` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `QUYEN_TRUY_CAP` int(11) NOT NULL,
+  `TINH_TRANG` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `taikhoan`
+--
+
+INSERT INTO `taikhoan` (`MA_NHAN_SU`, `TEN_DANG_NHAP`, `MAT_KHAU`, `QUYEN_TRUY_CAP`, `TINH_TRANG`) VALUES
+('NS01', 'vugalopg', '123', 1, 1),
+('NS02', 'admin', '123', 3, 1),
+('NS03', 'admin', '123', 3, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `taisandonvi`
+--
+
+CREATE TABLE `taisandonvi` (
+  `MA_TAI_SAN` int(11) NOT NULL,
+  `TEN_TAI_SAN` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `MA_DON_VI` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `SO_LUONG` int(11) NOT NULL,
+  `GHI_CHU` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `taisandonvi`
+--
+
+INSERT INTO `taisandonvi` (`MA_TAI_SAN`, `TEN_TAI_SAN`, `MA_DON_VI`, `SO_LUONG`, `GHI_CHU`) VALUES
+(1, 'Máy tính', '1', 11, 'Không có cái nào hỏng'),
+(2, 'Ghế gỗ', '1', 10, 'không cái nào hỏng hóc'),
+(3, 'Bàn', '1', 6, 'không cái nào hỏng hóc');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tinnhan`
+--
+
+CREATE TABLE `tinnhan` (
+  `MA_TIN_NHAN` int(11) NOT NULL,
+  `NGUOI_GUI` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `NGUOI_NHAN` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `NOI_DUNG` text COLLATE utf8_unicode_ci NOT NULL,
+  `NGAY_GUI` date NOT NULL,
+  `GIO_GUI` time NOT NULL,
+  `DA_DOC` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `tinnhan`
+--
+
+INSERT INTO `tinnhan` (`MA_TIN_NHAN`, `NGUOI_GUI`, `NGUOI_NHAN`, `NOI_DUNG`, `NGAY_GUI`, `GIO_GUI`, `DA_DOC`) VALUES
+(1, 'NS02', 'NS01', 'tin nhan 1', '2018-09-13', '01:19:08', 0),
+(2, 'NS02', 'NS01', 'tin nhan 2', '2018-09-13', '12:55:40', 0),
+(3, 'NS02', 'NS01', 'tin nhan 3', '2018-09-13', '12:55:40', 0),
+(4, 'NS02', 'NS01', 'tin nhan 4', '2018-09-14', '12:55:40', 0),
+(5, 'NS02', 'NS01', 'tin nhan 5', '2018-09-15', '12:55:40', 0),
+(6, 'NS01', 'NS02', 'aa', '2018-09-13', '13:22:19', 0),
+(7, 'NS01', 'NV02', 'aa', '2018-09-13', '13:22:19', 0),
+(8, 'NS01', 'NS02', 'aaa', '2018-09-13', '13:22:31', 0),
+(9, 'NS01', 'NV02', 'aaa', '2018-09-13', '13:22:31', 0),
+(10, 'NS01', 'NS02', 'aaa', '2018-09-13', '14:00:59', 0),
+(11, 'NS01', 'NV02', 'aaa', '2018-09-13', '14:00:59', 0),
+(12, 'NS01', 'NS02', 'aaa', '2018-09-13', '14:00:59', 0),
+(13, 'NS01', 'NV02', 'aaa', '2018-09-13', '14:00:59', 0),
+(14, 'NS01', 'NS02', 'ffffffffffffffffff', '2018-10-18', '10:40:37', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tinnhan_filedinhkem`
+--
+
+CREATE TABLE `tinnhan_filedinhkem` (
+  `NGUOI_GUI` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `NGUOI_NHAN` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `FILE_DINH_KEM` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `tinnhan_filedinhkem`
+--
+
+INSERT INTO `tinnhan_filedinhkem` (`NGUOI_GUI`, `NGUOI_NHAN`, `FILE_DINH_KEM`) VALUES
+('NS01', 'NS02', 'iqRL9UoEFGolRawUdIFifvb8PoKWwiY4G3kUOcyV.docx'),
+('NS01', 'NV02', 'iqRL9UoEFGolRawUdIFifvb8PoKWwiY4G3kUOcyV.docx'),
+('NS01', 'NS02', 'U53bAJmLN7tbLW2ekS6cT0LG3tWFa7eIyGOoBX6U.docx'),
+('NS01', 'NV02', 'U53bAJmLN7tbLW2ekS6cT0LG3tWFa7eIyGOoBX6U.docx'),
+('NS01', 'NS02', 'EK4UYTOUNk5eMRQM5X0woRvoWGvpmYxPhrC9CNvV.docx'),
+('NS01', 'NV02', 'EK4UYTOUNk5eMRQM5X0woRvoWGvpmYxPhrC9CNvV.docx'),
+('NS01', 'NS02', 'clUZZP1fXp4ZFOujnMcqyUTGnkK5MVKy5oOyWXQs.docx'),
+('NS01', 'NV02', 'clUZZP1fXp4ZFOujnMcqyUTGnkK5MVKy5oOyWXQs.docx'),
+('NS01', 'NS02', 'R0GDVhCzUlJrYEXCohSVVwoLR933GNnX9QFt8skX.docx');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc cho view `dscongvanden`
+--
+DROP TABLE IF EXISTS `dscongvanden`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `dscongvanden`  AS  (select NULL AS `LOAI_GUI`,`cv`.`DON_VI_BAN_HANH` AS `DON_VI_BAN_HANH`,`cv`.`CAP_DO_QUAN_TRONG` AS `CAP_DO_QUAN_TRONG`,`cn`.`MA_NHAN_SU` AS `MA_CVNS`,NULL AS `MA_CVDV`,`dv`.`TEN_DON_VI` AS `TEN_DON_VI`,`cv`.`SO_CONG_VAN` AS `SO_CONG_VAN`,`cv`.`TRICH_YEU_NOI_DUNG` AS `TRICH_YEU_NOI_DUNG`,`cv`.`NGAY_BAN_HANH` AS `NGAY_BAN_HANH`,`cv`.`NGUOI_GUI` AS `NGUOI_GUI`,`tk`.`TEN_DANG_NHAP` AS `TEN_DANG_NHAP`,`tk`.`MAT_KHAU` AS `MAT_KHAU`,NULL AS `DEN_NGAY` from (((`congvan` `cv` join `congvan_nhansu` `cn` on((`cv`.`SO_CONG_VAN` = `cn`.`SO_CONG_VAN`))) join `taikhoan` `tk` on((`cn`.`MA_NHAN_SU` = `tk`.`MA_NHAN_SU`))) join `donvi` `dv` on((`dv`.`MA_DON_VI` = `cv`.`DON_VI_BAN_HANH`)))) union all (select `cd`.`LOAI_GUI` AS `LOAI_GUI`,`cv`.`DON_VI_BAN_HANH` AS `DON_VI_BAN_HANH`,`cv`.`CAP_DO_QUAN_TRONG` AS `CAP_DO_QUAN_TRONG`,NULL AS `MA_CVNS`,`cd`.`LOAI_GUI` AS `MA_CVDV`,`dv`.`TEN_DON_VI` AS `TEN_DON_VI`,`cv`.`SO_CONG_VAN` AS `SO_CONG_VAN`,`cv`.`TRICH_YEU_NOI_DUNG` AS `TRICH_YEU_NOI_DUNG`,`cv`.`NGAY_BAN_HANH` AS `NGAY_BAN_HANH`,`cv`.`NGUOI_GUI` AS `NGUOI_GUI`,`tk`.`TEN_DANG_NHAP` AS `TEN_DANG_NHAP`,`tk`.`MAT_KHAU` AS `MAT_KHAU`,`nt`.`DEN_NGAY` AS `DEN_NGAY` from ((((`congvan` `cv` join `congvan_donvi` `cd` on((`cd`.`SO_CONG_VAN` = `cv`.`SO_CONG_VAN`))) join `nhansu_thuocdonvi` `nt` on((`cd`.`MA_DON_VI` = `nt`.`MA_DON_VI`))) join `taikhoan` `tk` on((`nt`.`MA_NHAN_SU` = `tk`.`MA_NHAN_SU`))) join `donvi` `dv` on((`dv`.`MA_DON_VI` = `cv`.`DON_VI_BAN_HANH`)))) ;
+
+--
+-- Chỉ mục cho các bảng đã đổ
+--
+
+--
+-- Chỉ mục cho bảng `bieumau`
+--
+ALTER TABLE `bieumau`
+  ADD PRIMARY KEY (`MA_BIEU_MAU`);
+
+--
+-- Chỉ mục cho bảng `chucvu`
+--
+ALTER TABLE `chucvu`
+  ADD PRIMARY KEY (`MA_CHUC_VU`);
+
+--
+-- Chỉ mục cho bảng `congvan`
+--
+ALTER TABLE `congvan`
+  ADD PRIMARY KEY (`SO_CONG_VAN`);
+
+--
+-- Chỉ mục cho bảng `congvan_donvi`
+--
+ALTER TABLE `congvan_donvi`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Chỉ mục cho bảng `congvan_filedinhkem`
+--
+ALTER TABLE `congvan_filedinhkem`
+  ADD PRIMARY KEY (`SO_CONG_VAN`,`FILE_DINH_KEM`);
+
+--
+-- Chỉ mục cho bảng `congvan_nhansu`
+--
+ALTER TABLE `congvan_nhansu`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Chỉ mục cho bảng `congvan_phanhoi`
+--
+ALTER TABLE `congvan_phanhoi`
+  ADD PRIMARY KEY (`MA_PHAN_HOI`);
+
+--
+-- Chỉ mục cho bảng `ctkhtuan`
+--
+ALTER TABLE `ctkhtuan`
+  ADD PRIMARY KEY (`MA_CTKHTUAN`);
+
+--
+-- Chỉ mục cho bảng `dangvien`
+--
+ALTER TABLE `dangvien`
+  ADD PRIMARY KEY (`MA_NHAN_SU`);
+
+--
+-- Chỉ mục cho bảng `donvi`
+--
+ALTER TABLE `donvi`
+  ADD PRIMARY KEY (`MA_DON_VI`);
+
+--
+-- Chỉ mục cho bảng `khtuan`
+--
+ALTER TABLE `khtuan`
+  ADD PRIMARY KEY (`MA_KHTUAN`);
+
+--
+-- Chỉ mục cho bảng `l_nhanvien`
+--
+ALTER TABLE `l_nhanvien`
+  ADD PRIMARY KEY (`MA_LOAI_NV`);
+
+--
+-- Chỉ mục cho bảng `l_vanban`
+--
+ALTER TABLE `l_vanban`
+  ADD PRIMARY KEY (`MA_L_NVANBAN`);
+
+--
+-- Chỉ mục cho bảng `ngaylenghi`
+--
+ALTER TABLE `ngaylenghi`
+  ADD PRIMARY KEY (`MA_NGAY_LE_NGHI`);
+
+--
+-- Chỉ mục cho bảng `nhansu`
+--
+ALTER TABLE `nhansu`
+  ADD PRIMARY KEY (`MA_NHAN_SU`);
+
+--
+-- Chỉ mục cho bảng `nhansu_thuocdonvi`
+--
+ALTER TABLE `nhansu_thuocdonvi`
+  ADD PRIMARY KEY (`MA_NHAN_SU`,`MA_DON_VI`,`TU_NGAY`);
+
+--
+-- Chỉ mục cho bảng `taikhoan`
+--
+ALTER TABLE `taikhoan`
+  ADD PRIMARY KEY (`MA_NHAN_SU`);
+
+--
+-- Chỉ mục cho bảng `taisandonvi`
+--
+ALTER TABLE `taisandonvi`
+  ADD PRIMARY KEY (`MA_TAI_SAN`);
+
+--
+-- Chỉ mục cho bảng `tinnhan`
+--
+ALTER TABLE `tinnhan`
+  ADD PRIMARY KEY (`MA_TIN_NHAN`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
+--
+
+--
+-- AUTO_INCREMENT cho bảng `congvan_donvi`
+--
+ALTER TABLE `congvan_donvi`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT cho bảng `congvan_nhansu`
+--
+ALTER TABLE `congvan_nhansu`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT cho bảng `taisandonvi`
+--
+ALTER TABLE `taisandonvi`
+  MODIFY `MA_TAI_SAN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT cho bảng `tinnhan`
+--
+ALTER TABLE `tinnhan`
+  MODIFY `MA_TIN_NHAN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+--
+-- Cơ sở dữ liệu: `shareit`
+--
+CREATE DATABASE IF NOT EXISTS `shareit` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `shareit`;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `cat_list`
+--
+
+CREATE TABLE `cat_list` (
+  `cat_id` int(11) NOT NULL,
+  `name` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `parent_id` int(11) NOT NULL,
+  `color` varchar(128) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `cat_list`
+--
+
+INSERT INTO `cat_list` (`cat_id`, `name`, `parent_id`, `color`) VALUES
+(1, 'Tâm sự coder', 0, 'gren'),
+(2, 'Công nghệ', 0, 'pink'),
+(3, 'Lập trình', 0, 'gren'),
+(4, 'Java', 1, 'orn'),
+(5, 'Android', 2, 'blue'),
+(11, 'CSS', 3, 'orn'),
+(12, 'PHP', 3, 'pink');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `comment`
+--
+
+CREATE TABLE `comment` (
+  `comment_id` int(11) NOT NULL,
+  `content` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `news_id` int(11) NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `comment`
+--
+
+INSERT INTO `comment` (`comment_id`, `content`, `email`, `date_create`, `news_id`, `status`) VALUES
+(15, 'đừng để bị lựa nha', 'nhatquan160697@gmail.com', '2018-07-19 08:48:18', 7, 1),
+(23, 'co the chu hihi', 'tu hao vcl', '2018-07-20 05:20:52', 7, 1),
+(25, 'comment mois', 'nhatquan124@gmail.com', '2018-07-19 08:48:23', 9, 1),
+(26, 'ua hoi nay co bl roi ', 'sao gio mat roi', '2018-07-19 08:48:24', 10, 1),
+(28, 'haizz', 'ma sia gon', '2018-07-19 08:48:27', 7, 1),
+(29, 'chan vay', 'vllvllv', '2018-07-19 08:48:28', 7, 1),
+(30, 'xzcxzc', 'xczxc', '2018-07-19 08:48:29', 7, 1),
+(31, 'zxcxzc', 'fqfqdq', '2018-07-19 09:02:49', 7, 1),
+(32, 'zzzzz', 'ggggg', '2018-07-19 08:48:34', 10, 1),
+(33, 'hay quá thêm tin mới nha', 'nhatquan160697@gmail.com', '2018-07-19 08:48:36', 4, 1),
+(34, 'test', 'test', '2018-07-19 09:01:38', 7, 1),
+(35, 'Bài viêt hay nha', 'chao@gmail.com', '2018-07-19 09:33:43', 6, 1),
+(39, 'xin chào', 'testban@gmail.com', '2018-07-20 05:07:50', 9, 1),
+(40, 'hiii', 'heeee@gmail.com', '2018-07-20 10:02:39', 10, 1),
+(41, '', '', '2018-07-20 12:48:38', 7, 1),
+(42, 'chào bạn', 'chaoban@gmail.com', '2018-07-20 14:30:19', 10, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `contact`
+--
+
+CREATE TABLE `contact` (
+  `contact_id` int(11) NOT NULL,
+  `name` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `content` varchar(128) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `contact`
+--
+
+INSERT INTO `contact` (`contact_id`, `name`, `email`, `phone`, `content`) VALUES
+(2, 'Tôn Quân', 'tonquan230497@gmail.com', '01264236535', 'Xin chào bạn');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `news`
+--
+
+CREATE TABLE `news` (
+  `news_id` int(11) NOT NULL,
+  `name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `preview` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `detail` text COLLATE utf8_unicode_ci NOT NULL,
+  `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `user_id` int(11) NOT NULL,
+  `picture` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `cat_id` int(11) NOT NULL,
+  `is_slide` int(11) NOT NULL,
+  `counter` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `news`
+--
+
+INSERT INTO `news` (`news_id`, `name`, `preview`, `detail`, `date_create`, `user_id`, `picture`, `cat_id`, `is_slide`, `counter`) VALUES
+(1, 'Rò rỉ thông số kỹ thuật của Huawei Nova 3i sử dụng Kirin 710', 'Huawei chuẩn bị ra mắt Nova 3i, đây là phiên bản rút gọn cấu hình phần cứng so với Nova 3 vừa ra mắt vào ngày hôm qua (11/07). Thông số kỹ thuật của máy vừa được GSMarena tiết lộ.', '<h1>R&ograve; rỉ th&ocirc;ng số kỹ thuật của Huawei Nova 3i sử dụng Kirin 710</h1>\r\n\r\n<h2>Huawei chuẩn bị ra mắt <a href=\"https://www.thegioididong.com/dtdd/huawei-nova-3i\" target=\"_blank\">Nova 3i</a>, đ&acirc;y l&agrave; phi&ecirc;n bản r&uacute;t gọn cấu h&igrave;nh phần cứng so với Nova 3 vừa ra mắt v&agrave;o ng&agrave;y h&ocirc;m qua (11/07). Th&ocirc;ng số kỹ thuật của m&aacute;y vừa được <a href=\"https://www.gsmarena.com/huawei_nova_3i_leaked_specs_kirin_710_chipset-news-32186.php\" target=\"_blank\">GSMarena</a> tiết lộ.</h2>\r\n\r\n<p>Huawei Nova 3i c&oacute; thiết kế tương tự như <a href=\"https://www.thegioididong.com/dtdd/huawei-nova-3\" target=\"_blank\">Nova 3</a> với phần &quot;tai thỏ&quot;, cụm camera k&eacute;p xếp dọc v&agrave; c&aacute;ch bố tr&iacute; cảm biến v&acirc;n tay ở mặt lưng. M&aacute;y sử dụng vi xử l&yacute; Kirin 710 mới nhất được sản xuất tiến tr&igrave;nh 12 nm. Vi xử l&yacute; n&agrave;y cũng hỗ trợ tr&iacute; th&ocirc;ng minh nh&acirc;n tạo AI tương tự như Kirin 970.</p>\r\n\r\n<p><img alt=\"Rò rỉ thông số kỹ thuật của Huawei Nova 3i sử dụng Kirin 710\" src=\"https://cdn.tgdd.vn/Files/2018/07/12/1101026/gsmarena_002_728x455.jpg\" /></p>\r\n\r\n<p>M&aacute;y&nbsp;được trang bị camera k&eacute;p ph&iacute;a sau (16 MP + 2 MP) với t&iacute;nh năng ch&iacute;nh tạo ảnh x&oacute;a ph&ocirc;ng c&oacute; t&iacute;ch hợp AI v&agrave; cụm camera k&eacute;p selfie (24 MP + 2 MP). Vi&ecirc;n pin dung lượng 3.340 mAh hỗ trợ sạc nhanh với nguồn ra 5V/2A.</p>\r\n\r\n<p><img alt=\"Rò rỉ thông số kỹ thuật của Huawei Nova 3i sử dụng Kirin 710\" src=\"https://cdn.tgdd.vn/Files/2018/07/12/1101026/gsmarena_003_728x454.jpg\" /></p>\r\n\r\n<p>Huawei Nova 3i c&oacute; 2 lựa chọn phi&ecirc;n bản bộ nhớ bao gồm: RAM 4 GB + ROM 128 GB v&agrave; RAM 6 GB + ROM 64 GB. Ngo&agrave;i ra m&aacute;y c&ograve;n hỗ trợ khe cắm thẻ nhớ, gi&uacute;p bạn mở rộng bộ nhớ lưu trữ dễ d&agrave;ng.</p>\r\n\r\n<p>Gi&aacute; Nova 3i vẫn chưa được tiết lộ, nhưng khả năng thiết bị sẽ thuộc ph&acirc;n kh&uacute;c tầm trung nhằm gi&uacute;p Huawei trải d&agrave;i mọi sản phẩm ở nhiều ph&acirc;n kh&uacute;c để cạnh tranh tốt hơn.</p>\r\n', '2018-04-09 05:55:47', 1, 'HinhAnh-1531463552.jpg', 2, 1, 19),
+(2, '3 điện thoại Sony đang giảm giá cuối tuần đến 3 triệu kèm quà tặng', 'Bắt đầu từ hôm nay (12/7), bạn đã có thể đặt mua trước Xperia L1, Xperia XA1 Plus & Xperia XZ2 để được hưởng giá khuyến mãi - giảm lần lượt 600K, 500K và 3 triệu đồng bên cạnh một số món quà kèm khuyế', '<p><em>*Lưu &yacute;: Khuyến m&atilde;i n&agrave;y d&agrave;nh cho c&aacute;c đơn h&agrave;ng đặt ONLINE v&agrave; nhận m&aacute;y trong ng&agrave;y 13 - 15/7/2018, được &aacute;p dụng k&egrave;m c&aacute;c khuyến m&atilde;i kh&aacute;c như:</em></p>\r\n\r\n<ul>\r\n	<li><em>20 chuyến du lịch Nhật Bản trị gi&aacute; 100 triệu cho 2 người (<a href=\"https://www.thegioididong.com/tin-tuc/mua-sony-vi-vu-kham-pha-nhat-ban-1086270?clearcache=1\" target=\"_blank\">Xem chi tiết</a>)</em></li>\r\n	<li><em>Cơ hội tr&uacute;ng 3 Tivi Sony 4K 55 inch (<a href=\"https://www.thegioididong.com/tin-tuc/mua-dien-thoai-may-tinh-bang-trung-tivi-55-inch-1095503\" target=\"_blank\">Xem chi tiết</a>)</em></li>\r\n</ul>\r\n\r\n<h3><strong>1. Xperia L1 (Trắng hoặc Hồng - Gi&aacute; tham khảo: 3.59 triệu)</strong></h3>\r\n\r\n<p><a href=\"https://www.thegioididong.com/dtdd/sony-xperia-l1-trang\" target=\"_blank\">Sony Xperia L1</a> được trang bị m&agrave;n h&igrave;nh 5.5 inch HD, chip MediTek&nbsp;MT6737T4,&nbsp;RAM 2 GB, bộ nhớ trong 16 GB, vi&ecirc;n pin 2.620 mAh,... Dĩ nhi&ecirc;n l&agrave; kh&oacute; để cạnh tranh với những c&aacute;i t&ecirc;n đến từ Trung Quốc.</p>\r\n\r\n<p><img alt=\"Xperia L1\" src=\"https://cdn.tgdd.vn/Files/2018/07/12/1100982/topsony2_800x449.jpg\" /></p>\r\n\r\n<p>Giảm 600.000 đồng + B&igrave;nh giữ nhiệt inox DMX-002 500 ml (<a href=\"https://www.dienmayxanh.com/binh-giu-nhiet/binh-giu-nhiet-500ml-dmx-002\" target=\"_blank\">Xem chi tiết</a>)</p>\r\n\r\n<p>Tuy nhi&ecirc;n b&ugrave; lại, chiếc smartphone n&agrave;y c&oacute; một thương hiệu kh&aacute; uy t&iacute;n, sở hữu thiết kế đẹp, mức gi&aacute; phải chăng v&agrave; một cấu h&igrave;nh đủ d&ugrave;ng n&ecirc;n n&oacute; vẫn được rất nhiều người chọn mua v&agrave; đ&aacute;nh gi&aacute; đến 5 sao tr&ecirc;n trang Thế Giới Di Động.</p>\r\n\r\n<p><a href=\"https://www.thegioididong.com/dtdd/sony-xperia-l1-trang\"><img src=\"https://cdn1.tgdd.vn/Products/Images/42/133496/sony-xperia-l1-trang-hh1-600x600-600x600-400x400.jpg\" /></a></p>\r\n\r\n<h3><a href=\"https://www.thegioididong.com/dtdd/sony-xperia-l1-trang\">Sony Xperia L1</a></h3>\r\n\r\n<p><strong>3.590.000₫</strong></p>\r\n\r\n<p>M&agrave;n h&igrave;nh: 5.5&quot;, HD</p>\r\n\r\n<p>HĐH: Android 7.0</p>\r\n\r\n<p>CPU: MT6737T, 4 nh&acirc;n</p>\r\n\r\n<p>RAM: 2 GB, ROM: 16 GB</p>\r\n\r\n<p>Camera: 13 MP, Selfie: 5 MP</p>\r\n\r\n<p><a href=\"https://www.thegioididong.com/them-vao-gio-hang?ProductId=133496\" target=\"blank\">Đặt mua</a><a href=\"https://www.thegioididong.com/tra-gop/dtdd/sony-xperia-l1-trang\" target=\"blank\">Trả g&oacute;p</a></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong><a href=\"https://www.thegioididong.com/dtdd/sony-xperia-l1-trang\" target=\"_blank\">ĐẶT MUA XPERIA L1</a></strong></p>\r\n\r\n<h3><strong>2. Xperia XA1 Plus (Gi&aacute; tham khảo: 5.99 triệu)</strong></h3>\r\n\r\n<p>Với mức gi&aacute; khoảng 6 triệu (nay c&ograve;n được giảm 500.000 đồng), <a href=\"https://www.thegioididong.com/dtdd/sony-xepria-xa1-plus\" target=\"_blank\">Xperia XA1 Plus</a> mang lại cho người d&ugrave;ng một kh&ocirc;ng gian trải nghiệm tốt tr&ecirc;n m&agrave;n h&igrave;nh 5.5 inch Full HD với tấm nền IPS, thiết kế kim loại nguy&ecirc;n khối được ho&agrave;n thiện tỉ mỉ, cứng c&aacute;p đem đến cảm gi&aacute;c cầm nắm tốt.</p>\r\n\r\n<p><img alt=\"Xperia XA1 Plus\" src=\"https://cdn.tgdd.vn/Files/2018/07/12/1100982/topsony4_800x451.jpg\" style=\"height:282px; width:500px\" /></p>\r\n\r\n<p>Giảm 500.000 đồng + B&igrave;nh giữ nhiệt inox DMX-002 500 ml (<a href=\"https://www.dienmayxanh.com/binh-giu-nhiet/binh-giu-nhiet-500ml-dmx-002\" target=\"_blank\">Xem chi tiết</a>)</p>\r\n\r\n<p>Về cấu h&igrave;nh, sản phẩm n&agrave;y được Sony trang bị vi xử l&yacute; Helio P20, RAM 4 GB, bộ nhớ trong 32 GB, camera trước - sau 8 &amp; 23 &quot;chấm&quot; &amp; vi&ecirc;n pin 3.430 mAh (c&oacute; sạc nhanh),... Theo m&igrave;nh th&igrave; tương đối tốt để mang lại trải nghiệm mượt m&agrave; cho hầu hết người d&ugrave;ng.&nbsp;</p>\r\n\r\n<p><a href=\"https://www.thegioididong.com/dtdd/sony-xepria-xa1-plus\"><img src=\"https://cdn3.tgdd.vn/Products/Images/42/112833/sony-xperia-xa1-plus-ava-200x200.jpg\" /></a></p>\r\n\r\n<h3><a href=\"https://www.thegioididong.com/dtdd/sony-xepria-xa1-plus\">Sony Xperia XA1 Plus</a></h3>\r\n\r\n<p><strong>5.990.000₫</strong></p>\r\n\r\n<p>M&agrave;n h&igrave;nh: 5.5&quot;, Full HD</p>\r\n\r\n<p>HĐH: Android 7.0</p>\r\n\r\n<p>CPU: Mediatek Helio P20</p>\r\n\r\n<p>RAM: 4 GB, ROM: 32 GB</p>\r\n\r\n<p>Camera: 23 MP, Selfie: 8 MP</p>\r\n\r\n<p><a href=\"https://www.thegioididong.com/them-vao-gio-hang?ProductId=112833\" target=\"blank\">Đặt mua</a><a href=\"https://www.thegioididong.com/tra-gop/dtdd/sony-xepria-xa1-plus\" target=\"blank\">Trả g&oacute;p</a></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong><a href=\"https://www.thegioididong.com/dtdd/sony-xepria-xa1-plus\" target=\"_blank\">ĐẶT MUA XA1 PLUS</a></strong></p>\r\n\r\n<h3><strong>3. Xperia XZ2 (Gi&aacute; tham khảo: 19.99 triệu)</strong></h3>\r\n\r\n<p>L&agrave; một smartphone ở ph&acirc;n kh&uacute;c cao cấp năm 2018 thế n&ecirc;n Xperia nghiễm nhi&ecirc;n được sở hữu những trang bị mạnh nhất về cấu h&igrave;nh như:</p>\r\n\r\n<p>Chip Snapdragon 845, RAM 4 GB, bộ nhớ trong 64 GB, vi&ecirc;n pin 3.180 mAh, camera sau 19 MP c&oacute; khả năng quay phim 4K HDR đầu ti&ecirc;n tr&ecirc;n thế giới,...</p>\r\n\r\n<p><img alt=\"Xperia XZ2\" src=\"https://cdn.tgdd.vn/Files/2018/07/12/1100982/topsony3_800x450.jpg\" style=\"height:281px; width:500px\" /></p>\r\n\r\n<p>Giảm 3.000.000 đồng + Phiếu mua h&agrave;ng trị gi&aacute; 200.000 đồng</p>\r\n\r\n<p>B&ecirc;n cạnh đ&oacute;, thiết bị n&agrave;y c&ograve;n sở hữu một ng&ocirc;n ngữ thiết kế mới mang lại phần mặt lưng cong, b&oacute;ng bẩy vừa đẹp, vừa &ocirc;m tay dễ cầm nắm. Đ&acirc;y cũng l&agrave; một trong những sản phẩm Xperia đầu ti&ecirc;n được trang bị m&agrave;n h&igrave;nh 18:9 k&iacute;ch thước 5.7 inch với nhiều c&ocirc;ng nghệ hiển thị h&agrave;ng đầu.</p>\r\n\r\n<p><a href=\"https://www.thegioididong.com/dtdd/sony-xperia-xz2\"><img src=\"https://cdn4.tgdd.vn/Products/Images/42/146014/sony-xperia-xz2-1-400x400.jpg\" /></a></p>\r\n\r\n<h3><a href=\"https://www.thegioididong.com/dtdd/sony-xperia-xz2\">Sony Xperia XZ2</a></h3>\r\n\r\n<p><strong>19.990.000₫</strong></p>\r\n\r\n<p>M&agrave;n h&igrave;nh: 5.7&quot;, Full HD+</p>\r\n\r\n<p>HĐH: Android 8.0</p>\r\n\r\n<p>CPU: Snapdragon 845 8 nh&acirc;n</p>\r\n\r\n<p>RAM: 4 GB, ROM: 64 GB</p>\r\n\r\n<p>Camera: 19 MP, Selfie: 5 MP</p>\r\n\r\n<p><a href=\"https://www.thegioididong.com/them-vao-gio-hang?ProductId=146014\" target=\"blank\">Đặt mua</a><a href=\"https://www.thegioididong.com/tra-gop/dtdd/sony-xperia-xz2\" target=\"blank\">Trả g&oacute;p</a></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong><a href=\"https://www.thegioididong.com/dtdd/sony-xperia-xz2\" target=\"_blank\">ĐẶT MUA XPERIA XZ2</a></strong></p>\r\n\r\n<p>-----</p>\r\n\r\n<p>Vừa rồi l&agrave; 3 sản phẩm Sony đang được giảm gi&aacute; cuối tuần k&egrave;m theo nhiều qu&agrave; tặng, khuyến m&atilde;i hấp dẫn. Nếu bạn th&iacute;ch th&igrave; h&atilde;y đặt gạch ngay h&ocirc;m nay để kh&ocirc;ng bỏ lỡ cơ hội nh&eacute;!</p>\r\n\r\n<p>&nbsp;</p>\r\n', '2018-05-14 05:55:51', 8, 'HinhAnh-1531463672.jpg', 2, 1, 27),
+(3, ' Nokia 2.1, 3.1 giá rẻ, chạy Android gốc về Việt Nam', 'Nokia 3.1 lên kệ từ ngày 12/7 với giá từ 3,4 triệu đồng trong khi Nokia 2.1 sẽ lên kệ vào tháng 8. ', '<table align=\"center\">\r\n	<tbody>\r\n		<tr>\r\n			<td>Sau loạt sản phẩm tầm trung ra mắt tại Việt Nam hồi th&aacute;ng 3, HMD Global - nh&atilde;n h&agrave;ng sở hữu thương hiệu di động Nokia - tiếp tục đem bộ đ&ocirc;i di động gi&aacute; rẻ l&agrave; Nokia 3.1 (phải) v&agrave; 2.1 (tr&aacute;i) về Việt Nam. Bộ đ&ocirc;i n&agrave;y ra mắt c&ugrave;ng với chiếc Nokia 5.1 v&agrave;o cuối th&aacute;ng 5 tại thị trường quốc tế.</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<table align=\"center\">\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p><img alt=\"Nokia 2.1, 3.1 gia re, chay Android goc ve Viet Nam hinh anh 2\" src=\"https://znews-photo-td.zadn.vn/w1024/Uploaded/Aohuouk/2018_07_12/SmartphoneNokia_Zing_2.jpg\" style=\"height:377px; width:559.609px\" /></p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>Đ&acirc;y đều l&agrave; bản n&acirc;ng cấp của những model đ&atilde; ra mắt năm ngo&aacute;i. Thay v&igrave; c&aacute;ch gọi Nokia 2 v&agrave; th&ecirc;m đu&ocirc;i 2018 như c&aacute;c h&atilde;ng vẫn l&agrave;m, HMD gọi ch&uacute;ng l&agrave; Nokia 2.1 hay 3.1. Theo c&ocirc;ng bố của nh&agrave; sản xuất, model thế hệ mới c&oacute; tốc độ xử l&yacute; nhanh hơn 50% so với thế hệ cũ.</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<table align=\"center\">\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p><img alt=\"Nokia 2.1, 3.1 gia re, chay Android goc ve Viet Nam hinh anh 3\" src=\"https://znews-photo-td.zadn.vn/w1024/Uploaded/Aohuouk/2018_07_12/SmartphoneNokia_Zing_3.jpg\" style=\"height:377px; width:559.609px\" /></p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>Trong số 2 model, Nokia 3.1 nhỏ nhắn hơn, sử dụng khung kim loại trong khi Nokia 2.1 d&ugrave;ng khung nhựa, m&agrave;n h&igrave;nh lớn, pin tr&acirc;u hơn.</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<table align=\"center\">\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p><img alt=\"Nokia 2.1, 3.1 gia re, chay Android goc ve Viet Nam hinh anh 4\" src=\"https://znews-photo-td.zadn.vn/w1024/Uploaded/Aohuouk/2018_07_12/SmartphoneNokia_Zing_4.jpg\" style=\"height:377px; width:559.609px\" /></p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>Cầm chiếc Nokia 3.1 tr&ecirc;n tay, người d&ugrave;ng sẽ thấy được đường n&eacute;t quen thuộc của model Nokia 3 năm ngo&aacute;i. Điểm kh&aacute;c biệt dễ nhận thấy nhất l&agrave; đường cắt kim cương chạy dọc khung m&aacute;y v&agrave; tỷ lệ m&agrave;n h&igrave;nh 18:9, thay v&igrave; 16:9 như trước đ&acirc;y.</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<table align=\"center\">\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p><img alt=\"Nokia 2.1, 3.1 gia re, chay Android goc ve Viet Nam hinh anh 5\" src=\"https://znews-photo-td.zadn.vn/w1024/Uploaded/Aohuouk/2018_07_12/SmartphoneNokia_Zing_5.jpg\" style=\"height:377px; width:559.609px\" /></p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>Ph&iacute;a mặt sau, m&aacute;y được trang bị camera đơn 13 megapixel, thiết kế hơi lồi. Về tổng thể, Nokia 3.1 tỏ ra cực kỳ gọn g&agrave;ng. Trừ khi cầm những chiếc iPhone m&agrave;n h&igrave;nh 4 inch của Apple như SE hay iPhone 5, 5S, kh&oacute; c&oacute; mẫu Android n&agrave;o cho cảm gi&aacute;c gọn như Nokia 3.1.</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<table align=\"center\">\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p><img alt=\"Nokia 2.1, 3.1 gia re, chay Android goc ve Viet Nam hinh anh 6\" src=\"https://znews-photo-td.zadn.vn/w1024/Uploaded/Aohuouk/2018_07_12/SmartphoneNokia_Zing_6.jpg\" style=\"height:377px; width:559.609px\" /></p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>Điều n&agrave;y kh&aacute; dễ hiểu khi m&aacute;y d&ugrave;ng m&agrave;n h&igrave;nh 5,2 inch (HD+), lại c&oacute; tỷ lệ 18:9. Thử nghiệm nhanh cho thấy camera của m&aacute;y cho chất lượng trung b&igrave;nh.&nbsp;</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<table align=\"center\">\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p><img alt=\"Nokia 2.1, 3.1 gia re, chay Android goc ve Viet Nam hinh anh 7\" src=\"https://znews-photo-td.zadn.vn/w1024/Uploaded/Aohuouk/2018_07_12/SmartphoneNokia_Zing_7.jpg\" style=\"height:377px; width:559.609px\" /></p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>Nokia 3.1 được b&aacute;n với gi&aacute; 3,39 triệu cho bản RAM 2 GB, dung lượng 16 GB v&agrave; 3,99 triệu bản RAM 3 GB, dung lượng 32 GB. Những th&ocirc;ng số đ&aacute;ng ch&uacute; &yacute; kh&aacute;c của m&aacute;y l&agrave; chip MediaTek 6750, hệ điều h&agrave;nh Android One với thời gian hứa hẹn n&acirc;ng cấp phần mềm l&agrave; 2 năm.&nbsp;</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<table align=\"center\">\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p><img alt=\"Nokia 2.1, 3.1 gia re, chay Android goc ve Viet Nam hinh anh 8\" src=\"https://znews-photo-td.zadn.vn/w1024/Uploaded/Aohuouk/2018_07_12/SmartphoneNokia_Zing_8.jpg\" style=\"height:377px; width:559.609px\" /></p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>Trong khi đ&oacute;, Nokia 2.1 chạy phi&ecirc;n bản Android Go, phi&ecirc;n bản Android gốc r&uacute;t gọn, tối ưu cho smartphone với RAM dưới 1 GB. Thiết bị n&agrave;y c&oacute; kiểu d&aacute;ng cơ bản với vỏ nhựa, nắp lưng th&aacute;o rời (nhưng kh&ocirc;ng d&ugrave;ng pin rời).&nbsp;</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<table align=\"center\">\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p><img alt=\"Nokia 2.1, 3.1 gia re, chay Android goc ve Viet Nam hinh anh 9\" src=\"https://znews-photo-td.zadn.vn/w1024/Uploaded/Aohuouk/2018_07_12/SmartphoneNokia_Zing_9.jpg\" style=\"height:377px; width:559.609px\" /></p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>Ở mặt trước l&agrave; m&agrave;n h&igrave;nh 5,5 inch với loa stereo k&eacute;p kh&aacute; đ&aacute;ng ch&uacute; &yacute;. Thiết bị n&agrave;y c&oacute; tỷ lệ 16:9.</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<table align=\"center\">\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p><img alt=\"Nokia 2.1, 3.1 gia re, chay Android goc ve Viet Nam hinh anh 10\" src=\"https://znews-photo-td.zadn.vn/w1024/Uploaded/Aohuouk/2018_07_12/SmartphoneNokia_Zing_10.jpg\" style=\"height:377px; width:559.609px\" /></p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>Nokia 2.1 sẽ b&aacute;n ra v&agrave;o th&aacute;ng 8 với gi&aacute; b&aacute;n chưa được c&ocirc;ng bố. Một v&agrave;i th&ocirc;ng số đ&aacute;ng ch&uacute; &yacute; của m&aacute;y bao gồm RAM 1 GB, dung lượng lưu trữ 8 GB, vi&ecirc;n pin 4.000 mAh v&agrave; con chip Snapdragon 425.</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<table align=\"center\">\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p><img alt=\"Nokia 2.1, 3.1 gia re, chay Android goc ve Viet Nam hinh anh 11\" src=\"https://znews-photo-td.zadn.vn/w1024/Uploaded/Aohuouk/2018_07_12/SmartphoneNokia_Zing_11.jpg\" style=\"height:377px; width:559.609px\" /></p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>Nokia 3.1 v&agrave; 2.1 g&oacute;p th&ecirc;m gia vị v&agrave;o cuộc đua smartphone gi&aacute; rẻ tại Việt Nam, vốn s&ocirc;i động nhưng kh&ocirc;ng nhiều model mới trong năm nay. Thực tế, nhiều h&atilde;ng di động đ&atilde; chuyển m&igrave;nh, &iacute;t để &yacute; đến những model gi&aacute; rẻ. Thay v&agrave;o đ&oacute;, họ tập trung v&agrave;o nh&oacute;m di động gi&aacute; tr&ecirc;n 5 triệu đồng. Những model tầm thấp chủ yếu l&agrave; m&aacute;y tầm trung trước kia được giảm gi&aacute;.</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<table align=\"center\">\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p><img alt=\"Nokia 2.1, 3.1 gia re, chay Android goc ve Viet Nam hinh anh 12\" src=\"https://znews-photo-td.zadn.vn/w1024/Uploaded/Aohuouk/2018_07_12/SmartphoneNokia_Zing_12.jpg\" style=\"height:377px; width:559.609px\" /></p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>Theo c&ocirc;ng bố của HMD Global, h&atilde;ng n&agrave;y hiện nằm trong top 5 nh&agrave; sản xuất smartphone tại Việt Nam, v&agrave; đứng đầu trong mảng sản xuất di động cơ bản. Hồi đầu năm, HMD tuy&ecirc;n bố muốn b&aacute;n khoảng 500.000 smartphone tại Việt Nam trong năm nay.</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>&nbsp;</p>\r\n', '2018-07-10 05:55:55', 1, 'HinhAnh-1531468802.jpg', 3, 1, 31),
+(4, 'Galaxy S9+ màu đỏ về Việt Nam với giá 16,3 triệu đồng', 'Sau khi ra mắt tại thị trường Trung Quốc và Hàn Quốc, Galaxy S9+ phiên bản màu đỏ đã nhanh chóng về đến Việt Nam theo đường xách tay với giá 16,3 triệu đồng cho bản 64 GB. ', '<table align=\"center\">\r\n	<tbody>\r\n		<tr>\r\n			<td>Theo quan niệm của phương đ&ocirc;ng, m&agrave;u đỏ tượng trưng cho sự may mắn. V&igrave; vậy, với phi&ecirc;n bản m&agrave;u đỏ tr&ecirc;n Galaxy S9+, được người d&ugrave;ng quan t&acirc;m. Trong đợt h&agrave;ng x&aacute;ch tay đầu ti&ecirc;n, m&aacute;y đ&atilde; được b&aacute;n &ldquo;sạch&rdquo; trong thời gian ngắn.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<table align=\"center\">\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p><img alt=\"Galaxy S9+ mau do ve Viet Nam voi gia 16,3 trieu dong hinh anh 2\" src=\"https://znews-photo-td.zadn.vn/w1024/Uploaded/neg_wpeczyr/2018_07_13/galaxy_s9_zing_4.jpg\" style=\"height:391px; width:559.615px\" /></p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>&nbsp;So với c&aacute;c phi&ecirc;n bản m&agrave;u sắc quen thuộc như đen, v&agrave;ng, bạc&hellip; th&igrave; m&agrave;u đỏ tr&ecirc;n Galaxy S9+ c&oacute; phần bắt mắt v&agrave; thu h&uacute;t &aacute;nh nh&igrave;n của người d&ugrave;ng ngay lần gặp đầu ti&ecirc;n. Đồng thời, m&agrave;u đỏ tr&ecirc;n Galaxy S9+ được l&agrave;m đậm hơn với m&agrave;u đỏ tr&ecirc;n Galaxy S8+.</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<table align=\"center\">\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p><img alt=\"Galaxy S9+ mau do ve Viet Nam voi gia 16,3 trieu dong hinh anh 3\" src=\"https://znews-photo-td.zadn.vn/w1024/Uploaded/neg_wpeczyr/2018_07_13/galaxy_s9_zing_7.jpg\" style=\"height:367px; width:558.707px\" /></p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>Galaxy S9+ đỏ được Samsung phủ lớp sơn đỏ đậm l&ecirc;n phần khung viền camera, cổng sạc, tai nghe v&agrave; loa ngo&agrave;i gi&uacute;p cho tổng thể của m&aacute;y liền lạc v&agrave; đẹp mắt hơn. Đồng thời, phần mặt lưng của Galaxy S9+ đỏ c&oacute; thể thay đổi m&agrave;u sắc, đậm nhạt theo từng g&oacute;c độ &aacute;nh s&aacute;ng kh&aacute;c nhau. Đ&acirc;y l&agrave; đặc trưng của lớp phủ m&agrave;u nano m&agrave; Samsung trang bị cho d&ograve;ng sản phẩm n&agrave;y. Tuy nhi&ecirc;n, điểm trừ l&agrave; mặt lưng k&iacute;nh b&aacute;m v&acirc;n tay v&agrave; mồ h&ocirc;i kh&aacute; nhiều.</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<table align=\"center\">\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p><img alt=\"Galaxy S9+ mau do ve Viet Nam voi gia 16,3 trieu dong hinh anh 4\" src=\"https://znews-photo-td.zadn.vn/w1024/Uploaded/neg_wpeczyr/2018_07_13/galaxy_s9_zing_1.jpg\" style=\"height:366px; width:559.005px\" /></p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>&nbsp;Phần viền ở mặt trước của m&aacute;y được l&agrave;m m&agrave;u đen kết hơp với mặt lưng m&agrave;u đỏ kh&aacute; sang trọng. Galaxy S9+ c&oacute; m&agrave;n h&igrave;nh Super AMOLED 6,2 inch 2K, tỷ lệ 18,5:9 c&ugrave;ng lớp k&iacute;nh cường lực Gorilla Glass 5 gi&uacute;p hạn chế trầy xước. Do đ&acirc;y l&agrave; phi&ecirc;n bản x&aacute;ch tay H&agrave;n Quốc nh&agrave; mạng SK Telecom n&ecirc;n m&aacute;y chỉ c&oacute; 1 SIM v&agrave; c&oacute; một số ứng dụng tiếng H&agrave;n k&egrave;m theo. C&aacute;c th&ocirc;ng số c&ograve;n lại của m&aacute;y vẫn giống như c&aacute;c phi&ecirc;n bản m&agrave;u sắc kh&aacute;c.</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<table align=\"center\">\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p><img alt=\"Galaxy S9+ mau do ve Viet Nam voi gia 16,3 trieu dong hinh anh 5\" src=\"https://znews-photo-td.zadn.vn/w1024/Uploaded/neg_wpeczyr/2018_07_13/galaxy_s9_zing_2.jpg\" style=\"height:362px; width:559.455px\" /></p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>&nbsp;C&aacute;c phụ kiện đi k&egrave;m theo m&aacute;y vẫn giống c&aacute;c phi&ecirc;n bản m&agrave;u sắc kh&aacute;c. Tuy nhi&ecirc;n, tai nghe AKG được l&agrave;m m&agrave;u đỏ nổi bật, c&ugrave;ng t&ocirc;ng m&agrave;u với m&aacute;y.</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>&nbsp;</p>\r\n', '2018-03-19 05:55:58', 8, 'HinhAnh-1531463811.jpg', 1, 1, 22),
+(5, 'Chrome bản mới có thể khiến máy tính của bạn khổ sở', 'Bản cập nhật mới của trình duyệt Chrome khiến nó chiếm thêm 10% dung lượng RAM của máy tính. ', '<p>Google vừa tung ra bản cập nhật v&aacute; lỗi bảo mật Spectre cho tr&igrave;nh duyệt Chrome. Theo c&aacute;c th&ocirc;ng tin từ <em>Thurrot</em>, c&ocirc;ng ty đ&atilde; bổ sung t&iacute;nh năng c&ocirc; lập trang web tr&ecirc;n bản Chrome 67.</p>\r\n\r\n<p>Theo đ&oacute;, t&iacute;nh năng n&agrave;y&nbsp;sẽ được bật mặc định để bảo vệ m&aacute;y t&iacute;nh khỏi c&aacute;c cuộc tấn c&ocirc;ng th&ocirc;ng qua lỗ hổng Spectre. Tuy nhi&ecirc;n, t&iacute;nh năng mới n&agrave;y sẽ khiến cho tr&igrave;nh duyệt Chrome sử dụng nhiều bộ nhớ RAM hơn.</p>\r\n\r\n<p>&Ocirc;ng Charlie Reis, kỹ sư phần mềm của Google cho biết &quot;việc tạo ra một tấm chắn c&ocirc; lập khiến tr&igrave;nh duyệt Chrome buộc phải sử dụng nhiều t&agrave;i nguy&ecirc;n hệ thống hơn. N&oacute; sẽ cần th&ecirc;m 10-13% bộ nhớ RAM để c&oacute; thể thực hiện c&aacute;c t&aacute;c vụ n&agrave;y&quot;.</p>\r\n\r\n<table align=\"center\">\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p><img alt=\"Chrome ban moi co the khien may tinh cua ban kho so hinh anh 1\" src=\"https://znews-photo-td.zadn.vn/w660/Uploaded/fsmyy/2018_07_13/chrome_1024x576.jpg\" style=\"height:315px; width:560px\" /></p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>Tr&igrave;nh duyệt Chrome sử dụng qu&aacute; nhiều t&agrave;i nguy&ecirc;n hệ thống khiến m&aacute;y t&iacute;nh bị chậm.</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>Tr&igrave;nh duyệt Chrome của Goole thường xuy&ecirc;n bị người d&ugrave;ng ph&agrave;n n&agrave;n về vấn đề sử dụng qu&aacute; nhiều bộ nhớ RAM, khiến m&aacute;y t&iacute;nh hoạt động chậm. Tồi tệ hơn tr&ecirc;n bản cập nhật n&agrave;y Google kh&ocirc;ng khắc phục lỗi đ&oacute; m&agrave; n&oacute; lại tăng th&ecirc;m 10%. Việc n&agrave;y sẽ ảnh hưởng nhiều đến trải nghiệm của người d&ugrave;ng đặc biệt với c&aacute;c thiết bị chỉ c&oacute; dưới 4 GB RAM.</p>\r\n\r\n<p>Resi&nbsp;cho biết &quot;c&aacute;c kỹ sư của Google đang cố gắng tối ưu h&oacute;a lại hệ thống để Chrome c&oacute; thể hoạt động mượt hơn v&agrave; th&acirc;n thiện hơn&quot;. Gần đ&acirc;y, ch&iacute;nh Microssoft cũng c&ocirc;ng khai chỉ tr&iacute;ch việc tr&igrave;nh duyệt Chrome đang l&agrave;m ảnh hưởng đến tuổi thọ pin của những chiếc m&aacute;y t&iacute;nh x&aacute;ch tay.</p>\r\n\r\n<p>&nbsp;</p>\r\n', '2018-07-11 09:44:44', 1, 'HinhAnh-1531463909.jpg', 1, 1, 48),
+(6, 'Top điện thoại Android ra mắt nửa sau 2018', 'Ngoài Galaxy Note 9, làng điện thoại Android còn chuẩn bị chào đón hàng loạt “siêu phẩm” khác.', '<h2>Samsung Galaxy Note 9</h2>\r\n\r\n<p>Samsung l&agrave; c&aacute;i t&ecirc;n &ldquo;khai hỏa&rdquo; đầu ti&ecirc;n với Note 9 ra mắt ng&agrave;y 9/8. D&ograve;ng Note sở hữu nhiều t&iacute;nh năng nổi trội, đ&aacute;ng ch&uacute; &yacute; nhất l&agrave; b&uacute;t S Pen. Th&ocirc;ng thường, thiết bị mới được Samsung b&aacute;n ra v&agrave;o tuần kế tiếp, v&igrave; vậy c&oacute; khả năng &ldquo;si&ecirc;u phẩm&rdquo; mới nhất của h&atilde;ng sẽ l&ecirc;n kệ v&agrave;o ng&agrave;y 13/8.</p>\r\n\r\n<h2>Sony Xperia XZ3</h2>\r\n\r\n<p>Ch&uacute;ng ta chưa c&oacute; nhiều th&ocirc;ng tin về smartphone mới của Sony song h&atilde;ng điện thoại Nhật Bản thường chọn IFA l&agrave;m nơi giới thiệu. Nếu mọi việc kh&ocirc;ng c&oacute; g&igrave; kh&aacute;c so với trước đ&acirc;y, c&oacute; thể Sony sẽ ra mắt Xperia XZ3, hay ch&iacute; &iacute;tl&agrave; phi&ecirc;n bản kế nhiệm XZ2 v&agrave; XZ2 Compact.</p>\r\n\r\n<p><img src=\"http://image1.ictnews.vn/_Files/2018/07/09/andrew-editors-desk-3.jpg\" style=\"height:375px; width:500px\" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h2>LG V40</h2>\r\n\r\n<p>LG V40 được đồn d&ugrave;ng tới 3 camera ph&iacute;a sau v&agrave; 2 camera trước. N&oacute; sẽ c&oacute; &ldquo;tai thỏ&rdquo; như G7 nhưng mong l&agrave; d&ugrave;ng m&agrave;n h&igrave;nh v&agrave; pin lớn hơn.</p>\r\n\r\n<h2>Google Pixel 3 v&agrave; 3 XL</h2>\r\n\r\n<p>Pixel 3 v&agrave; 3 XL l&agrave; bộ đ&ocirc;i smartphone đ&aacute;ng mong đợi đến từ Google. C&oacute; tin đồn Pixel 3 trang bị man h&igrave;nh cao 18:9, hai camera ph&iacute;a trước. Năm 2017, Google giới thiệu Pixel 2 v&agrave; 2 XL trong sự kiện ng&agrave;y 4/10, v&igrave; vậy đ&acirc;y cũng l&agrave; khoảng thời gian ch&uacute;ng ta tr&ocirc;ng đợi.</p>\r\n', '2018-07-02 05:56:07', 8, 'HinhAnh-1531467181.jpg', 5, 1, 133),
+(7, 'Cách tránh bị lừa mua phải smartphone dỏm', 'Chạy phần mềm, kiểm tra số IMEI, sử dụng thử thiết bị là những cách để người dùng tránh phải rủi ro mua một chiếc smartphone giả, nhái, không rõ nguồn gốc. ', '<p>Kh&ocirc;ng thiếu những trường hợp người d&ugrave;ng bị lừa h&agrave;ng chục triệu để mang về một chiếc smartphone nh&aacute;i. Đ&oacute; c&oacute; thể l&agrave; một chiếc iPhone mới c&aacute;u, song camera, vi xử l&yacute; hoặc c&aacute;c th&agrave;nh phần kh&aacute;c lại ho&agrave;n to&agrave;n k&eacute;m chất lượng.</p>\r\n\r\n<p>L&agrave;m giả c&aacute;c smartphone của iPhone hay Samsung gần như l&agrave; một ng&agrave;nh c&ocirc;ng nghiệp tại Trung Quốc. Theo b&aacute;o c&aacute;o v&agrave;o năm 2017 của Antutu, thị trường smartphone giả c&oacute; đến 36% thiết bị mang thương hiệu Samsung, tăng đ&aacute;ng kể so với 7,7% của iPhone v&agrave; 3,4% của Huawei. Trong đ&oacute; Galaxy S7 Edge l&agrave; c&aacute;i t&ecirc;n bị l&agrave;m nh&aacute;i nhiều nhất.</p>\r\n\r\n<p>B&aacute;o c&aacute;o cũng cho hay 2,64% trong số 17.424.726 thiết bị được x&aacute;c minh l&agrave; giả. Con số n&agrave;y v&agrave;o khoảng 460.000 m&aacute;y giả chỉ t&iacute;nh ri&ecirc;ng tr&ecirc;n b&aacute;o c&aacute;o của Antutu, trong khi thực tế, c&oacute; hơn 1 tỷ chiếc smartphone đang được sử dụng tr&ecirc;n khắp thế giới.</p>\r\n\r\n<table align=\"center\">\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p><img alt=\"Cach tranh bi lua mua phai smartphone dom hinh anh 1\" src=\"https://znews-photo-td.zadn.vn/w660/Uploaded/lce_uxlcq/2018_07_06/Screenshot_36.jpg\" style=\"height:276px; width:558.273px\" /></p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>Samsung l&agrave; thương hiệu smartphone bị l&agrave;m nh&aacute;i nhiều nhất trong năm 2017. Ảnh: <em>Antutu.</em></td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>R&otilde; r&agrave;ng mua một chiếc smartphone mới từ nh&agrave; b&aacute;n lẻ uy t&iacute;n l&agrave; c&aacute;ch l&agrave;m an to&agrave;n nhất, nhưng thực tế kh&ocirc;ng phải l&uacute;c n&agrave;o cũng như vậy. Thị trường điện thoại cũ, di động t&acirc;n trang ng&agrave;y c&agrave;ng ph&aacute;t triển, kh&ocirc;ng &iacute;t người d&ugrave;ng lu&ocirc;n c&oacute; khao kh&aacute;t sở hữu sản phẩm cao cấp với mức gi&aacute; vừa phải. Đ&acirc;y ho&agrave;n to&agrave;n l&agrave; một mong muốn ch&iacute;nh đ&aacute;ng.&nbsp;</p>\r\n\r\n<p>Do đ&oacute;, người d&ugrave;ng n&ecirc;n c&acirc;n nhắc những đặc điểm sau đ&acirc;y khi chọn mua smartphone nhằm tr&aacute;nh việc &quot;ăn&quot; phải những c&uacute; lừa kh&ocirc;ng đ&aacute;ng c&oacute;.</p>\r\n\r\n<h3>Vẻ ngo&agrave;i &#39;k&eacute;m sang&#39;</h3>\r\n\r\n<p>Lẽ dĩ nhi&ecirc;n, diện mạo b&ecirc;n ngo&agrave;i l&agrave; thứ đập ngay v&agrave;o mắt người d&ugrave;ng khi mua smartphone. Bạn n&ecirc;n ch&uacute; &yacute; vị tr&iacute; của c&aacute;c ph&iacute;m bấm, đường viền bezel c&oacute; ph&ugrave; hợp hoặc camera c&oacute; bị mờ hay kh&ocirc;ng.</p>\r\n\r\n<p>Tất nhi&ecirc;n, nếu chỉ kiểm tra b&ecirc;n ngo&agrave;i th&ocirc;i th&igrave; chuyện kh&ocirc;ng c&oacute; g&igrave; để n&oacute;i. C&aacute;c thiết bị được l&agrave;m nh&aacute;i tinh vi đều sở hữu vẻ ngo&agrave;i bắt mắt khiến người d&ugrave;ng b&igrave;nh thường rất dễ bị đ&aacute;nh lừa.</p>\r\n\r\n<p>Nếu giao dịch được thực hiện tr&ecirc;n mạng, bạn n&ecirc;n kiểm tra bằng c&aacute;ch gọi ngay cho người b&aacute;n v&agrave; y&ecirc;u cầu h&igrave;nh ảnh, video quay giao diện điện thoại ngay l&uacute;c ấy. Cũng đừng ngại ngần hỏi xem những h&igrave;nh ảnh về vết nứt, trầy xước của thiết bị.</p>\r\n\r\n<p>Phần mềm tr&ecirc;n smartphone giả thường rất tệ, đặc biệt c&aacute;c giao diện, biểu tượng ứng dụng thường kh&ocirc;ng khớp với thương hiệu. Người d&ugrave;ng c&oacute; thể kiểm tra smartphone mới bằng c&aacute;ch xem video đ&aacute;nh gi&aacute; tr&ecirc;n mạng x&atilde; hội. Cố gắng nhận biết tr&igrave;nh khởi chạy, icon, t&iacute;nh năng v&agrave; c&aacute;c ứng dụng được c&agrave;i đặt sẵn.</p>\r\n\r\n<table align=\"center\">\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p><img alt=\"Cach tranh bi lua mua phai smartphone dom hinh anh 2\" src=\"https://znews-photo-td.zadn.vn/w660/Uploaded/lce_uxlcq/2018_07_06/RealvsFakeGalaxyS9.jpg\" style=\"height:346px; width:560px\" /></p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>Với người d&ugrave;ng b&igrave;nh thường, kh&oacute; c&oacute; thể nhận ra chiếc Galaxy S9 b&ecirc;n phải l&agrave; h&agrave;ng nh&aacute;i. Ảnh: <em>Androidauthority.</em></td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<h3>Sử dụng thử thiết bị</h3>\r\n\r\n<p>Mặc d&ugrave; kh&ocirc;ng phải l&uacute;c n&agrave;o điều n&agrave;y cũng được đồng &yacute;, người mua n&ecirc;n cố gắng soi thiết bị trước khi giao tiền. C&aacute;ch n&agrave;y r&otilde; r&agrave;ng gi&uacute;p cho việc kiểm tra phần cứng cũng như phần mềm được bảo đảm.</p>\r\n\r\n<p>Một chiếc di động nh&aacute;i sẽ chỉ to&agrave;n c&aacute;c phần cứng k&eacute;m chất lượng, như camera &quot;dỏm&quot;, kh&ocirc;ng c&oacute; kết nối NFC hoặc cảm ứng v&acirc;n tay. Ngo&agrave;i ra, đảm bảo Wi-Fi, Bluetooth, GPS hay bất kỳ chức năng n&agrave;o kh&aacute;c vẫn c&ograve;n hoạt động tốt. Bạn n&ecirc;n kết nối với một thiết bị hoặc mạng kh&aacute;c, v&agrave; nếu được, thử lu&ocirc;n cả cảm biến v&acirc;n tay trước khi mua.</p>\r\n\r\n<p>Kiểm tra cả camera trước v&agrave; sau, chắc chắn rằng camera của m&aacute;y c&oacute; đầy đủ những t&iacute;nh năng được x&aacute;c nhận từ nh&agrave; sản xuất như ống k&iacute;nh g&oacute;c rộng, khả năng zoom...Cuối c&ugrave;ng, chụp thử một tấm h&igrave;nh v&agrave; kiểm tra độ nhiễu hạt. Người d&ugrave;ng cũng c&oacute; thể kiểm tra th&ocirc;ng số n&agrave;y bằng c&aacute;ch v&agrave;o phần th&ocirc;ng tin trong thư viện ảnh hoặc Google Photo. Một module camera k&eacute;m chất lượng rất dễ để nhận ra th&ocirc;ng qua h&igrave;nh ảnh, ngay cả khi xem tr&ecirc;n smartphone.</p>\r\n\r\n<h3>Chạy phần mềm kiểm tra chip xử l&yacute;</h3>\r\n\r\n<p>C&oacute; thể n&oacute;i, bộ xử l&yacute; l&agrave; yếu tố lớn nhất quyết định trải nghiệm của người d&ugrave;ng. Một chiếc smartphone nh&aacute;i, giả chắc chắn kh&ocirc;ng thể được trang bị vi xử l&yacute; tốt.</p>\r\n\r\n<table align=\"center\">\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p><img alt=\"Cach tranh bi lua mua phai smartphone dom hinh anh 3\" src=\"https://znews-photo-td.zadn.vn/w660/Uploaded/lce_uxlcq/2018_07_06/CPUZKirin970.jpg\" style=\"height:344px; width:560px\" /></p>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td>Ứng dụng CPU-Z tr&ecirc;n Play Store gi&uacute;p người d&ugrave;ng kiểm tra c&aacute;c th&ocirc;ng số của thiết bị. Ảnh: <em>Androidauthority.</em></td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>Bạn kh&ocirc;ng cần phải th&aacute;o điện thoại ra để kiểm tra th&agrave;nh phần n&agrave;y. H&atilde;y tải ứng dụng CPU-Z từ cửa h&agrave;ng Play Store, ứng dụng n&agrave;y sẽ cung cấp một bản t&oacute;m tắt th&ocirc;ng tin phần mềm chiếc smartphone đ&oacute;, kể cả CPU v&agrave; GPU.</p>\r\n\r\n<p>Lưu &yacute;, nhiều smartphone giả hiện c&agrave;i sẵn phi&ecirc;n bản giả mạo của CPU-Z, khiến n&oacute; lu&ocirc;n hiển thị th&ocirc;ng số như h&agrave;ng thật. H&atilde;y xo&aacute; ứng dụng CPU-Z c&oacute; sẵn v&agrave; tải về từ kho ứng dụng để kiểm tra.</p>\r\n\r\n<h3>Kiểm tra số IMEI</h3>\r\n\r\n<p>Tất cả c&aacute;c c&aacute;ch tr&ecirc;n sẽ gi&uacute;p bạn nhận biết một chiếc smartphone giả, nhưng chỉ với kiểm tra bằng IMEI, người d&ugrave;ng mới biết được đ&acirc;y c&oacute; phải l&agrave; sản phẩm ch&iacute;nh h&atilde;ng hay kh&ocirc;ng.</p>\r\n\r\n<p>Số IMEI (International Mobile Equipment Identifi) l&agrave; m&atilde; số nhận dạng thiết bị quốc tế. Mỗi thiết bị di động đều được cấp m&atilde; số IMEI gồm 15 chữ số, v&agrave; bạn c&oacute; thể t&igrave;m d&atilde;y số n&agrave;y trong phần Giới thiệu ở C&agrave;i Đặt, hoặc bấm gọi *#06#. Ngo&agrave;i ra, cũng c&oacute; thể t&igrave;m thấy m&atilde; số n&agrave;y trong bao b&igrave;, nhưng với những giao dịch kh&ocirc;ng r&otilde; r&agrave;ng, rất kh&oacute; để c&oacute; được bao b&igrave; gốc.</p>\r\n\r\n<p>Kế đến, g&otilde; số IMEI v&agrave;o phần kiểm tra tr&ecirc;n trang imei.info để biết t&igrave;nh trạng thiết bị hiện tại. Đ&acirc;y cũng l&agrave; c&aacute;ch để bạn kiểm tra m&aacute;y c&oacute; bị kh&oacute;a với bất kỳ nh&agrave; mạng n&agrave;o hay kh&ocirc;ng.</p>\r\n', '2018-07-13 06:40:13', 1, 'HinhAnh-1531464013.jpg', 2, 1, 111),
+(8, 'Ai được hưởng lợi nhiều nhất từ thực tế ảo? Chính là ngành công nghiệp phim khiêu dâm ', 'Naughty America, một trong những cái tên \"chăm chỉ\" nhất thế giới trong việc sản xuất nội dung thực tế ảo (VR) đang trở thành người đi tiên phong của cuộc đua quan trọng nhất ngành công nghệ trong tươ', '<p>Tất nhi&ecirc;n, &ocirc;ng Johnson, cũng như người tr&ocirc;ng trẻ kia, l&agrave; c&aacute;c nh&acirc;n vật trong một bộ phim người lớn, v&agrave; diễn vi&ecirc;n đ&oacute;ng vai &ocirc;ng kh&ocirc;ng c&oacute; một lời thoại n&agrave;o cả. Kh&aacute;n giả sẽ kh&ocirc;ng bao giờ nghe thấy giọng của &ocirc;ng hay nh&igrave;n thấy mặt &ocirc;ng, mặc d&ugrave; &ocirc;ng c&oacute; vai tr&ograve; rất lớn trong bộ phim. Đ&acirc;y ch&iacute;nh l&agrave; phim khi&ecirc;u d&acirc;m thực tế ảo, v&agrave; mọi cảnh quay đều l&agrave; g&oacute;c nh&igrave;n của người diễn vi&ecirc;n n&agrave;y.</p>\r\n\r\n<p>Như đ&atilde; được dự kiến từ trước, phim khi&ecirc;u d&acirc;m đ&atilde; trở th&agrave;nh một trong những ng&agrave;nh c&ocirc;ng nghiệp đầu ti&ecirc;n thực sự hưởng lợi từ VR, v&agrave; những c&ocirc;ng ty giải tr&iacute; người lớn như Naughty America &ndash; nh&agrave; sản xuất v&agrave; ph&acirc;n phối của bộ phim tr&ecirc;n &ndash; l&agrave; những người đi ti&ecirc;n phong. Trong v&ograve;ng 18 th&aacute;ng kể từ video VR đầu ti&ecirc;n của m&igrave;nh, studio c&oacute; trụ sở tại San Diego đ&atilde; cho ra mắt th&ecirc;m 108 bộ phim nữa, biến họ th&agrave;nh một trong những nh&agrave; sản xuất &quot;chăm chỉ&quot; nhất thế giới trong lĩnh vực n&agrave;y. Trong năm 2017, c&ocirc;ng ty đ&atilde; mở một quầy trưng b&agrave;y tại Hội chợ Điện tử Ti&ecirc;u d&ugrave;ng (CES) h&agrave;ng năm, trở th&agrave;nh doanh nghiệp giải tr&iacute; người lớn đầu ti&ecirc;n được ph&eacute;p triển l&atilde;m trong suốt 19 năm qua.</p>\r\n\r\n<p><em>&quot;Kh&aacute;ch h&agrave;ng của ch&uacute;ng t&ocirc;i đ&atilde; đ&oacute;n nhận VR một c&aacute;ch t&iacute;ch cực&quot;,</em> Andreas Hronopoulos, CEO của La Touraine, c&ocirc;ng ty mẹ của Naughty America cho biết. <em>&quot;N&oacute; c&oacute; một c&aacute;i g&igrave; đ&oacute; v&ocirc; c&ugrave;ng cuốn h&uacute;t, kh&ocirc;ng hề c&oacute; thứ g&igrave; giống như vậy cả&quot;.</em></p>\r\n\r\n<p>Đ&acirc;y l&agrave; điều kh&ocirc;ng mấy g&acirc;y ngạc nhi&ecirc;n. Sau khi c&aacute;c nội dung giải tr&iacute; người lớn khiến cho những ph&aacute;t minh như băng VHS, Blu-ray v&agrave; stream trực tuyến trở n&ecirc;n phổ biến, &yacute; tưởng rằng ng&agrave;nh c&ocirc;ng nghiệp phim khi&ecirc;u d&acirc;m đ&atilde; gi&uacute;p th&uacute;c đẩy sự ph&aacute;t triển của kỹ thuật số đ&atilde; trở th&agrave;nh một sự thật được thừa nhận rộng r&atilde;i.</p>\r\n\r\n<p>Tuy nhi&ecirc;n, điều đ&aacute;ng ngạc nhi&ecirc;n l&agrave; c&aacute;ch m&agrave; phim khi&ecirc;u d&acirc;m VR trở n&ecirc;n lớn mạnh một c&aacute;ch nhanh ch&oacute;ng như ng&agrave;y nay. Theo ước t&iacute;nh của SuperData, trong năm 2016, Samsung, HTC, Google, Sony v&agrave; Oculus chỉ b&aacute;n được 6,1 triệu k&iacute;nh thực tế ảo tr&ecirc;n to&agrave;n thế giới. Chỉ trong th&aacute;ng 12/2016, c&aacute;c kh&aacute;ch h&agrave;ng của Naughty America đ&atilde; tải xuống hơn 20 triệu video VR.</p>\r\n\r\n<p>Hơn nữa, người ti&ecirc;u d&ugrave;ng phim khi&ecirc;u d&acirc;m VR cũng h&agrave;o ph&oacute;ng hơn, sẵn s&agrave;ng chi tiền hơn so với những người ti&ecirc;u d&ugrave;ng th&ocirc;ng thường. C&ocirc;ng ty cho biết, cứ 167 người truy cập v&agrave;o trang VR của Naughty America th&igrave; c&oacute; 1 người sẽ trở th&agrave;nh người d&ugrave;ng trả ph&iacute;, so với tỷ lệ 1/1.500 của c&aacute;c trang th&ocirc;ng thường. Số lượng người d&ugrave;ng trả ph&iacute; của Naughty America cũng đ&atilde; tăng tới 55% trong năm 2016, năm đầu ti&ecirc;n họ bắt đầu cung cấp những nội dung VR; kh&aacute;ch h&agrave;ng sẽ trả 25 USD/th&aacute;ng (gần 600.000 đồng) hoặc 74 USD/năm (hơn 1,7 triệu đồng) để c&oacute; thể truy cập v&agrave;o to&agrave;n bộ nội dung của trang web. Trong 18 th&aacute;ng kể từ video VR đầu ti&ecirc;n, lợi nhuận của Naughty America đ&atilde; tăng hơn 40%, lợi nhuận t&iacute;nh ri&ecirc;ng mảng VR l&agrave; 433%.</p>\r\n\r\n<p><em>&quot;Ch&uacute;ng t&ocirc;i lu&ocirc;n cố gắng để trở th&agrave;nh người đi đầu&quot;</em>, Ian Paul, CIO của c&ocirc;ng ty cho biết. <em>&quot;Thực tế ảo đ&atilde; lu&ocirc;n ở trong tầm ngắm của ch&uacute;ng t&ocirc;i trong suốt một thời gian d&agrave;i, nhưng n&oacute; chỉ dừng lại ở những &yacute; tưởng &lsquo;nếu m&agrave; ch&uacute;ng ta l&agrave;m được th&igrave;&hellip;&#39;&quot;</em> Chỉ khi Oculus bắt đầu được g&oacute;p vốn tr&ecirc;n Kickstarter trong năm 2012, Naughty America mới thực sự nghi&ecirc;m t&uacute;c nghi&ecirc;n cứu c&ocirc;ng nghệ n&agrave;y.</p>\r\n\r\n<p>Do chỉ c&oacute; một số &iacute;t nh&agrave; sản xuất đ&atilde; từng l&agrave;m video VR trước đ&oacute;, c&ocirc;ng ty đ&atilde; phải tự t&igrave;m c&aacute;ch l&agrave;m ra quy tr&igrave;nh sản xuất của ri&ecirc;ng m&igrave;nh. <em>&quot;N&oacute; cần rất nhiều sự thử nghiệm, rất nhiều khoản đầu tư v&agrave;o nghi&ecirc;n cứu v&agrave; ph&aacute;t triển, về cơ bản l&agrave; mua mọi dụng cụ c&oacute; tr&ecirc;n thị trường v&agrave; thử từng c&aacute;i một&quot;,</em> Paul chia sẻ. <em>&quot;Một trong những vấn đề cơ bản nhất m&agrave; ch&uacute;ng t&ocirc;i phải đối mặt l&agrave; nơi đặt camera &ndash; ban đầu ch&uacute;ng t&ocirc;i đặt qu&aacute; cao, v&agrave; n&oacute; tr&ocirc;ng thật kỳ cục&quot;.</em></p>\r\n\r\n<p>C&ocirc;ng ty cho biết quy tr&igrave;nh ch&iacute;nh x&aacute;c của họ l&agrave; độc quyền, nhưng n&oacute; dựa tr&ecirc;n c&aacute;ch m&agrave; nhiều nh&agrave; sản xuất kh&aacute;c từng sử dụng: Hai camera kỹ thuật số được đặt cạnh nhau để cho g&oacute;c nh&igrave;n giống như nh&igrave;n qua ống nh&oacute;m. Sau đ&oacute;, kh&acirc;u hậu kỳ sẽ gộp hai video ấy v&agrave;o l&agrave;m một sao cho giống như mắt tr&aacute;i v&agrave; mắt phải của con người. Khi xem qua k&iacute;nh VR, những h&igrave;nh ảnh sẽ kết hợp lại v&agrave; tạo th&agrave;nh một ảnh 3 chiều.</p>\r\n\r\n<p>Naughty America tung ra bộ phim VR đầu ti&ecirc;n của m&igrave;nh, &quot;Birthday Surprise&quot; v&agrave;o th&aacute;ng 7/2015. <em>&quot;Ch&uacute;ng t&ocirc;i đ&atilde; đi được một đoạn đường rất d&agrave;i trong một khoảng thời gian rất ngắn&quot;, </em>Paul n&oacute;i th&ecirc;m. <em>&quot;T&ocirc;i nghĩ rằng c&oacute; lẽ rất nhiều c&ocirc;ng ty kh&aacute;c cũng đang l&agrave;m được điều tương tự&quot;.</em></p>\r\n\r\n<p>Naughty America, tất nhi&ecirc;n, kh&ocirc;ng phải l&agrave; nh&agrave; sản xuất duy nhất của ng&agrave;nh c&ocirc;ng nghiệp. G&atilde; khổng lồ Pornhub đ&atilde; k&yacute; hợp đồng với Rochester, một c&ocirc;ng ty chuy&ecirc;n sản xuất phim khi&ecirc;u d&acirc;m VR c&oacute; trụ sở tại New York. C&aacute;c c&ocirc;ng ty kh&aacute;c quy m&ocirc; nhỏ hơn cũng đang c&oacute; những c&aacute;ch ri&ecirc;ng để theo kịp với thời thế.</p>\r\n\r\n<p><img alt=\"\" src=\"https://vnreview.vn/image/18/25/98/1825984.jpg?t=1531469828045\" style=\"height:404px; width:720px\" /></p>\r\n\r\n<p>Một trong những doanh nghiệp nhỏ đ&aacute;ng gờm nhất trong ng&agrave;nh c&ocirc;ng nghiệp l&agrave; của Ela Darling, một doanh nh&acirc;n sản xuất v&agrave; thậm ch&iacute; từng đ&oacute;ng vai ch&iacute;nh trong c&aacute;c bộ phim của m&igrave;nh cho c&ocirc;ng ty VRTube.xxx. Đối với Darling, người từng l&agrave; diễn vi&ecirc;n phim khi&ecirc;u d&acirc;m, thực tế ảo mang đến cơ hội để người xem cảm thấy họ mới l&agrave; diễn vi&ecirc;n ch&iacute;nh của bộ phim, tạo ra những mối li&ecirc;n kết thực sự - tất nhi&ecirc;n l&agrave; về mặt t&acirc;m l&yacute;.</p>\r\n\r\n<p>Đối với hầu hết c&aacute;c doanh nghiệp phim khi&ecirc;u d&acirc;m, một thứ rất hấp dẫn kh&aacute;c nữa ch&iacute;nh l&agrave; tiền. Theo ng&acirc;n h&agrave;ng đầu tư Piper Jaffray, phim khi&ecirc;u d&acirc;m VR sẽ trở th&agrave;nh ng&agrave;nh c&ocirc;ng nghiệp trị gi&aacute; 1 tỷ USD v&agrave;o năm 2020. Hơn nữa, những nội dung VR sẽ kh&oacute; c&oacute; thể bị xem lậu hơn, v&igrave; người xem cần phải tải ch&uacute;ng về v&agrave; xem bằng phần cứng chuy&ecirc;n dụng.</p>\r\n\r\n<p>Trong khi đa số c&aacute;c c&ocirc;ng ty phim khi&ecirc;u d&acirc;m lo lắng về việc nội dung của họ bị c&aacute;c trang kh&aacute;c lấy về v&agrave; t&aacute;i ph&acirc;n phối, vấn đề lớn nhất m&agrave; c&aacute;c nh&agrave; sản xuất đang phải đối mặt ch&iacute;nh l&agrave; c&oacute; qu&aacute; &iacute;t đối t&aacute;c sẵn s&agrave;ng ph&acirc;n phối ch&uacute;ng. Phần lớn c&aacute;c nội dung VR đều được b&aacute;n trực tiếp th&ocirc;ng qua c&ocirc;ng ty sản xuất phần cứng VR đ&oacute;; v&iacute; dụ, nếu một người ti&ecirc;u d&ugrave;ng sở hữu k&iacute;nh PlayStation VR của Sony, họ chỉ c&oacute; thể mua c&aacute;c nội dung c&oacute; tr&ecirc;n PlayStation Store. Kh&ocirc;ng c&oacute; dịch vụ ph&acirc;n phối nội dung kỹ thuật số lớn n&agrave;o cho ph&eacute;p c&aacute;c nội dung khi&ecirc;u d&acirc;m xuất hiện tr&ecirc;n nền tảng của họ. Người d&ugrave;ng của Naughty America phải truy cập v&agrave;o c&aacute;c bộ phim th&ocirc;ng qua tr&igrave;nh duyệt web, khiến chất lượng bị giảm xuống, hoặc tải về m&aacute;y t&iacute;nh/điện thoại của họ v&agrave; sao ch&eacute;p v&agrave;o một tr&igrave;nh ph&aacute;t video VR để c&oacute; thể xem.</p>\r\n\r\n<p><em>&quot;Rất nhiều c&ocirc;ng ty lớn cảm thấy lo sợ khi &lsquo;d&iacute;nh l&iacute;u&#39; v&agrave;o phim khi&ecirc;u d&acirc;m&quot;,</em> Paul chia sẻ. <em>&quot;Tất nhi&ecirc;n, những mối lo về việc trẻ em truy cập v&agrave;o nội dung l&agrave; hợp l&yacute;, nhưng ch&uacute;ng t&ocirc;i đ&atilde; cung cấp dịch vụ của m&igrave;nh th&ocirc;ng qua c&aacute;c hệ thống truyền h&igrave;nh c&aacute;p trả ph&iacute; trong nhiều năm, n&ecirc;n r&otilde; r&agrave;ng đ&oacute; kh&ocirc;ng phải l&agrave; vấn đề kh&ocirc;ng c&oacute; c&aacute;ch giải quyết. C&oacute; c&aacute;ch để bạn x&aacute;c minh v&agrave; tr&aacute;nh điều đ&oacute; xảy ra. T&ocirc;i nghĩ một trong những l&yacute; do quan trọng nhất l&agrave; ch&iacute;nh trị&quot;.</em></p>\r\n\r\n<p>Tất nhi&ecirc;n, sẽ c&oacute; những phần thưởng &quot;hậu hĩnh&quot; cho những nền tảng nội dung lớn nếu như họ mở c&aacute;nh cửa của m&igrave;nh. Băng VHS đ&atilde; trở n&ecirc;n vượt trội so với Betamax một phần v&igrave; Sony kh&ocirc;ng cấp ph&eacute;p c&ocirc;ng nghệ Betamax cho c&aacute;c c&ocirc;ng ty phim khi&ecirc;u d&acirc;m. Nếu Oculus, HTC, Samsung hay Sony trở th&agrave;nh người đầu ti&ecirc;n cho ph&eacute;p nội dung người lớn tr&ecirc;n nền tảng của m&igrave;nh, đ&oacute; sẽ c&oacute; thể l&agrave; điểm nhấn gi&uacute;p họ cạnh tranh tr&ecirc;n thị trường. <em>&quot;Nếu bạn nh&igrave;n v&agrave;o lịch sử của c&ocirc;ng nghệ, bất kỳ l&uacute;c n&agrave;o, bất kỳ ai d&aacute;m chống lại phim khi&ecirc;u d&acirc;m đều thua&quot;,</em> Paul kết luận. <em>&quot;Tất nhi&ecirc;n ch&uacute;ng t&ocirc;i muốn thế giới đ&oacute;n nhận c&agrave;ng sớm c&agrave;ng tốt, v&igrave; đ&oacute; l&agrave; việc kinh doanh của ch&uacute;ng t&ocirc;i. Nhưng n&oacute; chắc chắn sẽ xảy ra, n&oacute; chỉ c&ograve;n l&agrave; vấn đề thời gian m&agrave; th&ocirc;i&quot;.</em></p>\r\n', '2018-07-13 17:01:40', 8, 'HinhAnh-1531501300.jpg', 11, 1, 38);
+INSERT INTO `news` (`news_id`, `name`, `preview`, `detail`, `date_create`, `user_id`, `picture`, `cat_id`, `is_slide`, `counter`) VALUES
+(9, 'Đánh giá nhanh Samsung QLED 55 inch Q7F 2018', 'QLED Q7F 2018 là bản kế nhiệm mới của dòng tivi QLED Q7F 2017 với một số nâng cấp về thiết kế, chất lượng hình ảnh, hiệu năng và phần mềm.', '<p><strong>QLED Q7F 2018 l&agrave; bản kế nhiệm mới của d&ograve;ng tivi QLED Q7F 2017 với một số n&acirc;ng cấp về thiết kế, chất lượng h&igrave;nh ảnh, hiệu năng v&agrave; phần mềm.</strong></p>\r\n\r\n<p>Samsung năm nay tung ra thị trường 4 d&ograve;ng sản phẩm tivi QLED gồm Q9F, Q8F, Q7F v&agrave; Q6F. So với năm ngo&aacute;i, c&aacute;c tivi QLED 2018 c&oacute; th&ecirc;m d&ograve;ng mới l&agrave; Q6F. Trong 4 d&ograve;ng sản phẩm QLED tr&ecirc;n th&igrave; Q9F l&agrave; d&ograve;ng cao cấp nhất, tiếp đến l&agrave; d&ograve;ng Q8F rồi đến Q7F v&agrave; cuối c&ugrave;ng l&agrave; Q6F. Mỗi d&ograve;ng đều c&oacute; nhiều lựa chọn k&iacute;ch cỡ kh&aacute;c nhau v&agrave; c&oacute; sự kh&aacute;c biệt ở một số t&iacute;nh năng c&ocirc;ng nghệ cũng như gi&aacute; b&aacute;n.</p>\r\n\r\n<p>Chiếc Q7F trong b&agrave;i đ&aacute;nh gi&aacute; của VnReview h&ocirc;m nay l&agrave; phi&ecirc;n bản c&oacute; k&iacute;ch cỡ 55 inch với gi&aacute; c&ocirc;ng bố l&agrave; 54,9 triệu đồng. Ngo&agrave;i k&iacute;ch cỡ n&agrave;y, d&ograve;ng Q7F 2018 c&ograve;n c&oacute; 2 k&iacute;ch cỡ lớn hơn l&agrave; 65 inch (78,9 triệu đồng) v&agrave; 75 inch (125,5 triệu đồng).</p>\r\n\r\n<p><strong>Thiết kế v&agrave; kết nối</strong></p>\r\n\r\n<p>Về tổng thể, thiết kế của QLED Q7F 2018 kh&ocirc;ng thay đổi nhiều so với năm ngo&aacute;i. Đ&acirc;y vẫn l&agrave; tivi m&agrave;n h&igrave;nh phẳng, c&aacute;c chi tiết ở mặt trước v&agrave; mặt sau được thiết kế tối giản. Điểm mới trong thiết kế năm nay l&agrave; chiếc hộp kết nối được Samsung gọi l&agrave; One Connect đi k&egrave;m theo tivi c&oacute; k&iacute;ch cỡ lớn hơn thế hệ cũ do chứa th&ecirc;m phần nguồn v&agrave; sợi c&aacute;p (được gọi l&agrave; One Invisible Connection) nối hộp kết nối với TV chỉ c&ograve;n một sợi duy nhất, kh&ocirc;ng cần th&ecirc;m sợi nguồn ri&ecirc;ng như thế hệ cũ.</p>\r\n\r\n<p>Sợi c&aacute;p n&agrave;y c&oacute; chiều d&agrave;i 5 m&eacute;t (v&agrave; c&oacute; thể mua th&ecirc;m sợi d&agrave;i tới 15 m&eacute;t nếu c&oacute; nhu cầu), vỏ bằng teflon c&oacute; khả năng dẫn điện v&agrave; phần l&otilde;i được cấu tạo từ c&aacute;p quang để truyền t&iacute;n hiệu h&igrave;nh ảnh/&acirc;m thanh. Điều n&agrave;y gi&uacute;p cho việc đi d&acirc;y giữa TV với hộp kết nối gọn g&agrave;ng hơn.</p>\r\n\r\n<p><img alt=\"\" src=\"https://vnreview.vn/image/18/08/93/1808938.jpg?t=1527497488494\" style=\"height:480px; width:720px\" /></p>\r\n\r\n<p><em>Sợi c&aacute;p vừa truyền dữ liệu (l&otilde;i c&aacute;p quang) vừa cấp nguồn điện (tr&ecirc;n lớp vỏ bằng teflon)&nbsp;</em></p>\r\n\r\n<p>Chiếc hộp One Connect l&agrave; &yacute; tưởng th&uacute; vị của Samsung, đưa tất cả c&aacute;c nguồn đầu v&agrave;o ra khỏi TV tạo điều kiện cho việc thiết kế tivi trở n&ecirc;n mỏng hơn. Hộp One Connect n&agrave;y cung cấp nhiều cổng kết nối gồm 3 cổng USB, 4 cổng HDMI, cổng mạng LAN, cổng &acirc;m thanh Optical, cổng h&igrave;nh ảnh/&acirc;m thanh Component, cổng ANT cắm ăng ten, d&acirc;y truyền h&igrave;nh c&aacute;p, 1 cổng Service để phục vụ c&ocirc;ng t&aacute;c bảo tr&igrave;, bảo h&agrave;nh&hellip;</p>\r\n\r\n<p><img alt=\"\" src=\"https://vnreview.vn/image/18/08/90/1808905.jpg?t=1527497717760\" style=\"height:459px; width:720px\" /></p>\r\n\r\n<p><em>Tivi c&oacute; viền rất mảnh</em></p>\r\n\r\n<p>Ở mặt trước, viền tivi rất mỏng (9mm) với kiểu thiết kế tr&agrave;n viền v&agrave; khung kim loại được xử l&yacute; mịn, tr&ocirc;ng đẹp mắt. Mặt sau sử dụng chất liệu nhựa nh&aacute;m nhưng vẫn đảm bảo độ cứng c&aacute;p, chắc chắn, kh&ocirc;ng hề ọp ẹp kể cả khi ấn mạnh. Mặt sau của tivi c&oacute; thiết kế đơn giản do kh&ocirc;ng phải quản l&yacute; c&aacute;c cổng nối đầu v&agrave;o ra cho tivi.</p>\r\n\r\n<p><img alt=\"\" src=\"https://vnreview.vn/image/18/08/76/1808764.jpg?t=1527497099801\" style=\"height:480px; width:720px\" /></p>\r\n\r\n<p><em>Mặt lưng bằng nhựa nh&aacute;m</em></p>\r\n\r\n<p>Ch&acirc;n đế h&igrave;nh chữ T tr&ecirc;n phi&ecirc;n bản QLED Q7F mỏng v&agrave; gọn hơn thế hệ cũ một ch&uacute;t. Ch&acirc;n đế được thiết kế liền khối bằng kim loại chắc chắn, trọng lượng kh&aacute; nặng v&agrave; tạo được cảm nhận vững ch&atilde;i. Ngo&agrave;i ch&acirc;n đế chữ T đi k&egrave;m, bạn cũng c&oacute; thể treo tivi l&ecirc;n tường hoặc sử dụng 2 kiểu ch&acirc;n đế kh&aacute;c: ch&acirc;n đế chịu lực v&agrave; ch&acirc;n đế khung tranh.</p>\r\n\r\n<p><img alt=\"\" src=\"https://vnreview.vn/image/18/09/13/1809130.jpg?t=1527569595562\" style=\"height:444px; width:720px\" /></p>\r\n\r\n<p><em>Ch&acirc;n đế bằng kim loại liền khối chắc chắn</em></p>\r\n\r\n<p>Chất lượng ho&agrave;n thiện của tivi c&oacute; thể đ&aacute;nh gi&aacute; tốt. Kh&ocirc;ng c&oacute; kẽ hở n&agrave;o tr&ecirc;n tivi, kể cả những m&eacute;p kết nối giữa c&aacute;c th&agrave;nh phần của sản phẩm như ch&acirc;n đế hay c&aacute;c m&eacute;p viền m&agrave;n h&igrave;nh với khung.</p>\r\n\r\n<p><img alt=\"\" src=\"https://vnreview.vn/image/18/16/63/1816636.jpg?t=1528965903116\" style=\"height:480px; width:720px\" /></p>\r\n\r\n<p><em>Điển khiển từ xa quay lại với phong c&aacute;ch đen tuyền truyền thống. Điều khiển n&agrave;y c&oacute; thể điều khiển cả đầu kỹ thuật số, TV Box, d&agrave;n &acirc;m thanh, đầu DVD tương th&iacute;ch.</em></p>\r\n', '2018-07-13 17:27:06', 1, 'HinhAnh-1531502826.jpg', 12, 1, 40),
+(10, 'Ngược dòng thời gian: Thay vì toàn phím cảm ứng, chúng ta từng có nhiều điện thoại với bàn phím kỳ dị thế này đây!', 'Trước đây bàn phím từng là một trong những đặc điểm nhận dạng điện thoại, khác hẳn với bàn phím ảo ngày nay. ', '<p>Trong thời đại <a href=\"http://kenh14.vn/smartphone.html\" target=\"_blank\">smartphone</a> ng&agrave;y nay, b&agrave;n ph&iacute;m dường như kh&ocirc;ng c&ograve;n l&agrave; một trong những th&agrave;nh phần quan trọng để l&agrave;m nổi bật điện thoại nữa, nếu th&iacute;ch kiểu n&agrave;y hay kiểu kh&aacute;c, bạn chỉ cần tải c&aacute;c dạng b&agrave;n ph&iacute;m theo &yacute; th&iacute;ch về m&agrave; th&ocirc;i. Tuy nhi&ecirc;n, trước đ&acirc;y khi m&agrave; smartphone vẫn chưa xuất hiện th&igrave; b&agrave;n ph&iacute;m l&agrave; nơi m&agrave; c&aacute;c nh&agrave; sản xuất tha hồ thể hiện sự s&aacute;ng tạo của m&igrave;nh để mang đến n&eacute;t độc đ&aacute;o v&agrave; trải nghiệm th&uacute; vị cho người d&ugrave;ng.</p>\r\n\r\n<p>Dưới đ&acirc;y l&agrave; những chiếc điện thoại c&oacute; b&agrave;n ph&iacute;m độc đ&aacute;o nhất từng xuất hiện, chắc chắn sẽ c&oacute; rất nhiều c&aacute;i t&ecirc;n quen thuộc đấy.</p>\r\n\r\n<p>Đối với b&agrave;n ph&iacute;m QWERTY ảo tr&ecirc;n smartphone, ch&uacute;ng ta kh&ocirc;ng c&ograve;n lạ g&igrave; với việc g&otilde; ph&iacute;m bằng hai ng&oacute;n tay c&aacute;i nữa, tuy nhi&ecirc;n ngay từ năm 2003 khi m&agrave; c&aacute;c b&agrave;n ph&iacute;m T9 (ph&iacute;m số v&agrave; chữ t&iacute;ch hợp chung) c&ograve;n đang chiếm lĩnh thị trường, một số nh&agrave; sản xuất đ&atilde; nghĩ ra c&aacute;ch bố tr&iacute; ph&iacute;m đặc biệt như Siemens với chiếc SX1 v&agrave; Nokia 7600. Thay v&igrave; một cụm ph&iacute;m b&ecirc;n dưới, hai h&atilde;ng n&agrave;y t&aacute;ch cụm T9 ra hai b&ecirc;n với &yacute; tưởng l&agrave; gi&uacute;p người d&ugrave;ng bấm nhanh hơn với hai ng&oacute;n tay.</p>\r\n\r\n<p><a href=\"https://kenh14cdn.com/2018/7/17/photo-1-15318369244371860556342.jpg\" target=\"_blank\"><img alt=\"Ngược dòng thời gian: Thay vì toàn phím cảm ứng, chúng ta từng có nhiều điện thoại với bàn phím kỳ dị thế này đây! - Ảnh 1.\" src=\"https://kenh14cdn.com/2018/7/17/photo-1-15318369244371860556342.jpg\" style=\"width:100%\" /></a></p>\r\n\r\n<p><a href=\"https://kenh14cdn.com/2018/7/17/photo-1-15318369288821580728295.jpg\" target=\"_blank\"><img alt=\"Ngược dòng thời gian: Thay vì toàn phím cảm ứng, chúng ta từng có nhiều điện thoại với bàn phím kỳ dị thế này đây! - Ảnh 2.\" src=\"https://kenh14cdn.com/2018/7/17/photo-1-15318369288821580728295.jpg\" style=\"width:100%\" /></a></p>\r\n\r\n<p>Nokia 7600</p>\r\n\r\n<p>Năm 2001, Nokia ra mắt chiếc 5510 với thiết kế nhấn mạnh v&agrave;o việc hỗ trợ g&otilde; ph&iacute;m. M&aacute;y được trang bị cả một b&agrave;n ph&iacute;m QWERTY nhưng chia th&agrave;nh hai nửa với m&agrave;n h&igrave;nh ở giữa. Nokia 6810 ra mắt năm 2003 c&oacute; thể xem l&agrave; bản n&acirc;ng cấp với thiết kế s&aacute;ng tạo hơn khi c&oacute; b&agrave;n ph&iacute;m QWERTY ẩn dạng gập. B&igrave;nh thường Nokia 6810 tr&ocirc;ng cũng như c&aacute;c điện thoại kh&aacute;c nhưng khi mở b&agrave;n ph&iacute;m T9 ra sẽ trở th&agrave;nh b&agrave;n ph&iacute;m QWERTY rất độc đ&aacute;o.</p>\r\n\r\n<p><a href=\"https://kenh14cdn.com/2018/7/17/photo-2-15318369288831582354630.jpg\" target=\"_blank\"><img alt=\"Ngược dòng thời gian: Thay vì toàn phím cảm ứng, chúng ta từng có nhiều điện thoại với bàn phím kỳ dị thế này đây! - Ảnh 3.\" src=\"https://kenh14cdn.com/2018/7/17/photo-2-15318369288831582354630.jpg\" style=\"width:100%\" /></a></p>\r\n\r\n<p>Nokia 5510</p>\r\n\r\n<p><strong>gif</strong> <em> </em> .</p>\r\n\r\n<p>Nokia 6800</p>\r\n\r\n<p>&Yacute; tưởng b&agrave;n ph&iacute;m QWERTY ẩn tiếp tục được ph&aacute;t triển, năm 2004, Sony Ericsson ra mắt chiếc P910 với c&aacute;ch thiết kế cực độc khi d&ugrave;ng b&agrave;n ph&iacute;m T9 l&agrave;m tấm nền che cho b&agrave;n ph&iacute;m QWERTY ẩn b&ecirc;n dưới, khi cần d&ugrave;ng th&igrave; chỉ cần mở ra như điện thoại nắp gập.</p>\r\n\r\n<p><a href=\"https://kenh14cdn.com/2018/7/17/photo-4-15318369288831339586110.jpg\" target=\"_blank\"><img alt=\"Ngược dòng thời gian: Thay vì toàn phím cảm ứng, chúng ta từng có nhiều điện thoại với bàn phím kỳ dị thế này đây! - Ảnh 5.\" src=\"https://kenh14cdn.com/2018/7/17/photo-4-15318369288831339586110.jpg\" style=\"width:100%\" /></a></p>\r\n\r\n<p>Ngo&agrave;i ra c&ograve;n c&oacute; những sản phẩm c&oacute; b&agrave;n ph&iacute;m QWERTY &ldquo;lai&rdquo; như Sony Ericsson M600, thoạt nh&igrave;n tưởng như m&aacute;y c&oacute; b&agrave;n ph&iacute;m T9, nhưng tr&ecirc;n mỗi ph&iacute; c&oacute; hai k&yacute; tự v&agrave; sắp xếp theo thứ tự của ph&iacute;m QWERTY, một ph&iacute;m c&oacute; hai hướng bấm, bạn c&oacute; thể nhấn v&agrave;o b&ecirc;n tr&aacute;i để ra một chữ v&agrave; v&agrave;o b&ecirc;n phải ph&iacute;m để ra chữ c&ograve;n lại.</p>\r\n\r\n<p><a href=\"https://kenh14cdn.com/2018/7/17/photo-5-15318369288842132273765.jpg\" target=\"_blank\"><img alt=\"Ngược dòng thời gian: Thay vì toàn phím cảm ứng, chúng ta từng có nhiều điện thoại với bàn phím kỳ dị thế này đây! - Ảnh 6.\" src=\"https://kenh14cdn.com/2018/7/17/photo-5-15318369288842132273765.jpg\" style=\"width:100%\" /></a></p>\r\n\r\n<p>B&ecirc;n cạnh hiện đại ho&aacute; với b&agrave;n QWERTY, ch&uacute;ng ta c&ograve;n c&oacute; những chiếc điện thoại muốn đưa người d&ugrave;ng quay về qu&aacute; khứ khi t&iacute;ch hợp kiểu b&agrave;n ph&iacute;m như tr&ecirc;n c&aacute;c điện thoại b&agrave;n quay số ng&agrave;y xưa, điển h&igrave;nh l&agrave; Nokia 3650, Toshiba G450 v&agrave; Samsung Serene. Thế nhưng những kiểu thiết kế n&agrave;y lại kh&ocirc;ng thuận tiện cho người d&ugrave;ng, một số lựa chon thiết kế b&agrave;n ph&iacute;m tệ hại kh&aacute;c c&oacute; thể kể đến Nokia 2300 v&agrave; Nokia 3200 với dạng ph&iacute;m gộp. Hay Nokia &quot;thỏi son&quot; 7280 c&ograve;n kh&ocirc;ng c&oacute; b&agrave;n ph&iacute;m m&agrave; d&ugrave;ng cụm n&uacute;m xoay.</p>\r\n\r\n<p><a href=\"https://kenh14cdn.com/2018/7/17/photo-6-1531836928884950956436.jpg\" target=\"_blank\"><img alt=\"Ngược dòng thời gian: Thay vì toàn phím cảm ứng, chúng ta từng có nhiều điện thoại với bàn phím kỳ dị thế này đây! - Ảnh 7.\" src=\"https://kenh14cdn.com/2018/7/17/photo-6-1531836928884950956436.jpg\" style=\"width:100%\" /></a></p>\r\n\r\n<p>Samsung Serene</p>\r\n\r\n<p><a href=\"https://kenh14cdn.com/2018/7/17/photo-7-1531836928885680518043.jpg\" target=\"_blank\"><img alt=\"Ngược dòng thời gian: Thay vì toàn phím cảm ứng, chúng ta từng có nhiều điện thoại với bàn phím kỳ dị thế này đây! - Ảnh 8.\" src=\"https://kenh14cdn.com/2018/7/17/photo-7-1531836928885680518043.jpg\" style=\"width:100%\" /></a></p>\r\n\r\n<p>Nokia 3200</p>\r\n\r\n<p><a href=\"https://kenh14cdn.com/2018/7/17/photo-8-1531836928885547417554.jpg\" target=\"_blank\"><img alt=\"Ngược dòng thời gian: Thay vì toàn phím cảm ứng, chúng ta từng có nhiều điện thoại với bàn phím kỳ dị thế này đây! - Ảnh 9.\" src=\"https://kenh14cdn.com/2018/7/17/photo-8-1531836928885547417554.jpg\" style=\"width:100%\" /></a></p>\r\n\r\n<p>Nokia 7280</p>\r\n\r\n<p>Motorola ROKR E8 ra mắt năm 2008 với kiểu b&agrave;n ph&iacute;m T9 cảm ứng. Nửa dưới của m&aacute;y l&agrave; một m&agrave;n h&igrave;nh cảm ứng đơn giản d&agrave;nh ri&ecirc;ng cho hiển thị ph&iacute;m, c&oacute; thể thay đổi chức năng tuỳ v&agrave;o nhu cầu sử dụng. V&iacute; dụ như khi bạn nghe nhạc phần m&agrave;n h&igrave;nh n&agrave;y sẽ hiển thị c&aacute;c ph&iacute;m điều khiển v&agrave; khi nhắn tin hay gọi điện sẽ l&agrave; ph&iacute;m T9 th&ocirc;ng thường.</p>\r\n\r\n<p><a href=\"https://kenh14cdn.com/2018/7/17/photo-9-1531836928886446262898.jpg\" target=\"_blank\"><img alt=\"Ngược dòng thời gian: Thay vì toàn phím cảm ứng, chúng ta từng có nhiều điện thoại với bàn phím kỳ dị thế này đây! - Ảnh 10.\" src=\"https://kenh14cdn.com/2018/7/17/photo-9-1531836928886446262898.jpg\" style=\"width:100%\" /></a></p>\r\n\r\n<p>Thậm ch&iacute;, chiếc 3108 của Nokia c&ograve;n c&oacute; cả b&agrave;n ph&iacute;m cảm ứng nhận diện chữ viết tay th&ocirc;ng qua b&uacute;t stylus nữa. Cũng gần giống như P910, b&agrave;n cảm ứng được giấu b&ecirc;n dưới b&agrave;n ph&iacute;m T9 v&agrave; khi cần d&ugrave;ng th&igrave; mở ra.</p>\r\n\r\n<p><a href=\"https://kenh14cdn.com/2018/7/17/photo-10-1531836928887544025863.jpg\" target=\"_blank\"><img alt=\"Ngược dòng thời gian: Thay vì toàn phím cảm ứng, chúng ta từng có nhiều điện thoại với bàn phím kỳ dị thế này đây! - Ảnh 11.\" src=\"https://kenh14cdn.com/2018/7/17/photo-10-1531836928887544025863.jpg\" style=\"width:100%\" /></a></p>\r\n\r\n<p>Ng&agrave;y nay với sự phổ biến của smartphone m&agrave;n h&igrave;nh cảm ứng, đến cả b&agrave;n ph&iacute;m QWERTY vật l&yacute; cũng kh&ocirc;ng trụ nổi, n&oacute;i chi đến b&agrave;n ph&iacute;m T9, thiếu đi b&agrave;n ph&iacute;m, điện thoại mất đi một điểm quan trọng để thể hiện sự s&aacute;ng tạo. Tuy nhi&ecirc;n cũng nhờ đ&oacute; m&agrave; người d&ugrave;ng c&oacute; một trải nghiệm đồng nhất hơn, bạn kh&ocirc;ng phải tốn thời gian l&agrave;m quen với một b&agrave;n ph&iacute;m kỳ lạ n&agrave;o đ&oacute; m&agrave; chỉ cần tải về b&agrave;n ph&iacute;m y&ecirc;u th&iacute;ch mỗi khi đổi điện thoại. C&oacute; lẽ đ&acirc;y l&agrave; một sự hy sinh đ&aacute;ng tiếc nhưng cần thiết.</p>\r\n', '2018-07-17 15:49:04', 10, 'HinhAnh-1531842647.jpg', 3, 1, 94);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `rep_comment`
+--
+
+CREATE TABLE `rep_comment` (
+  `rep_id` int(11) NOT NULL,
+  `rep_email` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `rep_content` text COLLATE utf8_unicode_ci NOT NULL,
+  `rep_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `comment_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `rep_comment`
+--
+
+INSERT INTO `rep_comment` (`rep_id`, `rep_email`, `rep_content`, `rep_date`, `comment_id`) VALUES
+(1, 'vbbbb', 'zzxczx', '2018-07-18 18:03:57', 24),
+(2, 'ngungu', 'ahihi', '2018-07-19 04:14:47', 26),
+(3, 'ngu vai', 'choi oi', '2018-07-19 04:18:17', 26),
+(4, 'oh vay ha', 'the co a', '2018-07-19 04:18:42', 27),
+(5, 'sojado', 'ajosdj\nasdjoasjd', '2018-07-19 04:21:02', 27),
+(6, 'vai a', 'huhu', '2018-07-19 04:22:39', 27),
+(7, 'vi sao khi yeu', 'vi toi la chang ngoosc', '2018-07-19 04:24:11', 27),
+(8, '??', 'sao duoc ?', '2018-07-19 04:24:51', 27),
+(9, 'vl', 'vl', '2018-07-19 04:24:56', 26),
+(10, '?????', '??', '2018-07-19 04:27:20', 27),
+(11, 'vvvvv', 'vai ca', '2018-07-19 04:27:41', 27),
+(12, 'luon', 'len', '2018-07-19 04:30:01', 29),
+(13, 'nao', 'len', '2018-07-19 04:30:05', 29),
+(14, 'ascaca', 'sadad', '2018-07-19 04:32:19', 31),
+(15, 'isaodjaod', 'hiuhiu', '2018-07-19 04:32:41', 31),
+(16, 'zxcxzc', 'cxzcxz', '2018-07-19 04:33:29', 31),
+(17, 'tu nhien doc', 'haivl', '2018-07-19 04:33:38', 31),
+(18, 'cxzc', 'zxczc', '2018-07-19 04:34:14', 24),
+(19, 'huhu', 'hihi', '2018-07-19 04:57:14', 26),
+(20, 'xoi', 'vai', '2018-07-19 04:57:30', 27),
+(21, 'hiii', 'hiii', '2018-07-19 09:08:09', 25),
+(22, 'chaoban@gmail.com', 'chào bạn', '2018-07-19 17:26:50', 33),
+(23, 'xzczxc@gmail.com', 'xzxzc', '2018-07-20 14:30:52', 42);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `slide`
+--
+
+CREATE TABLE `slide` (
+  `slide_id` int(11) NOT NULL,
+  `picture` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `news_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `slide`
+--
+
+INSERT INTO `slide` (`slide_id`, `picture`, `news_id`) VALUES
+(1, 'HinhAnh-1531464442.png', 5),
+(2, 'HinhAnh-1531756740.jpg', 4),
+(3, 'HinhAnh-1531756753.jpg', 3),
+(4, 'HinhAnh-1531820932.jpg', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `user`
+--
+
+CREATE TABLE `user` (
+  `user_id` int(11) NOT NULL,
+  `username` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `fullname` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `avatar` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `chucvu` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `active` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `user`
+--
+
+INSERT INTO `user` (`user_id`, `username`, `password`, `fullname`, `avatar`, `chucvu`, `active`) VALUES
+(1, 'admin', 'admin', 'Admin', 'HinhAnh-1531136256.jpg', 'admin', 0),
+(8, 'quanttn836', '123456', 'Tôn Quân', 'HinhAnh-1531136282.jpg', 'admin', 0),
+(10, 'mod', 'mod', 'Anh là mod', 'HinhAnh-1531307560.jpg', 'mod', 0);
+
+--
+-- Chỉ mục cho các bảng đã đổ
+--
+
+--
+-- Chỉ mục cho bảng `cat_list`
+--
+ALTER TABLE `cat_list`
+  ADD PRIMARY KEY (`cat_id`);
+
+--
+-- Chỉ mục cho bảng `comment`
+--
+ALTER TABLE `comment`
+  ADD PRIMARY KEY (`comment_id`);
+
+--
+-- Chỉ mục cho bảng `contact`
+--
+ALTER TABLE `contact`
+  ADD PRIMARY KEY (`contact_id`);
+
+--
+-- Chỉ mục cho bảng `news`
+--
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`news_id`);
+
+--
+-- Chỉ mục cho bảng `rep_comment`
+--
+ALTER TABLE `rep_comment`
+  ADD PRIMARY KEY (`rep_id`);
+
+--
+-- Chỉ mục cho bảng `slide`
+--
+ALTER TABLE `slide`
+  ADD PRIMARY KEY (`slide_id`);
+
+--
+-- Chỉ mục cho bảng `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
+--
+
+--
+-- AUTO_INCREMENT cho bảng `cat_list`
+--
+ALTER TABLE `cat_list`
+  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT cho bảng `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+
+--
+-- AUTO_INCREMENT cho bảng `contact`
+--
+ALTER TABLE `contact`
+  MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT cho bảng `news`
+--
+ALTER TABLE `news`
+  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT cho bảng `rep_comment`
+--
+ALTER TABLE `rep_comment`
+  MODIFY `rep_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT cho bảng `slide`
+--
+ALTER TABLE `slide`
+  MODIFY `slide_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT cho bảng `user`
+--
+ALTER TABLE `user`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- Cơ sở dữ liệu: `technews`
+--
+CREATE DATABASE IF NOT EXISTS `technews` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `technews`;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `cat`
+--
+
+CREATE TABLE `cat` (
+  `cat_id` int(10) NOT NULL,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(1) NOT NULL,
+  `parent_id` int(10) NOT NULL,
+  `color` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `cat`
+--
+
+INSERT INTO `cat` (`cat_id`, `name`, `status`, `parent_id`, `color`) VALUES
+(1, 'Công nghệ', 1, 0, 1),
+(2, 'Lập trình', 1, 0, 3),
+(4, 'Android', 1, 2, 3),
+(5, 'Ios', 1, 2, 4),
+(6, 'Web-Design', 1, 0, 2),
+(10, 'Jquery', 1, 6, 1),
+(11, 'HTML', 0, 6, 2),
+(12, 'CSS', 1, 6, 3),
+(13, 'HTML5', 1, 1, 4),
+(14, 'CSS3', 1, 1, 1),
+(15, 'Java', 1, 2, 2),
+(19, 'cha', 1, 0, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `comment`
+--
+
+CREATE TABLE `comment` (
+  `comment_id` int(10) NOT NULL,
+  `content` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `user_id` int(10) NOT NULL,
+  `date_create` datetime NOT NULL,
+  `parent_id` int(1) NOT NULL,
+  `news_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `comment`
+--
+
+INSERT INTO `comment` (`comment_id`, `content`, `email`, `name`, `user_id`, `date_create`, `parent_id`, `news_id`) VALUES
+(1, 'Bài viết hay quá\r\n', '', '', 2, '2015-01-14 07:17:51', 0, 15),
+(2, 'Thêm bài nữa đi bạn\r\n', 'chetduoitrensamac@yahoo.com', 'nam', 0, '2015-01-14 07:17:43', 0, 15),
+(3, 'Khóa học khi nào khai giảng\r\n', '', '', 2, '2014-01-14 07:17:44', 1, 15),
+(4, 'Cài đặt studio thế nào\r\n', 'nammale@gmail.com', 'bìn', 0, '2014-01-14 07:17:50', 1, 15),
+(5, 'Làm sao nén file css và js\r\n', 'chetduoitrensamac@yahoo.com', 'nấm', 0, '2013-01-14 07:17:46', 1, 15),
+(6, 'hay quá', '', '', 3, '2015-01-14 07:17:43', 2, 15),
+(8, 'rất bỏ ích.thánks\r\n', 'xnam7799@gmail.com', 'nam', 0, '2018-07-16 05:14:28', 0, 15),
+(11, 'nam thấy sao', 'nam@gmail', 'binh', 0, '2018-07-16 05:34:47', 0, 15),
+(13, 'nam thấy rất là hay :))', '', 'admin', 1, '2018-07-16 05:44:54', 0, 15),
+(14, 'bài viết rất hay', 'nam@gmail.com', 'nam', 0, '2018-07-17 02:42:58', 0, 14),
+(15, 'bài viết khá ổn', '', 'admin', 1, '2018-07-17 02:43:31', 0, 14),
+(32, 'khi nào có bài viết mới vậy ạ\n', '', 'admin', 1, '2018-07-17 17:04:57', 0, 9),
+(33, 'hay quá', '', 'admin', 1, '2018-07-19 05:33:49', 0, 18),
+(34, 'bài viết quá dài', 'test@gmail.com', 'test', 0, '2018-07-19 11:02:43', 0, 27),
+(35, 'dfdf', 'lephuc120', 'sdasd', 0, '2018-07-19 14:57:53', 0, 25),
+(36, 'Quá hay', 'nampham@gmail', 'Nam', 0, '2018-07-20 00:45:33', 33, 18),
+(37, 'nam', 'nam@gmail', 'a', 0, '2018-07-20 03:18:11', 0, 26),
+(38, 'nam', '', 'admin', 1, '2018-07-20 03:18:17', 0, 26),
+(39, 'a', 'a', 'a', 0, '2018-07-20 03:18:50', 37, 26),
+(40, 'a', 'a', 'a', 0, '2018-07-20 12:42:08', 0, 26),
+(41, 'a', 'a@gmail.xom', 'a', 0, '2018-07-20 12:42:16', 0, 26),
+(42, 'a', 'a@gmail.xom', 'a', 0, '2018-07-20 12:42:19', 0, 26),
+(43, 'a', 'a@gmail.xom', 'a', 0, '2018-07-20 12:42:20', 0, 26),
+(44, 'a', 'a@gmail.xom', 'a', 0, '2018-07-20 12:42:20', 0, 26),
+(45, 'a', 'a@gmail.xom', 'a', 0, '2018-07-20 12:42:20', 0, 26),
+(46, 'a', 'a', 'a', 0, '2018-07-20 12:47:30', 0, 26),
+(47, 'a', 'a', 'nam', 0, '2018-07-20 14:45:35', 0, 26),
+(48, 'a', 'quashayhaynamaa@gmail.com', 'nam', 0, '2018-07-20 14:45:42', 0, 26),
+(49, 'hay quá', 'quashayhaynamaa@gmail.com', 'nam', 0, '2018-07-20 14:45:50', 0, 26),
+(50, 'aaaaaa', 'xnam7979', 'nam', 0, '2018-09-03 12:23:19', 0, 18);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `contact`
+--
+
+CREATE TABLE `contact` (
+  `contact_id` int(11) NOT NULL,
+  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `message` text COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `contact`
+--
+
+INSERT INTO `contact` (`contact_id`, `email`, `name`, `message`) VALUES
+(21, 'xnam@gmail.com', 'nam', 'nam'),
+(22, 'xnam@gmail.com', 'nam', 'nam');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `news`
+--
+
+CREATE TABLE `news` (
+  `news_id` int(10) NOT NULL,
+  `name` text COLLATE utf8_unicode_ci NOT NULL,
+  `preview` text COLLATE utf8_unicode_ci NOT NULL,
+  `detail` text COLLATE utf8_unicode_ci NOT NULL,
+  `date_create` datetime NOT NULL,
+  `create_by` int(10) NOT NULL,
+  `picture` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `counter` int(10) NOT NULL,
+  `cat_id` int(10) NOT NULL,
+  `status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `news`
+--
+
+INSERT INTO `news` (`news_id`, `name`, `preview`, `detail`, `date_create`, `create_by`, `picture`, `counter`, `cat_id`, `status`) VALUES
+(1, 'Đà Nẵng cùng Vietnam Web Summit', 'Đà Nẵng cùng Vietnam Web Summit\r\n', '<p><a href=\"https://vietnamwebsummit.com/vi/home/\" target=\"_new\">Vietnam Web Summit 2016 (VWS2016)</a>, sự kiện do Hiệp hội Thương mại điện tử Việt Nam (VECOM) v&agrave; Applancer Topdev đồng tổ chức đ&atilde; đ&atilde; thu h&uacute;t được hơn 3.500, hơn 2.500 lượt tham gia tại H&agrave; Nội (29/10) v&agrave; dự đo&aacute;n sẽ tiếp tục đạt được th&agrave;nh c&ocirc;ng tại địa điểm c&ograve;n lại l&agrave;&nbsp;<strong>Đ&agrave; Nẵng (05/11).</strong></p>\r\n\r\n<p><img alt=\"img_1892\" src=\"http://techtalk.vn/wp-content/uploads/2016/11/IMG_1892.jpg\" style=\"height:4000px; width:6000px\" /></p>\r\n\r\n<p>Tại Th&agrave;nh Phố Hồ Ch&iacute; Minh, kh&aacute;n giả đ&atilde; c&oacute; cơ hội tham quan v&agrave; trải nghiệm đầy th&uacute; vị với c&aacute;c gian h&agrave;ng tại khu vực triển l&atilde;m. Nhiều bạn cũng cho biết, c&aacute;c chủ đề năm nay c&oacute; nhiều kiến thức mới v&agrave; kh&aacute; hấp dẫn, với tầm bao qu&aacute;t rộng hơn, ở cả&nbsp;<a href=\"https://vietnamwebsummit.com/vi/home/\" target=\"_new\"><strong>lĩnh vực marketing, thiết kế web, lẫn kỹ thuật/c&ocirc;ng nghệ.</strong></a></p>\r\n\r\n<p><img alt=\"img_2385\" src=\"http://techtalk.vn/wp-content/uploads/2016/11/IMG_2385.jpg\" style=\"height:4000px; width:6000px\" /></p>\r\n\r\n<p><em>Khu vực triển l&atilde;m trong sự kiện tại H&agrave; Nội</em></p>\r\n\r\n<p>Tiếp tục chuyến h&agrave;nh tr&igrave;nh của m&igrave;nh, sự kiện đ&atilde; mang đến H&agrave; Nội (29/10) s&acirc;n chơi đầy hứng khởi với khu vực triễn l&atilde;m đa dạng v&agrave; những phần tr&igrave;nh b&agrave;y đầy m&agrave;u sắc, l&ocirc;i cuốn kh&ocirc;ng k&eacute;m so với ở&nbsp;<a href=\"http://techtalk.vn/vws-2016-tphcm-phat-sung-thanh-cong-cho-chuoi-su-kien-cong-nghe-web-hang-dau.html\" target=\"_new\">TPHCM</a>.</p>\r\n\r\n<p><img alt=\"img_2432\" src=\"http://techtalk.vn/wp-content/uploads/2016/11/IMG_2432.jpg\" style=\"height:4000px; width:6000px\" /></p>\r\n\r\n<p><em>H&igrave;nh ảnh sự kiện tại H&agrave; Nội</em></p>\r\n\r\n<p>Đến với Đ&agrave; Nẵng v&agrave;o ng&agrave;y 05/11 n&agrave;y,&nbsp;<a href=\"https://vietnamwebsummit.com/vi/home/\" target=\"_new\">Vietnam Web Summit</a>&nbsp;mang đến cho bạn những chủ đề hấp dẫn c&ugrave;ng những diễn giả h&agrave;ng đầu.</p>\r\n\r\n<h2>Những tiến bộ của Google trong việc x&acirc;y dựng một hệ thống web mở v&agrave; bền vững trong tương lai</h2>\r\n\r\n<p>Số đăng k&yacute; thu&ecirc; bao điện thoại giờ đ&acirc;y c&ograve;n lớn hơn tổng d&acirc;n số Việt Nam. Đồng thời, lượng truy cập Internet qua smartphone chiếm đến hơn nửa tổng số người d&ugrave;ng. Vietnam hiện ở thời điểm đỉnh cao ph&aacute;t triển c&ocirc;ng nghệ số, với h&agrave;ng triệu lượt truy cập mới v&agrave;o mạng lưới Internet. Tuy tương lai của nội dung số vẫn nằm tr&ecirc;n di động, nhưng đa số website v&agrave; ứng dụng vẫn đang ph&aacute;t triển từng ng&agrave;y với nhiều c&ocirc;ng nghệ mới để mang đến trải nghiệm tốt hơn đến với người d&ugrave;ng. H&atilde;y c&ugrave;ng Google v&agrave; những &lsquo;&ocirc;ng khổng lồ l&agrave;ng c&ocirc;ng nghệ&rsquo; chia sẻ c&aacute;c s&aacute;ng kiến c&aacute;ch mạng trong hệ sinh th&aacute;i xuất bản số, v&igrave; một m&ocirc;i trường Web mở, &nbsp;mạnh, v&agrave; ổn định d&agrave;i l&acirc;u.</p>\r\n\r\n<p><img alt=\"summit-speaker-ads-12\" src=\"http://techtalk.vn/wp-content/uploads/2016/11/summit-speaker-ads-12.png\" style=\"height:612px; width:1200px\" /></p>\r\n\r\n<h2>3E &ndash; Standard pattern for your Scrum or non-Scrum team.</h2>\r\n\r\n<p>Kh&ocirc;ng cần biết team của bạn bắt đầu khi n&agrave;o, kh&ocirc;ng cần biết team bạn bao nhi&ecirc;u người, kh&ocirc;ng cần biết bạn c&oacute; theo&nbsp;<a href=\"https://vietnamwebsummit.com/vi/home/\" target=\"_new\">Scrum</a>&nbsp;hay kh&ocirc;ng. H&atilde;y t&igrave;m hiểu đ&acirc;y l&agrave; &nbsp;g&igrave;, n&oacute; l&agrave;m việc như thế n&agrave;o v&agrave; h&atilde;y &aacute;p dụng n&oacute; v&agrave;o team của bạn.</p>\r\n\r\n<p><img alt=\"summit-speaker-1ads\" src=\"http://techtalk.vn/wp-content/uploads/2016/11/summit-speaker-1ads.png\" style=\"height:612px; width:1200px\" /></p>\r\n\r\n<h2>7 kinh nghiệm về ph&aacute;t triển sản phẩm tại Thegioididong.com</h2>\r\n\r\n<p>Chia sẻ kinh nghiệm về của diễn giả, người đ&atilde; c&oacute; 5 năm x&acirc;y dựng v&agrave; ph&aacute;t triển website Thegioididong.com. Một số &yacute; sẽ chia sẻ: kinh nghiệm thiết kế, l&agrave;m việc với IT, quản l&yacute; team Designer + PM, đo lường hiệu quả&hellip;</p>\r\n\r\n<p><img alt=\"summit-speaker-ads-10\" src=\"http://techtalk.vn/wp-content/uploads/2016/11/summit-speaker-ads-10.png\" style=\"height:612px; width:1200px\" /></p>\r\n\r\n<h2>&ldquo;Growth Hacking&rdquo; kh&ocirc;ng phải l&agrave; chiếc đũa thần cho start-up</h2>\r\n\r\n<p>Truyền th&ocirc;ng lu&ocirc;n l&agrave; một b&agrave;i to&aacute;n kh&oacute; với hầu hết những người kinh doanh giai đầu khởi nghiệp. Đặc biệt l&agrave; với d&acirc;n c&ocirc;ng nghệ, những &ocirc;ng chủ theo đuổi giấc mơ l&agrave;m start-up.</p>\r\n\r\n<p>Gần đ&acirc;y, mọi người rỉ tai nhau về một kh&aacute;i niệm &ndash; phương thức gi&uacute;p tăng trưởng người d&ugrave;ng đột biến với t&ecirc;n gọi rất mĩ miều l&agrave;&nbsp;<a href=\"https://vietnamwebsummit.com/vi/home/\" target=\"_new\">Growth Hacking</a>. Những c&acirc;u chuyện b&ugrave;ng ph&aacute;t h&agrave;ng chục hoặc thậm ch&iacute; h&agrave;ng trăm ngh&igrave;n người d&ugrave;ng đăng k&yacute; sau một đ&ecirc;m của dropbox, mailbox, uber, twitter, facebook, gmail, quora&hellip; khiến d&acirc;n c&ocirc;ng nghệ như &ldquo;ngồi tr&ecirc;n đống lửa&rdquo;.</p>\r\n\r\n<p><img alt=\"summit-speaker-ads\" src=\"http://techtalk.vn/wp-content/uploads/2016/11/summit-speaker-ads.png\" style=\"height:612px; width:1200px\" /></p>\r\n\r\n<p>Sau cơn &ldquo;bấn loạn&rdquo;, mọi người đổ x&ocirc; đi nghi&ecirc;n cứu kh&aacute;i niệm v&agrave; phương thức để l&agrave;m growth hacking như cứu c&aacute;nh cho b&agrave;i to&aacute;n truyền th&ocirc;ng &ndash; tiếp thị c&aacute;c sản phẩm c&ocirc;ng nghệ số. Tuy nhi&ecirc;n, dưới g&oacute;c nh&igrave;n của chuy&ecirc;n gia, việc kh&ocirc;ng hiểu r&otilde; bản chất m&agrave; cố gắng &aacute;p dụng &ldquo;trick&rdquo; n&agrave;y c&oacute; thể khiến start-up gặp nhiều sai lầm lớn.</p>\r\n\r\n<h2>Serverless architecture &ndash; Kiến tr&uacute;c serverless</h2>\r\n\r\n<p><a href=\"https://vietnamwebsummit.com/vi/home/\" target=\"_new\">Severless</a>&nbsp;l&agrave; một chủ đề n&oacute;ng hổi trong thế giới architect thời gian gần đ&acirc;y. Ch&uacute;ng ta c&oacute; thể l&agrave;m g&igrave; với Severless? Phần tr&igrave;nh b&agrave;y n&agrave;y sẽ đưa ra to&agrave;n cảnh về Severless v&agrave; những b&agrave;i học m&agrave; diễn giả đ&atilde; nhận được khi ứng dụng kiến tr&uacute;c n&agrave;y. Bạn sẽ c&oacute; một bản hướng dẫn chung về việc khởi tạo v&agrave; khai th&aacute;c một ứng dụng Severless với những v&iacute; dụ của NodeJS.</p>\r\n\r\n<p><img alt=\"summit-speaker-ads-13\" src=\"http://techtalk.vn/wp-content/uploads/2016/11/summit-speaker-ads-13.png\" style=\"height:612px; width:1200px\" /></p>\r\n\r\n<h1>V&agrave; c&ograve;n nhiều điều để kh&aacute;m ph&aacute;&hellip;</h1>\r\n\r\n<p>Đặc biệt, với sự tham gia của những diễn giả ch&iacute;nh l&agrave; những team leader hoặc product manager, những người trực tiếp ph&aacute;t triển sản phẩm hứa hẹn mang đến cho bạn những kiến thức thực tiễn v&agrave; hữu &iacute;ch. H&atilde;y đến v&agrave; c&ugrave;ng lắng nghe những g&oacute;c nh&igrave;n rất s&acirc;u s&aacute;t về những vấn đề m&agrave; ch&uacute;ng ta thường quan t&acirc;m nhất.</p>\r\n\r\n<h2>Thời gian dự kiến của chuỗi sự kiện</h2>\r\n\r\n<p><strong>* TP. Hồ Ch&iacute; Minh: Trung T&acirc;m Hội Nghị 272 &ndash; 272 V&otilde; Thị S&aacute;u, Quận 3. Tp. HCM</strong></p>\r\n\r\n<p>Thời gian: 08h00 &ndash; 17h30 ng&agrave;y 22/10/2016</p>\r\n\r\n<p><strong>* TP. H&agrave; Nội: Trung T&acirc;m Hội Nghị Forevermark &ndash; 614 Lạc Long Qu&acirc;n, Quận T&acirc;y Hồ, HN.</strong></p>\r\n\r\n<p>Thời gian: 08h00 &ndash; 17h30 ng&agrave;y 29/10/2016</p>\r\n\r\n<p><strong>* TP. Đ&agrave; Nẵng: One Opera Hotel, 114 Nguyễn Văn Linh, Nam Dương, Thanh Khu&ecirc;, Đ&agrave; Nẵng.</strong></p>\r\n\r\n<p>Thời gian: 08h00 &ndash; 13h30 ng&agrave;y 05/11/2016</p>\r\n\r\n<p><strong><em>***Th&ocirc;ng tin chi tiết về chương tr&igrave;nh, BTC sẽ cập nhật đầy đủ tại địa chỉ:***</em></strong></p>\r\n\r\n<p>Website:<a href=\"https://vietnamwebsummit.com/\" target=\"_new\">&nbsp;https://vietnamwebsummit.com</a></p>\r\n\r\n<p>Facebook Page ch&iacute;nh thức:<a href=\"https://www.facebook.com/Vietnamwebsummit/\" target=\"_new\">&nbsp;https://www.facebook.com/Vietnamwebsummit/</a></p>\r\n\r\n<p>Để đăng k&yacute; tham dự chương tr&igrave;nh Vietnam Web Summit l&ograve;ng để lại th&ocirc;ng tin&nbsp;<a href=\"http://topdevvn.com/s/c7xU3gG5\" target=\"_new\">tại đ&acirc;y</a>.</p>\r\n\r\n<p><em>Để biết th&ecirc;m th&ocirc;ng tin xin vui l&ograve;ng li&ecirc;n hệ:</em></p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td>Ms. Ngọc Đỗ\r\n			<p>Điện thoại: 08 6273 3497</p>\r\n\r\n			<p>Mobile: 0944 685 243</p>\r\n\r\n			<p>Email: ngoc.do@applancer.net</p>\r\n			</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n', '2015-01-14 07:17:42', 1, 'HinhAnh-1531232128.png', 21, 3, 1),
+(2, 'Cộng đồng công nghệ Hà Nội tưng bừng hào hứng', 'Không tỏ ra kém cạnh so với sự kiện ở khu vực TP.HCM. Khán giả tại Hà Nội đã nồng nhiệt chào đón Vietnam Web Summit 2016 đến với thành phố thủ đô, với hơn 1.000 lượt tham dự ngay từ những giây phút đầu tiên.', '<p>Đi theo timeline tương tự với sự kiện tại S&agrave;i G&ograve;n, kh&aacute;n giả trước hết sẽ c&oacute; một khoảng thời gian để thỏa th&iacute;ch tham quan c&aacute;c gian h&agrave;ng đến từ h&agrave;ng chục c&ocirc;ng ty lớn v&agrave; startup như Wiki, Redweb, TopDev,&hellip; đ&acirc;y ch&iacute;nh l&agrave; cơ hội l&yacute; tưởng để c&aacute;c bạn giao lưu, network, t&igrave;m c&ocirc;ng việc l&yacute; tưởng hơn,&hellip;</p>\r\n\r\n<p>Năm 2016 sẽ l&agrave; năm đ&aacute;nh dấu sự b&ugrave;ng nổ thương mại điện tử tại Việt Nam, để bắt kịp l&agrave;n s&oacute;ng n&agrave;y, Vietnam Web Summit sẽ mang đến cho kh&aacute;n giả một loạt chủ đề từ vi m&ocirc; đến vĩ m&ocirc; để c&aacute;c doanh nghiệp c&oacute; thể x&acirc;y dựng hệ thống website v&agrave; quảng c&aacute;o điện tử của m&igrave;nh, thật hiệu quả v&agrave; tiếp kiệm chi ph&iacute; nhất.</p>\r\n\r\n<p>Với phi&ecirc;n khai mạc, vẫn với ba đại diện lần lượt đến từ VECOM, Google, Universal&hellip; đem đến những kiến thức mới nhất trong sự chờ đ&oacute;n của kh&aacute;n giả nơi đ&acirc;y.</p>\r\n\r\n<p><strong>Chế t&agrave;i ph&aacute;p l&yacute; tr&ecirc;n web n&ecirc;n l&agrave; ưu ti&ecirc;n lớn nhất cho c&aacute;c đơn vị hoạt động tr&ecirc;n web</strong></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&Ocirc;ng Nguyễn Ngọc Dũng đại diện từ Vecom tiếp tục giới thiệu cho ch&uacute;ng ta về những thay đổi mới nhất trong m&ocirc;i trường ph&aacute;p l&yacute; điện tử tại Việt Nam. Với c&aacute;c số liệu đến từ Nielsen Việt Nam, r&otilde; r&agrave;ng ch&uacute;ng ta đang thấy sự thống trị của di động so với c&aacute;c nền tảng kh&aacute;c.</p>\r\n\r\n<p>B&ecirc;nh cạnh những thay đổi đ&aacute;ng ch&uacute; &yacute; trong m&ocirc;i trường ph&aacute;p l&yacute; thương mại điện tử, c&aacute;c doanh nghiệp c&ograve;n được nghe th&ecirc;m về những hậu quả đ&aacute;ng tiếc c&oacute; thể xảy ra nếu ta kh&ocirc;ng tu&acirc;n thủ quy định, chỉ bằng một v&agrave;i c&uacute; click chuột tố c&aacute;o đơn giản của đối thủ, c&ocirc;ng ty của bạn sẽ bị phơi b&agrave;y trước v&ocirc; số vấn đề nghi&ecirc;m trọng.</p>\r\n\r\n<p><strong>Google v&agrave; hệ thống web mở của tương lai</strong></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Số đăng k&yacute; thu&ecirc; bao điện thoại giờ đ&acirc;y c&ograve;n lớn hơn tổng d&acirc;n số Việt Nam. Đồng thời, lượng truy cập Internet qua smartphone chiếm đến hơn nửa tổng số người d&ugrave;ng. Vietnam hiện ở thời điểm đỉnh cao ph&aacute;t triển c&ocirc;ng nghệ số, với h&agrave;ng triệu lượt truy cập mới v&agrave;o mạng lưới Internet. Để đ&aacute;p ứng được sự ph&aacute;t triển mạnh mẽ của thiết bị di động, giờ đ&acirc;y đa phần c&aacute;c website v&agrave; ứng dụng phải cố gắng bắt kịp với c&aacute;c c&ocirc;ng nghệ mới để mang đến cho người d&ugrave;ng trải nghiệm ho&agrave;n thiện hơn. H&atilde;y h&ograve;a m&igrave;nh với Google v&agrave; những &ocirc;ng lớn trong ng&agrave;nh với những s&aacute;ng kiến mới cho hệ sinh th&aacute;i xuất bản, để thấy được một m&ocirc;i trường web mở, tăng trưởng mạnh mẽ v&agrave; mở rộng kh&ocirc;ng ngừng.</p>\r\n\r\n<p><strong>SEO l&agrave;m th&igrave; dễ, m&agrave; l&agrave;m cho hay&hellip; th&igrave; kh&oacute; v&ocirc; c&ugrave;ng</strong></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Diễn ra ngay sau phi&ecirc;n khai mạc, phần tr&igrave;nh b&agrave;y tưởng chừng cũ như tr&aacute;i đất của anh Tuấn H&agrave; (CEO Vinalink) lại mới đến kh&ocirc;ng ngờ trước những thay đổi cải tiến kh&ocirc;ng ngừng từ Google, đầu mối t&igrave;m kiếm lớn nhất h&agrave;nh tinh.</p>\r\n\r\n<p>Trong phần n&oacute;i chuyện, anh đề cập:</p>\r\n\r\n<ul>\r\n	<li>Những cảnh b&aacute;o của Google về Mobile web.</li>\r\n	<li>Tối ưu c&aacute;c y&ecirc;u cầu của Google cho website th&acirc;n thiện phi&ecirc;n bản Mobile bao gồm Canonical v&agrave; AMP.</li>\r\n	<li>Ứng dụng AMP cho c&aacute;c website m&atilde; nguồn mở.</li>\r\n	<li>Tối ưu giao diện người d&ugrave;ng v&agrave; trải nghiệm người d&ugrave;ng tr&ecirc;n Mobile để tăng tỷ lệ chuyển đổi.</li>\r\n</ul>\r\n\r\n<p><strong>Đừng bỏ lỡ cơ hội cuối c&ugrave;ng tại Đ&agrave; Nẵng&hellip;</strong></p>\r\n\r\n<p>Để kết th&uacute;c chuyến h&agrave;nh tr&igrave;nh đi khắp đất nước, Vietnam Web Summit sẽ dừng ch&acirc;n tại Đ&agrave; Nẵng v&agrave;o ng&agrave;y 5/11 sắp tới. Một tin vui nữa cho những t&iacute;n đồ c&ocirc;ng nghệ miền Trung, c&aacute;c diễn giả cũng sẽ theo ch&acirc;n chương tr&igrave;nh đến th&agrave;nh phố xứ Quảng th&acirc;n thương. C&aacute;c bạn đừng bỏ lỡ cơ hội tham gia v&agrave;o ng&agrave;y hội Web/Marketing lớn nhất năm nay nh&eacute;!</p>\r\n\r\n<p><strong><em>***Th&ocirc;ng tin chi tiết về chương tr&igrave;nh, BTC sẽ cập nhật đầy đủ tại địa chỉ:***</em></strong></p>\r\n\r\n<p>Website:<a href=\"https://vietnamwebsummit.com/\" target=\"_new\">&nbsp;https://vietnamwebsummit.com</a></p>\r\n\r\n<p>Facebook Page ch&iacute;nh thức:<a href=\"https://www.facebook.com/Vietnamwebsummit/\" target=\"_new\">&nbsp;https://www.facebook.com/Vietnamwebsummit/</a></p>\r\n\r\n<p>Để đăng k&yacute; tham dự chương tr&igrave;nh Vietnam Web Summit l&ograve;ng để lại th&ocirc;ng tin&nbsp;<a href=\"http://topdevvn.com/s/c7xU3gG5\" target=\"_new\">tại đ&acirc;y</a>.</p>\r\n\r\n<p><strong><em>Để biết th&ecirc;m th&ocirc;ng tin xin vui l&ograve;ng li&ecirc;n hệ:</em></strong></p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td>Ms. Ngọc ĐỗĐiện thoại: 08 6273 3497<br />\r\n			Mobile: 0944 685 243<br />\r\n			Email: ngoc.do@applancer.net</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n', '2015-01-14 07:17:43', 1, 'HinhAnh-1531232119.jpg', 12, 4, 0),
+(3, 'Responsive Images trên Web', 'Tôi và thằng bạn thân vẫn chia sẻ, trò chuyện trước những tin vịt đã truyền qua lớp khác. \r\n', '<p>C&aacute;ch th&ocirc;ng thường ch&uacute;ng ta vẫn sử dụng h&igrave;nh ảnh lớn ph&ugrave; hợp với m&agrave;n h&igrave;nh lớn v&agrave; sẽ được co lại khi xem tr&ecirc;n m&agrave;n h&igrave;nh nhỏ, đ&acirc;y l&agrave; giải ph&aacute;p đơn giản nhưng c&oacute; 2 vấn đề lớn, thứ nhất l&agrave; ch&uacute;ng ta xem h&igrave;nh k&iacute;ch thước nhỏ nhưng k&iacute;ch thước thật lại l&agrave; một h&igrave;nh lớn vậy l&agrave; l&atilde;ng ph&iacute; băng th&ocirc;ng v&agrave; l&agrave;m tăng thời gian tải trang, thứ hai l&agrave; v&igrave; n&oacute; kh&ocirc;ng l&agrave; k&iacute;ch thước thật của h&igrave;nh ảnh n&ecirc;n đương nhi&ecirc;n tr&ocirc;ng sẽ mờ hơn v&agrave; c&aacute;c chi tiết bị nhỏ đi. Trong b&agrave;i viết n&agrave;y ch&uacute;ng ta sẽ b&agrave;n đến những giải ph&aacute;p cho vấn đề n&agrave;y.</p>\r\n\r\n<h3><strong>Thuộc t&iacute;nh CSS về h&igrave;nh nền</strong></h3>\r\n\r\n<p>V&iacute; dụ nếu ch&uacute;ng ta chọn giải ph&aacute;p l&agrave; sử dụng 2 thẻ html h&igrave;nh ảnh một cho m&agrave;n h&igrave;nh lớn v&agrave; một cho m&agrave;n h&igrave;nh nhỏ th&igrave; sẽ đạt được y&ecirc;u cầu về chất lượng h&igrave;nh ảnh. V&iacute; dụ:</p>\r\n\r\n<p><a href=\"https://topdev.vn/\" target=\"_blank\">Những việc l&agrave;m hấp dẫn</a></p>\r\n\r\n<ul>\r\n	<li><a href=\"https://topdev.vn/partners/detail-jobs/Front-End-Developer-8964/?token=ZKSuE%2BDgRSAzEOBNUcWfv9XiWteBtt6KdNdNI11aNYUzfyjT2VC0ZXq97IPeU9i0ITF9vI9NA30ibg73TVnifg%3D%3D\"><img src=\"https://topdev.vn/files/logos/870b152c6c1550c42e321287e04993a5.png\" /></a>\r\n\r\n	<p><a href=\"https://topdev.vn/partners/detail-jobs/Front-End-Developer-8964/?token=ZKSuE%2BDgRSAzEOBNUcWfv9XiWteBtt6KdNdNI11aNYUzfyjT2VC0ZXq97IPeU9i0ITF9vI9NA30ibg73TVnifg%3D%3D\" target=\"_blank\">Front-End Developer</a></p>\r\n\r\n	<p><a href=\"https://topdev.vn/partners/detail-jobs/Front-End-Developer-8964/?token=ZKSuE%2BDgRSAzEOBNUcWfv9XiWteBtt6KdNdNI11aNYUzfyjT2VC0ZXq97IPeU9i0ITF9vI9NA30ibg73TVnifg%3D%3D\" target=\"_blank\">Alta Media.Ho Chi MinhNegotiable</a></p>\r\n	<a href=\"https://topdev.vn/partners/detail-jobs/Front-End-Developer-8964/?token=ZKSuE%2BDgRSAzEOBNUcWfv9XiWteBtt6KdNdNI11aNYUzfyjT2VC0ZXq97IPeU9i0ITF9vI9NA30ibg73TVnifg%3D%3D\" target=\"_blank\">Front-End</a></li>\r\n	<li><a href=\"https://topdev.vn/partners/detail-jobs/02-PHP-Developers-8352/?token=ZKSuE%2BDgRSAzEOBNUcWfv9XiWteBtt6KdNdNI11aNYUzfyjT2VC0ZXq97IPeU9i0ITF9vI9NA30ibg73TVnifg%3D%3D\"><img src=\"https://topdev.vn/files/logos/daf77add451cd27868cf0089b8a3cba2.jpg\" /></a>\r\n	<p><a href=\"https://topdev.vn/partners/detail-jobs/02-PHP-Developers-8352/?token=ZKSuE%2BDgRSAzEOBNUcWfv9XiWteBtt6KdNdNI11aNYUzfyjT2VC0ZXq97IPeU9i0ITF9vI9NA30ibg73TVnifg%3D%3D\" target=\"_blank\">02 PHP Developers</a></p>\r\n\r\n	<p><a href=\"https://topdev.vn/partners/detail-jobs/02-PHP-Developers-8352/?token=ZKSuE%2BDgRSAzEOBNUcWfv9XiWteBtt6KdNdNI11aNYUzfyjT2VC0ZXq97IPeU9i0ITF9vI9NA30ibg73TVnifg%3D%3D\" target=\"_blank\">C&ocirc;ng ty TNHH myGHa Noi$400 - $1,250</a></p>\r\n	<a href=\"https://topdev.vn/partners/detail-jobs/02-PHP-Developers-8352/?token=ZKSuE%2BDgRSAzEOBNUcWfv9XiWteBtt6KdNdNI11aNYUzfyjT2VC0ZXq97IPeU9i0ITF9vI9NA30ibg73TVnifg%3D%3D\" target=\"_blank\">PHP</a></li>\r\n	<li><a href=\"https://topdev.vn/partners/detail-jobs/Senior-Front-end-Developer-8965/?token=ZKSuE%2BDgRSAzEOBNUcWfv9XiWteBtt6KdNdNI11aNYUzfyjT2VC0ZXq97IPeU9i0ITF9vI9NA30ibg73TVnifg%3D%3D\"><img src=\"https://topdev.vn/files/logos/63d2acc3d702f23b1693b992b7f0ca56.png\" /></a>\r\n	<p><a href=\"https://topdev.vn/partners/detail-jobs/Senior-Front-end-Developer-8965/?token=ZKSuE%2BDgRSAzEOBNUcWfv9XiWteBtt6KdNdNI11aNYUzfyjT2VC0ZXq97IPeU9i0ITF9vI9NA30ibg73TVnifg%3D%3D\" target=\"_blank\">02 Senior Front-end Developer (CSS, JavaScript, HTML)</a></p>\r\n\r\n	<p><a href=\"https://topdev.vn/partners/detail-jobs/Senior-Front-end-Developer-8965/?token=ZKSuE%2BDgRSAzEOBNUcWfv9XiWteBtt6KdNdNI11aNYUzfyjT2VC0ZXq97IPeU9i0ITF9vI9NA30ibg73TVnifg%3D%3D\" target=\"_blank\">C&ocirc;ng Ty Cổ Phần Đầu Tư V&agrave; Ph&aacute;t Triển IMHo Chi MinhUp to $1,250</a></p>\r\n	<a href=\"https://topdev.vn/partners/detail-jobs/Senior-Front-end-Developer-8965/?token=ZKSuE%2BDgRSAzEOBNUcWfv9XiWteBtt6KdNdNI11aNYUzfyjT2VC0ZXq97IPeU9i0ITF9vI9NA30ibg73TVnifg%3D%3D\" target=\"_blank\">CSSJavaScriptHTMLFront-End</a></li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p>1</p>\r\n\r\n			<p>2</p>\r\n\r\n			<p>3</p>\r\n\r\n			<p>4</p>\r\n\r\n			<p>5</p>\r\n\r\n			<p>6</p>\r\n\r\n			<p>7</p>\r\n\r\n			<p>8</p>\r\n\r\n			<p>9</p>\r\n\r\n			<p>10</p>\r\n\r\n			<p>11</p>\r\n			</td>\r\n			<td>\r\n			<p>&nbsp;</p>\r\n\r\n			<p>img.smallscreen { display: none; }</p>\r\n\r\n			<p>@media only screen and (max-width: 320px) {</p>\r\n\r\n			<p>&nbsp;&nbsp; img {</p>\r\n\r\n			<p>&nbsp;&nbsp;&nbsp;&nbsp; display: none;</p>\r\n\r\n			<p>&nbsp;&nbsp; }</p>\r\n\r\n			<p>&nbsp;&nbsp; img.smallscreen {</p>\r\n\r\n			<p>&nbsp;&nbsp;&nbsp;&nbsp; display: inline;</p>\r\n\r\n			<p>&nbsp;&nbsp; }</p>\r\n\r\n			<p>}</p>\r\n\r\n			<p>&nbsp;</p>\r\n			</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p>1</p>\r\n\r\n			<p>2</p>\r\n\r\n			<p>3</p>\r\n\r\n			<p>4</p>\r\n			</td>\r\n			<td>\r\n			<p>&nbsp;</p>\r\n\r\n			<p>&lt;img src=&quot;largeimage.jpg&quot;&gt;</p>\r\n\r\n			<p>&lt;img class=&quot;smallscreen&quot; src=&quot;smallimage.jpg&gt;</p>\r\n\r\n			<p>&nbsp;</p>\r\n			</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>Giải ph&aacute;p n&agrave;y sẽ d&ugrave;ng css ẩn h&igrave;nh ảnh kh&ocirc;ng ph&ugrave; hợp v&agrave; hiển thị h&igrave;nh ảnh ph&ugrave; hợp với k&iacute;ch thước m&agrave;n h&igrave;nh. Thực tế nhược điểm lớn của phương ph&aacute;p n&agrave;y l&agrave; tr&igrave;nh duyệt của bạn vẫn trả về nhiều h&igrave;nh ảnh v&agrave; n&oacute; chỉ ẩn đi những h&igrave;nh kh&ocirc;ng cần thiết như vậy phương ph&aacute;p n&agrave;y kh&ocirc;ng tiết kiệm được lưu lượng trang web m&agrave; c&ograve;n bị tăng l&ecirc;n.</p>\r\n\r\n<p>Thay v&igrave; sử dụng giải ph&aacute;p tr&ecirc;n ch&uacute;ng ta c&oacute; thể sử dụng h&igrave;nh nền cho một phần tử rổng n&agrave;o đ&oacute; như div hay span. V&iacute; dụ:</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p>1</p>\r\n\r\n			<p>2</p>\r\n\r\n			<p>3</p>\r\n\r\n			<p>4</p>\r\n\r\n			<p>5</p>\r\n\r\n			<p>6</p>\r\n\r\n			<p>7</p>\r\n\r\n			<p>8</p>\r\n\r\n			<p>9</p>\r\n\r\n			<p>10</p>\r\n			</td>\r\n			<td>\r\n			<p>&nbsp;</p>\r\n\r\n			<p>#image {</p>\r\n\r\n			<p>&nbsp;&nbsp;background-image: url(largeimage.jpg);</p>\r\n\r\n			<p>}</p>\r\n\r\n			<p>@media only screen and (max-width: 320px) {</p>\r\n\r\n			<p>&nbsp;&nbsp;#image {</p>\r\n\r\n			<p>&nbsp;&nbsp;&nbsp;&nbsp;background-image: url(smallimage.jpg);</p>\r\n\r\n			<p>&nbsp;&nbsp;}</p>\r\n\r\n			<p>}</p>\r\n\r\n			<p>&nbsp;</p>\r\n			</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p>1</p>\r\n\r\n			<p>2</p>\r\n\r\n			<p>3</p>\r\n			</td>\r\n			<td>\r\n			<p>&nbsp;</p>\r\n\r\n			<p>&lt;div id=&quot;image&quot;&gt;&lt;/div&gt;</p>\r\n\r\n			<p>&nbsp;</p>\r\n			</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>Tuy nhi&ecirc;n giải ph&aacute;p đơn giản n&agrave;y vẫn c&ograve;n những hạn chế lớn đ&oacute; l&agrave; ch&uacute;ng ta chưa c&oacute; được nguồn h&igrave;nh ảnh được trả về trong t&agrave;i liệu HTML điều n&agrave;y c&oacute; nghĩa h&igrave;nh ảnh chưa mang t&iacute;nh chất động, giải ph&aacute;p n&agrave;y chỉ hổ trợ cho phần cải thiện giao diện để c&oacute; được những h&igrave;nh ảnh tốt nhất với những độ ph&acirc;n giải m&agrave;n h&igrave;nh kh&aacute;c nhau.</p>\r\n\r\n<h3><strong>Sử dụng HTML5</strong></h3>\r\n\r\n<p><strong>Sử dụng thẻ &lt;picture&gt; kết hợp với thẻ &lt;source&gt;</strong></p>\r\n\r\n<p>Điều n&agrave;y cũng tương tự như thẻ &lt;video&gt; hay &lt;audio&gt;. Phần tử &lt;source&gt; c&oacute; thẻ chứa c&aacute;c thuộc t&iacute;nh t&ugrave;y chọn như type v&agrave; media. V&iacute; dụ:</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p>1</p>\r\n\r\n			<p>2</p>\r\n\r\n			<p>3</p>\r\n\r\n			<p>4</p>\r\n\r\n			<p>5</p>\r\n\r\n			<p>6</p>\r\n\r\n			<p>7</p>\r\n\r\n			<p>8</p>\r\n\r\n			<p>9</p>\r\n			</td>\r\n			<td>\r\n			<p>&nbsp;</p>\r\n\r\n			<p>&lt;picture&gt;</p>\r\n\r\n			<p>&nbsp;&nbsp; &lt;source src=image800.png media=&quot;min-width:800px&quot;&gt;</p>\r\n\r\n			<p>&nbsp;&nbsp; &lt;source src=image480.png media=&quot;min-width:480px&quot;&gt;</p>\r\n\r\n			<p>&nbsp;&nbsp; &lt;source src=image320.png&gt;</p>\r\n\r\n			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- Trường hợp c&aacute;c tr&igrave;nh duyệt kh&ocirc;ng hỗ trợ phần tử picture --&gt;</p>\r\n\r\n			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;img src=image800.png alt=&quot;angry pirate&quot;&gt;</p>\r\n\r\n			<p>&lt;/picture&gt;</p>\r\n\r\n			<p>&nbsp;</p>\r\n			</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>Giải ph&aacute;p n&agrave;y thực sự r&otilde; r&agrave;ng v&agrave; c&oacute; khả năng t&ugrave;y biến mạnh mẽ nhưng một điều kh&ocirc;ng hay l&agrave; với mỗi h&igrave;nh ảnh ch&uacute;ng ta lại c&oacute; v&ocirc; số c&aacute;c phần tử &lt;source&gt; với c&aacute;c media kh&aacute;c nhau nếu trang web của bạn nhiều h&igrave;nh ảnh th&igrave; r&otilde; r&agrave;ng lượng code HTML sẽ kh&aacute; nhiều điều n&agrave;y l&agrave;m tăng dung lượng của t&agrave;i liệu HTML.</p>\r\n\r\n<h3><strong>Sử dụng thuộc t&iacute;nh srcset</strong></h3>\r\n\r\n<p>W3C hiện đ&atilde; c&oacute; bản ph&aacute;c thảo về thuộc t&iacute;nh n&agrave;y điều n&agrave;y thực sự hữu &iacute;ch bởi thuộc t&iacute;nh src hiện đ&atilde; kh&ocirc;ng đ&aacute;p ứng đủ y&ecirc;u cầu, với srcset ch&uacute;ng ta c&oacute; thể đơn giản hơn việc viết css media query, những đường dẫn ảnh c&oacute; sự r&agrave;ng buộc với bối cảnh sẽ được tải t&ugrave;y theo k&iacute;ch thước m&agrave;n h&igrave;nh. V&iacute; dụ:</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p>1</p>\r\n\r\n			<p>2</p>\r\n\r\n			<p>3</p>\r\n			</td>\r\n			<td>\r\n			<p>&nbsp;</p>\r\n\r\n			<p>&lt;img src=&quot;image300.png&quot; srcset=&quot;image150.png 600w, image100.png 480w&quot; alt=&quot;&quot;&gt;</p>\r\n\r\n			<p>&nbsp;</p>\r\n			</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>Ở tr&ecirc;n h&igrave;nh ảnh image300 b&igrave;nh thường sẽ được tải nhưng nếu m&agrave;n h&igrave;nh nhỏ hơn hoặc bằng 600px th&igrave; h&igrave;nh image150 sẽ được tải, 600w ở đ&acirc;y cũng đồng nghĩa như media query l&agrave; max-width: 600px, tương tự với 480w. Trong responsive web ch&uacute;ng ta thường để viewpost l&agrave; device-width nhưng ch&uacute;ng ta cũng biết rằng đơn vị pixel của CSS tr&ecirc;n tr&igrave;nh duyệt c&oacute; một tỉ lệ n&agrave;o đ&oacute; với pixel của thiết bị. V&iacute; dụ th&ocirc;ng thường c&aacute;c m&agrave;n h&igrave;nh desktop hay c&aacute;c thiết bị của apple chưa c&oacute; retina sẽ c&oacute; tỉ lệ l&agrave; 1, với c&aacute;c thiết bị của apple c&oacute; retina sẽ c&oacute; tỉ lệ l&agrave; 2 tức l&agrave; độ ph&acirc;n giải của thiết bị sẽ bằng 2 lần độ ph&acirc;n giải tr&ecirc;n tr&igrave;nh duyệt. Trong trường hợp để x&aacute;c định thiết bị l&agrave; desktop kh&ocirc;ng c&oacute; một chiều rộng r&otilde; r&agrave;ng th&igrave; việc dựa v&agrave;o tỉ lệ độ ph&acirc;n giải giữa thiết bị v&agrave; tr&igrave;nh duyệt l&agrave; hữu &iacute;ch. V&iacute; dụ:</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p>1</p>\r\n\r\n			<p>2</p>\r\n\r\n			<p>3</p>\r\n			</td>\r\n			<td>\r\n			<p>&nbsp;</p>\r\n\r\n			<p>&lt;img src=&quot;image.jpg&quot; srcset=&quot;image0.jpg 720w, image721.jpeg 1280w, image1281.jpg 1x&quot; alt=&quot;&quot;&gt;</p>\r\n\r\n			<p>&nbsp;</p>\r\n			</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>Ở tr&ecirc;n h&igrave;nh image0 được tải khi chiều rộng tr&igrave;nh duyệt l&agrave; nhỏ hơn hoặc bằng 720px, tương tự cho 1280w, v&agrave; với trường hợp k&iacute;ch thước lớn hơn 1280px nếu tr&igrave;nh duyệt v&agrave; độ ph&acirc;n giải thiết bị c&oacute; tỉ lệ l&agrave; 1 th&igrave; h&igrave;nh sẽ tải l&agrave; image1281, điều n&agrave;y sẽ ph&ugrave; hợp với c&aacute;c m&agrave;n h&igrave;nh desktop, c&ograve;n image.jpg cho trường hợp tr&igrave;nh duyệt chưa hỗ trợ thuộc t&iacute;nh srcset.</p>\r\n\r\n<p>Như vậy ta c&oacute; thể thấy giải ph&aacute;p d&ugrave;ng &lt;picture&gt; v&agrave; giải ph&aacute;p d&ugrave;ng thuộc t&iacute;nh srcset đều c&oacute; c&ugrave;ng mục đ&iacute;ch v&agrave; c&oacute; thể d&ugrave;ng độc lập, đ&atilde; c&oacute; nhiều b&agrave;n luận về giải ph&aacute;p n&agrave;o tốt hơn nhưng bạn c&oacute; thể kết hợp cả 2 giải ph&aacute;p. V&iacute; dụ:</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p>1</p>\r\n\r\n			<p>2</p>\r\n\r\n			<p>3</p>\r\n\r\n			<p>4</p>\r\n\r\n			<p>5</p>\r\n\r\n			<p>6</p>\r\n\r\n			<p>7</p>\r\n			</td>\r\n			<td>\r\n			<p>&nbsp;</p>\r\n\r\n			<p>&lt;picture&gt;</p>\r\n\r\n			<p>&nbsp;&nbsp; &lt;source media=&quot;(min-width: 45em)&quot; srcset=&quot;large-1.jpg 1x, large-2.jpg 2x&quot;&gt;</p>\r\n\r\n			<p>&nbsp;&nbsp; &lt;source media=&quot;(min-width: 18em)&quot; srcset=&quot;med-1.jpg 1x, med-2.jpg 2x&quot;&gt;</p>\r\n\r\n			<p>&nbsp;&nbsp; &lt;img src=&quot;fallback.jpg&quot; alt=&quot;&quot; /&gt;</p>\r\n\r\n			<p>&lt;/picture&gt;</p>\r\n\r\n			<p>&nbsp;</p>\r\n			</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>H&atilde;y c&ugrave;ng chờ đợi W3C c&ocirc;ng bố ch&iacute;nh thức, c&aacute;c tr&igrave;nh duyệt bắt đầu hỗ trợ để bạn v&agrave; t&ocirc;i c&oacute; thể sử dụng những giải ph&aacute;p cần thiết n&agrave;y. Trong thời gian n&agrave;y ch&uacute;ng ta vẫn đang rất cần một giải ph&aacute;p thay thế v&agrave; c&aacute;c nh&agrave; ph&aacute;t triển đ&atilde; nhanh tr&oacute;ng c&oacute; những giải ph&aacute;p bằng c&aacute;c plugin javaScript, trong b&agrave;i viết tiếp ch&uacute;ng ta sẽ c&ugrave;ng t&igrave;m hiểu c&aacute;c giải ph&aacute;p sử dụng javaScript.</p>\r\n\r\n<p>B&agrave;i viết tham khảo ở trang: (<a href=\"https://css-tricks.com/responsive-images-css/\" target=\"_new\">https://css-tricks.com/responsive-images-css/</a>)</p>\r\n\r\n<p>Cảm ơn c&aacute;c bạn đ&atilde; theo d&otilde;i!</p>\r\n', '2014-01-14 07:17:44', 2, 'HinhAnh-1531232110.jpg', 2, 5, 0),
+(4, 'Lập trình PHP từ A-Z', 'Tôi và thằng bạn thân vẫn chia sẻ, trò chuyện trước những tin vịt đã truyền qua lớp khác. \r\n', 'Tôi và thằng bạn thân vẫn chia sẻ, trò chuyện trước những tin vịt đã truyền qua lớp khác. \r\n', '2014-01-14 07:17:45', 4, 'HinhAnh-1531232101.png', 40, 6, 1),
+(5, 'Lập trình JAVA từ A-Z', 'Tôi và thằng bạn thân vẫn chia sẻ, trò chuyện trước những tin vịt đã truyền qua lớp khác. \r\n', 'Java cũng là một trong nhưng ngôn ngữ lập trình sử dụng phổ biến nhất thế giới, dùng để xây dựng các phần mềm, ứng dụng khác nhau, viết các ứng dụng web, xây dựng các ứng dụng trong doanh nghiệp, siêu thị, bệnh viện, ngân hàng…\r\n', '2013-01-14 07:17:46', 3, 'HinhAnh-1531232092.png', 54, 12, 1),
+(7, 'Doanh nghiệp CNTT “chạy đua” trong cuộc chiến tuyển dụng và giữ chân nhân sự', 'Hiện tại các công ty CNTT chi trả mức lương từ 52,2 đến 64,5 triệu đồng/tháng cho nhân sự IT cấp cao, nhân sự trên 2 năm kinh nghiệm có mức lương từ 17 - 18,5 triệu đồng/tháng, sinh viên mới ra trường có mức lương dao động xấp xỉ 8 - 12 triệu đồng/tháng.', '<p><strong>Nghịch l&yacute;: Việc t&igrave;m người&hellip;</strong></p>\r\n\r\n<p>X&acirc;y dựng một sự nghiệp vĩ đại, hay &iacute;t nhất, c&oacute; được một c&ocirc;ng việc ổn thỏa, đ&oacute; l&agrave; đ&iacute;ch đến quan trọng h&agrave;ng đầu của mỗi người trong cuộc đời. Nhưng, để t&igrave;m được một c&ocirc;ng việc ph&ugrave; hợp khả năng v&agrave; nguyện vọng thời nay l&agrave; rất kh&oacute; khăn, đặc biệt l&agrave; với c&aacute;c bạn trẻ. Kh&ocirc;ng &iacute;t sinh vi&ecirc;n vừa tốt nghiệp ra trường rơi v&agrave;o t&igrave;nh trạng stress, căng thẳng, thậm ch&iacute; l&agrave; trầm cảm khi đối diện với nguy cơ thất nghiệp.</p>\r\n\r\n<p>Ở Việt Nam, trong khi tỷ lệ thất nghiệp chung l&agrave; 2% th&igrave; tỷ lệ thất nghiệp của giới trẻ l&agrave; 7,8%. Theo b&aacute;o c&aacute;o của Tổng cục Thống k&ecirc; trong qu&yacute; III năm ngo&aacute;i, hơn 55% trong số 1,1 triệu người thất nghiệp ở Việt Nam c&oacute; độ tuổi 15-24.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=\"Doanh nghiệp CNTT “chạy đua” trong cuộc chiến tuyển dụng và giữ chân nhân sự - Ảnh 1.\" src=\"http://channel.mediacdn.vn/thumb_w/640/prupload/156/2018/06/img20180627172059275.jpg\" />&nbsp;</p>\r\n\r\n<p>Khi c&aacute;ch mạng c&ocirc;ng nghệ 4.0 diễn ra, h&agrave;ng chục triệu lao động đối mặt nguy cơ bị nhiều ng&agrave;nh nghề thay thế bởi robot v&agrave; c&ocirc;ng nghệ th&ocirc;ng minh.</p>\r\n\r\n<p>Đi ngược t&igrave;nh h&igrave;nh tr&ecirc;n, ng&agrave;nh c&ocirc;ng nghiệp phần mềm Việt Nam lại đang trong t&igrave;nh trạng b&aacute;o động v&igrave; &ldquo;kh&aacute;t&rdquo; nh&acirc;n lực. B&aacute;o c&aacute;o của trang Vietnamworks 2017 cho hay nhu cầu nh&acirc;n sự ng&agrave;nh CNTT đang ở mức cao nhất trong lịch sử với gần 15.000 việc l&agrave;m được tuyển dụng trong năm 2016. Dự đo&aacute;n Việt Nam c&ograve;n thiếu khoảng 1,2 triệu nh&acirc;n lực cho đến năm 2020.</p>\r\n\r\n<p>Hiện tại c&aacute;c c&ocirc;ng ty CNTT chi trả mức lương từ 52,2 đến 64,5 triệu đồng/th&aacute;ng cho nh&acirc;n sự IT cấp cao, nh&acirc;n sự tr&ecirc;n 2 năm kinh nghiệm c&oacute; mức lương từ 17 - 18,5 triệu đồng/th&aacute;ng, sinh vi&ecirc;n mới ra trường c&oacute; mức lương dao động xấp xỉ 8 - 12 triệu đồng/th&aacute;ng. TopDev cho biết, chỉ sau một năm l&agrave;m việc, c&aacute;c lập tr&igrave;nh vi&ecirc;n mới ra trường n&agrave;y sẽ được tăng lương đ&aacute;ng kể. L&yacute; giải điều n&agrave;y, B&agrave; Nguyễn Phương Mai, Gi&aacute;m đốc điều h&agrave;nh của Navigos Search nhận định: &ldquo;Giữa c&aacute;c doanh nghiệp CNTT đang diễn ra cuộc chiến ngầm khi tuyển dụng, mức lương bị đẩy l&ecirc;n cao như thế l&agrave; để thu h&uacute;t v&agrave; giữ ch&acirc;n nh&acirc;n sự giỏi&rdquo;.</p>\r\n\r\n<p><strong>Chuy&ecirc;n gia trong ng&agrave;nh n&oacute;i g&igrave;?</strong></p>\r\n\r\n<p>Tại sự kiện Gặp gỡ Hiệp hội Internet Việt Nam với chủ đề &ldquo;Tổ chức kinh doanh bắt kịp xu thế to&agrave;n cầu h&oacute;a&rdquo;, Chủ tịch Tập đo&agrave;n FPT Trương Gia B&igrave;nh ph&aacute;t biểu: &ldquo;Yếu tố cốt l&otilde;i để c&aacute;c doanh nghiệp Việt Nam c&oacute; thể to&agrave;n cầu h&oacute;a l&agrave; chất lượng nguồn nh&acirc;n lực, đặc biệt l&agrave; trong lĩnh vực CNTT&rdquo;.</p>\r\n\r\n<p>Thực tế, hệ thống 290 trường đại học, cao đẳng v&agrave; khoảng 150 cơ sở đ&agrave;o tạo về CNTT cả nước hiện chỉ cung ứng được khoảng 250.000 người. Đồng thời, theo đ&aacute;nh gi&aacute; từ c&aacute;c doanh nghiệp CNTT, kiến thức, kỹ năng chuy&ecirc;n m&ocirc;n v&agrave; tr&igrave;nh độ ngoại ngữ của sinh vi&ecirc;n mới ra trường rất hạn chế. Hầu hết c&aacute;c doanh nghiệp đều phải mất 3-6 th&aacute;ng để đ&agrave;o tạo nh&acirc;n vi&ecirc;n mới trước khi ch&iacute;nh thức l&agrave;m việc.</p>\r\n\r\n<p>B&agrave; L&ecirc; Thị Hồng Hạnh &ndash; Gi&aacute;m đốc Trường đ&agrave;o tạo Lập tr&igrave;nh vi&ecirc;n quốc tế FPT Aptech cho biết: &ldquo;Để giải quyết thực trạng đ&oacute;, cần ch&uacute; trọng đ&agrave;o tạo kh&acirc;u thực h&agrave;nh v&agrave; c&aacute;c kỹ năng mềm cho sinh vi&ecirc;n, nhằm đ&aacute;p ứng đ&uacute;ng nhu cầu doanh nghiệp&rdquo;. Chứng minh điều n&agrave;y, hầu hết sinh vi&ecirc;n tại FPT Aptech đ&atilde; đạt được rất nhiều th&agrave;nh tựu sau khi tốt nghiệp kh&ocirc;ng l&acirc;u. C&aacute;c bạn trẻ học FPT Aptech kh&ocirc;ng chỉ được thỏa m&atilde;n đam m&ecirc; c&ocirc;ng nghệ, m&agrave; c&ograve;n c&oacute; cơ hội ra nước ngo&agrave;i l&agrave;m việc, cơ hội start up...</p>\r\n\r\n<p>Nguyễn Lương Bằng (1992) l&agrave; một trong những gương mặt điển h&igrave;nh cho thế hệ người trẻ FPT Aptech thắp l&ecirc;n những tia s&aacute;ng mới cho nền c&ocirc;ng nghệ Việt Nam. Lương Bằng ch&iacute;nh l&agrave; cha đẻ của game đ&igrave;nh đ&aacute;m Freaking Math. Chỉ sau 5 ng&agrave;y ra đời, Freaking Math đ&atilde; nhảy l&ecirc;n top 4 game miễn ph&iacute; hay nhất tr&ecirc;n AppStore với hơn 50.000 lượt tải v&agrave; 200 lượt rating t&iacute;ch cực v&agrave; được đ&aacute;nh gi&aacute; l&agrave; &ldquo;Hại n&atilde;o gấp tỷ lần Flappy Bird&rdquo;. Th&ocirc;ng qua những kỹ năng về lập tr&igrave;nh được học, Bằng đ&atilde; đưa những sản phẩm của m&igrave;nh đến gần với người sử dụng v&agrave; g&acirc;y tiếng vang tr&ecirc;n tầm quốc tế. Độ &ldquo;hot&rdquo; của game n&agrave;y khiến cộng đồng c&ocirc;ng nghệ thế giới ch&uacute; &yacute; đến game Việt v&agrave; người Việt, thậm ch&iacute;, tờ Tech In Asia đ&atilde; đặt ra c&acirc;u hỏi: &quot;C&oacute; phải Việt Nam đang dạy thế giới c&aacute;ch l&agrave;m game di động?&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=\"Doanh nghiệp CNTT “chạy đua” trong cuộc chiến tuyển dụng và giữ chân nhân sự - Ảnh 2.\" src=\"http://channel.mediacdn.vn/thumb_w/640/prupload/156/2018/06/img20180627172059929.jpg\" /></p>\r\n\r\n<p>Nguyễn Lương Bằng &ndash; đại diện cho c&aacute;c lập tr&igrave;nh vi&ecirc;n người Việt ho&agrave;n to&agrave;n c&oacute; khả năng l&agrave;m được những điều m&agrave; lập tr&igrave;nh vi&ecirc;n quốc tế đang l&agrave;m, thậm ch&iacute; l&agrave; vượt trội.</p>\r\n\r\n<p>Một gương mặt kh&aacute;c l&agrave; Gi&aacute;m đốc trẻ của C&ocirc;ng ty PPLUS Innovative Ideas: Phạm Nhật Trường. Th&ocirc;ng qua &yacute; tưởng quảng c&aacute;o bằng c&ocirc;ng nghệ cao v&agrave; cung cấp giải ph&aacute;p s&aacute;ng tạo trong quảng c&aacute;o dựa tr&ecirc;n nền tảng kiến thức lập tr&igrave;nh v&agrave; marketing, Trường đ&atilde; khởi nghiệp th&agrave;nh c&ocirc;ng, biến ước mơ gầy dựng c&ocirc;ng ty th&agrave;nh sự thật. Anh đưa PPLUS từ một c&ocirc;ng ty nhỏ b&eacute;, trở th&agrave;nh một Agency h&agrave;ng đầu trong lĩnh vực truyền th&ocirc;ng - quảng c&aacute;o.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=\"Doanh nghiệp CNTT “chạy đua” trong cuộc chiến tuyển dụng và giữ chân nhân sự - Ảnh 3.\" src=\"http://channel.mediacdn.vn/prupload/156/2018/06/img20180627172100798.jpg\" /></p>\r\n\r\n<p>Phạm Nhật Trường biến ước mơ gầy dựng c&ocirc;ng ty cho ri&ecirc;ng m&igrave;nh th&agrave;nh sự thật.</p>\r\n\r\n<p>CEO MStar Corporation Nguyễn Hải Đăng cũng l&agrave; một FPT Aptechive ưu t&uacute; kh&aacute;c. Sau khi tốt nghiệp THPT, anh Hải Đăng quyết định đăng k&yacute; học thẳng FPT Aptech. Trong một lần tư vấn con đường th&agrave;nh c&ocirc;ng cho c&aacute;c bạn trẻ y&ecirc;u th&iacute;ch CNTT, anh Đăng chia sẻ: &ldquo;Khi vừa ho&agrave;n tất học k&igrave; 3 tại FPT Aptech, anh đ&atilde; bắt đầu đi xin việc l&agrave;m v&agrave; được c&ocirc;ng ty DI Central của Mỹ nhận v&agrave;o l&agrave;m ch&iacute;nh thức. Thời điểm đ&oacute;, mức lương của anh kh&aacute; cao so với mặt bằng chung v&agrave; cũng cao hơn c&aacute;c bạn mới tốt nghiệp ĐH kh&aacute;c. Anh chọn FPT Aptech v&igrave; đ&acirc;y l&agrave; đơn vị ra đời ti&ecirc;n phong v&agrave; giải toả được nỗi kh&aacute;t khao đi học CNTT của giới trẻ&rdquo;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=\"Doanh nghiệp CNTT “chạy đua” trong cuộc chiến tuyển dụng và giữ chân nhân sự - Ảnh 4.\" src=\"http://channel.mediacdn.vn/thumb_w/640/prupload/156/2018/06/img20180627172101599.jpg\" /></p>\r\n\r\n<p>Nguyễn Hải Đăng - Cựu sinh vi&ecirc;n FPT Aptech - hiện đang l&agrave; CEO của Mstar Corp.</p>\r\n\r\n<p>Chỉ c&oacute; theo đuổi đam m&ecirc;, c&aacute;c bạn trẻ mới c&oacute; được một sự nghiệp, một cuộc đời đ&uacute;ng như m&igrave;nh mơ ước. Nếu kh&ocirc;ng, đời sống sẽ rất uổng ph&iacute; v&agrave; v&ocirc; c&ugrave;ng bi kịch. Con người sinh ra vốn dĩ giống nhau, nhưng lựa chọn kh&aacute;c nhau th&igrave; sẽ c&oacute; những cuộc đời kh&aacute;c, những số phận kh&aacute;c.</p>\r\n\r\n<p>Y&ecirc;u c&ocirc;ng nghệ? Muốn tạo ra gi&aacute; trị mới? C&aacute;ch duy nhất: Lựa chọn CNTT v&agrave; theo đuổi đam m&ecirc;!</p>\r\n\r\n<p>Trường Đ&agrave;o tạo Lập tr&igrave;nh vi&ecirc;n Quốc tế FPT Aptech l&agrave; ng&ocirc;i trường đầu ti&ecirc;n tại Việt Nam đ&agrave;o tạo lập tr&igrave;nh theo hướng li&ecirc;n kết quốc tế được th&agrave;nh lập v&agrave;o năm 1999. Qua gần 20 năm đ&agrave;o tạo v&agrave; ph&aacute;t triển, FPT Aptech lu&ocirc;n l&agrave; sự lựa chọn h&agrave;ng đầu của c&aacute;c em học sinh vừa tốt nghiệp THPT, c&aacute;c sinh vi&ecirc;n đang học Đại học - Cao đẳng v&agrave; cả những người đi l&agrave;m muốn bổ sung kiến thức thực tế. Nơi đ&acirc;y cũng được xem như l&agrave; trường đ&agrave;o tạo Lập tr&igrave;nh vi&ecirc;n chất lượng cao, được nhiều nh&agrave; tuyển dụng trong v&agrave; ngo&agrave;i nước tin tưởng để chi&ecirc;u mộ lập tr&igrave;nh vi&ecirc;n giỏi nghề cho c&ocirc;ng ty m&igrave;nh.</p>\r\n\r\n<p>Năm 2017 l&agrave; năm đ&aacute;nh dấu sự đột ph&aacute; của FPT Aptech khi cập nhật chương tr&igrave;nh đ&agrave;o tạo ACCP 2017 với định hướng song h&agrave;nh c&ugrave;ng c&aacute;c c&ocirc;ng nghệ ti&ecirc;n tiến nhất tr&ecirc;n thế giới. C&aacute;c bạn trẻ đam m&ecirc; CNTT vừa tốt nghiệp THPT, hay sinh vi&ecirc;n c&aacute;c trường ĐH CĐ muốn x&acirc;y dựng tương lai vững chắc cho bản th&acirc;n c&oacute; thể tham khảo v&agrave; đăng k&yacute;&nbsp;<a href=\"http://aptech.fpt.edu.vn/dangky.php\" target=\"_blank\">Tại Đ&acirc;y</a>&nbsp;để nhận được nhiều ưu đ&atilde;i về học ph&iacute; v&agrave; chế độ việc l&agrave;m sau khi ra trường.</p>\r\n', '2018-07-07 05:12:15', 0, 'HinhAnh-1531232084.jpg', 1127, 10, 0),
+(8, 'Không cần phải sở hữu MacBook, bộ công cụ này sẽ giúp người dùng dễ dàng tạo ra các ứng dụng iOS ngay trên Windows', 'Và giá dành cho một công cụ lập trình tuyệt vời thế này cũng rất \"hạt dẻ\", chỉ 45 USD mà thôi.', '<p>Đối với người d&ugrave;ng chuy&ecirc;n sử dụng Windows, để c&oacute; thể tạo ra v&agrave; ph&aacute;t h&agrave;nh những ứng dụng iOS l&agrave; một qu&aacute; tr&igrave;nh tương đối phức tạp. Chưa b&agrave;n đến tr&igrave;nh độ chuy&ecirc;n m&ocirc;n, chỉ ri&ecirc;ng việc Apple y&ecirc;u cầu phải sử dụng những phần mềm, c&ocirc;ng cụ chuy&ecirc;n dụng của h&atilde;ng cũng đ&atilde; g&acirc;y &iacute;t nhiều kh&oacute; khăn cho họ.</p>\r\n\r\n<p>Mới đ&acirc;y, chuy&ecirc;n gia IT ki&ecirc;m lập tr&igrave;nh vi&ecirc;n độc lập Pierre-Marie Baty đ&atilde; cho ra mắt bộ c&ocirc;ng cụ iOS Build Environment for Windows Developers nhằm mục đ&iacute;ch gi&uacute;p c&aacute;c nh&agrave; ph&aacute;t triển x&acirc;y dựng ứng dụng iOS ngay tr&ecirc;n nền tảng Windows một c&aacute;ch đơn giản nhất. Baty cho biết c&oacute; rất nhiều người d&ugrave;ng đ&atilde; quen sử dụng m&ocirc;i trường cũng như ng&ocirc;n ngữ lập tr&igrave;nh tr&ecirc;n hệ điều h&agrave;nh Windows v&agrave; kh&ocirc;ng th&iacute;ch sử dụng những phần mềm của Apple.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=\"Không cần phải sở hữu MacBook, bộ công cụ này sẽ giúp người dùng dễ dàng tạo ra các ứng dụng iOS ngay trên Windows - Ảnh 1.\" src=\"http://genknews.genkcdn.vn/thumb_w/660/2018/6/16/1-15291184787691937738527.jpg\" /></p>\r\n\r\n<p>Bộ c&ocirc;ng cụ của Baty sẽ gi&uacute;p người d&ugrave;ng dễ d&agrave;ng lập tr&igrave;nh c&aacute;c ứng dụng iOS ngay tr&ecirc;n nền tảng Windows.</p>\r\n\r\n<p>Mặt kh&aacute;c, bộ c&ocirc;ng cụ của Baty cũng hứa hẹn l&agrave; tương đối dễ sử dụng, ph&ugrave; hợp với nhiều tr&igrave;nh độ kh&aacute;c nhau. Tuy nhi&ecirc;n, điều đ&oacute; kh&ocirc;ng đồng nghĩa với việc một &ldquo;l&iacute;nh mới&rdquo; trong lĩnh vực lập tr&igrave;nh c&oacute; thể ngay lập tức sử dụng c&ocirc;ng cụ n&agrave;y. Baty cho biết bạn cần nắm vững kiến thức nền tảng cơ bản về C/C++ hoặc Objective-C/C++. Ngo&agrave;i ra, bạn phải hiểu rằng để tạo ra một ứng dụng iOS ho&agrave;n chỉnh kh&ocirc;ng phải l&agrave; qu&aacute; tr&igrave;nh &ldquo;ăn xổi&rdquo; m&agrave; cần đầu tư nhiều thời gian v&agrave; c&ocirc;ng sức.</p>\r\n\r\n<p>B&ecirc;n cạnh đ&oacute;, iOS Build Environment for Windows developers cũng sẽ mang lại nhiều lợi &iacute;ch cho người d&ugrave;ng, trong đ&oacute; nổi bật nhất l&agrave;: Tiết kiệm thời gian, N&acirc;ng cao kiến thức lập tr&igrave;nh v&agrave; Thoải m&aacute;i s&aacute;ng tạo. Bộ c&ocirc;ng cụ n&agrave;y sẽ hoạt động tương th&iacute;ch với tất cả những phi&ecirc;n bản Windows 64-bit, bao gồm Windows Vista, Windows Server 2008, Windows 7, Windows Server 2012, Windows 8/8.1 v&agrave; Windows 10.</p>\r\n\r\n<p>Để sử dụng iOS Build Environment for Windows developers, người d&ugrave;ng chỉ cần c&agrave;i đặt n&oacute; v&agrave;o m&ocirc;i trường lập tr&igrave;nh t&iacute;ch hợp (IDE) m&agrave; họ thường sử dụng, v&iacute; dụ như Eclipse, EditPad Pro hay Visual Studio. Bộ ứng dụng n&agrave;y sẽ cung cấp một thuật sĩ (wizard) trợ gi&uacute;p c&agrave;i đặt chuy&ecirc;n dụng để hướng dẫn người d&ugrave;ng tạo ra c&aacute;c dự &aacute;n iOS trong IDE của họ. Sau đ&oacute;, họ c&oacute; thể tiến h&agrave;nh lập tr&igrave;nh, dịch m&atilde;, kết nối v&agrave; đ&oacute;ng g&oacute;i dữ liệu th&agrave;nh file ipa để xuất sang c&aacute;c thiết bị của Apple.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=\"Không cần phải sở hữu MacBook, bộ công cụ này sẽ giúp người dùng dễ dàng tạo ra các ứng dụng iOS ngay trên Windows - Ảnh 2.\" src=\"http://genknews.genkcdn.vn/2018/6/16/2-1529118572576524253049.jpg\" /></p>\r\n\r\n<p>Kh&ocirc;ng cần đến những phần mềm chuy&ecirc;n dụng của Apple, người d&ugrave;ng Windows cũng c&oacute; thể dễ d&agrave;ng tạo ra c&aacute;c ứng dụng iOS ho&agrave;n chỉnh với bộ c&ocirc;ng cụ n&agrave;y.</p>\r\n\r\n<p>Baty cho biết bộ c&ocirc;ng cụ n&agrave;y sẽ bao gồm những t&iacute;nh năng sau:</p>\r\n\r\n<p>- Tr&igrave;nh bi&ecirc;n dịch giống như Xcode, hỗ trợ to&agrave;n bộ t&iacute;nh năng của ng&ocirc;n ngữ ObjC (ARC, blocks,...)</p>\r\n\r\n<p>- Tr&igrave;nh li&ecirc;n kết giống như Xcode, cho ph&eacute;p người d&ugrave;ng tạo ra c&aacute;c giao thức m&atilde; h&oacute;a nhị ph&acirc;n armv7 v&agrave; arm64 (32-bit v&agrave; 64-bit)</p>\r\n\r\n<p>- Bộ c&ocirc;ng cụ xử l&yacute; m&atilde; nhị ph&acirc;n giống Xcode, cho ph&eacute;p người d&ugrave;ng kiểm tra, điều chỉnh, t&aacute;ch, nhập, hack c&aacute;c file kết quả</p>\r\n\r\n<p>- C&ocirc;ng cụ code chuy&ecirc;n dụng cho ph&eacute;p người d&ugrave;ng xuất file sang c&aacute;c thiết bị iOS</p>\r\n\r\n<p>- C&ocirc;ng cụ quản l&yacute; hồ sơ, bảo mật để gi&uacute;p người d&ugrave;ng thiết lập cũng như thay đổi th&ocirc;ng tin đăng nhập của m&igrave;nh</p>\r\n\r\n<p>- C&ocirc;ng cụ iTunes Connect gi&uacute;p người d&ugrave;ng gửi file .ipa l&ecirc;n nền tảng App Store</p>\r\n\r\n<p>- C&ocirc;ng cụ sửa lỗi từ xa (debug) để theo d&otilde;i v&agrave; ph&aacute;t hiện t&igrave;nh trạng sập ứng dụng trong qu&aacute; tr&igrave;nh hoạt động</p>\r\n\r\n<p>- C&ocirc;ng cụ triển khai ứng dụng OTA cho ph&eacute;p người d&ugrave;ng xuất ứng dụng sang c&aacute;c thiết bị iOS th&ocirc;ng qua Wifi</p>\r\n\r\n<p>- Một tr&igrave;nh tạo dự &aacute;n d&ograve;ng lệnh linh hoạt</p>\r\n\r\n<p>- C&ocirc;ng cụ sửa lỗi cho iOS</p>\r\n\r\n<p>- Thuật sĩ hỗ trợ tạo dự &aacute;n lập tr&igrave;nh trong Visual Studio</p>\r\n\r\n<p>- C&ocirc;ng cụ chuyển đổi file .plist tự động, gi&uacute;p chuyển từ m&atilde; nhị ph&acirc;n sang văn bản th&ocirc;ng thường v&agrave; ngược lại</p>\r\n\r\n<p>- Bộ chuẩn h&oacute;a dữ liệu file PNG</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>- 20 v&iacute; dụ mẫu, bao gồm m&atilde; nguồn v&agrave; cấu tr&uacute;c m&atilde; lập tr&igrave;nh</p>\r\n\r\n<p>Hiện tại, iOS Build Environment for Windows developers c&oacute; gi&aacute; 45 USD (hơn 1 triệu đồng) v&agrave; hỗ trợ c&aacute;c ng&ocirc;n ngữ C/C++, Objective-C/C++, ARM assembly. Độc giả quan t&acirc;m c&oacute; thể truy cập v&agrave;o&nbsp;<a href=\"https://www.pmbaty.com/iosbuildenv/\" target=\"_blank\">đ&acirc;y</a>&nbsp;để t&igrave;m hiểu th&ecirc;m th&ocirc;ng tin chi tiết, tải về cũng như b&agrave;y tỏ những thắc mắc của m&igrave;nh về bộ c&ocirc;ng cụ n&agrave;y.</p>\r\n', '2018-07-08 06:57:08', 0, 'HinhAnh-1531233591.jpg', 2228, 4, 0);
+INSERT INTO `news` (`news_id`, `name`, `preview`, `detail`, `date_create`, `create_by`, `picture`, `counter`, `cat_id`, `status`) VALUES
+(9, 'Không cần ra ngoài vào ngày hè oi bức – Tự học lập trình web tại nhà cũng đem lại hiệu quả cao', 'Sự phát triển mạnh mẽ của công nghệ thông tin và thương mại điện tử kéo theo sự ra đời của một số ngành nghề mới trong đó phải kể đến nghề lập trình web. Trong vài năm trở lại đây, nghề lập trình web trở thành một trong những ngành HOT được các doanh nghiệp quan tâm và săn đón.', '<p>Khi khoa học c&ocirc;ng nghệ ng&agrave;y c&agrave;ng ph&aacute;t triển, lập tr&igrave;nh web được coi l&agrave; &ldquo;thuyền trưởng&rdquo; cho m&aacute;y t&iacute;nh. Đ&acirc;y l&agrave; một nghề thời thượng v&agrave; hấp dẫn, đặc biệt l&agrave; với những bạn trẻ đam m&ecirc; c&ocirc;ng nghệ. Tuy nhi&ecirc;n, hiện nay nhiều người c&ograve;n kh&aacute; mơ hồ về kh&aacute;i niệm lập tr&igrave;nh vi&ecirc;n. B&agrave;i viết dưới đ&acirc;y sẽ cung cấp cho bạn một số th&ocirc;ng tin, từ đ&oacute; gi&uacute;p bạn hiểu r&otilde; hơn về nghề lập tr&igrave;nh vi&ecirc;n.&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=\"Không cần ra ngoài vào ngày hè oi bức – Tự học lập trình web tại nhà cũng đem lại hiệu quả cao - Ảnh 1.\" src=\"http://genknews.genkcdn.vn/thumb_w/660/2018/6/5/photo-1-1528192600206403187532.jpg\" /></p>\r\n\r\n<p><strong>Kh&aacute;i niệm về nghề lập tr&igrave;nh vi&ecirc;n</strong></p>\r\n\r\n<p>Lập tr&igrave;nh vi&ecirc;n (hay c&ograve;n gọi l&agrave; thảo chương vi&ecirc;n điện to&aacute;n) l&agrave; người viết ra, thiết kế, x&acirc;y dựng v&agrave; bảo tr&igrave; c&aacute;c chương tr&igrave;nh m&aacute;y t&iacute;nh (phần mềm). Bằng c&aacute;ch thao t&aacute;c c&aacute;c đoạn m&atilde; (c&aacute;c ng&ocirc;n ngữ) tr&ecirc;n c&aacute;c c&ocirc;ng cụ lập tr&igrave;nh, họ c&oacute; thể tạo ra c&aacute;c chương tr&igrave;nh mới, sửa lỗi hay n&acirc;ng cấp chương tr&igrave;nh đ&oacute; để tăng t&iacute;nh hiệu quả của việc sử dụng m&aacute;y t&iacute;nh.</p>\r\n\r\n<p>Theo một kh&aacute;i niệm kh&aacute;c, lập tr&igrave;nh vi&ecirc;n c&ograve;n được gọi l&agrave; Software Engineering. Đ&acirc;y l&agrave; một phầm mềm được tạo ra từ một &ldquo;thiết kế&rdquo; (framework), ở đ&oacute; mỗi lập tr&igrave;nh vi&ecirc;n đảm nhận vai tr&ograve; kh&aacute;c nhau sau đ&oacute; tổng hợp để tạo ra một chương tr&igrave;nh ho&agrave;n chỉnh. Họ được v&iacute; l&agrave; những thợ &ldquo;coding&rdquo; (những người g&otilde; code), hoặc l&agrave; s&aacute;ng tạo hoặc l&agrave; chỉnh sửa, từ đ&oacute; ph&aacute;t triển c&aacute;c phần mềm dựa tr&ecirc;n c&ocirc;ng cụ lập tr&igrave;nh.</p>\r\n\r\n<p>Đ&acirc;y c&ograve;n l&agrave; những kỹ sư phần mềm bao gồm c&aacute;c c&ocirc;ng đoạn thiết kế, x&acirc;y dựng v&agrave; bảo tr&igrave; c&aacute;c chương tr&igrave;nh m&aacute;y t&iacute;nh. Ch&iacute;nh v&igrave; thế m&agrave; người ta v&iacute; nghề n&agrave;y như một vị &ldquo; nhạc trưởng&rdquo; chỉ huy c&aacute;c d&agrave;n nhạc ( l&agrave; c&aacute;c đoạn m&atilde; lập tr&igrave;nh) để tạo ra một bản nhạc hoản hảo ( phần mềm m&aacute;y t&iacute;nh).</p>\r\n\r\n<p><strong>Những yếu tố cơ bản để trở th&agrave;nh một lập tr&igrave;nh vi&ecirc;n</strong></p>\r\n\r\n<p>Điều quan trọng nhất trong lập tr&igrave;nh l&agrave; Logic. Để trở th&agrave;nh một lập tr&igrave;nh vi&ecirc;n, bạn phải c&oacute; tư duy logic v&agrave; khả năng giải quyết vấn đề một c&aacute;ch triệt để. Sẽ rất nhiều khi, c&aacute;c lập tr&igrave;nh vi&ecirc;n cảm thấy nhức đầu hay nh&agrave;m ch&aacute;n để gỡ bung c&aacute;c đoạn m&atilde; code hay c&aacute;c dấu chấm phẩy,... Tuy nhi&ecirc;n, ch&iacute;nh tư duy logic gi&uacute;p họ xử l&yacute; c&ocirc;ng việc một c&aacute;ch nhanh ch&oacute;ng v&agrave; hiệu quả. B&ecirc;n cạnh đ&oacute;, t&iacute;nh phức tạp của c&ocirc;ng việc lập tr&igrave;nh cũng đ&ograve;i hỏi họ phải cực kỳ cẩn thận, tỉ mỉ trong qu&aacute; tr&igrave;nh l&agrave;m việc bởi chỉ một lỗi nhỏ bất kỳ cũng sẽ khiến sản phẩm của bạn thất bại v&agrave; bạn phải tốn rất nhiều thời gian để sửa chữa n&oacute;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=\"Không cần ra ngoài vào ngày hè oi bức – Tự học lập trình web tại nhà cũng đem lại hiệu quả cao - Ảnh 2.\" src=\"http://genknews.genkcdn.vn/2018/6/5/photo-1-15281926019012059840876.jpg\" /></p>\r\n\r\n<p>Tiếp theo l&agrave; khả năng độc lập kết hợp với l&agrave;m việc nh&oacute;m để cho ra hiệu quả c&ocirc;ng việc. Th&ocirc;ng thường c&aacute;c lập tr&igrave;nh vi&ecirc;n sẽ đảm nhiệm c&aacute;c c&ocirc;ng việc kh&aacute;c nhau trong dự &aacute;n, sau đ&oacute; kết nối lại để tạo ra một sản phẩm ho&agrave;n chỉnh, v&igrave; vậy đ&ograve;i hỏi một lập tr&igrave;nh vi&ecirc;n phải vừa c&oacute; khả năng l&agrave;m việc độc lập, vừa c&oacute; thể cộng t&aacute;c tốt với đồng nghiệp.</p>\r\n\r\n<p>Cuối c&ugrave;ng l&agrave; tinh thần tự học hỏi n&acirc;ng cao kiến thức. Đến được với nghề lập tr&igrave;nh vi&ecirc;n đ&atilde; kh&oacute;, để sống chung được với n&oacute; c&ograve;n kh&oacute; hơn rất nhiều. Đặc th&ugrave; của nghề đ&ograve;i hỏi bạn phải lu&ocirc;n học hỏi tiếp thu th&ecirc;m kiến thức v&agrave; thực h&agrave;nh thường xuy&ecirc;n để c&oacute; kỹ năng th&agrave;nh thạo.</p>\r\n\r\n<p><strong>Kh&ocirc;ng cần ra ngo&agrave;i khi trời oi bức &ndash; Tự học lập tr&igrave;nh web ở nh&agrave; cũng mang lại hiệu quả cao</strong></p>\r\n\r\n<p>Đ&agrave;o tạo trực tuyến (E-learning) ra đời như một cuộc c&aacute;ch mạng về dạy v&agrave; học. N&oacute; trở th&agrave;nh một xu thế tất yếu của thời đại v&agrave; đang &ldquo;b&ugrave;ng nổ&rdquo; ở nhiều nước trong đ&oacute; c&oacute; Việt Nam. C&ugrave;ng với sự ph&aacute;t triển của c&ocirc;ng nghệ, việc x&acirc;y dựng m&ocirc;i trường học tập trực tuyến hiện đại, x&acirc;y dựng c&aacute;c nội dung giảng dạy trực tuyến được ph&aacute;t triển theo hướng mới tiếp cận gần hơn với người học đ&atilde; ng&agrave;y c&agrave;ng thu h&uacute;t học vi&ecirc;n tham gia v&agrave; đăng k&yacute;, trong đ&oacute; phải kể đến l&agrave; c&aacute;c kh&oacute;a học về lập tr&igrave;nh trực tuyến.</p>\r\n\r\n<p>Lập tr&igrave;nh web kh&ocirc;ng đơn giản như những ng&agrave;nh kh&aacute;c để bạn c&oacute; thể tự học hỏi qua c&aacute;c trang mạng hay c&aacute;c diễn đ&agrave;n, s&aacute;ch b&aacute;o,... Bạn cần phải c&oacute; người hướng dẫn, chỉ đường v&agrave; giải th&iacute;ch. Nhưng ở Việt Nam hiện nay lại kh&ocirc;ng c&oacute; nhiều trường đại học đ&agrave;o tạo về ng&agrave;nh n&agrave;y. Do đ&oacute;, học online ch&iacute;nh l&agrave; c&aacute;ch &nbsp;hữu hiệu gi&uacute;p bạn tiếp cận nghề lập tr&igrave;nh vi&ecirc;n một c&aacute;ch nhanh ch&oacute;ng hơn.</p>\r\n\r\n<p>Fedudev l&agrave; trung t&acirc;m đ&agrave;o tạo lập tr&igrave;nh h&agrave;ng đầu tại Việt Nam với việc x&acirc;y dựng lộ tr&igrave;nh học b&agrave;i bản theo nội dung hấp dẫn cả về chi ph&iacute; cũng như chất lượng giảng dạy.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=\"Không cần ra ngoài vào ngày hè oi bức – Tự học lập trình web tại nhà cũng đem lại hiệu quả cao - Ảnh 3.\" src=\"http://genknews.genkcdn.vn/thumb_w/660/2018/6/5/photo-2-1528192601904313031899.jpg\" /></p>\r\n\r\n<p>Bạn l&agrave; người mới tiếp cận về lập tr&igrave;nh web? Bạn mới chỉ bước đầu l&agrave;m quen với c&aacute;c đoạn m&atilde; code? Bạn ho&agrave;n to&agrave;n c&oacute; thể y&ecirc;n t&acirc;m bởi Fedudev l&agrave; m&ocirc; h&igrave;nh gi&aacute;o dục online đang ứng dụng những xu hướng ti&ecirc;n tiến nhất hiện nay, mang đến sự tiện lợi cho người học. C&aacute;c kh&oacute;a học lập tr&igrave;nh tại Fedu được sắp xếp theo một lộ tr&igrave;nh cụ thể từ Front - end cho đến Back - end gi&uacute;p học vi&ecirc;n cho thể học những bước cơ bản nhất, sau đ&oacute; c&oacute; thể tự lập ra ra c&aacute;c ứng dụng web ho&agrave;n chỉnh.</p>\r\n\r\n<p>Bạn chỉ cần một m&aacute;y t&iacute;nh c&oacute; kết nối mạng internet l&agrave; c&oacute; thể v&agrave;o học mọi l&uacute;c, mọi nơi, linh động về thời gian, kh&ocirc;ng gian, ph&ugrave; hợp với tất cả c&aacute;c đối tượng sinh vi&ecirc;n v&agrave; cả những người đang đi l&agrave;m m&agrave; học ph&iacute; cực kỳ ưu đ&atilde;i chưa đến 500.000đ cho một kh&oacute;a học</p>\r\n\r\n<p>Bạn muốn trở th&agrave;nh một c&ocirc;ng d&acirc;n to&agrave;n cầu với tr&igrave;nh độ lập tr&igrave;nh web đ&aacute;p ứng nhu cầu thị trường đang KH&Aacute;T hiện nay? Vậy th&igrave; c&ograve;n chần chừ g&igrave; m&agrave; kh&ocirc;ng đăng k&iacute; ngay những kh&oacute;a học của Fedudev!</p>\r\n\r\n<p>Th&ocirc;ng tin chi tiết bạn c&oacute; thể tham khảo tại địa chỉ:&nbsp;<a href=\"http://fedudev.vn/\" target=\"_blank\">http://fedudev.vn</a></p>\r\n\r\n<p>TRƯỜNG Đ&Agrave;O TẠO TIN HỌC, LẬP TR&Igrave;NH &amp; MỸ THUẬT ĐA PHƯƠNG TIỆN FEDU</p>\r\n\r\n<p>Địa chỉ: Tầng 6 &ndash; T&ograve;a nh&agrave; C &ndash; 22 Th&agrave;nh C&ocirc;ng &ndash; Ba Đ&igrave;nh &ndash; H&agrave; Nội</p>\r\n\r\n<p>Email: contact@fedu.vn</p>\r\n\r\n<p>Hotline: 0869259562</p>\r\n', '2018-07-08 07:00:45', 0, 'HinhAnh-1531232067.jpg', 19, 5, 0),
+(10, 'Các nhà phát triển ứng dụng iOS thành lập 1 tổ chức riêng nhằm yêu cầu Apple tăng phần trăm doanh thu từ App Store', 'Bên cạnh đó, tổ chức này cũng hi vọng Apple có thể cho phép người dùng thử nghiệm mọi ứng dụng trả phí trước khi quyết định bỏ tiền ra để sở hữu vĩnh viễn ứng dụng đó.', '<p>Mới đ&acirc;y, một nh&oacute;m c&aacute;c lập tr&igrave;nh vi&ecirc;n ứng dụng iOS đ&atilde; c&ugrave;ng nhau th&agrave;nh lập một tổ chức nhỏ với t&ecirc;n gọi &ldquo;<em>The Developers Union</em>&rdquo; (tạm dịch: &ldquo;<em>Li&ecirc;n minh c&aacute;c nh&agrave; ph&aacute;t triển</em>&rdquo;). Mục đ&iacute;ch của tổ chức n&agrave;y l&agrave; y&ecirc;u cầu Apple nới rộng số lượng ứng dụng m&agrave; người d&ugrave;ng được ph&eacute;p thử nghiệm cũng như tăng phần trăm doanh thu từ App Store cho họ.</p>\r\n\r\n<p>Theo th&ocirc;ng tin từ&nbsp;<a href=\"https://www.thedevelopersunion.org/#faq\" target=\"_blank\">website ch&iacute;nh thức</a>&nbsp;của &ldquo;<em>The Developers Union</em>&rdquo;, tổ chức n&agrave;y hiện bao gồm 100 th&agrave;nh vi&ecirc;n v&agrave; hoạt động theo h&igrave;nh thức &ldquo;phi tổ chức&rdquo; v&igrave; c&aacute;c hội vi&ecirc;n kh&ocirc;ng phải đ&oacute;ng bất cứ chi ph&iacute; n&agrave;o cả.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=\"\r\nĐã có rất nhiều nhà phát triển và người dùng ủng hộ The Developers Union.\r\n\" src=\"http://genknews.genkcdn.vn/thumb_w/660/2018/5/21/1-1526872024636879338374.jpg\" /></p>\r\n\r\n<p>Đ&atilde; c&oacute; rất nhiều nh&agrave; ph&aacute;t triển v&agrave; người d&ugrave;ng ủng hộ &quot;The Developers Union&quot;.</p>\r\n\r\n<p>Như đ&atilde; n&ecirc;u tr&ecirc;n, mục đ&iacute;ch của họ l&agrave; cho ph&eacute;p mọi ứng dụng c&oacute; thể cung cấp một khoảng thời gian d&ugrave;ng thử để người d&ugrave;ng c&oacute; cơ hội đ&aacute;nh gi&aacute; trước khi quyết định bỏ tiền ra để sở hữu ứng dụng đ&oacute;. Ngo&agrave;i ra, trong tương lai, &ldquo;<em>The Developers Union</em>&rdquo; c&oacute; thể sẽ y&ecirc;u cầu Apple tăng phần trăm doanh thu c&aacute;c ứng dụng của họ tr&ecirc;n nền tảng cửa h&agrave;ng App Store.</p>\r\n\r\n<p>Được biết, &yacute; tưởng h&igrave;nh th&agrave;nh &ldquo;<em>The Developers Union</em>&rdquo; bắt nguồn từ bộ phim t&agrave;i liệu &ldquo;<em>App: The Human Story</em>&rdquo;. Bộ phim n&agrave;y tập trung v&agrave;o rất nhiều c&acirc;u chuyện của c&aacute;c nh&agrave; ph&aacute;t triển kh&aacute;c nhau khi mới bắt đầu bước ch&acirc;n v&agrave;o lĩnh vực lập tr&igrave;nh ứng dụng di động kể từ khi thế hệ iPhone đầu ti&ecirc;n ra mắt v&agrave;o năm 2007.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Current Time0:00</p>\r\n\r\n<p>/</p>\r\n\r\n<p>Duration2:47</p>\r\n\r\n<p>Auto</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Đoạn phim t&agrave;i liệu &quot;App: The Human Story&quot; ch&iacute;nh l&agrave; nguồn cảm hứng cho sự ra đời của &quot;The Developers Union&quot;.</p>\r\n\r\n<p>Trong v&ograve;ng hơn 1 thập kỷ qua, Apple đ&atilde; kh&ocirc;ng ngừng đầu tư mạnh tay v&agrave;o c&aacute;c c&ocirc;ng cụ d&agrave;nh cho đội ngũ lập tr&igrave;nh vi&ecirc;n của m&igrave;nh. Trong đ&oacute;, những dịch vụ như App Store đ&atilde; ph&aacute;t triển b&ugrave;ng nổ v&agrave; đ&oacute;ng vai tr&ograve; quan trọng trong việc th&uacute;c đẩy doanh thu v&agrave; tốc độ tăng trưởng của h&atilde;ng.</p>\r\n\r\n<p>B&ecirc;n cạnh đ&oacute;, Apple c&ograve;n ch&uacute; trọng v&agrave;o những chương tr&igrave;nh &ldquo;học lập tr&igrave;nh&rdquo; tại nhiều trường học cũng như nhấn mạnh tầm quan trọng của mục ti&ecirc;u n&agrave;y tại c&aacute;c cửa h&agrave;ng của m&igrave;nh. Họ thậm ch&iacute; c&ograve;n tạo ra Swift, ng&ocirc;n ngữ lập tr&igrave;nh dễ hiểu hơn, v&agrave; Swift Playgrounds, một m&ocirc;i trường lập tr&igrave;nh ho&agrave;n to&agrave;n mới.</p>\r\n\r\n<p>Đối với c&aacute;c thiết bị m&aacute;y t&iacute;nh, MacBook Pro thế hệ mới cũng được t&iacute;ch hợp th&ecirc;m nền tảng ph&aacute;t triển Xcode, v&agrave; rất nhiều m&atilde; do Apple cung cấp hiện nay đều l&agrave; m&atilde; nguồn mở. V&agrave;o th&aacute;ng 6/2017, Apple c&ograve;n ra mắt một phi&ecirc;n bản App Store với thiết kế ho&agrave;n to&agrave;n mới c&ugrave;ng nhiều t&iacute;nh năng tiện lợi hơn. Ngo&agrave;i ra, &ldquo;t&aacute;o khuyết&rdquo; cũng đ&atilde; tiến h&agrave;nh h&igrave;nh thức chia sẻ doanh thu d&agrave;nh cho những ứng dụng trả ph&iacute; để n&acirc;ng cao quyền lợi v&agrave; thu nhập của c&aacute;c nh&agrave; ph&aacute;t triển.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=\"\r\nApple đã tạo ra ngôn ngữ lập trình Swift cùng rất nhiều công cụ tiện lợi khác để hỗ trợ các nhà phát triển ứng dụng iOS.\r\n\" src=\"http://genknews.genkcdn.vn/thumb_w/660/2018/5/21/2-15268721850271503886989.jpg\" /></p>\r\n\r\n<p>Apple đ&atilde; tạo ra ng&ocirc;n ngữ lập tr&igrave;nh Swift c&ugrave;ng rất nhiều c&ocirc;ng cụ tiện lợi kh&aacute;c để hỗ trợ c&aacute;c nh&agrave; ph&aacute;t triển ứng dụng iOS.</p>\r\n\r\n<p>Tuy nhi&ecirc;n, theo đoạn phim t&agrave;i liệu &ldquo;<em>App: The Human Story</em>&rdquo;, kh&ocirc;ng phải tất cả những thay đổi tr&ecirc;n đều mang lại kết quả như kỳ vọng, v&agrave; thậm ch&iacute; c&ograve;n bất c&ocirc;ng với kh&ocirc;ng &iacute;t nh&agrave; ph&aacute;t triển. Nhiều người cho rằng c&aacute;c ứng dụng miễn ph&iacute; với t&iacute;nh năng in-app purchase đang g&acirc;y ra rất nhiều kh&oacute; khăn cho những ứng dụng trả ph&iacute;, qua đ&oacute; ảnh hưởng ti&ecirc;u cực đến doanh thu của họ.</p>\r\n\r\n<p>B&ecirc;n cạnh đ&oacute;, Apple lại đang tập trung mở rộng th&ecirc;m qu&aacute; nhiều t&iacute;nh năng, c&ocirc;ng nghệ mới như thực tế tăng cường v&agrave; &ldquo;bỏ qu&ecirc;n&rdquo; những dịch vụ kh&aacute;c. Một số nh&agrave; ph&aacute;t triển đ&atilde; khiếu nại rằng chất lượng cũng như tốc độ ph&aacute;t triển của Siri đang diễn ra qu&aacute; chậm.</p>\r\n\r\n<p>Tuy nhi&ecirc;n, bất chấp những lời khiếu nại tr&ecirc;n, Apple vẫn khẳng định c&aacute;c nh&agrave; ph&aacute;t triển iOS đ&atilde; thu về 26.5 tỉ USD trong năm 2017, tăng 30% so với 1 năm trước đ&oacute;. Th&aacute;ng 1 v&ugrave;a qua, &ldquo;t&aacute;o khuyết&rdquo; cũng tiết lộ hệ sinh th&aacute;i ứng dụng của họ đ&atilde; tạo ra th&ecirc;m 1.6 triệu việc l&agrave;m chỉ t&iacute;nh ri&ecirc;ng tại thị trường Mỹ.</p>\r\n', '2018-07-08 07:01:37', 0, 'HinhAnh-1531232687.jpg', 3130, 13, 0),
+(11, 'Hướng dẫn sử dụng Sets trên Windows 10 để sắp xếp các ứng dụng khác nhau thành nhiều tab trong cùng một cửa sổ', 'Hiện tại, tính năng Sets đã ra mắt trong bản cập nhật Redstone 5 dành cho người dùng nội bộ thử nghiệm. Phiên bản chính thức sẽ được trình làng vào mùa thu năm nay.', '<p>C&oacute; thể n&oacute;i, Sets ch&iacute;nh l&agrave; một trong những thay đổi lớn nhất về giao diện của Windows desktop trong năm nay. T&iacute;nh năng n&agrave;y sẽ cho ph&eacute;p gần như to&agrave;n bộ mọi ứng dụng c&oacute; thể sử dụng chế độ tab (thanh) giống như đa số c&aacute;c tr&igrave;nh duyệt web hiện nay. Điều đ&oacute; đồng nghĩa với việc bạn c&oacute; thể sử dụng nhiều ứng dụng kh&aacute;c nhau như File Explorer, Microsoft Word hay Edge trong c&ugrave;ng một cửa sổ duy nhất.</p>\r\n\r\n<p>Hiện tại, Sets đ&atilde; c&oacute; mặt trong bản cập nhật Redstone 5 d&agrave;nh ri&ecirc;ng cho những người d&ugrave;ng nội bộ thử nghiệm trước. Phi&ecirc;n bản ch&iacute;nh thức (t&ecirc;n c&oacute; thể thay đổi) sẽ ra mắt v&agrave;o m&ugrave;a thu năm nay. Tuy nhi&ecirc;n, v&igrave; Microsoft đ&atilde; khẳng định Sets chỉ được ra mắt khi đ&atilde; ho&agrave;n thiện nhất, n&ecirc;n kh&ocirc;ng loại trừ khả năng t&iacute;nh năng n&agrave;y sẽ kh&ocirc;ng c&oacute; mặt trong bản cập nhật Redstone sắp tới.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=\"\r\nTính năng Sets trên Windows 10 sẽ cho phép người dùng sắp xếp các ứng dụng khác nhau thành nhiều tab trong cùng một cửa sổ.\r\n\" src=\"http://genknews.genkcdn.vn/2018/5/15/1-15263575534691634433705.png\" /></p>\r\n\r\n<p>T&iacute;nh năng Sets tr&ecirc;n Windows 10 sẽ cho ph&eacute;p người d&ugrave;ng sắp xếp c&aacute;c ứng dụng kh&aacute;c nhau th&agrave;nh nhiều tab trong c&ugrave;ng một cửa sổ.</p>\r\n\r\n<p><strong>Sets l&agrave; g&igrave;?</strong></p>\r\n\r\n<p>Sets l&agrave; một t&iacute;nh năng ho&agrave;n to&agrave;n mới cung cấp chế độ tab cho hầu hết mọi ứng dụng tr&ecirc;n nền tảng Windows, bao gồm cả những ứng dụng chưa từng sở hữu chế độ n&agrave;y trước đ&acirc;y. V&iacute; dụ, bạn c&oacute; thể vừa soạn thảo văn bản trong Microsoft Word, lại vừa c&oacute; thể dễ d&agrave;ng mở tr&igrave;nh duyệt Edge để tra cứu th&ocirc;ng tin ngay trong c&ugrave;ng một cửa sổ thay v&igrave; phải đổi qua lại giữa hai cửa sổ trước đ&acirc;y.</p>\r\n\r\n<p>Mục đ&iacute;ch của Sets ch&iacute;nh l&agrave; tạo ra một nh&oacute;m (sets) tab c&oacute; li&ecirc;n quan đến nhau d&ugrave; thuộc những ứng dụng kh&aacute;c nhau để hỗ trợ tối đa cho t&aacute;c vụ m&agrave; người d&ugrave;ng đang thực hiện. N&oacute;i c&aacute;ch kh&aacute;c, v&igrave; người d&ugrave;ng rất th&iacute;ch sự tiện lợi của tab tr&ecirc;n c&aacute;c tr&igrave;nh duyệt web n&ecirc;n Microsoft đ&atilde; đưa t&iacute;nh năng n&agrave;y l&ecirc;n hầu hết mọi ứng dụng của m&igrave;nh. Họ thậm ch&iacute; c&ograve;n thay đổi chức năng của tổ hợp ph&iacute;m&nbsp;<strong><em>Alt+Tab</em></strong>, trước đ&acirc;y d&ugrave;ng để đổi nhanh giữa c&aacute;c cửa sổ, th&agrave;nh đổi nhanh giữa c&aacute;c tab v&agrave; cửa sổ kh&aacute;c nhau.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=\"\r\nTổ hợp phím Alt+Tab trước đây dùng để thay đổi nhanh giữa các cửa sổ ứng dụng mà người dùng đang sử dụng.\r\n\" src=\"http://genknews.genkcdn.vn/thumb_w/660/2018/5/15/2-15263576840011486678862.jpg\" /></p>\r\n\r\n<p>Tổ hợp ph&iacute;m Alt+Tab trước đ&acirc;y d&ugrave;ng để thay đổi nhanh giữa c&aacute;c cửa sổ ứng dụng m&agrave; người d&ugrave;ng đang sử dụng.</p>\r\n\r\n<p><strong>Những ứng dụng n&agrave;o hỗ trợ Sets?</strong></p>\r\n\r\n<p>Như đ&atilde; n&ecirc;u ở tr&ecirc;n, Sets sẽ c&oacute; mặt tr&ecirc;n hầu hết c&aacute;c ứng dụng Windows, bao gồm cả những ứng dụng Win32 v&agrave; phi&ecirc;n bản mới nhất của Microsoft Office. Sets cũng hoạt động tương th&iacute;ch với ứng dụng UWP (Universal Windows Platform) tr&ecirc;n nền tảng Store của Microsoft.</p>\r\n\r\n<p>Mặt kh&aacute;c, những ứng dụng kh&ocirc;ng sử dụng title bar (thanh ti&ecirc;u đề) chuẩn của Windows, v&iacute; dụ như Google Chrome, Mozilla Firefox, Steam hay iTunes, sẽ kh&ocirc;ng hỗ trợ Sets. C&aacute;c lập tr&igrave;nh vi&ecirc;n sẽ phải chỉnh sửa lại những ứng dụng n&agrave;y nếu muốn sử dụng t&iacute;nh năng mới của Microsoft.</p>\r\n\r\n<p><strong>C&aacute;ch sử dụng Sets</strong></p>\r\n\r\n<p>Trước hết, phải khẳng định Sets rất dễ sử dụng. Đa số c&aacute;c ứng dụng desktop sẽ c&oacute; những thanh tab ngay tr&ecirc;n tittle bar c&ugrave;ng với k&iacute; hiệu &ldquo;<strong><em>+</em></strong>&rdquo; quen thuộc để mở th&ecirc;m tab mới, giống hết c&aacute;c tr&igrave;nh duyệt web kh&aacute;c.</p>\r\n\r\n<p>Trong phi&ecirc;n bản Redstone 5 hiện tại, khi bạn nhấn v&agrave;o dấu &ldquo;<strong><em>+</em></strong>&rdquo; n&agrave;y, một tab Microsoft Edge mới sẽ mở ra v&agrave; đưa bạn đến trang New Tab của Edge. Tại đ&acirc;y, bạn c&oacute; thể lướt web b&igrave;nh thường giống như c&aacute;ch bạn thường sử dụng Edge. Trong phi&ecirc;n bản Redstone tương lai, Microsoft dự kiến sẽ trang bị th&ecirc;m c&aacute;c để mở những ứng dụng kh&aacute;c trong trang New Tab n&agrave;y chứ kh&ocirc;ng chỉ giới hạn ở Edge.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=\"\r\nBạn có thể dễ dàng mở tab mới bằng cách click vào dấu +.\r\n\" src=\"http://genknews.genkcdn.vn/2018/5/15/3-15263577546241306829124.png\" /></p>\r\n\r\n<p>Bạn c&oacute; thể dễ d&agrave;ng mở tab mới bằng c&aacute;ch click v&agrave;o dấu &quot;+&quot;.</p>\r\n\r\n<p>Tuy nhi&ecirc;n, hiện tại t&aacute;c vụ mở tab trong những ứng dụng mới vẫn c&ograve;n kh&aacute; nhiều hạn chế. Bạn cần phải mở từng ứng dụng ri&ecirc;ng biệt, sau đ&oacute; k&eacute;o cửa sổ ứng dụng n&agrave;y v&agrave; thả v&agrave;o thanh ti&ecirc;u đề của ứng dụng kh&aacute;c để đưa hai ứng dụng đ&oacute; về c&ugrave;ng một cửa sổ (hai ứng dụng cũng sẽ lập tức trở th&agrave;nh 2 tab ri&ecirc;ng biệt).</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=\"\r\nHiện tại, bạn vẫn phải mở ứng dụng thành các cửa sổ riêng biệt và thực hiện thao tác kéo thả để đưa về chế độ Tab.\r\n\" src=\"http://genknews.genkcdn.vn/2018/5/15/5-15263578082081554761790.png\" /></p>\r\n\r\n<p>Hiện tại, bạn vẫn phải mở ứng dụng th&agrave;nh c&aacute;c cửa sổ ri&ecirc;ng biệt v&agrave; thực hiện thao t&aacute;c k&eacute;o thả để đưa về chế độ Tab.</p>\r\n\r\n<p>Đối với File Explorer, việc sử dụng File Explorer để mở th&ecirc;m tab lại kh&aacute; dễ d&agrave;ng. Bạn c&oacute; thể bấm tổ hợp ph&iacute;m&nbsp;<strong><em>Ctrl+T</em></strong>&nbsp;hoặc lựa chọn&nbsp;<strong><em>File &gt; Open New Window &gt; Open New Tab</em></strong>&nbsp;để mở một tab mới ngay lập tức. Ngo&agrave;i ra, bạn cũng c&oacute; thể click chuột phải v&agrave;o một folder trong File Explorer v&agrave; lựa chọn lệnh &ldquo;<em><strong>Open in New Tab</strong></em>&rdquo;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=\"\r\nBạn có thể dễ dàng mở folder dưới dạng một tab mới trong File Explorer.\r\n\" src=\"http://genknews.genkcdn.vn/2018/5/15/6-1526357873775186923096.png\" /></p>\r\n\r\n<p>Bạn c&oacute; thể dễ d&agrave;ng mở folder dưới dạng một tab mới trong File Explorer.</p>\r\n\r\n<p>Giống như một tr&igrave;nh duyệt web th&ocirc;ng thường, bạn c&oacute; thể click chuột phải v&agrave;o những tab n&agrave;y để sắp xếp ch&uacute;ng với những lệnh cơ bản như &ldquo;<strong><em>Close Tab</em></strong>&rdquo; (đ&oacute;ng tab), &ldquo;<strong><em>Close Other Tabs</em></strong>&rdquo; (đ&oacute;ng những tab kh&aacute;c), &ldquo;<strong><em>Close Tabs to the Right</em></strong>&rdquo; (đ&oacute;ng c&aacute;c tab b&ecirc;n phải) v&agrave; &ldquo;<strong><em>Move to New Window</em></strong>&rdquo; (chuyển tab sang cửa sổ mới). Bạn cũng c&oacute; thể sử dụng thao t&aacute;c k&eacute;o - thả thủ c&ocirc;ng để di chuyển, sắp xếp c&aacute;c tab trong c&ugrave;ng 1 cửa sổ hoặc giữa 2 cửa sổ kh&aacute;c nhau.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=\"\r\nSets cung cấp rất nhiều lựa chọn để bạn có thể điều khiển các tab trong cùng 1 cửa sổ.\r\n\" src=\"http://genknews.genkcdn.vn/2018/5/15/7-1526357954423144550923.png\" /></p>\r\n\r\n<p>Sets cung cấp rất nhiều lựa chọn để bạn c&oacute; thể điều khiển c&aacute;c tab trong c&ugrave;ng 1 cửa sổ.</p>\r\n\r\n<p>Nếu một tab trong tr&igrave;nh duyệt Edge đang ph&aacute;t nhạc/&acirc;m thanh, bạn sẽ thấy biểu tượng h&igrave;nh chiếc loa hiển thị tr&ecirc;n tab n&agrave;y. Bạn c&oacute; thể click v&agrave;o n&oacute; để điều chỉnh bật/tắt nhạc trong tab đ&oacute;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=\"\r\nBiểu tượng chiếc loa đồng nghĩa với việc tab này đang phát ra âm thanh.\r\n\" src=\"http://genknews.genkcdn.vn/2018/5/15/8-15263580004731377825887.png\" /></p>\r\n\r\n<p>Biểu tượng chiếc loa đồng nghĩa với việc tab n&agrave;y đang ph&aacute;t ra &acirc;m thanh.</p>\r\n\r\n<p>Ngo&agrave;i ra, Sets cũng ghi nhớ những tab li&ecirc;n quan đến một ứng dụng m&agrave; bạn đ&atilde; sử dụng trước đ&oacute;. Chỉ cần click v&agrave;o lựa chọn &ldquo;<strong><em>Previous Tabs</em></strong>&rdquo; ở ph&iacute;a b&ecirc;n tr&aacute;i của c&aacute;c tab l&agrave; bạn c&oacute; thể dễ d&agrave;ng xem lại ch&uacute;ng.</p>\r\n\r\n<p>T&iacute;nh năng Microsoft Graph cũng sở hữu khả năng tương tự khi c&oacute; thể nhớ v&agrave; mở lại những tab m&agrave; bạn từng sử dụng trong một t&aacute;c vụ cụ thể. Điều n&agrave;y sẽ mang đến sự tiện lợi v&agrave; tiết kiệm thời gian hơn trong phi&ecirc;n l&agrave;m việc tiếp theo của bạn.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=\"\r\nSets cũng cho phép bạn dễ dàng mở lại những tab đã sử dụng/đóng trước đó.\r\n\" src=\"http://genknews.genkcdn.vn/2018/5/15/9-15263580399891501903794.png\" /></p>\r\n\r\n<p>Sets cũng cho ph&eacute;p bạn dễ d&agrave;ng mở lại những tab đ&atilde; sử dụng/đ&oacute;ng trước đ&oacute;.</p>\r\n\r\n<p><strong>Tổ hợp ph&iacute;m n&oacute;ng của Sets</strong></p>\r\n\r\n<p>Bạn c&oacute; thể điều khiển nhanh c&aacute;c tab trong Sets với một số tổ hợp ph&iacute;m sau:</p>\r\n\r\n<p><strong><em>Ctrl+Windows+Tab</em></strong>: Đổi sang tab kh&aacute;c</p>\r\n\r\n<p><strong><em>Ctrl+Windows+Shift+Tab</em></strong>: Đổi sang tab trước</p>\r\n\r\n<p><strong><em>Ctrl+Windows+T</em></strong>: Mở tab mới</p>\r\n\r\n<p><strong><em>Ctrl+Windows+W</em></strong>: Đ&oacute;ng tab đang sử dụng</p>\r\n\r\n<p><strong><em>Ctrl+Windows+Shift+T</em></strong>: Mở lại tab mới đ&oacute;ng</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong><em>Ctrl+Windows+1-9</em></strong>: Thay đổi đến 1 tab nhất định trong c&ugrave;ng cửa sổ.</p>\r\n\r\n<p><strong>C&aacute;ch c&agrave;i đặt Sets</strong></p>\r\n\r\n<p>Mặc d&ugrave; kh&ocirc;ng thể ho&agrave;n to&agrave;n v&ocirc; hiệu h&oacute;a Sets trong phi&ecirc;n bản Redstone 5 hiện tại nhưng bạn c&oacute; thể c&agrave;i đặt phương thức hoạt động của Sets. Để l&agrave;m được điều n&agrave;y, bạn chỉ cần truy cập&nbsp;<strong><em>Settings&gt;System&gt;Multitasking</em></strong>&nbsp;v&agrave; k&eacute;o xuống t&igrave;m đến khu vực Sets.</p>\r\n\r\n<p>Lựa chọn &ldquo;<strong><em>Apps and website automatically open in a new</em></strong>&rdquo; sẽ gi&uacute;p bạn điều khiển những ứng dụng v&agrave; website m&agrave; bạn đ&atilde; sử dụng gần đ&acirc;y. C&agrave;i đặt mặc định sẽ l&agrave; &ldquo;<strong><em>Tab</em></strong>&rdquo; nhưng bạn ho&agrave;n to&agrave;n c&oacute; thể đổi th&agrave;nh &ldquo;<strong><em>Window</em></strong>&rdquo; (chế độ cửa sổ) nếu muốn.</p>\r\n\r\n<p>Lựa chọn &quot;<strong><em>Pressing Alt+Tab shows the most recently used</em></strong>&quot; sẽ gi&uacute;p bạn thiết lập lại chức năng của tổ hợp ph&iacute;m&nbsp;<strong><em>Alt+Tab</em></strong>. Theo mặc định,&nbsp;<strong><em>Alt+Tab</em></strong>&nbsp;sẽ hiển thị cả tab v&agrave; những cửa sổ m&agrave; bạn đang sử dụng. Nếu muốn sử dụng phương thức giống như truyền thống, bạn c&oacute; thể đổi lại th&agrave;nh &quot;<strong><em>Windows Only</em></strong>&quot;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=\"\" src=\"http://genknews.genkcdn.vn/2018/5/15/10-1526358191233649068673.png\" /></p>\r\n\r\n<p>Lựa chọn &quot;<strong><em>Apps added to this list can&rsquo;t be included in sets of tabs</em></strong>&quot; cho ph&eacute;p bạn v&ocirc; hiệu h&oacute;a t&iacute;nh năng Sets tr&ecirc;n một số ứng dụng nhất định. Bạn chỉ cần click v&agrave;o &quot;<strong><em>Add an App</em></strong>&quot; v&agrave; lựa chọn những ứng dụng t&ugrave;y theo nhu cầu c&aacute; nh&acirc;n.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=\"\" src=\"http://genknews.genkcdn.vn/2018/5/15/11-15263582323941483146070.png\" /></p>\r\n\r\n<p>Mặc d&ugrave; qu&aacute; tr&igrave;nh nghi&ecirc;n cứu v&agrave; ph&aacute;t triển vẫn đang tiếp tục diễn ra nhưng hiện tại, Sets đ&atilde; hoạt động tương đối ổn định trong c&aacute;c phi&ecirc;n bản thử nghiệm. T&iacute;nh năng n&agrave;y đ&atilde; từng xuất hiện tr&ecirc;n phi&ecirc;n bản Redstone 4 preview nhưng lại bị gỡ bỏ khỏi phi&ecirc;n bản Redstone 4 ch&iacute;nh thức (ra mắt v&agrave;o th&aacute;ng 4/2018). Microsoft vẫn đang nỗ lực ho&agrave;n thiện Sets với hy vọng c&oacute; thể kịp ra mắt trong bản cập nhật Redstone 5.</p>\r\n', '2018-07-08 07:03:08', 0, 'HinhAnh-1531232667.png', 3318, 11, 0),
+(12, 'Thiết kế Landing page không còn là sân chơi riêng cho dân lập trình', 'Đó là phát biểu của ông Võ Thái Hiển, giám đốc điều hành CHILI.VN, trong sự kiện Diễn đàn Tiếp thị trực tuyến (VOMF) ngày 15/08/2017 tại TP.HCM vừa qua.', '<p>Landing page, hay trang đ&iacute;ch, từ l&acirc;u đ&atilde; trở th&agrave;nh thuật ngữ quen thuộc đối với ng&agrave;nh tiếp thị trực tuyến tại Việt Nam.</p>\r\n\r\n<p>Th&ocirc;ng thường, thay v&igrave; truy cập v&agrave;o website với nhiều nội dung, nhiều thanh điều hướng v&agrave; n&uacute;t bấm g&acirc;y ph&acirc;n t&aacute;n sự ch&uacute; &yacute; của người d&ugrave;ng; th&igrave; landing page chỉ với 1 trang duy nhất sẽ tập trung to&agrave;n bộ nội dung v&agrave;o một loại chuyển đổi nhất định. Đ&oacute; c&oacute; thể l&agrave; lời k&ecirc;u gọi mua h&agrave;ng hoặc thu thập th&ocirc;ng tin kh&aacute;ch h&agrave;ng. Ch&iacute;nh sự tập trung v&agrave;o một mục ti&ecirc;u duy nhất khiến landing page trở th&agrave;nh c&ocirc;ng cụ then chốt để ho&agrave;n th&agrave;nh mục ti&ecirc;u chung của cả chiến dịch tiếp thị.</p>\r\n\r\n<p>Theo chia sẻ của &ocirc;ng Nguyễn Thanh Hưng, Chủ tịch Hiệp hội thương mại điện tử Việt Nam (VECOM), trong sự kiện VOMF 2017 th&igrave; c&oacute; đến hơn 80% chi ph&iacute; tiếp thị trực tuyến tại Việt Nam đổ v&agrave;o 2 k&ecirc;nh Google v&agrave; Facebook, tiếp sau đ&oacute; l&agrave; Email, Zalo, Affiliate,...</p>\r\n\r\n<p>C&aacute;c chuy&ecirc;n gia cho rằng, d&ugrave; đầu tư v&agrave;o bất kỳ k&ecirc;nh n&agrave;o, nếu dẫn về một trang chung chung, &iacute;t th&ocirc;ng tin, kh&ocirc;ng hướng đến h&agrave;nh động cụ thể cho người d&ugrave;ng th&igrave; sẽ rất l&atilde;ng ph&iacute; tiền chạy quảng c&aacute;o. Thay v&agrave;o đ&oacute;, h&atilde;y đầu tư cho một trang landing page r&otilde; r&agrave;ng, chỉnh chu v&agrave; c&oacute; t&iacute;nh thuyết phục th&igrave; kết quả của cả chiến dịch sẽ tăng l&ecirc;n rất nhiều.</p>\r\n\r\n<p><strong>Tự tạo hoặc sử dụng dịch vụ l&agrave; hai h&igrave;nh thức phổ biến để c&oacute; landing page</strong></p>\r\n\r\n<p>Landing page, về bản chất, l&agrave; một dạng website với một trang duy nhất. V&igrave; vậy, d&acirc;n biết lập tr&igrave;nh c&oacute; thể tự tạo cho m&igrave;nh một landing page dễ d&agrave;ng hơn cả website th&ocirc;ng thường. C&ograve;n đối với người kh&ocirc;ng biết lập tr&igrave;nh, lựa chọn duy nhất chỉ c&oacute; thể l&agrave; sử dụng dịch vụ từ b&ecirc;n thứ ba, thường l&agrave; c&aacute;c đơn vị thiết kế website.</p>\r\n\r\n<p>May mắn thay, nhờ sự ph&aacute;t triển của c&ocirc;ng nghệ m&agrave; ng&agrave;y nay người kh&ocirc;ng r&agrave;nh về kỹ thuật vẫn c&oacute; thể tự tay tạo landing page m&agrave; kh&ocirc;ng cần lập tr&igrave;nh. Ở nước ngo&agrave;i, c&oacute; nhiều đơn vị cung cấp nền tảng thiết kế landing page bằng c&aacute;c c&ocirc;ng cụ k&eacute;o thả (drag &ndash; drop) kh&aacute; đơn giản như Wix, Weebly... hoặc t&ugrave;y chỉnh theo từng phần (header, body, background...) như Wordpress, Blogspot. Điều đ&oacute; cho thấy việc thiết kế landing page đang dần kh&ocirc;ng c&ograve;n l&agrave; s&acirc;n chơi ri&ecirc;ng của d&acirc;n biết lập tr&igrave;nh.</p>\r\n\r\n<p><strong>Ra mắt giải ph&aacute;p mới kết hợp giữa việc tự tạo v&agrave; hỗ trợ ho&agrave;n thiện landing page trọn g&oacute;i</strong></p>\r\n\r\n<p>Cũng trong Diễn đ&agrave;n Tiếp thị trực tuyến 2017, Chili.vn &ndash; đơn vị ti&ecirc;n phong trong việc cung cấp giải ph&aacute;p web th&ocirc;ng minh &ndash; đ&atilde; cho ra mắt giải ph&aacute;p mới: Chili Landing Page, kết hợp giữa nền tảng để tự tạo landing page v&agrave; hỗ trợ ho&agrave;n thiện trọn g&oacute;i.</p>\r\n\r\n<p>Chia sẻ về giải ph&aacute;p mới n&agrave;y, &ocirc;ng V&otilde; Th&aacute;i Hiển &ndash; C.E.O Chili.vn &ndash; cho biết: Chili Landing Page l&agrave; nền tảng ho&agrave;n to&agrave;n Việt h&oacute;a để người d&ugrave;ng Việt Nam c&oacute; thể tự tạo landing page dễ d&agrave;ng bằng c&aacute;c c&ocirc;ng cụ k&eacute;o thả th&ocirc;ng minh m&agrave; kh&ocirc;ng cần biết lập tr&igrave;nh. Hơn nữa, với một g&oacute;i duy nhất, người d&ugrave;ng c&oacute; thể thoải m&aacute;i chọn giao diện landing sẵn c&oacute; v&agrave; tự thiết kế, kh&ocirc;ng giới hạn số lần xuất bản, hoặc giao cho Chili hỗ trợ ho&agrave;n thiện landing page thay v&igrave; tự l&agrave;m m&agrave; kh&ocirc;ng ph&aacute;t sinh th&ecirc;m chi ph&iacute;. Giải ph&aacute;p n&agrave;y ph&ugrave; hợp cho cả hai đối tượng: Th&iacute;ch tự m&agrave;i m&ograve; kh&aacute;m ph&aacute;; hoặc kh&ocirc;ng c&oacute; thời gian, kh&ocirc;ng tự tin v&agrave;o thẩm mỹ n&ecirc;n cần người c&oacute; chuy&ecirc;n m&ocirc;n trợ gi&uacute;p.</p>\r\n\r\n<p>Ngo&agrave;i ra, Chili Landing Page c&ograve;n l&agrave; nền tảng hỗ trợ tối đa cho c&aacute;c h&igrave;nh thức tiếp thị trực tuyến; dễ d&agrave;ng kết nối với c&aacute;c cổng Sugar, Suite CRM, vTiger, Google Docs&hellip; gi&uacute;p người d&ugrave;ng chủ động quản l&yacute; th&ocirc;ng tin kh&aacute;ch h&agrave;ng. Đồng thời c&oacute; thể gắn c&aacute;c m&atilde; đo lường từ b&ecirc;n thứ 3 như Google Analytic, Facebook Pixel&hellip; thuận tiện cho việc theo d&otilde;i hiệu quả c&aacute;c h&agrave;nh động tr&ecirc;n trang, lượt truy cập v&agrave; click chuột.</p>\r\n\r\n<p>Hiện tại Chili Landing Page đang ra mắt những g&oacute;i đầu ti&ecirc;n với nhiều ưu đ&atilde;i, th&ocirc;ng tin chương tr&igrave;nh c&oacute; thể tham khảo tại website&nbsp;<a href=\"http://landingpage.chili.vn/\" target=\"_blank\">http://landingpage.chili.vn/.</a></p>\r\n', '2018-07-10 05:01:34', 0, 'HinhAnh-1531232034.jpg', 268, 14, 0),
+(13, 'Sẽ có smartphone BlackBerry màn hình 5 inch', 'BlackBerry sẽ phát hành 2 hoặc 3 smartphone mới từ giờ đến cuối năm.', '<p>Trong khu&ocirc;n khổ triển l&atilde;m MWC 2015, BlackBerry đ&atilde; ch&iacute;nh thức giới thiệu chiếc Leap - mẫu smartphone kế nhiệm BlackBerry Z3. Một năm về trước, Z3 cũng xuất hiện tại triển l&atilde;m MWC, mở ra một hướng đi mới cho &ldquo;d&acirc;u đen&rdquo;, hướng đến ph&acirc;n kh&uacute;c gi&aacute; rẻ tại c&aacute;c thị trường tiềm năng như Indonesia, Việt Nam.</p>\r\n\r\n<table align=\"center\">\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p><img alt=\"BlackBerry Leap ra mat voi man hinh 5 inch, gia 275 USD hinh anh 1\" src=\"https://znews-photo-td.zadn.vn/w660/Uploaded/Aohuouk/2015_03_03/Leap.jpg\" /></p>\r\n			</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>Thiết bị mới nhất của BlackBerry l&agrave; một model thuần cảm ứng, kh&aacute;c xa với Passport hay Classic. M&aacute;y nằm ở ph&acirc;n kh&uacute;c tầm trung với m&agrave;n h&igrave;nh 5 inch, mật độ điểm ảnh 294 ppi.</p>\r\n\r\n<p>Leap c&oacute; kiểu d&aacute;ng kh&aacute; giống chiếc Z3. Tuy nhi&ecirc;n, cấu h&igrave;nh của m&aacute;y đ&atilde; được n&acirc;ng cấp to&agrave;n diện. Cụ thể, model n&agrave;y sở hữu m&agrave;n h&igrave;nh HD 720p, RAM 2 GB, dung lượng lưu trữ trong 16 GB (c&oacute; thể mở rộng bằng khe cắm thẻ nhớ tối đa 128 GB), camera sau cũng được n&acirc;ng l&ecirc;n 8 megapixel. Trước đ&oacute;, Z3 chỉ c&oacute; m&agrave;n h&igrave;nh qHD (c&ugrave;ng k&iacute;ch thước 5 inch), RAM 1,5 GB v&agrave; dung lượng 8 GB.</p>\r\n\r\n<p>Tuy nhi&ecirc;n, Leap g&acirc;y ngạc nhi&ecirc;n lớn khi sở hữu d&ograve;ng chip xử l&yacute; Snapdragon S4 Plus (tốc độ 1,5 GHz) cũ kỹ, thay v&igrave; c&aacute;c mẫu chip l&otilde;i tứ hoặc 8 nh&acirc;n đời mới của Qualcomm. M&aacute;y mỏng 9,5 mm, nặng 170 gram. Pin của m&aacute;y c&oacute; dung lượng 2.800 mAh, kh&ocirc;ng thể th&aacute;o rời. BlackBerry cho biết, pin n&agrave;y c&oacute; thể sử dụng li&ecirc;n tục trong 25 tiếng với cường độ nặng.</p>\r\n\r\n<p>M&aacute;y sẽ l&ecirc;n kệ v&agrave;o th&aacute;ng 4 với gi&aacute; 275 USD, kh&ocirc;ng k&egrave;m hợp đồng. Khi b&aacute;n ra, Leap sẽ t&iacute;ch hợp sẵn nền tảng BlackBerry 10.3.1.</p>\r\n', '2018-07-10 07:26:36', 0, 'HinhAnh-1531232001.jpg', 1241, 14, 0),
+(14, 'Samsung Galaxy S10+ sẽ có đến... 5 camera', 'Samsung sẽ tung ra ba mẫu Galaxy S10, một điều hãng chưa từng làm trước đó.', '<p>Kể từ Galaxy S6 v&agrave; S6 Edge năm 2015 trở lại đ&acirc;y, Samsung c&oacute; truyền thống giới thiệu mỗi lần 2 mẫu flagship Galaxy S. Tuy nhi&ecirc;n, năm sau, nh&acirc;n kỷ niệm 10 năm của d&ograve;ng Galaxy, Samsung sẽ chơi lớn khi tung ra th&ecirc;m một mẫu Galaxy S10 gi&aacute; rẻ, b&ecirc;n cạnh S10 th&ocirc;ng thường v&agrave; S10+.</p>\r\n\r\n<p>Nhiều th&ocirc;ng tin xoay quanh chiếc flagship n&agrave;y cho thấy Galaxy S10+ kh&ocirc;ng chỉ l&agrave; mẫu c&oacute; m&agrave;n h&igrave;nh lớn nhất trong bộ 3 sản phẩm mới, m&agrave; c&ograve;n được trang bị cụm camera gồm 3 thấu k&iacute;nh ở mặt sau. Một th&ocirc;ng tin mới từ H&agrave;n Quốc tiếp tục khẳng định mẫu m&aacute;y n&agrave;y sẽ c&oacute; một cụm camera k&eacute;p ở mặt trước nữa, tức Galaxy S10+ sẽ c&oacute; đến 5 camera!</p>\r\n\r\n<p>Về cụm camera sau, sẽ c&oacute; một ống k&iacute;nh g&oacute;c si&ecirc;u rộng. Cụ thể, S10+ sẽ vẫn c&oacute; ống k&iacute;nh ch&iacute;nh 12-megapixel khẩu độ k&eacute;p tương tự S9, c&ugrave;ng với ống k&iacute;nh 16-megapixel f/1.9 g&oacute;c si&ecirc;u rộng 123 độ. Nếu th&ocirc;ng tin n&agrave;y l&agrave; ch&iacute;nh x&aacute;c, S10+ sẽ l&agrave; thiết bị đầu ti&ecirc;n của Samsung sở hữu đến 3 camera sau.</p>\r\n\r\n<p>Ống k&iacute;nh gốc si&ecirc;u rộng tr&ecirc;n cụm camera n&agrave;y sẽ cho ph&eacute;p người d&ugrave;ng bắt được nhiều khung cảnh hơn trong một bức h&igrave;nh. N&oacute; c&oacute; thể kh&ocirc;ng hấp dẫn lắm với những người d&ugrave;ng th&iacute;ch chụp ch&acirc;n dung, khi m&agrave; họ sẽ chủ yếu sử dụng ống k&iacute;nh telephoto với khả năng zoom v&agrave;o một chủ thể chỉ bằng một chạm.</p>\r\n\r\n<p>Về cụm camera k&eacute;p ph&iacute;a trước, S10+ kh&ocirc;ng phải l&agrave; smartphone đầu ti&ecirc;n của Samsung được trang bị cụm camera n&agrave;y - trước đ&oacute; Samsung đ&atilde; c&oacute; mẫu Galaxy A8 kh&aacute; th&agrave;nh c&ocirc;ng với camera k&eacute;p ở mặt trước.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=\"Samsung Galaxy S10+ sẽ có đến... 5 camera - Ảnh 1.\" src=\"http://genknews.genkcdn.vn/thumb_w/660/2018/7/9/photo-1-1531134192000623584943.jpg\" /></p>\r\n\r\n<p>Galaxy A8 với cụm camera selfie k&eacute;p</p>\r\n\r\n<p>&nbsp;Cụm camera k&eacute;p ở ph&iacute;a trước n&agrave;y sẽ cho ph&eacute;p người d&ugrave;ng chụp được những bức ảnh selfie đẹp hơn, với hiệu ứng x&oacute;a ph&ocirc;ng. Chiếc Galaxy A8 đ&atilde; n&oacute;i ở tr&ecirc;n c&oacute; cảm biến ch&iacute;nh 16-megapixel c&ugrave;ng cảm biến phụ thứ hai 8-megapixel. Kh&ocirc;ng r&otilde; Galaxy S10+ c&oacute; cụm camera tương tự như vậy hay kh&ocirc;ng.</p>\r\n\r\n<p>Trong khi đ&oacute;, Galaxy S10 bản thường cũng sẽ c&oacute; cụm camera 3 ống k&iacute;nh ở mặt sau, nhưng chỉ c&oacute; một camera đơn ở ph&iacute;a trước. Mẫu S10 gi&aacute; rẻ c&oacute; lẽ sẽ chỉ c&oacute; camera k&eacute;p ở sau v&agrave; một camera đơn ph&iacute;a trước m&agrave; th&ocirc;i.</p>\r\n\r\n<p>Những th&ocirc;ng tin n&agrave;y hiện vẫn chưa được Samsung x&aacute;c nhận, v&igrave; vậy ch&uacute;ng ta sẽ phải đợi đến đầu năm sau để xem thực hư mọi chuyện như thế n&agrave;o.</p>\r\n', '2018-07-10 07:27:37', 0, 'HinhAnh-1531231968.jpg', 2347, 1, 0),
+(15, 'Đây là quyển sách biết nghe, biết nói của FPT', 'Không chỉ có vậy, nó còn được tích hợp cả trợ lý ảo nữa.', '<p>Đ&acirc;y l&agrave; FPT Tech Insight, một cuốn s&aacute;ch (hay đ&uacute;ng hơn l&agrave; tập san) n&oacute;i về c&aacute;c th&agrave;nh tựu của FPT trong suốt 30 năm vừa qua. N&oacute; c&oacute; b&igrave;a ngo&agrave;i l&agrave; h&igrave;nh ảnh của một ch&uacute; robot tr&ocirc;ng rất &quot;cool&quot;, d&agrave;y hơn 200 trang với nhiều b&agrave;i viết chất lượng v&agrave; được thiết kế một c&aacute;ch tinh tế.</p>\r\n\r\n<p><img alt=\"\" src=\"http://genknews.genkcdn.vn/thumb_w/660/2018/5/12/dscf7620-1526140766713656244308.jpg\" /></p>\r\n\r\n<p><img alt=\"\" src=\"http://genknews.genkcdn.vn/thumb_w/660/2018/5/12/dscf7622-152614076712983206261.jpg\" /></p>\r\n\r\n<p>Thế nhưng, FPT Tech Insight kh&ocirc;ng đơn thuần chỉ l&agrave; một quyển s&aacute;ch với những trang giấy m&agrave; ch&uacute;ng ta quen thuộc. Với thế mạnh của m&igrave;nh, FPT cũng trang bị cho n&oacute; những c&ocirc;ng nghệ đang thịnh h&agrave;nh ng&agrave;y nay.</p>\r\n\r\n<p>Sử dụng một thiết bị di động v&agrave; ứng dụng được FPT cung cấp, người đọc chỉ cần giơ chiếc smartphone/tablet của m&igrave;nh hướng v&agrave;o quyển tập san v&agrave; bỗng chốc mọi thứ trở n&ecirc;n sống động hơn bao giờ hết. Những nội dung đa phương tiện như video hay &acirc;m thanh, vốn kh&ocirc;ng thể truyền đạt th&ocirc;ng qua những ấn phẩm giấy th&ocirc;ng thường, nay đ&atilde; trở th&agrave;nh hiện thực. FPT đ&atilde; kh&eacute;o l&eacute;o &aacute;p dụng c&ocirc;ng nghệ AR (augmented reality - thực tế ảo tăng cường) để đem đến một trải nghiệm rất mới lạ cho cuốn tập san n&agrave;y.</p>\r\n\r\n<p><img alt=\"\" src=\"http://genknews.genkcdn.vn/thumb_w/660/2018/5/12/dscf7642-1526141378469440899095.jpg\" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Xem video trực tiếp tr&ecirc;n cuốn tập san th&ocirc;ng qua c&ocirc;ng nghệ AR</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Xem video trực tiếp tr&ecirc;n cuốn tập san th&ocirc;ng qua c&ocirc;ng nghệ AR</p>\r\n\r\n<p>Tuy nhi&ecirc;n, mọi thứ chưa dừng lại ở đ&acirc;y. Bạn c&ograve;n nhớ ch&uacute; robot ở trang b&igrave;a chứ? Nếu bạn qu&eacute;t n&oacute; bằng ứng dụng AR, n&oacute; sẽ sống dậy v&agrave; trở th&agrave;nh một trợ l&yacute; ảo, gi&uacute;p bạn t&igrave;m hiểu về cuốn s&aacute;ch. Bạn c&oacute; thể n&oacute;i&nbsp;<em>&quot;Xin ch&agrave;o!&quot;</em>, v&agrave; n&oacute; sẽ tự giới thiệu về m&igrave;nh. Hay, bạn c&oacute; thế hỏi&nbsp;<em>&quot;Bạn l&agrave;m được g&igrave;?&quot;</em>&nbsp;v&agrave; n&oacute; sẽ n&oacute;i về những thứ n&oacute; c&oacute; thể l&agrave;m được.</p>\r\n\r\n<p><img alt=\"\" src=\"http://genknews.genkcdn.vn/thumb_w/660/2018/5/12/dscf7638-15261413015901569633088.jpg\" /></p>\r\n\r\n<p><img alt=\"\" src=\"http://genknews.genkcdn.vn/thumb_w/660/2018/5/12/dscf7641-1526141301170348393175.jpg\" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Trợ l&yacute; ảo được t&iacute;ch hợp trong cuốn tập san</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Trợ l&yacute; ảo được t&iacute;ch hợp trong cuốn tập san</p>\r\n\r\n<p>Đương nhi&ecirc;n, trợ l&yacute; ảo của FPT chỉ mang t&iacute;nh chất vui vẻ v&agrave; kh&ocirc;ng thể so s&aacute;nh với Siri hay Google Assistant - đừng qu&ecirc;n rằng n&oacute; chỉ l&agrave; dự &aacute;n b&ecirc;n lề của một cuốn tập san. Thực tế, FPT cho biết c&ocirc;ng đoạn &quot;hi tech h&oacute;a&quot; cuốn tập san n&agrave;y được ho&agrave;n th&agrave;nh trong 2 tuần, bởi 1 lập tr&igrave;nh vi&ecirc;n duy nhất.</p>\r\n\r\n<p>Nhưng, để c&oacute; thể x&acirc;y dựng một trợ l&yacute; ảo như thế n&agrave;y cũng y&ecirc;u cầu FPT phải t&iacute;ch hợp rất nhiều c&ocirc;ng nghệ b&ecirc;n trong đ&oacute;, v&iacute; dụ như nhận dạng giọng n&oacute;i, ph&acirc;n t&iacute;ch c&acirc;u tr&uacute;c c&acirc;u, ph&acirc;n t&iacute;ch ngữ điệu... để từ đ&oacute; c&oacute; thể hiểu được mệnh lệnh của người d&ugrave;ng v&agrave; đưa ra c&acirc;u trả lời ph&ugrave; hợp. Tất cả những c&ocirc;ng nghệ tr&ecirc;n đều dựa tr&ecirc;n nền tảng của AI, cũng l&agrave; thứ m&agrave; to&agrave;n bộ ng&agrave;nh c&ocirc;ng nghệ đang theo đuổi trong suốt những năm qua, trong đ&oacute; c&oacute; FPT. Đ&oacute; cũng l&agrave; l&yacute; do tại sao h&igrave;nh ảnh của ch&uacute; robot được lựa chọn l&agrave;m b&igrave;a cho cuốn tập san n&agrave;y.</p>\r\n\r\n<p>Mặc d&ugrave; đ&acirc;y chỉ l&agrave; một cuốn tập san nội bộ, v&agrave; FPT (c&oacute; lẽ) cũng chưa c&oacute; kế hoạch ph&aacute;t triển sản phẩm n&agrave;o tương tự, tuy nhi&ecirc;n tiềm năng của những ấn phẩm như thế n&agrave;y l&agrave; rất lớn. &Ocirc;ng L&ecirc; Hồng Việt - Gi&aacute;m đốc c&ocirc;ng nghệ FPT lấy v&iacute; dụ về s&aacute;ch gi&aacute;o khoa. Nếu những b&agrave;i học trong đ&oacute; được tr&igrave;nh b&agrave;y v&agrave; m&ocirc; phỏng sinh động như thế n&agrave;y th&igrave; chẳng phải chăng học sinh sẽ cảm thấy hứng th&uacute; hơn rất nhiều hay sao?</p>\r\n\r\n<p><img alt=\"\" src=\"http://genknews.genkcdn.vn/thumb_w/660/2018/5/12/dscf7647-15261413780591554735638.jpg\" /></p>\r\n\r\n<p>FPT hiện đang đầu tư rất mạnh về AI, v&agrave; một trong những ng&agrave;nh sẽ hưởng lợi nhiều nhất từ lĩnh vực n&agrave;y l&agrave; &ocirc; t&ocirc;, cụ thể l&agrave; xe tự h&agrave;nh. Hiện FPT đang triển khai một số dự &aacute;n li&ecirc;n quan đến c&ocirc;ng nghệ xe tự h&agrave;nh n&oacute;i ri&ecirc;ng v&agrave; automotive n&oacute;i chung cho khoảng 40 kh&aacute;ch h&agrave;ng lớn tr&ecirc;n to&agrave;n cầu.</p>\r\n\r\n<p>Ngo&agrave;i ra, FPT c&ograve;n đẩy mạnh hoạt động nghi&ecirc;n cứu, s&aacute;ng tạo, trải nghiệm c&ocirc;ng nghệ mới nhất trong lĩnh vực tự h&agrave;nh cho c&aacute;c bạn trẻ Việt Nam th&ocirc;ng qua cuộc thi Cuộc đua số,&nbsp;<a href=\"http://genk.vn/cuoc-thi-che-tao-xe-tu-lai-do-fpt-to-chuc-khoi-nguon-khat-vong-tesla-viet-nam-cua-cac-ban-tre-dam-me-cong-nghe-20170511013221851.chn\">diễn ra lần đầu hồi năm ngo&aacute;i.</a>&nbsp;FPT kỳ vọng trong tương lai sẽ c&oacute; nhiều hơn nữa c&aacute;c sản phẩm ti&ecirc;n tiến nhất tr&ecirc;n thế giới được ph&aacute;t triển từ tr&iacute; tuệ Việt Nam từ những s&acirc;n chơi như Cuộc đua số.</p>\r\n', '2018-07-11 12:52:23', 0, 'HinhAnh-1531306378.jpg', 636, 1, 0),
+(16, 'Java EE đổi tên thành Jakarta EE', 'Theo adtmag, tên gọi mới chính thức của Java Enterprise Edition (và Dự án EE4J) là Jakarta EE ', '<p>Mới đ&acirc;y, tr&ecirc;n trang web ch&iacute;nh thức của&nbsp;<a href=\"https://mmilinkov.wordpress.com/2018/02/26/and-the-name-is/\" target=\"_blank\">Life at Eclipse.&nbsp;</a>Gi&aacute;m đốc điều h&agrave;nh của Eclipse Foundation &ndash; Mike Milinkovich đ&atilde; đưa ra th&ocirc;ng b&aacute;o ch&iacute;nh thức về việc thay đổi t&ecirc;n gọi ch&iacute;nh thức của Java EE</p>\r\n\r\n<blockquote>\r\n<p>Theo Milinkovich,với 7.000 lượt vote từ cộng đồng lập tr&igrave;nh Java bỏ xa đối thủ liền kề chỉ với 64,4% ủng hộ từ cộng đồng</p>\r\n</blockquote>\r\n\r\n<p>Eclipse Foundation đ&atilde; tổ chức cuộc khảo s&aacute;t to&agrave;n diện trong cộng đồng Java để t&igrave;m ra c&aacute;i t&ecirc;n mới cho Java EE , qua nhiều v&ograve;ng b&igrave;nh chọn cuối c&ugrave;ng c&aacute;i t&ecirc;n mới được x&aacute;c định l&agrave; &ldquo;Jakarta&rdquo;, đ&acirc;y l&agrave; t&ecirc;n của dự &aacute;n Apache Software Foundation đ&atilde; kết th&uacute;c v&agrave;o năm 2011, được sử dụng với sự cho ph&eacute;p của ASF.&nbsp;Wayne Beaton, Gi&aacute;m đốc Dự &aacute;n open source QEclipse Foundation, đ&atilde; tiết lộ chi tiết về qu&aacute; tr&igrave;nh lựa chọn t&ecirc;n gọi mới trong 1 b&agrave;i đăng tr&ecirc;n&nbsp;<a href=\"https://github.com/eclipse-ee4j/ee4j/issues/1\" target=\"_blank\">GitHub</a>&nbsp;của m&igrave;nh.</p>\r\n\r\n<p>Beato viết:</p>\r\n\r\n<blockquote>\r\n<p>Cuối c&ugrave;ng qu&aacute; tr&igrave;nh tuyển chọn cũng đ&atilde; được thực hiện một c&aacute;ch nghi&ecirc;m t&uacute;c, với những đ&aacute;nh gi&aacute; kh&aacute;ch quan để x&aacute;c định những t&ecirc;n ph&ugrave; hợp.</p>\r\n</blockquote>\r\n\r\n<p>Giải đ&aacute;p thắc mắc về nền tảng Java EE 8 được Oracle c&ocirc;ng bố hồi năm ngo&aacute;i &ndash; hiện l&agrave; một dự &aacute;n cao cấp nhất của Eclipse được gọi l&agrave; Eclipse Enterprise for Java (EE4J) &ndash; đ&atilde; tạo ra một l&agrave;n s&oacute;ng phản đổi dữ dội từ cộng đồng Java. Đại diện&nbsp;Java EE đ&atilde; c&ocirc;ng bố một&nbsp;t&acirc;m thư&nbsp; gửi&nbsp;cho Oracle tr&igrave;nh b&agrave;y những l&yacute; lẽ để được giữ lại c&aacute;i t&ecirc;n đ&oacute;, n&oacute; nhận được sự đồng thuận của ch&iacute;nh cha đẻ của Java l&agrave;&nbsp;James Gosling.</p>\r\n\r\n<p>Việc t&igrave;m kiếm một c&aacute;i t&ecirc;n mới ( m&agrave; cụ thể ở đ&acirc;y l&agrave; Jakarta) dường như l&agrave; một sự thỏa hiệp nhằm xoa diệu cộng đồng, cũng như những người phản đối.</p>\r\n\r\n<p>Trong b&agrave;i chia sẻ gần đ&acirc;y &ocirc;ng, Milinkovich lưu &yacute; rằng hiện tại việc sử dụng t&ecirc;n gọi Jakarta EE vẫn c&ograve;n bị r&agrave;ng buộc một số quy định bởi EE.next&rdquo;, nhưng nh&oacute;m ph&aacute;t triển đang nổ lực hết sức để đẩy nhanh qu&aacute; tr&iacute;nh hợp thức t&ecirc;n gọi ch&iacute;nh thức n&agrave;y.</p>\r\n', '2018-07-18 14:32:09', 0, 'HinhAnh-1531917129.jpg', 1, 13, 0);
+INSERT INTO `news` (`news_id`, `name`, `preview`, `detail`, `date_create`, `create_by`, `picture`, `counter`, `cat_id`, `status`) VALUES
+(17, 'Lộ trình trở thành lập trình viên freelance', 'Lập trình viên freelance bắt đầu từ đâu? Và như thế nào?\r\n\r\nBí kíp tối thượng làm Freelancer', '<p>Mọi người lu&ocirc;n thắc mắc l&agrave;m thế n&agrave;o một Developer c&oacute; thể vừa l&agrave;m c&ocirc;ng việc tay phải v&agrave; vừa l&agrave;m c&oacute; thể l&agrave;m Freelance b&ecirc;n ngo&agrave;i? V&agrave; bắt đầu c&ocirc;ng việc Freelance của m&igrave;nh như thế n&agrave;o?</p>\r\n\r\n<p>T&ocirc;i l&agrave; một developer, t&ocirc;i c&oacute; một c&ocirc;ng vi&ecirc;c ch&iacute;nh thức tại văn ph&ograve;ng, ngo&agrave;i ra t&ocirc;i cũng l&agrave;m freelance b&ecirc;n ngo&agrave;i.</p>\r\n\r\n<p>Đ&acirc;y l&agrave; những điều t&ocirc;i đ&atilde; trải qua m&agrave; kh&ocirc;ng s&aacute;ch vở n&agrave;o hướng dẫn. Nếu bạn thực sự nghi&ecirc;m t&uacute;c bắt đầu c&ocirc;ng việc freelance với tư c&aacute;ch như l&agrave; một lập tr&igrave;nh vi&ecirc;n th&igrave; h&atilde;y d&agrave;nh ch&uacute;t thời gian để đọc v&agrave;i chia sẻ th&uacute; vị từ Darryl D</p>\r\n\r\n<h3><strong>Tận dụng tối đa lợi &iacute;ch từ&nbsp;</strong><strong>portfolio</strong></h3>\r\n\r\n<p>Bạn vẫn chưa c&oacute; portfolio ư? Thế th&igrave; t&ocirc;i c&oacute; tin tốt v&agrave; tin xấu cho bạn đ&acirc;y.</p>\r\n\r\n<p><strong>Tin vui:</strong>&nbsp;Bạn l&agrave; developer, l&agrave;m một portfolio kh&aacute; l&agrave; &ldquo;đơn giản&rdquo;!</p>\r\n\r\n<p><strong>Tin xấu:</strong>&nbsp;Bạn l&agrave; developer, c&oacute; việc n&agrave;o m&agrave; &ldquo;đơn giản&rdquo; đ&acirc;u?</p>\r\n\r\n<p>Đầu ti&ecirc;n h&atilde;y kiếm một theme đơn giản, kh&ocirc;ng d&agrave;nh qu&aacute; một ng&agrave;y v&agrave;o n&oacute;. Ch&uacute;ng ta kh&ocirc;ng cần phải l&agrave; nh&agrave; ph&aacute;t minh hay s&aacute;ng tạo g&igrave; cả bởi bạn chỉ cần cho họ thấy rằng &ldquo;t&ocirc;i biết những g&igrave; m&igrave;nh đang n&oacute;i về, v&agrave; đ&acirc;y l&agrave; những điều t&ocirc;i đ&atilde; l&agrave;m trong qu&aacute; khứ.&rdquo;</p>\r\n\r\n<p>Kh&ocirc;ng c&oacute; kinh nghiệm hoặc thứ g&igrave; ấn tượng để th&ecirc;m v&agrave;o portfolio?</p>\r\n\r\n<p>Kh&ocirc;ng sao đ&acirc;u, h&atilde;y bắt đầu l&agrave;m một số dự &aacute;n c&aacute; nh&acirc;n. Tạo một ứng dụng nhỏ v&agrave; launch n&oacute;. Kh&ocirc;ng th&igrave; l&agrave;m một thư viện nhỏ v&agrave; đăng n&oacute; v&agrave;o GitHub. T&igrave;m một thiết kế tr&ecirc;n Dribbble v&agrave; biến n&oacute; th&agrave;nh hiện thực.</p>\r\n\r\n<p>Kh&ocirc;ng c&oacute; thời gian để l&agrave;m những loại dự &aacute;n tr&ecirc;n?</p>\r\n\r\n<p>OK, thế th&igrave; h&atilde;y viết một v&agrave;i c&acirc;u chuyện về c&aacute;c dự &aacute;n trước đ&acirc;y của bạn. C&aacute;c vấn đề bạn phải đối mặt, c&aacute;ch bạn giải quyết n&oacute; v&agrave; những g&igrave; bạn sẽ l&agrave;m kh&aacute;c đi trong lần tiếp theo. Đừng bỏ qua c&aacute;c chi tiết bởi người tuyển dụng sẽ rất muốn đọc về n&oacute;.</p>\r\n\r\n<p>N&oacute;i chung, h&atilde;y &ldquo;thể hiện&rdquo; một ch&uacute;t! Cho họ thấy rằng bạn biết r&otilde; m&igrave;nh đang n&oacute;i g&igrave;, bạn c&agrave;ng c&oacute; nhiều th&ocirc;ng tin cho những kh&aacute;ch h&agrave;ng tiềm năng về khả năng của bạn, th&igrave; c&agrave;ng tốt.</p>\r\n\r\n<p><img alt=\"\" src=\"https://techtalk.vn/wp-content/uploads/2018/03/freelancer-696x348.png\" style=\"height:348px; width:696px\" /></p>\r\n\r\n<h3><strong>Bạn cần c&oacute; một c&ocirc;ng thức để tiếp cận với kh&aacute;ch h&agrave;ng</strong></h3>\r\n\r\n<p>B&acirc;y giờ đ&atilde; c&oacute; một portfolio, bạn cần bắt đầu tiếp cận với mọi người. H&atilde;y lu&ocirc;n nhớ rằng kh&ocirc;ng ai biết bạn tồn tại cho đến khi bạn n&oacute;i với họ.</p>\r\n\r\n<p>Mẹo Pro: Khi mọi người đang t&igrave;m kiếm c&aacute;c freelance, họ cũng nhận được rất nhiều lời mời gọi từ nhiều nơi kh&aacute;c. Hầu hết c&aacute;c đề xuất n&agrave;y l&agrave; rất mơ hồ v&agrave; chứa đầy th&ocirc;ng tin v&ocirc; &iacute;ch. Chưa đề kể đến c&aacute;c thủ tục rườm ra kh&ocirc;ng cần thiết tr&ecirc;n một nền tảng như Upwork.</p>\r\n\r\n<p>Họ thường ghi với nội dung đại loại như sau:</p>\r\n\r\n<p>&nbsp;&nbsp;<em>&nbsp;K&iacute;nh gửi c&ocirc;ng ty,</em></p>\r\n\r\n<p><em>&nbsp;&nbsp;&nbsp;T&ocirc;i rất quan t&acirc;m đến blah blah blah &hellip; Nếu bạn d&agrave;nh thời gian để xem x&eacute;t t&ocirc;i, n&oacute; sẽ l&agrave; blah blah blah&hellip;..</em></p>\r\n\r\n<p><strong>Đừng l&agrave;m thế!</strong>&nbsp;Kh&ocirc;ng ai quan t&acirc;m đến việc bạn sử dụng c&aacute;ch viết như thế n&agrave;o khi đ&atilde; đọc h&agrave;ng chục nội dung tương tự.</p>\r\n\r\n<p>Thay v&agrave;o đ&oacute;, h&atilde;y l&agrave;m cho đề xuất của bạn thật dễ hiểu, v&agrave; nhấn mạnh v&agrave;o dự &aacute;n m&agrave; bạn đặt mục ti&ecirc;u.</p>\r\n\r\n<p>Giả sử bạn t&igrave;m thấy một dự &aacute;n ph&ugrave; hợp th&igrave; c&aacute;ch bạn c&oacute; thể tiếp cận n&oacute; c&oacute; thể như sau:</p>\r\n\r\n<p><em>Xin ch&agrave;o, Anh/Chị&hellip;.</em></p>\r\n\r\n<p><em>T&ocirc;i c&oacute; xem qua dự &aacute;n th&uacute; vị của Anh/chị v&agrave; c&oacute; một v&agrave;i thắc mắc:</em></p>\r\n\r\n<p><em>&nbsp;&nbsp;&nbsp;&ndash; Anh/chị nhắm mục ti&ecirc;u mạng x&atilde; hội n&agrave;o?</em></p>\r\n\r\n<p><em>&nbsp;&nbsp;&nbsp;&ndash; C&oacute; bao nhi&ecirc;u người d&ugrave;ng cần thiết cho dự &aacute;n n&agrave;y?</em></p>\r\n\r\n<p><em>Dự &aacute;n gần đ&acirc;y nhất m&agrave; t&ocirc;i đ&atilde; l&agrave;m việc cũng c&oacute; sử dụng những c&ocirc;ng nghệ n&agrave;y, Kh&ocirc;ng biết Anh/chị c&oacute; hứng th&uacute; với điều n&agrave;y?</em></p>\r\n\r\n<p><em>&nbsp;&nbsp;&nbsp;&ndash; React với redux</em></p>\r\n\r\n<p><em>&nbsp;&nbsp;&nbsp;&ndash; Firebase cho thời gian thực</em></p>\r\n\r\n<p><em>&nbsp;&nbsp;&nbsp;&ndash; AWS cho cơ sở hạ tầng</em></p>\r\n\r\n<p><em>Ngo&agrave;i ra, t&ocirc;i c&oacute; nhiều kinh nghiệm l&agrave;m việc với c&aacute;c project kh&aacute;c nhau:&hellip;.</em></p>\r\n\r\n<p>Đ&acirc;y l&agrave; portfolio của t&ocirc;i nếu anh/chị muốn biết th&ecirc;m th&ocirc;ng tin</p>\r\n\r\n<p><strong>V&igrave; sao t&ocirc;i lại viết như vậy?</strong></p>\r\n\r\n<p>&nbsp;&nbsp;&nbsp;Bạn phải hỏi những c&acirc;u hỏi cần biết về dự &aacute;n</p>\r\n\r\n<p>&nbsp;&nbsp;&nbsp;H&atilde;y đề cập đến c&aacute;ch bạn l&agrave;m dự &aacute;n tương tự</p>\r\n\r\n<p>&nbsp;&nbsp;&nbsp;N&oacute;i về kinh nghiệm của bạn d&agrave;nh cho vị tr&iacute; n&agrave;y</p>\r\n\r\n<p>&nbsp;&nbsp;&nbsp;Cho họ một link để đọc th&ecirc;m th&ocirc;ng tin về bản th&acirc;n t&ocirc;i</p>\r\n\r\n<p>L&uacute;c đầu, việc n&agrave;y sẽ mất một &iacute;t thời gian để l&agrave;m quen nhưng bạn sẽ nhanh ch&oacute;ng thấy n&oacute; dễ d&agrave;ng như việc update trạng th&aacute;i tr&ecirc;n Facebook vậy.</p>\r\n\r\n<h3><strong>Tạo t&agrave;i khoản tr&ecirc;n c&aacute;c trang tuyển dụng/freelance uy t&iacute;n</strong></h3>\r\n\r\n<p>H&atilde;y tạo profile một c&aacute;ch chi tiết nhất c&oacute; thể bởi đ&acirc;y sẽ l&agrave; nơi m&agrave; kh&aacute;ch h&agrave;ng tiềm năng thật sự t&igrave;m hiểu về bạn cũng như đưa ra quyết định cuối c&ugrave;ng.</p>\r\n\r\n<p><strong>T&ocirc;i nhận thấy c&aacute;c freelance thường sẽ:</strong></p>\r\n\r\n<ul>\r\n	<li>Gửi mail mời gọi, chờ đợi v&agrave; hy vọng rằng một trong những kh&aacute;ch h&agrave;ng sẽ đọc v&agrave; c&oacute; hứng th&uacute; để click v&agrave;o.</li>\r\n	<li>Chỉ gửi c&aacute;ch một tuần hoặc một th&aacute;ng</li>\r\n	<li>Kh&ocirc;ng hề gửi bất kỳ mail n&agrave;o m&agrave; thay v&agrave;o đ&oacute; chỉ hy vọng được li&ecirc;n lạc</li>\r\n</ul>\r\n\r\n<p>Thay v&agrave;o đ&oacute;, h&atilde;y cố gắng viết tối thiểu 5 mail đề xuất h&agrave;ng ng&agrave;y dựa tr&ecirc;n c&ocirc;ng thức t&ocirc;i đ&atilde; đề cập ở tr&ecirc;n. H&atilde;y nghĩ về n&oacute; như một th&oacute;i quen giống như kiểm tra email của bạn. Với mục ti&ecirc;u nhắm v&agrave;o c&aacute;c dự &aacute;n mới hơn.</p>\r\n\r\n<p>Khi viết, đừng qu&aacute; cứng nhắc! Đọc kĩ y&ecirc;u cầu, đưa ra đề xuất, trả lời c&acirc;u hỏi v&agrave; l&iacute; giải rồi gửi cho họ. Sau đ&oacute; h&atilde;y qu&ecirc;n đi v&agrave; tiếp tục với nơi kh&aacute;c. Như vậy bạn sẽ kh&ocirc;ng tốn thời gian qu&aacute; trong mong v&agrave;o một nơi.</p>\r\n\r\n<p>Khoảnh khắc bạn thật sự bắt đầu gắn b&oacute; với một dự &aacute;n l&agrave; khi bạn nhận được phản hồi từ kh&aacute;ch h&agrave;ng.</p>\r\n\r\n<p>Tin vui, l&agrave; thường bạn sẽ chỉ mất 30 ph&uacute;t để gửi 20 mail đề xuất. Một nửa giờ l&agrave;m việc nhưng gi&aacute; trị thu lại kh&aacute; l&agrave; tuyệt vời. &nbsp;</p>\r\n\r\n<h3><strong>Bắt đầu với qui m&ocirc; nhỏ th&ocirc;i</strong></h3>\r\n\r\n<p>Khi t&igrave;m kiếm c&aacute;c dự &aacute;n, h&atilde;y thận trọng với người đang muốn thu&ecirc; nhiều freelancer kh&aacute;c nhau để c&ugrave;ng l&agrave;m một project. Đồng thời, khi mới bắt đầu, bạn sẽ cần phải chịu cảnh lương thấp nhưng l&agrave;m nhiều để gầy dựng n&ecirc;n danh tiếng.</p>\r\n\r\n<p>Từ quan điểm tuyển dụng, thật kh&oacute; để chọn một người kh&ocirc;ng c&oacute; background ấn tượng v&agrave; chắc chắn. Do đ&oacute; bạn cần đảm bảo rằng người đang xem hồ sơ của bạn kh&ocirc;ng nghĩ bạn l&agrave; một &ldquo;nguy cơ tiềm ẩn&rdquo;.</p>\r\n\r\n<p>Bắt đầu với gi&aacute; kh&ocirc;ng qu&aacute; $ 20 nhằm thu h&uacute;t sự ch&uacute; &yacute; của mọi người. Sau đ&oacute; h&atilde;y tăng gi&aacute; của bạn l&ecirc;n 5-10 đ&ocirc; la t&ugrave;y theo t&igrave;nh h&igrave;nh cũng như danh tiếng của bạn.</p>\r\n', '2018-07-18 14:37:39', 0, 'HinhAnh-1531917459.jpg', 0, 13, 0),
+(18, 'Facebook thưởng nóng $15000 cho hacker hack thành công tài khoản Facebook', '  Hacker tìm ra cách khuếch đại sức mạnh các cuộc tấn công DDos lên hơn 51.000 lần, mạnh nhất lịch sử nhờ phương thức mới\r\n ', '<p>Trước hết t&ocirc;i xin lưu &yacute; rằng l&agrave; b&agrave;i viết n&agrave;y được đăng với sự cho ph&eacute;p của Facebook theo ch&iacute;nh s&aacute;ch tiết lộ c&oacute; tr&aacute;ch nhiệm. Khi bạn đọc được b&agrave;i viết th&igrave; họ cũng đ&atilde; khắc phục lỗ hổng n&agrave;y.</p>\r\n\r\n<p>Đ&acirc;y l&agrave; một lỗi đơn giản m&agrave; t&ocirc;i ph&aacute;t hiện ra tr&ecirc;n Facebook, vốn cho ph&eacute;p ta c&oacute; thể sử dụng để hack v&agrave;o t&agrave;i khoản Facebook của người d&ugrave;ng kh&aacute;c một c&aacute;ch dễ d&agrave;ng m&agrave; kh&ocirc;ng cần tới sự tương t&aacute;c của họ.</p>\r\n\r\n<p>N&oacute;i c&aacute;ch kh&aacute;c, điều n&agrave;y cho t&ocirc;i to&agrave;n quyền truy cập v&agrave;o t&agrave;i khoản người d&ugrave;ng kh&aacute;c th&ocirc;ng qua việc đặt một mật khẩu mới. T&ocirc;i đ&atilde; c&oacute; thể xem tin nhắn, thẻ t&iacute;n dụng / thẻ ghi nợ của họ được lưu trữ dưới phần thanh to&aacute;n của người d&ugrave;ng cũng như l&agrave; ảnh c&aacute; nh&acirc;n v&agrave; c&aacute;c th&ocirc;ng tin ri&ecirc;ng tư kh&aacute;c.</p>\r\n\r\n<p>Facebook nhanh ch&oacute;ng thừa nhận v&agrave; x&aacute;c định vấn đề cũng như khen thưởng t&ocirc;i với một khoản tiền thưởng trị gi&aacute; 15.000 đ&ocirc; la Mỹ dựa tr&ecirc;n mức độ nghi&ecirc;m trọng v&agrave; t&aacute;c hại của lỗ hổng n&agrave;y.</p>\r\n\r\n<h3><strong>C&aacute;ch thức m&agrave; lỗi n&agrave;y hoạt động</strong></h3>\r\n\r\n<p>Bất cứ khi n&agrave;o người d&ugrave;ng qu&ecirc;n mật khẩu của họ tr&ecirc;n Facebook, họ c&oacute; thể đặt lại mật khẩu bằng c&aacute;ch nhập số điện thoại v&agrave; địa chỉ email của họ tại: https://www.facebook.com/login/identify?ctx=recover&amp;lwv=110.</p>\r\n\r\n<p>Facebook sẽ gửi một m&atilde; số 6 chữ số cho số điện thoại hoặc địa chỉ email m&agrave; người d&ugrave;ng&nbsp; để thiết lập một mật khẩu mới.</p>\r\n\r\n<p>T&ocirc;i đ&atilde; cố gắng ph&aacute; m&atilde; 6 chữ số tr&ecirc;n www.facebook.com v&agrave; đ&atilde; bị chặn sau 10-12 lần thử kh&ocirc;ng hợp lệ.</p>\r\n\r\n<p>Sau đ&oacute;, t&ocirc;i cũng lại thực hiện tr&igrave;nh tự như vậy tr&ecirc;n beta.facebook.com v&agrave; mbasic.beta.facebook.com. Thật th&uacute; vị, l&agrave; bạn sẽ kh&ocirc;ng hề bị giới hạn số lượt sai.</p>\r\n\r\n<p>T&ocirc;i đ&atilde; cố gắng thử hack t&agrave;i khoản của ri&ecirc;ng m&igrave;nh (theo ch&iacute;nh s&aacute;ch của Facebook, bạn kh&ocirc;ng được tấn cống v&agrave;o t&agrave;i khoản n&agrave;o của người d&ugrave;ng kh&aacute;c) v&agrave; đ&atilde; th&agrave;nh c&ocirc;ng trong việc đặt mật khẩu mới cho t&agrave;i khoản n&agrave;y. Sau đ&oacute; t&ocirc;i c&oacute; thể sử dụng mật khẩu n&agrave;y để đăng nhập v&agrave;o t&agrave;i khoản một c&aacute;ch đường ho&agrave;ng.</p>\r\n\r\n<p>&nbsp;</p>\r\n<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/U3Of-jF1nWo\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>\r\n<p>Như bạn thấy trong video, t&ocirc;i đ&atilde; c&oacute; thể thiết lập một mật khẩu mới cho người d&ugrave;ng bằng c&aacute;ch d&ugrave;ng &ldquo;vũ lực&rdquo; ăn cắp m&atilde; đ&atilde; được gửi đến địa chỉ email v&agrave; số điện thoại của họ.</p>\r\n\r\n<p><code>POST /recover/as/code/ HTTP/1.1</code></p>\r\n\r\n<p><code>Host: beta.facebook.com</code></p>\r\n\r\n<p><code>lsd=AVoywo13&amp;n=XXXXX</code></p>\r\n\r\n<p>Với &ldquo;n&rdquo; th&agrave;nh c&ocirc;ng cho ph&eacute;p t&ocirc;i thiết lập mật khẩu mới cho bất kỳ người d&ugrave;ng Facebook n&agrave;o.</p>\r\n\r\n<p>Ng&agrave;y 22 th&aacute;ng 2 năm 2016: T&ocirc;i b&aacute;o lỗi tới Facebook.</p>\r\n\r\n<p>Ng&agrave;y 23 th&aacute;ng 2 năm 2016: Fb X&aacute;c minh rằng lỗi đ&atilde; được khắc phục.</p>\r\n\r\n<p>Ng&agrave;y 2 th&aacute;ng 3 năm 2016: Facebook trao thưởng 15.000 đ&ocirc; la mỹ cho t&ocirc;i.</p>\r\n', '2018-07-18 14:45:46', 0, 'HinhAnh-1531917946.jpg', 3357, 14, 0),
+(19, 'Lập trình viên nên chọn laptop nào?', 'Từ đầu năm 2017, có rất nhiều laptop mới ra mắt có bộ xử lý mới hơn và card đồ họa tiêu thụ năng lượng ít hơn và mạnh hơn so với mô hình tiền nhiệm của nó', '<h3><strong>Cấu h&igrave;nh m&aacute;y t&iacute;nh để lập tr&igrave;nh&nbsp;cho d&acirc;n lập tr&igrave;nh vi&ecirc;n bao gồm</strong></h3>\r\n\r\n<p><strong>CPU v&agrave; RAM</strong></p>\r\n\r\n<p>H&atilde;y chắc chắn rằng bạn đang nhận được bộ vi xử l&yacute; mới nhất tr&ecirc;n thị trường nằm trong&nbsp;ng&acirc;n s&aacute;ch của bạn . Điều đ&oacute; sẽ cho ph&eacute;p bạn c&oacute; thể giữ cho m&aacute;y t&iacute;nh của bạn trong 5 năm tới c&oacute; thể chạy bất kỳ chương tr&igrave;nh lập tr&igrave;nh mới nhất hoặc c&aacute;c c&ocirc;ng cụ ph&aacute;t triển trong tương lai. C&oacute; thể cần đến năng lực xử l&yacute; trong một số trường hợp khi bạn bi&ecirc;n soạn code của m&igrave;nh. Bộ vi xử l&yacute; i5 hoặc i7 với thế hệ mới nhất v&agrave; tốc độ cao hơn sẽ l&agrave; l&yacute; tưởng trong trường hợp n&agrave;y.</p>\r\n\r\n<p>RAM l&agrave; một th&agrave;nh phần phần cứng ch&iacute;nh cần được lựa chọn trong khi lựa chọn laptop&nbsp;cho lập tr&igrave;nh n&oacute;i ri&ecirc;ng v&agrave; m&aacute;y t&iacute;nh x&aacute;ch tay n&oacute;i chung. H&atilde;y chọn laptop c&oacute;&nbsp;bộ nhớ RAM c&ocirc;ng suất cao hơn với tần số cao hơn. Hiện nay RAM&nbsp;&nbsp;DDR4 đ&atilde;&nbsp;c&oacute; mặt tr&ecirc;n thị trường, h&atilde;y chọn m&aacute;y t&iacute;nh c&oacute;&nbsp;bộ nhớ RAM DDR4 nếu n&oacute; nằm trong ng&acirc;n s&aacute;ch của bạn. Bộ nhớ RAM 8GB&nbsp;sẽ đảm bảo chương tr&igrave;nh ch&iacute;nh của bạn hoặc c&aacute;c phần mềm ph&aacute;t triển y&ecirc;u cầu phần cứng ph&ugrave; hợp. M&aacute;y t&iacute;nh cung cấp 1 khe RAM miễn ph&iacute; sẽ cho ph&eacute;p bạn n&acirc;ng cấp RAM trong tương lai.</p>\r\n\r\n<p><strong>Card đồ họa / M&agrave;n h&igrave;nh / HDD / Thời lượng Pin</strong></p>\r\n\r\n<p>Mặc d&ugrave; bạn kh&ocirc;ng mua&nbsp;laptop để chơi game&nbsp;, nhưng n&oacute; phụ thuộc v&agrave;o chương tr&igrave;nh hoặc ứng dụng bạn đang ph&aacute;t triển để&nbsp;y&ecirc;u cầu về card đồ họa. Một số chương tr&igrave;nh v&agrave; c&ocirc;ng cụ c&oacute; thể cần&nbsp;<a href=\"https://en.wikipedia.org/wiki/Graphics_processing_unit\" target=\"_new\">GPU</a>&nbsp;(bộ nhớ v&agrave; bộ xử l&yacute; đồ họa), trong trường hợp n&agrave;y bạn cũng n&ecirc;n lựa chọn laptop tốt nhất được trang bị đồ hoạc&nbsp;chuy&ecirc;n dụng mới nhất.&nbsp;&nbsp;K&iacute;ch thước m&agrave;n h&igrave;nh c&oacute; thể lớn hơn, điều n&agrave;y sẽ cho ph&eacute;p bạn thực hiện c&ocirc;ng việc viết code v&agrave; ph&aacute;t triển trong nhiều cửa sổ tr&ecirc;n c&ugrave;ng một m&agrave;n h&igrave;nh.</p>\r\n\r\n<p>Tốt hơn hết l&agrave; lựa chọn m&aacute;y t&iacute;nh x&aacute;ch tay c&oacute; đi k&egrave;m ổ&nbsp;SSD để c&oacute; thể&nbsp;đ&aacute;p ứng c&aacute;c truy vấn v&agrave; lệnh một c&aacute;ch nhanh ch&oacute;ng. Bạn c&oacute; thể thiết lập đĩa cứng hoặc lưu trữ đ&aacute;m m&acirc;y để lưu trữ nhiều dữ liệu hơn. Tuy nhi&ecirc;n, bạn n&ecirc;n c&oacute; Hệ điều h&agrave;nh ch&iacute;nh v&agrave; ứng dụng lập tr&igrave;nh / ph&aacute;t triển tr&ecirc;n ổ cứng SSD.</p>\r\n\r\n<p>L&agrave; d&acirc;n lập tr&igrave;nh&nbsp;bạn c&oacute; thể di chuyển thường xuy&ecirc;n, h&atilde;y mua m&aacute;y t&iacute;nh x&aacute;ch tay c&oacute; tuổi thọ pin tốt nhất.</p>\r\n\r\n<h3><strong>Laptop d&agrave;nh cho d&acirc;n lập tr&igrave;nh vi&ecirc;n 2017</strong></h3>\r\n\r\n<p><strong>Lenovo ThinkPad E560 &ndash; M&aacute;y t&iacute;nh x&aacute;ch tay th&acirc;n thiện với ng&acirc;n s&aacute;ch d&agrave;nh cho d&acirc;n lập tr&igrave;nh</strong></p>\r\n\r\n<p><img src=\"http://techzno.com/wp-content/uploads/2017/04/cau-hinh-laptop-cho-lap-trinh-vien-lenovo-thinkpad-e560.jpg\" style=\"height:497px; width:700px\" /></p>\r\n\r\n<p>Lenovo ThinkPad E560</p>\r\n\r\n<p>Lenovo ThinkPad c&oacute; chất lượng x&acirc;y dựng vững chắc nhất v&agrave;&nbsp;<strong>Lenovo ThinkPad E560</strong>&nbsp;c&oacute; chất lượng x&acirc;y dựng rất bền v&agrave; n&oacute; cũng l&agrave; một laptop th&acirc;n thiện với ng&acirc;n s&aacute;ch d&agrave;nh cho d&acirc;n lập tr&igrave;nh. N&oacute; kh&ocirc;ng phải l&agrave; một m&aacute;y t&iacute;nh x&aacute;ch tay h&agrave;ng đầu, nhưng nếu bạn đ&atilde; bắt đầu học đại học chuy&ecirc;n ng&agrave;nh&nbsp;<strong>c&ocirc;ng nghệ th&ocirc;ng tin</strong>&nbsp;hoặc nếu bạn đang c&oacute; ng&acirc;n s&aacute;ch hạn hẹp, đ&acirc;y l&agrave; lựa chọn tối ưu cho bạn. M&aacute;y được x&acirc;y dụng b&ecirc;n trong l&agrave; một bộ xử l&yacute; Intel Core i5 thế hệ thứ 6 v&agrave; 8GB RAM đủ mạnh cho c&aacute;c nh&agrave; ph&aacute;t triển web hoặc c&aacute;c nh&agrave; ph&aacute;t triển ứng dụng di động.</p>\r\n\r\n<p>Với Lenovo ThinkPad E560 bạn c&oacute; thể dễ d&agrave;ng n&acirc;ng cấp đĩa v&agrave; bộ nhớ nếu bạn cảm thấy m&aacute;y kh&ocirc;ng ph&ugrave; hợp với nhu cầu của bạn. Lưu trữ được t&iacute;ch hợp kh&aacute; nhanh v&igrave; n&oacute; l&agrave; một ổ SSD. Lenovo ThinkPad E560 đủ mạnh cho c&aacute;c nh&agrave; ph&aacute;t triển, d&acirc;n it v&agrave; c&oacute; chất lượng x&acirc;y dựng tốt m&agrave; kh&ocirc;ng ph&aacute; vỡ ng&acirc;n s&aacute;ch của bạn.</p>\r\n\r\n<p>Lenovo ThinkPad E560 l&agrave; một m&aacute;y t&iacute;nh x&aacute;ch tay gi&aacute; rẻ&nbsp;d&agrave;nh cho d&acirc;n it v&agrave;o năm 2017. M&aacute;y đi k&egrave;m c&aacute;c th&ocirc;ng số phần cứng như sau:</p>\r\n\r\n<ul>\r\n	<li><a href=\"http://ark.intel.com/products/88193/Intel-Core-i5-6200U-Processor-3M-Cache-up-to-2_80-GHz\" target=\"_new\">Intel Core i5-6200U</a>&nbsp;(2.3GHz, Turbo l&ecirc;n đến 2.8GHz)</li>\r\n	<li>RAM 8GB DDR3</li>\r\n	<li>Ổ cứng trạng th&aacute;i rắn 240GB</li>\r\n	<li>M&agrave;n h&igrave;nh 1366&times;768 khổ 15,6 inch</li>\r\n</ul>\r\n\r\n<p><strong>Acer Aspire S13</strong></p>\r\n\r\n<p><img src=\"http://techzno.com/wp-content/uploads/2017/04/cau-hinh-laptop-cho-dan-lap-trinh-Acer-Aspire-S13.jpg\" style=\"height:393px; width:700px\" /></p>\r\n\r\n<p>Acer Aspire S13</p>\r\n\r\n<p>Acer Aspire S13 l&agrave; một m&aacute;y t&iacute;nh x&aacute;ch tay gi&aacute; rẻ tốt cho lập tr&igrave;nh vi&ecirc;n v&agrave;o năm 2017 với một thiết kế mỏng v&agrave; nhẹ. Tr&ecirc;n thị trường c&oacute; nhiều&nbsp;m&aacute;y t&iacute;nh x&aacute;ch tay mỏng v&agrave; nhẹ&nbsp;như thế n&agrave;y, nhưng Acer Aspire S13 c&oacute; những ưu điểm ri&ecirc;ng. N&oacute; c&oacute; một thiết kế khung nhựa mỏng m&agrave; gi&uacute;p m&aacute;y nhẹ v&agrave; di động để bạn c&oacute; thể mang n&oacute; đi khắp nơi. Đối với người d&ugrave;ng c&ocirc;ng nghệ th&ocirc;ng tin, đ&acirc;y l&agrave; một laptop&nbsp;rất tốt v&igrave; n&oacute; được trang bị bộ vi xử l&yacute; Intel Core i5 v&agrave; RAM 8GB, t&iacute;nh năng di động của n&oacute; cũng l&agrave; một lợi thế cho d&acirc;n lập tr&igrave;nh v&agrave;o năm 2017.</p>\r\n\r\n<p>Nếu bạn l&agrave;m việc trong một căn ph&ograve;ng thiếu &aacute;nh s&aacute;ng, Acer Aspire S13 c&oacute; một b&agrave;n ph&iacute;m backlit để bạn c&oacute; thể g&otilde; một c&aacute;ch dễ d&agrave;ng. Acer Aspire S13 c&oacute; tuổi thọ pin tuyệt vời với Windows 10, ph&ugrave; hợp hơn cho t&iacute;nh di động v&agrave; thời gian l&agrave;m việc d&agrave;i. M&aacute;y mỏng, mức sử dụng pin tốt v&agrave; m&agrave;n h&igrave;nh HD đầy đủ sẽ ph&ugrave; hợp với hầu hết c&aacute;c lập tr&igrave;nh vi&ecirc;n v&agrave; d&acirc;n it, những người t&igrave;m kiếm&nbsp;laptop gi&aacute; rẻ&nbsp;v&agrave; tốt nhất cho lập tr&igrave;nh.</p>\r\n\r\n<p>Acer Aspire S13 đi k&egrave;m với th&ocirc;ng số kỹ thuật sau:</p>\r\n\r\n<ul>\r\n	<li>Bộ xử l&yacute; Intel Core i5-6200U thứ 6 Gen 6</li>\r\n	<li>256GB SSD</li>\r\n	<li>RAM 8GB DDR3</li>\r\n	<li>M&agrave;n h&igrave;nh 1080p Full HD với m&agrave;n h&igrave;nh 13,3-inch</li>\r\n</ul>\r\n\r\n<p><strong>Dell Inspiron 5567 &ndash; i7 &nbsp;&ndash; cấu h&igrave;nh mạnh để lập tr&igrave;nh</strong></p>\r\n\r\n<p><img src=\"http://techzno.com/wp-content/uploads/2017/04/Dell-Inspiron-5567-cau-hinh-laptop-cho-dan-lap-trinh.jpg\" style=\"height:410px; width:700px\" /></p>\r\n\r\n<p>Dell Inspiron 5567 &ndash; i7</p>\r\n\r\n<p>Dell Inspiron 5567 đứng đầu trong d&ograve;ng m&aacute;y t&iacute;nh x&aacute;ch tay Inspiron 15. M&aacute;y được trang bị bộ xử l&yacute; Intel Core i7&nbsp;<a href=\"https://en.wikipedia.org/wiki/Kaby_Lake\" target=\"_new\">Kabylake</a>, RAM 16GB v&agrave; card đồ họa&nbsp;<a href=\"http://www.amd.com/en-us/products/graphics/desktop/r7\" target=\"_new\">AMD R7</a>&nbsp;c&oacute; gi&aacute; tầm 15 triệu&nbsp;l&agrave;m cho n&oacute; trở th&agrave;nh một chiếc m&aacute;y t&iacute;nh x&aacute;ch tay rất tốt cho lập tr&igrave;nh. Hiệu suất của Dell Inspiron 5567 vượt trội cho ph&aacute;t triển ứng dụng v&agrave; lập tr&igrave;nh&nbsp;v&agrave; m&aacute;y cũng c&oacute; thể phục vụ như l&agrave; một thay thế cho m&aacute;y t&iacute;nh để b&agrave;n rất tốt . Ngay cả với một ổ đĩa quang học, m&aacute;y t&iacute;nh x&aacute;ch tay n&agrave;y vẫn nhẹ&nbsp;v&agrave; c&oacute; thể được mang trong t&uacute;i một c&aacute;ch dễ d&agrave;ng.Được x&acirc;y dựng chất lượng, tuy nhi&ecirc;n, kh&ocirc;ng phải l&agrave; tuyệt vời với thiết kế nhựa của n&oacute;, v&agrave; n&oacute; l&agrave; b&oacute;ng, v&igrave; vậy n&oacute; dễ bị trầy xước. Điều tuyệt vời nữa ở Dell Inspiron 5567 l&agrave; n&oacute; c&oacute; một b&agrave;n ph&iacute;m backlit v&agrave; một m&agrave;n h&igrave;nh cảm ứng rất ch&iacute;nh x&aacute;c m&agrave; l&agrave;m cho n&oacute; trở th&agrave;nh laptop với gi&aacute; rất hợp l&yacute; trong năm 2017.</p>\r\n\r\n<p>Cấu h&igrave;nh n&agrave;y của Dell Inspiron 5567:</p>\r\n\r\n<ul>\r\n	<li><a href=\"https://ark.intel.com/products/95451/Intel-Core-i7-7500U-Processor-4M-Cache-up-to-3_50-GHz-\" target=\"_new\">Intel Core i7-7500U</a>&nbsp;(2.7GHz, Turbo l&ecirc;n đến 3.5GHz)</li>\r\n	<li>RAM 16GB DDR4</li>\r\n	<li>1TB HDD</li>\r\n	<li>AMD Radeon R7 M445 với 4GB GDDR5 VRAM</li>\r\n	<li>M&agrave;n h&igrave;nh cảm ứng 10,6 inch 15,6 inch</li>\r\n</ul>\r\n\r\n<p><strong>ASUS F556UA</strong></p>\r\n\r\n<p><img src=\"http://techzno.com/wp-content/uploads/2017/04/ASUS-F556UA-la-mot-laptop-tot-cho-cac-lap-trinh-vien.jpg\" style=\"height:462px; width:700px\" /></p>\r\n\r\n<p>ASUS F556UA</p>\r\n\r\n<p>ASUS F556UA l&agrave; một laptop tốt cho c&aacute;c lập tr&igrave;nh vi&ecirc;n đang t&igrave;m kiếm một m&aacute;y t&iacute;nh x&aacute;ch tay gi&aacute; rẻ với chất lượng x&acirc;y dựng tốt v&agrave; thiết kế đơn giản. Đ&acirc;y l&agrave; laptop tầm trung &nbsp;với thiết kế đơn giản v&agrave; mỏng, một bộ vi xử l&yacute; Intel Core i5 Kabylake v&agrave; 8GB RAM l&agrave; tuyệt vời cho c&aacute;c nh&agrave; ph&aacute;t triển ứng dụng v&agrave; lập tr&igrave;nh c&oacute; ng&acirc;n s&aacute;ch hạn chế. Bạn c&oacute; thể dễ d&agrave;ng chạy c&aacute;c ứng dụng ph&aacute;t triển web &nbsp;hoặc c&aacute;c ứng dụng m&ocirc; phỏng một c&aacute;ch dễ d&agrave;ng m&agrave; kh&ocirc;ng gặp trở ngại g&igrave;. ASUS cung cấp kết nối&nbsp;tốt nhất&nbsp;với&nbsp;<a href=\"https://en.wikipedia.org/wiki/USB_Type-C\" target=\"_new\">USB Type-C</a>&nbsp;cho tốc độ truyền nhanh đến c&aacute;c thiết bị USB-C, HDMI v&agrave; VGA để kết nối với m&agrave;n h&igrave;nh ngo&agrave;i.ASUS F556UA l&agrave; một m&aacute;y t&iacute;nh x&aacute;ch tay tuyệt vời cho c&aacute;c nh&agrave; ph&aacute;t triển lập tr&igrave;nh với taamg gi&aacute; chỉ dưới 15 triệu. N&oacute; nhẹ, mỏng thậm ch&iacute; với một ổ đĩa quang học v&agrave; thiết kế nhựa của được x&acirc;y dựng bằng m&agrave;u champagne l&agrave;m cho n&oacute; tr&ocirc;ng rất đẹp.</p>\r\n\r\n<p>Cấu h&igrave;nh n&agrave;y của ASUS F556UA bao gồm:</p>\r\n\r\n<ul>\r\n	<li>Bộ xử l&yacute; mới nhất thứ 7 Intel Core i5-7200U 2.5GHz</li>\r\n	<li>RAM 8GB DDR4</li>\r\n	<li>Ổ cứng SSD 256GB</li>\r\n	<li>M&agrave;n h&igrave;nh 1080p 15.6 inch</li>\r\n</ul>\r\n\r\n<p><strong>HP Envy 13-ab016nr</strong></p>\r\n\r\n<p><img src=\"http://techzno.com/wp-content/uploads/2017/04/HP-Envy-13-ab016nr.jpg\" style=\"height:454px; width:700px\" /></p>\r\n\r\n<p>HP Envy 13-ab016nr</p>\r\n\r\n<p>HP Envy được biết đến với thiết kế mỏng v&agrave; vẻ ngo&agrave;i sang trọng. HP Envy 13-ab016nr l&agrave; một&nbsp;<strong>m&aacute;y t&iacute;nh x&aacute;ch tay mỏng nhẹ</strong>&nbsp;được trang bị những t&iacute;nh năng l&agrave;m cho n&oacute; trở th&agrave;nh một m&aacute;y t&iacute;nh x&aacute;ch tay rất tốt cho coding. Thứ nhất, n&oacute; được thiết kế th&acirc;n m&aacute;y bằng nh&ocirc;m mỏng đẹp l&agrave;m cho m&aacute;y rất nhẹ v&agrave; c&oacute; t&iacute;nh di động cao. Thứ hai, khi nắp được mở ra, bản lề nắp n&acirc;ng b&agrave;n ph&iacute;m v&agrave; bảng điều khiển cảm ứng ở một g&oacute;c nhỏ để bạn g&otilde; thoải m&aacute;i khi bạn c&oacute; thể l&agrave;m việc trong nhiều giờ. Thứ ba, b&agrave;n ph&iacute;m c&oacute; đ&egrave;n nền c&ugrave;ng với bản lề nắp l&agrave; tốt nhất khi bạn đang l&agrave;m việc trong một ph&ograve;ng c&oacute; &aacute;nh s&aacute;ng lờ mờ.</p>\r\n\r\n<p>C&ocirc;ng việc ph&aacute;t triển c&aacute;c ứng dụng v&agrave; m&ocirc; phỏng của bạn sẽ kh&ocirc;ng gặp vấn đề g&igrave;, v&agrave; với tuổi thọ pin d&agrave;i, bạn c&oacute; thể l&agrave;m việc m&agrave; kh&ocirc;ng lo lắng bị gi&aacute;n đoạn.</p>\r\n\r\n<p>HP Envy 13-ab016nr đi k&egrave;m với th&ocirc;ng số kỹ thuật sau:</p>\r\n\r\n<ul>\r\n	<li>Intel Core i5-7200U (2.5GHz, Turbo l&ecirc;n đến 3.1GHz)</li>\r\n	<li>RAM 8GB DDR3</li>\r\n	<li>Ổ cứng SSD 256GB</li>\r\n	<li>M&agrave;n h&igrave;nh 13,3 inch 1080p</li>\r\n</ul>\r\n\r\n<p><strong>Apple MacBook Pro 13 &ndash; M&aacute;y t&iacute;nh x&aacute;ch tay tốt nhất d&agrave;nh cho lập tr&igrave;nh vi&ecirc;n năm 2017</strong></p>\r\n\r\n<p><img src=\"http://techzno.com/wp-content/uploads/2017/04/Apple-MacBook-Pro-13.jpg\" style=\"height:451px; width:700px\" /></p>\r\n\r\n<p>Apple MacBook Pro 13</p>\r\n\r\n<p>Apple MacBook Pro 13 l&agrave; m&aacute;y t&iacute;nh x&aacute;ch tay tốt nhất cho c&aacute;c nh&agrave; ph&aacute;t triển ứng dụng v&agrave; lập tr&igrave;nh vi&ecirc;n nếu bạn thực sự kh&ocirc;ng cần hệ điều h&agrave;nh Windows. M&aacute;y t&iacute;nh x&aacute;ch tay MacBook Pro lu&ocirc;n được đ&aacute;nh gi&aacute; cao về chất lượng x&acirc;y dựng, chất lượng hiển thị v&agrave; sự ổn định của MacOS cho c&aacute;c nh&agrave; ph&aacute;t triển v&agrave; lập tr&igrave;nh. Hệ điều h&agrave;nh dựa tr&ecirc;n UNIX n&agrave;y l&agrave; l&yacute; do tại sao c&aacute;c nh&agrave; ph&aacute;t triển v&agrave; lập tr&igrave;nh th&iacute;ch m&aacute;y t&iacute;nh MacBook Pro v&igrave; n&oacute; rất ổn định v&agrave; hoạt động rất tốt với phần cứng đi k&egrave;m với ch&uacute;ng.</p>\r\n\r\n<p>Apple MacBook&nbsp;Pro 13 đi k&egrave;m bộ xử l&yacute; Intel Core i5, RAM 8GB (kh&ocirc;ng thể n&acirc;ng cấp) v&agrave; bộ nhớ flash 256GB cực nhanh. Mặc d&ugrave; bộ xử l&yacute; kh&ocirc;ng mạnh như hầu hết c&aacute;c m&aacute;y t&iacute;nh x&aacute;ch tay Windows kh&aacute;c trong phạm vi gi&aacute; của n&oacute;, MacBook Pro 13 vẫn hoạt động tốt như l&agrave; m&aacute;y t&iacute;nh x&aacute;ch tay tốt nhất cho c&aacute;c nh&agrave; ph&aacute;t triển iOS v&agrave; macOS. V&igrave; c&oacute; nhiều c&aacute;ch để c&agrave;i đặt Windows OS tr&ecirc;n m&aacute;y t&iacute;nh x&aacute;ch tay Mac, bạn c&oacute; thể sử dụng m&aacute;y t&iacute;nh x&aacute;ch tay n&agrave;y để lập tr&igrave;nh đa năng tr&ecirc;n nền tảng ch&eacute;o.</p>\r\n\r\n<p>Th&ocirc;ng số&nbsp;của Apple MacBook Pro 13 đi k&egrave;m bao gồm:</p>\r\n\r\n<ul>\r\n	<li>Intel Core i5 -6360U (2.0GHz, Turbo l&ecirc;n đến 3.1GHz)</li>\r\n	<li>RAM 8GB LPDDR3</li>\r\n	<li>Bộ nhớ flash 256 GB</li>\r\n	<li>Intel Iris Graphics 540</li>\r\n	<li>M&agrave;n h&igrave;nh Retina 13.3 inch độ ph&acirc;n giải 2560&times;1600</li>\r\n</ul>\r\n\r\n<h3><strong>Dell XPS 13 9360</strong></h3>\r\n\r\n<p><img src=\"http://techzno.com/wp-content/uploads/2017/04/Dell-XPS-13-9360.jpg\" style=\"height:401px; width:700px\" /></p>\r\n\r\n<p>Dell XPS 13 9360</p>\r\n\r\n<p>Giống như c&aacute;c m&aacute;y t&iacute;nh x&aacute;ch tay kh&aacute;c trong danh s&aacute;ch n&agrave;y, Acer Aspire S13, HP Envy 13, Dell XPS 13 9360 đ&atilde; c&oacute; mặt từ đầu năm 2015 v&agrave; c&oacute; m&agrave;n h&igrave;nh tốt nhất trong danh s&aacute;ch laptop&nbsp;mỏng v&agrave; nhẹ. Dell XPS 13 9360 c&oacute; một khung gầm ấn tượng được l&agrave;m từ nh&ocirc;m v&agrave; sợi carbon l&agrave;m cho n&oacute; chắc chắn v&agrave; nhẹ, phần cứng được trang bị l&agrave; mới nhất v&agrave; rất mạnh mẽ l&agrave;m cho n&oacute; trở th&agrave;nh laptop&nbsp;tốt nhất cho c&aacute;c nh&agrave; ph&aacute;t triển v&agrave; lập tr&igrave;nh trong năm 2017. Dell XPS 13 9360 cũng c&oacute; một m&agrave;n h&igrave;nh hiển thị InfinityEdge v&agrave; sự r&otilde; n&eacute;t của m&agrave;n h&igrave;nh hiển thị n&agrave;y được so s&aacute;nh với m&agrave;n h&igrave;nh Retina của MacBook Pro thậm ch&iacute; với độ ph&acirc;n giải m&agrave;n h&igrave;nh 1080p. Bộ xử l&yacute; mới nhất của Intel Core i5 v&agrave; 8GB RAM cung cấp hiệu suất tuyệt vời cho tất cả c&aacute;c nhu cầu ph&aacute;t triển v&agrave; lập tr&igrave;nh của bạn. Bạn cũng c&oacute; thể di chuyển dễ d&agrave;ng với m&aacute;y nhờ v&agrave;o thiết kế mỏng v&agrave; nhẹ của n&oacute;.</p>\r\n\r\n<p>Cấu h&igrave;nh Dell XPS 13 9360 đi k&egrave;m với:</p>\r\n\r\n<ul>\r\n	<li>Intel Core i5-7200U (2.5GHz, Turbo l&ecirc;n đến 3.1GHz)</li>\r\n	<li>RAM 8GB DDR3</li>\r\n	<li>Ổ cứng trạng th&aacute;i rắn 128 GB</li>\r\n	<li>M&agrave;n h&igrave;nh InfinityEdge 13.3 inch 1080p</li>\r\n</ul>\r\n\r\n<h3><strong>Kết luận</strong></h3>\r\n\r\n<p>Tr&ecirc;n đ&acirc;y 7 laptop tốt nhất d&agrave;nh cho c&aacute;c nh&agrave; ph&aacute;t triển v&agrave; lập tr&igrave;nh vi&ecirc;n v&agrave;o năm 2017 nằm trong ng&acirc;n s&aacute;ch của bạn. Năm 2017 l&agrave; một năm tuyệt vời cho những người d&ugrave;ng coding&nbsp;v&igrave; c&oacute; rất nhiều laptop&nbsp;mới c&oacute; phần cứng tuyệt vời như c&aacute;c card đồ họa NVIDIA mới v&agrave; bộ xử l&yacute; Intel Kabylake ti&ecirc;u thụ năng lượng &iacute;t hơn v&agrave; mang lại hiệu suất tốt hơn.</p>\r\n', '2018-07-18 14:49:31', 0, 'HinhAnh-1531918171.jpg', 4, 13, 0),
+(20, 'Không biết bắt đầu học lập trình từ đâu, 13 mẹo tự học lập trình này sẽ giúp bạn!', 'Khi bạn mới bắt đầu viết code, sẽ rất khó để biết rõ mình nên bắt đầu từ đâu. Và thật dễ dàng để đi nhầm đường và lãng phí rất nhiều thời gian cũng như là tiền bạc của bạn.', '<p>T&ocirc;i l&agrave; Eric Elliott, t&aacute;c giả của &ldquo;Lập tr&igrave;nh ứng dụng JavaScript&rdquo; (O&rsquo;Reilly), trưởng nh&oacute;m ph&aacute;t triển JavaScript. T&ocirc;i dạy v&agrave; thu&ecirc; c&aacute;c nh&agrave; ph&aacute;t triển JavaScript. Dưới đ&acirc;y l&agrave; một số mẹo y&ecirc;u th&iacute;ch của t&ocirc;i d&agrave;nh cho những bạn lập tr&igrave;nh muốn theo đuổi th&agrave;nh c&ocirc;ng:</p>\r\n\r\n<p><a href=\"https://techtalk.vn/lap-trinh-vien-co-can-hoc-dai-hoc-hay-khong.html\"><strong>Qu&ecirc;n chương tr&igrave;nh đại học đi</strong></a>. Trừ khi đ&oacute; l&agrave; từ Stanford hoặc MIT, bằng cấp của bạn sẽ chẳng ấn tượng bằng việc bạn c&oacute; thể đưa ra một số ứng dụng của ri&ecirc;ng m&igrave;nh. Tr&ecirc;n thực tế, hầu hết c&aacute;c chương tr&igrave;nh của trường đại học đều cố gắng theo kịp với c&ocirc;ng nghệ đang thay đổi. Bằng cấp sẽ mua cho bạn một mức lượng v&agrave;i ng&agrave;n đ&ocirc; la trong 1-3 năm đầu ti&ecirc;n. Sau đ&oacute; th&igrave; n&oacute; gần như kh&ocirc;ng c&ograve;n tạo ra sự kh&aacute;c biệt n&agrave;o nữa. Trừ khi bạn muốn đổ thời gian v&agrave; tiền bạc ra đường để học lấy th&ecirc;m nhiều bằng cấp kh&ocirc;ng cần thiết &hellip;</p>\r\n\r\n<p><img alt=\"\" src=\"https://techtalk.vn/wp-content/uploads/2018/03/developer-1-696x464.jpeg\" style=\"height:464px; width:696px\" /></p>\r\n\r\n<p><strong>Bắt đầu bằng JavaScript</strong>. JavaScript l&agrave; ng&ocirc;n ngữ lập tr&igrave;nh phổ biến nhất tr&ecirc;n thế giới. Đ&oacute; l&agrave; ng&ocirc;n ngữ chuẩn của nền tảng web v&agrave; thường được sử dụng để m&atilde; ứng dụng di động. Bạn thậm ch&iacute; c&oacute; thể lập tr&igrave;nh robot, m&aacute;y bay kh&ocirc;ng người l&aacute;i v&agrave; tr&ograve; chơi bằng JavaScript.</p>\r\n\r\n<p><strong>L&agrave;m một project nhỏ</strong>. Sự tự tin gi&uacute;p c&aacute;c sinh vi&ecirc;n lập tr&igrave;nh nhiều hơn bất cứ điều g&igrave; kh&aacute;c. H&atilde;y Tăng cường điều đ&oacute; bằng c&aacute;ch bắt đầu với những project v&agrave; cuộc thi nhỏ. Code.org đ&atilde; c&oacute; chương tr&igrave;nh giảng dạy về code d&agrave;nh cho trẻ em với c&aacute;c theme li&ecirc;n quan tới Star Wars v&agrave; Minecraft. Ngay cả khi bạn l&agrave; người lớn, đ&oacute; vẫn l&agrave; một c&aacute;ch tuyệt vời để chứng minh bản th&acirc;n m&igrave;nh c&oacute; thể l&agrave;m nhiều thứ th&uacute; vị.</p>\r\n\r\n<p><strong>C&aacute;ch tốt nhất để t&igrave;m hiểu l&agrave;m thế n&agrave;o để code l&agrave; coding</strong>. Rất nhiều sinh vi&ecirc;n bắt đầu bằng c&aacute;ch đọc s&aacute;ch. Bạn c&oacute; thể đi theo con đường đ&oacute; &ndash; đ&oacute; l&agrave; c&aacute;ch t&ocirc;i học code khi t&ocirc;i mới bắt đầu, nhưng nếu bạn thực sự muốn tiến bộ, h&atilde;y bắt đầu bằng một số b&agrave;i tập. FreeCodeCamp c&oacute; kh&oacute;a học JavaScript cơ bản vỏn vẹn chỉ 10 giờ sẽ cho bạn một cơ hội tốt để tung đ&ocirc;i c&aacute;nh của m&igrave;nh trong thế giới lập tr&igrave;nh.</p>\r\n\r\n<p><strong>Học theo v&iacute; dụ</strong>. Một trong những c&aacute;ch tốt nhất để tạo ra đột ph&aacute; ch&iacute;nh l&agrave; xem code của người kh&aacute;c v&agrave; t&igrave;m hiểu xem họ nghĩ g&igrave; về vấn đề. H&atilde;y c&ugrave;ng học chung một người bạn.</p>\r\n\r\n<p><strong>Đọc Blogs</strong>&nbsp;T&ocirc;i c&oacute; thể hơi thi&ecirc;n vị, nhưng&nbsp;<a href=\"https://medium.com/javascript-scene\" target=\"_new\"><strong>JavaScript Scene</strong></a>&nbsp;thật sự l&agrave; một blog tuyệt vời để đọc. T&ocirc;i cũng l&agrave; một fan của&nbsp;<a href=\"http://www.2ality.com/\" target=\"_new\"><strong>2ality</strong></a>&nbsp;&ndash; một c&aacute;ch tuyệt vời để lu&ocirc;n cập nhật những g&igrave; sẽ xảy ra tiếp theo trong JavaScript.</p>\r\n\r\n<p><strong>H&atilde;y thử Bootcamp</strong>. Nếu bạn c&oacute; đủ khả năng để đi học full-time, th&igrave; n&ecirc;n qu&ecirc;n c&aacute;c chương tr&igrave;nh của trường đại học m&agrave; h&atilde;y thử một bootcamp. Bootcamps rất tuyệt nếu bạn thực sự nghi&ecirc;m t&uacute;c để đầu tư (thường l&agrave; từ $ 10k &ndash; $ 25k), v&agrave; bạn cần phải rất c&oacute; tr&aacute;ch nhiệm với ch&iacute;nh m&igrave;nh. Tuy vậy h&atilde;y coi chừng những bootcamps chỉ cung cấp c&aacute;c chương tr&igrave;nh 3 th&aacute;ng (12 tuần). Bởi bạn cần &iacute;t nhất gấp đ&ocirc;i số đ&oacute; để c&oacute; thể vững v&agrave;ng để kiếm việc.</p>\r\n\r\n<p><strong>Học qua trực tuyến</strong>. Nếu bạn kh&ocirc;ng c&oacute; tiền cho bootcamp, hoặc bạn l&agrave; một người th&iacute;ch chủ động cũng như tự định hướng hơn, h&atilde;y thử học trực tuyến. &ldquo;Học JavaScript với Eric Elliott&rdquo; l&agrave; một kh&oacute;a học tuyệt vời để bạn bắt đầu.</p>\r\n\r\n<p><strong>T&igrave;m người thầy giỏi.</strong>&nbsp;Tốt nghiệp kh&oacute;a học bootcamp hoặc trực tuyến chỉ l&agrave; một bước trong chuyến đi học tập của bạn. Với tốc độ thay đổi ng&agrave;nh c&ocirc;ng nghiệp n&agrave;y, bạn sẽ kh&ocirc;ng bao giờ ngừng học tập. Do đ&oacute;, Bạn n&ecirc;n lu&ocirc;n lu&ocirc;n c&oacute; một người cố vấn giỏi để học hỏi. Bạn kh&ocirc;ng cần phải biết họ trực tiếp để học hỏi từ họ. C&oacute; thể l&agrave; ai đ&oacute; bạn theo d&otilde;i trực tuyến.</p>\r\n\r\n<p><strong>T&igrave;m nh&oacute;m Meetup hoặc học nh&oacute;m</strong>. C&aacute;c cuộc tr&ograve; chuyện l&agrave; một c&aacute;ch tuyệt vời để t&igrave;m người cố vấn, bạn b&egrave; nghi&ecirc;n cứu v&agrave; mối quan hệ mới, bất kể tr&igrave;nh độ kỹ năng hiện tại của bạn l&agrave; g&igrave;. V&agrave; thường c&ograve;n được cho ăn b&aacute;nh pizza miễn ph&iacute; nữa. H&atilde;y thử tại&nbsp;<a href=\"https://meetup.vn/\" target=\"_new\">Meetup.vn</a></p>\r\n\r\n<p><strong>Kết hợp n&oacute; lại.</strong>&nbsp;C&aacute;c b&agrave;i tập thường rất hay, nhưng thường chỉ tập trung c&aacute;c kh&aacute;i niệm rất cụ thể v&agrave; video hướng dẫn ch&iacute;nh l&agrave; con đường khai s&aacute;ng cho bạn. S&aacute;ch l&agrave; tuyệt vời, nhưng hầu hết c&aacute;c độc giả kh&ocirc;ng c&oacute; đủ khả năng thực h&agrave;nh nếu chỉ đọc từ s&aacute;ch. D&ugrave; bạn đang l&agrave;m g&igrave;, h&atilde;y trộn n&oacute; l&ecirc;n một lần. Cố gắng học hỏi từ nhiều phương tiện kh&aacute;c nhau như s&aacute;ch, video, web, etc.</p>\r\n\r\n<p><strong>X&acirc;y dựng một Portfolio cho bản th&acirc;n</strong>. Cho d&ugrave; bạn học như thế n&agrave;o, nếu bạn muốn theo nghề code, bạn sẽ muốn bắt đầu x&acirc;y dựng portfolio cho m&igrave;nh. H&atilde;y mở một t&agrave;i khoản GitHub v&agrave; đăng c&aacute;c dự &aacute;n của bạn ở đ&oacute; để c&aacute;c nh&agrave; tuyển dụng tiềm năng c&oacute; thể nh&igrave;n thấy c&ocirc;ng việc của bạn.</p>\r\n\r\n<p><strong>Học nhiều hơn một ng&ocirc;n ngữ</strong>. T&ocirc;i khuy&ecirc;n bạn n&ecirc;n đọc &ldquo;Bảy ng&ocirc;n ngữ trong bảy tuần.&rdquo; T&ocirc;i đ&atilde; code bằng c&aacute;c ng&ocirc;n ngữ như Basic, Assembly, Pascal, Delphi, C / C ++, Java, Lisp v&agrave; JavaScript. Việc học c&aacute;c ng&ocirc;n ngữ kh&aacute;c nhau với c&aacute;c triết l&yacute; kh&aacute;c nhau sẽ dạy cho bạn c&aacute;ch suy nghĩ theo nhiều hướng về những vấn đề tương tự. Mở rộng t&acirc;m tr&iacute; &nbsp;cũng như sự s&aacute;ng tạo của bạn. Nhưng h&atilde;y d&agrave;nh một năm vững chắc để tập trung v&agrave;o JavaScript trước khi bạn bắt đầu mở rộng ra ngo&agrave;i.</p>\r\n', '2018-07-18 14:53:36', 0, 'HinhAnh-1531918416.jpg', 6, 14, 0),
+(21, 'Đánh giá thứ hạng của các ngôn ngữ lập trình', 'Ngày này chúng ta sử dụng các ứng dụng một cách vô tội vạ để điều hành doanh nghiệp để làm việc cũng như để giải trí trong cuộc sống cá nhân. Nhưng ngôn ngữ lập trình nào cho phép thế giới kỹ thuật số kết nối chúng ta – và chúng đang phát triển như thế nào?', '<p>C&aacute;ch để hiểu được sự phổ biến của c&aacute;c ng&ocirc;n ngữ lập tr&igrave;nh l&agrave; xem th&ocirc;ng tin từ c&aacute;c nh&oacute;m như TIOBE, RedMonk, v&agrave; Stack Overflow, cho thấy xu hướng của ng&ocirc;n ngữ. GitHub cũng c&oacute; thể l&agrave; một thước đo quan trọng, đặc biệt l&agrave; trong cộng đồng m&atilde; nguồn mở, bởi v&igrave; n&oacute; cho thấy kh&aacute;ch quan c&oacute; bao nhi&ecirc;u đ&oacute;ng g&oacute;p code bằng một ng&ocirc;n ngữ cụ thể.</p>\r\n\r\n<p>Trong 5 năm qua ch&uacute;ng ta đ&atilde; bước v&agrave;o giai đoạn b&ugrave;ng nổ c&aacute;c ng&ocirc;n ngữ lập tr&igrave;nh. V&iacute; dụ, đ&atilde; c&oacute; một sự b&ugrave;ng nổ của c&aacute;c ng&ocirc;n ngữ v&agrave;o Java Virtual Machine. Nhưng ngay cả với tất cả những đối thủ mới, nếu bạn xem c&aacute;c bảng trending, th&igrave; những c&aacute;i t&ecirc;n dẫn đ&acirc;u vẫn l&agrave; những c&aacute;i t&ecirc;n quen thuộc Java, C, C ++, PHP, Python v&agrave; JavaScript.</p>\r\n\r\n<p>Thời điểm, khả năng chấp nhận v&agrave; t&iacute;nh li&ecirc;n quan l&agrave; những điểm kh&aacute;c biệt giữa c&aacute;c ng&ocirc;n ngữ lập tr&igrave;nh phổ biến nhất với số c&ograve;n lại. Nếu bạn nh&igrave;n v&agrave;o ng&ocirc;n ngữ lập tr&igrave;nh từ quan điểm học thuật, đ&atilde; c&oacute; một số ng&ocirc;n ngữ tốt nhưng lại thất bại do kh&ocirc;ng đ&uacute;ng đối tượng hoặc sai thời điểm. V&agrave; đ&ocirc;i khi l&agrave; cả hai.</p>\r\n\r\n<p>Ng&ocirc;n ngữ C v&agrave; C ++ đ&atilde; tồn tại h&agrave;ng thập kỷ v&agrave; vẫn tiếp tục ph&aacute;t triển mạnh mẽ. Ch&uacute;ng tiếp tục đ&oacute;ng một vai tr&ograve; quan trọng đối với operating systems, device drivers cũng như những nơi cần hiệu suất tương t&aacute;c cao với phần cứng.</p>\r\n\r\n<p><img src=\"https://techtalk.vn/wp-content/uploads/2018/01/program-language-696x465.jpg\" /></p>\r\n\r\n<p>Tương tự như vậy, Java đ&atilde; xuất hiện từ năm 1996 v&agrave; ng&agrave;y c&agrave;ng trở n&ecirc;n mạnh mẽ. Một trong những l&yacute; do phổ biến rộng r&atilde;i của n&oacute; l&agrave; bởi việc xuất hiện đ&uacute;ng l&uacute;c đ&uacute;ng thời điểm, khi c&aacute;c developer muốn tăng năng suất của họ v&agrave; c&aacute;c ng&ocirc;n ngữ lập tr&igrave;nh hướng đối tượng. Java cũng xử l&yacute; việc thực hiện nhiều qu&aacute; tr&igrave;nh song song (chủ đề) trong một qu&aacute; tr&igrave;nh duy nhất rất tốt. Khi n&oacute; xuất hiện trong năm 1996, những g&igrave; n&oacute; l&agrave;m được th&igrave; hầu như kh&ocirc;ng t&igrave;m thấy trong bất k&igrave; ng&ocirc;n ngữ lập tr&igrave;nh n&agrave;o kh&aacute;c. Java cũng mang lại lợi &iacute;ch cho việc c&oacute; thể &ldquo;ghi một lần chạy ở bất cứ đ&acirc;u&rdquo;, do đ&oacute; code c&oacute; thể chạy tr&ecirc;n c&aacute;c kiến ​​tr&uacute;c m&aacute;y t&iacute;nh v&agrave; hệ điều h&agrave;nh kh&aacute;c nhau, tạo cho n&oacute; nhiều sự hấp dẫn với c&aacute;c c&aacute;c nh&agrave; ph&aacute;t triển.</p>\r\n\r\n<p>JavaScript l&agrave; một ng&ocirc;n ngữ lập tr&igrave;nh thường xuy&ecirc;n g&oacute;p mặt trong c&aacute;c ng&ocirc;n ngữ phổ biến nhất, nhưng ở đ&acirc;y cần phải ph&acirc;n biệt sự phổ biến về số lượng người d&ugrave;ng v&agrave; mức độ ưa th&iacute;ch của một ng&ocirc;n ngữ lập tr&igrave;nh. JavaScript l&agrave; một ng&ocirc;n ngữ đ&atilde; được &aacute;p dụng rộng r&atilde;i cho ph&aacute;t triển web v&agrave; điện thoại di động; tuy nhi&ecirc;n, cộng đồng developer n&oacute;i chung c&oacute; nhiều &yacute; kiến kh&aacute;c nhau về n&oacute;. D&ugrave; g&igrave; đi chăng nữa th&igrave; web v&agrave; sự gia tăng gần đ&acirc;y của điện thoại di động đ&atilde; th&uacute;c đẩy sự phổ biến của n&oacute;.</p>\r\n\r\n<p>Ng&ocirc;n ngữ Go của Google l&agrave; một điều th&uacute; vị kh&aacute;c đ&aacute;ng được nhắc đến. Với chỉ vọn vẹn 10 tuổi, Go được xem l&agrave; tương đối trẻ so với c&aacute;c ng&ocirc;n ngữ kh&aacute;c đ&atilde; được n&ecirc;u ra ở tr&ecirc;n, nhưng n&oacute; đang ph&aacute;t triển nhanh ch&oacute;ng. V&agrave;o th&aacute;ng 7 năm 2016, ng&ocirc;n ngữ xếp thứ 55 tr&ecirc;n TIOBE Index, v&agrave; v&agrave;o th&aacute;ng 7 năm 2017 đ&atilde; tăng l&ecirc;n vị tr&iacute; thứ 10 . Với sự gia tăng về c&aacute;c c&ocirc;ng nghệ container như Docker v&agrave; Kubernetes, ch&uacute;ng ta thấy sự quan t&acirc;m về Go cũng được cải thiện đ&aacute;ng kể. Trong t&igrave;nh huống tương tự, sự phổ biến của c&aacute;c thiết bị của Apple đ&atilde; dẫn đến sự gia tăng nhanh ch&oacute;ng của Swift v&agrave; gi&uacute;p n&oacute; trở th&agrave;nh một ng&ocirc;n ngữ lập tr&igrave;nh h&agrave;ng đầu 15, vốn cực k&igrave; đ&aacute;ng nể khi tuổi đời của ng&ocirc;n ngữ chỉ mới l&agrave; con số 3.</p>\r\n\r\n<p>T&oacute;m lại, trong khi c&oacute; một số biến động trong thứ hạng c&aacute;c ng&ocirc;n ngữ lập tr&igrave;nh, danh s&aacute;ch của ch&uacute;ng vẫn kh&aacute; ổn định qua nhiều năm. V&agrave; một lần nữa, t&ocirc;i nghĩ rằng điều quan trọng l&agrave; phải ph&acirc;n biệt giữa sự phổ biến của một ng&ocirc;n ngữ v&agrave; những g&igrave; c&aacute;c nh&agrave; ph&aacute;t triển sử dụng. Thật dễ d&agrave;ng để đo lường kh&aacute;ch quan những ng&ocirc;n ngữ lập tr&igrave;nh đang được sử dụng nhưng điều đ&oacute; kh&ocirc;ng chỉ ra được ng&ocirc;n ngữ n&agrave;o sẽ ph&ugrave; hợp nhất cho từng developer nếu họ chưa thử qua.</p>\r\n', '2018-07-18 14:55:48', 0, 'HinhAnh-1531918573.jpg', 0, 4, 0),
+(22, 'Front end Optimization – 9 tips để cải thiện Web Performance', 'Bài viết này sẽ hướng dẫn cải thiện front end, bạn có thể tăng đáng kể tốc độ và hiệu suất tổng thể trang web của bạn bằng cách tập trung vào mã sạch (clean code), nén hình ảnh, giảm thiểu các external request, triển khai một CDN và một vài phương pháp khác.', '<p>Trong thế giới kĩ thuật số hiện nay, c&oacute; h&agrave;ng triệu l&iacute; do để truy cập web mỗi ng&agrave;y. Tuy nhi&ecirc;n, kh&ocirc;ng phải website n&agrave;o cũng dễ sử dụng v&agrave; load nhanh ch&oacute;ng. C&aacute;c website chưa được tối ưu h&oacute;a thường gặp phải c&aacute;c vấn đề như thời gian tải chậm, chưa c&oacute; phi&ecirc;n bản mobile hoặc tr&igrave;nh duyệt kh&ocirc;ng tương th&iacute;ch, v.v&hellip;</p>\r\n\r\n<p><img src=\"https://techtalk.vn/wp-content/uploads/2018/01/front-end-optimization-696x348.png\" style=\"width:650px\" /></p>\r\n\r\n<p><strong>1.Dọn sạch HTML document</strong></p>\r\n\r\n<p>HTML hay Hyper Text Markup Language l&agrave; xương sống của hầu hết mọi website. HTML cho ph&eacute;p định dạng trang web với heading, subheadings, danh s&aacute;ch v&agrave; những t&iacute;nh năng sắp xếp chữ hữu &iacute;ch kh&aacute;c. Bạn c&ograve;n c&oacute; thể tạo ra nhiều graphic thu h&uacute;t với phi&ecirc;n bản HTML5 mới nhất.<br />\r\n<br />\r\nHTML c&oacute; thể dễ d&agrave;ng được đọc bởi web crawlers, v&igrave; vậy c&aacute;c c&ocirc;ng cụ t&igrave;m kiếm c&oacute; thể được update c&aacute;c nội dung trang web của bạn kịp thời. Khi l&agrave;m việc với HTML, bạn n&ecirc;n cố gắng viết theo c&aacute;ch vừa ngắn gọn vừa hiệu quả. Th&ecirc;m v&agrave;o đ&oacute;, khi tham khảo c&aacute;c nguồn kh&aacute;c với HTML document th&igrave; sẽ c&oacute; một v&agrave;i kiến thức thực tế thật sự hữu &iacute;ch bạn n&ecirc;n l&agrave;m theo.<br />\r\n<br />\r\nVị tr&iacute; CSS th&iacute;ch hợp<br />\r\n<br />\r\nC&aacute;c web design thường tạo c&aacute;c CSS stylesheet sao khi tạo xong sườn của HTML ch&iacute;nh. Như vậy, c&aacute;c nh&acirc;n tố CSS thường được đặt ph&iacute;a cuối t&agrave;i liệu. Tuy nhi&ecirc;n, ch&uacute;ng ta n&ecirc;n đặt CSS ở ph&iacute;a tr&ecirc;n đầu của HTML document để đảm bảo tiến độ render.</p>\r\n\r\n\r\n<p>Chiến lược n&agrave;y c&oacute; thể sẽ kh&ocirc;ng cải thiện tốc độ tải trang, nhưng n&oacute; c&oacute; thể giữ người xem trang web của bạn tr&aacute;nh phải xem một m&agrave;n h&igrave;nh trắng hoặc một bản text chưa được chỉnh style. Điều đ&oacute; gi&uacute;p người v&agrave;o xem trang của bạn c&oacute; thể sẽ chấp nhận đợi để load page. Do thế cải thiện front end optimization của bạn.</p>\r\n\r\n<p>Vị tr&iacute; Javascript th&iacute;ch hợp<br />\r\n<br />\r\nMặt kh&aacute;c, nếu bạn đặt c&aacute;c thuộc t&iacute;nh Javascript tr&ecirc;n head tag hoặc gần đầu của t&agrave;i liệu HTML, bạn sẽ kh&oacute;a quy tr&igrave;nh loading của c&aacute;c th&agrave;nh phần HTML v&agrave; CSS. Điều n&agrave;y c&oacute; thể sẽ khiến nhiều người truy cập v&agrave;o trang của bạn phải đợi tr&ecirc;n 1 trang trống v&agrave; do vậy sẽ mất ki&ecirc;n nhẫn m&agrave; từ bỏ trang web của bạn. Bạn c&oacute; thể tr&aacute;nh vấn đề n&agrave;y bằng c&aacute;ch đặt c&aacute;c thuộc t&iacute;nh Javascript ở ph&iacute;a dưới HTML.<br />\r\n<br />\r\nTh&ecirc;m v&agrave;o đ&oacute;, khi sử dụng Javascript, bạn n&ecirc;n tải async script hơn. Điều n&agrave;y sẽ ngăn bất kỳ</p>\r\n', '2018-07-18 14:58:22', 0, 'HinhAnh-1531918702.jpg', 5, 4, 0);
+INSERT INTO `news` (`news_id`, `name`, `preview`, `detail`, `date_create`, `create_by`, `picture`, `counter`, `cat_id`, `status`) VALUES
+(23, 'Những câu nói cửa miệng của Dev và ý nghĩa của chúng', 'Để giúp bạn không bị qua mặt bởi những developer tinh quái này, tôi sẽ giải thích một số thuật ngữ mà họ thường sử dụng trong các cuộc họp nhóm.', '<p>Người ta thường n&oacute;i rằng người lu&ocirc;n n&oacute;i thật l&agrave; những đứa trẻ v&agrave; kẻ đi&ecirc;n. V&agrave; quả thật developer đ&ocirc;i khi như c&oacute; vẻ đang l&ecirc;n cơn đi&ecirc;n v&agrave; họ cũng c&oacute; t&iacute;nh trẻ con như bao người kh&aacute;c, nhưng điều đ&oacute; kh&ocirc;ng c&oacute; nghĩa l&agrave; họ sẽ lu&ocirc;n n&oacute;i sự thật. Developer thường sử dụng một ng&ocirc;n ngữ kh&aacute;c nhằm để che giấu đi những điều m&agrave; họ kh&ocirc;ng muốn bạn biết.</p>\r\n\r\n<p>Để gi&uacute;p bạn kh&ocirc;ng bị qua mặt bởi những developer tinh qu&aacute;i n&agrave;y, t&ocirc;i sẽ giải th&iacute;ch một số thuật ngữ m&agrave; họ thường sử dụng trong c&aacute;c cuộc họp nh&oacute;m.</p>\r\n\r\n<h2><strong>&lsquo;Kh&ocirc;ng ti&ecirc;u chuẩn &ndash;&nbsp;</strong><strong>Non-standard</strong><strong>&lsquo;</strong></h2>\r\n\r\n<p>Khi c&aacute;c nh&agrave; ph&aacute;t triển gọi một s&aacute;ng kiến hoặc tool l&agrave; &ldquo;kh&ocirc;ng chuẩn&rdquo;, họ c&oacute; thể n&oacute;i sự thật. Rằng n&oacute; thật sự chỉ đơn giản l&agrave; một mẹo/c&aacute;ch thức của ri&ecirc;ng họ để giải quyết vấn đề. Tuy vậy, n&oacute; c&oacute; thể sẽ dễ dẫn tới việc ảnh hưởng tới chất lượng của project, đặc biệt l&agrave; về l&acirc;u d&agrave;i nếu như tr&igrave;nh độ của developer kh&ocirc;ng vững cũng như phương ph&aacute;p kh&ocirc;ng khả thi, chỉ mang t&iacute;nh tạm thời. Do đ&oacute;, h&atilde;y thử hỏi r&otilde; cũng như lắng nghe &yacute; kiến của họ trước khi thật sự chấp thuận.</p>\r\n\r\n<h2><strong>&lsquo;Ti&ecirc;u chuẩn mới&rsquo;</strong></h2>\r\n\r\n<p>Đ&acirc;y l&agrave; c&acirc;u y&ecirc;u th&iacute;ch của họ bằng c&aacute;ch n&oacute;i rằng đ&oacute; l&agrave; &ldquo;ti&ecirc;u chuẩn mới&rdquo; hoặc &ldquo;n&oacute; sẽ nhanh ch&oacute;ng trở th&agrave;nh ti&ecirc;u chuẩn mới.&rdquo; nhằm tăng t&iacute;nh thuyết phục lập luận của m&igrave;nh cũng như khiến bạn dễ đồng &yacute; hơn.</p>\r\n\r\n<p>Tuy vậy, mới kh&ocirc;ng c&oacute; nghĩ l&agrave; n&oacute; sẽ lu&ocirc;n tốt hơn hoặc ph&ugrave; hợp hơn. Mặt kh&aacute;c, c&aacute;c &ldquo;ti&ecirc;u chuẩn&rdquo; kh&ocirc;ng phải trở th&agrave;nh ti&ecirc;u chuẩn chỉ trong một sớm một chiều. Nếu c&oacute; c&aacute;i g&igrave; đ&oacute; &ldquo;mới&rdquo; th&igrave; vẫn c&ograve;n qu&aacute; sớm để biết liệu đ&aacute;m đ&ocirc;ng c&oacute; thật sự ủng hộ n&oacute; hay kh&ocirc;ng. Developer khi d&ugrave;ng &ldquo;ti&ecirc;u chuẩn mới&rdquo; c&oacute; thể sẽ thổi b&ugrave;ng l&ecirc;n v&agrave; n&oacute;i qu&aacute; sự thật nhằm g&acirc;y ấn tượng.</p>\r\n\r\n<p>Điều đ&oacute; kh&ocirc;ng c&oacute; nghĩa l&agrave; c&aacute;c developer kh&ocirc;ng c&oacute; &yacute; định tốt khi họ n&oacute;i với bạn rằng đ&oacute; l&agrave; một &ldquo;ti&ecirc;u chuẩn mới&rdquo; m&agrave; họ đang n&oacute;ng l&ograve;ng để được &aacute;p dụng. Điều n&agrave;y thường c&oacute; nghĩa l&agrave; họ quan t&acirc;m đến việc từ bỏ hoặc phản đối một số c&aacute;ch tiếp cận cũ. Tuy nhi&ecirc;n, bạn vẫn phải thận trọng đối với c&aacute;i mới khi được c&aacute;c developer đề xuất.</p>\r\n\r\n<h2><strong>&lsquo;Một tuần&rsquo;</strong></h2>\r\n\r\n<p>Khi developer n&oacute;i rằng t&iacute;nh năng hoặc sửa lỗi đ&oacute; sẽ rất dễ để l&agrave;m, họ thường n&oacute;i đ&uacute;ng sự thật. Bởi v&igrave; họ thực sự hy vọng n&oacute; sẽ được ho&agrave;n th&agrave;nh nhanh ch&oacute;ng. Chỉ c&oacute; điều l&agrave; c&oacute; qu&aacute; nhiều sai s&oacute;t c&oacute; thể xảy ra với m&aacute;y t&iacute;nh. Đ&ocirc;i khi đ&oacute; l&agrave; mạng, đ&ocirc;i khi lại li&ecirc;n quan tới cơ sở dữ liệHoặc cũng c&oacute; thể n&oacute; đến từ sự lạc quan ngu ngốc của ch&iacute;nh c&aacute;c Developer. Trong mọi trường hợp, &ldquo;một tuần&rdquo; thường thực sự c&oacute; nghĩa l&agrave; &ldquo;một th&aacute;ng&rdquo;. Hoặc thậm ch&iacute; c&oacute; thể l&agrave; &ldquo;s&aacute;u tuần&rdquo;.</p>\r\n\r\n<h2><strong>&lsquo;Một th&aacute;ng&rsquo;</strong></h2>\r\n\r\n<p>Đ&acirc;y l&agrave; một đơn vị ước lượng chuẩn hơn m&agrave; bạn c&oacute; thể tin tưởng được nhưng cũng giống như &ldquo;một tuần&rdquo;, n&oacute; ho&agrave;n to&agrave;n kh&ocirc;ng ch&iacute;nh x&aacute;c theo đ&uacute;ng nghĩa đen. Mức độ sai lệch c&oacute; lẽ tương tự như &ldquo;trong một tuần&rdquo; v&agrave; việc k&eacute;o d&agrave;i th&agrave;nh 4-6 th&aacute;ng sẽ kh&ocirc;ng phải l&agrave; điều hiếm hoi.</p>\r\n\r\n<h2><strong>&lsquo;Một năm&rsquo;</strong></h2>\r\n\r\n<p>Khi developer n&oacute;i điều g&igrave; đ&oacute; sẽ mất một năm, họ kh&ocirc;ng n&oacute;i về thời gian nữa. Họ chỉ n&oacute;i rằng họ kh&ocirc;ng muốn l&agrave;m điều đ&oacute;. C&oacute; lẽ n&oacute; li&ecirc;n quan đến chương tr&igrave;nh hoặc ng&ocirc;n ngữ m&agrave; họ kh&ocirc;ng th&iacute;ch. C&oacute; lẽ n&oacute; sẽ c&oacute; nghĩa l&agrave; phải l&agrave;m việc với c&aacute; nh&acirc;n/team m&agrave; họ gh&eacute;t.</p>\r\n\r\n<p>Nhưng developer cũng kh&ocirc;ng thể tuy&ecirc;n bố l&agrave; n&oacute; kh&ocirc;ng thể thực hiện điện. &Iacute;t ra l&agrave; c&aacute;i t&ocirc;i của họ kh&ocirc;ng cho ph&eacute;p như vậy. Do đ&oacute; m&agrave; họ thường nghĩ rằng sẽ tốt hơn l&agrave; ch&ocirc;n v&ugrave;i n&oacute; bằng c&aacute;ch tuy&ecirc;n bố rằng điều đ&oacute; l&agrave; kh&ocirc;ng khả thi hoặc kh&ocirc;ng thực tế.</p>\r\n\r\n<p>Tất nhi&ecirc;n, h&agrave;nh vi n&agrave;y kh&aacute; l&agrave; phổ biến trong tất cả c&aacute;c th&agrave;nh phần của một c&ocirc;ng ty. V&agrave; đơn giản l&agrave; l&agrave;n n&agrave;y n&oacute; được sử dụng bởi c&aacute;c developer.</p>\r\n\r\n<h2><strong>&lsquo;Phong c&aacute;ch &ndash; Style&rsquo;</strong></h2>\r\n\r\n<p>C&oacute; người đ&atilde; từng n&oacute;i rằng tranh luận kh&ocirc;ng hề tồn tại &ndash; hoặc bạn c&oacute; hoặc bạn kh&ocirc;ng. Developer cũng tương tư như vậy. Họ c&oacute; quan điểm c&aacute; nh&acirc;n của m&igrave;nh ​​về c&aacute;ch đẹp nhất để viết code giống như c&aacute;c designer quan t&acirc;m đến c&aacute;c chuẩn mực trong thiết kế vậy.</p>\r\n\r\n<p>Vấn đề đến từ việc họ cố gắng buộc những người kh&aacute;c phải theo đ&uacute;ng &yacute; muốn của m&igrave;nh. Thậm ch&iacute; nhiều con sẵn s&agrave;ng g&acirc;y &ldquo;war&rdquo; với nhau về c&aacute;ch viết code tốt nhất. Tuy vậy n&oacute; v&ocirc; c&ugrave;ng bất lợi trong một tập thể khi c&oacute; những c&aacute; nh&acirc;n như vậy. Do đ&oacute; m&agrave; bất cứ điều g&igrave; họ n&oacute;i sau khi nhấn mạnh về &ldquo;phong c&aacute;ch&rdquo; của m&igrave;nh th&igrave; bạn c&oacute; thể bỏ qua một b&ecirc;n. Chỉ khi n&oacute; thật sự c&oacute; một vấn đề kỹ thuật đ&ograve;i hỏi sự thay đổi &ldquo;phong c&aacute;ch&rdquo; th&igrave; h&atilde;y tiếp thu &yacute; kiến từ họ một c&aacute;ch nghi&ecirc;m t&uacute;c.</p>\r\n\r\n<h2><strong>&lsquo;DevOps&rsquo;</strong></h2>\r\n\r\n<p>T&ecirc;n gọi giống như sự kết hợp của &ldquo;Developer&rdquo; v&agrave; &ldquo;Operations&rdquo;, nhưng n&oacute; thực sự đề cập đến qu&aacute; tr&igrave;nh giữ code chạy v&agrave; c&aacute;c m&aacute;y chủ hoạt động tốt, một qu&aacute; tr&igrave;nh phức tạp đủ để lập hẳn ra c&aacute;c ban ph&ograve;ng ri&ecirc;ng cho n&oacute;.</p>\r\n\r\n<p>Nhưng bạn thường c&oacute; thể ph&aacute;t hiện ra một ch&uacute;t nhạo b&aacute;ng trong giọng n&oacute;i của developer với đội &ldquo;DevOps&rdquo;. Đ&oacute; l&agrave; bởi c&aacute;c developer l&agrave; người tạo ra cấu tr&uacute;c dữ liệu v&agrave; để lại c&ocirc;ng việc bảo đảm n&oacute; chạy tốt cho người kh&aacute;c. Theo một c&aacute;ch n&agrave;o đ&oacute;, &ldquo;DevOps&rdquo; c&oacute; thể c&oacute; vẻ như l&agrave; bất cứ điều g&igrave; m&agrave; c&aacute;c developer kh&ocirc;ng muốn l&agrave;m nhưng cần được thực hiện.</p>\r\n\r\n<h2><strong>&lsquo;API&rsquo;</strong></h2>\r\n\r\n<p>C&aacute;c developer y&ecirc;u th&iacute;ch c&aacute;c API bởi v&igrave; n&oacute; thiết lập ranh giới r&otilde; r&agrave;ng với c&aacute;c quy tắc để vượt qua ch&uacute;ng.</p>\r\n\r\n<p>Nhưng khi c&aacute;c lập tr&igrave;nh vi&ecirc;n n&oacute;i &ldquo;API&rdquo;, điều họ đang n&oacute;i đến thường xuy&ecirc;n hơn l&agrave; kiểm so&aacute;t. Nh&oacute;m x&acirc;y dựng API được thiết lập c&aacute;c quy tắc, tạo điều kiện khiếu nại c&aacute;c developer kh&aacute;c khi kh&ocirc;ng l&agrave;m đ&uacute;ng theo chuẩn của họ. N&oacute;i c&aacute;ch kh&aacute;c n&oacute; c&oacute; nghĩa l&agrave; họ đang lạm dụng API để giằng mặt nhau. Họ c&oacute; thể thiết lập c&aacute;c điều khoản về dịch vụ v&agrave; c&aacute;c quy tắc về quyền truy cập c&oacute; lợi cho m&igrave;nh. Do đ&oacute; m&agrave; rất cần thiết để nghe r&otilde; từ hai ph&iacute;a cũng như bảo đảm sự c&ocirc;ng bằng cũng như v&igrave; lợi &iacute;ch chung của c&ocirc;ng ty.</p>\r\n\r\n<h2><strong>&lsquo;Th&iacute;ch hợp hơn / C&ocirc;ng cụ ph&ugrave; hợp với c&ocirc;ng việc&rsquo;</strong></h2>\r\n\r\n<p>Đối với developer, những c&ocirc;ng cụ m&agrave; họ đang học th&igrave; thường c&oacute; hiệu quả v&agrave; gi&aacute; trị hơn. V&igrave; vậy, kh&ocirc;ng c&oacute; g&igrave; ngạc nhi&ecirc;n khi họ thường ủng hộ cho những g&igrave; họ biết l&agrave; tốt nhất.</p>\r\n\r\n<p>Khi họ n&oacute;i rằng X hoặc Y l&agrave; &ldquo;th&iacute;ch hợp hơn&rdquo; với task n&agrave;y, họ thường chỉ x&aacute;c nhận rằng lựa chọn n&agrave;y l&agrave; ph&ugrave; hợp với họ. C&aacute;ch giải quyết tốt nhất chỉ l&agrave; gật đầu, mỉm cười v&agrave; đồng &yacute;. Bởi c&aacute;i họ giỏi nhất sẽ gi&uacute;p bảo đảm chất lượng. Tuy vậy, h&atilde;y lưu &yacute; rằng đ&ocirc;i khi những tool v&agrave; c&ocirc;ng nghệ đ&oacute; thật sự vẫn chưa tối ưu hoặc ph&ugrave; hợp cho task.</p>\r\n\r\n<h2><strong>&lsquo;Phạm vi leo thang&rsquo;</strong></h2>\r\n\r\n<p>C&aacute;c dự &aacute;n bắt đầu với những ước mơ lớn &ndash; v&agrave; đ&ocirc;i khi ch&uacute;ng ta quản l&yacute; chỉ để ho&agrave;n th&agrave;nh 50 % trong số ch&uacute;ng. Lựa chọn mức độ ph&ugrave; hợp kh&ocirc;ng phải l&agrave; một c&ocirc;ng việc dễ d&agrave;ng. Nếu bạn qu&aacute; bảo thủ, bạn kh&ocirc;ng đạt được nhiều. Nhưng nếu bạn cố gắng qu&aacute; mức th&igrave; bạn c&oacute; nhiều khả năng bị sụp đổ v&agrave; kh&ocirc;ng thu được g&igrave; cả.</p>\r\n\r\n<p>Cụm từ &ldquo;phạm vi leo thang&rdquo; m&ocirc; tả qu&aacute; tr&igrave;nh m&agrave; một mục ti&ecirc;u trở n&ecirc;n bất khả thi do cứ th&ecirc;m nhiều mục ti&ecirc;u kh&aacute;c tr&ecirc;n qu&aacute; tr&igrave;nh đi tới n&oacute;. N&oacute; thường được đề cập khi developer cố gắng ngăn một người quản l&yacute; muốn th&ecirc;m một &yacute; tưởng mới v&agrave;o. Tuy nhi&ecirc;n, c&aacute;c nh&agrave; quản l&yacute; thường phản đối bằng c&aacute;c cụm từ như &rdquo; phải biết n&acirc;ng cao bản th&acirc;n&rdquo; hoặc thậm ch&iacute; tệ hơn l&agrave; &ldquo;Hoặc l&agrave; l&agrave;m n&oacute;, hoặc bị sa thải.&rdquo;</p>\r\n\r\n<h2><strong>&lsquo;Ph&ugrave; hợp với văn ho&aacute;&rsquo;</strong></h2>\r\n\r\n<p>Thường &aacute;m chỉ những c&aacute; nh&acirc;n kh&ocirc;ng nằm trong x&atilde; hội thu nhỏ của developer. Đ&oacute; thường l&agrave; c&aacute;c th&agrave;nh vi&ecirc;n kh&ocirc;ng c&oacute; hiểu biết về IT cũng như kh&ocirc;ng đủ &ldquo;tr&igrave;nh&rdquo; để giao tiếp với họ bởi sự thiếu hụt về kiến thức kĩ thuật trong ng&agrave;nh.</p>\r\n\r\n<h2><strong>&lsquo;Sắp xếp lại &ndash;&nbsp;</strong><strong>Refactoring</strong><strong>&lsquo;</strong></h2>\r\n\r\n<p>Nếu một lập tr&igrave;nh vi&ecirc;n gọi n&oacute; l&agrave; &ldquo;sửa sai lầm&rdquo; hoặc &ldquo;x&acirc;y dựng lại đ&uacute;ng c&aacute;ch&rdquo;, th&igrave; c&oacute; vẻ như họ đ&atilde; thừa nhận bản th&acirc;n kh&ocirc;ng đủ năng lực. Nhưng bằng c&aacute;ch n&agrave;o đ&oacute; th&igrave; d&ugrave;ng từ &ldquo;t&aacute;i cấu tr&uacute;c&rdquo; nghe n&oacute; c&oacute; vẻ khoa học v&agrave; cao qu&yacute; hơn. Tuy vậy, n&oacute; sẽ khiến bạn thắc mắc tại sao c&aacute;c developer lại mắc những lỗi như vậy để phải đập đi x&acirc;y lại.</p>\r\n\r\n<h2><strong>&lsquo;T&iacute;nh năng&rsquo; vs &lsquo;Bug&rsquo;</strong></h2>\r\n\r\n<p>Nếu một lập tr&igrave;nh vi&ecirc;n n&oacute;i &ldquo;t&iacute;nh năng&rdquo;, n&oacute; c&oacute; nghĩa l&agrave; họ th&iacute;ch code đ&oacute;, thường l&agrave; v&igrave; bởi ch&iacute;nh họ đ&atilde; viết n&oacute;. Nếu họ sử dụng từ &ldquo;bug&rdquo;, tức l&agrave; họ kh&ocirc;ng th&iacute;ch code n&agrave;y v&agrave; n&oacute; thường đơn giản bởi v&igrave; nh&oacute;m kh&aacute;c đ&atilde; viết n&oacute;.</p>\r\n\r\n<p>Mặc d&ugrave; bất kỳ người d&ugrave;ng n&agrave;o cũng hiểu được kh&aacute;i niệm &ldquo;Bug&rdquo;, nhưng thực sự kh&oacute; cho c&aacute;c developer để nhận ra ch&uacute;ng. Thường th&igrave; phải chạy code mới biết được.</p>\r\n\r\n<p>Do đ&oacute; đừng bị sa lầy v&agrave;o đống triết học của họ. Nếu người d&ugrave;ng kh&ocirc;ng thể sử dụng, n&oacute; cần phải được sửa cho d&ugrave; n&oacute; l&agrave; bug hay t&iacute;nh năng.</p>\r\n\r\n<h2><strong>&lsquo;Kludge&rsquo;</strong></h2>\r\n\r\n<p>Một kludge chỉ l&agrave; một tiếng l&oacute;ng cũ cho một biện ph&aacute;p l&agrave;m lại những task m&agrave; đ&atilde; thực hiện trong qu&aacute; khứ nhưng chưa thật sự ho&agrave;n hảo do &ldquo;kh&ocirc;ng c&oacute; đủ thời gian&rdquo;. V&iacute; dụ như c&aacute;c developer c&oacute; thể sẽ muốn refactor bằng c&aacute;ch th&ecirc;m nhiều code hơn nữa. Trong tương lai, nh&oacute;m tiếp theo sẽ đề cập đến t&aacute;i cấu tr&uacute;c n&agrave;y như l&agrave; một kludge v&agrave; chu kỳ sẽ tiếp tục</p>\r\n\r\n<h2><strong>&lsquo;Luser&rsquo;</strong></h2>\r\n\r\n<p>&Aacute;m chỉ phần c&ograve;n lại của thế giới, những người vốn kh&ocirc;ng chuy&ecirc;n về code hay c&ograve;n gọi l&agrave; &ldquo;lusers&rdquo;. Khi sự th&agrave;nh c&ocirc;ng của một nền tảng c&ocirc;ng nghệ được đo bằng số lượng người sử dụng n&oacute; th&igrave; ch&uacute;ng ta cũng thường ngộ nhận rằng n&oacute; sẽ l&agrave; tốt nh&acirc;t. Tuy vậy, Developer sẽ cần c&oacute; sự hiểu biết cũng như nhận thức r&otilde; c&ocirc;ng nghệ n&agrave;o ph&ugrave; hợp chứ đừng theo đ&aacute;m đ&ocirc;ng.</p>\r\n', '2018-07-18 15:03:07', 0, 'HinhAnh-1531918987.jpg', 3, 5, 0),
+(24, 'Có gì mới trong Microsoft Visual Studio Code', 'Ngày này chúng ta sử dụng các ứng dụng một cách vô tội vạ để điều hành doanh nghiệp để làm việc cũng như để giải trí trong cuộc sống cá nhân. Nhưng ngôn ngữ lập trình nào cho phép thế giới kỹ thuật số kết nối chúng ta – và chúng đang phát triển như thế nào?', '<p>C&aacute;ch để hiểu được sự phổ biến của c&aacute;c ng&ocirc;n ngữ lập tr&igrave;nh l&agrave; xem th&ocirc;ng tin từ c&aacute;c nh&oacute;m như TIOBE, RedMonk, v&agrave; Stack Overflow, cho thấy xu hướng của ng&ocirc;n ngữ. GitHub cũng c&oacute; thể l&agrave; một thước đo quan trọng, đặc biệt l&agrave; trong cộng đồng m&atilde; nguồn mở, bởi v&igrave; n&oacute; cho thấy kh&aacute;ch quan c&oacute; bao nhi&ecirc;u đ&oacute;ng g&oacute;p code bằng một ng&ocirc;n ngữ cụ thể.</p>\r\n\r\n<p>Trong 5 năm qua ch&uacute;ng ta đ&atilde; bước v&agrave;o giai đoạn b&ugrave;ng nổ c&aacute;c ng&ocirc;n ngữ lập tr&igrave;nh. V&iacute; dụ, đ&atilde; c&oacute; một sự b&ugrave;ng nổ của c&aacute;c ng&ocirc;n ngữ v&agrave;o Java Virtual Machine. Nhưng ngay cả với tất cả những đối thủ mới, nếu bạn xem c&aacute;c bảng trending, th&igrave; những c&aacute;i t&ecirc;n dẫn đ&acirc;u vẫn l&agrave; những c&aacute;i t&ecirc;n quen thuộc Java, C, C ++, PHP, Python v&agrave; JavaScript.</p>\r\n\r\n<p><img src=\"https://techtalk.vn/wp-content/uploads/2018/03/visual-studio-696x464.jpg\" /></p>\r\n\r\n<p>Thời điểm, khả năng chấp nhận v&agrave; t&iacute;nh li&ecirc;n quan l&agrave; những điểm kh&aacute;c biệt giữa c&aacute;c ng&ocirc;n ngữ lập tr&igrave;nh phổ biến nhất với số c&ograve;n lại. Nếu bạn nh&igrave;n v&agrave;o ng&ocirc;n ngữ lập tr&igrave;nh từ quan điểm học thuật, đ&atilde; c&oacute; một số ng&ocirc;n ngữ tốt nhưng lại thất bại do kh&ocirc;ng đ&uacute;ng đối tượng hoặc sai thời điểm. V&agrave; đ&ocirc;i khi l&agrave; cả hai.</p>\r\n\r\n<p>Ng&ocirc;n ngữ C v&agrave; C ++ đ&atilde; tồn tại h&agrave;ng thập kỷ v&agrave; vẫn tiếp tục ph&aacute;t triển mạnh mẽ. Ch&uacute;ng tiếp tục đ&oacute;ng một vai tr&ograve; quan trọng đối với operating systems, device drivers cũng như những nơi cần hiệu suất tương t&aacute;c cao với phần cứng.</p>\r\n\r\n<p>Tương tự như vậy, Java đ&atilde; xuất hiện từ năm 1996 v&agrave; ng&agrave;y c&agrave;ng trở n&ecirc;n mạnh mẽ. Một trong những l&yacute; do phổ biến rộng r&atilde;i của n&oacute; l&agrave; bởi việc xuất hiện đ&uacute;ng l&uacute;c đ&uacute;ng thời điểm, khi c&aacute;c developer muốn tăng năng suất của họ v&agrave; c&aacute;c ng&ocirc;n ngữ lập tr&igrave;nh hướng đối tượng. Java cũng xử l&yacute; việc thực hiện nhiều qu&aacute; tr&igrave;nh song song (chủ đề) trong một qu&aacute; tr&igrave;nh duy nhất rất tốt. Khi n&oacute; xuất hiện trong năm 1996, những g&igrave; n&oacute; l&agrave;m được th&igrave; hầu như kh&ocirc;ng t&igrave;m thấy trong bất k&igrave; ng&ocirc;n ngữ lập tr&igrave;nh n&agrave;o kh&aacute;c. Java cũng mang lại lợi &iacute;ch cho việc c&oacute; thể &ldquo;ghi một lần chạy ở bất cứ đ&acirc;u&rdquo;, do đ&oacute; code c&oacute; thể chạy tr&ecirc;n c&aacute;c kiến ​​tr&uacute;c m&aacute;y t&iacute;nh v&agrave; hệ điều h&agrave;nh kh&aacute;c nhau, tạo cho n&oacute; nhiều sự hấp dẫn với c&aacute;c c&aacute;c nh&agrave; ph&aacute;t triển.</p>\r\n\r\n<p>JavaScript l&agrave; một ng&ocirc;n ngữ lập tr&igrave;nh thường xuy&ecirc;n g&oacute;p mặt trong c&aacute;c ng&ocirc;n ngữ phổ biến nhất, nhưng ở đ&acirc;y cần phải ph&acirc;n biệt sự phổ biến về số lượng người d&ugrave;ng v&agrave; mức độ ưa th&iacute;ch của một ng&ocirc;n ngữ lập tr&igrave;nh. JavaScript l&agrave; một ng&ocirc;n ngữ đ&atilde; được &aacute;p dụng rộng r&atilde;i cho ph&aacute;t triển web v&agrave; điện thoại di động; tuy nhi&ecirc;n, cộng đồng developer n&oacute;i chung c&oacute; nhiều &yacute; kiến kh&aacute;c nhau về n&oacute;. D&ugrave; g&igrave; đi chăng nữa th&igrave; web v&agrave; sự gia tăng gần đ&acirc;y của điện thoại di động đ&atilde; th&uacute;c đẩy sự phổ biến của n&oacute;.</p>\r\n\r\n<p>Ng&ocirc;n ngữ Go của Google l&agrave; một điều th&uacute; vị kh&aacute;c đ&aacute;ng được nhắc đến. Với chỉ vọn vẹn 10 tuổi, Go được xem l&agrave; tương đối trẻ so với c&aacute;c ng&ocirc;n ngữ kh&aacute;c đ&atilde; được n&ecirc;u ra ở tr&ecirc;n, nhưng n&oacute; đang ph&aacute;t triển nhanh ch&oacute;ng. V&agrave;o th&aacute;ng 7 năm 2016, ng&ocirc;n ngữ xếp thứ 55 tr&ecirc;n TIOBE Index, v&agrave; v&agrave;o th&aacute;ng 7 năm 2017 đ&atilde; tăng l&ecirc;n vị tr&iacute; thứ 10 . Với sự gia tăng về c&aacute;c c&ocirc;ng nghệ container như Docker v&agrave; Kubernetes, ch&uacute;ng ta thấy sự quan t&acirc;m về Go cũng được cải thiện đ&aacute;ng kể. Trong t&igrave;nh huống tương tự, sự phổ biến của c&aacute;c thiết bị của Apple đ&atilde; dẫn đến sự gia tăng nhanh ch&oacute;ng của Swift v&agrave; gi&uacute;p n&oacute; trở th&agrave;nh một ng&ocirc;n ngữ lập tr&igrave;nh h&agrave;ng đầu 15, vốn cực k&igrave; đ&aacute;ng nể khi tuổi đời của ng&ocirc;n ngữ chỉ mới l&agrave; con số 3.</p>\r\n\r\n<p>T&oacute;m lại, trong khi c&oacute; một số biến động trong thứ hạng c&aacute;c ng&ocirc;n ngữ lập tr&igrave;nh, danh s&aacute;ch của ch&uacute;ng vẫn kh&aacute; ổn định qua nhiều năm. V&agrave; một lần nữa, t&ocirc;i nghĩ rằng điều quan trọng l&agrave; phải ph&acirc;n biệt giữa sự phổ biến của một ng&ocirc;n ngữ v&agrave; những g&igrave; c&aacute;c nh&agrave; ph&aacute;t triển sử dụng. Thật dễ d&agrave;ng để đo lường kh&aacute;ch quan những ng&ocirc;n ngữ lập tr&igrave;nh đang được sử dụng nhưng điều đ&oacute; kh&ocirc;ng chỉ ra được ng&ocirc;n ngữ n&agrave;o sẽ ph&ugrave; hợp nhất cho từng developer nếu họ chưa thử qua.</p>\r\n', '2018-07-18 15:04:37', 0, 'HinhAnh-1531919091.jpg', 2, 5, 0),
+(25, 'Angular 2 là kỹ năng lập trình được yêu thích nhất trong năm 2018', 'Mới đây theo trang Developer-tech mới đây vừa công bố khảo sát toàn cầu về các ngôn ngữ lập trình được yêu cầu nhiều nhất.', '<p>Khảo s&aacute;t c&oacute; sự tham gia của cộng đồng&nbsp;freelance bao gồm: Developer, designers, v&agrave; c&aacute;c chuy&ecirc;n gia t&agrave;i ch&iacute;nh to&agrave;n cầu đ&atilde; c&ocirc;ng bố danh s&aacute;ch 10 ng&ocirc;n ngữ lập tr&igrave;nh cần thiết nhất trong năm 2018.</p>\r\n\r\n<ul>\r\n	<li>Angular 2 (+441.5% qua mỗi năm (YOY)</li>\r\n	<li>React Native (+353.7% YOY)</li>\r\n	<li>Docker (+140.7% YOY)</li>\r\n	<li>Redux (120.6% YOY)</li>\r\n	<li>React.js (+97.4 YOY)</li>\r\n	<li>Firebase (+96.4 YOY)</li>\r\n	<li>Shopify (+93.0 YOY)</li>\r\n	<li>WooCommerce (69.0% YOY)</li>\r\n	<li>Azure (+53.0% YOY)</li>\r\n	<li>Laravel (+45.0 YOY)</li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&ldquo;Angular 2 &ndash; một phi&ecirc;n bản kh&aacute;c của AngularJS &ndash; đ&atilde; nổi l&ecirc;n đ&igrave;nh đ&aacute;m trong v&agrave;i năm gần đ&acirc;y.&rdquo; Alvaro Oliveira, Ph&oacute; chủ tịch điều h&agrave;nh bộ phận Talent của Toptal đ&atilde; n&oacute;i. &rdquo; L&agrave; một nền tảng ứng dụng front-end web dựa tr&ecirc;n TypeScript, c&aacute;c t&iacute;nh năng ch&iacute;nh của n&oacute; cho ph&eacute;p c&aacute;c doanh nghiệp cải tiến quy tr&igrave;nh nội bộ v&agrave; x&acirc;y dựng logic kinh doanh. Với bất kỳ nền tảng n&agrave;o phụ thuộc v&agrave;o kh&aacute;ch h&agrave;ng, điều n&agrave;y rất quan trọng. &ldquo;</p>\r\n\r\n<p>Thật th&uacute; vị, c&ocirc;ng bố của Toptal tr&aacute;i ngược với những con số của NPM cho rằng&nbsp;React đang thịnh h&agrave;nh hơn so với Angular.</p>\r\n\r\n<p>&rdquo; React đ&atilde; được mọi người chấp nhận kh&aacute; rộng r&atilde;i.&rdquo; Laurie Voss, đồng s&aacute;ng lập v&agrave; COO của NPM đ&atilde; nhấn mạnh. &rdquo; Một phần của việc n&agrave;y phản &aacute;nh bản chất của n&oacute;; kh&ocirc;ng giống c&aacute;c framework kh&aacute;c, React kh&ocirc;ng phải l&agrave; giải ph&aacute;p tổng thể để x&acirc;y dựng một ứng dụng web. Đ&oacute; l&agrave; một giải ph&aacute;p được thiết kế d&agrave;nh ri&ecirc;ng cho c&aacute;c nhu cầu cụ thể c&oacute; thể kết hợp dễ d&agrave;ng với một số giải ph&aacute;p thay thế kh&aacute;c cho c&aacute;c phần kh&aacute;c của ứng dụng &ldquo;.</p>\r\n\r\n<p>Đầu th&aacute;ng n&agrave;y, nh&agrave; ph&aacute;t triển th&ocirc;ng b&aacute;o rằng&nbsp;C đ&atilde; được chọn l&agrave; ng&ocirc;n ngữ lập tr&igrave;nh của Tiobe trong năm 2017&nbsp;do độ phổ biến v&agrave; mức tăng trưởng h&agrave;ng đầu của n&oacute;. Ng&ocirc;n ngữ n&agrave;y vẫn giữ vị tr&iacute; thứ 2 trong bảng xếp hạng th&aacute;ng 1 năm 2018, sau Java v&agrave; trước C++.</p>\r\n\r\n<p>Theo Toptal, c&aacute;c ng&ocirc;n ngữ dự kiến sẽ kh&ocirc;ng c&ograve;n nằm trong top được y&ecirc;u th&iacute;ch trong năm 2018 bao gồm:</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<ul>\r\n	<li>Objective-C</li>\r\n	<li>Perl</li>\r\n	<li>COBOL</li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>Bạn nghĩ những nền tảng v&agrave; ng&ocirc;n ngữ n&agrave;o sẽ dẫn đầu trong năm nay? H&atilde;y để ch&uacute;ng t&ocirc;i nghe &yacute; kiến của bạn trong phần b&igrave;nh luận.</strong></p>\r\n', '2018-07-18 15:08:42', 0, 'HinhAnh-1531919322.png', 11, 15, 0),
+(26, 'Cứ 10 website có 3 trang sử dụng WordPress', 'Theo số liệu mới nhất của W3Techs, WordPress chiếm 30% trong số tất cả các trang web.', '<p>Theo những số liệu gần đ&acirc;y nhất, v&agrave;o cuối th&aacute;ng 2 năm 2018, WordPress chiếm tới 30%&nbsp; c&aacute;c trang web,v&agrave; chiếm tới 60,2% thị phần cho tất cả c&aacute;c hệ thống quản l&yacute; nội dung. Cần lưu &yacute; rằng chỉ hơn một nửa (50,2%) c&aacute;c trang web ph&acirc;n t&iacute;ch bởi W3Techs kh&ocirc;ng sử dụng CMS hoặc được x&acirc;y dựng từ con số kh&ocirc;ng. C&aacute;c con số l&agrave; kết quả của c&aacute;c ph&acirc;n t&iacute;ch từ bảng xếp hạng 10 triệu trang web h&agrave;ng đầu của Alexa.</p>\r\n\r\n<p>Joomla, với thị phần 6,3%, chỉ chiếm 3% số trang web, theo sau l&agrave; Drupal ở mức 4,4% v&agrave; 2,2%, v&agrave; Magento l&agrave; 2,4% v&agrave; 1,2%. Nh&igrave;n chung, hơn 50 hệ thống CMS đ&atilde; được ph&acirc;n t&iacute;ch cung cấp &iacute;t nhất cho 0,1% tất cả c&aacute;c trang web &ndash; n&oacute;i c&aacute;ch kh&aacute;c, 10.000 trang web sử dụng ch&uacute;ng.</p>\r\n\r\n<p>C&aacute;c con số của W3Techs cũng được t&iacute;nh &nbsp;tr&ecirc;n c&aacute;c số liệu kh&aacute;c nhau, bao gồm c&aacute;c ng&ocirc;n ngữ lập tr&igrave;nh ph&iacute;a m&aacute;y chủ v&agrave; c&aacute;c thư viện JavaScript. Với PHP vẫn dẫn đầu với tỉ lệ sử dụng l&ecirc;n tới 83,2%, cao hơn so với ASP.NET (13,9%), trong khi đối với thư viện JavaScript th&igrave; Polyfill.io, Bootstrap v&agrave; React c&oacute; tốc độ ph&aacute;t triển nhanh nhất.</p>\r\n\r\n<p>V&agrave;o th&aacute;ng 1, theo một b&aacute;o c&aacute;o của HackerRank sau khi khảo s&aacute;t gần 40.000 lập tr&igrave;nh vi&ecirc;n, cho hay React l&agrave; kỹ năng m&agrave; c&aacute;c c&ocirc;ng ty c&ocirc;ng nghệ lu&ocirc;n c&oacute; nhu cầu rất cao.</p>\r\n\r\n<p>Một b&aacute;o c&aacute;o từ 34SP &ndash; một nh&agrave; cung cấp dịch vụ lưu trữ tr&ecirc;n WordPress, cho rằng c&aacute;c doanh nghiệp nhỏ ng&agrave;y c&agrave;ng dựa v&agrave;o platform n&agrave;y hơn bao giờ hết. Nhờ đ&oacute; m&agrave; WordPress như đang trở th&agrave;nh một ti&ecirc;u chuẩn mới trong thiết kế web.</p>\r\n', '2018-07-18 15:11:39', 0, 'HinhAnh-1531919499.JPG', 17, 15, 0),
+(27, 'Webpack series – giới thiệu từ cơ bản đến căng cơ', 'Webpack hiện đang là module loader được sử dụng rộng rãi nhất hiện nay với cộng động support to lớn và những chức năng vô cùng mạnh mẽ. Phiên bản hiện tại là v2.3.3.', '<p>Với xu hướng lập tr&igrave;nh m&agrave; business v&agrave; phần lớn xử l&yacute; đều nằm ở tầng ph&iacute;a front-end với g&aacute;nh nặng c&agrave;ng ng&agrave;y c&agrave;ng đ&egrave; l&ecirc;n vai ch&agrave;ng dũng sĩ javascript tội nghiệp, th&igrave; c&aacute;c c&ocirc;ng cụ hỗ trợ cho anh ấy (ahihi) như typing, task runner, test tools,&hellip; t&egrave; le t&agrave; la hết, n&oacute;i chung l&agrave; kh&ocirc;ng thể thiếu được với 1 front-end dev. H&ocirc;m nay m&igrave;nh muốn giới thiệu&nbsp;<strong>Webpack</strong>&nbsp;một&nbsp;<strong>module loader</strong>&nbsp;cho javascript một c&aacute;ch cơ bản nhất.</p>\r\n\r\n<p><img src=\"https://techtalk.vn/wp-content/uploads/2017/04/Screen-Shot-2017-04-25-at-2.27.33-PM.png\" style=\"width:650px\" /></p>\r\n\r\n<h3>Vậy Module loader l&agrave; g&igrave;?</h3>\r\n\r\n<ul>\r\n	<li>Một c&aacute;ch đơn giản l&agrave; ng&agrave;y xưa ch&uacute;ng ta thường add những thư viện (3th parties) như&nbsp;<code>jquery, moment, select2, dtpicker,sticky,...</code>&nbsp;v&agrave;o thẻ&nbsp;<code>script</code>để khi web load l&ecirc;n xong th&igrave; những thư viện n&agrave;y sẽ được&nbsp;<code>execute</code>&nbsp;v&agrave; xử l&yacute;. Nhưng kh&ocirc;ng c&ograve;n như những ng&agrave;y xưa chỉ v&agrave;i d&ograve;ng jquery l&agrave; đủ d&ugrave;ng, sau n&agrave;y do việc code dưới front-end c&agrave;ng ng&agrave;y c&agrave;ng ph&igrave;ng to n&ecirc;n việc quản l&yacute; code = javascript c&agrave;ng ng&agrave;y c&agrave;ng t&otilde; r&otilde; sự quan trọng n&ecirc;n từ đ&oacute; kh&aacute;i niệm&nbsp;<code>module loader</code>ra đời.</li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<ul>\r\n	<li>C&oacute; kh&aacute; nhiều thư viện từ nhỏ đến to ra đời cho việc n&agrave;y: Tiny Loaders (curl, LABjs, almond), RequireJS, Browserify, SystemJs,&nbsp;<strong>Webpack</strong>&nbsp;v&agrave; gần đ&acirc;y đang nổi l&ecirc;n l&agrave; RollupJs (m&igrave;nh chưa x&agrave;i thằng n&agrave;y nhưng nghe n&oacute;i Facebook sử dụng thg n&agrave;y cho React :D).</li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<ul>\r\n	<li>Nếu bạn n&agrave;o c&oacute; x&agrave;i&nbsp;<code>SystemJs</code>,&nbsp;<code>Browserify</code>&nbsp;rồi th&igrave; thấy thật ra&nbsp;<code>Webpack</code>&nbsp;ra đời từ thừa hưởng những th&agrave;nh quả v&agrave; kinh nghiệm từ những thư viện đ&oacute; v&agrave; ph&aacute;t triển lền một tầm mới tốt hơn cho c&ocirc;ng việc&nbsp;<code>quản l&yacute; module</code>.</li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>C&oacute; ai đọc tới đ&acirc;y m&agrave; chưa thấy hiểu g&igrave; kh&ocirc;ng? Hoặc chưa tiếp x&uacute;c với kh&aacute;i niệm&nbsp;<code>module loader</code>trong javascript bao giờ, th&igrave; xem qua v&iacute; dụ n&agrave;y sẽ chắc dễ hiểu hơn.</p>\r\n\r\n<h3>V&iacute; dụ cơ bản</h3>\r\n\r\n<p>Ch&uacute;ng ta sẽ c&oacute;&nbsp;<code>2 file .js</code></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p>1</p>\r\n\r\n			<p>2</p>\r\n\r\n			<p>3</p>\r\n\r\n			<p>4</p>\r\n\r\n			<p>5</p>\r\n\r\n			<p>6</p>\r\n			</td>\r\n			<td>\r\n			<p>&nbsp;</p>\r\n\r\n			<p>//xinchao.js</p>\r\n\r\n			<p>export default function xinchao(name){</p>\r\n\r\n			<p>&nbsp;&nbsp;&nbsp;&nbsp;console.log(&#39;Xin chao &#39;+ name);</p>\r\n\r\n			<p>}</p>\r\n\r\n			<p>&nbsp;</p>\r\n			</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p>1</p>\r\n\r\n			<p>2</p>\r\n\r\n			<p>3</p>\r\n\r\n			<p>4</p>\r\n\r\n			<p>5</p>\r\n\r\n			<p>6</p>\r\n			</td>\r\n			<td>\r\n			<p>&nbsp;</p>\r\n\r\n			<p>//index.js</p>\r\n\r\n			<p>import xinchao from &#39;./xinchao&#39;;</p>\r\n\r\n			<p>&nbsp;</p>\r\n\r\n			<p>xinchao(&#39;Dinh&#39;);</p>\r\n\r\n			<p>&nbsp;</p>\r\n			</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>Th&igrave; đ&acirc;y&nbsp;<code>import xinchao from &#39;./xinchao&#39;</code>&nbsp;ch&iacute;nh l&agrave; chỗ m&agrave; Webpack sẽ l&agrave;m việc cho ch&uacute;ng ta.</p>\r\n\r\n<blockquote>\r\n<p><code>IMPORT</code>&nbsp;V&Agrave;&nbsp;<code>EXPORT</code>&nbsp;HIỆN TẠI CHƯA ĐƯỢC SUPPORT CHO ĐA PHẦN C&Aacute;C BROWSER. V&Agrave; KHI BẠN VIẾT NHƯ THẾ N&Agrave;Y TH&Igrave; BROWSER CŨNG ẾU HIỂU BẠN ĐANG MUỐN L&Agrave;M C&Aacute;I G&Igrave;? V&Agrave; Đ&Oacute; L&Agrave; L&Uacute;C C&Aacute;C&nbsp;<code>MODULE LOADER</code>&nbsp;XUẤT HIỆN.</p>\r\n</blockquote>\r\n\r\n<p><img alt=\"\" src=\"https://i.imgur.com/KT6mRPY.png\" style=\"width:650px\" /><em>Hỗ trợ&nbsp;<code>import</code>&nbsp;<code>export</code>&nbsp;của c&aacute;c tr&igrave;nh duyệt</em></p>\r\n\r\n<p>Với&nbsp;<code>2 file .js</code>&nbsp;ở tr&ecirc;n ch&uacute;ng ta sẽ d&ugrave;ng&nbsp;<code>Webpack</code>&nbsp;để bundle v&agrave; xem kết quả như thế n&agrave;o nh&eacute;?</p>\r\n\r\n<p>Tạo file&nbsp;<code>webpack.config.js</code>&nbsp;để config cho&nbsp;<code>Webpack</code>.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p>1</p>\r\n\r\n			<p>2</p>\r\n\r\n			<p>3</p>\r\n\r\n			<p>4</p>\r\n\r\n			<p>5</p>\r\n\r\n			<p>6</p>\r\n\r\n			<p>7</p>\r\n\r\n			<p>8</p>\r\n\r\n			<p>9</p>\r\n			</td>\r\n			<td>\r\n			<p>&nbsp;</p>\r\n\r\n			<p>//webpack.config.js</p>\r\n\r\n			<p>module.exports = {</p>\r\n\r\n			<p>&nbsp;&nbsp;entry: &#39;./index.js&#39;,</p>\r\n\r\n			<p>&nbsp;&nbsp;output: {</p>\r\n\r\n			<p>&nbsp;&nbsp;&nbsp;&nbsp;filename: &#39;bundle.js&#39;</p>\r\n\r\n			<p>&nbsp;&nbsp;}</p>\r\n\r\n			<p>}</p>\r\n\r\n			<p>&nbsp;</p>\r\n			</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p><strong>&ndash; entry</strong>: l&agrave; file m&agrave; ch&uacute;ng ta sẽ bắt đầu chạy bằng&nbsp;<code>webpack</code>. N&oacute;i chung n&oacute; l&agrave; bắt nguồn của chiến tranh. N&oacute;&nbsp;<code>import</code>&nbsp;từ thằng kh&aacute;c rồi thằng kh&aacute;c&nbsp;<code>import</code>&nbsp;từ thằng kh&aacute;c kh&aacute;c nữa từ đ&oacute; sẽ k&eacute;o theo một chuỗi c&oacute; hệ thống việc load c&aacute;c js module. Ở đ&acirc;y l&agrave; file&nbsp;<code>index.js</code>&nbsp;ở tr&ecirc;n.</p>\r\n\r\n<p><strong>&ndash; output-filename</strong>: l&agrave; đầu ra của file sau khi webpack l&agrave;m việc xong.</p>\r\n\r\n<p>Cuối c&ugrave;ng một file html đơn giản để chạy script n&agrave;y</p>\r\n\r\n<p><code>mkdir wp-demo &amp;&amp; cd wp-demo</code>. Tạo 1 folder để chứa src.Y&ecirc;u cầu c&aacute;c bạn đ&atilde; c&agrave;i&nbsp;<code>Nodejs</code>&nbsp;v&agrave;&nbsp;<code>Npm</code>&nbsp;rồi nh&eacute;.&nbsp;<a href=\"https://nodejs.org/en/\" target=\"_new\">https://nodejs.org/en/</a></p>\r\n\r\n<ol>\r\n	<li><code>npm init -y</code>. Tạo 1 file&nbsp;<code>node package</code>&nbsp;. -y l&agrave; yes cm n&oacute; hết c&aacute;c bước version, decription,&hellip;</li>\r\n	<li><code>npm install --save-dev webpack</code>. Install&nbsp;<code>Webpack</code>.</li>\r\n</ol>\r\n\r\n<p><strong>Sau khi c&agrave;i xong</strong><img alt=\"cai xong\" src=\"https://i.imgur.com/6zoSqfi.png\" style=\"width:650px\" /></p>\r\n\r\n<p><strong>Cấu tr&uacute;c thư mục</strong><img alt=\"thu muc\" src=\"https://i.imgur.com/i3Nd9KE.png\" style=\"width:650px\" /></p>\r\n\r\n<p>4.G&otilde;&nbsp;<code>webpack</code>&nbsp;để run.<img alt=\"sau khi chay\" src=\"https://i.imgur.com/LyuvRSV.png\" style=\"width:650px\" /></p>\r\n\r\n<p>Ch&uacute;ng ta sẽ thấy file&nbsp;<code>bundle.js</code>&nbsp;được tạo ra v&agrave; sau khi chạy file&nbsp;<code>index.html</code>&nbsp;sẽ xuất ra d&ograve;ng log&nbsp;<code>xin chao Dinh</code>.</p>\r\n\r\n<p>Ok.Ch&uacute;ng ta c&ugrave;ng xem trong file bundle.js c&oacute; g&igrave; v&agrave; webpack đ&atilde; l&agrave;m g&igrave; nh&eacute;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p>1</p>\r\n\r\n			<p>2</p>\r\n\r\n			<p>3</p>\r\n\r\n			<p>4</p>\r\n\r\n			<p>5</p>\r\n\r\n			<p>6</p>\r\n\r\n			<p>7</p>\r\n\r\n			<p>8</p>\r\n\r\n			<p>9</p>\r\n\r\n			<p>10</p>\r\n\r\n			<p>11</p>\r\n\r\n			<p>12</p>\r\n\r\n			<p>13</p>\r\n\r\n			<p>14</p>\r\n\r\n			<p>15</p>\r\n\r\n			<p>16</p>\r\n\r\n			<p>17</p>\r\n\r\n			<p>18</p>\r\n\r\n			<p>19</p>\r\n\r\n			<p>20</p>\r\n\r\n			<p>21</p>\r\n\r\n			<p>22</p>\r\n\r\n			<p>23</p>\r\n\r\n			<p>24</p>\r\n\r\n			<p>25</p>\r\n\r\n			<p>26</p>\r\n\r\n			<p>27</p>\r\n\r\n			<p>28</p>\r\n\r\n			<p>29</p>\r\n\r\n			<p>30</p>\r\n\r\n			<p>31</p>\r\n\r\n			<p>32</p>\r\n\r\n			<p>33</p>\r\n\r\n			<p>34</p>\r\n\r\n			<p>35</p>\r\n\r\n			<p>36</p>\r\n\r\n			<p>37</p>\r\n\r\n			<p>38</p>\r\n\r\n			<p>39</p>\r\n\r\n			<p>40</p>\r\n\r\n			<p>41</p>\r\n\r\n			<p>42</p>\r\n\r\n			<p>43</p>\r\n\r\n			<p>44</p>\r\n\r\n			<p>45</p>\r\n\r\n			<p>46</p>\r\n\r\n			<p>47</p>\r\n\r\n			<p>48</p>\r\n\r\n			<p>49</p>\r\n\r\n			<p>50</p>\r\n\r\n			<p>51</p>\r\n\r\n			<p>52</p>\r\n\r\n			<p>53</p>\r\n\r\n			<p>54</p>\r\n\r\n			<p>55</p>\r\n\r\n			<p>56</p>\r\n\r\n			<p>57</p>\r\n\r\n			<p>58</p>\r\n\r\n			<p>59</p>\r\n\r\n			<p>60</p>\r\n\r\n			<p>61</p>\r\n\r\n			<p>62</p>\r\n\r\n			<p>63</p>\r\n\r\n			<p>64</p>\r\n\r\n			<p>65</p>\r\n\r\n			<p>66</p>\r\n\r\n			<p>67</p>\r\n\r\n			<p>68</p>\r\n\r\n			<p>69</p>\r\n\r\n			<p>70</p>\r\n\r\n			<p>71</p>\r\n\r\n			<p>72</p>\r\n\r\n			<p>73</p>\r\n\r\n			<p>74</p>\r\n\r\n			<p>75</p>\r\n\r\n			<p>76</p>\r\n\r\n			<p>77</p>\r\n\r\n			<p>78</p>\r\n\r\n			<p>79</p>\r\n\r\n			<p>80</p>\r\n\r\n			<p>81</p>\r\n\r\n			<p>82</p>\r\n\r\n			<p>83</p>\r\n\r\n			<p>84</p>\r\n\r\n			<p>85</p>\r\n\r\n			<p>86</p>\r\n\r\n			<p>87</p>\r\n\r\n			<p>88</p>\r\n\r\n			<p>89</p>\r\n\r\n			<p>90</p>\r\n\r\n			<p>91</p>\r\n\r\n			<p>92</p>\r\n			</td>\r\n			<td>\r\n			<p>&nbsp;</p>\r\n\r\n			<p>/******/ (function(modules) { // webpackBootstrap</p>\r\n\r\n			<p>/******/ // The module cache</p>\r\n\r\n			<p>/******/ var installedModules = {};</p>\r\n\r\n			<p>/******/</p>\r\n\r\n			<p>/******/ // The require function</p>\r\n\r\n			<p>/******/ function __webpack_require__(moduleId) {</p>\r\n\r\n			<p>/******/</p>\r\n\r\n			<p>/******/ // Check if module is in cache</p>\r\n\r\n			<p>/******/ if(installedModules[moduleId]) {</p>\r\n\r\n			<p>/******/ return installedModules[moduleId].exports;</p>\r\n\r\n			<p>/******/ }</p>\r\n\r\n			<p>/******/ // Create a new module (and put it into the cache)</p>\r\n\r\n			<p>/******/ var module = installedModules[moduleId] = {</p>\r\n\r\n			<p>/******/ i: moduleId,</p>\r\n\r\n			<p>/******/ l: false,</p>\r\n\r\n			<p>/******/ exports: {}</p>\r\n\r\n			<p>/******/ };</p>\r\n\r\n			<p>/******/</p>\r\n\r\n			<p>/******/ // Execute the module function</p>\r\n\r\n			<p>/******/ modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);</p>\r\n\r\n			<p>/******/</p>\r\n\r\n			<p>/******/ // Flag the module as loaded</p>\r\n\r\n			<p>/******/ module.l = true;</p>\r\n\r\n			<p>/******/</p>\r\n\r\n			<p>/******/ // Return the exports of the module</p>\r\n\r\n			<p>/******/ return module.exports;</p>\r\n\r\n			<p>/******/ }</p>\r\n\r\n			<p>/******/</p>\r\n\r\n			<p>/******/</p>\r\n\r\n			<p>/******/ // expose the modules object (__webpack_modules__)</p>\r\n\r\n			<p>/******/ __webpack_require__.m = modules;</p>\r\n\r\n			<p>/******/</p>\r\n\r\n			<p>/******/ // expose the module cache</p>\r\n\r\n			<p>/******/ __webpack_require__.c = installedModules;</p>\r\n\r\n			<p>/******/</p>\r\n\r\n			<p>/******/ // identity function for calling harmony imports with the correct context</p>\r\n\r\n			<p>/******/ __webpack_require__.i = function(value) { return value; };</p>\r\n\r\n			<p>/******/</p>\r\n\r\n			<p>/******/ // define getter function for harmony exports</p>\r\n\r\n			<p>/******/ __webpack_require__.d = function(exports, name, getter) {</p>\r\n\r\n			<p>/******/ if(!__webpack_require__.o(exports, name)) {</p>\r\n\r\n			<p>/******/ Object.defineProperty(exports, name, {</p>\r\n\r\n			<p>/******/ configurable: false,</p>\r\n\r\n			<p>/******/ enumerable: true,</p>\r\n\r\n			<p>/******/ get: getter</p>\r\n\r\n			<p>/******/ });</p>\r\n\r\n			<p>/******/ }</p>\r\n\r\n			<p>/******/ };</p>\r\n\r\n			<p>/******/</p>\r\n\r\n			<p>/******/ // getDefaultExport function for compatibility with non-harmony modules</p>\r\n\r\n			<p>/******/ __webpack_require__.n = function(module) {</p>\r\n\r\n			<p>/******/ var getter = module &amp;&amp; module.__esModule ?</p>\r\n\r\n			<p>/******/ function getDefault() { return module[&#39;default&#39;]; } :</p>\r\n\r\n			<p>/******/ function getModuleExports() { return module; };</p>\r\n\r\n			<p>/******/ __webpack_require__.d(getter, &#39;a&#39;, getter);</p>\r\n\r\n			<p>/******/ return getter;</p>\r\n\r\n			<p>/******/ };</p>\r\n\r\n			<p>/******/</p>\r\n\r\n			<p>/******/ // Object.prototype.hasOwnProperty.call</p>\r\n\r\n			<p>/******/ __webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };</p>\r\n\r\n			<p>/******/</p>\r\n\r\n			<p>/******/ // __webpack_public_path__</p>\r\n\r\n			<p>/******/ __webpack_require__.p = &quot;&quot;;</p>\r\n\r\n			<p>/******/</p>\r\n\r\n			<p>/******/ // Load entry module and return exports</p>\r\n\r\n			<p>/******/ return __webpack_require__(__webpack_require__.s = 1);</p>\r\n\r\n			<p>/******/ })</p>\r\n\r\n			<p>/************************************************************************/</p>\r\n\r\n			<p>/******/ ([</p>\r\n\r\n			<p>/* 0 */</p>\r\n\r\n			<p>/***/ (function(module, __webpack_exports__, __webpack_require__) {</p>\r\n\r\n			<p>&nbsp;</p>\r\n\r\n			<p>&quot;use strict&quot;;</p>\r\n\r\n			<p>/* harmony export (immutable) */ __webpack_exports__[&quot;a&quot;] = xinchao;</p>\r\n\r\n			<p>function xinchao(name) {</p>\r\n\r\n			<p>&nbsp;&nbsp;&nbsp;&nbsp;console.log(&#39;Xin chao &#39; + name);</p>\r\n\r\n			<p>}</p>\r\n\r\n			<p>&nbsp;</p>\r\n\r\n			<p>/***/ }),</p>\r\n\r\n			<p>/* 1 */</p>\r\n\r\n			<p>/***/ (function(module, __webpack_exports__, __webpack_require__) {</p>\r\n\r\n			<p>&nbsp;</p>\r\n\r\n			<p>&quot;use strict&quot;;</p>\r\n\r\n			<p>Object.defineProperty(__webpack_exports__, &quot;__esModule&quot;, { value: true });</p>\r\n\r\n			<p>/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__xinchao__ = __webpack_require__(0);</p>\r\n\r\n			<p>&nbsp;</p>\r\n\r\n			<p>__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__xinchao__[&quot;a&quot; /* default */])(&#39;Dinh&#39;);</p>\r\n\r\n			<p>&nbsp;</p>\r\n\r\n			<p>/***/ })</p>\r\n\r\n			<p>/******/ ]);</p>\r\n\r\n			<p>&nbsp;</p>\r\n			</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<ul>\r\n	<li>Kh&aacute; loằng nhoằng nhưng ch&uacute;ng ta c&oacute; thể hiểu&nbsp;<code>webpack</code>&nbsp;đang l&agrave;m c&aacute;i g&igrave;. Như ta thấy Module&nbsp;<code>/* 0 */</code>&nbsp;l&agrave; file&nbsp;<code>xinchao.js</code>&nbsp;v&agrave; module&nbsp;<code>/* 1 */</code>&nbsp;ch&iacute;nh file&nbsp;<code>index.js</code>.</li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p>1</p>\r\n\r\n			<p>2</p>\r\n\r\n			<p>3</p>\r\n\r\n			<p>4</p>\r\n			</td>\r\n			<td>\r\n			<p>&nbsp;</p>\r\n\r\n			<p>var __WEBPACK_IMPORTED_MODULE_0__xinchao__ = __webpack_require__(0);</p>\r\n\r\n			<p>__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__xinchao__[&quot;a&quot; /* default */])(&#39;Dinh&#39;);</p>\r\n\r\n			<p>&nbsp;</p>\r\n			</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<ul>\r\n	<li>Đoạn n&agrave;y c&oacute; thể thấy webpack gọi function trong module&nbsp;<code>xinchao</code>&nbsp;v&agrave; call n&oacute; ở&nbsp;<code>index.js</code>.</li>\r\n	<li>Những function mặc định tr&ecirc;n của&nbsp;<code>webpack</code>&nbsp;như ta thấy d&ugrave;ng để như:\r\n	<ol>\r\n		<li>require module</li>\r\n		<li>tạo module</li>\r\n		<li>cache module</li>\r\n		<li>execute module</li>\r\n		<li>check export type (<code>default</code>&nbsp;hoặc&nbsp;<code>chỉ định</code>)</li>\r\n		<li>&hellip; c&aacute;c bạn c&oacute; thể debug ở browser để xem n&oacute; chạy</li>\r\n	</ol>\r\n	</li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td>\r\n			<p>1</p>\r\n\r\n			<p>2</p>\r\n\r\n			<p>3</p>\r\n\r\n			<p>4</p>\r\n			</td>\r\n			<td>\r\n			<p>&nbsp;</p>\r\n\r\n			<p>// Load entry module and return exports</p>\r\n\r\n			<p>/******/ return __webpack_require__(__webpack_require__.s = 1);</p>\r\n\r\n			<p>&nbsp;</p>\r\n			</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>Đ&acirc;y l&agrave; nơi start của webpack. N&oacute; bắt đầu require từ module số&nbsp;<code>1</code>&nbsp;(nghĩa l&agrave; file&nbsp;<code>index.js</code>). Tada đơn giản v&agrave; dễ hiểu phải kh&ocirc;ng n&agrave;o.</p>\r\n\r\n<p>Giờ ch&uacute;ng ta sẽ chạy&nbsp;<code>webpack -p</code>&nbsp;để build file tr&ecirc;n mode production nh&eacute;. V&agrave; đ&acirc;y l&agrave; file&nbsp;<code>bundle.js</code>&nbsp;của ch&uacute;ng ta.</p>\r\n\r\n<p><img alt=\"prod mode\" src=\"https://i.imgur.com/dPu2yfG.png\" style=\"width:650px\" /></p>\r\n\r\n<p>Nguy&ecirc;n b&agrave;i n&agrave;y l&agrave; những phần hết sức căn bản trong việc sử dụng&nbsp;<code>Webpack</code>&nbsp;&ndash; module loader được sử dụng rỗng r&atilde;i nhất hiện nay.</p>\r\n\r\n<p>C&aacute;c b&agrave;i kế tiếp m&igrave;nh sẽ giới thiệu tiếp về c&aacute;c phần n&acirc;ng cao hơn của&nbsp;<code>Webpack</code>&nbsp;như:</p>\r\n\r\n<ul>\r\n	<li>Code Splitting</li>\r\n	<li>Code Splitting &ndash; CSS</li>\r\n	<li>Code Splitting &ndash; Libraries</li>\r\n	<li>Code Splitting &ndash; Async</li>\r\n</ul>\r\n\r\n<p>Hy vọng b&agrave;i n&agrave;y c&oacute; &iacute;ch cho c&aacute;c bạn. Hẹn gặp lại v&agrave;o c&aacute;c b&agrave;i sao nh&eacute; ^^.</p>\r\n', '2018-07-18 15:15:05', 0, 'HinhAnh-1531919705.jpg', 13, 15, 0);
+INSERT INTO `news` (`news_id`, `name`, `preview`, `detail`, `date_create`, `create_by`, `picture`, `counter`, `cat_id`, `status`) VALUES
+(28, 'Front-end developer từ chưa biết gì tới chuyên gia [Phần 1]', 'Tôi nhớ khi bắt đầu học front-end. Tôi đã tìm được rất nhiều bài viết, tài nguyên, và vì thế tôi đã bị quá tải, tôi không biết mình cần học gì và thậm chí cũng chẳng biết bắt đầu từ đâu.', '<p>B&agrave;i viết&nbsp;n&agrave;y sẽ gi&uacute;p bạn định hướng qu&aacute; tr&igrave;nh học front-end. N&oacute; cung cấp c&aacute;c t&agrave;i nguy&ecirc;n m&agrave; t&ocirc;i thấy hiệu quả trong qu&aacute; tr&igrave;nh học tập của m&igrave;nh, c&ugrave;ng với c&aacute;c ch&uacute;&nbsp;th&iacute;ch chi tiết.</p>\r\n\r\n<p>Để gi&uacute;p bạn kh&ocirc;ng bị qu&aacute; tải, t&ocirc;i chia b&agrave;i hướng dẫn n&agrave;y th&agrave;nh 2 phần. Phần một đề cập tới qu&aacute; tr&igrave;nh ph&aacute;t triển giao diện với HTML v&agrave; CSS. Phần hai đề cập tới Javascript, c&aacute;c framework v&agrave; c&aacute;c design pattern. Nếu bạn đ&atilde; th&agrave;nh thạo HTML v&agrave; CSS bạn c&oacute; thể chuyển tới phần 2, b&agrave;i viết đề cập mọi thứ về Javascript</p>\r\n\r\n<p><img src=\"https://techmaster.vn/fileman/Uploads/users/188/1-1msCRn-wDUzuGtI1yPUbAA.gif\" style=\"height:600px; width:650px\" /></p>\r\n\r\n<p>Từ code tới giao diện</p>\r\n\r\n<h3><strong>HTML v&agrave; CSS cơ bản</strong></h3>\r\n\r\n<p>Để bắt đầu, đọc những b&agrave;i hướng dẫn về&nbsp;<a href=\"https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Introduction\" target=\"_blank\">HTML</a>&nbsp;v&agrave;&nbsp;<a href=\"https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Introduction\" target=\"_blank\">CSS</a>&nbsp;tr&ecirc;n Mozilla Developer Network (MDN). MDN cung cấp từng chương một, giải th&iacute;ch c&aacute;c kh&aacute;i niệm quan trọng của HTML v&agrave; CSS. Ngo&agrave;i ra, mỗi chương chỉ l&agrave; nằm trong một trang, với c&aacute;c li&ecirc;n kết demo tới CodePen v&agrave; JSFiddle.</p>\r\n\r\n<p>Sau khi ho&agrave;n th&agrave;nh c&aacute;c b&agrave;i hướng dẫn tr&ecirc;n, h&atilde;y tham gia kh&oacute;a học&nbsp;<a href=\"https://www.codecademy.com/learn/make-a-website\" target=\"_blank\">Make a Website</a>&nbsp;tr&ecirc;n CodeAcademy. Bạn sẽ mất v&agrave;i giờ để ho&agrave;n th&agrave;nh b&agrave;i hướng dẫn n&agrave;y, n&oacute; l&agrave; một&nbsp;điểm khởi tốt&nbsp;đầu để x&acirc;y dựng c&aacute;c website với HTML v&agrave; CSS. Nếu muốn học th&ecirc;m,&nbsp;<a href=\"https://www.codecademy.com/courses/web-beginner-en-Vfmnp/0/2?curriculum_id=50b91eda28c2fb212300039e\" target=\"_blank\">Building web forms</a>&nbsp;l&agrave; một hướng kh&aacute;c tr&ecirc;n CodeAcademy gi&uacute;p bạn x&acirc;y dựng v&agrave; styling một web form.</p>\r\n\r\n<p>Để luyện tập với CSS, thử&nbsp;<a href=\"http://flukeout.github.io/\" target=\"_blank\">CSS Dinner</a>. Đ&acirc;y l&agrave; một game kh&aacute; vui với c&aacute;c thử th&aacute;ch về CSS. Một kh&iacute;a cạnh quan trọng kh&aacute;c của HTML v&agrave; CSS l&agrave; c&aacute;c layout.&nbsp;<a href=\"http://learnlayout.com/\" target=\"_blank\">LearnLayout</a>&nbsp;l&agrave; một b&agrave;i hướng dẫn gi&uacute;p bạn biết c&aacute;ch tạo ra c&aacute;c layout với HTML v&agrave; CSS.</p>\r\n\r\n<p>Ngo&agrave;i ra, h&atilde;y học c&aacute;c sử dụng&nbsp;<a href=\"https://fonts.google.com/\" target=\"_blank\">Google Fonts</a>&nbsp;với b&agrave;i hướng dẫn&nbsp;<a href=\"https://css-tricks.com/snippets/css/basics-of-google-font-api/\" target=\"_blank\">Basics of Google Font API</a>&nbsp;tr&ecirc;n CSSTricks. Typography l&agrave; nền tảng x&acirc;y dựng c&aacute;c block của giao diện. Khi bạn c&oacute; thời gian, t&ocirc;i khuyến kh&iacute;ch bạn đọc&nbsp;<a href=\"https://prowebtype.com/\" target=\"_blank\">Professional Web Typography</a>của Donny Trương một cuốn s&aacute;ch miễn ph&iacute;. N&oacute; dạy bạn mọi thứ m&agrave; một front-end developer cần biết về typography.</p>\r\n\r\n<p>Trong qu&aacute; tr&igrave;nh học, đừng lo lắng về việc bạn phải nhớ qu&aacute; nhiều thứ. Thay v&agrave;o đ&oacute;, tập trung v&agrave;o việc hiểu c&aacute;ch HTML v&agrave; CSS l&agrave;m việc c&ugrave;ng nhau.</p>\r\n\r\n<h3><strong>Luyện tập HTML v&agrave; CSS cơ bản</strong></h3>\r\n\r\n<p>B&acirc;y giờ bạn đ&atilde;&nbsp;c&oacute; hiểu biết cơ bản về HTML v&agrave; CSS, h&atilde;y l&agrave;m một v&agrave;i thứ th&uacute; vị. Trong phần n&agrave;y c&oacute; 2 th&iacute; nghiệm đ&atilde; được thiết kế để gi&uacute;p bạn luyện tập việc x&acirc;y dựng c&aacute;c giao diện v&agrave; website. T&ocirc;i d&ugrave;ng từ &ldquo;th&iacute; nghiệm&rdquo; bởi v&igrave; trong qu&aacute; tr&igrave;nh th&iacute; nghiệm, bạn sẽ học được rất nhiều từ thất bại v&agrave; n&oacute; sẽ gi&uacute;p bạn đi tới th&agrave;nh c&ocirc;ng.</p>\r\n\r\n<p><strong>Th&iacute; nghiệm 1</strong></p>\r\n\r\n<p>Trong th&iacute; nghiệm đầu ti&ecirc;n, ch&uacute;ng ta sử dụng&nbsp;<a href=\"http://codepen.io/\" target=\"_blank\">CodePen</a>. CodePen l&agrave; một s&acirc;n chơi cho front-end nơi bạn c&oacute; thể code HTML v&agrave; CSS m&agrave; kh&ocirc;ng cần lưu trữ c&aacute;c file tr&ecirc;n m&aacute;y t&iacute;nh. N&oacute; cũng c&oacute; live preview c&aacute;i cập nhật giao diện ngay sau khi bạn code.</p>\r\n\r\n<p>Bằng c&aacute;ch sử dụng CodePen, bạn sẽ đạt được 2 thứ. Đầu ti&ecirc;n, l&agrave; luyện tập kỹ năng HTML v&agrave; CSS. Thứ hai, bạn đ&atilde; tạo ra một bộ sưu tập c&aacute;c sản phẩm của m&igrave;nh. Ch&uacute;ng ta cũng sử dụng&nbsp;<a href=\"https://dribbble.com/\" target=\"_blank\">Dribbble</a>, một trang web với nhiều thiết kế gi&uacute;p&nbsp;đem lại cảm hứng cho bạn.</p>\r\n\r\n<p>H&atilde;y t&igrave;m tr&ecirc;n Dribbble một thiết kế đủ đơn giản để code trong một v&agrave;i giờ. T&ocirc;i&nbsp;đ&atilde; lựa chọn một v&agrave;i bản thiết kế để cho bạn bắt đầu:&nbsp;<a href=\"https://dribbble.com/shots/2262761-Mobile-Blog-App-Interface/attachments/424147\" target=\"_blank\">1</a>,&nbsp;<a href=\"https://dribbble.com/shots/2492038-Task-List-App/attachments/489171\" target=\"_blank\">2</a>,&nbsp;<a href=\"https://dribbble.com/shots/2144170-Day-014-Location-Card/attachments/392323\" target=\"_blank\">3</a>,&nbsp;<a href=\"https://dribbble.com/shots/2639709-Confirm-Reservation/attachments/528798\" target=\"_new\">4</a>&nbsp;v&agrave;&nbsp;<a href=\"https://dribbble.com/shots/2314157-Daily-UI-Day-1/attachments/439137\" target=\"_blank\">5</a>. T&ocirc;i chọn c&aacute;c thiết kế d&agrave;nh cho mobile, v&igrave; ch&uacute;ng &iacute;t phức tạp hơn so với c&aacute;c thiết kế d&agrave;nh cho desktop. Tuy nhi&ecirc;n, bạn cũng c&oacute; thể chọn bất cứ thiết kế n&agrave;o m&agrave; m&igrave;nh th&iacute;ch.</p>\r\n\r\n<p><img alt=\"\" src=\"https://techtalk.vn/wp-content/uploads/2017/06/frontend-tu-chua-biet-den-chuyen-gia-2.png\" style=\"height:444px; width:800px\" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Sau khi bạn đ&atilde; chọn được một thiết kế, h&atilde;y thử code n&oacute; tr&ecirc;n CodePen. Nếu bạn gặp kh&oacute; khăn, h&atilde;y nhờ sự trợ gi&uacute;p tr&ecirc;n&nbsp;<a href=\"http://stackoverflow.com/\" target=\"_blank\">StackOverflow</a>. Một nguồn luyện tập hữu &iacute;ch kh&aacute;c l&agrave; c&aacute;c website như&nbsp;<a href=\"https://medium.com/\" target=\"_blank\">Medium</a>,&nbsp;<a href=\"https://www.airbnb.com/\" target=\"_new\">AirBnB</a>, v&agrave;&nbsp;<a href=\"https://www.dropbox.com/\" target=\"_new\">Dropbox&nbsp;</a>v&agrave; sử dụng&nbsp;<a href=\"https://developer.chrome.com/devtools\" target=\"_blank\">dev tool</a>của tr&igrave;nh duyệt để xem c&aacute;ch layout v&agrave; style của c&aacute;c trang web n&agrave;y. Bạn cũng c&oacute; thể tham khảo một v&agrave;i pen tr&ecirc;n CodePen. T&ocirc;i đ&atilde; chọn cho bạn một v&agrave;i c&aacute;i:</p>\r\n\r\n<ul>\r\n	<li><a href=\"http://codepen.io/ManarKamel/pen/BooXJw\" target=\"_blank\">Menu App Interface</a></li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<ul>\r\n	<li><a href=\"http://codepen.io/cameronbaney/pen/gfjLJ\" target=\"_blank\">Twitter Widget</a></li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<ul>\r\n	<li><a href=\"http://codepen.io/jonathanzwhite/pen/GZVKmE\" target=\"_new\">Article News Card</a></li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<ul>\r\n	<li><a href=\"http://codepen.io/Jeplaa/pen/adnoH\" target=\"_new\">Simple Flat Menu</a></li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Nếu bản copy của bạn tr&ocirc;ng kh&aacute;c so với thiết kế gốc, đừng nản l&ograve;ng. H&atilde;y tiếp tục luyện tập với nhiều bản thiết kế kh&aacute;c nhau v&agrave; bạn sẽ nhận thấy rằng kỹ năng của bạn sẽ tiến bộ sau mỗi lần luyện tập.</p>\r\n\r\n<p>Nếu bạn kh&ocirc;ng c&oacute; một nền tảng kiến thức về thiết kế, c&oacute; thể con mắt thiết kế của bạn chưa được ph&aacute;t triển. Một front-end developer với con mắt thiết kế tốt c&oacute; thể x&aacute;c định c&aacute;c thiết kế tốt v&agrave; t&aacute;i hiện ch&uacute;ng một c&aacute;ch ho&agrave;n hảo. T&ocirc;i đ&atilde; viết một b&agrave;i hướng dẫn về&nbsp;<a href=\"https://medium.com/@JonathanZWhite/developing-your-eye-for-design-cce944bbeae4#.norh8v3ah\" target=\"_blank\">c&aacute;ch ph&aacute;t triển con mắt thiết kế của bạn</a>.</p>\r\n\r\n<p><strong>Th&iacute; nghiệm 2</strong></p>\r\n\r\n<p>Hi vọng th&iacute; nghiệm đầu ti&ecirc;n đ&atilde; đem lại cho bạn sự tin khi viết code HTML v&agrave; CSS. Trong th&iacute; nghiệm 2, ch&uacute;ng ta sẽ xem x&eacute;t một v&agrave;i website, sau đ&oacute; code một v&agrave;i th&agrave;nh phần của ch&uacute;ng.</p>\r\n\r\n<p>Nhiều website sử dụng c&aacute;c CSS framework hoặc đặt t&ecirc;n c&aacute;c class CSS kh&oacute; hiểu, l&agrave;m cho bạn kh&oacute; đọc source code. Đ&oacute; l&agrave; l&yacute; do tại sao t&ocirc;i chọn sẵn một v&agrave;i website được thiết kế tốt với source code dễ đọc.</p>\r\n\r\n<ul>\r\n	<li><a href=\"https://www.dropbox.com/business\" target=\"_blank\">Dropbox for Business</a>: thử sao ch&eacute;p phần&nbsp;<a href=\"https://en.wikipedia.org/wiki/Hero_image\" target=\"_blank\">hero</a></li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<ul>\r\n	<li><a href=\"https://www.airbnb.com/\" target=\"_blank\">AirBnB</a>: thử sao ch&eacute;p phần footer</li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<ul>\r\n	<li><a href=\"https://www.paypal.com/home\" target=\"_blank\">PayPal</a>: thử sao ch&eacute;p phần navigation bar</li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<ul>\r\n	<li><a href=\"https://www.invisionapp.com/\" target=\"_blank\">Invision</a>: thử sao ch&eacute;p phần signup ở ph&iacute;a dưới trang web</li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<ul>\r\n	<li><a href=\"https://stripe.com/us/pricing\" target=\"_blank\">Stripe</a>: thử sao ch&eacute;p phần payments</li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Một lần nữa, trọng t&acirc;m của th&iacute; nghiệm 2 kh&ocirc;ng phải l&agrave; t&aacute;i hiện to&agrave;n bộ trang web. Mặc d&ugrave; điều đ&oacute; c&oacute; thể kh&ocirc;ng kh&oacute;! Chọn một v&agrave;i th&agrave;nh phần quan trọng giống như navigation bar hoặc phần hero để code. T&ocirc;i đ&atilde; cung cấp một v&agrave;i gợi &yacute;, nhưng bạn ho&agrave;n to&agrave;n c&oacute; thể chọn bất cứ th&agrave;nh phần n&agrave;o&nbsp;m&agrave; m&igrave;nh th&iacute;ch. để sao ch&eacute;p.</p>\r\n\r\n<p><img alt=\"\" src=\"https://techtalk.vn/wp-content/uploads/2017/06/frontend-tu-chua-biet-den-chuyen-gia-3.png\" style=\"height:600px; width:800px\" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Bạn c&oacute; thể code th&iacute; nghiệm n&agrave;y tr&ecirc;n CodePen hoặc tr&ecirc;n m&aacute;y t&iacute;nh. Nếu chọn lưu trữ tr&ecirc;n m&aacute;y t&iacute;nh, bạn c&oacute; thể tải&nbsp;<a href=\"https://github.com/murtaugh/HTML5-Reset\" target=\"_blank\">dự &aacute;n mẫu n&agrave;y</a>&nbsp;để bắt đầu hoặc tự tạo c&aacute;c file từ đầu. T&ocirc;i gợi &yacute; bạn chọn một tr&igrave;nh soạn thảo như&nbsp;<a href=\"https://atom.io/\" target=\"_blank\">Atom</a>&nbsp;hoặc&nbsp;<a href=\"https://www.sublimetext.com/\" target=\"_blank\">Sublime</a>.</p>\r\n\r\n<p>Bạn cũng cần nhớ rằng, với mọi website bạn lu&ocirc;n lu&ocirc;n c&oacute; thể xem code HTML v&agrave; CSS. Chỉ cần click chuột phải tr&ecirc;n trang hoặc tr&ecirc;n một th&agrave;nh phần của trang, click&nbsp;<em>inspect,&nbsp;</em>một panel sẽ xuất hiện&nbsp;với code HTML b&ecirc;n tr&aacute;i v&agrave; CSS b&ecirc;n phải. Khi bạn gặp kh&oacute; khăn, h&atilde;y xử dụng t&iacute;nh năng&nbsp;<em>inspect</em>&nbsp;để so s&aacute;nh code HTML v&agrave; CSS của bạn với trang web m&agrave; bạn đang sao ch&eacute;p.</p>\r\n\r\n<h3><strong>HTML v&agrave; CSS Best Pracitces</strong></h3>\r\n\r\n<p>Đến đ&acirc;y bạn đ&atilde; học được những kiến thức cơ bản về HTML v&agrave; CSS. Bước tiếp theo l&agrave; học c&aacute;c best practice. Best practices l&agrave; tập hợp c&aacute;c quy tắc gi&uacute;p cải thiện chất lượng code của ban.</p>\r\n\r\n<p><strong>Semantic Markup</strong></p>\r\n\r\n<p>Một best practices cho HTML v&agrave; CSS l&agrave; viết semantic markup. C&oacute; nghĩa l&agrave; sử dụng c&aacute;c thẻ HTML ph&ugrave; hợp v&agrave; đặt t&ecirc;n c&aacute;c class CSS c&oacute; &yacute; nghĩa để truyền đạt &yacute; nghĩa của cấu tr&uacute;c.</p>\r\n\r\n<p>V&iacute; dụ, thẻ&nbsp;<em>h1</em>&nbsp;n&oacute;i với ch&uacute;ng ta rằng đoạn text nội dung của n&oacute; l&agrave; một ti&ecirc;u đề quan trọng. Một v&iacute; dụ kh&aacute;c l&agrave; thẻ&nbsp;<em>footer</em>, n&oacute;i với ch&uacute;ng ta rằng phần tử n&agrave;y ở ph&iacute;a dưới của trang web. Bạn c&oacute; thể đọc th&ecirc;m&nbsp;<a href=\"http://www.hongkiat.com/blog/html-5-semantics/\" target=\"_blank\">Một c&aacute;i nh&igrave;n đ&uacute;ng về ngữ nghĩa trong HTML5</a>&nbsp;v&agrave;&nbsp;<a href=\"https://css-tricks.com/semantic-class-names/\" target=\"_blank\">C&aacute;i g&igrave; l&agrave;m cho&nbsp;t&ecirc;n class c&oacute; &yacute; nghĩa?</a>&nbsp;tr&ecirc;n CSSTricks.</p>\r\n\r\n<p><strong>C&aacute;c quy ước đặt t&ecirc;n class CSS</strong></p>\r\n\r\n<p>Best practice quan trọng tiếp theo l&agrave; c&aacute;c quy ước đặt t&ecirc;n class CSS. C&aacute;c quy ước đặt t&ecirc;n tốt, giống như semantic markup, gi&uacute;p truyền tải &yacute; nghĩa v&agrave; gi&uacute;p cho code của ch&uacute;ng ta c&oacute; thể dự đo&aacute;n được, dễ đọc v&agrave; dễ bảo tr&igrave;. Bạn c&oacute; thể đọc về c&aacute;c quy tắc đặt t&ecirc;n kh&aacute;c nhau trong b&agrave;i viết&nbsp;<a href=\"http://clubmate.fi/oocss-acss-bem-smacss-what-are-they-what-should-i-use/\" target=\"_blank\">OOCSS, ACSS, BEM, SMACSS: ch&uacute;ng l&agrave; g&igrave;? T&ocirc;i n&ecirc;n sử dụng c&aacute;i n&agrave;o?</a></p>\r\n\r\n<p>N&oacute;i chung, t&ocirc;i gợi &yacute; l&agrave; bạn n&ecirc;n cố gắng đặt t&ecirc;n thật đơn giản theo cảm nhận của bạn. Theo thời gian, bạn sẽ kh&aacute;m ph&aacute; ra những c&aacute;i tốt nhất cho m&igrave;nh. Để xem c&aacute;ch c&aacute;c c&ocirc;ng ty như Medium sử dụng c&aacute;c quy ước đặt t&ecirc;n như BEM, bạn c&oacute; thể đọc b&agrave;i viết&nbsp;<a href=\"https://medium.com/@fat/mediums-css-is-actually-pretty-fucking-good-b8e2a6c78b06#.8dcr07j2i\" target=\"_blank\">n&agrave;y</a>. Trong b&agrave;i viết, bạn cũng sẽ học được rằng tạo l&ecirc;n một tập hợp c&aacute;c quy ước hiệu quả l&agrave; một qu&aacute; tr&igrave;nh lặp đi lặp lại.</p>\r\n\r\n<p><strong>CSS Reset</strong></p>\r\n\r\n<p>C&aacute;c tr&igrave;nh duyệt c&oacute; styling kh&ocirc;ng thống nhất từ margin cho tới line-height. V&igrave; l&yacute; do n&agrave;y, lu&ocirc;n lu&ocirc;n reset CSS của bạn.&nbsp;<a href=\"http://meyerweb.com/eric/tools/css/reset/index.html\" target=\"_blank\">MeyerWeb</a>&nbsp;l&agrave; một reset phổ biến. Nếu bạn muốn t&igrave;m hiểu s&acirc;u hơn, bạn c&oacute; thể đọc T<a href=\"https://code.tutsplus.com/tutorials/quick-tip-create-your-own-simple-resetcss-file--net-206\" target=\"_blank\">ự tạo một file Reset.css đơn giản của ri&ecirc;ng m&igrave;nh</a>.</p>\r\n\r\n<p><strong>Cross Browser Support</strong></p>\r\n\r\n<p>C&oacute; nghĩa l&agrave; code của bạn hỗ trợ hầu hết c&aacute;c tr&igrave;nh duyệt mới nhất. Một v&agrave;i thuộc t&iacute;nh CSS như transition cần&nbsp;<a href=\"https://developer.mozilla.org/en-US/docs/Glossary/Vendor_Prefix\" target=\"_blank\">vendor prefixes</a>&nbsp;để l&agrave;m việc tr&ecirc;n nhiều tr&igrave;nh duyệt kh&aacute;c nhau. Bạn c&oacute; thể đọc nhiều hơn về vendor prefixes trong b&agrave;i viết n&agrave;y,&nbsp;<a href=\"http://webdesign.about.com/od/css/a/css-vendor-prefixes.htm\" target=\"_blank\">CSS Vendor Prefixes</a>. Điểm ch&iacute;nh l&agrave; bạn phải kiểm thử website của m&igrave;nh tr&ecirc;n nhiều tr&igrave;nh duyệt như Chrome, Firefox, v&agrave; Safari.</p>\r\n\r\n<p><img alt=\"\" src=\"https://techtalk.vn/wp-content/uploads/2017/06/frontend-tu-chua-biet-den-chuyen-gia-4.png\" style=\"height:160px; width:800px\" /></p>\r\n\r\n<h3><strong>CSS Preprocessors v&agrave; Postprocessors</strong></h3>\r\n\r\n<p>Kể từ khi được giới thiệu v&agrave;o năm 1990, CSS đ&atilde; đi được một chặng đường d&agrave;i. Khi m&agrave; c&aacute;c hệ thống UI ng&agrave;y c&agrave;ng trở l&ecirc;n phức tạp, mọi người bắt đầu sử dụng c&aacute;c preprocessors v&agrave; postprocessors để quản l&yacute; sự phức tạp.</p>\r\n\r\n<p>CSS preprocessors l&agrave; ng&ocirc;n ngữ CSS mở rộng, n&oacute; bổ sung th&ecirc;m biến, mixin v&agrave; kế thừa. C&oacute; hai CSS preprocessors ch&iacute;nh l&agrave;&nbsp;<a href=\"http://sass-lang.com/guide\" target=\"_blank\">Sass</a>&nbsp;v&agrave;&nbsp;<a href=\"http://lesscss.org/\" target=\"_blank\">Less</a>. Trong năm 2016, Sass được sử dụng rộng r&atilde;i&nbsp;hơn. Bootstrap, một framework CSS phổ biến, đ&atilde; chuyển từ Less sang Sass. Cũng cần biết rằng, hầu hết mọi người thường n&oacute;i về Sass, nhưng thực sự họ đang n&oacute;i về&nbsp;<a href=\"https://www.sitepoint.com/whats-difference-sass-scss/\" target=\"_blank\">SCSS</a>.</p>\r\n\r\n<p><img alt=\"\" src=\"https://techtalk.vn/wp-content/uploads/2017/06/frontend-tu-chua-biet-den-chuyen-gia-5.png\" style=\"height:307px; width:800px\" /></p>\r\n\r\n<p>CSS postprocessors &aacute;p dụng c&aacute;c thay đổi tới CSS sau khi viết hoặc đ&atilde; được bi&ecirc;n dịch bởi một preprocessor. V&iacute; dụ, một v&agrave;i postprocessors giống như PostCSS c&oacute; c&aacute;c plugin th&ecirc;m c&aacute;c vendor prefixes tự động.</p>\r\n\r\n<p>Trong lần đầu ti&ecirc;n kh&aacute;m ph&aacute; CSS preprocessors v&agrave; postprocessors, bạn c&oacute; thể bị hấp dẫn để sử dụng ch&uacute;ng ở mọi nơi. Nhưng, h&atilde;y bắt đầu thật đơn giản v&agrave; th&ecirc;m c&aacute;c phần mở rộng chẳng hạn như variables v&agrave; mixins chỉ khi cần thiết. B&agrave;i viết&nbsp;<a href=\"https://medium.com/@fat/mediums-css-is-actually-pretty-fucking-good-b8e2a6c78b06#.ef81j61eg\" target=\"_blank\">n&agrave;y</a>, cũng đề cập nhiều đến preprocessors.</p>\r\n\r\n<h3><strong>Grid Systems v&agrave; Responsiveness</strong></h3>\r\n\r\n<p>Grid systems l&agrave; những cấu tr&uacute;c CSS gi&uacute;p bạn xắp xếp v&agrave; tổ chức c&aacute;c phần tử theo chiều dọc v&agrave; chiều ngan.</p>\r\n\r\n<p><img alt=\"\" src=\"https://techtalk.vn/wp-content/uploads/2017/06/frontend-tu-chua-biet-den-chuyen-gia-6.png\" style=\"height:256px; width:800px\" /></p>\r\n\r\n<p>C&aacute;c framework như Bootstrap, Skeleton v&agrave; Foundation cung cấp c&aacute;c stylesheet để quản l&yacute; c&aacute;c d&ograve;ng v&agrave; c&aacute;c cột trong layout. Khi sử dụng c&aacute;c framework, bạn cũng cần hiểu c&aacute;ch c&aacute;c grid l&agrave;m việc.&nbsp;<a href=\"https://www.sitepoint.com/understanding-css-grid-systems/\" target=\"_blank\">Hiểu CSS Grid Systems</a>&nbsp;v&agrave;&nbsp;<a href=\"https://css-tricks.com/dont-overthink-it-grids/\" target=\"_blank\">Đừng suy nghĩ qu&aacute; phức tạp về Grids</a>&nbsp;l&agrave; những b&agrave;i viết rất hữu &iacute;ch về chủ đề n&agrave;y.</p>\r\n\r\n<p>Một trong những mục đ&iacute;ch ch&iacute;nh của grid systems l&agrave; bổ sung khả năng&nbsp;<em>responsiveness</em>&nbsp;cho website của bạn. Responsiveness c&oacute; nghĩa l&agrave; website của bạn c&oacute; thể resize dựa theo độ rộng của m&agrave;n h&igrave;nh. Responsiveness thường đạt được bằng c&aacute;c sử dụng&nbsp;<a href=\"https://www.w3schools.com/css/css_rwd_mediaqueries.asp\" target=\"_blank\">CSS media queries</a>, c&aacute;c quy tắc CSS kh&aacute;c nhau chỉ &aacute;p dụng cho&nbsp;một loại m&agrave;n h&igrave;nh nhất định.</p>\r\n\r\n<p><img alt=\"\" src=\"https://techmaster.vn/fileman/Uploads/users/188/1-EERzyzZhHJ5FWXKi2PNxuA.gif\" /></p>\r\n\r\n<p>Bạn c&oacute; thể đọc nhiều hơn về media queries trong b&agrave;i viết&nbsp;<a href=\"https://varvy.com/mobile/media-queries.html\" target=\"_blank\">Giới thiệu về Media Queries</a>. Ngo&agrave;i ra, v&igrave; ch&uacute;ng ta đ&atilde; đi v&agrave;o một kỷ nguy&ecirc;n&nbsp;<a href=\"http://zurb.com/word/mobile-first\" target=\"_blank\">mobile-first</a>, h&atilde;y đọc&nbsp;<a href=\"https://www.sitepoint.com/introduction-mobile-first-media-queries/\" target=\"_blank\">Giới thiệu về Mobile-First Media Queries</a>.</p>\r\n\r\n<h3><strong>Luyện tập HTML v&agrave; CSS Best Practices</strong></h3>\r\n\r\n<p>B&acirc;y giờ bạn đ&atilde; được trang bị c&aacute;c&nbsp;best practices, h&atilde;y chiến đấu để kiểm nghiệm ch&uacute;ng. Mục ti&ecirc;u của 2 th&iacute; nghiệm tiếp theo l&agrave; luyện tập viết clean code v&agrave; quan s&aacute;t hiệu quả l&acirc;u d&agrave;i của c&aacute;c best practice về t&iacute;nh dễ bảo tr&igrave; v&agrave; dễ đọc.</p>\r\n\r\n<p><strong>Th&iacute; nghiệm 3</strong></p>\r\n\r\n<p>Trong phần n&agrave;y, h&atilde;y chọn một th&iacute; nghiệm bạn đ&atilde; thực hiện v&agrave; refactor code của bạn sử dụng một v&agrave;i best practices m&agrave; bạn đ&atilde; học được. Refactoring nghĩa l&agrave; chỉnh sử code của bạn sao cho dễ đọc v&agrave; &iacute;t phức tạp hơn.</p>\r\n\r\n<p>C&oacute; khả năng&nbsp;refactor code hiệu quả&nbsp;l&agrave; một kỹ năng quan trọng của một front-end developer. Tạo ra code c&oacute; chất lượng l&agrave; một qu&aacute; tr&igrave;nh lặp đi lặp lại.&nbsp;<a href=\"https://www.sitepoint.com/css-architectures-refactor-your-css/\" target=\"_blank\">C&aacute;c kiến tr&uacute;c CSS: Refactor code CSS của bạn</a>&nbsp;l&agrave; một khởi đầu tốt cho việc refactoring code của bạn.</p>\r\n\r\n<p><img alt=\"\" src=\"https://techtalk.vn/wp-content/uploads/2017/06/frontend-tu-chua-biet-den-chuyen-gia-8.png\" style=\"height:600px; width:800px\" /></p>\r\n\r\n<p>Điều quan trọng nhất kh&ocirc;ng phải l&agrave; l&agrave;m đ&uacute;ng ngay lần đầu, m&agrave; quan trọng l&agrave; ki&ecirc;n tr&igrave; luyện tập cho đến đạt được điều đ&oacute;.</p>\r\n\r\n<p>Đ&acirc;y l&agrave; một v&agrave;i c&acirc;u hỏi bạn cần trả lời khi tiến h&agrave;nh refactoring lại code:</p>\r\n\r\n<ul>\r\n	<li>T&ecirc;n của c&aacute;c class chưa r&otilde; r&agrave;ng? 6 th&aacute;ng sau, bạn sẽ vẫn hiểu &yacute; nghĩa của c&aacute;c class n&agrave;y?</li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<ul>\r\n	<li>HTML v&agrave; CSS đ&atilde; c&oacute; ngữ nghĩa r&otilde; r&agrave;ng? Khi đọc lướt qua code, bạn c&oacute; thể nhanh ch&oacute;ng h&igrave;nh dung cấu tr&uacute;c v&agrave; quan hệ giữa c&aacute;c th&agrave;nh phần?</li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<ul>\r\n	<li>Bạn đang t&aacute;i sử dụng c&ugrave;ng một m&agrave;u m&atilde; hex nhiều lần? Sẽ tốt hơn nếu bạn refactor n&oacute; th&agrave;nh một&nbsp;<a href=\"https://webdesign.tutsplus.com/articles/understanding-variable-scope-in-sass--cms-23498\" target=\"_blank\">biến Sass</a>?</li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<ul>\r\n	<li>Code của bạn c&oacute; l&agrave;m việc tốt tr&ecirc;n Safari như tr&ecirc;n Chrome kh&ocirc;ng?</li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<ul>\r\n	<li>Bạn c&oacute; thể thay thế&nbsp;một v&agrave;i đoạn code layout bằng một grid system như Skeleton?</li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<ul>\r\n	<li>Bạn thường xuy&ecirc;n sử dụng cờ&nbsp;<em>!important</em>? L&agrave;m sao để sửa chữa điều n&agrave;y?</li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>Th&iacute; nghiệm 4</strong></p>\r\n\r\n<p>Trong th&iacute; nghiệm cuối c&ugrave;ng n&agrave;y, bạn sẽ sử dụng c&aacute;c best practices đ&atilde; học để x&acirc;y dựng một trang portfolio. Tuy nhi&ecirc;n, hiệu quả của c&aacute;c best practice sẽ kh&ocirc;ng r&otilde; r&agrave;ng cho đến khi bạn &aacute;p dụng ch&uacute;ng v&agrave;o c&aacute;c dự &aacute;n lớn hơn.</p>\r\n\r\n<p>Với&nbsp;một front-end developer, trang portfolio l&agrave; một t&agrave;i sản kỹ thuật số quan trọng nhất&nbsp;của bạn. Portfolio l&agrave; một trang web giới thiệu về c&ocirc;ng việc của bạn. Quan trọng hơn, n&oacute; gi&uacute;p bạn ghi lại v&agrave; theo d&otilde;i qu&aacute; tr&igrave;nh ph&aacute;t triển của m&igrave;nh. V&igrave; thế nếu bạn chỉ c&oacute; 1 hoặc 2 thứ để trưng b&agrave;y, h&atilde;y đặt ch&uacute;ng l&ecirc;n.</p>\r\n\r\n<p><img alt=\"\" src=\"https://techtalk.vn/wp-content/uploads/2017/06/frontend-tu-chua-biet-den-chuyen-gia-9.jpeg\" style=\"height:410px; width:800px\" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Để bắt đầu, bạn c&oacute; thể l&agrave;m theo hướng dẫn trong b&agrave;i viết của&nbsp;Adham Dannaway,&nbsp;<a href=\"https://www.smashingmagazine.com/2013/06/workflow-design-develop-modern-portfolio-website/\" target=\"_blank\">Một workflow đơn giản để thiết kế v&agrave; ph&aacute;t triển một trang portfolio</a>.</p>\r\n\r\n<p>Nếu portfolio đầu ti&ecirc;n của bạn chưa ho&agrave;n hảo, điều đ&oacute; l&agrave; b&igrave;nh thường. Ho&agrave;n thiện portfolio sau nhiều lần lặp đi lặp lại. V&agrave; điều quan trọng l&agrave; bạn x&acirc;y dựng n&oacute; bằng những kỹ năng của m&igrave;nh.</p>\r\n\r\n<h3><strong>Li&ecirc;n tục học hỏi</strong></h3>\r\n\r\n<p>Khi m&agrave; HTML v&agrave; CSS vẫn sẽ được sử dụng trong một thời gian d&agrave;i, điều quan trọng l&agrave; li&ecirc;n tục cập nhật kiến thức front-end.</p>\r\n\r\n<p><img alt=\"\" src=\"https://techtalk.vn/wp-content/uploads/2017/06/frontend-tu-chua-biet-den-chuyen-gia-10.jpeg\" style=\"height:416px; width:800px\" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Dưới đ&acirc;y l&agrave; danh s&aacute;ch c&aacute;c wesite, blog v&agrave; forum tất cả đều th&uacute; vị để đọc v&agrave; t&igrave;m hiểu th&ocirc;ng tin</p>\r\n\r\n<ul>\r\n	<li><a href=\"https://css-tricks.com/\" target=\"_blank\">CSSTricks</a></li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<ul>\r\n	<li><a href=\"https://www.smashingmagazine.com/\" target=\"_blank\">Smashing Magazine</a></li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<ul>\r\n	<li><a href=\"https://www.designernews.co/\" target=\"_blank\">Designer News</a></li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<ul>\r\n	<li><a href=\"https://code.tutsplus.com/\" target=\"_blank\">Nettuts+</a></li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<ul>\r\n	<li><a href=\"https://csswizardry.com/\" target=\"_new\">CSS Wizard</a></li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h3><strong>Học qua v&iacute; dụ</strong></h3>\r\n\r\n<p>Cuối c&ugrave;ng, c&aacute;ch học tốt nhất l&agrave; qua v&iacute; dụ. Đ&acirc;y l&agrave; một tập hợp c&aacute;c styleguides v&agrave; code conventions, sẽ dạy bạn c&aacute;ch l&agrave;m việc hiệu quả hơn.</p>\r\n\r\n<p><strong>Styleguides</strong></p>\r\n\r\n<p><img alt=\"\" src=\"https://techtalk.vn/wp-content/uploads/2017/06/frontend-tu-chua-biet-den-chuyen-gia-11.png\" style=\"height:594px; width:800px\" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Styleguides l&agrave; tập hợp c&aacute;c CSS component v&agrave; c&aacute;c pattern, c&oacute; thể t&aacute;i sử dụng tr&ecirc;n nhiều trang web. Điều quan trọng cần ch&uacute; &yacute; từ c&aacute;c styleguides n&agrave;y l&agrave; c&aacute;ch c&aacute;c&nbsp;th&agrave;nh phần dựa tr&ecirc;n HTML v&agrave; CSS cho ph&eacute;p bạn t&aacute;i sử dụng code tu&acirc;n theo quy tắc&nbsp;<a href=\"https://en.wikipedia.org/wiki/Don%27t_repeat_yourself\" target=\"_blank\">DRY</a>.</p>\r\n\r\n<ul>\r\n	<li><a href=\"https://www.mapbox.com/base/styling/\" target=\"_blank\">Mapbox</a></li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<ul>\r\n	<li><a href=\"http://rizzo.lonelyplanet.com/styleguide/design-elements/colours\" target=\"_blank\">LonelyPlanet</a></li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<ul>\r\n	<li><a href=\"https://www.lightningdesignsystem.com/\" target=\"_blank\">SalesForce</a></li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<ul>\r\n	<li><a href=\"http://ux.mailchimp.com/patterns/\" target=\"_blank\">MailChimp</a></li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>Code Conventions</strong></p>\r\n\r\n<p>Code conventions được thiết kế để l&agrave;m cho code của bạn dễ đọc v&agrave; dễ bảo tr&igrave;. Một số li&ecirc;n kết như&nbsp;<a href=\"http://cssguidelin/\" target=\"_blank\">C&aacute;c hướng dẫn về CSS</a>hướng dẫn viết HTML v&agrave; CSS tốt hơn trong khi c&aacute;c li&ecirc;n kết kh&aacute;c như&nbsp;<a href=\"https://github.com/primer/primer-css\" target=\"_blank\">C&aacute;c hướng dẫn v&agrave; bộ c&ocirc;ng cụ CSS tr&ecirc;n Github</a>&nbsp;lại l&agrave; những v&iacute; dụ về code chất lượng.</p>\r\n\r\n<ul>\r\n	<li><a href=\"http://cssguidelin/\" target=\"_blank\">C&aacute;c hướng dẫn về CSS</a></li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<ul>\r\n	<li><a href=\"https://github.com/primer/primer-css\" target=\"_blank\">C&aacute;c hướng dẫn v&agrave; bộ c&ocirc;ng cụ CSS tr&ecirc;n Github</a></li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<ul>\r\n	<li><a href=\"https://github.com/airbnb/css\" target=\"_new\">Styleguide CSS của AirBnB</a></li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h3><strong>Tổng kết</strong></h3>\r\n\r\n<p>Hy vọng, đến cuối b&agrave;i viết n&agrave;y, bạn đ&atilde; quen thuộc với HTML v&agrave; CSS v&agrave; c&oacute; một v&agrave;i dự &aacute;n từ những thứ bạn đ&atilde; học được. C&aacute;ch tốt nhất để học front-end l&agrave; x&acirc;y dựng c&aacute;c dự &aacute;n v&agrave; th&iacute; nghiệm. Nhớ rằng, mọi front-end developer đều bắt đầu từ một nơi n&agrave;o đ&oacute;. V&agrave; bắt đầu ngay từ h&ocirc;m nay sẽ tốt hơn ng&agrave;y mai.</p>\r\n\r\n<p>Đ&acirc;y l&agrave; b&agrave;i viết đầu ti&ecirc;n trong loạt b&agrave;i viết gồm 2 phần. Phần 2 sẽ đề cập tới việc th&ecirc;m c&aacute;c tương t&aacute;c với Javascript v&agrave; c&aacute;c thư vi&ecirc;n/framework Javascript.</p>\r\n', '2018-07-18 15:23:56', 0, 'HinhAnh-1531920236.jpg', 3, 10, 0);
+INSERT INTO `news` (`news_id`, `name`, `preview`, `detail`, `date_create`, `create_by`, `picture`, `counter`, `cat_id`, `status`) VALUES
+(29, '30 Trang web nên theo dõi nếu bạn là một lập trình viên web 1', 'Hầu hết các trang web này thường được cập nhật thường xuyên, vì vậy phần mềm đọc tin RSS của tôi luôn tràn ngập nội dung mới từ những trang này.', '<h3><a href=\"http://nettuts.com/\" target=\"_blank\">1. NETTUTS</a></h3>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=\"\" src=\"https://lh3.googleusercontent.com/-sVDdAUYGwso/U28mj85qlzI/AAAAAAAAABk/zSL3RTA7juc/w450-h200-no/21-01_nettuts.jpg\" style=\"height:200px; width:450px\" /></p>\r\n\r\n<p><em>NET</em></p>\r\n\r\n<p><em>TUTS</em>&nbsp;gần đ&acirc;y cho ra mắt một blog/tutorial chuy&ecirc;n cung cấp những &ldquo;<em>kỹ năng đặc biệt về l&agrave;m web</em>&rdquo;. Tại đ&acirc;y c&oacute; rất nhiều b&agrave;i hướng dẫn rất chi tiết v&agrave; bổ &iacute;ch trải d&agrave;i từ WordPress cho đến jQuery. NETTUTS l&agrave; nguồn t&agrave;i liệu ho&agrave;n hảo d&agrave;nh cho c&aacute;c lập tr&igrave;nh vi&ecirc;n mới bắt đầu, c&aacute;c b&agrave;i hướng dẫn của họ rất chi tiết thường theo c&aacute;ch thức &ldquo;step by step&rdquo;. Đối với c&aacute;c lập tr&igrave;nh vi&ecirc;n nhiều kinh nghiệm th&igrave; trang web n&agrave;y l&agrave; nguồn t&agrave;i nguy&ecirc;n kh&aacute; tốt để lấy cảm hứng v&agrave; học th&ecirc;m những kỹ năng mới.</p>\r\n\r\n<h3><a href=\"http://www.webdesignerwall.com/\" target=\"_blank\">2. Web Designer Wall</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh4.googleusercontent.com/-B94ZDFsCuv4/U28nTNXWoXI/AAAAAAAAACY/ueMlT-knqmQ/w450-h200-no/21-03_webdesignerwall.jpg\" style=\"height:200px; width:450px\" /></p>\r\n\r\n<p><em>Web Designer Wall</em>&nbsp;l&agrave; blog được ph&aacute;t triển bởi Nick La, ở đ&acirc;y c&oacute; những &yacute; tưởng thiết kế ti&ecirc;u biểu v&agrave; c&ocirc;ng phu, những b&agrave;i hướng dẫn tuyệt vời như l&agrave;&nbsp;<a href=\"http://www.webdesignerwall.com/tutorials/css-gradient-text-effect/\" target=\"_blank\">CSS gradient Text Effect</a>&nbsp;&ndash; một kỹ thuật sử dụng h&igrave;nh ảnh để phủ l&ecirc;n những d&ograve;ng chữ XHTML b&igrave;nh thường, v&agrave; c&aacute;c b&agrave;i hướng dẫn về&nbsp;<a href=\"http://www.webdesignerwall.com/tutorials/jquery-tutorials-for-designers/\" target=\"_blank\">jQuery cho c&aacute;c designer</a>, chứa loạt b&agrave;i viết về 10 kỹ thuật để bạn bắt đầu với jQuery.</p>\r\n\r\n<h3><a href=\"http://www.smashingmagazine.com/\" target=\"_blank\">3. Smashing Magazine</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh5.googleusercontent.com/-io9bb2hpQHc/U28nS1PKSlI/AAAAAAAAACA/k9hVuqCx5Nk/w450-h200-no/21-04_smashing_magazine.jpg\" style=\"height:200px; width:450px\" /></p>\r\n\r\n<p>T&ocirc;i kh&ocirc;ng muốn n&oacute;i nhiều về&nbsp;<em>Smashing Magazine</em>&nbsp;bởi v&igrave; c&oacute; lẽ rất nhiều người trong số c&aacute;c bạn đ&atilde; nghe về n&oacute;, nhưng nếu bạn chưa từng biết n&oacute;, th&igrave; Smashing Magazine l&agrave; một nguồn t&agrave;i liệu ho&agrave;n hảo cho c&aacute;c lập tr&igrave;nh vi&ecirc;n v&agrave; thiết kế web đang t&igrave;m kiếm nguồn cảm hứng cho m&igrave;nh. Smashing Magazine đăng b&agrave;i viết mới mỗi ng&agrave;y v&agrave; c&aacute;c b&agrave;i viết thường rất chi tiết v&agrave; tỉ mỉ.</p>\r\n\r\n<h3><a href=\"http://www.thinkvitamin.com/\" target=\"_blank\">4. Vitamin</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh3.googleusercontent.com/-9Z4Xt7hH578/U28nTufb-PI/AAAAAAAAACM/J3CCTTWFJ8o/w450-h200-no/21-05_vitamin.jpg\" style=\"height:200px; width:450px\" /></p>\r\n\r\n<p><em>Vitamin</em>&nbsp;cung cấp một số lượng lớn th&ocirc;ng tin về c&aacute;c chủ đề trong ph&aacute;t triển v&agrave; thiết kế web. V&igrave; c&oacute; rất nhiều người đ&oacute;ng g&oacute;p b&agrave;i viết n&ecirc;n Vitamin c&oacute; một phạm vi rất rộng c&aacute;c chủ đề bao gồm Ajax, CSS, c&aacute;c kỹ thuật lập tr&igrave;nh, c&aacute;c b&agrave;i thực h&agrave;nh tốt nhất v&agrave; thậm ch&iacute; cả c&aacute;ch quản l&yacute; theo workflow.</p>\r\n\r\n<h3><a href=\"http://woork.blogspot.com/\" target=\"_blank\">5. Woork</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh3.googleusercontent.com/-3KUvBG1aJxk/U28nS3eqyJI/AAAAAAAAAB8/_3s-5_4DfP0/w450-h200-no/21-02_woork.jpg\" style=\"height:200px; width:450px\" /></p>\r\n\r\n<p><em>Woork</em>&nbsp;l&agrave; blog của Antonio Lupetti, một lập tr&igrave;nh vi&ecirc;n người &Yacute;. Anh ta cung cấp những b&agrave;i viết ngắn gọn, dễ hiểu về rất nhiều chủ để kh&aacute;c nhau trong ph&aacute;t triển web như l&agrave; PHP, Cold Fusion, JavaScript v&agrave; CSS. Sở trường của anh ta l&agrave; tạo ra những b&agrave;i viết tr&ocirc;ng rất bắt mắt, bằng c&aacute;ch ch&egrave;n v&agrave;o rất nhiều h&igrave;nh ảnh minh họa về vấn đề m&agrave; anh ta n&oacute;i đến, l&agrave;m cho người đọc cảm thấy rất dễ tiếp thu.</p>\r\n\r\n<h3><a href=\"http://wakeuplater.com/\" target=\"_blank\">6. Wake Up Later</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh6.googleusercontent.com/-zaemyNrRORo/U28nT543M3I/AAAAAAAAACI/GG9xY29er-Y/w450-h200-no/21-06_wakeuplater.jpg\" style=\"height:200px; width:450px\" /></p>\r\n\r\n<p>Wake Up Later l&agrave; blog của Samuel Ryan, một freelancer về lập tr&igrave;nh v&agrave; thiết kế website. Thay v&igrave; chứa c&aacute;c b&agrave;i viết về kỹ thuật ph&aacute;t triển web hoặc cung cấp c&aacute;c b&agrave;i hướng dẫn, anh ta n&oacute;i về c&aacute;c chủ đề phổ biển li&ecirc;n quan đến việc ph&aacute;t triển web như l&agrave;&nbsp;<a href=\"http://wakeuplater.com/website-building/5-reasons-not-to-write-your-own-code.aspx\" target=\"_blank\">l&yacute; do tại sao designer kh&ocirc;ng n&ecirc;n tự viết code</a>,&nbsp;<a href=\"http://wakeuplater.com/freelance-lessons/10-productivity-tips-are-better-than-101.aspx\" target=\"_blank\">c&aacute;c b&iacute; quyết để tăng năng suất l&agrave;m việc</a>,&nbsp;<a href=\"http://wakeuplater.com/website-building/8-web-design-mistakes-that-developers-make.aspx\" target=\"_blank\">c&aacute;c lỗi thiết kế phổ biến m&agrave; c&aacute;c lập tr&igrave;nh vi&ecirc;n thường mắc phải</a>.</p>\r\n\r\n<h3><a href=\"http://snook.ca/\" target=\"_blank\">7. Snook.ca</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh6.googleusercontent.com/-S1o7e3EgW6M/U28nUZHhTTI/AAAAAAAAACc/NUVqaTQihSM/w450-h200-no/21-07_snookca.jpg\" style=\"height:200px; width:450px\" /></p>\r\n\r\n<p><em>Snook.ca</em>&nbsp;l&agrave; trang web của Jonathan Snook, anh l&agrave; một người kh&aacute; nổi tiếng trong lĩnh vực ph&aacute;t triển v&agrave; thiết kế web. Blog của anh cung cấp rất nhiều b&agrave;i viết v&agrave; hướng dẫn về PHP, JavaScript, Adobe AIR v&agrave; một số lĩnh vực kh&aacute;c. Anh cũng cung cấp nhiều t&agrave;i nguy&ecirc;n hữu &iacute;ch v&agrave; b&agrave;n luận về những vấn đề li&ecirc;n quan mật thiết đến ph&aacute;t triển web như l&agrave;&nbsp;<a href=\"http://snook.ca/archives/other/pm_email/\" target=\"_blank\">quản l&yacute; dự &aacute;n th&ocirc;ng qua email</a>, v&agrave;&nbsp;<a href=\"http://snook.ca/archives/other/maintain_personal_brand/\" target=\"_blank\">duy tr&igrave; thương hiệu c&aacute; nh&acirc;n trực tuyến</a>.</p>\r\n\r\n<h3><a href=\"http://signalvnoise.com/\" target=\"_blank\">8. Signal vs. Noise</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh3.googleusercontent.com/-iWQaHnsQop0/U28nUhSV0LI/AAAAAAAAADU/HyvFp_DTCg4/w450-h200-no/21-08_signav_vs_noise.jpg\" style=\"height:200px; width:450px\" /></p>\r\n\r\n<p><em>Signal vs. Noise</em>&nbsp;l&agrave; blog của một c&ocirc;ng ty chuy&ecirc;n thiết kế web, gồm những người đ&atilde; ph&aacute;t triển c&aacute;c ứng dụng web kh&aacute; nổi tiếng như Basecamp v&agrave; mối quan t&acirc;m của họ li&ecirc;n quan đến framework m&atilde; nguồn mở nổi tiếng d&ugrave;ng để ph&aacute;t triển ứng dụng web l&agrave; Ruby On Rails. Blog n&agrave;y đưa ra những c&aacute;i nh&igrave;n s&acirc;u sắc về c&aacute;ch để trở th&agrave;nh một lập tr&igrave;nh vi&ecirc;n web năng suất v&agrave; hiệu quả, c&ugrave;ng với những b&agrave;i viết như l&agrave; &ldquo;<a href=\"http://signalvnoise.com/posts/1017-workaholics-fixate-on-inconsequential-details\" target=\"_blank\">Những người ham c&ocirc;ng tiếc việc thường qu&aacute; tập trung v&agrave;o c&aacute;c chi tiết nhỏ nhặt</a>&rdquo; v&agrave; &rdquo;<a href=\"http://www.37signals.com/svn/posts/1006-sleep-deprivation-is-not-a-badge-of-honor\" target=\"_blank\">Việc thiếu ngủ kh&ocirc;ng phải l&agrave; một tấm huy chương danh dự</a>&rdquo;</p>\r\n\r\n<h3><a href=\"http://www.adaptivepath.com/ideas/\" target=\"_blank\">9. Adaptive Path Ideas</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh4.googleusercontent.com/-r7P7UtZQZg4/U28nVMIY47I/AAAAAAAAACo/eoPbHxJi6B8/w450-h200-no/21-09_adaptive_path.jpg\" style=\"height:200px; width:450px\" /></p>\r\n\r\n<p>Blog của c&ocirc;ng ty&nbsp;<em>Adaptive Path</em>&nbsp;đưa ra c&aacute;c tin tức v&agrave; b&agrave;i viết về chủ đề thiết kế giao diện người d&ugrave;ng. C&oacute; rất nhiều b&agrave;i viết bổ &iacute;ch về chủ đề tạo ra giao diện th&acirc;n thiện người sử dụng (kh&ocirc;ng chỉ giới hạn trong c&aacute;c ứng dụng web). Đ&ocirc;i khi họ c&ograve;n viết c&aacute;c b&agrave;i như &ldquo;<a href=\"http://www.adaptivepath.com/ideas/tips-for-presenting-the-look-feel-to-a-client/\" target=\"_blank\">B&iacute; quyết để tr&igrave;nh b&agrave;y sản phẩm để h&agrave;i l&ograve;ng kh&aacute;ch h&agrave;ng</a>&rdquo;.</p>\r\n\r\n<h3><a href=\"http://tutorialblog.org/\" target=\"_blank\">10. Tutorial Blog</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh5.googleusercontent.com/-nh15NXyRXik/U28nVZa8DII/AAAAAAAAACs/fK2S_mfFV9Q/w450-h200-no/21-10_tutorial_blog.jpg\" style=\"height:200px; width:450px\" /><em>Tutorial Blog</em>&nbsp;cung cấp rất nhiều b&agrave;i hướng dẫn thực h&agrave;nh, c&aacute;c t&agrave;i nguy&ecirc;n v&agrave; một danh s&aacute;ch rất nhiều chủ đề li&ecirc;n quan đến thiết kế v&agrave; ph&aacute;t triển web như l&agrave;&nbsp;<a href=\"http://tutorialblog.org/25-code-snippets-for-web-designers-part8/\" target=\"_blank\">những đoạn code ngắn d&agrave;nh cho người thiết kế web</a>,&nbsp;<a href=\"http://tutorialblog.org/how-to-use-layer-comps-in-photoshop/\" target=\"_blank\">sử dụng layer comp trong Photoshop</a>&nbsp;để quản l&yacute; việc thiết kế, v&agrave; c&aacute;c b&agrave;i thực h&agrave;nh về Flash. Tutorial Blog c&ograve;n c&oacute; một phần d&agrave;nh cho người đọc c&oacute; thể chia sẻ những b&agrave;i viết hướng dẫn của ri&ecirc;ng m&igrave;nh.</p>\r\n\r\n<h3><a href=\"http://www.webappers.com/\" target=\"_blank\">11. WebAppers</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh3.googleusercontent.com/-fQlNyAFaYD0/U28nWGZ9rGI/AAAAAAAAAC4/6BuYAFh69PQ/w450-h200-no/21-11_web_appers.jpg\" style=\"height:200px; width:450px\" /><em>WebAppers</em>&nbsp;l&agrave; một blog được tạo ra bởi Ray Cheung, một freelancer về ph&aacute;t triển web. Nội dung ch&iacute;nh của WebAppers l&agrave; cung cấp tin tức v&agrave; t&agrave;i nguy&ecirc;n li&ecirc;n quan đến m&atilde; nguồn mở v&agrave; c&aacute;c ứng dụng miễn ph&iacute; hữu &iacute;ch d&agrave;nh cho c&aacute;c lập tr&igrave;nh vi&ecirc;n v&agrave; thiết kế web. Từ những bộ font v&agrave; icon miễn ph&iacute; cho tới c&aacute;c menu điều hướng v&agrave; cả những thư viện h&igrave;nh ảnh, WebAppers lu&ocirc;n t&igrave;m kiếm để săn t&igrave;m được những c&ocirc;ng cụ v&agrave; ứng dụng hữu &iacute;ch, nhằm gi&uacute;p bạn giảm thời gian ph&aacute;t triển sản phẩm.</p>\r\n\r\n<h3><a href=\"http://www.webresourcesdepot.com/\" target=\"_blank\">12. Web Resources Depot</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh5.googleusercontent.com/-q0bYRVhX_ng/U28nWSoydkI/AAAAAAAAAC8/tNua76apFdk/w450-h200-no/21-12_web_resource_depot.jpg\" style=\"height:200px; width:450px\" /><em>Web Resources Depot</em>&nbsp;th&igrave; tương tự như trang web WebAppers n&oacute;i tr&ecirc;n &ndash; trang web b&agrave;n luận về những t&agrave;i nguy&ecirc;n web mới m&agrave; c&aacute;c lập tr&igrave;nh vi&ecirc;n v&agrave; thiết kế web c&oacute; thể t&igrave;m thấy nhiều điều bổ &iacute;ch. Web Resources Depot l&agrave; một nơi ho&agrave;n hảo để c&oacute; thể cập nhật kiến thức c&ocirc;ng nghệ mới nhất.</p>\r\n\r\n<h3><a href=\"http://ajaxian.com/\" target=\"_blank\">13. Ajaxian</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh4.googleusercontent.com/-6zKrqnWvrtE/U28nW2NtdPI/AAAAAAAAADI/lbGUmC7zT_g/w450-h200-no/21-13_ajaxian.jpg\" style=\"height:200px; width:450px\" />C&ugrave;ng với sự tiếp tục ph&aacute;t triển của c&ocirc;ng nghệ Ajax, việc cần thiết l&agrave; cập nhật những th&ocirc;ng tin v&agrave; những kỹ thuật mới nhất về c&ocirc;ng nghệ n&agrave;y.&nbsp;<em>Ajaxian</em>&nbsp;l&agrave; trang web dẫn đầu trong cộng đồng Ajax v&agrave; được điều h&agrave;nh bởi một nh&oacute;m c&aacute;c lập tr&igrave;nh vi&ecirc;n danh tiếng trong lĩnh vực n&agrave;y. Bạn sẽ t&igrave;m thấy nhiều th&ocirc;ng tin, review c&aacute;c framework JavaScript, c&aacute;c c&ocirc;ng cụ hữu &iacute;ch, v&agrave; c&aacute;c b&agrave;i viết rất hay về những c&ocirc;ng nghệ server-side (như PHP, RoR v&agrave; .NET). Nếu c&oacute; th&ocirc;ng tin n&agrave;o về c&ocirc;ng nghệ Ajax m&agrave; bạn đang t&igrave;m kiếm, th&igrave; t&ocirc;i d&aacute;m chắc rằng n&oacute; sẽ c&oacute; ở trang Ajaxian.</p>\r\n\r\n<h3><a href=\"http://www.dzone.com/links/index.html\" target=\"_blank\">14. DZone</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh4.googleusercontent.com/-tQSx6VZiq5E/U28nXbbB_NI/AAAAAAAAADQ/Bu3FPthAILM/w450-h200-no/21-14_dzone.jpg\" style=\"height:200px; width:450px\" /><em>DZone</em>&nbsp;l&agrave; một mạng x&atilde; hội d&agrave;nh cho lập tr&igrave;nh vi&ecirc;n. Người d&ugrave;ng c&oacute; thể chia sẻ những li&ecirc;n kết li&ecirc;n quan đến việc ph&aacute;t triển web v&agrave; c&oacute; thể b&igrave;nh chọn cho c&aacute;c li&ecirc;n kết n&agrave;y (cũng c&oacute; điểm giống với Digg nhưng chỉ giới hạn tới những li&ecirc;n kết của lập tr&igrave;nh vi&ecirc;n). Bạn c&oacute; thể đăng k&yacute; đọc tin qua RSS ứng với những mục nhỏ của trang như l&agrave; JavaScript, Flash/Flex hoặc database, để nhận được những th&ocirc;ng tin cập nhật n&oacute;ng hổi nhất.</p>\r\n\r\n<h3><a href=\"http://www.designfloat.com/\" target=\"_blank\">15. Design Float</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh3.googleusercontent.com/-bKUAImfKk1g/U28nX9MSrLI/AAAAAAAAADk/UUNDgWPhrSU/w450-h200-no/21-15_design_float.jpg\" style=\"height:200px; width:450px\" /><em>Design Float</em>&nbsp;l&agrave; trang mạng x&atilde; hội d&agrave;nh cho c&aacute;c nh&agrave; thiết kế web v&agrave; graphics. Giống như DZone, mọi người c&oacute; thể b&igrave;nh chọn cho những li&ecirc;n kết tại đ&acirc;y. Bạn sẽ t&igrave;m thấy rất nhiều t&agrave;i nguy&ecirc;n về CSS, HTML v&agrave; Photoshop được đăng tại Design Float.</p>\r\n\r\n<h3><a href=\"http://www.ibm.com/developerworks/\" target=\"_blank\">16. IBM&rsquo;s developerWorks</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh3.googleusercontent.com/-tzeF6Kyj1D4/U28nYFcdccI/AAAAAAAAADg/Y7sFsSkONFA/w450-h200-no/21-16_developerworks.jpg\" style=\"height:200px; width:450px\" />C&aacute;i t&ecirc;n IBM đ&atilde; n&oacute;i l&ecirc;n kh&aacute; nhiều điều, đ&oacute; l&agrave; một trang web rất tuyệt vời d&agrave;nh cho c&aacute;c lập tr&igrave;nh vi&ecirc;n.&nbsp;<em>DeveloperWorks</em>&nbsp;đưa ra rất nhiều b&agrave;i viết v&agrave; hướng dẫn thực h&agrave;nh về c&aacute;c chủ đề ph&aacute;t triển sản phẩm, kh&ocirc;ng chỉ n&oacute;i về ph&aacute;t triển web m&agrave; c&ograve;n li&ecirc;n quan đến rất nhiều lĩnh vực như l&agrave; quản trị hệ thống v&agrave; c&aacute;c ứng dụng dựa tr&ecirc;n c&ocirc;ng nghệ m&atilde; nguồn mở. DeveloperWorks c&oacute; sở trường l&agrave; diễn giải những vấn đề kh&oacute; hiểu trở n&ecirc;n dễ hiểu v&agrave; dễ học hơn rất nhiều. Một số b&agrave;i viết hay của n&oacute; m&agrave; t&ocirc;i c&ograve;n lưu lại như l&agrave; &ldquo;<a href=\"http://www.ibm.com/developerworks/web/library/wa-aj-firebug/index.html\" target=\"_blank\">Debug ứng dụng dễ d&agrave;ng bằng Firebug</a>&rdquo; v&agrave; loạt b&agrave;i viết về &ldquo;<a href=\"http://www.ibm.com/developerworks/opensource/library/os-php-fastapps3/\" target=\"_blank\">C&aacute;ch l&agrave;m cho ứng dụng PHP chạy nhanh, nhanh hơn, nhanh nhất</a>&rdquo;.</p>\r\n\r\n<h3><a href=\"http://del.icio.us/\" target=\"_blank\">17. Del.icio.us</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh6.googleusercontent.com/-nbkAOkXfnOY/U28nYuAKR_I/AAAAAAAAAD0/Jmhh5Oxj4zY/w450-h200-no/21-17_delicious.jpg\" style=\"height:200px; width:450px\" /><em>Del.icio.us</em>&nbsp;l&agrave; một trang web d&ugrave;ng để lưu lại c&aacute;c b&agrave;i viết, nơi m&agrave; c&aacute;c th&agrave;nh vi&ecirc;n c&oacute; thể lưu giữ v&agrave; chia sẻ những b&agrave;i viết m&agrave; họ quan t&acirc;m. Trang web kh&ocirc;ng giới hạn chỉ d&agrave;nh cho c&aacute;c lập tr&igrave;nh vi&ecirc;n web, nhưng bạn c&oacute; thể theo d&otilde;i theo c&aacute;c chủ để li&ecirc;n quan đến m&igrave;nh như l&agrave; webdev, development hoặc javascript.</p>\r\n\r\n<h3><a href=\"http://sharebrain.info/\" target=\"_blank\">18. Sharebrain</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh3.googleusercontent.com/-FgmzE2ppvUk/U28nZPLRJVI/AAAAAAAAADw/T5hNPJbzEP4/w450-h200-no/21-18_sharebrain.jpg\" style=\"height:200px; width:450px\" /><em>Sharebrain</em>&nbsp;l&agrave; trang web chia sẻ nhiều t&agrave;i nguy&ecirc;n hữu &iacute;ch cho c&aacute;c lập tr&igrave;nh vi&ecirc;n web. Bạn c&oacute; thể t&igrave;m thấy rất nhiều t&agrave;i nguy&ecirc;n v&agrave; b&agrave;i viết hướng dẫn về việc ph&aacute;t triển v&agrave; thiết kế web, c&aacute;c b&agrave;i hướng dẫn về c&aacute;c chủ đề như l&agrave; Photoshop, Usability, SEO Tools, c&aacute;c CMS v&agrave; cả những b&agrave;i phỏng vấn kh&aacute;c.</p>\r\n\r\n<h3><a href=\"http://stylegrind.com/\" target=\"_blank\">19. Style Grind</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh3.googleusercontent.com/-Rn892Eg-Nz8/U28nZSvAQdI/AAAAAAAAAEI/1hTazIfWD5o/w450-h200-no/21-19_stylegrind.jpg\" style=\"height:200px; width:450px\" /><em>Style Grind</em>&nbsp;chia sẻ rất nhiều th&ocirc;ng tin bổ &iacute;ch về thiết kế v&agrave; c&aacute;c c&ocirc;ng nghệ li&ecirc;n quan đến web. C&aacute;c nguồn t&agrave;i nguy&ecirc;n v&agrave; tin tức m&agrave; Style Grind cung cấp bao gồm rất nhiều chủ đề li&ecirc;n quan đến lĩnh vực thiết kế v&agrave; ph&aacute;t triển web như l&agrave; CSS hay&nbsp;<a href=\"http://stylegrind.com/javascript/jquery-fancy-zoom-plugin/\" target=\"_blank\">những plugin mới cho jQuery</a>.</p>\r\n\r\n<h3><a href=\"http://psdtuts.com/\" target=\"_blank\">20. PSDTUTS</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh4.googleusercontent.com/-8Bfw6LclWGA/U28nZyGZs-I/AAAAAAAAAFU/WWI-WtGYZ8s/w450-h200-no/21-20_psdtuts.jpg\" style=\"height:200px; width:450px\" />Gi&aacute; trị của một lập tr&igrave;nh vi&ecirc;n web sẽ tăng l&ecirc;n rất nhiều khi bạn cũng c&oacute; thể thiết kế nữa. V&iacute; dụ một lập tr&igrave;nh vi&ecirc;n ph&aacute;t triển theme cho WordPress th&igrave; kh&ocirc;ng những c&oacute; kiến thức về việc l&agrave;m thế n&agrave;o để ph&aacute;t triển c&aacute;c theme, m&agrave; anh ta c&ograve;n c&oacute; th&ecirc;m khả năng thiết kế ra n&oacute; nữa. PSDTUTS l&agrave; nơi tốt nhất để bạn c&oacute; thể n&acirc;ng cao kỹ năng Photoshop của m&igrave;nh, t&ocirc;i cũng đ&atilde; học được rất nhiều về kỹ năng thiết kế web/graphics tại trang web n&agrave;y.</p>\r\n\r\n<h3><a href=\"http://designreviver.com/\" target=\"_blank\">21. Design Reviver</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh4.googleusercontent.com/-y3oNnZGpIcw/U28naMJS4cI/AAAAAAAAAEE/UjmHOm70-mc/w450-h200-no/21-21_design_reviver.jpg\" style=\"height:200px; width:450px\" /><em>Design Reviver</em>&nbsp;th&igrave; nhắm đến việc cung cấp những th&ocirc;ng tin hữu &iacute;ch cho c&aacute;c nh&agrave; thiết kế web. Bạn c&oacute; thể gh&eacute; thăm v&agrave; đọc c&aacute;c b&agrave;i viết như l&agrave;&nbsp;<a href=\"http://designreviver.com/tutorials/getting-started-with-3d-in-flash\" target=\"_blank\">bắt đầu c&ugrave;ng với 3D trong Flash</a>, hoặc để download&nbsp;<a href=\"http://designreviver.com/freebies/free-wrinkled-paper-photoshop-brushes\" target=\"_blank\">những mẫu brush trong Photoshop</a>&nbsp;miễn ph&iacute;, v&agrave; t&igrave;m thấy cho m&igrave;nh những cảm hứng trong việc thiết kế.</p>\r\n\r\n<h3><a href=\"http://www.blog.spoongraphics.co.uk/\" target=\"_blank\">22. Blog.SpoonGraphics</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh4.googleusercontent.com/-oH1Gpq954Zc/U28nax3JtQI/AAAAAAAAAEg/SvQ2W22WyIU/w450-h200-no/21-22_blogspoongraphics.jpg\" style=\"height:200px; width:450px\" /><em>Blog.SpoonGraphics</em>&nbsp;l&agrave; một blog về graphics v&agrave; thiết kế web, trang web được tạo ra bởi Chris Spooner, một nh&agrave; thiết kế web nổi tiếng. Bạn c&oacute; thể t&igrave;m thấy ở đ&acirc;y rất nhiều b&agrave;i hướng dẫn về Adobe Illustrator v&agrave; Photoshop, những nguồn t&agrave;i nguy&ecirc;n c&oacute; thể download miễn ph&iacute; như l&agrave;&nbsp;<a href=\"http://www.blog.spoongraphics.co.uk/freebies/five-free-css-sliding-door-tab-menus\" target=\"_blank\">&ldquo;Sliding Door&rdquo; tab menu</a>, c&aacute;c b&agrave;i viết truyền cảm hứng v&agrave; rất nhiều tin tức kh&aacute;c.</p>\r\n\r\n<h3><a href=\"http://ejohn.org/\" target=\"_blank\">23. John Resig</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh5.googleusercontent.com/-6c5J4-ox0rw/U28nbMtlQ0I/AAAAAAAAAEU/UkhJP2LSlEc/w450-h200-no/21-23_ejohn.jpg\" style=\"height:200px; width:450px\" /><em>John Resig</em>&nbsp;l&agrave; blog c&aacute; nh&acirc;n của lập tr&igrave;nh vi&ecirc;n John Resig &ndash; anh l&agrave; nh&agrave; ph&aacute;t triển JavaScript số một hiện nay, l&agrave; t&aacute;c giả của framework JavaScript nổi tiếng hiện nay l&agrave;<a href=\"http://jquery.com/\" target=\"_blank\">jQuery</a>. Blog của John Resig chia sẻ những suy nghĩ của anh ta về việc ph&aacute;t triển JavaScript n&oacute;i ri&ecirc;ng v&agrave; c&aacute;c ứng dụng web n&oacute;i chung. N&oacute; l&agrave; nơi m&agrave; t&ocirc;i t&igrave;m thấy dự &aacute;n mới nhất của anh l&agrave;:&nbsp;<a href=\"http://ejohn.org/blog/processingjs/\" target=\"_blank\">Processing.js</a>, v&agrave; l&agrave; nơi anh ta ph&aacute;t biểu những suy nghĩ của m&igrave;nh về Google Doctype.</p>\r\n\r\n<h3><a href=\"http://boxesandarrows.com/\" target=\"_blank\">24. Boxes and Arrows</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh6.googleusercontent.com/-VH_zbMuBj6k/U28nbZHnEvI/AAAAAAAAAEc/i817LyizfRo/w450-h200-no/21-24_boxesandarrows.jpg\" style=\"height:200px; width:450px\" /><em>Boxes and Arrows</em>&nbsp;th&igrave; c&oacute; những b&agrave;i hướng dẫn thực h&agrave;nh tốt nhất, c&aacute;ch t&acirc;n nhất, v&agrave; c&aacute;c xu hướng trong lĩnh vực thiết kế &ndash; bao gồm kiến tr&uacute;c th&ocirc;ng tin, thiết kế graphics, thiết kế tương t&aacute;c người d&ugrave;ng. Bạn c&oacute; thể biết được&nbsp;<a href=\"http://boxesandarrows.com/story/index/date/176\" target=\"_blank\">c&aacute;ch mọi người t&igrave;m kiếm th&ocirc;ng tin</a>&nbsp;như thế n&agrave;o, v&agrave; t&iacute;nh dễ truy cập của m&ocirc;i trường web.</p>\r\n\r\n<h3><a href=\"http://phpdeveloper.org/\" target=\"_blank\">25. PHP Developer</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh6.googleusercontent.com/-McbTm1_hyic/U28nb1AlW-I/AAAAAAAAAE4/ByuMkT1LH_E/w450-h200-no/21-25_phpdeveloper.jpg\" style=\"height:200px; width:450px\" /><em>PHP Developer</em>&nbsp;mang đến nhiều th&ocirc;ng tin tổng hợp về c&aacute;c nguồn t&agrave;i nguy&ecirc;n PHP từ những blog v&agrave; trang web chuy&ecirc;n về PHP kh&aacute;c nhau. Bạn sẽ t&igrave;m thẩy rất nhiều b&agrave;i viết bổ &iacute;ch từ c&aacute;c&nbsp;<a href=\"http://phpdeveloper.org/news/10216\" target=\"_blank\">hướng dẫn học PHP bằng video</a>, đến&nbsp;<a href=\"http://phpdeveloper.org/news/10228\" target=\"_blank\">c&aacute;ch ph&aacute;t triển web th&ocirc;ng qua Zend Framework</a>.</p>\r\n\r\n<h3><a href=\"http://www.codinghorror.com/blog/\" target=\"_blank\">26. Coding Horror</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh4.googleusercontent.com/-wkqi-EvgQc8/U28ncU5djKI/AAAAAAAAAEs/zsRpynDtSDQ/w450-h200-no/21-26_coding_horror.jpg\" style=\"height:200px; width:450px\" /><em>Coding Horror</em>&nbsp;l&agrave; một blog cực kỳ nổi tiếng (với tr&ecirc;n 100,000 người đăng k&yacute; đọc th&ocirc;ng qua RSS), được x&acirc;y dựng bởi&nbsp;<a href=\"http://www.codinghorror.com/blog/archives/000021.html\" target=\"_blank\">Jeff Atwood</a>&nbsp;l&agrave; một lập tr&igrave;nh vi&ecirc;n l&agrave; cha đẻ của trang web danh tiếng&nbsp;<a href=\"https://vinacode.net/2013/10/15/stackoverflow-la-gi/\" target=\"_blank\">StackOverflow.com</a>. Ở đ&acirc;y bạn c&oacute; thể t&igrave;m thấy rất nhiều th&ocirc;ng tin th&uacute; vị về lĩnh vực ph&aacute;t triển phần mềm.</p>\r\n\r\n<h3><a href=\"http://www.oreillynet.com/\" target=\"_blank\">27. O&rsquo;Reilly Network</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh5.googleusercontent.com/-yH36jhezrLU/U28ncnOdGnI/AAAAAAAAAFQ/--RE8UliAE8/w450-h200-no/21-27_oreillynetwork.jpg\" style=\"height:200px; width:450px\" /><em>O&rsquo;Reilly Network</em>&nbsp;được x&acirc;y dựng bởi O&rsquo;Reilly Media (một nh&agrave; xuất bản s&aacute;ch nổi tiếng), bao gồm c&aacute;c b&agrave;i viết rất chuy&ecirc;n s&acirc;u v&agrave; blog của họ tập trung v&agrave;o việc ph&aacute;t triển web v&agrave; c&aacute;c c&ocirc;ng nghệ mở. Một số b&agrave;i viết gần đ&acirc;y của họ bao gồm&nbsp;<a href=\"http://www.onlamp.com/pub/a/onlamp/2008/05/13/creating-applications-with-amazon-ec2-and-s3.html\" target=\"_blank\">C&aacute;ch tạo ứng dụng dựa tr&ecirc;n Amazon EC2 v&agrave; S3</a>,&nbsp;<a href=\"http://www.onlamp.com/pub/a/onlamp/2008/05/20/getting-started-with-the-google-apps-engine.html\" target=\"_blank\">X&acirc;y dựng ứng dụng với Google App Engine</a>. Một số blog kh&aacute;c cũng nằm trong mạng lưới của O&rsquo;Reilly Network bao gồm&nbsp;<a href=\"http://www.windowsdevcenter.com/\" target=\"_blank\">WindowsDevCenter.com</a>(d&agrave;nh cho lập tr&igrave;nh vi&ecirc;n tr&ecirc;n m&ocirc;i trường Windows),&nbsp;<a href=\"http://www.onjava.com/\" target=\"_blank\">ONJava.com</a>&nbsp;(c&aacute;c chủ đề li&ecirc;n quan đến ng&ocirc;n ngữ Java), v&agrave;&nbsp;<a href=\"http://www.onlamp.com/\" target=\"_blank\">ONLamp.com</a>&nbsp;(chuy&ecirc;n trang về Linux, Apache, MySQL v&agrave; PHP).</p>\r\n\r\n<h3><a href=\"http://code.google.com/doctype/\" target=\"_blank\">28. Google Doctype</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh3.googleusercontent.com/-3tELAsi3pcs/U28ndcGUnmI/AAAAAAAAAFA/JIF_WKN3g6U/w450-h200-no/21-28_google_doctype.jpg\" style=\"height:200px; width:450px\" /><em>Google Doctype</em>&nbsp;l&agrave; một dự &aacute;n mới của Google bao gồm c&aacute;c b&agrave;i viết &ldquo;<em>của lập tr&igrave;nh vi&ecirc;n v&agrave; d&agrave;nh cho lập tr&igrave;nh vi&ecirc;n</em>&rdquo;. Hiện tại n&oacute; vẫn chưa c&oacute; nhiều b&agrave;i viết, nhưng đ&oacute; chắc chắn l&agrave; một nguồn t&agrave;i nguy&ecirc;n n&ecirc;n theo d&otilde;i trong v&agrave;i th&aacute;ng sắp tới.</p>\r\n\r\n<h3><a href=\"http://www.webmonkey.com/\" target=\"_blank\">29. Web Monkey</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh3.googleusercontent.com/-tYyYuK_k6qA/U28ndks3ipI/AAAAAAAAAFM/ITZ7YH4gHaU/w450-h200-no/21-29_web_monkey.jpg\" style=\"height:200px; width:450px\" /><em>Web Monkey</em>&nbsp;&ndash; l&agrave; một trang web chứa t&agrave;i nguy&ecirc;n cho c&aacute;c lập tr&igrave;nh vi&ecirc;n. Mặc d&ugrave; họ mới c&oacute; kế hoạch quay trở lại hoạt động, nhưng đ&oacute; l&agrave; một website m&agrave; bạn n&ecirc;n theo d&otilde;i thường xuy&ecirc;n.</p>\r\n\r\n<h3><a href=\"http://www.digital-web.com/topics/web_standards\" target=\"_blank\">30. Digital Web Magazine</a></h3>\r\n\r\n<p><img alt=\"\" src=\"https://lh6.googleusercontent.com/-LNnEupn1YSo/U28nd7SNauI/AAAAAAAAAFI/v9VPzXHu72I/w450-h200-no/21-30_digital_web_magazine.jpg\" style=\"height:200px; width:450px\" /><em>Digital Web Magazine</em>&nbsp;l&agrave; một tờ tạp ch&iacute; trực tuyến d&agrave;nh cho c&aacute;c chuy&ecirc;n gia ph&aacute;t triển web (web designer, lập tr&igrave;nh vi&ecirc;n, v&agrave; c&aacute;c nh&agrave; thiết kế th&ocirc;ng tin). Bạn c&oacute; thể t&igrave;m thấy rất nhiều thứ bổ &iacute;ch ở đ&acirc;y như l&agrave; PHP,&nbsp;<a href=\"http://www.digital-web.com/topics/web_standards\" target=\"_blank\">c&aacute;c chuẩn trong ph&aacute;t triển Web</a>&nbsp;v&agrave; kỹ thuật lập tr&igrave;nh n&oacute;i chung.</p>\r\n\r\n<h3>Một số trang web đ&aacute;ng ch&uacute; &yacute; kh&aacute;c</h3>\r\n\r\n<ul>\r\n	<li><a href=\"http://24ways.org/\" target=\"_blank\">24 ways</a>&nbsp;&ndash; một tuyển tập h&agrave;ng năm gồm 24 b&agrave;i viết về lập tr&igrave;nh v&agrave; thiết kế web bởi một số nh&agrave; ph&aacute;t triển web h&agrave;ng đầu thế giới.</li>\r\n	<li><a href=\"http://www.noupe.com/\" target=\"_blank\">Noupe</a>&nbsp;&ndash; cung cấp rất nhiều tin tức v&agrave; t&agrave;i nguy&ecirc;n về x&acirc;y dựng v&agrave; thiết kế web.</li>\r\n	<li><a href=\"http://vandelaydesign.com/blog/\" target=\"_blank\">Vandelay Design</a>&nbsp;&ndash; một blog về ph&aacute;t triển v&agrave; thiết kế web được x&acirc;y dựng bởi Steven Snell, người mới tham gia viết b&agrave;i cho cộng đồng Six Revisions th&aacute;ng vừa rồi.</li>\r\n	<li><a href=\"http://cssglobe.com/\" target=\"_blank\">CSS Globe</a>&nbsp;&ndash; một trang web về cộng đồng, c&oacute; nhiều th&ocirc;ng tin về c&aacute;c chuẩn web.</li>\r\n</ul>\r\n\r\n<p><strong>Nếu bạn đang t&igrave;m kiếm một trang web ưa th&iacute;ch của m&igrave;nh, nhưng n&oacute; lại kh&ocirc;ng c&oacute; trong danh s&aacute;ch kể tr&ecirc;n</strong>, th&igrave; h&atilde;y xem lại một b&agrave;i viết m&agrave; t&ocirc;i đ&atilde; viết c&aacute;ch đ&acirc;y v&agrave;i th&aacute;ng &ldquo;<a href=\"http://sixrevisions.com/resources/20_websites_better_web_developer/\" target=\"_blank\">20 Trang web khiến bạn trở th&agrave;nh một lập tr&igrave;nh vi&ecirc;n web giỏi hơn</a>&rdquo;, trong b&agrave;i viết đ&oacute; t&ocirc;i cũng đề cập đến một số trang web nổi tiếng kh&aacute;c như&nbsp;<a href=\"http://www.alistapart.com/\" target=\"_blank\">A List Part</a>&nbsp;v&agrave;&nbsp;<a href=\"http://www.456bereastreet.com/\" target=\"_blank\">456 Berea Steet</a>.</p>\r\n\r\n<p>Bởi v&igrave; c&oacute; rất nhiều trang web c&oacute; nội dung rất tuyệt vời kh&aacute;c, nhưng t&ocirc;i kh&ocirc;ng thể giới thiệu hoặc chia sẻ ch&uacute;ng ở đ&acirc;y (ước g&igrave; t&ocirc;i c&oacute; thể l&agrave;m điều đ&oacute;),&nbsp;<em>v&igrave; vậy bạn c&oacute; thể gi&uacute;p t&ocirc;i chia sẻ những trang web m&agrave; bạn y&ecirc;u th&iacute;ch ở trong phần b&igrave;nh luận ph&iacute;a dưới (bao gồm t&ecirc;n trang web, li&ecirc;n kết, v&agrave; một m&ocirc; tả ngắn gọn)</em>. Cứ h&agrave;ng tuần th&igrave; t&ocirc;i sẽ cập nhật b&agrave;i viết n&agrave;y c&ugrave;ng với những gợi &yacute; của bạn.</p>\r\n\r\n<p>Cảm ơn bạn rất nhiều!</p>\r\n', '2018-07-18 15:40:05', 0, 'HinhAnh-1531921205.jpg', 6, 10, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `users`
+--
+
+CREATE TABLE `users` (
+  `user_id` int(10) NOT NULL,
+  `username` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `fullname` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `avatar` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `active` int(1) NOT NULL,
+  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `users`
+--
+
+INSERT INTO `users` (`user_id`, `username`, `password`, `fullname`, `avatar`, `active`, `email`) VALUES
+(1, 'admin', '22c78aadb8d25a53ca407fae265a7154', 'VinaEnter Edu\r\n', 'find_user.png', 1, ''),
+(2, 'vinaenter', '22c78aadb8d25a53ca407fae265a7154', 'VinaEnte', 'HinhAnh-1531306524.png', 1, ''),
+(3, 'nam', 'a9eb5d345ee454ff926a664ae3c05dcf', 'nam', 'HinhAnh-1531925710.jpg', 1, ''),
+(4, 'chetduoitrensamac', '64680a6660194264ed56a0aaa5664e6f', 'xuân nam', 'HinhAnh-1531925716.jpg', 1, 'xnam9977@gmail.com');
+
+--
+-- Chỉ mục cho các bảng đã đổ
+--
+
+--
+-- Chỉ mục cho bảng `cat`
+--
+ALTER TABLE `cat`
+  ADD PRIMARY KEY (`cat_id`);
+
+--
+-- Chỉ mục cho bảng `comment`
+--
+ALTER TABLE `comment`
+  ADD PRIMARY KEY (`comment_id`);
+
+--
+-- Chỉ mục cho bảng `contact`
+--
+ALTER TABLE `contact`
+  ADD PRIMARY KEY (`contact_id`);
+
+--
+-- Chỉ mục cho bảng `news`
+--
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`news_id`);
+
+--
+-- Chỉ mục cho bảng `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
+--
+
+--
+-- AUTO_INCREMENT cho bảng `cat`
+--
+ALTER TABLE `cat`
+  MODIFY `cat_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT cho bảng `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `comment_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+
+--
+-- AUTO_INCREMENT cho bảng `contact`
+--
+ALTER TABLE `contact`
+  MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT cho bảng `news`
+--
+ALTER TABLE `news`
+  MODIFY `news_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT cho bảng `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- Cơ sở dữ liệu: `test`
+--
+CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `test`;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
