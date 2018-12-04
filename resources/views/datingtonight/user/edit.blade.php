@@ -1,14 +1,12 @@
 @extends('templates.datingtonight.master')
 @section('title')
-	@if (Session::has('checkUser'))
-	   {{ session()->get('checkUser')[0]->Fullname }}
-	@endif
+   {{ $getInfoUser->Fullname }}
 @endsection
 @section('content')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
 	/* Style inputs with type="text", select elements and textareas */
-	input[type=text], input[type=password], select, textarea {
+	input[type=text], input[type=password], input[type=date], select, textarea {
 	    width: 100%; /* Full width */
 	    padding: 12px; /* Some padding */
 	    border: 1px solid #ccc; /* Gray border */
@@ -21,12 +19,14 @@
 
 	/* Style the submit button with a specific background color etc */
 	input[type=submit] {
-	    background-color: #4CAF50;
+	    background-color: #BD081C;
 	    color: white;
 	    padding: 12px 20px;
 	    border: none;
 	    border-radius: 4px;
-	    cursor: pointer;}
+	    cursor: pointer;
+	    margin-left: 12.5%;
+	}
 
 	/* When moving the mouse over the submit button, add a darker green color */
 	input[type=submit]:hover {
@@ -88,7 +88,8 @@
 	}
 </style>
 @if (Session::has('checkUser'))
-	<div id="information">
+	<form action="{{ route('datingtonight.user.edit') }}" id="information" method="POST" enctype="multipart/form-data">
+		{{ csrf_field() }}
 		<a href="javascript:void(0)" >
 			<div id="personal">
 				PERSONAL INFORMATION
@@ -96,43 +97,48 @@
 		</a>
 		<div class="container-main">
 		  	<label class="csslb">Avatar</label>
-		    <img src="#" alt="This is image">
+		    <img style="width: 200px; height: 200px;" src="/storage/app/files/avatar/{{ $getInfoUser->Avatar }}" alt="Please input your avatar">
+		    <input type="file" name="fAvatar">
 
 		    <label class="csslb">Username</label>
-		    <input type="text" id="username" name="username" value="{{ session()->get('checkUser')[0]->username }}" readonly>
+		    <input type="text" id="username" name="username" value="{{ $getInfoUser->username }}" >
 
 		    <label class="csslb">Password</label>
-		    <input type="password" id="password" name="password" value="{{ session()->get('checkUser')[0]->password }}" readonly>
+		    <input type="password" id="password" name="txtPassword" value="{{ $getInfoUser->password }}" >
 
 		    <label class="csslb">Full name</label>
-		    <input type="text" id="fullname" name="fullname" value="{{ session()->get('checkUser')[0]->Fullname }}" readonly>
+		    <input type="text" id="fullname" name="txtFullname" value="{{ $getInfoUser->Fullname }}" >
 
 		    <label class="csslb">Email</label>
-		   	<input type="text" id="email" name="email" value="{{ session()->get('checkUser')[0]->email }}" readonly>
+		   	<input type="text" id="email" name="txtEmail" value="{{ $getInfoUser->email }}" >
 
 		   	<label class="csslb">Phone number</label>
-		   	<input type="text" id="phone" name="phone" value="{{ session()->get('checkUser')[0]->phone_number }}" readonly>
+		   	<input type="text" id="phone" name="txtPhone" value="{{ $getInfoUser->phone_number }}" >
 
 		   	<label class="csslb">Birthday</label>
-		   	<input type="text" id="birthday" name="birthday" value="{{-- {{ session()->get('checkUser')[0]->gender }} --}}" readonly>
+		   	<input type="date" id="birthday" name="txtBirthday" value="{{ $getInfoUser->Birthdate }}">
 
 		   	<label class="csslb">Facebook</label>
-		   	<input type="text" id="facebook" name="facebook" value="{{ session()->get('checkUser')[0]->Facebook }}" readonly>
-
+		   	<input type="text" id="facebook" name="txtFacebook" value="{{ $getInfoUser->Facebook }}" >
 		   	<label class="csslb">Gender</label>
-		   	<input type="text" id="gender" name="gender" value="{{-- {{ session()->get('checkUser')[0]->gender }} --}}" readonly>
+		   	<select id="gender" name="txtGender">
+		   		<option value="{{ $getInfoUser->idGender }}" selected>{{ $getInfoUser->gender }}</option>
+				@foreach($getGender as $iGender)
+					@if($iGender->id != $getInfoUser->idGender) continue;
+						<option value="{{ $iGender->id }}">{{ $iGender->gender }}</option>
+					@endif
+		    	@endforeach
+		    </select>
 
 		   	<label class="csslb">City</label>
-		   	<input type="text" id="city" name="city" value="{{-- {{ session()->get('checkUser')[0]->gender }} --}}" readonly>
-
-		    {{-- <label class="csslb">Country</label>
-		    <select id="country" name="country">
-		      <option value="australia">Da Nang</option>
-		      <option value="canada">Canada</option>
-		      <option value="usa">USA</option>
-		    </select> --}}
-		    {{-- <label>Subject</label>
-		    <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea> --}}
+		    <select id="city" name="txtCity">
+		    	<option value="{{ $getInfoUser->idCity }}" selected>{{ $getInfoUser->city }}</option>
+				@foreach($getCity as $iCity)
+					@if($iCity->id != $getInfoUser->idCity) continue;
+			    		<option value="{{ $iCity->id }}">{{ $iCity->city }}</option>
+			    	@endif
+		    	@endforeach
+		    </select>
 	    </div>
 	    <a href="javascript:void(0)" >
 			<div id="personal-body">
@@ -141,37 +147,105 @@
 		</a>
 		<div class="container-sub-one">
 		    <label class="csslb">Hair Color</label>
-		    <input type="text" id="hair-color" name="hairColor" value="{{ session()->get('checkUser')[0]->username }}" readonly>
+		    <select id="hair-color" name="txtHairColor">
+		    	@if($getInfoUser->idHairColor == 0)
+					<option value="{{ $getInfoUser->idHairColor }}" selected>{{ $getInfoUser->hairColor }}</option>
+					@foreach($getHairColor as $iHC)
+						@if($iHC->id != $getInfoUser->idHairColor) continue;
+				    		<option value="{{ $iHC->id }}">{{ $iHC->color }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+		    		<option value="{{ $getInfoUser->idHairColor }}" selected>{{ $getInfoUser->hairColor }}</option>
+					@foreach($getHairColor as $iHC)
+						@if($iHC->id != $getInfoUser->idHairColor && $iHC->id != 0 ) continue;
+				    		<option value="{{ $iHC->id }}">{{ $iHC->color }}</option>
+				    	@endif
+			    	@endforeach
+		    	@endif
+		    </select>
 
 		    <label class="csslb">Hair length</label>
-		    <input type="password" id="hair-length" name="hairLength" value="{{ session()->get('checkUser')[0]->password }}" readonly>
+		    <select id="hair-length" name="txtHairLength">
+		    	@if($getInfoUser->idHairLength == 0)
+					<option value="{{ $getInfoUser->idHairLength }}" selected>{{ $getInfoUser->length }}</option>
+					@foreach($getHairLength as $iHL)
+						@if($iHL->id != $getInfoUser->idHairLength) continue;
+				    		<option value="{{ $iHL->id }}">{{ $iHL->length }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idHairLength }}" selected>{{ $getInfoUser->length }}</option>
+					@foreach($getHairLength as $iHL)
+						@if($iHL->id != $getInfoUser->idHairLength && $iHL->id != 0) continue;
+				    		<option value="{{ $iHL->id }}">{{ $iHL->length }}</option>
+				    	@endif
+			    	@endforeach
+			    @endif
+		    </select>
 
 		    <label class="csslb">Hair style</label>
-		    <input type="text" id="hair-style" name="hairStyle" value="{{ session()->get('checkUser')[0]->Fullname }}" readonly>
+		    <select id="hair-style" name="txtHairStyle">
+		    	@if($getInfoUser->idHairStyle == 0)
+					<option value="{{ $getInfoUser->idHairStyle }}" selected>{{ $getInfoUser->style }}</option>
+					@foreach($getHairStyle as $iHS)
+						@if($iHS->id != $getInfoUser->idHairStyle) continue;
+				    		<option value="{{ $iHS->id }}">{{ $iHS->style }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idHairStyle }}" selected>{{ $getInfoUser->style }}</option>
+					@foreach($getHairStyle as $iHS)
+						@if($iHS->id != $getInfoUser->idHairStyle && $iHS->id != 0) continue;
+				    		<option value="{{ $iHS->id }}">{{ $iHS->style }}</option>
+				    	@endif
+			    	@endforeach
+		    	@endif
+		    </select>
 
 		    <label class="csslb">Eye color</label>
-		   	<input type="text" id="eye-color" name="eyeColor" value="{{ session()->get('checkUser')[0]->email }}" readonly>
+		   	<select id="eye-color" name="txtEyeColor">
+		    	@if($getInfoUser->idEyeColor == 0)
+					<option value="{{ $getInfoUser->idEyeColor }}" selected>{{ $getInfoUser->eyeColor }}</option>
+					@foreach($getEyeColor as $iEC)
+						@if($iEC->id != $getInfoUser->idEyeColor) continue;
+				    		<option value="{{ $iEC->id }}">{{ $iEC->color }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idEyeColor }}" selected>{{ $getInfoUser->eyeColor }}</option>
+					@foreach($getEyeColor as $iEC)
+						@if($iEC->id != $getInfoUser->idEyeColor && $iEC->id != 0) continue;
+				    		<option value="{{ $iEC->id }}">{{ $iEC->color }}</option>
+				    	@endif
+			    	@endforeach
+		    	@endif
+		    </select>
 
 		   	<label class="csslb">Height</label>
-		   	<input type="text" id="height" name="height" value="{{ session()->get('checkUser')[0]->phone_number }}" readonly>
+		   	<input type="text" id="height" name="height" value="{{ $getInfoUser->height }}" >
 
 		   	<label class="csslb">Weight</label>
-		   	<input type="text" id="weight" name="weight" value="{{ session()->get('checkUser')[0]->Facebook }}" readonly>
+		   	<input type="text" id="weight" name="weight" value="{{ $getInfoUser->weight }}" >
 
 		   	<label class="csslb">Body</label>
-		   	<input type="text" id="body" name="body" value="{{ session()->get('checkUser')[0]->Facebook }}" readonly>
-
-		   	{{-- <label class="csslb">Gender</label>
-		   	<input type="text" id="facebook" name="facebook" value="{{ session()->get('checkUser')[0]->gender }}" readonly> --}}
-
-		    {{-- <label class="csslb">Country</label>
-		    <select id="country" name="country">
-		      <option value="australia">Da Nang</option>
-		      <option value="canada">Canada</option>
-		      <option value="usa">USA</option>
-		    </select> --}}
-		    {{-- <label>Subject</label>
-		    <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea> --}}
+			<select name="txtBody">
+				@if($getInfoUser->idBody == 0)
+					<option value="{{ $getInfoUser->idBody }}" selected>{{ $getInfoUser->body }}</option>
+					@foreach($getBody as $iBD)
+						@if($iBD->id != $getInfoUser->idBody) continue;
+				    		<option value="{{ $iBD->id }}">{{ $iBD->body }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idBody }}" selected>{{ $getInfoUser->body }}</option>
+					@foreach($getBody as $iBD)
+						@if($iBD->id != $getInfoUser->idBody && $iBD->id != 0) continue;
+				    		<option value="{{ $iBD->id }}">{{ $iBD->body }}</option>
+				    	@endif
+			    	@endforeach
+		    	@endif
+		    </select>
 	    </div>
 	    <a href="javascript:void(0)" >
 			<div id="personal-other">
@@ -180,50 +254,216 @@
 		</a>
 		<div class="container-sub-two">
 		    <label class="csslb">Drinking</label>
-		    <input type="text" id="drinking" name="drinking" value="{{ session()->get('checkUser')[0]->username }}" readonly>
+		    <select id="drinking" name="txtDrinking">
+		    	@if($getInfoUser->idDrinking == 0)
+					<option value="{{ $getInfoUser->idDrinking }}" selected>{{ $getInfoUser->drink }}</option>
+					@foreach($getDrinking as $iDK)
+						@if($iDK->id != $getInfoUser->idDrinking) continue;
+				    		<option value="{{ $iDK->id }}">{{ $iDK->drink }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idDrinking }}" selected>{{ $getInfoUser->drink }}</option>
+					@foreach($getDrinking as $iDK)
+						@if($iDK->id != $getInfoUser->idDrinking && $iDK->id != 0) continue;
+				    		<option value="{{ $iDK->id }}">{{ $iDK->drink }}</option>
+				    	@endif
+			    	@endforeach
+		    	@endif
+		    </select>
 
 		    <label class="csslb">Smoking</label>
-		    <input type="password" id="somking" name="somking" value="{{ session()->get('checkUser')[0]->password }}" readonly>
+		    <select id="smoking" name="txtSmoking">
+		    	@if($getInfoUser->idSmoking == 0)
+					<option value="{{ $getInfoUser->idSmoking }}" selected>{{ $getInfoUser->smoke }}</option>
+					@foreach($getSmoking as $iSK)
+						@if($iSK->id != $getInfoUser->idSmoking) continue;
+				    		<option value="{{ $iSK->id }}">{{ $iSK->smoke }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idSmoking }}" selected>{{ $getInfoUser->smoke }}</option>
+					@foreach($getSmoking as $iSK)
+						@if($iSK->id != $getInfoUser->idSmoking && $iSK->id != 0) continue;
+				    		<option value="{{ $iSK->id }}">{{ $iSK->smoke }}</option>
+				    	@endif
+			    	@endforeach
+		    	@endif
+		    </select>
 
 		    <label class="csslb">Job status</label>
-		    <input type="text" id="jobStatus" name="jobStatus" value="{{ session()->get('checkUser')[0]->Fullname }}" readonly>
+		    <select id="jobStatus" name="txtJobStatus">
+		    	@if($getInfoUser->idJobStatus == 0)
+					<option value="{{ $getInfoUser->idJobStatus }}" selected>{{ $getInfoUser->status }}</option>
+					@foreach($getJobStatus as $iJS)
+						@if($iJS->id != $getInfoUser->idJobStatus) continue;
+				    		<option value="{{ $iJS->id }}">{{ $iJS->status }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idJobStatus }}" selected>{{ $getInfoUser->status }}</option>
+					@foreach($getJobStatus as $iJS)
+						@if($iJS->id != $getInfoUser->idJobStatus && $iJS->id != 0) continue;
+				    		<option value="{{ $iJS->id }}">{{ $iJS->status }}</option>
+				    	@endif
+			    	@endforeach
+		    	@endif
+		    </select>
 
 		    <label class="csslb">Home type</label>
-		   	<input type="text" id="homeType" name="homeType" value="{{ session()->get('checkUser')[0]->email }}" readonly>
+		   	<select id="homeType" name="txtHomeType">
+		   		@if($getInfoUser->idHomeType == 0)
+					<option value="{{ $getInfoUser->idHomeType }}" selected>{{ $getInfoUser->type }}</option>
+					@foreach($getHomeType as $iHT)
+						@if($iHT->id != $getInfoUser->idHomeType) continue;
+				    		<option value="{{ $iHT->id }}">{{ $iHT->type }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idHomeType }}" selected>{{ $getInfoUser->type }}</option>
+					@foreach($getHomeType as $iHT)
+						@if($iHT->id != $getInfoUser->idHomeType && $iHT->id != 0) continue;
+				    		<option value="{{ $iHT->id }}">{{ $iHT->type }}</option>
+				    	@endif
+			    	@endforeach
+		    	@endif
+		    </select>
 
 		   	<label class="csslb">Live with</label>
-		   	<input type="text" id="liveWith" name="liveWith" value="{{ session()->get('checkUser')[0]->phone_number }}" readonly>
+		   	<select id="liveWith" name="txtLiveWith">
+		   		@if($getInfoUser->idLivewith == 0)
+					<option value="{{ $getInfoUser->idLivewith }}" selected>{{ $getInfoUser->livewith }}</option>
+					@foreach($getLivewith as $iLW)
+						@if($iLW->id != $getInfoUser->idLivewith) continue;
+				    		<option value="{{ $iLW->id }}">{{ $iLW->livewith }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idLivewith }}" selected>{{ $getInfoUser->livewith }}</option>
+					@foreach($getLivewith as $iLW)
+						@if($iLW->id != $getInfoUser->idLivewith && $iLW->id != 0) continue;
+				    		<option value="{{ $iLW->id }}">{{ $iLW->livewith }}</option>
+				    	@endif
+			    	@endforeach
+			    @endif
+		    </select>
 
 		   	<label class="csslb">Have children</label>
-		   	<input type="text" id="haveChildren" name="haveChildren" value="{{ session()->get('checkUser')[0]->Facebook }}" readonly>
+		   	<select id="haveChildren" name="txtHaveChildren">
+		   		@if($getInfoUser->idHaveChild == 0)
+					<option value="{{ $getInfoUser->idHaveChild }}" selected>{{ $getInfoUser->children }}</option>
+					@foreach($getHaveChild as $iHChild)
+						@if($iHChild->id != $getInfoUser->idHaveChild) continue;
+				    		<option value="{{ $iHChild->id }}">{{ $iHChild->children }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idHaveChild }}" selected>{{ $getInfoUser->children }}</option>
+					@foreach($getHaveChild as $iHChild)
+						@if($iHChild->id != $getInfoUser->idHaveChild && $iHChild->id != 0) continue;
+				    		<option value="{{ $iHChild->id }}">{{ $iHChild->children }}</option>
+				    	@endif
+			    	@endforeach
+		    	@endif
+		    </select>
 
 		   	<label class="csslb">National</label>
-		   	<input type="text" id="national" name="national" value="{{ session()->get('checkUser')[0]->Facebook }}" readonly>
+		   	<select id="national" name="txtNational">
+		   		@if($getInfoUser->idNational == 0)
+					<option value="{{ $getInfoUser->idNational }}" selected>{{ $getInfoUser->national }}</option>
+					@foreach($getNational as $iNA)
+						@if($iNA->id != $getInfoUser->idNational) continue;
+				    		<option value="{{ $iNA->id }}">{{ $iNA->national }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idNational }}" selected>{{ $getInfoUser->national }}</option>
+					@foreach($getNational as $iNA)
+						@if($iNA->id != $getInfoUser->idNational && $iNA->id != 0) continue;
+				    		<option value="{{ $iNA->id }}">{{ $iNA->national }}</option>
+				    	@endif
+			    	@endforeach
+		    	@endif
+		    </select>
 
 		   	<label class="csslb">Education level</label>
-		   	<input type="text" id="education" name="education" value="{{ session()->get('checkUser')[0]->Facebook }}" readonly>
+		   	<select id="education" name="txtEducation">
+		   		@if($getInfoUser->idEducation == 0)
+					<option value="{{ $getInfoUser->idEducation }}" selected>{{ $getInfoUser->level }}</option>
+					@foreach($getEducation as $iEDU)
+						@if($iEDU->id != $getInfoUser->idEducation) continue;
+				    		<option value="{{ $iEDU->id }}">{{ $iEDU->level }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idEducation }}" selected>{{ $getInfoUser->level }}</option>
+					@foreach($getEducation as $iEDU)
+						@if($iEDU->id != $getInfoUser->idEducation && $iEDU->id != 0) continue;
+				    		<option value="{{ $iEDU->id }}">{{ $iEDU->level }}</option>
+				    	@endif
+			    	@endforeach
+		    	@endif
+		    </select>
 
 		   	<label class="csslb">Language</label>
-		   	<input type="text" id="language" name="language" value="{{ session()->get('checkUser')[0]->Facebook }}" readonly>
+		   	<select id="language" name="txtLanguage">
+		   		@if($getInfoUser->idLanguage == 0)
+					<option value="{{ $getInfoUser->idLanguage }}" selected>{{ $getInfoUser->language }}</option>
+					@foreach($getLanguage as $iLANG)
+						@if($iLANG->id != $getInfoUser->idLanguage) continue;
+				    		<option value="{{ $iLANG->id }}">{{ $iLANG->language }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idLanguage }}" selected>{{ $getInfoUser->language }}</option>
+					@foreach($getLanguage as $iLANG)
+						@if($iLANG->id != $getInfoUser->idLanguage && $iLANG->id != 0) continue;
+				    		<option value="{{ $iLANG->id }}">{{ $iLANG->language }}</option>
+				    	@endif
+			    	@endforeach
+		    	@endif
+		    </select>
 
 		   	<label class="csslb">Religion</label>
-		   	<input type="text" id="religion" name="religion" value="{{ session()->get('checkUser')[0]->Facebook }}" readonly>
+		   	<select id="religion" name="txtReligion">
+		   		@if($getInfoUser->idReligion == 0)
+					<option value="{{ $getInfoUser->idReligion }}" selected>{{ $getInfoUser->religion }}</option>
+					@foreach($getReligion as $iRG)
+						@if($iRG->id != $getInfoUser->idReligion) continue;
+				    		<option value="{{ $iRG->id }}">{{ $iRG->religion }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idReligion }}" selected>{{ $getInfoUser->religion }}</option>
+					@foreach($getReligion as $iRG)
+						@if($iRG->id != $getInfoUser->idReligion && $iRG->id != 0) continue;
+				    		<option value="{{ $iRG->id }}">{{ $iRG->religion }}</option>
+				    	@endif
+			    	@endforeach
+		    	@endif
+		    </select>
 
 			<label class="csslb">Constellation</label>
-		   	<input type="text" id="constellation" name="constellation" value="{{ session()->get('checkUser')[0]->Facebook }}" readonly>
-		   	{{-- <label class="csslb">Gender</label>
-		   	<input type="text" id="facebook" name="facebook" value="{{ session()->get('checkUser')[0]->gender }}" readonly> --}}
-
-		    {{-- <label class="csslb">Country</label>
-		    <select id="country" name="country">
-		      <option value="australia">Da Nang</option>
-		      <option value="canada">Canada</option>
-		      <option value="usa">USA</option>
-		    </select> --}}
-		    {{-- <label>Subject</label>
-		    <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea> --}}
+		   	<select id="constellation" name="txtConstellation">
+		   		@if($getInfoUser->idConstellation == 0)
+					<option value="{{ $getInfoUser->idConstellation }}" selected>{{ $getInfoUser->constellation }}</option>
+					@foreach($getConstellation as $iCON)
+						@if($iCON->id != $getInfoUser->idConstellation) continue;
+				    		<option value="{{ $iCON->id }}">{{ $iCON->constellation }}</option>
+				    	@endif
+			    	@endforeach
+		    	@else
+			    	<option value="{{ $getInfoUser->idConstellation }}" selected>{{ $getInfoUser->constellation }}</option>
+					@foreach($getConstellation as $iCON)
+						@if($iCON->id != $getInfoUser->idConstellation && $iCON->id != 0 ) continue;
+				    		<option value="{{ $iCON->id }}">{{ $iCON->constellation }}</option>
+				    	@endif
+			    	@endforeach
+		    	@endif
+		    </select>
 	    </div>
-	</div>
+	    <input type="submit" name="submit" value="Edit Information">
+	</form>
 @endif
 <script>
 $(document).ready(function(){

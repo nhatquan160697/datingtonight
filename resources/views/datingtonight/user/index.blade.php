@@ -1,8 +1,6 @@
 @extends('templates.datingtonight.master')
 @section('title')
-	@if (Session::has('checkUser'))
-	   {{ session()->get('checkUser')[0]->Fullname }}
-	@endif
+	{{ $getInfoUser->Fullname }}
 @endsection
 @section('content')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -94,37 +92,41 @@
 				PERSONAL INFORMATION
 			</div>
 		</a>
+		@if (session('alert'))
+		    <script type="text/javascript" charset="utf-8">
+		    	alert("{{ session('alert') }}");
+		    </script>
+		@endif
 		<div class="container-main">
 		  	<label class="csslb">Avatar</label>
-		    <img src="#" alt="This is image">
+		    <img style="width: 200px; height: 200px;" src="/storage/app/files/avatar/{{ $getInfoUser->Avatar }}" alt="This is image">
 
 		    <label class="csslb">Username</label>
-		    <input type="text" id="username" name="username" value="{{ session()->get('checkUser')[0]->username }}" readonly>
+		    <input type="text" id="username" name="username" value="{{ $getInfoUser->username }}" readonly>
 
 		    <label class="csslb">Password</label>
-		    <input type="password" id="password" name="password" value="{{ session()->get('checkUser')[0]->password }}" readonly>
+		    <input type="password" id="password" name="password" value="{{ $getInfoUser->password }}" readonly>
 
 		    <label class="csslb">Full name</label>
-		    <input type="text" id="fullname" name="fullname" value="{{ session()->get('checkUser')[0]->Fullname }}" readonly>
+		    <input type="text" id="fullname" name="fullname" value="{{ $getInfoUser->Fullname }}" readonly>
 
 		    <label class="csslb">Email</label>
-		   	<input type="text" id="email" name="email" value="{{ session()->get('checkUser')[0]->email }}" readonly>
+		   	<input type="text" id="email" name="email" value="{{ $getInfoUser->email }}" readonly>
 
 		   	<label class="csslb">Phone number</label>
-		   	<input type="text" id="phone" name="phone" value="{{ session()->get('checkUser')[0]->phone_number }}" readonly>
+		   	<input type="text" id="phone" name="phone" value="{{ $getInfoUser->phone_number }}" readonly>
 
 		   	<label class="csslb">Birthday</label>
-		   	<input type="text" id="birthday" name="birthday" value="{{-- {{ session()->get('checkUser')[0]->gender }} --}}" readonly>
+		   	<input type="text" id="birthday" name="birthday" value="{{ $getInfoUser->Birthdate }}" readonly>
 
 		   	<label class="csslb">Facebook</label>
-		   	<input type="text" id="facebook" name="facebook" value="{{ session()->get('checkUser')[0]->Facebook }}" readonly>
+		   	<input type="text" id="facebook" name="facebook" value="{{ $getInfoUser->Facebook }}" readonly>
 
 		   	<label class="csslb">Gender</label>
-		   	<input type="text" id="gender" name="gender" value="{{-- {{ session()->get('checkUser')[0]->gender }} --}}" readonly>
+		   	<input type="text" id="gender" name="gender" value="{{ $getInfoUser->gender }}" readonly>
 
 		   	<label class="csslb">City</label>
-		   	<input type="text" id="city" name="city" value="{{-- {{ session()->get('checkUser')[0]->gender }} --}}" readonly>
-
+		   	<input type="text" id="city" name="city" value="{{ $getInfoUser->city }}" readonly>
 		    {{-- <label class="csslb">Country</label>
 		    <select id="country" name="country">
 		      <option value="australia">Da Nang</option>
@@ -141,25 +143,25 @@
 		</a>
 		<div class="container-sub-one">
 		    <label class="csslb">Hair Color</label>
-		    <input type="text" id="hair-color" name="hairColor" value="{{ session()->get('checkUser')[0]->username }}" readonly>
+		    <input type="text" id="hair-color" name="hairColor" value="{{ $getInfoUser->hairColor }}" readonly>
 
 		    <label class="csslb">Hair length</label>
-		    <input type="password" id="hair-length" name="hairLength" value="{{ session()->get('checkUser')[0]->password }}" readonly>
+		    <input type="text" id="hair-length" name="hairLength" value="{{ $getInfoUser->length }}" readonly>
 
 		    <label class="csslb">Hair style</label>
-		    <input type="text" id="hair-style" name="hairStyle" value="{{ session()->get('checkUser')[0]->Fullname }}" readonly>
+		    <input type="text" id="hair-style" name="hairStyle" value="{{ $getInfoUser->style }}" readonly>
 
 		    <label class="csslb">Eye color</label>
-		   	<input type="text" id="eye-color" name="eyeColor" value="{{ session()->get('checkUser')[0]->email }}" readonly>
+		   	<input type="text" id="eye-color" name="eyeColor" value="{{ $getInfoUser->eyeColor }}" readonly>
 
 		   	<label class="csslb">Height</label>
-		   	<input type="text" id="height" name="height" value="{{ session()->get('checkUser')[0]->phone_number }}" readonly>
+		   	<input type="text" id="height" name="height" value="{{ $getInfoUser->height }}cm" readonly>
 
 		   	<label class="csslb">Weight</label>
-		   	<input type="text" id="weight" name="weight" value="{{ session()->get('checkUser')[0]->Facebook }}" readonly>
+		   	<input type="text" id="weight" name="weight" value="{{ $getInfoUser->weight }}kg" readonly>
 
 		   	<label class="csslb">Body</label>
-		   	<input type="text" id="body" name="body" value="{{ session()->get('checkUser')[0]->Facebook }}" readonly>
+		   	<input type="text" id="body" name="body" value="{{ $getInfoUser->body }}" readonly>
 
 		   	{{-- <label class="csslb">Gender</label>
 		   	<input type="text" id="facebook" name="facebook" value="{{ session()->get('checkUser')[0]->gender }}" readonly> --}}
@@ -180,37 +182,37 @@
 		</a>
 		<div class="container-sub-two">
 		    <label class="csslb">Drinking</label>
-		    <input type="text" id="drinking" name="drinking" value="{{ session()->get('checkUser')[0]->username }}" readonly>
+		    <input type="text" id="drinking" name="drinking" value="{{ $getInfoUser->drink }}" readonly>
 
 		    <label class="csslb">Smoking</label>
-		    <input type="password" id="somking" name="somking" value="{{ session()->get('checkUser')[0]->password }}" readonly>
+		    <input type="text" id="smoking" name="smoking" value="{{ $getInfoUser->smoke }}" readonly>
 
 		    <label class="csslb">Job status</label>
-		    <input type="text" id="jobStatus" name="jobStatus" value="{{ session()->get('checkUser')[0]->Fullname }}" readonly>
+		    <input type="text" id="jobStatus" name="jobStatus" value="{{ $getInfoUser->status }}" readonly>
 
 		    <label class="csslb">Home type</label>
-		   	<input type="text" id="homeType" name="homeType" value="{{ session()->get('checkUser')[0]->email }}" readonly>
+		   	<input type="text" id="homeType" name="homeType" value="{{ $getInfoUser->type }}" readonly>
 
 		   	<label class="csslb">Live with</label>
-		   	<input type="text" id="liveWith" name="liveWith" value="{{ session()->get('checkUser')[0]->phone_number }}" readonly>
+		   	<input type="text" id="liveWith" name="liveWith" value="{{ $getInfoUser->livewith }}" readonly>
 
 		   	<label class="csslb">Have children</label>
-		   	<input type="text" id="haveChildren" name="haveChildren" value="{{ session()->get('checkUser')[0]->Facebook }}" readonly>
+		   	<input type="text" id="haveChildren" name="haveChildren" value="{{ $getInfoUser->children }}" readonly>
 
 		   	<label class="csslb">National</label>
-		   	<input type="text" id="national" name="national" value="{{ session()->get('checkUser')[0]->Facebook }}" readonly>
+		   	<input type="text" id="national" name="national" value="{{ $getInfoUser->national }}" readonly>
 
 		   	<label class="csslb">Education level</label>
-		   	<input type="text" id="education" name="education" value="{{ session()->get('checkUser')[0]->Facebook }}" readonly>
+		   	<input type="text" id="education" name="education" value="{{ $getInfoUser->level }}" readonly>
 
 		   	<label class="csslb">Language</label>
-		   	<input type="text" id="language" name="language" value="{{ session()->get('checkUser')[0]->Facebook }}" readonly>
+		   	<input type="text" id="language" name="language" value="{{ $getInfoUser->language }}" readonly>
 
 		   	<label class="csslb">Religion</label>
-		   	<input type="text" id="religion" name="religion" value="{{ session()->get('checkUser')[0]->Facebook }}" readonly>
+		   	<input type="text" id="religion" name="religion" value="{{ $getInfoUser->religion }}" readonly>
 
 			<label class="csslb">Constellation</label>
-		   	<input type="text" id="constellation" name="constellation" value="{{ session()->get('checkUser')[0]->Facebook }}" readonly>
+		   	<input type="text" id="constellation" name="constellation" value="{{ $getInfoUser->constellation }}" readonly>
 		   	{{-- <label class="csslb">Gender</label>
 		   	<input type="text" id="facebook" name="facebook" value="{{ session()->get('checkUser')[0]->gender }}" readonly> --}}
 
