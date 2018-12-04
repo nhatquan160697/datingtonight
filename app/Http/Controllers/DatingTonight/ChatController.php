@@ -38,10 +38,9 @@ class ChatController extends Controller
     		$message->touser=$toID;
     		$message->fromuser=$fromID;
     		$message->content=$request->content;
+            $message->time=now();
     		$message->save();
     	}
-    	
-    	$message=message::all();
     	return redirect()->back();
     }
 }

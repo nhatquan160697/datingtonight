@@ -17,7 +17,7 @@
 	<!--/main-->
 <section class="main-content-w3layouts-agileits">
 		<div class="container">
-			<h3 class="tittle">Result</h3>
+			<h3 class="tittle">Result ({{$count}} results)</h3>
 			<div class="inner-sec">
 				<!--left-->
 				<div class="left-blog-info-w3layouts-agileits text-left">

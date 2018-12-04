@@ -6,7 +6,7 @@
 -->
 
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="lang="{{ app()->getLocale() }}"">
 
 <head>
    <title>@yield('title','Welcome to Dating Tonight')</title>

@@ -131,9 +131,11 @@
                                             <label class="label">Hair Color:</label>
                                             <div class="rs-select2 js-select-simple select--no-search">
                                                 <select name="hair_color">
-                                                    <option value="" selected="selected">Anything</option>
                                                 	@foreach($hair_color as $hc)
-                                                    	<option value="{{$hc->id}}">{{$hc->color}}</option>
+                                                    @if($hc->id==0)
+                                                        <option value="" selected="selected">Anything</option>
+                                                    @endif   
+                                                        <option value="{{$hc->id}}">{{$hc->color}}</option>
                                                     @endforeach
                                                 </select>
                                                 <div class="select-dropdown"></div>
@@ -145,8 +147,10 @@
                                             <label class="label">Eye Color:</label>
                                             <div class="rs-select2 js-select-simple select--no-search">
                                                 <select name="eye_color">
-                                                    <option value="" selected="selected">Anything</option>
                                                		@foreach($eye_color as $ec)
+                                                    @if($ec->id==0)
+                                                        <option value="" selected="selected">Anything</option>
+                                                    @endif
                                                     	<option value="{{$ec->id}}">{{$ec->color}}</option>
                                                     @endforeach
                                                 </select>
@@ -164,8 +168,10 @@
                                             <label class="label">Hair Length:</label>
                                             <div class="rs-select2 js-select-simple select--no-search">
                                                 <select name="hair_length">
-                                                    <option value="" selected="selected">Anything</option>
                                                 	@foreach($hair_length as $hl)
+                                                    @if($hl->id==0)
+                                                        <option value="" selected="selected">Anything</option>
+                                                    @endif
                                                     	<option value="{{$hl->id}}">{{$hl->length}}</option>
                                                     @endforeach
                                                 </select>
@@ -178,8 +184,10 @@
                                             <label class="label">Hair Style:</label>
                                             <div class="rs-select2 js-select-simple select--no-search">
                                                 <select name="hair_style">
-                                                    <option value="" selected="selected">Anything</option>
                                                		@foreach($hair_style as $hs)
+                                                    @if($hs->id==0)
+                                                        <option value="" selected="selected">Anything</option>
+                                                    @endif
                                                     	<option value="{{$hs->id}}">{{$hs->style}}</option>
                                                     @endforeach
                                                 </select>
@@ -286,8 +294,10 @@
                                         <label class="label">Body:</label>
                                         <div class="rs-select2 js-select-simple select--no-search">
                                             <select name="body">
-                                                <option value="" selected="selected">Anything</option>
                                               	@foreach($body as $bd)
+                                                    @if($bd->id==0)
+                                                        <option value="" selected="selected">Anything</option>
+                                                    @endif
                                                   	<option value="{{$bd->id}}">{{$bd->body}}</option>
                                                 @endforeach
                                             </select>
@@ -304,8 +314,10 @@
                                             <label class="label">Drinking:</label>
                                             <div class="rs-select2 js-select-simple select--no-search">
                                                 <select name="drink">
-                                                    <option value="" selected="selected">Anything</option>
                                                 	@foreach($drinking as $dr)
+                                                    @if($dr->id==0)
+                                                        <option value="" selected="selected">Anything</option>
+                                                    @endif
                                                     	<option value="{{$dr->id}}">{{$dr->drink}}</option>
                                                     @endforeach
                                                 </select>
@@ -318,8 +330,10 @@
                                             <label class="label">Smoking:</label>
                                             <div class="rs-select2 js-select-simple select--no-search">
                                                 <select name="smoke">
-                                                    <option value="" selected="selected">Anything</option>
                                                		@foreach($smoking as $sm)
+                                                    @if($sm->id==0)
+                                                        <option value="" selected="selected">Anything</option>
+                                                    @endif
                                                     	<option value="{{$sm->id}}">{{$sm->smoke}}</option>
                                                     @endforeach
                                                 </select>
@@ -336,8 +350,10 @@
                                         <label class="label">Job Status:</label>
                                         <div class="rs-select2 js-select-simple select--no-search">
                                             <select name="job_status">
-                                                <option value="" selected="selected">Anything</option>
                                               	@foreach($job_status as $js)
+                                                @if($js->id==0)
+                                                        <option value="" selected="selected">Anything</option>
+                                                @endif
                                                   	<option value="{{$js->id}}">{{$js->status}}</option>
                                                 @endforeach
                                             </select>
@@ -353,8 +369,10 @@
                                         <label class="label">Home type:</label>
                                         <div class="rs-select2 js-select-simple select--no-search">
                                             <select name="house_type">
-                                                <option value="" selected="selected">Anything</option>
                                               	@foreach($house_type as $ht)
+                                                @if($ht->id==0)
+                                                    <option value="" selected="selected">Anything</option>
+                                                @endif
                                                   	<option value="{{$ht->id}}">{{$ht->type}}</option>
                                                 @endforeach
                                             </select>
@@ -370,8 +388,10 @@
                                         <label class="label">Live with:</label>
                                         <div class="rs-select2 js-select-simple select--no-search">
                                             <select name="live_with">
-                                                <option value="" selected="selected">Anything</option>
                                               	@foreach($live_with as $lw)
+                                                @if($lw->id==0)
+                                                    <option value="" selected="selected">Anything</option>
+                                                @endif
                                                   	<option value="{{$lw->id}}">{{$lw->livewith}}</option>
                                                 @endforeach
                                             </select>
@@ -387,8 +407,10 @@
                                         <label class="label">Have Children:</label>
                                         <div class="rs-select2 js-select-simple select--no-search">
                                             <select name="have_children">
-                                                <option value="" selected="selected">Anything</option>
                                               	@foreach($have_children as $hc)
+                                                @if($hc->id==0)
+                                                    <option value="" selected="selected">Anything</option>
+                                                @endif
                                                   	<option value="{{$hc->id}}">{{$hc->children}}</option>
                                                 @endforeach
                                             </select>
@@ -404,8 +426,10 @@
                                         <label class="label">National:</label>
                                         <div class="rs-select2 js-select-simple select--no-search">
                                             <select name="national">
-                                                <option value="" selected="selected">Anything</option>
                                               	@foreach($national as $na)
+                                                @if($na->id==0)
+                                                    <option value="" selected="selected">Anything</option>
+                                                @endif
                                                   	<option value="{{$na->id}}">{{$na->national}}</option>
                                                 @endforeach
                                             </select>
@@ -421,8 +445,10 @@
                                         <label class="label">Educational Level:</label>
                                         <div class="rs-select2 js-select-simple select--no-search">
                                             <select name="educational_level">
-                                                <option value="" selected="selected">Anything</option>
                                               	@foreach($educational_level as $el)
+                                                @if($el->id==0)
+                                                    <option value="" selected="selected">Anything</option>
+                                                @endif
                                                   	<option value="{{$el->id}}">{{$el->level}}</option>
                                                 @endforeach
                                             </select>
@@ -438,8 +464,10 @@
                                         <label class="label">Language:</label>
                                         <div class="rs-select2 js-select-simple select--no-search">
                                             <select name="language">
-                                                <option value="" selected="selected">Anything</option>
                                               	@foreach($language as $lg)
+                                                @if($lg->id==0)
+                                                    <option value="" selected="selected">Anything</option>
+                                                @endif
                                                   	<option value="{{$lg->id}}">{{$lg->language}}</option>
                                                 @endforeach
                                             </select>
@@ -454,8 +482,10 @@
                                         <label class="label">Religion:</label>
                                         <div class="rs-select2 js-select-simple select--no-search">
                                             <select name="religion">
-                                                <option value="" selected="selected">Anything</option>
                                               	@foreach($religion as $rl)
+                                                @if($rl->id==0)
+                                                    <option value="" selected="selected">Anything</option>
+                                                @endif
                                                   	<option value="{{$rl->id}}">{{$rl->religion}}</option>
                                                 @endforeach
                                             </select>
@@ -471,8 +501,10 @@
                                         <label class="label">Constellation:</label>
                                         <div class="rs-select2 js-select-simple select--no-search">
                                             <select name="constellation">
-                                                <option value="" selected="selected">Anything</option>
                                               	@foreach($constellation as $cs)
+                                                @if($cs->id==0)
+                                                    <option value="" selected="selected">Anything</option>
+                                                @endif
                                                   	<option value="{{$cs->id}}">{{$cs->constellation}}</option>
                                                 @endforeach
                                             </select>
