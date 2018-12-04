@@ -101,7 +101,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                </button>
                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto" id="nav">
-                     <li class="nav-item active">
+                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('datingtonight.index.index') }}">DATING TONIGHT
                            <span class="sr-only">(current)</span>
                         </a>

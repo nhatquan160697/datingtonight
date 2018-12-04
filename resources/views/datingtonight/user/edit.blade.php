@@ -95,6 +95,16 @@
 				PERSONAL INFORMATION
 			</div>
 		</a>
+		@if (session('announce'))
+		    <script type="text/javascript" charset="utf-8">
+		    	alert("{{ session('announce') }}");
+		    </script>
+		@endif
+		@if (session('alert'))
+		    <script type="text/javascript" charset="utf-8">
+		    	alert("{{ session('alert') }}");
+		    </script>
+		@endif
 		<div class="container-main">
 		  	<label class="csslb">Avatar</label>
 		    <img style="width: 200px; height: 200px;" src="/storage/app/files/avatar/{{ $getInfoUser->Avatar }}" alt="Please input your avatar">
@@ -462,7 +472,7 @@
 		    	@endif
 		    </select>
 	    </div>
-	    <input type="submit" name="submit" value="Edit Information">
+	    <input type="submit" onclick="return confirm('Are you sure want to change?')" name="submit" value="Edit Information">
 	</form>
 @endif
 <script>

@@ -31,7 +31,7 @@ class AuthUserController extends Controller
     	if($this->mUser->checkUserLogin($username,$password)){
     		$request->session()->put('checkUser',$getUsername);
             $request->session()->put('userID',$getUserID);
-    		return redirect()->route('datingtonight.index.index');
+    		return redirect()->route('datingtonight.user.edit')->with('announce','Update your information in onder to easy to find your partner');
     	} else {
     		return redirect()->route('auth.users.default')->with('alert','Username or Password is invalid');
     	}

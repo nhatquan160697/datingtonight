@@ -190,9 +190,9 @@ class UserController extends Controller
             );
         }
         if($this->mUser->editUser($id_user, $arItem)) {
-            return redirect(route('datingtonight.user.index'))->with('alert','Edit successfully');
+            return redirect(route('datingtonight.user.edit'))->with('alert','Edit successfully');
         } else {
-            return redirect(route('datingtonight.user.index'))->with('alert','Edit failed');
+            return redirect(route('datingtonight.user.edit'))->with('alert','Edit failed');
         }
     }
 }

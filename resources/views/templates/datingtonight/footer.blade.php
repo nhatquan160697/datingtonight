@@ -11,12 +11,12 @@
 {{-- Chatbot --}}
 <script>
   (function () {
-    let appCode = 'f638f11dc7bf71ccaed44a82520fc0b9';
+    let appCode = '754a19c0e8bdc3beb5b9b91ca80d8c23';
     let ws_host = 'wss://bot.fpt.ai/ws/livechat'
     let appCodeHash = window.location.hash.substr(1);
     let objLiveChat = {
-        appCode: 'f638f11dc7bf71ccaed44a82520fc0b9',
-        appName: 'Auto'
+        appCode: '754a19c0e8bdc3beb5b9b91ca80d8c23',
+        appName: 'Hướng dẫn sử dụng web'
     };
     if (appCodeHash.length == 32) {
       objLiveChat.appCode = appCodeHash;
@@ -30,7 +30,6 @@
     r.onload = function () {
       new FPTAI_LiveChat(objLiveChat, baseUrl, ws_host);
     };
-
   })()
 </script>
 {{-- Endchatbot --}}
