@@ -22,7 +22,9 @@ Route::namespace('DatingTonight')->group(function(){
 		'as' => 'datingtonight.index.index'
 	]);
 
-
+	Route::get('/test', function () {
+    	return view('datingtonight.chat.test');
+	});
 
  	Route::get('/chat-{id}',[
  		'uses'=>'ChatController@index',

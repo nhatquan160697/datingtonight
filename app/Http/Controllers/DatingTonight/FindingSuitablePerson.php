@@ -226,6 +226,7 @@ class FindingSuitablePerson extends Controller
         $user_search->save();
 
         $Users=$Users->paginate(9);
+        $count=count($Users);
         
         $gender=gender::all();
         $body=body::all();
@@ -264,7 +265,8 @@ class FindingSuitablePerson extends Controller
             'national'=>$national,
             'religion'=>$religion,
             'gender'=>$gender,
-            'smoking'=>$smoking
+            'smoking'=>$smoking,
+            'count'=>$count
         ]);
         
     }
