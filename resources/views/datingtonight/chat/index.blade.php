@@ -100,38 +100,10 @@
               $urlTo='/storage/app/files/avatar/'.$toUser->Avatar;
               $urlFrom='/storage/app/files/avatar/'.$fromUser->Avatar;
             ?>
-          	@foreach($message as $msg)
-          	<?php
-          		$sendedContent;
-          		$receivedContent;
-          		if($msg->fromuser==$fromID && $msg->touser==$toID)
-          		{
-          			$sendedContent=$msg->content;
-          			echo '	<div class="outgoing_msg">
-              					<div class="sent_msg">
-                					<p>'.$sendedContent.'</p>
-                				</div>
-            				</div>';
-          		}
-          		elseif($msg->fromuser==$toID && $msg->touser==$fromID)
-          		{
-          			$receivedContent=$msg->content;
-          			echo '	<div class="incoming_msg">
-              					<div class="incoming_msg_img"> 
-              					<img src="'.$urlTo.'"> 
-              					</div>
-              					<div class="received_msg">
-                					<div class="received_withd_msg">
-                						<p>'.$receivedContent.'</p>
-                  					</div>
-              					</div>
-            				</div>';
-          		}
-          	?>
-            @endforeach
+          	
 
             <div class ="a" id="app">
-                <chat-component :from-id="{{$fromID}}"></chat-component>
+                <chat-component from-id="{{$fromID}}" to-id="{{$toID}}" url-to="{{$urlTo}}"></chat-component>
             </div>
 
             <script type="text/javascript">
