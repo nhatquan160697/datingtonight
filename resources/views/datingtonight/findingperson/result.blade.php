@@ -153,6 +153,7 @@
                         		}
                         	}                    	
                         ?>
+                        
 						<div class="col-lg-4 card">
 							<a href="#exampleModal-{{$up->id}}" data-toggle="modal">
 								<img src="{{$url}}" class="card-img-top img-fluid" alt="This is an image">

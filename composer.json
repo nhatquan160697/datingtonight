@@ -11,7 +11,6 @@
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "5.7.*",
         "mpociot/laravel-firebase-sync": "^1.0",
-        "pusher/pusher-php-server": "^3.2",
         "unisharp/laravel-ckeditor": "^4.7"
     },
     "require-dev": {

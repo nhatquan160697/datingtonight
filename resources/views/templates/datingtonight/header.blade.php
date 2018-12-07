@@ -15,7 +15,7 @@
    <meta name="keywords" content="Weblog a Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
    <meta property="350829552332404" content="100001348658954" />
-
+   <meta name="csrf-token" content="{{ csrf_token() }}">
    <script>
       addEventListener("load", function () {
          setTimeout(hideURLbar, 0);

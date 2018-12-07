@@ -92,6 +92,9 @@ class FindingSuitablePerson extends Controller
         {
             $user_search=user_search::find($id);
         }
+
+
+        $Users->where('id','!=',$id);
     	if($request->gender!='')
     	{
     		$Users->where('Gender','=',$request->gender);
