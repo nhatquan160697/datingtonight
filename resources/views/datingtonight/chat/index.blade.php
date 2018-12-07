@@ -4,6 +4,8 @@
 @endsection
 @section('content')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
 <div class="container">
 <h3 class=" text-center">{{$toUser->Fullname}}</h3>
 <div class="messaging">
@@ -95,7 +97,8 @@
           </div>
         </div> --}}     
         <div class="mesgs">
-          <div class="msg_history">
+          <div class="msg_history" id="history_message">
+           
           	<?php 
               $urlTo='/storage/app/files/avatar/'.$toUser->Avatar;
               $urlFrom='/storage/app/files/avatar/'.$fromUser->Avatar;
@@ -105,6 +108,7 @@
             <div class ="a" id="app">
                 <chat-component from-id="{{$fromID}}" to-id="{{$toID}}" url-to="{{$urlTo}}"></chat-component>
             </div>
+  
 
             <script type="text/javascript">
             // Initialize Firebase
@@ -119,17 +123,40 @@
 
           </div>
           <div class="type_msg">
-          	<form method="POST" action="{{route('datingtonight.chat.send',$toID)}}">
+          	<form method="POST" action="{{route('datingtonight.chat.send',$toID)}}" id="input-form">
           		<input type="hidden" name="_token" value="{{csrf_token()}}"/>
           		<div class="input_msg_write">
-              		<input type="text" class="write_msg" placeholder="Type a message" name="content" />
-              		<button type="submit" class="msg_send_btn" type="button" id="loadData">><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+              		<input type="text" class="write_msg" placeholder="Type a message" name="content" id="ctn" />
+              		<button type="submit" class="msg_send_btn" type="button" id="load-data">><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
             	</div>
+              
+              <script type="text/javascript">
+                $('#load-data').on('click',function(){
+                  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                  $.post({
+                    type:'POST',
+                    data:{
+                      _token: CSRF_TOKEN,
+                      content:$("#ctn").val()
+                    },
+                    url:'/chat-4',
+                    dataType:'String',
+                    success:function(){
+                      $('#input-form')[0].reset();
+                    }
+                  });
+                  return false;
+                });
+              </script>
           	</form>
           </div>
         </div>
       </div>
+       <script type="text/javascript">
+            $('.msg_history').scrollTop($('.msg_history')[0].scrollHeight);     
+        </script>
       <p class="text-center top_spac"> Design by <a target="_blank" href="#">The Dreamers Team</a></p>
 </div>
 </div>
 @endsection
+
