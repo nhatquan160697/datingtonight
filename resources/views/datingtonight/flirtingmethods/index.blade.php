@@ -58,13 +58,9 @@
 										<a href="{{ $urlDetail }}">
 											<i class="far fa-calendar-alt"></i> {{ $month }} {{ $day }},{{ $year }}</a>
 									</li>
-									<li class="mx-2">
-										<a href="{{ $urlDetail }}">
-											<i class="far fa-comment"></i> 0</a>
-									</li>
 									<li>
 										<a href="#">
-											<i class="fas fa-eye"></i>{{ $count }} </a>
+											<i style="padding-right: 5px;" class="fas fa-eye"> </i>{{ $count }} </a>
 									</li>
 
 								</ul>

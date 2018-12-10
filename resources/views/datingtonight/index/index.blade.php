@@ -199,13 +199,9 @@
                         </li>
                         <li class="mx-2">
                            <a href="{{ route('datingtonight.datingplaces.detail',['slug' => str_slug($top1->name_place), 'id' => $top1->id_place]) }}">
-                              <i class="far fa-thumbs-up"></i> {{$top1->count_number}} Views</a>
+                              <i class="fas fa-home"></i> {{$top1->name_place}}
+                           </a>
                         </li>
-                        <li>
-                           <a href="{{ route('datingtonight.datingplaces.detail',['slug' => str_slug($top1->name_place), 'id' => $top1->id_place]) }}">
-                              <i class="far fa-comment"></i> 0 Comments</a>
-                        </li>
-
                      </ul>
                   </div>
                </div>
@@ -271,13 +267,9 @@
                            <a href="{{ route('datingtonight.datingplaces.detail',['slug' => str_slug($top23->name_place), 'id' => $top23->id_place]) }}">
                               <i class="far fa-clock"></i> {{ $month }} {{ $day }}, {{ $year }}</a>
                         </li>
-                        <li class="mx-2">
-                           <a href="{{ route('datingtonight.datingplaces.detail',['slug' => str_slug($top23->name_place), 'id' => $top23->id_place]) }}">
-                              <i class="far fa-comment"></i> 0</a>
-                        </li>
                         <li>
                            <a href="{{ route('datingtonight.datingplaces.detail',['slug' => str_slug($top23->name_place), 'id' => $top23->id_place]) }}">
-                              <i class="fas fa-eye"></i> {{$top23->count_number}}</a>
+                              <i class="fas fa-home"></i> {{$top23->name_place}}</a>
                         </li>
                      </ul>
                   </div>
@@ -423,14 +415,12 @@
 
 <script>
    $(document).ready(function () {
-
-                        var defaults = {
-                           containerID: 'toTop', // fading element id
-                           containerHoverID: 'toTopHover', // fading element hover id
-                           scrollSpeed: 1200,
-                           easingType: 'linear' 
-                        };
-
+      var defaults = {
+         containerID: 'toTop', // fading element id
+         containerHoverID: 'toTopHover', // fading element hover id
+         scrollSpeed: 1200,
+         easingType: 'linear'
+      };
       $().UItoTop({
          easingType: 'easeOutQuart'
       });
