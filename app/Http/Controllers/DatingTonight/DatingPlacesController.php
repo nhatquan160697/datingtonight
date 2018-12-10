@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Model\DatingPlaces;
 use App\Model\DatingPlacePicture;
 use App\Model\DatingType;
+use Session;
 
 class DatingPlacesController extends Controller
 {
@@ -39,6 +40,12 @@ class DatingPlacesController extends Controller
 			array_push($arrType, array('cid' => $nameType->id_type,'name'=>$nameType->name_type,'count'=>$countType));
 		}
 		$mostView = $this->mDatingPlaces->getTop5();
+		$sessionKey = $id;
+		$sessionView = Session::get($sessionKey); // tạo 1 mảng sessionView
+		if(!$sessionView) {
+			Session::put($sessionKey,1);
+			$getItem->increment('count_number');
+		}
 		$relatedNews = $this->mDatingPlaces->relatedNews($id,$getItem->id_type);
 		return view('datingtonight.datingplaces.detail',compact('getItem','getPicture','getNameType','arrType','mostView','relatedNews'));
 	}

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\DatingTonight;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\flirtingmethods;
+use Session;
 
 class FlirtingMethodsController extends Controller
 {
@@ -34,6 +35,12 @@ class FlirtingMethodsController extends Controller
             array_push($arrType, array('idt' => $type->id,'gender'=>$type->gender,'icon'=>$type->icon,'count'=>$countType));
         }
         $mostView = $this->mFlirtingmethods->mostView();
+        $sessionKey = $id;
+        $sessionView = Session::get($sessionKey); // tạo 1 mảng sessionView
+        if(!$sessionView) {
+            Session::put($sessionKey,1);
+            $getIdItem->increment('count_number');
+        }
         $relatedNews = $this->mFlirtingmethods->relatedNews($id, $getIdItem->id_gender);
     	return view('datingtonight.flirtingmethods.detail',compact('getIdItem','arrType','mostView','relatedNews'));
     }
