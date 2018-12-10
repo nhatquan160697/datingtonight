@@ -17,7 +17,8 @@
         "laravel-mix": "^4.0.0-beta.2",
         "lodash": "^4.17.5",
         "popper.js": "^1.14.6",
-        "vue": "^2.5.7"
+        "vue": "^2.5.7",
+        "webpack-clean": "^1.2.3"
     },
     "dependencies": {
         "ajv": "^6.6.1",

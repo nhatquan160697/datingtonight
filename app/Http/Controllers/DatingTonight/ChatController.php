@@ -29,18 +29,31 @@ class ChatController extends Controller
 
     public function sendMessage($id,Request $request)
     {
-    	//event(new DemoPusherEvent($request->content));
+
     	$fromID=Session::get('userID');
-    	$toID=$id;
-    	if($request->content!=null)
-    	{
-    		$message=new message;
-    		$message->touser=$toID;
-    		$message->fromuser=$fromID;
-    		$message->content=$request->content;
+        $toID=$id;
+        $message=message::all();
+        $toUser=users::find($toID);
+        $fromUser=users::find($fromID);
+    	
+        if ($request->content!=null) 
+        {
+            $message=new message;
+            $message->touser=$toID;
+            $message->fromuser=$fromID;
+            $message->content=$request->content;
             $message->time=now();
-    		$message->save();
-    	}
-    	return redirect()->back();
+            if($request->post())
+            {
+                $message->save();
+            }
+        }
+        return view('datingtonight.chat.index',[
+            'fromID'=>$fromID,
+            'toID'=>$toID,
+            'message'=>$message,
+            'toUser'=>$toUser,
+            'fromUser'=>$fromUser
+        ]);
     }
 }

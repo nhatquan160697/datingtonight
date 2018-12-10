@@ -49105,6 +49105,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -49119,7 +49129,8 @@ __webpack_require__.r(__webpack_exports__);
     firebase__WEBPACK_IMPORTED_MODULE_0___default.a.database().ref('message/').on('value', function (snapshot) {
       _this.message = snapshot.val();
     });
-  }
+  },
+  props: ['fromId', 'toId', 'urlTo']
 });
 
 /***/ }),
@@ -94085,26 +94096,36 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "incoming_msg" }, [
-    _c("div", { staticClass: "incoming_msg_img" }, [
-      _c("img", { attrs: { src: _vm.message } })
-    ]),
-    _vm._v(" "),
-    _vm._m(0)
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "received_msg" }, [
-      _c("div", { staticClass: "received_withd_msg" }, [
-        _c("p", [_vm._v("Hello")])
+  return _c(
+    "div",
+    _vm._l(_vm.message, function(msg) {
+      return _c("div", [
+        msg.touser == _vm.fromId && msg.fromuser == _vm.toId
+          ? _c("div", { staticClass: "incoming_msg" }, [
+              _c("div", { staticClass: "incoming_msg_img" }, [
+                _c("img", { attrs: { src: _vm.urlTo } })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "received_msg" }, [
+                _c("div", { staticClass: "received_withd_msg" }, [
+                  _c("p", [_vm._v(_vm._s(msg.content))])
+                ])
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        msg.fromuser == _vm.fromId && msg.touser == _vm.toId
+          ? _c("div", { staticClass: "outgoing_msg" }, [
+              _c("div", { staticClass: "sent_msg" }, [
+                _c("p", [_vm._v(_vm._s(msg.content))])
+              ])
+            ])
+          : _vm._e()
       ])
-    ])
-  }
-]
+    })
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
