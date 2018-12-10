@@ -57,19 +57,18 @@
 										$day = $date_array['mday'];
 										$year = $date_array['year'];
 									@endphp
-									<li>
+									<li style="padding-right: 10px;">
 										<a href="{{ $urlDetail }}">
-											<i class="far fa-calendar-alt"></i> {{ $month }} {{ $day }},{{ $year }}</a>
+											<i class="fas fa-home"></i> {{ $name }}  </a>
+									</li>
+									<li style="padding-right: 5px;">
+										<a href="{{ $urlDetail }}">
+											<i class="far fa-calendar-alt"></i> {{ $month }} {{ $day }},{{ $year }}  </a>
 									</li>
 									<li class="mx-2">
 										<a href="{{ $urlDetail }}">
-											<i class="far fa-thumbs-up"></i> {{ $count }} Views</a>
+											<i class="fas fa-eye"></i> {{ $count }} Views</a>
 									</li>
-									<li>
-										<a href="{{ $urlDetail }}">
-											<i class="far fa-comment"></i> 0 Comments</a>
-									</li>
-
 								</ul>
 							</div>
 						</div>

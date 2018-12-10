@@ -39,17 +39,17 @@
 										$day = $date_array['mday'];
 										$year = $date_array['year'];
 									@endphp
-									<li>
+									<li style="padding-right: 10px;">
 										<a href="">
-											<i class="far fa-calendar-alt"></i> {{ $month }} {{ $day }}, {{ $year }}</a>
+											<i class="fas fa-home"></i> {{ $getItem->name_place }}  </a>
+									</li>
+									<li style="padding-right: 5px;">
+										<a href="">
+											<i class="far fa-calendar-alt"></i> {{ $month }} {{ $day }},{{ $year }}  </a>
 									</li>
 									<li class="mx-2">
 										<a href="">
-											<i class="far fa-thumbs-up"></i>{{ $getItem->count_number }}</a>
-									</li>
-									<li>
-										<a href="">
-											<i class="far fa-comment"></i> 0 Comments</a>
+											<i class="fas fa-eye"></i> {{ $getItem->count_number }} Views</a>
 									</li>
 
 								</ul>
