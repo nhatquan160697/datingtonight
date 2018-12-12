@@ -77,7 +77,7 @@
 		margin: 30px;
 	}
 
-	#aEdit {
+	#aEdit, {
 		background-color: #F08690;
 	    padding: 10px;
 	    margin-left: 150px;
@@ -86,8 +86,32 @@
 		border-radius: 5px;
 		margin-bottom: 10px;
 	}
+
+	.changePassword {
+		background-color: #BD081C;
+	    color: white;
+	    padding: 12px 20px;
+	    border: none;
+	    border-radius: 4px;
+	    cursor: pointer;
+	    margin-left: 2%;
+	}
+
+	.changePassword:hover {
+	    background-color: #F08690;
+	    color: white;
+	}
 </style>
 @if (Session::has('checkUser'))
+	@if ($errors->any())
+	    <div class="alert alert-danger" style="width:71%; margin-left: 14.5%; padding-left: 5%; margin-top: 10px">
+	        <ul>
+	            @foreach ($errors->all() as $error)
+	                <li>{{ $error }}</li>
+	            @endforeach
+	        </ul>
+	    </div>
+	@endif
 	<form action="{{ route('datingtonight.user.edit') }}" id="information" method="POST" enctype="multipart/form-data">
 		{{ csrf_field() }}
 		<a href="javascript:void(0)" >
@@ -111,10 +135,7 @@
 		    <input type="file" name="fAvatar">
 
 		    <label class="csslb">Username</label>
-		    <input type="text" id="username" name="username" value="{{ $getInfoUser->username }}" >
-
-		    <label class="csslb">Password</label>
-		    <input type="password" id="password" name="txtPassword" value="{{ $getInfoUser->password }}" >
+		    <input type="text" id="username" name="username" value="{{ $getInfoUser->username }}" readonly>
 
 		    <label class="csslb">Full name</label>
 		    <input type="text" id="fullname" name="txtFullname" value="{{ $getInfoUser->Fullname }}" >
@@ -232,10 +253,10 @@
 		    	@endif
 		    </select>
 
-		   	<label class="csslb">Height</label>
-		   	<input type="text" id="height" name="height" value="{{ $getInfoUser->height }}" >
+		   	<label class="csslb">Height (cm)</label>
+		   	<input type="text" id="height" name="height" value="{{ $getInfoUser->height }}">
 
-		   	<label class="csslb">Weight</label>
+		   	<label class="csslb">Weight (kg)</label>
 		   	<input type="text" id="weight" name="weight" value="{{ $getInfoUser->weight }}" >
 
 		   	<label class="csslb">Body</label>
@@ -473,6 +494,7 @@
 		    </select>
 	    </div>
 	    <input type="submit" onclick="return confirm('Are you sure want to change?')" name="submit" value="Edit Information">
+	    <a href="{{ route('datingtonight.user.changePassword') }}" class="changePassword"> Change password </a>
 	</form>
 @endif
 <script>

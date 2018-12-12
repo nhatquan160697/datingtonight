@@ -20,6 +20,15 @@ class Users extends Model
     	}
     }
 
+    public function checkPassword($id, $password){
+        $checkPassword = DB::table('users')->where('id','=',$id)->where('password','=',$password)->count();
+        if($checkPassword >= 1){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function getUsername($username){
     	return DB::table('users')->where('username','=',$username)->get();
     }
@@ -37,6 +46,14 @@ class Users extends Model
     }
 
     public function editUser($id, $arItem){
+        return $this->where('id',$id)->update($arItem);
+    }
+
+    public function delUser($id){
+        return $this->where('id',$id)->delete();
+    }
+
+    public function editPassword($id, $arItem){
         return $this->where('id',$id)->update($arItem);
     }
 

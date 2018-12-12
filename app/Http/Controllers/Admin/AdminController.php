@@ -25,7 +25,7 @@ class AdminController extends Controller
 
     public function postAdd(AdminRequest $request){
     	$username = trim($request->username);
-		$txtPassword = bcrypt($request->txtPassword);
+		$txtPassword = md5($request->txtPassword);
 		$txtFullname = trim($request->txtFullname);
 		$slcRole = $request->slcRole;
 		$arItem = array(
@@ -51,7 +51,7 @@ class AdminController extends Controller
     public function postEdit($id, Request $request){
     	$getItem = $this->mAdministrator->getItem($id);
     	$username = trim($request->username);
-		$txtPassword = trim($request->txtPassword);
+		$txtPassword = md5($request->txtPassword);
 		$txtFullname = trim($request->txtFullname);
 		$slcRole = $request->slcRole;
 		$arItem = array(

@@ -129,7 +129,7 @@
               		<input type="text" class="write_msg" placeholder="Type a message" name="content" id="ctn" />
               		<button type="submit" class="msg_send_btn" type="button" id="load-data">><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
             	</div>
-              
+
               <script type="text/javascript">
                 $('#load-data').on('click',function(){
                   var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');

@@ -16,4 +16,12 @@ class UserController extends Controller
     	$getUser = $this->mUsers->getItems();
     	return view('admin.user.index',compact('getUser'));
     }
+
+    public function deleteUser($id){
+    	if($this->mUsers->delUser($id)){
+			return redirect()->route('admin.user.index')->with('msg','Delete successfully');
+		} else {
+			return redirect()->route('admin.user.index')->with('msg','Delete failed');
+		}
+    }
 }

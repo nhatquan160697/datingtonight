@@ -25,7 +25,7 @@ class AuthUserController extends Controller
 
     public function postLogin(Request $request){
     	$username = trim($request->username);
-    	$password = trim($request->password);
+    	$password = md5($request->password);
     	$getUsername = $this->mUser->getUsername($username);
         $getUserID = $this->mUser->getUserID($username);
     	if($this->mUser->checkUserLogin($username,$password)){
@@ -57,7 +57,7 @@ class AuthUserController extends Controller
         $users->phone_number=$request->phone_number;
         $users->Facebook=$request->facebook;
         $users->Birthdate=$request->birthday;
-        $users->password=$request->password;
+        $users->password=md5($request->password);
         $users->save();
         return redirect()->route('auth.users.default')->with('alert','Register Successful');
     }

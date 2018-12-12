@@ -18,7 +18,7 @@ class AuthAdminController extends Controller
 
     public function postLogin(Request $request){
     	$username = trim($request->username);
-    	$password = trim($request->password);
+    	$password = md5($request->password);
     	$getAdmin = $this->mAdministrator->getIdAdmin($username);
     	if($this->mAdministrator->checkLogin($username,$password)){
     		$request->session()->put('checkAdmin',$getAdmin);
