@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\DatingTonight;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
+use App\Http\Requests\ConfirmPassword;
 use App\Http\Controllers\Controller;
 use App\Model\Users;
 use App\Model\city;
@@ -82,12 +84,11 @@ class UserController extends Controller
     	return view('datingtonight.user.edit',compact('getInfoUser','getCity','getGender','getHairColor','getHairLength','getHairStyle','getEyeColor','getBody','getDrinking','getSmoking','getJobStatus','getHomeType','getLivewith','getHaveChild','getNational','getEducation','getLanguage','getReligion','getConstellation'));
     }
 
-    public function postEdit(Request $request){
+    public function postEdit(UserRequest $request){
         if(session()->has('checkUser')){
             $id_user = session()->get('checkUser')[0]->id;
         }
         // INFORMATION
-        $username = trim($request->username);
         $txtPassword = $request->txtPassword;
         $txtFullname = trim($request->txtFullname);
         $txtEmail = trim($request->txtEmail);
@@ -130,7 +131,6 @@ class UserController extends Controller
             $file->move($uploadPath, $picture);
             $arItem = array(
                 'Avatar' => $picture,
-                'username' => $username,
                 'password' => $txtPassword,
                 'Fullname' => $txtFullname,
                 'email' => $txtEmail,
@@ -160,7 +160,6 @@ class UserController extends Controller
             );
         } else { // xu ly neu ko co anh thi giu nguyen
             $arItem = array(
-                'username' => $username,
                 'password' => $txtPassword,
                 'Fullname' => $txtFullname,
                 'email' => $txtEmail,
@@ -193,6 +192,31 @@ class UserController extends Controller
             return redirect(route('datingtonight.user.edit'))->with('alert','Edit successfully');
         } else {
             return redirect(route('datingtonight.user.edit'))->with('alert','Edit failed');
+        }
+    }
+
+    public function getPassword(){
+        return view('datingtonight.user.changePassword');
+    }
+
+    public function postPassword(ConfirmPassword $request){
+        $txtOldPassword = $request->txtOldPassword;
+        $txtNewPassword = md5($request->txtNewPassword);
+        $txtConfirmPassword = md5($request->txtConfirmPassword);
+        if(session()->has('checkUser')){
+            $id_user = session()->get('checkUser')[0]->id;
+        }
+        if($this->mUser->checkPassword($id_user,$txtOldPassword)) {
+            $arPassword = array(
+                'password' => $txtNewPassword,
+            );
+            if($this->mUser->editPassword($id_user, $arPassword)) {
+                return redirect(route('datingtonight.user.edit'))->with('alert','Change password successfully');
+            } else {
+                return redirect(route('datingtonight.user.edit'))->with('alert','Change password failed');
+            }
+        } else {
+            return redirect(route('datingtonight.user.changePassword'))->with('alert','Old password is invalid');
         }
     }
 }

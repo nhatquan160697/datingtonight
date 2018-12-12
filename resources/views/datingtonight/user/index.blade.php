@@ -104,9 +104,6 @@
 		    <label class="csslb">Username</label>
 		    <input type="text" id="username" name="username" value="{{ $getInfoUser->username }}" readonly>
 
-		    <label class="csslb">Password</label>
-		    <input type="password" id="password" name="password" value="{{ $getInfoUser->password }}" readonly>
-
 		    <label class="csslb">Full name</label>
 		    <input type="text" id="fullname" name="fullname" value="{{ $getInfoUser->Fullname }}" readonly>
 

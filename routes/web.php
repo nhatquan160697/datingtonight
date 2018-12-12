@@ -46,6 +46,16 @@ Route::namespace('DatingTonight')->group(function(){
 		'as' => 'datingtonight.user.edit'
 	]);
 
+	Route::get('/account/change-password',[
+		'uses' => 'UserController@getPassword',
+		'as' => 'datingtonight.user.changePassword'
+	]);
+
+	Route::post('/account/change-password',[
+		'uses' => 'UserController@postPassword',
+		'as' => 'datingtonight.user.changePassword'
+	]);
+
 	Route::prefix('/dating-places')->group(function(){
 		// Controller dating places for user
 		Route::get('/',[
@@ -177,24 +187,8 @@ Route::namespace('Admin')->prefix('admin')->group(function(){
 			'uses' => 'UserController@index',
 			'as' => 'admin.user.index'
 		]);
-		Route::get('/add',[
-			'uses' => 'UserController@getAdd',
-			'as' => 'admin.user.add'
-		]);
-		Route::post('/add',[
-			'uses' => 'UserController@postAdd',
-			'as' => 'admin.user.add'
-		]);
-		Route::get('/edit-{id}',[
-			'uses' => 'UserController@getEdit',
-			'as' => 'admin.user.edit'
-		]);
-		Route::post('/edit-{id}',[
-			'uses' => 'UserController@postEdit',
-			'as' => 'admin.user.edit'
-		]);
 		Route::get('/del-{id}',[
-			'uses' => 'UserController@del',
+			'uses' => 'UserController@deleteUser',
 			'as' => 'admin.user.del'
 		]);
 	});

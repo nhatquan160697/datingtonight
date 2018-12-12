@@ -15,7 +15,9 @@
                     <tr align="center">
                         <th>ID</th>
                         <th>Username</th>
-                        <th>Fullname</th>
+                        <th>Email</th>
+                        <th>Phone number</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,25 +25,25 @@
                     @php
                         $id = $user->id;
                         $username = $user->username;
-                        $fullname = $user->fullname;
-                        //$urlEdit = route('admin.admin.edit',$id);
-                        //$urlDelete = route('admin.admin.del',$id);
+                        $email = $user->email;
+                        $phone_number = $user->phone_number;
+                        $urlDelete = route('admin.user.del',$id);;
                     @endphp
                     @if( $id % 2 == 0 )
                     <tr class="odd gradeX" align="center">
                         <td>{{ $id }}</td>
                         <td>{{ $username }}</td>
-                        <td>{{ $fullname }}</td>
-                        {{-- <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a onclick=" return confirm('Do you want to delete ?')" href="{{ $urlDelete }}">Delete</a></td>
-                        <td class="center"><i class="fa fa-pencil fa-fw"></i><a href="{{ $urlEdit }}">Edit</a></td> --}}
+                        <td>{{ $email }}</td>
+                        <td>{{ $phone_number }}</td>
+                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a onclick=" return confirm('Are you sure you want to delete this user?')" href="{{ $urlDelete }}">Delete</a></td>
                     </tr>
                     @else
                     <tr class="odd gradeX" align="center">
                         <td>{{ $id }}</td>
                         <td>{{ $username }}</td>
-                        <td>{{ $fullname }}</td>
-                        {{-- <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a onclick=" return confirm('Do you want to delete ?')" href="{{ $urlDelete }}">Delete</a></td>
-                        <td class="center"><i class="fa fa-pencil fa-fw"></i><a href="{{ $urlEdit }}">Edit</a></td> --}}
+                        <td>{{ $email }}</td>
+                        <td>{{ $phone_number }}</td>
+                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a onclick=" return confirm('Are you sure you want to delete this user?')" href="{{ $urlDelete }}">Delete</a></td>
                     </tr>
                     @endif
                     @endforeach
