@@ -40,7 +40,7 @@
                         <input class="form-control" name="preview_text" placeholder="Please Enter Preview Text" />
                     </div>
                     <div class="form-group">
-                        <label style="display: block;">City</label>
+                        <label style="display: block;">Gender</label>
                         <select name="gender">
                             @foreach($gender as $gd)
                                 <option value="{{ $gd->id }}">{{ $gd->gender }}</option>

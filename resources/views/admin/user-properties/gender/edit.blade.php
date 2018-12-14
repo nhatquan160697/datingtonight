@@ -26,7 +26,7 @@
                     {{session('success')}}
                 </div>
             @endif
-                <form action="{{route('admin.user-properties.gender.edit',$gender->gd)}}" method="POST">
+                <form action="{{route('admin.user-properties.gender.edit',$gender->id)}}" method="POST">
                     <input type="hidden" name="_token" value="{{csrf_token()}}"/>
                     <div class="form-group">
                         <label>Gender</label>

@@ -69,7 +69,11 @@ class AdminFlirtingController extends Controller
     public function getEdit($id)
     {
         $flirtingmethods = flirtingmethods::find($id);
-    	return view('admin.flirtingmethods.edit',['flirtingmethods'=>$flirtingmethods]);
+        $gender= gender::all();     
+    	return view('admin.flirtingmethods.edit',[
+            'flirtingmethods'=>$flirtingmethods,
+            'gender'=>$gender
+        ]);
     }
 
     public function postEdit($id ,Request $request)
