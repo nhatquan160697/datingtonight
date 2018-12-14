@@ -49130,6 +49130,20 @@ __webpack_require__.r(__webpack_exports__);
       _this.message = snapshot.val();
     });
   },
+  updated: function updated() {
+    var _this2 = this;
+
+    // whenever data changes and the component re-renders, this is called.
+    this.$nextTick(function () {
+      return _this2.scrollToEnd();
+    });
+  },
+  methods: {
+    scrollToEnd: function scrollToEnd() {
+      // scroll to the start of the last message
+      this.$el.scrollTop = this.$el.lastElementChild.offsetTop;
+    }
+  },
   props: ['fromId', 'toId', 'urlTo']
 });
 

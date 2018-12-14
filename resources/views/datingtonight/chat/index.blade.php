@@ -5,7 +5,7 @@
 @section('content')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+
 <div class="container">
 <h3 class=" text-center">{{$toUser->Fullname}}</h3>
 <div class="messaging">
@@ -97,18 +97,15 @@
           </div>
         </div> --}}     
         <div class="mesgs">
-          <div class="msg_history" id="history_message">
+          <div class="msg_history">
            
           	<?php 
               $urlTo='/storage/app/files/avatar/'.$toUser->Avatar;
               $urlFrom='/storage/app/files/avatar/'.$fromUser->Avatar;
             ?>
-          	
-
-            <div class ="a" id="app">
+            <div id="app">
                 <chat-component from-id="{{$fromID}}" to-id="{{$toID}}" url-to="{{$urlTo}}"></chat-component>
             </div>
-  
 
             <script type="text/javascript">
             // Initialize Firebase
@@ -131,29 +128,45 @@
             	</div>
 
               <script type="text/javascript">
-                $('#load-data').on('click',function(){
+                $('#input-form').on('submit',function(){
+                  //$('#app').scrollTop($('#app')[0].scrollHeight)
+                  //$(".msg_history").animate({ scrollTop: $(".msg_history")[0].scrollHeight}, 1000);
                   var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                  var id='{{$toID}}';
                   $.post({
                     type:'POST',
                     data:{
                       _token: CSRF_TOKEN,
                       content:$("#ctn").val()
                     },
-                    url:'/chat-4',
+                    url:'/chat-{{$toID}}',
                     dataType:'String',
-                    success:function(){
-                      $('#input-form')[0].reset();
+                    success:function(data){
+                      console.log(data);                      
                     }
                   });
                   return false;
                 });
+
+              
+                function clearInput() {
+                  $("#input-form :input").each(function() {
+                    $(this).val(''); //hide form values
+                  });
+                }
               </script>
           	</form>
           </div>
         </div>
       </div>
        <script type="text/javascript">
-            $('.msg_history').scrollTop($('.msg_history')[0].scrollHeight);     
+          $(document).ready(function() {
+
+            // $('#history_message').animate({
+            //   scrollTop: $('#history_message').get(0).scrollHeight
+            // }, 5000);
+            //$('#history_message').scrollTop($('#history_message')[0].scrollHeight);
+          });   
         </script>
       <p class="text-center top_spac"> Design by <a target="_blank" href="#">The Dreamers Team</a></p>
 </div>

@@ -36,6 +36,16 @@
                 this.message = snapshot.val();
             });
         },
+        updated() {
+            // whenever data changes and the component re-renders, this is called.
+            this.$nextTick(() => this.scrollToEnd());
+        },
+        methods: {
+            scrollToEnd: function () {
+                // scroll to the start of the last message
+                this.$el.scrollTop = this.$el.lastElementChild.offsetTop;
+            }
+        },
         props:['fromId','toId','urlTo']
     }
 </script>
