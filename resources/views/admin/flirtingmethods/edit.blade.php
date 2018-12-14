@@ -45,8 +45,9 @@
                             @foreach($gender as $gd)
                             @if($gd->id==$flirtingmethods->id_gender)
                                 <option selected="selected" value="{{ $gd->id }}">{{ $gd->gender }}</option>
-                            @endif
+                            @else
                                 <option value="{{ $gd->id }}">{{ $gd->gender }}</option>
+                            @endif
                             @endforeach
                         </select>
                     </div>
