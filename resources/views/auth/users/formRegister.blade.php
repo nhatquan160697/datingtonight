@@ -6,7 +6,7 @@
 			<div class="clear"></div>
 		</div>
 		<div class="form-right-to-w3ls">
-			<input type="password" name="password" placeholder="Password" required="">
+			<input type="password" name="password" placeholder="Password" required="" minlength=8 maxlength=16>
 			  <div class="clear"></div>
 		</div>
 	</div>
@@ -16,7 +16,7 @@
 			  <div class="clear"></div>
 		</div>
 		<div class="form-right-to-w3ls">
-			<input type="text" name="phone_number" placeholder="Phone Number" required="">
+			<input type="text" name="phone_number" placeholder="Phone Number" required="" minlength=10 maxlength=15>
 			  <div class="clear"></div>
 		</div>
 	</div>
@@ -34,7 +34,7 @@
 		</div>
 	</div>
 	<div class="form-add-to-w3ls add">
-		<input type="text" name="fullname" placeholder="Fullname" required="">
+		<input type="text" name="fullname" placeholder="Fullname" required="" maxlength=50>
 		<div class="clear"></div>
 	</div>
 	<div class="form-right-to-w3ls">
