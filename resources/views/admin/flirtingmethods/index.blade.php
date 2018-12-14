@@ -34,6 +34,7 @@
                         <th>ID</th>
                         <th>Flirting Name</th>
                         <th>Preview Text</th>
+                        <th>Gender</th>
                         <th>Detail</th>
                         <th>Author</th>
                         <th>Image</th>
@@ -53,6 +54,11 @@
                             <td>{{$fm->id}}</td>
                             <td>{{$fm->name_flirting}}</td>
                             <td>{{$preview_text}}</td>
+                            @foreach($gender as $gd)
+                                @if($gd->id==$fm->id_gender)
+                                    <td>{{$gd->gender}}</td>
+                                @endif
+                            @endforeach
                             <td>{{$detail_flirting}}</td>
                             <td>{{$fm->author}}</td>
                             <td><img src="{{$url}}" alt="This is an image" width="100px" height="80px"></td>
