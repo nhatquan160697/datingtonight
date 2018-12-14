@@ -43,7 +43,7 @@
                     @foreach($drinking as $dr)
                     <tr class="odd gradeX" align="center">
                         <td>{{$dr->id}}</td>
-                        <td>{{$dr->drinking}}</td>
+                        <td>{{$dr->drink}}</td>
                         <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('admin.user-properties.drinking.delete',$dr->id)}}">Delete</a></td>
                         <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('admin.user-properties.drinking.edit',$dr->id)}}">Edit</a></td>
                     </tr>
