@@ -43,7 +43,7 @@
                     @foreach($smoking as $sm)
                     <tr class="odd gradeX" align="center">
                         <td>{{$sm->id}}</td>
-                        <td>{{$sm->smoking}}</td>
+                        <td>{{$sm->smoke}}</td>
                         <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('admin.user-properties.smoking.delete',$sm->id)}}">Delete</a></td>
                         <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('admin.user-properties.smoking.edit',$sm->id)}}">Edit</a></td>
                     </tr>
