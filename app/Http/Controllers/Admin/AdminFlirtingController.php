@@ -5,18 +5,24 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\flirtingmethods;
+use App\Model\gender;
 
 class AdminFlirtingController extends Controller
 {
     public function index()
     {
         $flirtingmethods = flirtingmethods::all();
-    	return view('admin.flirtingmethods.index',['flirtingmethods'=>$flirtingmethods]);
+        $gender= gender::all();
+    	return view('admin.flirtingmethods.index',[
+            'flirtingmethods'=>$flirtingmethods,
+            'gender'=>$gender
+        ]);
     }
 
     public function getAdd()
     {
-    	return view('admin.flirtingmethods.add');
+        $gender= gender::all();
+    	return view('admin.flirtingmethods.add',['gender'=>$gender]);
     }
 
     public function postAdd(Request $request)
@@ -54,6 +60,7 @@ class AdminFlirtingController extends Controller
         $flirtingmethods->preview_text=$request->preview_text;
         $flirtingmethods->detail_flirting=$request->detail_flirting;
         $flirtingmethods->author=$request->author;
+        $flirtingmethods->id_gender=$request->gender;
         $flirtingmethods->date_created=now();
         $flirtingmethods->save();
         return redirect('admin/flirting-methods/add')->with('success','Add successfully');
