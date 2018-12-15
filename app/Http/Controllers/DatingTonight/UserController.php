@@ -89,7 +89,6 @@ class UserController extends Controller
             $id_user = session()->get('checkUser')[0]->id;
         }
         // INFORMATION
-        $txtPassword = $request->txtPassword;
         $txtFullname = trim($request->txtFullname);
         $txtEmail = trim($request->txtEmail);
         $txtPhone = trim($request->txtPhone);
@@ -131,7 +130,6 @@ class UserController extends Controller
             $file->move($uploadPath, $picture);
             $arItem = array(
                 'Avatar' => $picture,
-                'password' => $txtPassword,
                 'Fullname' => $txtFullname,
                 'email' => $txtEmail,
                 'phone_number' => $txtPhone,
@@ -160,7 +158,6 @@ class UserController extends Controller
             );
         } else { // xu ly neu ko co anh thi giu nguyen
             $arItem = array(
-                'password' => $txtPassword,
                 'Fullname' => $txtFullname,
                 'email' => $txtEmail,
                 'phone_number' => $txtPhone,
