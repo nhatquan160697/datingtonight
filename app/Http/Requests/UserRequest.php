@@ -32,9 +32,6 @@ class UserRequest extends FormRequest
             'txtFacebook' => 'required',
             'height' => 'required|digits_between:2,3|min:1',
             'weight' => 'required|digits_between:2,3|min:1',
-            'txtOldPassword' => 'required',
-            'txtNewPassword' => 'required|min:8|max:16',
-            'txtConfirmPassword' => 'required|same:txtNewPassword',
         ];
     }
 
@@ -54,12 +51,6 @@ class UserRequest extends FormRequest
             'height.digits_between' => 'Your height: Please input at least two numbers and maximum three numbers',
             'weight.required' => 'Please input your weight',
             'weight.digits_between' => 'Your weight: Please input at least two numbers and maximum three numbers',
-            'txtOldPassword.required' => 'Please input old password',
-            'txtNewPassword.required' => 'Please input new password',
-            'txtNewPassword.min' => 'You should input your password maximum 16 characters and minimum 8 characters',
-            'txtNewPassword.max' => 'You should input your password maximum 16 characters and minimum 8 characters',
-            'txtConfirmPassword.required' => 'Please input confirming password',
-            'txtConfirmPassword.same' => 'Confirm password is invalid',
         ];
     }
 
