@@ -130,7 +130,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </div>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="contact.html">About Us</a>
+                        <a class="nav-link" href="{{ route('datingtonight.about.index') }}">About Us</a>
                      </li>
 
                   </ul>

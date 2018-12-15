@@ -56,6 +56,11 @@ Route::namespace('DatingTonight')->group(function(){
 		'as' => 'datingtonight.user.changePassword'
 	]);
 
+	Route::get('/about-us',[
+		'uses' => 'AboutController@index',
+		'as' => 'datingtonight.about.index'
+	]);
+
 	Route::prefix('/dating-places')->group(function(){
 		// Controller dating places for user
 		Route::get('/',[
