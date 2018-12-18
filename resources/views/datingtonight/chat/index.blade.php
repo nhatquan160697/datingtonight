@@ -130,7 +130,7 @@
               <script type="text/javascript">
                 $('#input-form').on('submit',function(){
                   //$('#app').scrollTop($('#app')[0].scrollHeight)
-                  //$(".msg_history").animate({ scrollTop: $(".msg_history")[0].scrollHeight}, 1000);
+                  $(".msg_history").animate({ scrollTop: $(".msg_history")[0].scrollHeight}, 1000);
                   var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                   var id='{{$toID}}';
                   $.post({
