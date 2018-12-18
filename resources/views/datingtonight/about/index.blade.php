@@ -13,73 +13,67 @@
     <ul class="row">
       <li class="col-12 col-md-6 col-lg-3">
           <div class="cnt-block equal-hight" style="height: 349px;">
-            <figure><img src="http://www.webcoderskull.com/img/team4.png" class="img-responsive" alt=""></figure>
-            <h3><a href="http://www.webcoderskull.com/">Guptam Holla</a></h3>
-            <p>Hofstra University School of Law Hempstead, New York</p>
+            <figure><img src="public/templates/datingtonight/images/thayJan.jpg" class="img-responsive" alt=""></figure>
+            <h3><a href="http://www.webcoderskull.com/">JAN SAMUELSSON</a></h3>
+            <p>Mentor, teacher of Duy Tan University</p>
             <ul class="follow-us clearfix">
-              <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-              <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-              <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+              <li><a href="https://www.facebook.com/profile.php?id=100006277428022&lst=100009009884703%3A100006277428022%3A1544971318&sk=about&section=education"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+              
             </ul>
           </div>
       </li>
       <li class="col-12 col-md-6 col-lg-3">
           <div class="cnt-block equal-hight" style="height: 349px;">
-            <figure><img src="http://www.webcoderskull.com/img/team1.png" class="img-responsive" alt=""></figure>
-            <h3><a href="#">Kappua Billa</a></h3>
-            <p>Hofstra University School of Law Hempstead, New York</p>
+            <figure><img src="public/templates/datingtonight/images/quan3.jpg" class="img-responsive" alt=""></figure>
+            <h3><a href="#">TON THAT NHAT QUAN</a></h3>
+            <p>Scrum Master, learning SE at Duy Tan University</p>
             <ul class="follow-us clearfix">
-              <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-              <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-              <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+              <li><a href="https://www.facebook.com/TonThatNhatQuan"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+             
             </ul>
           </div>
       </li>
       <li class="col-12 col-md-6 col-lg-3">
           <div class="cnt-block equal-hight" style="height: 349px;">
-            <figure><img src="http://www.webcoderskull.com/img/team4.png" class="img-responsive" alt=""></figure>
-            <h3><a href="http://www.webcoderskull.com/">Omin Goshu</a></h3>
-            <p>Hofstra University School of Law Hempstead, New York</p>
+            <figure><img src="public/templates/datingtonight/images/tan.jpg" class="img-responsive" alt=""></figure>
+            <h3><a href="http://www.webcoderskull.com/">DAM HO DUY TAN</a></h3>
+            <p>Developer, learning SE at Duy Tan University</p>
             <ul class="follow-us clearfix">
-              <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-              <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-              <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+              <li><a href="https://www.facebook.com/forddien"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+              
             </ul>
           </div>
        </li>
       <li class="col-12 col-md-6 col-lg-3">
           <div class="cnt-block equal-hight" style="height: 349px;">
-            <figure><img src="http://www.webcoderskull.com/img/team2.png" class="img-responsive" alt=""></figure>
-            <h3><a href="http://www.webcoderskull.com/">NArman Bandhu</a></h3>
-            <p>Hofstra University School of Law Hempstead, New York</p>
+            <figure><img src="public/templates/datingtonight/images/yen.jpg" class="img-responsive" alt=""></figure>
+            <h3><a href="http://www.webcoderskull.com/">TRAN THI TO YEN</a></h3>
+            <p>Product Owner, learning MIS at Duy Tan University</p>
             <ul class="follow-us clearfix">
-              <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-              <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-              <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+              <li><a href="https://www.facebook.com/toyen1997"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+             
             </ul>
           </div>
       </li>
       <li class="col-12 col-md-6 col-lg-3">
           <div class="cnt-block equal-hight" style="height: 349px;">
-            <figure><img src="http://www.webcoderskull.com/img/team2.png" class="img-responsive" alt=""></figure>
-            <h3><a href="http://www.webcoderskull.com/">NArman Bandhu</a></h3>
-            <p>Hofstra University School of Law Hempstead, New York</p>
+            <figure><img src="public/templates/datingtonight/images/tai.jpg" class="img-responsive" alt=""></figure>
+            <h3><a href="http://www.webcoderskull.com/">DANG PHUOC TAI</a></h3>
+            <p>Developer, learning SE at Duy Tan University</p>
             <ul class="follow-us clearfix">
-              <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-              <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-              <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+              <li><a href="https://www.facebook.com/profile.php?id=100004637684024&epa=SEARCH_BOX"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+             
             </ul>
           </div>
       </li>
       <li class="col-12 col-md-6 col-lg-3">
           <div class="cnt-block equal-hight" style="height: 349px;">
-            <figure><img src="http://www.webcoderskull.com/img/team2.png" class="img-responsive" alt=""></figure>
-            <h3><a href="http://www.webcoderskull.com/">NArman Bandhu</a></h3>
-            <p>Hofstra University School of Law Hempstead, New York</p>
+            <figure><img src="public/templates/datingtonight/images/van.jpg" class="img-responsive" alt=""></figure>
+            <h3><a href="http://www.webcoderskull.com/">LE ANH VAN</a></h3>
+            <p>Developer, learning SE at Duy Tan University</p>
             <ul class="follow-us clearfix">
-              <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-              <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-              <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+              <li><a href="https://www.facebook.com/profile.php?id=100006105375344&epa=SEARCH_BOX"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+             
             </ul>
           </div>
       </li>
