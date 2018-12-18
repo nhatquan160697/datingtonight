@@ -156,7 +156,7 @@
                         
 						<div class="col-lg-4 card">
 							<a href="#exampleModal-{{$up->id}}" data-toggle="modal">
-								<img src="{{$url}}" class="card-img-top img-fluid" alt="This is an image">
+								<img src="{{$url}}" class="card-img-top img-fluid" alt="This is an image" style="width: 250px; height: 250px;">
 							</a>
 							<div class="card-body">			
 								<h5 class="card-title">
@@ -184,7 +184,7 @@
        										 </button>
       									</div>
       									<div class="modal-body">
-        									<img src="{{$url}}" class="card-img-top img-fluid" alt="This is an image">
+        									<img style="width:250px; height: 250px; margin-left: 113.5px;" src="{{$url}}" class="card-img-top img-fluid" alt="This is an image">
         									<!-- button chat -->
         									<hr>
                                             <a href="{{route('datingtonight.chat.index',$id)}}" class="btn btn-primary" role="button">Chat</a>	
