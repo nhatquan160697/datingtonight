@@ -52,10 +52,7 @@
                                                 <select name="gender">
                                                     <option selected="selected" value="">Anything</option>
                                                 	@foreach($gender as $gd)
-                                                    @if($gd->gender=="Other")
-                                                    @else
                                                     	<option value="{{$gd->id}}">{{$gd->gender}}</option>
-                                                    @endif
                                                     @endforeach
                                                 </select>
                                                 <div class="select-dropdown"></div>
@@ -71,10 +68,7 @@
                                                 <select name="city">
                                                     <option selected="selected" value="">Anything</option>
                                                     @foreach($city as $ct)
-                                                    @if($ct->city=="Other")
-                                                    @else
                                                         <option value="{{$ct->id}}">{{$ct->city}}</option>
-                                                    @endif
                                                     @endforeach
                                                 </select>
                                                 <div class="select-dropdown"></div>
