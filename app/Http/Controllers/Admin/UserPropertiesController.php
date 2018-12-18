@@ -41,12 +41,10 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'color'=>'required|unique:hair_color|min:3|max:50'
+    			'color'=>'required|unique:hair_color'
     		],
     		[
     			'color.required'=>'Please input hair color',
-    			'color.min'=>'Character between 3-50',
-    			'color.max'=>'Character between 3-50',
     			'color.unique'=>'Color must be unique',
     		]
     	);
@@ -67,12 +65,10 @@ class UserPropertiesController extends Controller
 		$hair_color = hair_color::find($id);
 		$this->validate($request,
             [
-                'color'=>'required|unique:hair_color|min:3|max:50'
+                'color'=>'required|unique:hair_color'
             ],
             [
                 'color.required'=>'Please input hair color',
-    			'color.min'=>'Character between 3-50',
-    			'color.max'=>'Character between 3-50',
     			'color.unique'=>'Color must be unique',
             ]
         );
@@ -107,12 +103,10 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'length'=>'required|unique:hair_length|min:3|max:50'
+    			'length'=>'required|unique:hair_length'
     		],
     		[
     			'length.required'=>'Please input hair length',
-    			'length.min'=>'Character between 3-50',
-    			'length.max'=>'Character between 3-50',
     			'length.unique'=>'length must be unique',
     		]
     	);
@@ -133,12 +127,10 @@ class UserPropertiesController extends Controller
 		$hair_length = hair_length::find($id);
 		$this->validate($request,
             [
-                'length'=>'required|unique:hair_length|min:3|max:50'
+                'length'=>'required|unique:hair_length'
             ],
             [
                 'length.required'=>'Please input hair length',
-    			'length.min'=>'Character between 3-50',
-    			'length.max'=>'Character between 3-50',
     			'length.unique'=>'length must be unique',
             ]
         );
@@ -173,12 +165,10 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'style'=>'required|unique:hair_style|min:3|max:50'
+    			'style'=>'required|unique:hair_style'
     		],
     		[
     			'style.required'=>'Please input hair style',
-    			'style.min'=>'Character between 3-50',
-    			'style.max'=>'Character between 3-50',
     			'style.unique'=>'style must be unique',
     		]
     	);
@@ -199,12 +189,10 @@ class UserPropertiesController extends Controller
 		$hair_style = hair_style::find($id);
 		$this->validate($request,
             [
-                'style'=>'required|unique:hair_style|min:3|max:50'
+                'style'=>'required|unique:hair_style'
             ],
             [
                 'style.required'=>'Please input hair style',
-    			'style.min'=>'Character between 3-50',
-    			'style.max'=>'Character between 3-50',
     			'style.unique'=>'style must be unique',
             ]
         );
@@ -239,12 +227,10 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'color'=>'required|unique:eye_color|min:3|max:50'
+    			'color'=>'required|unique:eye_color'
     		],
     		[
     			'color.required'=>'Please input eye color',
-    			'color.min'=>'Character between 3-50',
-    			'color.max'=>'Character between 3-50',
     			'color.unique'=>'color must be unique',
     		]
     	);
@@ -265,12 +251,10 @@ class UserPropertiesController extends Controller
 		$eye_color = eye_color::find($id);
 		$this->validate($request,
             [
-                'color'=>'required|unique:eye_color|min:3|max:50'
+                'color'=>'required|unique:eye_color'
             ],
             [
                 'color.required'=>'Please input eye color',
-    			'color.min'=>'Character between 3-50',
-    			'color.max'=>'Character between 3-50',
     			'color.unique'=>'color must be unique',
             ]
         );
@@ -305,12 +289,10 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'city'=>'required|unique:city|min:3|max:50'
+    			'city'=>'required|unique:city'
     		],
     		[
     			'city.required'=>'Please input city',
-    			'city.min'=>'Character between 3-50',
-    			'city.max'=>'Character between 3-50',
     			'city.unique'=>'city must be unique',
     		]
     	);
@@ -331,12 +313,10 @@ class UserPropertiesController extends Controller
 		$city = city::find($id);
 		$this->validate($request,
             [
-                'city'=>'required|unique:city|min:3|max:50'
+                'city'=>'required|unique:city'
             ],
             [
                 'city.required'=>'Please input city',
-    			'city.min'=>'Character between 3-50',
-    			'city.max'=>'Character between 3-50',
     			'city.unique'=>'city must be unique',
             ]
         );
@@ -371,12 +351,10 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'body'=>'required|unique:body|min:3|max:50'
+    			'body'=>'required|unique:body'
     		],
     		[
     			'body.required'=>'Please input body',
-    			'body.min'=>'Character between 3-50',
-    			'body.max'=>'Character between 3-50',
     			'body.unique'=>'body must be unique',
     		]
     	);
@@ -397,12 +375,10 @@ class UserPropertiesController extends Controller
 		$body = body::find($id);
 		$this->validate($request,
             [
-                'body'=>'required|unique:body|min:3|max:50'
+                'body'=>'required|unique:body'
             ],
             [
                 'body.required'=>'Please input body',
-    			'body.min'=>'Character between 3-50',
-    			'body.max'=>'Character between 3-50',
     			'body.unique'=>'body must be unique',
             ]
         );
@@ -437,12 +413,10 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'drink'=>'required|unique:drinking|min:3|max:50'
+    			'drink'=>'required|unique:drinking'
     		],
     		[
     			'drink.required'=>'Please input drinking',
-    			'drink.min'=>'Character between 3-50',
-    			'drink.max'=>'Character between 3-50',
     			'drink.unique'=>'drinking must be unique',
     		]
     	);
@@ -463,12 +437,10 @@ class UserPropertiesController extends Controller
 		$drinking = drinking::find($id);
 		$this->validate($request,
             [
-                'drink'=>'required|unique:drinking|min:3|max:50'
+                'drink'=>'required|unique:drinking'
             ],
             [
                 'drink.required'=>'Please input drinking',
-    			'drink.min'=>'Character between 3-50',
-    			'drink.max'=>'Character between 3-50',
     			'drink.unique'=>'drinking must be unique',
             ]
         );
@@ -503,12 +475,10 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'smoke'=>'required|unique:smoking|min:3|max:50'
+    			'smoke'=>'required|unique:smoking'
     		],
     		[
     			'smoke.required'=>'Please input smoking',
-    			'smoke.min'=>'Character between 3-50',
-    			'smoke.max'=>'Character between 3-50',
     			'smoke.unique'=>'smoking must be unique',
     		]
     	);
@@ -529,12 +499,10 @@ class UserPropertiesController extends Controller
 		$smoking = smoking::find($id);
 		$this->validate($request,
             [
-                'smoke'=>'required|unique:smoking|min:3|max:50'
+                'smoke'=>'required|unique:smoking'
             ],
             [
                 'smoke.required'=>'Please input smoking',
-    			'smoke.min'=>'Character between 3-50',
-    			'smoke.max'=>'Character between 3-50',
     			'smoke.unique'=>'smoking must be unique',
             ]
         );
@@ -569,12 +537,10 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'status'=>'required|unique:job_status|min:3|max:50'
+    			'status'=>'required|unique:job_status'
     		],
     		[
     			'status.required'=>'Please input status',
-    			'status.min'=>'Character between 3-50',
-    			'status.max'=>'Character between 3-50',
     			'status.unique'=>'status must be unique',
     		]
     	);
@@ -595,12 +561,10 @@ class UserPropertiesController extends Controller
 		$job_status = job_status::find($id);
 		$this->validate($request,
             [
-                'status'=>'required|unique:job_status|min:3|max:50'
+                'status'=>'required|unique:job_status'
             ],
             [
                 'status.required'=>'Please input status',
-    			'status.min'=>'Character between 3-50',
-    			'status.max'=>'Character between 3-50',
     			'status.unique'=>'status must be unique',
             ]
         );
@@ -635,12 +599,10 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'type'=>'required|unique:house_type|min:3|max:50'
+    			'type'=>'required|unique:house_type'
     		],
     		[
     			'type.required'=>'Please input type',
-    			'type.min'=>'Character between 3-50',
-    			'type.max'=>'Character between 3-50',
     			'type.unique'=>'type must be unique',
     		]
     	);
@@ -661,12 +623,10 @@ class UserPropertiesController extends Controller
 		$house_type = house_type::find($id);
 		$this->validate($request,
             [
-                'type'=>'required|unique:house_type|min:3|max:50'
+                'type'=>'required|unique:house_type'
             ],
             [
                 'type.required'=>'Please input type',
-    			'type.min'=>'Character between 3-50',
-    			'type.max'=>'Character between 3-50',
     			'type.unique'=>'type must be unique',
             ]
         );
@@ -701,12 +661,10 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'livewith'=>'required|unique:live_with|min:3|max:50'
+    			'livewith'=>'required|unique:live_with'
     		],
     		[
     			'livewith.required'=>'Please input livew ith',
-    			'livewith.min'=>'Character between 3-50',
-    			'livewith.max'=>'Character between 3-50',
     			'livewith.unique'=>'live with must be unique',
     		]
     	);
@@ -727,12 +685,10 @@ class UserPropertiesController extends Controller
 		$live_with = live_with::find($id);
 		$this->validate($request,
             [
-                'livewith'=>'required|unique:live_with|min:3|max:50'
+                'livewith'=>'required|unique:live_with'
             ],
             [
                 'livewith.required'=>'Please input live with',
-    			'livewith.min'=>'Character between 3-50',
-    			'livewith.max'=>'Character between 3-50',
     			'livewith.unique'=>'live with must be unique',
             ]
         );
@@ -767,12 +723,10 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'children'=>'required|unique:have_children|min:3|max:50'
+    			'children'=>'required|unique:have_children'
     		],
     		[
     			'children.required'=>'Please input children',
-    			'children.min'=>'Character between 3-50',
-    			'children.max'=>'Character between 3-50',
     			'children.unique'=>'children must be unique',
     		]
     	);
@@ -793,12 +747,10 @@ class UserPropertiesController extends Controller
 		$have_children = have_children::find($id);
 		$this->validate($request,
             [
-                'children'=>'required|unique:have_children|min:3|max:50'
+                'children'=>'required|unique:have_children'
             ],
             [
                 'children.required'=>'Please input children',
-    			'children.min'=>'Character between 3-50',
-    			'children.max'=>'Character between 3-50',
     			'children.unique'=>'children must be unique',
             ]
         );
@@ -833,12 +785,10 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'national'=>'required|unique:national|min:3|max:50'
+    			'national'=>'required|unique:national'
     		],
     		[
     			'national.required'=>'Please input national',
-    			'national.min'=>'Character between 3-50',
-    			'national.max'=>'Character between 3-50',
     			'national.unique'=>'national must be unique',
     		]
     	);
@@ -859,12 +809,10 @@ class UserPropertiesController extends Controller
 		$national = national::find($id);
 		$this->validate($request,
             [
-                'national'=>'required|unique:national|min:3|max:50'
+                'national'=>'required|unique:national'
             ],
             [
                 'national.required'=>'Please input national',
-    			'national.min'=>'Character between 3-50',
-    			'national.max'=>'Character between 3-50',
     			'national.unique'=>'national must be unique',
             ]
         );
@@ -899,12 +847,10 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'level'=>'required|unique:educational_level|min:3|max:50'
+    			'level'=>'required|unique:educational_level'
     		],
     		[
     			'level.required'=>'Please input level',
-    			'level.min'=>'Character between 3-50',
-    			'level.max'=>'Character between 3-50',
     			'level.unique'=>'level must be unique',
     		]
     	);
@@ -925,12 +871,10 @@ class UserPropertiesController extends Controller
 		$educational_level = educational_level::find($id);
 		$this->validate($request,
             [
-                'level'=>'required|unique:educational_level|min:3|max:50'
+                'level'=>'required|unique:educational_level'
             ],
             [
                 'level.required'=>'Please input level',
-    			'level.min'=>'Character between 3-50',
-    			'level.max'=>'Character between 3-50',
     			'level.unique'=>'level must be unique',
             ]
         );
@@ -965,12 +909,10 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'language'=>'required|unique:language|min:3|max:50'
+    			'language'=>'required|unique:language'
     		],
     		[
     			'language.required'=>'Please input language',
-    			'language.min'=>'Character between 3-50',
-    			'language.max'=>'Character between 3-50',
     			'language.unique'=>'language must be unique',
     		]
     	);
@@ -991,12 +933,10 @@ class UserPropertiesController extends Controller
 		$language = language::find($id);
 		$this->validate($request,
             [
-                'language'=>'required|unique:language|min:3|max:50'
+                'language'=>'required|unique:language'
             ],
             [
                 'language.required'=>'Please input language',
-    			'language.min'=>'Character between 3-50',
-    			'language.max'=>'Character between 3-50',
     			'language.unique'=>'language must be unique',
             ]
         );
@@ -1031,12 +971,10 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'religion'=>'required|unique:religion|min:3|max:50'
+    			'religion'=>'required|unique:religion'
     		],
     		[
     			'religion.required'=>'Please input religion',
-    			'religion.min'=>'Character between 3-50',
-    			'religion.max'=>'Character between 3-50',
     			'religion.unique'=>'religion must be unique',
     		]
     	);
@@ -1057,12 +995,10 @@ class UserPropertiesController extends Controller
 		$religion = religion::find($id);
 		$this->validate($request,
             [
-                'religion'=>'required|unique:religion|min:3|max:50'
+                'religion'=>'required|unique:religion'
             ],
             [
                 'religion.required'=>'Please input religion',
-    			'religion.min'=>'Character between 3-50',
-    			'religion.max'=>'Character between 3-50',
     			'religion.unique'=>'religion must be unique',
             ]
         );
@@ -1097,12 +1033,10 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'constellation'=>'required|unique:constellation|min:3|max:50'
+    			'constellation'=>'required|unique:constellation'
     		],
     		[
     			'constellation.required'=>'Please input constellation',
-    			'constellation.min'=>'Character between 3-50',
-    			'constellation.max'=>'Character between 3-50',
     			'constellation.unique'=>'constellation must be unique',
     		]
     	);
@@ -1123,12 +1057,10 @@ class UserPropertiesController extends Controller
 		$constellation = constellation::find($id);
 		$this->validate($request,
             [
-                'constellation'=>'required|unique:constellation|min:3|max:50'
+                'constellation'=>'required|unique:constellation'
             ],
             [
                 'constellation.required'=>'Please input constellation',
-    			'constellation.min'=>'Character between 3-50',
-    			'constellation.max'=>'Character between 3-50',
     			'constellation.unique'=>'constellation must be unique',
             ]
         );
@@ -1163,12 +1095,10 @@ class UserPropertiesController extends Controller
     {
         $this->validate($request,
             [
-                'gender'=>'required|unique:gender|min:3|max:50'
+                'gender'=>'required|unique:gender'
             ],
             [
                 'gender.required'=>'Please input gender',
-                'gender.min'=>'Character between 3-50',
-                'gender.max'=>'Character between 3-50',
                 'gender.unique'=>'gender must be unique',
             ]
         );
@@ -1189,12 +1119,10 @@ class UserPropertiesController extends Controller
         $gender = gender::find($id);
         $this->validate($request,
             [
-                'gender'=>'required|unique:gender|min:3|max:50'
+                'gender'=>'required|unique:gender'
             ],
             [
                 'gender.required'=>'Please input gender',
-                'gender.min'=>'Character between 3-50',
-                'gender.max'=>'Character between 3-50',
                 'gender.unique'=>'gender must be unique',
             ]
         );
