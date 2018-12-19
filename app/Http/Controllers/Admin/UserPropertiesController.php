@@ -51,7 +51,7 @@ class UserPropertiesController extends Controller
     	$hair_color = new hair_color;
     	$hair_color->color=$request->color;
     	$hair_color->save();
-    	return redirect('admin/user-properties/hair-color/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/hair-color/index')->with('success','Add successfully');
     }
 
     public function getEditHairColor($id)
@@ -74,7 +74,7 @@ class UserPropertiesController extends Controller
         );
         $hair_color->color=$request->color;
         $hair_color->save();
-        return redirect('admin/user-properties/hair-color/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/hair-color/index')->with('success','Edit successfully');
     }
 
     public function getDeleteHairColor($id)
@@ -113,7 +113,7 @@ class UserPropertiesController extends Controller
     	$hair_length = new hair_length;
     	$hair_length->length=$request->length;
     	$hair_length->save();
-    	return redirect('admin/user-properties/hair-length/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/hair-length/index')->with('success','Add successfully');
     }
 
     public function getEditHairLength($id)
@@ -136,7 +136,7 @@ class UserPropertiesController extends Controller
         );
         $hair_length->length=$request->length;
         $hair_length->save();
-        return redirect('admin/user-properties/hair-length/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/hair-length/index')->with('success','Edit successfully');
     }
 
     public function getDeleteHairLength($id)
@@ -175,7 +175,7 @@ class UserPropertiesController extends Controller
     	$hair_style = new hair_style;
     	$hair_style->style=$request->style;
     	$hair_style->save();
-    	return redirect('admin/user-properties/hair-style/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/hair-style/index')->with('success','Add successfully');
     }
 
     public function getEditHairStyle($id)
@@ -198,7 +198,7 @@ class UserPropertiesController extends Controller
         );
         $hair_style->style=$request->style;
         $hair_style->save();
-        return redirect('admin/user-properties/hair-style/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/hair-style/index')->with('success','Edit successfully');
     }
 
     public function getDeleteHairStyle($id)
@@ -237,7 +237,7 @@ class UserPropertiesController extends Controller
     	$eye_color = new eye_color;
     	$eye_color->color=$request->color;
     	$eye_color->save();
-    	return redirect('admin/user-properties/eye-color/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/eye-color/index')->with('success','Add successfully');
     }
 
     public function getEditEyeColor($id)
@@ -260,7 +260,7 @@ class UserPropertiesController extends Controller
         );
         $eye_color->color=$request->color;
         $eye_color->save();
-        return redirect('admin/user-properties/eye-color/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/eye-color/index')->with('success','Edit successfully');
     }
 
     public function getDeleteEyeColor($id)
@@ -299,7 +299,7 @@ class UserPropertiesController extends Controller
     	$city = new city;
     	$city->city=$request->city;
     	$city->save();
-    	return redirect('admin/user-properties/city/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/city/index')->with('success','Add successfully');
     }
 
     public function getEditCity($id)
@@ -322,7 +322,7 @@ class UserPropertiesController extends Controller
         );
         $city->city=$request->city;
         $city->save();
-        return redirect('admin/user-properties/city/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/city/index')->with('success','Edit successfully');
     }
 
     public function getDeleteCity($id)
@@ -361,7 +361,7 @@ class UserPropertiesController extends Controller
     	$body = new body;
     	$body->body=$request->body;
     	$body->save();
-    	return redirect('admin/user-properties/body/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/body/index')->with('success','Add successfully');
     }
 
     public function getEditBody($id)
@@ -384,7 +384,7 @@ class UserPropertiesController extends Controller
         );
         $body->body=$request->body;
         $body->save();
-        return redirect('admin/user-properties/body/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/body/index')->with('success','Edit successfully');
     }
 
     public function getDeleteBody($id)
@@ -423,7 +423,7 @@ class UserPropertiesController extends Controller
     	$drinking = new drinking;
     	$drinking->drink=$request->drink;
     	$drinking->save();
-    	return redirect('admin/user-properties/drinking/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/drinking/index')->with('success','Add successfully');
     }
 
     public function getEditDrinking($id)
@@ -446,7 +446,7 @@ class UserPropertiesController extends Controller
         );
         $drinking->drink=$request->drink;
         $drinking->save();
-        return redirect('admin/user-properties/drinking/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/drinking/index')->with('success','Edit successfully');
     }
 
     public function getDeleteDrinking($id)
@@ -485,7 +485,7 @@ class UserPropertiesController extends Controller
     	$smoking = new smoking;
     	$smoking->smoke=$request->smoke;
     	$smoking->save();
-    	return redirect('admin/user-properties/smoking/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/smoking/index')->with('success','Add successfully');
     }
 
     public function getEditSmoking($id)
@@ -508,7 +508,7 @@ class UserPropertiesController extends Controller
         );
         $smoking->smoke=$request->smoke;
         $smoking->save();
-        return redirect('admin/user-properties/smoking/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/smoking/index')->with('success','Edit successfully');
     }
 
     public function getDeleteSmoking($id)
@@ -547,7 +547,7 @@ class UserPropertiesController extends Controller
     	$job_status = new job_status;
     	$job_status->status=$request->status;
     	$job_status->save();
-    	return redirect('admin/user-properties/job-status/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/job-status/index')->with('success','Add successfully');
     }
 
     public function getEditJobStatus($id)
@@ -570,7 +570,7 @@ class UserPropertiesController extends Controller
         );
         $job_status->status=$request->status;
         $job_status->save();
-        return redirect('admin/user-properties/job-status/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/job-status/index')->with('success','Edit successfully');
     }
 
     public function getDeleteJobStatus($id)
@@ -609,7 +609,7 @@ class UserPropertiesController extends Controller
     	$house_type = new house_type;
     	$house_type->type=$request->type;
     	$house_type->save();
-    	return redirect('admin/user-properties/house-type/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/house-type/index')->with('success','Add successfully');
     }
 
     public function getEditHouseType($id)
@@ -632,7 +632,7 @@ class UserPropertiesController extends Controller
         );
         $house_type->type=$request->type;
         $house_type->save();
-        return redirect('admin/user-properties/house-type/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/house-type/index')->with('success','Edit successfully');
     }
 
     public function getDeleteHouseType($id)
@@ -671,7 +671,7 @@ class UserPropertiesController extends Controller
     	$live_with = new live_with;
     	$live_with->livewith=$request->livewith;
     	$live_with->save();
-    	return redirect('admin/user-properties/live-with/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/live-with/index')->with('success','Add successfully');
     }
 
     public function getEditLiveWith($id)
@@ -694,7 +694,7 @@ class UserPropertiesController extends Controller
         );
         $live_with->livewith=$request->livewith;
         $live_with->save();
-        return redirect('admin/user-properties/live-with/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/live-with/index')->with('success','Edit successfully');
     }
 
     public function getDeleteLiveWith($id)
@@ -733,7 +733,7 @@ class UserPropertiesController extends Controller
     	$have_children = new have_children;
     	$have_children->children=$request->children;
     	$have_children->save();
-    	return redirect('admin/user-properties/have-children/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/have-children/index')->with('success','Add successfully');
     }
 
     public function getEditHaveChildren($id)
@@ -756,7 +756,7 @@ class UserPropertiesController extends Controller
         );
         $have_children->children=$request->children;
         $have_children->save();
-        return redirect('admin/user-properties/have-children/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/have-children/index')->with('success','Edit successfully');
     }
 
     public function getDeleteHaveChildren($id)
@@ -795,7 +795,7 @@ class UserPropertiesController extends Controller
     	$national = new national;
     	$national->national=$request->national;
     	$national->save();
-    	return redirect('admin/user-properties/national/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/national/index')->with('success','Add successfully');
     }
 
     public function getEditNational($id)
@@ -818,7 +818,7 @@ class UserPropertiesController extends Controller
         );
         $national->national=$request->national;
         $national->save();
-        return redirect('admin/user-properties/national/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/national/index')->with('success','Edit successfully');
     }
 
     public function getDeleteNational($id)
@@ -857,7 +857,7 @@ class UserPropertiesController extends Controller
     	$educational_level = new educational_level;
     	$educational_level->level=$request->level;
     	$educational_level->save();
-    	return redirect('admin/user-properties/educational-level/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/educational-level/index')->with('success','Add successfully');
     }
 
     public function getEditEducationalLevel($id)
@@ -880,7 +880,7 @@ class UserPropertiesController extends Controller
         );
         $educational_level->level=$request->level;
         $educational_level->save();
-        return redirect('admin/user-properties/educational-level/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/educational-level/index')->with('success','Edit successfully');
     }
 
     public function getDeleteEducationalLevel($id)
@@ -919,7 +919,7 @@ class UserPropertiesController extends Controller
     	$language = new language;
     	$language->language=$request->language;
     	$language->save();
-    	return redirect('admin/user-properties/language/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/language/index')->with('success','Add successfully');
     }
 
     public function getEditLanguage($id)
@@ -942,7 +942,7 @@ class UserPropertiesController extends Controller
         );
         $language->language=$request->language;
         $language->save();
-        return redirect('admin/user-properties/language/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/language/index')->with('success','Edit successfully');
     }
 
     public function getDeleteLanguage($id)
@@ -981,7 +981,7 @@ class UserPropertiesController extends Controller
     	$religion = new religion;
     	$religion->religion=$request->religion;
     	$religion->save();
-    	return redirect('admin/user-properties/religion/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/religion/index')->with('success','Add successfully');
     }
 
     public function getEditReligion($id)
@@ -1004,7 +1004,7 @@ class UserPropertiesController extends Controller
         );
         $religion->religion=$request->religion;
         $religion->save();
-        return redirect('admin/user-properties/religion/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/religion/index')->with('success','Edit successfully');
     }
 
     public function getDeleteReligion($id)
@@ -1043,7 +1043,7 @@ class UserPropertiesController extends Controller
     	$constellation = new constellation;
     	$constellation->constellation=$request->constellation;
     	$constellation->save();
-    	return redirect('admin/user-properties/constellation/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/constellation/index')->with('success','Add successfully');
     }
 
     public function getEditConstellation($id)
@@ -1066,7 +1066,7 @@ class UserPropertiesController extends Controller
         );
         $constellation->constellation=$request->constellation;
         $constellation->save();
-        return redirect('admin/user-properties/constellation/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/constellation/index')->with('success','Edit successfully');
     }
 
     public function getDeleteConstellation($id)
@@ -1105,7 +1105,7 @@ class UserPropertiesController extends Controller
         $gender = new gender;
         $gender->gender=$request->gender;
         $gender->save();
-        return redirect('admin/user-properties/gender/add')->with('success','Add successfully');
+        return redirect('admin/user-properties/gender/index')->with('success','Add successfully');
     }
 
     public function getEditGender($id)
@@ -1128,7 +1128,7 @@ class UserPropertiesController extends Controller
         );
         $gender->gender=$request->gender;
         $gender->save();
-        return redirect('admin/user-properties/gender/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/gender/index')->with('success','Edit successfully');
     }
 
     public function getDeleteGender($id)
