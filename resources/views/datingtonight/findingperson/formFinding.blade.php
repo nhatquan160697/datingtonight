@@ -68,7 +68,7 @@
                                                 <select name="city">
                                                     <option selected="selected" value="">Anything</option>
                                                     @foreach($city as $ct)
-                                                    	<option value="{{$ct->id}}">{{$ct->city}}</option>
+                                                        <option value="{{$ct->id}}">{{$ct->city}}</option>
                                                     @endforeach
                                                 </select>
                                                 <div class="select-dropdown"></div>
@@ -134,8 +134,9 @@
                                                 	@foreach($hair_color as $hc)
                                                     @if($hc->id==0)
                                                         <option value="" selected="selected">Anything</option>
-                                                    @endif   
+                                                    @else
                                                         <option value="{{$hc->id}}">{{$hc->color}}</option>
+                                                    @endif 
                                                     @endforeach
                                                 </select>
                                                 <div class="select-dropdown"></div>
@@ -150,8 +151,9 @@
                                                		@foreach($eye_color as $ec)
                                                     @if($ec->id==0)
                                                         <option value="" selected="selected">Anything</option>
-                                                    @endif
+                                                    @else
                                                     	<option value="{{$ec->id}}">{{$ec->color}}</option>
+                                                    @endif
                                                     @endforeach
                                                 </select>
                                                 <div class="select-dropdown"></div>
@@ -171,8 +173,9 @@
                                                 	@foreach($hair_length as $hl)
                                                     @if($hl->id==0)
                                                         <option value="" selected="selected">Anything</option>
-                                                    @endif
+                                                    @else
                                                     	<option value="{{$hl->id}}">{{$hl->length}}</option>
+                                                    @endif
                                                     @endforeach
                                                 </select>
                                                 <div class="select-dropdown"></div>
@@ -187,8 +190,9 @@
                                                		@foreach($hair_style as $hs)
                                                     @if($hs->id==0)
                                                         <option value="" selected="selected">Anything</option>
-                                                    @endif
+                                                    @else
                                                     	<option value="{{$hs->id}}">{{$hs->style}}</option>
+                                                    @endif
                                                     @endforeach
                                                 </select>
                                                 <div class="select-dropdown"></div>
@@ -297,8 +301,9 @@
                                               	@foreach($body as $bd)
                                                     @if($bd->id==0)
                                                         <option value="" selected="selected">Anything</option>
+                                                    @else
+                                                  	    <option value="{{$bd->id}}">{{$bd->body}}</option>
                                                     @endif
-                                                  	<option value="{{$bd->id}}">{{$bd->body}}</option>
                                                 @endforeach
                                             </select>
                                         	<div class="select-dropdown"></div>
@@ -317,8 +322,9 @@
                                                 	@foreach($drinking as $dr)
                                                     @if($dr->id==0)
                                                         <option value="" selected="selected">Anything</option>
-                                                    @endif
+                                                    @else
                                                     	<option value="{{$dr->id}}">{{$dr->drink}}</option>
+                                                    @endif
                                                     @endforeach
                                                 </select>
                                                 <div class="select-dropdown"></div>
@@ -333,8 +339,9 @@
                                                		@foreach($smoking as $sm)
                                                     @if($sm->id==0)
                                                         <option value="" selected="selected">Anything</option>
-                                                    @endif
+                                                    @else
                                                     	<option value="{{$sm->id}}">{{$sm->smoke}}</option>
+                                                    @endif
                                                     @endforeach
                                                 </select>
                                                 <div class="select-dropdown"></div>
@@ -353,8 +360,9 @@
                                               	@foreach($job_status as $js)
                                                 @if($js->id==0)
                                                         <option value="" selected="selected">Anything</option>
-                                                @endif
+                                                @else
                                                   	<option value="{{$js->id}}">{{$js->status}}</option>
+                                                @endif
                                                 @endforeach
                                             </select>
                                         	<div class="select-dropdown"></div>
@@ -372,8 +380,9 @@
                                               	@foreach($house_type as $ht)
                                                 @if($ht->id==0)
                                                     <option value="" selected="selected">Anything</option>
-                                                @endif
+                                                @else
                                                   	<option value="{{$ht->id}}">{{$ht->type}}</option>
+                                                @endif
                                                 @endforeach
                                             </select>
                                         	<div class="select-dropdown"></div>
@@ -391,8 +400,9 @@
                                               	@foreach($live_with as $lw)
                                                 @if($lw->id==0)
                                                     <option value="" selected="selected">Anything</option>
-                                                @endif
+                                                @else
                                                   	<option value="{{$lw->id}}">{{$lw->livewith}}</option>
+                                                @endif
                                                 @endforeach
                                             </select>
                                         	<div class="select-dropdown"></div>
@@ -410,8 +420,9 @@
                                               	@foreach($have_children as $hc)
                                                 @if($hc->id==0)
                                                     <option value="" selected="selected">Anything</option>
-                                                @endif
+                                                @else
                                                   	<option value="{{$hc->id}}">{{$hc->children}}</option>
+                                                @endif
                                                 @endforeach
                                             </select>
                                         	<div class="select-dropdown"></div>
@@ -429,8 +440,9 @@
                                               	@foreach($national as $na)
                                                 @if($na->id==0)
                                                     <option value="" selected="selected">Anything</option>
-                                                @endif
+                                                @else
                                                   	<option value="{{$na->id}}">{{$na->national}}</option>
+                                                @endif
                                                 @endforeach
                                             </select>
                                         	<div class="select-dropdown"></div>
@@ -448,8 +460,9 @@
                                               	@foreach($educational_level as $el)
                                                 @if($el->id==0)
                                                     <option value="" selected="selected">Anything</option>
-                                                @endif
+                                                @else
                                                   	<option value="{{$el->id}}">{{$el->level}}</option>
+                                                @endif
                                                 @endforeach
                                             </select>
                                         	<div class="select-dropdown"></div>
@@ -467,8 +480,9 @@
                                               	@foreach($language as $lg)
                                                 @if($lg->id==0)
                                                     <option value="" selected="selected">Anything</option>
-                                                @endif
+                                                @else
                                                   	<option value="{{$lg->id}}">{{$lg->language}}</option>
+                                                @endif
                                                 @endforeach
                                             </select>
                                         	<div class="select-dropdown"></div>
@@ -485,8 +499,9 @@
                                               	@foreach($religion as $rl)
                                                 @if($rl->id==0)
                                                     <option value="" selected="selected">Anything</option>
-                                                @endif
+                                                @else
                                                   	<option value="{{$rl->id}}">{{$rl->religion}}</option>
+                                                @endif
                                                 @endforeach
                                             </select>
                                         	<div class="select-dropdown"></div>
@@ -504,8 +519,9 @@
                                               	@foreach($constellation as $cs)
                                                 @if($cs->id==0)
                                                     <option value="" selected="selected">Anything</option>
-                                                @endif
+                                                @else
                                                   	<option value="{{$cs->id}}">{{$cs->constellation}}</option>
+                                                @endif
                                                 @endforeach
                                             </select>
                                         	<div class="select-dropdown"></div>

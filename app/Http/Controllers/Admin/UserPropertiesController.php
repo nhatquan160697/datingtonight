@@ -41,19 +41,17 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'color'=>'required|unique:hair_color|min:3|max:50'
+    			'color'=>'required|unique:hair_color'
     		],
     		[
     			'color.required'=>'Please input hair color',
-    			'color.min'=>'Character between 3-50',
-    			'color.max'=>'Character between 3-50',
     			'color.unique'=>'Color must be unique',
     		]
     	);
     	$hair_color = new hair_color;
     	$hair_color->color=$request->color;
     	$hair_color->save();
-    	return redirect('admin/user-properties/hair-color/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/hair-color/index')->with('success','Add successfully');
     }
 
     public function getEditHairColor($id)
@@ -67,18 +65,16 @@ class UserPropertiesController extends Controller
 		$hair_color = hair_color::find($id);
 		$this->validate($request,
             [
-                'color'=>'required|unique:hair_color|min:3|max:50'
+                'color'=>'required|unique:hair_color'
             ],
             [
                 'color.required'=>'Please input hair color',
-    			'color.min'=>'Character between 3-50',
-    			'color.max'=>'Character between 3-50',
     			'color.unique'=>'Color must be unique',
             ]
         );
         $hair_color->color=$request->color;
         $hair_color->save();
-        return redirect('admin/user-properties/hair-color/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/hair-color/index')->with('success','Edit successfully');
     }
 
     public function getDeleteHairColor($id)
@@ -107,19 +103,17 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'length'=>'required|unique:hair_length|min:3|max:50'
+    			'length'=>'required|unique:hair_length'
     		],
     		[
     			'length.required'=>'Please input hair length',
-    			'length.min'=>'Character between 3-50',
-    			'length.max'=>'Character between 3-50',
     			'length.unique'=>'length must be unique',
     		]
     	);
     	$hair_length = new hair_length;
     	$hair_length->length=$request->length;
     	$hair_length->save();
-    	return redirect('admin/user-properties/hair-length/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/hair-length/index')->with('success','Add successfully');
     }
 
     public function getEditHairLength($id)
@@ -133,18 +127,16 @@ class UserPropertiesController extends Controller
 		$hair_length = hair_length::find($id);
 		$this->validate($request,
             [
-                'length'=>'required|unique:hair_length|min:3|max:50'
+                'length'=>'required|unique:hair_length'
             ],
             [
                 'length.required'=>'Please input hair length',
-    			'length.min'=>'Character between 3-50',
-    			'length.max'=>'Character between 3-50',
     			'length.unique'=>'length must be unique',
             ]
         );
         $hair_length->length=$request->length;
         $hair_length->save();
-        return redirect('admin/user-properties/hair-length/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/hair-length/index')->with('success','Edit successfully');
     }
 
     public function getDeleteHairLength($id)
@@ -173,19 +165,17 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'style'=>'required|unique:hair_style|min:3|max:50'
+    			'style'=>'required|unique:hair_style'
     		],
     		[
     			'style.required'=>'Please input hair style',
-    			'style.min'=>'Character between 3-50',
-    			'style.max'=>'Character between 3-50',
     			'style.unique'=>'style must be unique',
     		]
     	);
     	$hair_style = new hair_style;
     	$hair_style->style=$request->style;
     	$hair_style->save();
-    	return redirect('admin/user-properties/hair-style/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/hair-style/index')->with('success','Add successfully');
     }
 
     public function getEditHairStyle($id)
@@ -199,18 +189,16 @@ class UserPropertiesController extends Controller
 		$hair_style = hair_style::find($id);
 		$this->validate($request,
             [
-                'style'=>'required|unique:hair_style|min:3|max:50'
+                'style'=>'required|unique:hair_style'
             ],
             [
                 'style.required'=>'Please input hair style',
-    			'style.min'=>'Character between 3-50',
-    			'style.max'=>'Character between 3-50',
     			'style.unique'=>'style must be unique',
             ]
         );
         $hair_style->style=$request->style;
         $hair_style->save();
-        return redirect('admin/user-properties/hair-style/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/hair-style/index')->with('success','Edit successfully');
     }
 
     public function getDeleteHairStyle($id)
@@ -239,19 +227,17 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'color'=>'required|unique:eye_color|min:3|max:50'
+    			'color'=>'required|unique:eye_color'
     		],
     		[
     			'color.required'=>'Please input eye color',
-    			'color.min'=>'Character between 3-50',
-    			'color.max'=>'Character between 3-50',
     			'color.unique'=>'color must be unique',
     		]
     	);
     	$eye_color = new eye_color;
     	$eye_color->color=$request->color;
     	$eye_color->save();
-    	return redirect('admin/user-properties/eye-color/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/eye-color/index')->with('success','Add successfully');
     }
 
     public function getEditEyeColor($id)
@@ -265,18 +251,16 @@ class UserPropertiesController extends Controller
 		$eye_color = eye_color::find($id);
 		$this->validate($request,
             [
-                'color'=>'required|unique:eye_color|min:3|max:50'
+                'color'=>'required|unique:eye_color'
             ],
             [
                 'color.required'=>'Please input eye color',
-    			'color.min'=>'Character between 3-50',
-    			'color.max'=>'Character between 3-50',
     			'color.unique'=>'color must be unique',
             ]
         );
         $eye_color->color=$request->color;
         $eye_color->save();
-        return redirect('admin/user-properties/eye-color/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/eye-color/index')->with('success','Edit successfully');
     }
 
     public function getDeleteEyeColor($id)
@@ -305,19 +289,17 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'city'=>'required|unique:city|min:3|max:50'
+    			'city'=>'required|unique:city'
     		],
     		[
     			'city.required'=>'Please input city',
-    			'city.min'=>'Character between 3-50',
-    			'city.max'=>'Character between 3-50',
     			'city.unique'=>'city must be unique',
     		]
     	);
     	$city = new city;
     	$city->city=$request->city;
     	$city->save();
-    	return redirect('admin/user-properties/city/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/city/index')->with('success','Add successfully');
     }
 
     public function getEditCity($id)
@@ -331,18 +313,16 @@ class UserPropertiesController extends Controller
 		$city = city::find($id);
 		$this->validate($request,
             [
-                'city'=>'required|unique:city|min:3|max:50'
+                'city'=>'required|unique:city'
             ],
             [
                 'city.required'=>'Please input city',
-    			'city.min'=>'Character between 3-50',
-    			'city.max'=>'Character between 3-50',
     			'city.unique'=>'city must be unique',
             ]
         );
         $city->city=$request->city;
         $city->save();
-        return redirect('admin/user-properties/city/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/city/index')->with('success','Edit successfully');
     }
 
     public function getDeleteCity($id)
@@ -371,19 +351,17 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'body'=>'required|unique:body|min:3|max:50'
+    			'body'=>'required|unique:body'
     		],
     		[
     			'body.required'=>'Please input body',
-    			'body.min'=>'Character between 3-50',
-    			'body.max'=>'Character between 3-50',
     			'body.unique'=>'body must be unique',
     		]
     	);
     	$body = new body;
     	$body->body=$request->body;
     	$body->save();
-    	return redirect('admin/user-properties/body/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/body/index')->with('success','Add successfully');
     }
 
     public function getEditBody($id)
@@ -397,18 +375,16 @@ class UserPropertiesController extends Controller
 		$body = body::find($id);
 		$this->validate($request,
             [
-                'body'=>'required|unique:body|min:3|max:50'
+                'body'=>'required|unique:body'
             ],
             [
                 'body.required'=>'Please input body',
-    			'body.min'=>'Character between 3-50',
-    			'body.max'=>'Character between 3-50',
     			'body.unique'=>'body must be unique',
             ]
         );
         $body->body=$request->body;
         $body->save();
-        return redirect('admin/user-properties/body/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/body/index')->with('success','Edit successfully');
     }
 
     public function getDeleteBody($id)
@@ -437,19 +413,17 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'drink'=>'required|unique:drinking|min:3|max:50'
+    			'drink'=>'required|unique:drinking'
     		],
     		[
     			'drink.required'=>'Please input drinking',
-    			'drink.min'=>'Character between 3-50',
-    			'drink.max'=>'Character between 3-50',
     			'drink.unique'=>'drinking must be unique',
     		]
     	);
     	$drinking = new drinking;
     	$drinking->drink=$request->drink;
     	$drinking->save();
-    	return redirect('admin/user-properties/drinking/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/drinking/index')->with('success','Add successfully');
     }
 
     public function getEditDrinking($id)
@@ -463,18 +437,16 @@ class UserPropertiesController extends Controller
 		$drinking = drinking::find($id);
 		$this->validate($request,
             [
-                'drink'=>'required|unique:drinking|min:3|max:50'
+                'drink'=>'required|unique:drinking'
             ],
             [
                 'drink.required'=>'Please input drinking',
-    			'drink.min'=>'Character between 3-50',
-    			'drink.max'=>'Character between 3-50',
     			'drink.unique'=>'drinking must be unique',
             ]
         );
         $drinking->drink=$request->drink;
         $drinking->save();
-        return redirect('admin/user-properties/drinking/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/drinking/index')->with('success','Edit successfully');
     }
 
     public function getDeleteDrinking($id)
@@ -503,19 +475,17 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'smoke'=>'required|unique:smoking|min:3|max:50'
+    			'smoke'=>'required|unique:smoking'
     		],
     		[
     			'smoke.required'=>'Please input smoking',
-    			'smoke.min'=>'Character between 3-50',
-    			'smoke.max'=>'Character between 3-50',
     			'smoke.unique'=>'smoking must be unique',
     		]
     	);
     	$smoking = new smoking;
     	$smoking->smoke=$request->smoke;
     	$smoking->save();
-    	return redirect('admin/user-properties/smoking/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/smoking/index')->with('success','Add successfully');
     }
 
     public function getEditSmoking($id)
@@ -529,18 +499,16 @@ class UserPropertiesController extends Controller
 		$smoking = smoking::find($id);
 		$this->validate($request,
             [
-                'smoke'=>'required|unique:smoking|min:3|max:50'
+                'smoke'=>'required|unique:smoking'
             ],
             [
                 'smoke.required'=>'Please input smoking',
-    			'smoke.min'=>'Character between 3-50',
-    			'smoke.max'=>'Character between 3-50',
     			'smoke.unique'=>'smoking must be unique',
             ]
         );
         $smoking->smoke=$request->smoke;
         $smoking->save();
-        return redirect('admin/user-properties/smoking/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/smoking/index')->with('success','Edit successfully');
     }
 
     public function getDeleteSmoking($id)
@@ -569,19 +537,17 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'status'=>'required|unique:job_status|min:3|max:50'
+    			'status'=>'required|unique:job_status'
     		],
     		[
     			'status.required'=>'Please input status',
-    			'status.min'=>'Character between 3-50',
-    			'status.max'=>'Character between 3-50',
     			'status.unique'=>'status must be unique',
     		]
     	);
     	$job_status = new job_status;
     	$job_status->status=$request->status;
     	$job_status->save();
-    	return redirect('admin/user-properties/job-status/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/job-status/index')->with('success','Add successfully');
     }
 
     public function getEditJobStatus($id)
@@ -595,18 +561,16 @@ class UserPropertiesController extends Controller
 		$job_status = job_status::find($id);
 		$this->validate($request,
             [
-                'status'=>'required|unique:job_status|min:3|max:50'
+                'status'=>'required|unique:job_status'
             ],
             [
                 'status.required'=>'Please input status',
-    			'status.min'=>'Character between 3-50',
-    			'status.max'=>'Character between 3-50',
     			'status.unique'=>'status must be unique',
             ]
         );
         $job_status->status=$request->status;
         $job_status->save();
-        return redirect('admin/user-properties/job-status/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/job-status/index')->with('success','Edit successfully');
     }
 
     public function getDeleteJobStatus($id)
@@ -635,19 +599,17 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'type'=>'required|unique:house_type|min:3|max:50'
+    			'type'=>'required|unique:house_type'
     		],
     		[
     			'type.required'=>'Please input type',
-    			'type.min'=>'Character between 3-50',
-    			'type.max'=>'Character between 3-50',
     			'type.unique'=>'type must be unique',
     		]
     	);
     	$house_type = new house_type;
     	$house_type->type=$request->type;
     	$house_type->save();
-    	return redirect('admin/user-properties/house-type/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/house-type/index')->with('success','Add successfully');
     }
 
     public function getEditHouseType($id)
@@ -661,18 +623,16 @@ class UserPropertiesController extends Controller
 		$house_type = house_type::find($id);
 		$this->validate($request,
             [
-                'type'=>'required|unique:house_type|min:3|max:50'
+                'type'=>'required|unique:house_type'
             ],
             [
                 'type.required'=>'Please input type',
-    			'type.min'=>'Character between 3-50',
-    			'type.max'=>'Character between 3-50',
     			'type.unique'=>'type must be unique',
             ]
         );
         $house_type->type=$request->type;
         $house_type->save();
-        return redirect('admin/user-properties/house-type/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/house-type/index')->with('success','Edit successfully');
     }
 
     public function getDeleteHouseType($id)
@@ -701,19 +661,17 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'livewith'=>'required|unique:live_with|min:3|max:50'
+    			'livewith'=>'required|unique:live_with'
     		],
     		[
     			'livewith.required'=>'Please input livew ith',
-    			'livewith.min'=>'Character between 3-50',
-    			'livewith.max'=>'Character between 3-50',
     			'livewith.unique'=>'live with must be unique',
     		]
     	);
     	$live_with = new live_with;
     	$live_with->livewith=$request->livewith;
     	$live_with->save();
-    	return redirect('admin/user-properties/live-with/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/live-with/index')->with('success','Add successfully');
     }
 
     public function getEditLiveWith($id)
@@ -727,18 +685,16 @@ class UserPropertiesController extends Controller
 		$live_with = live_with::find($id);
 		$this->validate($request,
             [
-                'livewith'=>'required|unique:live_with|min:3|max:50'
+                'livewith'=>'required|unique:live_with'
             ],
             [
                 'livewith.required'=>'Please input live with',
-    			'livewith.min'=>'Character between 3-50',
-    			'livewith.max'=>'Character between 3-50',
     			'livewith.unique'=>'live with must be unique',
             ]
         );
         $live_with->livewith=$request->livewith;
         $live_with->save();
-        return redirect('admin/user-properties/live-with/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/live-with/index')->with('success','Edit successfully');
     }
 
     public function getDeleteLiveWith($id)
@@ -767,19 +723,17 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'children'=>'required|unique:have_children|min:3|max:50'
+    			'children'=>'required|unique:have_children'
     		],
     		[
     			'children.required'=>'Please input children',
-    			'children.min'=>'Character between 3-50',
-    			'children.max'=>'Character between 3-50',
     			'children.unique'=>'children must be unique',
     		]
     	);
     	$have_children = new have_children;
     	$have_children->children=$request->children;
     	$have_children->save();
-    	return redirect('admin/user-properties/have-children/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/have-children/index')->with('success','Add successfully');
     }
 
     public function getEditHaveChildren($id)
@@ -793,18 +747,16 @@ class UserPropertiesController extends Controller
 		$have_children = have_children::find($id);
 		$this->validate($request,
             [
-                'children'=>'required|unique:have_children|min:3|max:50'
+                'children'=>'required|unique:have_children'
             ],
             [
                 'children.required'=>'Please input children',
-    			'children.min'=>'Character between 3-50',
-    			'children.max'=>'Character between 3-50',
     			'children.unique'=>'children must be unique',
             ]
         );
         $have_children->children=$request->children;
         $have_children->save();
-        return redirect('admin/user-properties/have-children/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/have-children/index')->with('success','Edit successfully');
     }
 
     public function getDeleteHaveChildren($id)
@@ -833,19 +785,17 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'national'=>'required|unique:national|min:3|max:50'
+    			'national'=>'required|unique:national'
     		],
     		[
     			'national.required'=>'Please input national',
-    			'national.min'=>'Character between 3-50',
-    			'national.max'=>'Character between 3-50',
     			'national.unique'=>'national must be unique',
     		]
     	);
     	$national = new national;
     	$national->national=$request->national;
     	$national->save();
-    	return redirect('admin/user-properties/national/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/national/index')->with('success','Add successfully');
     }
 
     public function getEditNational($id)
@@ -859,18 +809,16 @@ class UserPropertiesController extends Controller
 		$national = national::find($id);
 		$this->validate($request,
             [
-                'national'=>'required|unique:national|min:3|max:50'
+                'national'=>'required|unique:national'
             ],
             [
                 'national.required'=>'Please input national',
-    			'national.min'=>'Character between 3-50',
-    			'national.max'=>'Character between 3-50',
     			'national.unique'=>'national must be unique',
             ]
         );
         $national->national=$request->national;
         $national->save();
-        return redirect('admin/user-properties/national/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/national/index')->with('success','Edit successfully');
     }
 
     public function getDeleteNational($id)
@@ -899,19 +847,17 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'level'=>'required|unique:educational_level|min:3|max:50'
+    			'level'=>'required|unique:educational_level'
     		],
     		[
     			'level.required'=>'Please input level',
-    			'level.min'=>'Character between 3-50',
-    			'level.max'=>'Character between 3-50',
     			'level.unique'=>'level must be unique',
     		]
     	);
     	$educational_level = new educational_level;
     	$educational_level->level=$request->level;
     	$educational_level->save();
-    	return redirect('admin/user-properties/educational-level/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/educational-level/index')->with('success','Add successfully');
     }
 
     public function getEditEducationalLevel($id)
@@ -925,18 +871,16 @@ class UserPropertiesController extends Controller
 		$educational_level = educational_level::find($id);
 		$this->validate($request,
             [
-                'level'=>'required|unique:educational_level|min:3|max:50'
+                'level'=>'required|unique:educational_level'
             ],
             [
                 'level.required'=>'Please input level',
-    			'level.min'=>'Character between 3-50',
-    			'level.max'=>'Character between 3-50',
     			'level.unique'=>'level must be unique',
             ]
         );
         $educational_level->level=$request->level;
         $educational_level->save();
-        return redirect('admin/user-properties/educational-level/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/educational-level/index')->with('success','Edit successfully');
     }
 
     public function getDeleteEducationalLevel($id)
@@ -965,19 +909,17 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'language'=>'required|unique:language|min:3|max:50'
+    			'language'=>'required|unique:language'
     		],
     		[
     			'language.required'=>'Please input language',
-    			'language.min'=>'Character between 3-50',
-    			'language.max'=>'Character between 3-50',
     			'language.unique'=>'language must be unique',
     		]
     	);
     	$language = new language;
     	$language->language=$request->language;
     	$language->save();
-    	return redirect('admin/user-properties/language/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/language/index')->with('success','Add successfully');
     }
 
     public function getEditLanguage($id)
@@ -991,18 +933,16 @@ class UserPropertiesController extends Controller
 		$language = language::find($id);
 		$this->validate($request,
             [
-                'language'=>'required|unique:language|min:3|max:50'
+                'language'=>'required|unique:language'
             ],
             [
                 'language.required'=>'Please input language',
-    			'language.min'=>'Character between 3-50',
-    			'language.max'=>'Character between 3-50',
     			'language.unique'=>'language must be unique',
             ]
         );
         $language->language=$request->language;
         $language->save();
-        return redirect('admin/user-properties/language/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/language/index')->with('success','Edit successfully');
     }
 
     public function getDeleteLanguage($id)
@@ -1031,19 +971,17 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'religion'=>'required|unique:religion|min:3|max:50'
+    			'religion'=>'required|unique:religion'
     		],
     		[
     			'religion.required'=>'Please input religion',
-    			'religion.min'=>'Character between 3-50',
-    			'religion.max'=>'Character between 3-50',
     			'religion.unique'=>'religion must be unique',
     		]
     	);
     	$religion = new religion;
     	$religion->religion=$request->religion;
     	$religion->save();
-    	return redirect('admin/user-properties/religion/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/religion/index')->with('success','Add successfully');
     }
 
     public function getEditReligion($id)
@@ -1057,18 +995,16 @@ class UserPropertiesController extends Controller
 		$religion = religion::find($id);
 		$this->validate($request,
             [
-                'religion'=>'required|unique:religion|min:3|max:50'
+                'religion'=>'required|unique:religion'
             ],
             [
                 'religion.required'=>'Please input religion',
-    			'religion.min'=>'Character between 3-50',
-    			'religion.max'=>'Character between 3-50',
     			'religion.unique'=>'religion must be unique',
             ]
         );
         $religion->religion=$request->religion;
         $religion->save();
-        return redirect('admin/user-properties/religion/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/religion/index')->with('success','Edit successfully');
     }
 
     public function getDeleteReligion($id)
@@ -1097,19 +1033,17 @@ class UserPropertiesController extends Controller
     {
     	$this->validate($request,
     		[
-    			'constellation'=>'required|unique:constellation|min:3|max:50'
+    			'constellation'=>'required|unique:constellation'
     		],
     		[
     			'constellation.required'=>'Please input constellation',
-    			'constellation.min'=>'Character between 3-50',
-    			'constellation.max'=>'Character between 3-50',
     			'constellation.unique'=>'constellation must be unique',
     		]
     	);
     	$constellation = new constellation;
     	$constellation->constellation=$request->constellation;
     	$constellation->save();
-    	return redirect('admin/user-properties/constellation/add')->with('success','Add successfully');
+    	return redirect('admin/user-properties/constellation/index')->with('success','Add successfully');
     }
 
     public function getEditConstellation($id)
@@ -1123,18 +1057,16 @@ class UserPropertiesController extends Controller
 		$constellation = constellation::find($id);
 		$this->validate($request,
             [
-                'constellation'=>'required|unique:constellation|min:3|max:50'
+                'constellation'=>'required|unique:constellation'
             ],
             [
                 'constellation.required'=>'Please input constellation',
-    			'constellation.min'=>'Character between 3-50',
-    			'constellation.max'=>'Character between 3-50',
     			'constellation.unique'=>'constellation must be unique',
             ]
         );
         $constellation->constellation=$request->constellation;
         $constellation->save();
-        return redirect('admin/user-properties/constellation/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/constellation/index')->with('success','Edit successfully');
     }
 
     public function getDeleteConstellation($id)
@@ -1163,19 +1095,17 @@ class UserPropertiesController extends Controller
     {
         $this->validate($request,
             [
-                'gender'=>'required|unique:gender|min:3|max:50'
+                'gender'=>'required|unique:gender'
             ],
             [
                 'gender.required'=>'Please input gender',
-                'gender.min'=>'Character between 3-50',
-                'gender.max'=>'Character between 3-50',
                 'gender.unique'=>'gender must be unique',
             ]
         );
         $gender = new gender;
         $gender->gender=$request->gender;
         $gender->save();
-        return redirect('admin/user-properties/gender/add')->with('success','Add successfully');
+        return redirect('admin/user-properties/gender/index')->with('success','Add successfully');
     }
 
     public function getEditGender($id)
@@ -1189,18 +1119,16 @@ class UserPropertiesController extends Controller
         $gender = gender::find($id);
         $this->validate($request,
             [
-                'gender'=>'required|unique:gender|min:3|max:50'
+                'gender'=>'required|unique:gender'
             ],
             [
                 'gender.required'=>'Please input gender',
-                'gender.min'=>'Character between 3-50',
-                'gender.max'=>'Character between 3-50',
                 'gender.unique'=>'gender must be unique',
             ]
         );
         $gender->gender=$request->gender;
         $gender->save();
-        return redirect('admin/user-properties/gender/edit/'.$id)->with('success','Edit successfully');
+        return redirect('admin/user-properties/gender/index')->with('success','Edit successfully');
     }
 
     public function getDeleteGender($id)
