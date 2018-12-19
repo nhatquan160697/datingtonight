@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Exceptions\Handler;
 use App\Model\hair_color;
 use App\Model\hair_length;
 use App\Model\hair_style;
@@ -25,6 +26,9 @@ use App\Model\gender;
 
 class UserPropertiesController extends Controller
 {
+    public function errorMessage(){
+        return view('admin.user-properties.error.error');
+    }
 	//Hair Color Controller
     public function indexHairColor()
     {
@@ -79,9 +83,13 @@ class UserPropertiesController extends Controller
 
     public function getDeleteHairColor($id)
     {
-    	$hair_color=hair_color::find($id);
-    	$hair_color->delete();
-    	return redirect('admin/user-properties/hair-color/index')->with('success','Delete successfully');
+        try { 
+            $hair_color=hair_color::find($id);
+            $hair_color->delete();
+            return redirect('admin/user-properties/hair-color/index')->with('success','Delete successfully');
+        } catch (\Exception $e) { 
+            return view('admin.user-properties.error.error');
+        }  	
     }
 
 
@@ -141,9 +149,13 @@ class UserPropertiesController extends Controller
 
     public function getDeleteHairLength($id)
     {
-    	$hair_length=hair_length::find($id);
-    	$hair_length->delete();
-    	return redirect('admin/user-properties/hair-length/index')->with('success','Delete successfully');
+    	try { 
+            $hair_length=hair_length::find($id);
+            $hair_length->delete();
+            return redirect('admin/user-properties/hair-length/index')->with('success','Delete successfully');
+        } catch (\Exception $e) { 
+            return view('admin.user-properties.error.error');
+        }  
     }
 
 
@@ -203,9 +215,13 @@ class UserPropertiesController extends Controller
 
     public function getDeleteHairStyle($id)
     {
-    	$hair_style=hair_style::find($id);
-    	$hair_style->delete();
-    	return redirect('admin/user-properties/hair-style/index')->with('success','Delete successfully');
+    	try { 
+            $hair_style=hair_style::find($id);
+            $hair_style->delete();
+            return redirect('admin/user-properties/hair-style/index')->with('success','Delete successfully');
+        } catch (\Exception $e) { 
+            return view('admin.user-properties.error.error');
+        }  
     }
 
 
@@ -265,9 +281,13 @@ class UserPropertiesController extends Controller
 
     public function getDeleteEyeColor($id)
     {
-    	$eye_color=eye_color::find($id);
-    	$eye_color->delete();
-    	return redirect('admin/user-properties/eye-color/index')->with('success','Delete successfully');
+    	try { 
+            $eye_color=eye_color::find($id);
+            $eye_color->delete();
+            return redirect('admin/user-properties/eye-color/index')->with('success','Delete successfully');
+        } catch (\Exception $e) { 
+            return view('admin.user-properties.error.error');
+        }  
     }
 
 
@@ -327,9 +347,13 @@ class UserPropertiesController extends Controller
 
     public function getDeleteCity($id)
     {
-    	$city=city::find($id);
-    	$city->delete();
-    	return redirect('admin/user-properties/city/index')->with('success','Delete successfully');
+    	try { 
+            $city=city::find($id);
+            $city->delete();
+            return redirect('admin/user-properties/city/index')->with('success','Delete successfully');
+        } catch (\Exception $e) { 
+            return view('admin.user-properties.error.error');
+        }  
     }
 
 
@@ -389,9 +413,13 @@ class UserPropertiesController extends Controller
 
     public function getDeleteBody($id)
     {
-    	$body=body::find($id);
-    	$body->delete();
-    	return redirect('admin/user-properties/body/index')->with('success','Delete successfully');
+    	try { 
+            $body=body::find($id);
+            $body->delete();
+            return redirect('admin/user-properties/body/index')->with('success','Delete successfully');
+        } catch (\Exception $e) { 
+            return view('admin.user-properties.error.error');
+        }  
     }
 
 
@@ -451,9 +479,13 @@ class UserPropertiesController extends Controller
 
     public function getDeleteDrinking($id)
     {
-    	$drinking=drinking::find($id);
-    	$drinking->delete();
-    	return redirect('admin/user-properties/drinking/index')->with('success','Delete successfully');
+    	try { 
+            $drinking=drinking::find($id);
+            $drinking->delete();
+            return redirect('admin/user-properties/drinking/index')->with('success','Delete successfully');
+        } catch (\Exception $e) { 
+            return view('admin.user-properties.error.error');
+        }  
     }
 
 
@@ -513,9 +545,13 @@ class UserPropertiesController extends Controller
 
     public function getDeleteSmoking($id)
     {
-    	$smoking=smoking::find($id);
-    	$smoking->delete();
-    	return redirect('admin/user-properties/smoking/index')->with('success','Delete successfully');
+    	try { 
+            $smoking=smoking::find($id);
+            $smoking->delete();
+            return redirect('admin/user-properties/smoking/index')->with('success','Delete successfully');
+        } catch (\Exception $e) { 
+            return view('admin.user-properties.error.error');
+        }  
     }
 
 
@@ -575,9 +611,13 @@ class UserPropertiesController extends Controller
 
     public function getDeleteJobStatus($id)
     {
-    	$job_status=job_status::find($id);
-    	$job_status->delete();
-    	return redirect('admin/user-properties/job-status/index')->with('success','Delete successfully');
+    	try { 
+            $job_status=job_status::find($id);
+            $job_status->delete();
+            return redirect('admin/user-properties/job-status/index')->with('success','Delete successfully');
+        } catch (\Exception $e) { 
+            return view('admin.user-properties.error.error');
+        }  
     }
 
 
@@ -637,9 +677,13 @@ class UserPropertiesController extends Controller
 
     public function getDeleteHouseType($id)
     {
-    	$house_type=house_type::find($id);
-    	$house_type->delete();
-    	return redirect('admin/user-properties/house-type/index')->with('success','Delete successfully');
+    	try { 
+            $house_type=house_type::find($id);
+            $house_type->delete();
+            return redirect('admin/user-properties/house-type/index')->with('success','Delete successfully');
+        } catch (\Exception $e) { 
+            return view('admin.user-properties.error.error');
+        }  
     }
 
 
@@ -699,9 +743,13 @@ class UserPropertiesController extends Controller
 
     public function getDeleteLiveWith($id)
     {
-    	$live_with=live_with::find($id);
-    	$live_with->delete();
-    	return redirect('admin/user-properties/live-with/index')->with('success','Delete successfully');
+    	try { 
+            $live_with=live_with::find($id);
+            $live_with->delete();
+            return redirect('admin/user-properties/live-with/index')->with('success','Delete successfully');
+        } catch (\Exception $e) { 
+            return view('admin.user-properties.error.error');
+        }  
     }
 
 
@@ -761,9 +809,13 @@ class UserPropertiesController extends Controller
 
     public function getDeleteHaveChildren($id)
     {
-    	$have_children=have_children::find($id);
-    	$have_children->delete();
-    	return redirect('admin/user-properties/have-children/index')->with('success','Delete successfully');
+    	try { 
+            $have_children=have_children::find($id);
+            $have_children->delete();
+            return redirect('admin/user-properties/have-children/index')->with('success','Delete successfully');
+        } catch (\Exception $e) { 
+            return view('admin.user-properties.error.error');
+        }  
     }
 
 
@@ -823,9 +875,13 @@ class UserPropertiesController extends Controller
 
     public function getDeleteNational($id)
     {
-    	$national=national::find($id);
-    	$national->delete();
-    	return redirect('admin/user-properties/national/index')->with('success','Delete successfully');
+    	try { 
+            $national=national::find($id);
+            $national->delete();
+            return redirect('admin/user-properties/national/index')->with('success','Delete successfully');
+        } catch (\Exception $e) { 
+            return view('admin.user-properties.error.error');
+        }  
     }
 
 
@@ -885,9 +941,13 @@ class UserPropertiesController extends Controller
 
     public function getDeleteEducationalLevel($id)
     {
-    	$educational_level=educational_level::find($id);
-    	$educational_level->delete();
-    	return redirect('admin/user-properties/educational-level/index')->with('success','Delete successfully');
+    	try { 
+            $educational_level=educational_level::find($id);
+            $educational_level->delete();
+            return redirect('admin/user-properties/educational-level/index')->with('success','Delete successfully');
+        } catch (\Exception $e) { 
+            return view('admin.user-properties.error.error');
+        }  
     }
 
 
@@ -947,9 +1007,13 @@ class UserPropertiesController extends Controller
 
     public function getDeleteLanguage($id)
     {
-    	$language=language::find($id);
-    	$language->delete();
-    	return redirect('admin/user-properties/language/index')->with('success','Delete successfully');
+    	try { 
+            $language=language::find($id);
+            $language->delete();
+            return redirect('admin/user-properties/language/index')->with('success','Delete successfully');
+        } catch (\Exception $e) { 
+            return view('admin.user-properties.error.error');
+        }  
     }
 
 
@@ -1009,9 +1073,13 @@ class UserPropertiesController extends Controller
 
     public function getDeleteReligion($id)
     {
-    	$religion=religion::find($id);
-    	$religion->delete();
-    	return redirect('admin/user-properties/religion/index')->with('success','Delete successfully');
+    	try { 
+            $religion=religion::find($id);
+            $religion->delete();
+            return redirect('admin/user-properties/religion/index')->with('success','Delete successfully');
+        } catch (\Exception $e) { 
+            return view('admin.user-properties.error.error');
+        }  
     }
 
 
@@ -1071,9 +1139,13 @@ class UserPropertiesController extends Controller
 
     public function getDeleteConstellation($id)
     {
-    	$constellation=constellation::find($id);
-    	$constellation->delete();
-    	return redirect('admin/user-properties/constellation/index')->with('success','Delete successfully');
+    	try { 
+            $constellation=constellation::find($id);
+            $constellation->delete();
+            return redirect('admin/user-properties/constellation/index')->with('success','Delete successfully');
+        } catch (\Exception $e) { 
+            return view('admin.user-properties.error.error');
+        }  
     }
 
 
@@ -1133,8 +1205,12 @@ class UserPropertiesController extends Controller
 
     public function getDeleteGender($id)
     {
-        $gender=gender::find($id);
-        $gender->delete();
-        return redirect('admin/user-properties/gender/index')->with('success','Delete successfully');
+        try { 
+            $gender=gender::find($id);
+            $gender->delete();
+            return redirect('admin/user-properties/gender/index')->with('success','Delete successfully');
+        } catch (\Exception $e) { 
+            return view('admin.user-properties.error.error');
+        }  
     }
 }
