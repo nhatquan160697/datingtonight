@@ -242,7 +242,7 @@
                         @empty
                             <h1>Nothing found</h1>
 						@endforelse
-						{{$Users->links()}}
+						{{-- {{$Users->links()}} --}}
 					</div>
 					<!--//left-->
 				</div>

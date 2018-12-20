@@ -228,7 +228,7 @@ class FindingSuitablePerson extends Controller
 
         $user_search->save();
 
-        $Users=$Users->paginate(9);
+        $Users=$Users->get();
         $count=count($Users);
         
         $gender=gender::all();
