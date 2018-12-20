@@ -30,7 +30,7 @@
                     <input type="hidden" name="_token" value="{{csrf_token()}}"/>
                     <div class="form-group">
                         <label>Hair length</label>
-                        <input class="form-control" name="color" value="{{$hair_length->length}}" placeholder="Please Enter Hair Length" />
+                        <input class="form-control" name="length" value="{{$hair_length->length}}" placeholder="Please Enter Hair Length" />
                     </div>
                     <button type="submit" class="btn btn-default">Edit</button>
                     <button type="reset" class="btn btn-default">Reset</button>
