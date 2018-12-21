@@ -39,7 +39,7 @@
 	                            @php
 	                                $urlImg = '/storage/app/files/flirtingmethods/'.$image;
 	                            @endphp
-								<img style="height: 268px" src="{{ $urlImg }}" class="img-fluid" alt="">
+								<img style="height: 268px;width: 357px" src="{{ $urlImg }}" class="img-fluid" alt="">
 								@endif
 							</a>
 							<div class="card-body">

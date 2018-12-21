@@ -8,11 +8,9 @@
 	</div>
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item">
-			<a href="{{route('datingtonight.index.index')}}">Flirting Methods</a>
+			<a href="{{route('datingtonight.flirtingmethods.index')}}">Flirting Methods</a>
 		</li>
-		<li class="breadcrumb-item">
-			<a style="color:#910745" href="{{route('datingtonight.flirtingmethods.index')}}">{{ $getIdItem->name_flirting }}</a>
-		</li>
+		<li class="breadcrumb-item" style="color:#910745">{{ $getIdItem->name_flirting }}</li>
 	</ol>
 	<!--//banner-->
 	<section class="banner-bottom">
