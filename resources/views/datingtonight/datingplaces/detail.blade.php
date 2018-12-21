@@ -7,7 +7,7 @@
 	</div>
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item">
-			<a href="index.html">Dating Place</a>
+			<a href="{{ route('datingtonight.datingplaces.index') }}">Dating Place</a>
 		</li>
 		<li class="breadcrumb-item" style="color:#910745">{{ $getItem->name_place }}</li>
 	</ol>

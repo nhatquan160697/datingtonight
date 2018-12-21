@@ -61,6 +61,8 @@ Route::namespace('DatingTonight')->group(function(){
 		'as' => 'datingtonight.about.index'
 	]);
 
+	
+
 	Route::prefix('/dating-places')->group(function(){
 		// Controller dating places for user
 		Route::get('/',[
@@ -114,6 +116,11 @@ Route::namespace('Admin')->prefix('admin')->group(function(){
 		'as' => 'admin.index.index'
 	]);
 
+	Route::get('/error',[
+		'uses' => 'UserPropertiesController@errorMessage',
+		'as' => 'admin.user-properties.error'
+	]);
+	
 	Route::prefix('dating-places')->group(function(){
 		// Controller dating places
 		Route::get('/',[

@@ -16,7 +16,7 @@
     let appCodeHash = window.location.hash.substr(1);
     let objLiveChat = {
         appCode: '754a19c0e8bdc3beb5b9b91ca80d8c23',
-        appName: 'Hướng dẫn sử dụng web'
+        appName: 'Dating Tonight Botchat'
     };
     if (appCodeHash.length == 32) {
       objLiveChat.appCode = appCodeHash;

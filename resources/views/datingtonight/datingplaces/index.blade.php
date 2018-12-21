@@ -8,7 +8,7 @@
 	</div>
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item">
-			<a href="index.html">Dating Tonight</a>
+			<a href="{{ route('datingtonight.index.index') }}">Dating Tonight</a>
 		</li>
 		<li class="breadcrumb-item" style="color:#910745">Dating Places</li>
 	</ol>

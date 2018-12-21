@@ -3,7 +3,7 @@
     <div v-for="msg in message">
         <div class="incoming_msg" v-if="msg.touser==fromId && msg.fromuser==toId">
             <div class="incoming_msg_img"> 
-                <img :src="urlTo"> 
+                <img :src="urlTo" style="width:50px; height:50px;"> 
             </div>
             <div class="received_msg">
                 <div class="received_withd_msg">
