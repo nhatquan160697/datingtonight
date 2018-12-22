@@ -14,7 +14,7 @@ class FlirtingMethodsController extends Controller
     }
 
     public function index(){
-    	$flirtingmethods=flirtingmethods::paginate(6);
+    	$flirtingmethods=flirtingmethods::orderBy('date_created','DESC')->paginate(6);
         $getAllType = $this->mFlirtingmethods->getAllType();
         $arrType = array();
         foreach($getAllType as $type){
