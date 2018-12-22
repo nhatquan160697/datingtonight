@@ -16,7 +16,7 @@ class DatingPlaces extends Model
     }
 
     public function getIndex(){
-        return DB::table('datingplaces')->paginate(4);
+        return DB::table('datingplaces')->orderby('date_created','DESC')->paginate(4);
     }
 
     public function getTop5(){
