@@ -63,7 +63,7 @@
                             <td>{{$fm->author}}</td>
                             <td><img src="{{$url}}" alt="This is an image" width="100px" height="80px"></td>
                             <td>{{$fm->date_created}}</td>
-                            <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{ route('admin.flirtingmethods.delete',$fm->id)}}">Delete</a></td>
+                            <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a onclick="return confirm('Do you want to delete ?')" href="{{ route('admin.flirtingmethods.delete',$fm->id)}}">Delete</a></td>
                             <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{ route('admin.flirtingmethods.edit',$fm->id)}}">Edit</a></td>
                         </tr>
                     @endforeach
